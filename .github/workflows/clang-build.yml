@@ -24,7 +24,7 @@ jobs:
         echo "build-output-dir=${{ github.workspace }}/bin" >> "$GITHUB_OUTPUT"
     - name: Dependencies
       run: |
-        sudo apt-get update && sudo apt-get install -yq libboost-all-dev clang-14
+        sudo apt-get update && sudo apt-get install -yq libboost-all-dev libcurl4-openssl-dev clang-14
     - name: Setup
       env:
         CMAKE_BUILD_TYPE: Debug
