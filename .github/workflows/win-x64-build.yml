@@ -83,7 +83,7 @@ jobs:
       shell: pwsh
       run: |
         $curlInstallRoot = "$env:RUNNER_TEMP/curl-installed"
-        & "$env:VCPKG_INSTALLATION_ROOT/vcpkg.exe" install "curl[core,schannel]:x64-windows" "--x-install-root=$curlInstallRoot"
+        & "$env:VCPKG_INSTALLATION_ROOT/vcpkg.exe" install "curl[core,ssl]:x64-windows" "--x-install-root=$curlInstallRoot"
         if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
         "root=$curlInstallRoot/x64-windows" >> $env:GITHUB_OUTPUT
 
