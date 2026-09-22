@@ -48,7 +48,7 @@ void WorldSession::HandleVoidStorageUnlock(WorldPackets::VoidStorage::UnlockVoid
 
     if (!_player->HasEnoughMoney(uint64(VOID_STORAGE_UNLOCK_COST)))
     {
-        TC_LOG_DEBUG("network", "WORLD: HandleVoidStorageUnlock - Player ({}, name: {}) does not have enough money to unlock void storage.", _player->GetGUID().ToString(), _player->GetName());
+        TC_LOG_DEBUG("network", "WORLD: HandleVoidStorageUnlock - Player (%s, name: %s) does not have enough money to unlock void storage.", _player->GetGUID().ToString().c_str(), _player->GetName().c_str());
         return;
     }
 
