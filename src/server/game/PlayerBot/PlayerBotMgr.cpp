@@ -3509,19 +3509,12 @@ void PlayerBotMgr::UpdateIdleBotLogout()
         if (!player || !player->IsInWorld() || player->IsLoading())
             continue;
         uint32 accId = session->GetAccountId();
-        // Module Siege des Capitales : un bot enrole dans une invasion n est
-        // jamais inactif, meme entre deux combats. Sans cette exemption la
-        // deconnexion d inactivite du remplissage BG vidait la horde en pleine
-        // progression et le recrutement la reconstituait en boucle.
-        bool inSiege = false;
-        if (BotBGAI* botAI = dynamic_cast<BotBGAI*>(player->GetAI()))
-            inSiege = botAI->IsSiegeMode();
         // Module Mercenaires : un bot loue est sous contrat meme s il reste
         // immobile aupres de son employeur. Sans cette exemption le balayage
         // d inactivite le deconnectait au bout de pbotbg_idlelogout secondes et
         // le mercenaire disparaissait sans explication.
         bool const hired = sMercenaryMgr->IsAccountHired(accId);
-        bool busy = inSiege || hired || pSession->HasSchedules() || player->InBattleground() || player->InArena()
+        bool busy = hired || pSession->HasSchedules() || player->InBattleground() || player->InArena()
             || player->InBattlegroundQueue() || player->GetMap()->IsDungeon() || player->isUsingLfg()
             || player->IsInCombat();
         if (busy)

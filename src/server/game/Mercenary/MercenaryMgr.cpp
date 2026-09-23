@@ -17,7 +17,6 @@
 
 #include "MercenaryMgr.h"
 #include "BotGroupAI.h"
-#include "CapitalSiegeMgr.h"
 #include "Chat.h"
 #include "MercenaryChat.h"
 #include "Config.h"
@@ -272,8 +271,6 @@ bool MercenaryMgr::FindCandidate(Player* owner, uint8 role, uint32& accountId, u
             continue;
         if (IsAccountHired(session->GetAccountId()))
             continue;
-        if (sCapitalSiegeMgr->IsAccountEngaged(session->GetAccountId()))
-            continue;   // deja enrole dans l assaut quotidien
 
         Player* bot = session->GetPlayer();
         if (!bot)
@@ -322,8 +319,6 @@ bool MercenaryMgr::FindCandidate(Player* owner, uint8 role, uint32& accountId, u
         if (session->GetPlayer())
             continue;
         if (IsAccountHired(session->GetAccountId()))
-            continue;
-        if (sCapitalSiegeMgr->IsAccountEngaged(session->GetAccountId()))
             continue;
 
         PlayerBotBaseInfo* accountInfo = sPlayerBotMgr->GetPlayerBotAccountInfo(session->GetAccountId());

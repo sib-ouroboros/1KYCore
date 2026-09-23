@@ -43,7 +43,6 @@
 #include "ObjectVisitors.h"
 #include "CellImpl.h"
 #include "GridNotifiersImpl.h"
-#include "CapitalSiegeMgr.h"
 #include "ObjectAccessor.h"
 
 //#define THREAD_PATHFINDING
@@ -137,10 +136,7 @@ BotBGAI::BotBGAI(Player* player) :
     m_LastControlTarget(ObjectGuid::Empty),
     m_NeedReserveCtrlSpell(false),
     m_InitRndPos(),
-    m_lastClearCtrlTick(0),
-    m_SiegeMode(false),
-    m_SiegeAdvanceUntil(0),
-    m_SiegeTarget(ObjectGuid::Empty)
+    m_lastClearCtrlTick(0)
 {
     m_FilterCreatureEntrys.clear();
     m_FilterCreatureEntrys.insert(14848);
@@ -543,9 +539,7 @@ void BotBGAI::UpdateAI(uint32 diff)
     if (m_UpdateTick <= 0)
     {
         m_UpdateTick = BOTAI_UPDATE_TICK;
-        // Le mode siege se joue en ville, hors de toute instance de champ
-        // de bataille : le verrou ne s applique qu au cas BG.
-        if (!m_SiegeMode && !InBattleground())
+        if (!InBattleground())
             return;
         if (IsAlive())
         {
@@ -570,11 +564,7 @@ void BotBGAI::UpdateAI(uint32 diff)
             m_CastRecords.ClearRecordSpell();
             m_Teleporting.ClearTeleport();
             me->SetSelection(ObjectGuid::Empty);
-            // En siege, un bot tue est perdu pour l evenement : pas de
-            // boucle de resurrection. CommandSiege le compte en perte et
-            // le gestionnaire le retire.
-            if (!m_SiegeMode)
-                BattlegroundRevive();
+            BattlegroundRevive();
         }
 
         //{
@@ -795,7 +785,7 @@ void BotBGAI::SearchCreatureListFromRange(Unit* center, NearCreatureVec& nearCre
         // SylvaniaCore: la visite de grille etait commentee et jamais
         // remplacee (VisitNearbyGridObject n existe plus dans ce core). La
         // liste restait donc toujours vide et les bots ne voyaient aucune
-        // creature, ni en siege ni en champ de bataille.
+        // creature en champ de bataille.
         Cell::VisitGridObjects(center, searcher, range);
     }
     for (Creature* pCreature : nearCreature)
@@ -1780,39 +1770,30 @@ void BotBGAI::UpdateBotAI(uint32 diff)
 {
     Battleground* pBattleground = me->GetBattleground();
 
-    if (m_SiegeMode)
-    {
-        // Module Siege des Capitales : aucun statut de champ de bataille a
-        // suivre, l etat d assaut est impose en permanence.
-        m_AIBGStateType = BotAIBGState::AIBGState_Start;
-    }
-    else
-    {
-        if (!pBattleground)
-            return;
+    if (!pBattleground)
+        return;
 
-        BattlegroundStatus bgStatus = pBattleground->GetStatus();
+    BattlegroundStatus bgStatus = pBattleground->GetStatus();
 
-        switch (bgStatus)
-        {
-        case STATUS_NONE:
-        case STATUS_WAIT_QUEUE:
-            return;
-        case STATUS_WAIT_JOIN:
-            if (m_AIBGStateType != BotAIBGState::AIBGState_Ready)
-                m_AIBGStateType = BotAIBGState::AIBGState_Ready;
-            break;
-        case STATUS_IN_PROGRESS:
-            if (m_AIBGStateType != BotAIBGState::AIBGState_Start)
-                m_AIBGStateType = BotAIBGState::AIBGState_Start;
-            break;
-        case STATUS_WAIT_LEAVE:
-            if (m_AIBGStateType != BotAIBGState::AIBGState_Leave)
-                m_AIBGStateType = BotAIBGState::AIBGState_Leave;
-            break;
-        default:
-            return;
-        }
+    switch (bgStatus)
+    {
+    case STATUS_NONE:
+    case STATUS_WAIT_QUEUE:
+        return;
+    case STATUS_WAIT_JOIN:
+        if (m_AIBGStateType != BotAIBGState::AIBGState_Ready)
+            m_AIBGStateType = BotAIBGState::AIBGState_Ready;
+        break;
+    case STATUS_IN_PROGRESS:
+        if (m_AIBGStateType != BotAIBGState::AIBGState_Start)
+            m_AIBGStateType = BotAIBGState::AIBGState_Start;
+        break;
+    case STATUS_WAIT_LEAVE:
+        if (m_AIBGStateType != BotAIBGState::AIBGState_Leave)
+            m_AIBGStateType = BotAIBGState::AIBGState_Leave;
+        break;
+    default:
+        return;
     }
 
     EachTick();
@@ -1879,11 +1860,7 @@ void BotBGAI::UpdateBotAI(uint32 diff)
         if (m_Movement->ExecuteCruxMovementCommand())
             return;
         bool inArena = me->InArena();
-        // Module Siege des Capitales : en ville il y a toujours une cible
-        // dans les 32 yards reglementaires, si bien que la horde s arrete au
-        // premier civil croise et n atteint jamais le trone. En mode siege on
-        // n engage que ce qui barre reellement le passage.
-        float const searchRange = m_SiegeMode ? sCapitalSiegeMgr->GetEngageRange() : float(BOTAI_SEARCH_RANGE);
+        float const searchRange = float(BOTAI_SEARCH_RANGE);
         if (!inArena)
         {
             if (!me->HasAura(m_UseMountID) && !me->HasUnitState(UNIT_STATE_CASTING))
@@ -1891,71 +1868,6 @@ void BotBGAI::UpdateBotAI(uint32 diff)
         }
         else if (TryStartControlCommand())
             return;
-        // Module Siege des Capitales : marche forcee. On lache la cible et on
-        // avance, quitte a encaisser des coups en chemin.
-        if (m_SiegeMode && m_SiegeAdvanceUntil)
-        {
-            if (getMSTime() < m_SiegeAdvanceUntil)
-            {
-                me->AttackStop();
-                me->SetSelection(ObjectGuid::Empty);
-                if (!IsNotMovement())
-                    m_Movement->ExecuteMovementCommand();
-                return;
-            }
-            m_SiegeAdvanceUntil = 0;
-        }
-
-        // Module Siege des Capitales : le dirigeant prime sur tout le reste des
-        // qu il est a portee. Sans cette priorite les bots atteignent le trone
-        // mais passent leur temps sur sa garde rapprochee.
-        if (m_SiegeMode && !m_SiegeTarget.IsEmpty())
-        {
-            Unit* siegeBoss = ObjectAccessor::GetUnit(*me, m_SiegeTarget);
-            if (siegeBoss)
-            {
-                float const bossDistance = me->GetDistance(siegeBoss);
-                bool const bossAttackable = me->IsValidAttackTarget(siegeBoss);
-                bool const bossInRange = bossDistance < sCapitalSiegeMgr->GetBossEngageRange();
-
-                // Instrumentation temporaire du blocage sur le dirigeant : il ne
-                // perd aucun point de vie alors que des bots meurent a trois
-                // yards de lui, et ni sa faction, ni ses drapeaux, ni son
-                // creature_template ne l expliquent.
-                // Sonde declenchee des que le dirigeant est designe (60 yards),
-                // et non seulement au contact : IsValidAttackTarget ne depend pas
-                // de la distance, et la horde n arrive pas toujours jusqu a lui.
-                {
-                    static uint32 s_siegeBossLog = 0;
-                    if (++s_siegeBossLog % 25 == 1)
-                    {
-                        Unit* victim = me->GetVictim();
-                        TC_LOG_ERROR("server.worldserver",
-                            "SIEGE-DBG: %s dist=%.1f attaquable=%u cible=%s victime=%s flags=0x%X | evade=%u visible=%u memephase=%u react=%d pv=%s",
-                            me->GetName().c_str(), bossDistance, uint32(bossAttackable),
-                            (me->GetTarget() == m_SiegeTarget) ? "dirigeant" : "autre",
-                            victim ? victim->GetName().c_str() : "aucune",
-                            siegeBoss->GetUInt32Value(UNIT_FIELD_FLAGS),
-                            uint32(siegeBoss->ToCreature() ? siegeBoss->ToCreature()->IsInEvadeMode() : 0),
-                            uint32(siegeBoss->IsVisible()),
-                            uint32(me->InSamePhase(siegeBoss->GetPhaseShift())),
-                            int32(siegeBoss->ToCreature() ? siegeBoss->ToCreature()->GetReactState() : -1),
-                            std::to_string(siegeBoss->GetHealth()).c_str());
-                    }
-                }
-                (void)bossInRange;
-
-                if (siegeBoss->IsAlive() && bossAttackable && bossInRange)
-                    me->SetSelection(m_SiegeTarget);
-            }
-            else
-            {
-                static uint32 s_siegeBossMissing = 0;
-                if (++s_siegeBossMissing % 50 == 1)
-                    TC_LOG_ERROR("server.worldserver", "SIEGE-DBG: %s ne trouve pas le dirigeant en memoire.", me->GetName().c_str());
-            }
-        }
-
         Unit* pSelect = GetBotAIValidSelectedUnit();
         if (pSelect && TargetIsStealth(pSelect->ToPlayer()))
         {
@@ -1966,13 +1878,7 @@ void BotBGAI::UpdateBotAI(uint32 diff)
         else if (pSelect && !IsInvincible(pSelect) && !HasAuraMechanic(pSelect, Mechanics::MECHANIC_POLYMORPH))
         {
             float distance = me->GetDistance(pSelect->GetPosition());
-            // Module Siege des Capitales : le dirigeant echappe au seuil
-            // d abandon de cible. Avec une portee d engagement courte, l IA le
-            // lachait des 17 yards ( distance > searchRange * 1.7 ) et la
-            // selection ne tenait pas une seule tick, meme a 28 yards de lui.
-            float const engageDistance = (m_SiegeMode && !m_SiegeTarget.IsEmpty() && pSelect->GetGUID() == m_SiegeTarget)
-                ? sCapitalSiegeMgr->GetBossEngageRange() : searchRange;
-            if (distance < engageDistance || inArena)
+            if (distance < searchRange || inArena)
             {
                 if (m_CurrentTargetTick < BOTAI_MAXTARGET_TICKTIME || inArena)
                 {
@@ -1993,7 +1899,7 @@ void BotBGAI::UpdateBotAI(uint32 diff)
                     me->SetSelection(ObjectGuid::Empty);
                 }
             }
-            else if (distance > engageDistance * 1.7f || me->GetMap() != pSelect->GetMap())
+            else if (distance > searchRange * 1.7f || me->GetMap() != pSelect->GetMap())
             {
                 me->SetSelection(ObjectGuid::Empty);
             }
@@ -2055,29 +1961,6 @@ void BotBGAI::ResetBotAI()
     m_FastAid.CheckPlayerFastAid();
 }
 
-// Module Siege des Capitales. En mode siege le bot garde toute son IA de
-// combat de champ de bataille, mais cesse de dependre d un Battleground :
-// l etat d assaut est impose et les ordres viennent de CommandSiege.
-void BotBGAI::SetSiegeMode(bool enable)
-{
-    m_SiegeMode = enable;
-    m_SiegeAdvanceUntil = 0;
-    m_SiegeTarget = ObjectGuid::Empty;
-    if (enable)
-        m_AIBGStateType = BotAIBGState::AIBGState_Start;
-}
-
-// Ouvre une fenetre pendant laquelle le bot cesse d acquerir des cibles et
-// marche vers son objectif. Sans elle, une ville qui presente en permanence un
-// adversaire a portee fige la horde a son point d entree : l IA ne se deplace
-// que lorsqu elle n a aucune cible selectionnee.
-void BotBGAI::PushSiegeAdvance(uint32 durationMs)
-{
-    if (!m_SiegeMode)
-        return;
-    m_SiegeAdvanceUntil = getMSTime() + durationMs;
-}
-
 bool BotBGAI::IsAlive()
 {
     return me->IsAlive();
@@ -2101,22 +1984,6 @@ bool BotBGAI::IsNotSelect(Unit* pTarget)
             return true;
 
 
-
-        // Module Siege des Capitales : les bots d invasion n engagent les
-        // joueurs reels que selon la cle siege_pvp. 0 = jamais, 1 = seulement
-        // les joueurs deja flagges PvP, 2 = tout joueur de la faction adverse.
-        // La regle ne vaut que pour un joueur adverse. IsNotSelect() est aussi
-        // appele par IsNotMovement() avec le bot lui-meme en parametre : sans le
-        // test pPlayer != me, un bot non flagge PvP se declarait non selectionnable,
-        // ce qui appelait StopMoving() et figeait toute la horde sur place.
-        if (m_SiegeMode && pPlayer != me && pPlayer->GetTeamId() != me->GetTeamId())
-        {
-            uint32 const siegePvpMode = sCapitalSiegeMgr->GetPvpMode();
-            if (siegePvpMode == 0)
-                return true;
-            if (siegePvpMode == 1 && !pPlayer->IsPvP())
-                return true;
-        }
 
         if (pPlayer->GetVehicleKit())
             return true;

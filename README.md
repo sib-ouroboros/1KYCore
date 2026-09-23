@@ -43,7 +43,6 @@ Au-delà du core amont, le royaume apporte ses propres systèmes :
 | Module | Description |
 | --- | --- |
 | 🤖 **PlayerBots** | Bots joueurs pilotables (`src/server/game/PlayerBot`) : ordres de groupe, rôles tank/heal, gestion d'équipement, remplissage automatique des champs de bataille |
-| ⚔️ **Siège des Capitales** | Invasion quotidienne des capitales par des raids de bots, avec meneur désigné et joueurs flaggés PvP (`src/server/game/CapitalSiege`) |
 | 💰 **Mercenaires** | PNJ de louage : un joueur solo recrute des compagnons contre pièces d'or, sous contrat (`src/server/game/Mercenary`) |
 | 🇫🇷 **Localisation frFR** | Restitution des textes officiels français extraits du client 7.3.5 (quêtes, dialogues, broadcast texts) et traduction des contenus scriptés manquants |
 | 🐛 **Correctifs de contenu** | Campagnes, donjons et quêtes remis en état zone par zone (Mardum, Île Vagabonde, Cime du Vortex…) |
@@ -60,7 +59,7 @@ Ce README suffit pour **installer et lancer** un serveur. Tout le reste vit dans
 | 🔧 **[Corriger le contenu](https://github.com/BlaMacfly/SylvaniaCore/wiki/Corriger-le-contenu)** | Les classes de bugs récurrentes de ce core — scripts C++ non rattachés, hooks morts, quêtes sans objectif, butin, phases résiduelles — et comment les trouver. **Le meilleur point d'entrée pour une première contribution.** |
 | ⚙️ **[Configuration](https://github.com/BlaMacfly/SylvaniaCore/wiki/Configuration)** | Référence de toutes les clés de configuration propres au royaume |
 | 🧩 **[Architecture du core](https://github.com/BlaMacfly/SylvaniaCore/wiki/Architecture-du-core)** | Arborescence, lignée amont, pièges d'architecture |
-| 🤖 **Modules** | [PlayerBots](https://github.com/BlaMacfly/SylvaniaCore/wiki/Module-PlayerBots) · [Mercenaires](https://github.com/BlaMacfly/SylvaniaCore/wiki/Module-Mercenaires) · [Siège des Capitales](https://github.com/BlaMacfly/SylvaniaCore/wiki/Module-Siege-des-Capitales) · [Autres customs](https://github.com/BlaMacfly/SylvaniaCore/wiki/Autres-customs) |
+| 🤖 **Modules** | [PlayerBots](https://github.com/BlaMacfly/SylvaniaCore/wiki/Module-PlayerBots) · [Mercenaires](https://github.com/BlaMacfly/SylvaniaCore/wiki/Module-Mercenaires) · [Autres customs](https://github.com/BlaMacfly/SylvaniaCore/wiki/Autres-customs) |
 | 💥 **[Diagnostic des crashs](https://github.com/BlaMacfly/SylvaniaCore/wiki/Diagnostic-des-crashs)** | Core dumps, redzone jemalloc, faux crashs d'arrêt |
 | 🩺 **[FAQ Dépannage](https://github.com/BlaMacfly/SylvaniaCore/wiki/FAQ-Depannage)** | Écran de chargement, PNJ disparus, personnage bloqué, boss infaisable… |
 | 🚧 **[Chantiers en cours](https://github.com/BlaMacfly/SylvaniaCore/wiki/Chantiers-en-cours)** | Ce qui est ouvert, ce qui est clos, et les **impasses connues** |

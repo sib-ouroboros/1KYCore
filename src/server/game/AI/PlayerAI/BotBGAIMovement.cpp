@@ -700,12 +700,7 @@ void BotBGAIMovement::SyncPosition(Position& pos, bool immed)
 
 bool BotBGAIMovement::IsNearToPosition(float x, float y, float z, float range)
 {
-	// Hors champ de bataille ce test repondait toujours  pas encore arrive  : les
-	// appelants ne coupaient donc jamais court et relancaient un calcul de chemin
-	// a chaque tick, d ou le flot de messages de pathfinding en echec pendant le
-	// siege. Le mode siege doit passer.
-	bool const siegeMode = m_BGAI && m_BGAI->IsSiegeMode();
-	if (!siegeMode && !m_Player->InBattleground())
+    if (!m_Player->InBattleground())
 		return false;
 	if (Unit* pVehicle = m_Player->GetVehicleBase())
 	{

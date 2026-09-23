@@ -25,7 +25,6 @@ maison de fonctionner avec le peuplement amont désactivé.
 | `pbotall` | `0` | Aucun peuplement automatique du monde ni de la file LFG (amont). |
 | `pbotbg` | `1` | **Module BG BotFill** : remplissage des champs de bataille quand de vrais joueurs sont en file (WS / AB / EY / AV / IC). Explicitement indépendant de `pbotall`. |
 | `pbotmerc` | `1` | **Module Mercenaires** : le Portail d'Invocation (créature `1000010`, 60 spawns) loue des bots au joueur solo, 100 po, contrat rompu au moindre départ du groupe. |
-| `siege_enable` | `0` | **Module Siège des Capitales** : écrit et livré, mais **pas encore activé** en production. |
 | `pbotasl` | `88` | Plafond de bots connectés simultanément. |
 | `pbottitle` | `600` | Titre « Mercenaire » imposé à tout bot, pour qu'un joueur ne puisse jamais le confondre avec un vrai joueur. Entrée `char_titles` custom de la base hotfix (MaskID 380). |
 
@@ -38,11 +37,11 @@ maison de fonctionner avec le peuplement amont désactivé.
 
 ## `sql/sylvania/`
 
-108 fichiers : la trace versionnée des correctifs data appliqués à la main à la base de
-production. **Le dossier n'a pas une base cible unique** — la plupart visent `dc_world`, mais
-`capital_siege.sql` crée deux tables dans `characters`. Chaque fichier annonce sa base dans son
-en-tête : la lire avant de rejouer quoi que ce soit. Les `*_ROLLBACK.sql` annulent le patch de
-même nom.
+Ce dossier conserve les correctifs data appliques manuellement. Chaque fichier
+indique sa base cible dans son en-tete : la lire avant de rejouer le patch.
+Les fichiers `*_ROLLBACK.sql` annulent le patch de meme nom.
+Les anciennes migrations automatiques restent dans `sql/updates/` pour
+preserver l historique des bases existantes.
 
 Ces fichiers ne passent **pas** par le mécanisme de mise à jour automatique du core. Un patch qui
 doit valoir pour toute installation neuve a sa place dans `sql/updates/`, pas ici.

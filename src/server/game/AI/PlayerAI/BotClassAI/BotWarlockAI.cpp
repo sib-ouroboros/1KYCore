@@ -673,10 +673,7 @@ bool BotWarlockAI::ProcessFear(Unit* pTarget)
 
 bool BotWarlockAI::ProcessNormalSpell()
 {
-	// Module Siege des Capitales : hors champ de bataille cette garde renvoyait
-	// true, et la boucle d IA (if (!IsInCombat() && ProcessNormalSpell()) return)
-	// figeait le demoniste sur place, sans jamais atteindre son deplacement.
-	if (me->HasUnitState(UNIT_STATE_CASTING) || (!m_SiegeMode && !me->InBattleground()) || !me->IsInWorld())
+    if (me->HasUnitState(UNIT_STATE_CASTING) || !me->InBattleground() || !me->IsInWorld())
 		return true;
 	InitializePetSpells();
 
