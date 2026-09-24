@@ -15,6 +15,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "PlayerBotMgr.h"
 #include "LFGMgr.h"
 #include "DatabaseEnv.h"
 #include "DB2Stores.h"
@@ -39,7 +40,6 @@
 #include "SocialMgr.h"
 #include "World.h"
 #include "WorldSession.h"
-#include "FieldBotMgr.h"
 #include "PlayerBotSession.h"
  //#include "BotFieldAI.h"
  //#include "BotGroupAI.h"
@@ -538,13 +538,6 @@ void LFGMgr::JoinLfg(Player* player, uint8 roles, LfgDungeonSet& dungeons)
     bool isContinue = grp && grp->isLFGGroup() && GetState(gguid) != LFG_STATE_FINISHED_DUNGEON;
     if (!player->IsPlayerBot())
     {
-        if (sFieldBotMgr->ExistWarfare())
-        {
-            std::string outString;
-            consoleToUtf8(std::string("The dungeon has been closed in the outbreak of war!"), outString);
-            sWorld->SendGlobalText(outString.c_str(), NULL);
-            return;
-        }
 
         uint8 commandCode = roles & 1;
         if (commandCode == 0)

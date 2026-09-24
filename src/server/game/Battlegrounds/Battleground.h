@@ -515,7 +515,6 @@ class TC_GAME_API Battleground
         // because BattleGrounds with different types and same level range has different m_BracketId
         uint8 GetUniqueBracketId() const;
         bool ExistRealPlayer();
-        virtual bool HasJoinNearGrave(Player* player);
         virtual Creature const* GetClosestGraveCreature(const Player* player) { return NULL; }
 		
 		virtual void RewardArena(Player* player, bool win);

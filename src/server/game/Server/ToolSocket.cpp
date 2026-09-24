@@ -15,6 +15,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "BotGroupAI.h"
 #include "ToolSocket.h"
 #include "BigNumber.h"
 #include "Opcodes.h"
@@ -22,10 +23,8 @@
 #include "World.h"
 #include "AccountMgr.h"
 #include "PlayerBotMgr.h"
-#include "FieldBotMgr.h"
 #include "OnlineMgr.h"
 #include "ToolSocketMgr.h"
-#include "CommandBG.h"
 #include "Config.h"
 #include "AccountMgr.h"
 
@@ -128,8 +127,6 @@ void ToolSocket::ProcessToolCmd()
 			CmdBotChange(jsonCmd);
 		else if (entry == "player_change")
 			CmdPlayerChange(jsonCmd);
-		else if (entry == "bg_model")
-			CmdBGModel(jsonCmd);
 		else if (entry == "pve_autosetting")
 			CmdPVEAutoSetting(jsonCmd);
 		else if (entry == "pve_maxlevel")
@@ -144,12 +141,6 @@ void ToolSocket::ProcessToolCmd()
 			CmdPVEAddion(jsonCmd);
 		else if (entry == "pve_revive")
 			CmdPVEAutoRevive(jsonCmd);
-		else if (entry == "pve_field_creature")
-			CmdPVEFieldCreature(jsonCmd);
-		else if (entry == "pve_field_driving")
-			CmdPVEFieldDriving(jsonCmd);
-		else if (entry == "pve_field_warfare")
-			CmdPVEFieldWarfare(jsonCmd);
 		else if (entry == "pvp_diminishing")
 			CmdPVPDiminishing(jsonCmd);
 		else if (entry == "pvp_canbreak_controll")
@@ -327,19 +318,6 @@ Json::Value jsonEndure = sConfigMgr->GetFloatDefault("endure", 1.0f);
 Json::Value jsonRevive = sConfigMgr->GetIntDefault("auto_revive", 0);
 		int revive  = sConfigMgr->GetIntDefault("auto_revive", 0);
 		BotUtility::BotCanForceRevive = (revive != 0) ? true : false;
-
-Json::Value jsonFieldCreature = sConfigMgr->GetIntDefault("field_creature", 1);	
-		int fCreature = sConfigMgr->GetIntDefault("field_creature", 1);
-		FieldBotMgr::FIELDBOT_CREATURE = (fCreature != 0) ? true : false;
-
-Json::Value jsonFieldDriving = sConfigMgr->GetIntDefault("field_driving", 0);
-		int fDriving  = sConfigMgr->GetIntDefault("field_driving", 0);
-		FieldBotMgr::FIELDBOT_DRIVING = (fDriving != 0) ? true : false;
-
-Json::Value jsonWarfareSize = sConfigMgr->GetIntDefault("warfare_size", 0);
-		int warfareSize  = sConfigMgr->GetIntDefault("warfare_size", 0);
-		if (warfareSize >= 0 && warfareSize <= 3)
-			FieldBotMgr::FIELDWARFARE_SIZE = warfareSize;
 
 Json::Value jsonDiminishing = sConfigMgr->GetIntDefault("diminishing", 1);
 		BotUtility::ControllSpellDiminishing = (sConfigMgr->GetIntDefault("diminishing", 1) != 0) ? true : false;
@@ -588,20 +566,6 @@ void ToolSocket::CmdPlayerChange(Json::Value& info)
 	SendNormalResult("player_change", false);
 }
 
-void ToolSocket::CmdBGModel(Json::Value& info)
-{
-	uint32 model = info["model"].asInt();
-	if (model < CommandModel::CM_Over)
-	{
-		CommandBG::SettingCommandModel(CommandModel(model));
-		SendNormalResult("bg_model", true);
-	}
-	else
-	{
-		SendNormalResult("bg_model", false);
-	}
-}
-
 void ToolSocket::CmdPVEAutoSetting(Json::Value& info)
 {
 	uint32 setting = info["auto_setting"].asInt();
@@ -689,32 +653,6 @@ void ToolSocket::CmdPVEAutoRevive(Json::Value& info)
 	uint32 revive = info["auto_revive"].asInt();
 	BotUtility::BotCanForceRevive = (revive != 0) ? true : false;
 	SendNormalResult("pve_revive", true);
-}
-
-void ToolSocket::CmdPVEFieldCreature(Json::Value& info)
-{
-	uint32 fc = info["field_creature"].asInt();
-	FieldBotMgr::FIELDBOT_CREATURE = (fc != 0) ? true : false;
-	SendNormalResult("pve_field_creature", true);
-}
-
-void ToolSocket::CmdPVEFieldDriving(Json::Value& info)
-{
-	uint32 fd = info["field_driving"].asInt();
-	FieldBotMgr::FIELDBOT_DRIVING = (fd != 0) ? true : false;
-	SendNormalResult("pve_field_driving", true);
-}
-
-void ToolSocket::CmdPVEFieldWarfare(Json::Value& info)
-{
-	uint32 warfareSize = info["field_size"].asInt();
-	if (warfareSize > 3)
-	{
-		SendNormalResult("pve_field_warfare", false);
-		return;
-	}
-	FieldBotMgr::FIELDWARFARE_SIZE = warfareSize;
-	SendNormalResult("pve_field_warfare", true);
 }
 
 void ToolSocket::CmdPVPDiminishing(Json::Value& info)

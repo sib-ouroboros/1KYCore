@@ -4464,38 +4464,6 @@ endure = 1.000000
 auto_revive = 0
 
 #
-# Field Creature Combat
-#
-#   field_creature
-#        Description: Determines if PlayerBots can engage open-world creatures.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-field_creature = 1
-
-#
-# Field Driving
-#
-#   field_driving
-#        Description: Allows PlayerBots to use vehicles in open-world fields.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-field_driving = 0
-
-#
-# Warfare Group Size
-#
-#   warfare_size
-#        Description: Maximum number of PlayerBots allowed in warfare/large-scale battles.
-#        Default:     0 - Disabled
-#
-
-warfare_size = 0
-
-#
 # Diminishing Returns
 #
 #   diminishing

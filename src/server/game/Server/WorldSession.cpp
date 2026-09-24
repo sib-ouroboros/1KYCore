@@ -51,7 +51,6 @@
 #include "World.h"
 #include "WorldSocket.h"
 #include "PlayerBotMgr.h"
-#include "FieldBotMgr.h"
 #include "OnlineMgr.h"
 
 namespace {
@@ -705,8 +704,6 @@ void WorldSession::LogoutPlayer(bool save)
 
         if (IsBotSession())
             sPlayerBotMgr->OnPlayerBotLogout(this);
-        else
-            sFieldBotMgr->OnRealPlayerLogout(logoutPlayerGUID);
         sOnlineMgr->CharaterOffline(GetAccountId());
     }
 

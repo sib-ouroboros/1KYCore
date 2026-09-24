@@ -104,10 +104,7 @@ protected:
 	uint32 FindMaxRankSpellByExist(uint32 spellID);
 	uint32 FindPetMaxRankSpellByExist(uint32 spellID);
 	bool InBattleground();
-	void BattlegroundRevive();
 	// SylvaniaCore (module BG BotFill): vague de sortie de cimetiere
-	bool WaitRegroupAfterRevive();
-	uint32 m_DeathTick = 0;
 	uint32 m_ReviveTick = 0;
 	void ProcessHealth();
 	void ProcessCombat(Unit* pTarget);
@@ -121,8 +118,6 @@ protected:
 	NearUnitVec SearchNeedHealth(float range = BOTAI_SEARCH_RANGE);
 	NearUnitVec BeforeSearchNeedHealth(float range, float minHeal);
 	NearUnitVec SearchLifePctByFriendRange(Unit* pTarget, float lifePct, float range = NEEDFLEE_CHECKRANGE);
-	bool NeedDireFlee();
-	bool DoDireFlee();
 	bool DoFaceToTarget(Unit* pTarget);
 	SpellCastResult TryCastSpell(uint32 spellID, Unit* pTarget = NULL, bool force = false, bool dismount = true);
 	SpellCastResult PetTryCastSpell(uint32 spellID, Unit* pTarget = NULL, bool force = false);
@@ -185,7 +180,6 @@ protected:
 	int32 m_UpmountTick;
 	BotAIBGState m_AIBGStateType;
 	int32 m_UpdateTick;
-	int32 m_CanDireFlee;
 	BotBGAIMovement* m_Movement;
 	uint32 m_CurrentTargetTick;
 

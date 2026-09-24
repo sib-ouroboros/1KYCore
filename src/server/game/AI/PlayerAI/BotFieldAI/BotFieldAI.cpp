@@ -20,7 +20,6 @@
 #include "MoveSplineInit.h"
 #include "BotBGAIMovement.h"
 #include "PlayerBotMgr.h"
-#include "FieldBotMgr.h"
 #include "PlayerBotSession.h"
 #include "Spell.h"
 #include "Pet.h"
@@ -418,11 +417,11 @@ bool BotFieldAI::CanSelectPlayerEnemy(Player* player)
 {
 	if (!player || player->GetTeamId() == me->GetTeamId() || IsNotSelect(player))
 		return false;
-	if (!m_DrivingPVP && !FieldBotMgr::FIELDBOT_DRIVING && !player->IsPvP())
+    if (!m_DrivingPVP && !player->IsPvP())
 		return false;
 	if (TargetIsStealth(player))
 		return false;
-	if (m_DrivingPVP || FieldBotMgr::FIELDBOT_DRIVING)
+    if (m_DrivingPVP)
 	{
 		return true;
 	}
@@ -1007,16 +1006,7 @@ void BotFieldAI::SearchCreatureListFromRange(Unit* center, NearCreatureVec& near
 			continue;
 		if (!selfFaction && !me->IsValidAttackTarget(pCreature))
 			continue;
-		if (FieldBotMgr::FIELDBOT_CREATURE || selfFaction)
-		{
-			nearCreatures.push_back(pCreature);
-		}
-		else if (!selfFaction)
-		{
-			ObjectGuid targetGUID = pCreature->GetTarget();
-			if (targetGUID != ObjectGuid::Empty)
-				nearCreatures.push_back(pCreature);
-		}
+        nearCreatures.push_back(pCreature);
 	}
 }
 

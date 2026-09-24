@@ -19,6 +19,7 @@
     \ingroup world
 */
 
+#include "BotGroupAI.h"
 #include "World.h"
 #include "BattlePetDataStore.h"
 #include "WildBattlePet.h"
@@ -100,7 +101,6 @@
 #include "WorldSocket.h"
 #include "PetBattleSystem.h"
 #include "PlayerBotMgr.h"
-#include "FieldBotMgr.h"
 #include "AIWaypointsMgr.h"
 #include "MMapManager.h"
 #include "ToolSocket.h"
@@ -2493,19 +2493,6 @@ void World::SetInitialWorldSettings()
         int revive = sConfigMgr->GetIntDefault("auto_revive", 0);
         BotUtility::BotCanForceRevive = (revive != 0) ? true : false;
 
-        Json::Value jsonFieldCreature = sConfigMgr->GetIntDefault("field_creature", 1);
-        int fCreature = sConfigMgr->GetIntDefault("field_creature", 1);
-        FieldBotMgr::FIELDBOT_CREATURE = (fCreature != 0) ? true : false;
-
-        Json::Value jsonFieldDriving = sConfigMgr->GetIntDefault("field_driving", 0);
-        int fDriving = sConfigMgr->GetIntDefault("field_driving", 0);
-        FieldBotMgr::FIELDBOT_DRIVING = (fDriving != 0) ? true : false;
-
-        Json::Value jsonWarfareSize = sConfigMgr->GetIntDefault("warfare_size", 0);
-        int warfareSize = sConfigMgr->GetIntDefault("warfare_size", 0);
-        if (warfareSize >= 0 && warfareSize <= 3)
-            FieldBotMgr::FIELDWARFARE_SIZE = warfareSize;
-
         Json::Value jsonDiminishing = sConfigMgr->GetIntDefault("diminishing", 1);
         BotUtility::ControllSpellDiminishing = (sConfigMgr->GetIntDefault("diminishing", 1) != 0) ? true : false;
 
@@ -2559,7 +2546,6 @@ void World::SetInitialWorldSettings()
     m_timers[WUPDATE_GUILDSAVE].SetInterval(getIntConfig(CONFIG_GUILD_SAVE_INTERVAL) * MINUTE * IN_MILLISECONDS);
 
     m_timers[WUPDATE_PLAYERBOT_MGR].SetInterval(IN_MILLISECONDS * 2);
-    m_timers[WUPDATE_FIELDBOT_MGR].SetInterval(IN_MILLISECONDS * 5);
 
     m_timers[WUPDATE_BLACKMARKET].SetInterval(10 * IN_MILLISECONDS);
 
@@ -2999,12 +2985,6 @@ void World::Update(uint32 diff)
         sPlayerBotMgr->Update();
         m_timers[WUPDATE_PLAYERBOT_MGR].Reset();
     }
-    if (m_timers[WUPDATE_FIELDBOT_MGR].Passed())
-    {
-        //sFieldBotMgr->Update();
-        m_timers[WUPDATE_FIELDBOT_MGR].Reset();
-    }
-
     // update the instance reset times
     sInstanceSaveMgr->Update();
 

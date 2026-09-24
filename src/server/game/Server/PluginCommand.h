@@ -51,7 +51,6 @@ private:
 	bool ResetDungeon(Player* player);
 	bool OnlineFriends(Player* player);
 	bool Saveall(Player* player);
-	bool ToggleWarfareAid(Player* player);
 	bool OnlineArenaTeamMember(Player* player, uint32 arenaType);
 	bool OnlineGuildMember(Player* player);
 };

@@ -17,7 +17,6 @@
 
 #include "BotBGAIMovement.h"
 #include "Pathfinding.h"
-#include "CommandBG.h"
 #include "WorldSession.h"
 #include "MoveSplineInit.h"
 #include "VMapFactory.h"
@@ -588,23 +587,6 @@ void BotBGAIMovement::TeleportToValidPosition()
 {
 	if (!m_BGAI || !m_Player->GetMap())
 		return;
-	Position selfPos = m_Player->GetPosition();
-	Position nearPosition;
-	CommandBG* bgCommander = m_Player->GetMap()->GetCommander(m_Player->GetTeamId());
-	if (bgCommander)
-	{
-		nearPosition = bgCommander->GetNearTeleportPoint(selfPos);
-		if (selfPos.IsInDist(&nearPosition, 25))
-		{
-			nearPosition.SetOrientation(m_Player->GetOrientation());
-			m_Player->SetSelection(ObjectGuid::Empty);
-			m_BGAI->SetTeleport(nearPosition);
-			//NearUnitVec& enemys = RangeEnemyListByTargetIsMe(BOTAI_RANGESPELL_DISTANCE);
-			//for (Unit* enemy : enemys)
-			//	enemy->SetTarget(ObjectGuid::Empty);
-			return;
-		}
-	}
 	float loopLayerRange = 8.0f;
 	for (int i = 1; i <= 10; i++)
 	{
@@ -647,19 +629,7 @@ void BotBGAIMovement::TeleportToValidPosition()
 			return;
 		}
 	}
-	//TC_LOG_ERROR("BotBGAI.Pathfinding", "Pathfinding error by %s. Force tele to near wp.", me->GetName().c_str());
-	if (bgCommander)
-	{
-		nearPosition.SetOrientation(m_Player->GetOrientation());
-		m_Player->SetSelection(ObjectGuid::Empty);
-		if (m_BGAI)
-			m_BGAI->SetTeleport(nearPosition);
-		else if (m_GroupAI)
-			m_GroupAI->SetTeleport(nearPosition);
-		//NearUnitVec& enemys = RangeEnemyListByTargetIsMe(BOTAI_RANGESPELL_DISTANCE);
-		//for (Unit* enemy : enemys)
-		//	enemy->SetTarget(ObjectGuid::Empty);
-	}
+
 }
 
 void BotBGAIMovement::SyncPosition(Position& pos, bool immed)

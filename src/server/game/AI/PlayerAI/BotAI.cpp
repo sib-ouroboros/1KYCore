@@ -18,7 +18,6 @@
 #include "BotAI.h"
 #include "WorldSession.h"
 #include "Player.h"
-#include "CommandBG.h"
 #include "Battlefield.h"
 #include "BattlefieldMgr.h"
 #include "BotBGAIMovement.h"
@@ -130,7 +129,6 @@ BotBGAI::BotBGAI(Player* player) :
     m_MovetoUseGO(player),
     m_AIBGStateType(BotAIBGState::AIBGState_Leave),
     m_UpdateTick(BOTAI_UPDATE_TICK),
-    m_CanDireFlee(0),
     m_CruxControlTarget(ObjectGuid::Empty),
     m_LastControlTarget(ObjectGuid::Empty),
     m_NeedReserveCtrlSpell(false),
@@ -350,104 +348,6 @@ bool BotBGAI::InBattleground()
 // le temps qu une vague se forme (doctrine PvP : repartir en goutte-a-goutte revient a
 // nourrir l adversaire). Il repart des que trois allies sont a portee, ou au bout de
 // huit secondes, et immediatement si un ennemi vient jusqu au cimetiere.
-bool BotBGAI::WaitRegroupAfterRevive()
-{
-    if (!m_DeathTick)
-        return false;
-    if (me->InArena())
-    {
-        m_DeathTick = 0;
-        return false;
-    }
-    // porteur de drapeau ou bot en peril : aucune attente
-    if (me->IsInCombat() || (me->IsPlayer() && TargetIsFlagCarrier(me->ToPlayer())))
-    {
-        m_DeathTick = 0;
-        return false;
-    }
-    if (!m_ReviveTick)
-        m_ReviveTick = getMSTime();
-    if (GetMSTimeDiffToNow(m_ReviveTick) >= 8000)
-    {
-        m_DeathTick = 0;
-        m_ReviveTick = 0;
-        return false;
-    }
-    uint32 nearAllies = 0;
-    NearPlayerList playersNearby;
-    QueryNearPlayerList(30.0f, playersNearby);
-    for (Player* pVisionPlayer : playersNearby)
-    {
-        if (!pVisionPlayer || pVisionPlayer == me || !pVisionPlayer->IsAlive())
-            continue;
-        if (pVisionPlayer->GetTeamId() == me->GetTeamId())
-            ++nearAllies;
-        else
-        {
-            // un ennemi pousse jusqu au cimetiere : on ne reste pas passif
-            m_DeathTick = 0;
-            m_ReviveTick = 0;
-            return false;
-        }
-    }
-    if (nearAllies >= 3)
-    {
-        m_DeathTick = 0;
-        m_ReviveTick = 0;
-        return false;
-    }
-    m_Movement->ClearMovement();
-    return true;
-}
-
-void BotBGAI::BattlegroundRevive()
-{
-    // SylvaniaCore (module BG BotFill): on note l instant de la mort pour imposer un
-    // temps de regroupement au cimetiere (cf. WaitRegroupAfterRevive).
-    if (!m_DeathTick)
-        m_DeathTick = getMSTime();
-    if (me->InArena())
-        return;
-    if (!me->IsPlayerBot() || !me->InBattleground())
-        return;
-    Player* player = dynamic_cast<Player*>(me);
-    if (!player || player->IsAlive())
-        return;
-    CommandBG* bgCommander = player->GetMap()->GetCommander(player->GetTeamId());
-    if (!bgCommander)
-        return;
-    if (player->getDeathState() == DeathState::CORPSE && !player->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST)) // need release soul
-    {
-        //m_IsFlagTarget = false;
-        m_Movement->ClearMovement();
-        bgCommander->OnPlayerDead(player->GetGUID());
-        WorldPackets::Misc::RepopRequest packet(WorldPacket{ CMSG_REPOP_REQUEST });
-        packet.CheckInstance = false;
-        player->GetSession()->HandleRepopRequest(packet);
-
-        WorldPacket opcode2(CMSG_MOVE_TELEPORT_ACK);
-        WorldPackets::Movement::MoveTeleportAck pakcet(std::move(opcode2));
-        pakcet.MoverGUID = player->GetGUID();
-        player->GetSession()->HandleMoveTeleportAck(pakcet);
-
-        //WorldPacket opcode3(3);
-        //player->GetSession()->HandleAreaSpiritHealerQueueOpcode(opcode3);
-        const Creature* pCreature = bgCommander->GetMatchGraveyardNPC(player);
-        if (!pCreature || !pCreature->IsSpiritService())	// it's not spirit service
-            return;
-        player->GetBattleground()->AddPlayerToResurrectQueue(pCreature->GetGUID(), player->GetGUID());
-        if (Battlefield* bf = sBattlefieldMgr->GetBattlefieldToZoneId(player->GetZoneId()))
-            bf->AddPlayerToResurrectQueue(pCreature->GetGUID(), player->GetGUID());
-    }
-    else if (!player->GetBattleground()->HasJoinNearGrave(player))
-    {
-        const Creature* pCreature = bgCommander->GetMatchGraveyardNPC(player);
-        if (!pCreature || !pCreature->IsSpiritService())	// it's not spirit service
-            return;
-        player->GetBattleground()->AddPlayerToResurrectQueue(pCreature->GetGUID(), player->GetGUID());
-    }
-}
-
 void BotBGAI::DamageDealt(Unit* victim, uint32& damage, DamageEffectType damageType)
 {
     //if (!victim || !me->IsInWorld() || damage == 0)
@@ -550,8 +450,6 @@ void BotBGAI::UpdateAI(uint32 diff)
                 packet.SpellID = BattlegroundSpells::SPELL_WAITING_FOR_RESURRECT;
                 me->GetSession()->HandleCancelAuraOpcode(packet);
             }
-            if (WaitRegroupAfterRevive())
-                return;
             if (m_Teleporting.CanMovement())
                 UpdateBotAI(BOTAI_UPDATE_TICK);
             else
@@ -563,7 +461,6 @@ void BotBGAI::UpdateAI(uint32 diff)
             m_CastRecords.ClearRecordSpell();
             m_Teleporting.ClearTeleport();
             me->SetSelection(ObjectGuid::Empty);
-            BattlegroundRevive();
         }
 
     }
@@ -1150,80 +1047,6 @@ NearUnitVec BotBGAI::SearchLifePctByFriendRange(Unit* pTarget, float lifePct, fl
     return lifePctPlayers;
 }
 
-bool BotBGAI::NeedDireFlee()
-{
-    if (m_CanDireFlee == 0)
-    {
-        if (Map* pMap = me->GetMap())
-        {
-            if (CommandBG* bgCommander = pMap->GetCommander(me->GetTeamId()))
-            {
-                if (bgCommander->CanDireFlee())
-                    m_CanDireFlee = 1;
-                else
-                    m_CanDireFlee = -1;
-            }
-        }
-    }
-    if (m_CanDireFlee <= 0)
-        return false;
-    if (me->GetHealthPct() < 20 && RangeEnemyListByTargetIsMe(BOTAI_SEARCH_RANGE * 0.6f).size() > 0)
-        return true;
-    NearPlayerVec rangeFriends = ExistFriendAttacker(BOTAI_SEARCH_RANGE * 0.6f);
-    NearUnitVec rangeEnemys = RangeEnemyListByHasAura(0, BOTAI_SEARCH_RANGE * 0.6f);
-    int32 enemyCount = int32(rangeEnemys.size());
-    int32 friendCount = int32(rangeFriends.size());
-    float gap = (float)(enemyCount - friendCount);
-    if (gap < 2)
-        return false;
-    if (friendCount <= 0)
-        return true;
-    float rate = gap / ((float)friendCount);
-    return rate > 0.2f;
-}
-
-bool BotBGAI::DoDireFlee()
-{
-    if (IsNotMovement())
-        return false;
-    NearUnitVec enemys = RangeEnemyListByHasAura(0, BOTAI_SEARCH_RANGE * 0.6f);
-    if (enemys.empty())
-        return false;
-    NearPlayerVec friends = SearchFarFriend(BOTAI_SEARCH_RANGE * 0.8f, BOTAI_SEARCH_RANGE * 1.4f, true);
-    if (friends.empty())
-        return false;
-    Unit* nearFriend = NULL;
-    float nearDistance = 0;
-    for (Player* player : friends)
-    {
-        float distance = me->GetDistance(player->GetPosition());
-        if (nearFriend == NULL)
-        {
-            nearFriend = player;
-            nearDistance = distance;
-        }
-        else if (distance < nearDistance)
-        {
-            nearFriend = player;
-            nearDistance = distance;
-        }
-        if (player->GetSelectedUnit() == NULL)
-        {
-            player->StopMoving();
-            uint32 index = urand(0, enemys.size() - 1);
-            player->SetSelection(enemys[index]->GetGUID());
-        }
-    }
-    if (nearFriend)
-    {
-        me->AttackStop();
-        //me->SetSelection(ObjectGuid::Empty);
-        m_Movement->MovementTo(nearFriend->GetPositionX(), nearFriend->GetPositionY(), nearFriend->GetPositionZ(), 3.0f);
-        return true;
-    }
-    return false;
-}
-
 bool BotBGAI::DoFaceToTarget(Unit* pTarget)
 {
     float relative = me->GetRelativeAngle(pTarget->GetPositionX(), pTarget->GetPositionY());
@@ -1633,12 +1456,7 @@ void BotBGAI::UpdateBotAI(uint32 diff)
     {
         if (m_InitRndPos.GetPositionZ() != 0)
         {
-            CommandBG* pBGCommand = pBattleground->GetBgMap()->GetCommander(me->GetTeamId());
-            AIWaypoint* pAIWP = pBGCommand ? pBGCommand->GetReadyPosition() : NULL;
-            if (pAIWP)
-                m_InitRndPos = pAIWP->GetPosition();
-            else
-                m_InitRndPos = me->GetPosition();
+            m_InitRndPos = me->GetPosition();
             if (me->InArena())
             {
                 m_InitRndPos = BotAIHorrorState::GetNewHorrorPosByRange(me, 3.0f);
@@ -1694,15 +1512,10 @@ void BotBGAI::UpdateBotAI(uint32 diff)
                 if (m_CurrentTargetTick < BOTAI_MAXTARGET_TICKTIME || inArena)
                 {
                     m_CurrentTargetTick += diff;
-                    if (inArena || !NeedDireFlee() || !DoDireFlee())
-                    {
-                        if (IsHealerBotAI() && HaveManaStore())
-                            ProcessHealth();
-                        else
-                            ProcessCombat(pSelect);
-                    }
+                    if (IsHealerBotAI() && HaveManaStore())
+                        ProcessHealth();
                     else
-                        ProcessFlee();
+                        ProcessCombat(pSelect);
                 }
                 else
                 {
@@ -1809,12 +1622,7 @@ void BotBGAI::UpdateBotAI(uint32 diff)
     {
         if (m_InitRndPos.GetPositionZ() != 0)
         {
-            CommandBG* pBGCommand = pBattleground->GetBgMap()->GetCommander(me->GetTeamId());
-            AIWaypoint* pAIWP = pBGCommand ? pBGCommand->GetReadyPosition() : NULL;
-            if (pAIWP)
-                m_InitRndPos = pAIWP->GetPosition();
-            else
-                m_InitRndPos = me->GetPosition();
+            m_InitRndPos = me->GetPosition();
             if (me->InArena())
             {
                 m_InitRndPos = BotAIHorrorState::GetNewHorrorPosByRange(me, 3.0f);
@@ -1872,15 +1680,10 @@ void BotBGAI::UpdateBotAI(uint32 diff)
                 if (m_CurrentTargetTick < BOTAI_MAXTARGET_TICKTIME || inArena)
                 {
                     m_CurrentTargetTick += diff;
-                    if (inArena || !NeedDireFlee() || !DoDireFlee())
-                    {
-                        if (IsHealerBotAI() && HaveManaStore())
-                            ProcessHealth();
-                        else
-                            ProcessCombat(pSelect);
-                    }
+                    if (IsHealerBotAI() && HaveManaStore())
+                        ProcessHealth();
                     else
-                        ProcessFlee();
+                        ProcessCombat(pSelect);
                 }
                 else
                 {
@@ -2019,9 +1822,6 @@ bool BotBGAI::TryUpMount()
                 return false;
         }
     }
-    CommandBG* bgCommander = me->GetMap()->GetCommander(me->GetTeamId());
-    if (bgCommander && !bgCommander->CanUpMount(me))
-        return false;
     if (!me->InArena())
     {
         ++m_UpmountTick;

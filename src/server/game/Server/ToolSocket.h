@@ -73,7 +73,6 @@ private:
 	void CmdBotOnline(Json::Value& info);
 	void CmdBotChange(Json::Value& info);
 	void CmdPlayerChange(Json::Value& info);
-	void CmdBGModel(Json::Value& info);
 	void CmdPVEAutoSetting(Json::Value& info);
 	void CmdPVEMaxLevel(Json::Value& info);
 	void CmdPVEMaxDungeon(Json::Value& info);
@@ -81,9 +80,6 @@ private:
 	void CmdPVEPull(Json::Value& info);
 	void CmdPVEAddion(Json::Value& info);
 	void CmdPVEAutoRevive(Json::Value& info);
-	void CmdPVEFieldCreature(Json::Value& info);
-	void CmdPVEFieldDriving(Json::Value& info);
-	void CmdPVEFieldWarfare(Json::Value& info);
 	void CmdPVPDiminishing(Json::Value& info);
 	void CmdPVPCanBreakControll(Json::Value& info);
 	void CmdAutoBuildArenaTeam(Json::Value& info);

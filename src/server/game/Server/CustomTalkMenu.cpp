@@ -22,7 +22,6 @@
 #include "SpellAuras.h"
 #include "Group.h"
 #include "PlayerBotMgr.h"
-#include "FieldBotMgr.h"
 
 CustomTalkMenu::~CustomTalkMenu()
 {
@@ -538,7 +537,7 @@ bool CustomTalkMenu::ProcessArenaList(CustomItem* pMenuItem, Player* player)
 	TeamId team = (pMenuItem->param2 != 0) ? TeamId::TEAM_ALLIANCE : TeamId::TEAM_HORDE;
 	if (player->GetTeamId() == team)
 		return false;
-	/*if (sFieldBotMgr->ExistWarfare() || !sArenaTeamMgr->CanJoinRatedArenaQueue(player, pMenuItem->param3))
+    /*if (!sArenaTeamMgr->CanJoinRatedArenaQueue(player, pMenuItem->param3))
 	{
 		std::string allonlineText;
 		consoleToUtf8(std::string("|cffff8800当前状态无法开始竞技场。|r"), allonlineText);

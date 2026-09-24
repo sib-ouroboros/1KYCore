@@ -53,12 +53,7 @@
 #include "WorldSession.h"
 #include "WildBattlePet.h"
 #include "PlayerBotMgr.h"
-#include "FieldBotMgr.h"
-#include "../CommandBG/CommandAB.h"
-#include "../CommandBG/CommandWS.h"
-#include "../CommandBG/CommandEY.h"
-#include "../CommandBG/CommandAV.h"
-#include "../CommandBG/CommandIC.h"
+#include "BotGroupAI.h"
 #include "Config.h"
 
 u_map_magic MapMagic        = { {'M','A','P','S'} };
@@ -809,8 +804,6 @@ void Map::Update(const uint32 t_diff)
         // update players at tick
         player->Update(t_diff);
 
-        if (!player->IsPlayerBot())
-            sFieldBotMgr->Update(player->GetGUID());
 
         VisitNearbyCellsOf(player, grid_object_update, world_object_update);
 
@@ -4057,7 +4050,7 @@ uint32 InstanceMap::GetMaxResetDelay() const
 /* ******* Battleground Instance Maps ******* */
 
 BattlegroundMap::BattlegroundMap(uint32 id, time_t expiry, uint32 InstanceId, Map* _parent, Difficulty spawnMode)
-  : Map(id, expiry, InstanceId, spawnMode, _parent), m_bg(NULL), m_pAllianceCommander(NULL), m_pHordeCommander(NULL)
+  : Map(id, expiry, InstanceId, spawnMode, _parent), m_bg(NULL)
 {
     //lets initialize visibility distance for BG/Arenas
     BattlegroundMap::InitVisibilityDistance();
@@ -4108,36 +4101,12 @@ bool BattlegroundMap::AddPlayerToMap(Player* player, bool initPlayer /*= true*/)
         player->m_InstanceValid = true;
     }
     bool result = Map::AddPlayerToMap(player);
-    if (result && player->IsPlayerBot())
-    {
-        if (player->GetTeamId() == TEAM_ALLIANCE && m_pAllianceCommander)
-        {
-            m_pAllianceCommander->AddPlayerBot(player, m_bg);
-        }
-        else if (player->GetTeamId() == TEAM_HORDE && m_pHordeCommander)
-        {
-            m_pHordeCommander->AddPlayerBot(player, m_bg);
-        }
-    }
-
     return result;
 }
 
 void BattlegroundMap::RemovePlayerFromMap(Player* player, bool remove)
 {
     TC_LOG_DEBUG("maps", "MAP: Removing player '%s' from bg '%u' of map '%s' before relocating to another map", player->GetName().c_str(), GetInstanceId(), GetMapName());
-    if (player->IsPlayerBot())
-    {
-        PlayerBotMgr::SwitchPlayerBotAI(player, PlayerBotAIType::PBAIT_FIELD, true);
-        if (player->GetTeamId() == TEAM_ALLIANCE && m_pAllianceCommander)
-        {
-            m_pAllianceCommander->RemovePlayerBot(player);
-        }
-        else if (player->GetTeamId() == TEAM_HORDE && m_pHordeCommander)
-        {
-            m_pHordeCommander->RemovePlayerBot(player);
-        }
-    }
     Map::RemovePlayerFromMap(player, remove);
 }
 
@@ -4153,102 +4122,6 @@ void BattlegroundMap::RemoveAllPlayers()
             if (Player* player = itr->GetSource())
                 if (!player->IsBeingTeleportedFar())
                     player->TeleportTo(player->GetBattlegroundEntryPoint());
-}
-
-void BattlegroundMap::Update(const uint32 diff)
-{
-    Map::Update(diff);
-    if (m_pAllianceCommander)
-        m_pAllianceCommander->Update(diff);
-    if (m_pHordeCommander)
-        m_pHordeCommander->Update(diff);
-}
-
-void BattlegroundMap::InsureCommander(BattlegroundTypeId bgType)
-{
-    if (!m_pAllianceCommander)
-    {
-        switch (bgType)
-        {
-        case BATTLEGROUND_AB:
-            m_pAllianceCommander = new CommandAB(m_bg, TeamId::TEAM_ALLIANCE);
-            break;
-        case BATTLEGROUND_WS:
-            m_pAllianceCommander = new CommandWS(m_bg, TeamId::TEAM_ALLIANCE);
-            break;
-        case BATTLEGROUND_EY:
-            m_pAllianceCommander = new CommandEY(m_bg, TeamId::TEAM_ALLIANCE);
-            break;
-        case BATTLEGROUND_AV:
-            m_pAllianceCommander = new CommandAV(m_bg, TeamId::TEAM_ALLIANCE);
-            break;
-        case BATTLEGROUND_IC:
-            m_pAllianceCommander = new CommandIC(m_bg, TeamId::TEAM_ALLIANCE);
-            break;
-        }
-    }
-    if (!m_pHordeCommander)
-    {
-        switch (bgType)
-        {
-        case BATTLEGROUND_AB:
-            m_pHordeCommander = new CommandAB(m_bg, TeamId::TEAM_HORDE);
-            break;
-        case BATTLEGROUND_WS:
-            m_pHordeCommander = new CommandWS(m_bg, TeamId::TEAM_HORDE);
-            break;
-        case BATTLEGROUND_EY:
-            m_pHordeCommander = new CommandEY(m_bg, TeamId::TEAM_HORDE);
-            break;
-        case BATTLEGROUND_AV:
-            m_pHordeCommander = new CommandAV(m_bg, TeamId::TEAM_HORDE);
-            break;
-        case BATTLEGROUND_IC:
-            m_pHordeCommander = new CommandIC(m_bg, TeamId::TEAM_HORDE);
-            break;
-        }
-    }
-}
-
-void BattlegroundMap::InitCommander()
-{
-    if (m_pAllianceCommander)
-        m_pAllianceCommander->Initialize();
-    if (m_pHordeCommander)
-        m_pHordeCommander->Initialize();
-}
-
-void BattlegroundMap::ResetCommander()
-{
-    if (m_pAllianceCommander)
-        m_pAllianceCommander->UpdateBelongBattleground(m_bg);
-    if (m_pHordeCommander)
-        m_pHordeCommander->UpdateBelongBattleground(m_bg);
-}
-
-void BattlegroundMap::ReadyCommander()
-{
-    if (m_pAllianceCommander)
-        m_pAllianceCommander->ReadyGame();
-    if (m_pHordeCommander)
-        m_pHordeCommander->ReadyGame();
-}
-
-void BattlegroundMap::StartCommander()
-{
-    if (m_pAllianceCommander)
-        m_pAllianceCommander->StartGame();
-    if (m_pHordeCommander)
-        m_pHordeCommander->StartGame();
-}
-
-CommandBG* BattlegroundMap::GetCommander(TeamId team)
-{
-    if (team == TEAM_ALLIANCE)
-        return m_pAllianceCommander;
-    else if (team == TEAM_HORDE)
-        return m_pHordeCommander;
-    return NULL;
 }
 
 GameObject* Map::SummonGameObject(uint32 entry, Position const& pos, QuaternionData const& rot, uint32 respawnTime)

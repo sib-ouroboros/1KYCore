@@ -83,7 +83,6 @@
 #include "BotGroupAI.h"
 #include "BotAI.h"
 #include "BotMovementAI.h"
-#include "FieldBotMgr.h"
 
 float baseMoveSpeed[MAX_MOVE_TYPE] =
 {
@@ -11780,7 +11779,6 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
             plrVictim->DuelComplete(DUEL_INTERRUPTED);
         }
 
-        sFieldBotMgr->KillFieldPlayer(player, plrVictim);
     }
     else                                                // creature died
     {

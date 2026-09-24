@@ -38,7 +38,6 @@
 #include "Opcodes.h"
 #include "Player.h"
 #include "PlayerBotMgr.h"
-#include "FieldBotMgr.h"
 
 void WorldSession::HandleBattlemasterHelloOpcode(WorldPackets::NPC::Hello& hello)
 {
@@ -180,13 +179,6 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPackets::Battleground::Batt
         if (_player->HasAura(9454))
             return;
 
-        if (sFieldBotMgr->ExistWarfare())
-        {
-            std::string outString;
-            consoleToUtf8(std::string("????????????????????"), outString);
-            sWorld->SendGlobalText(outString.c_str(), NULL);
-            return;
-        }
 
         BattlegroundQueue& bgQueue = sBattlegroundMgr->GetBattlegroundQueue(bgQueueTypeId);
         GroupQueueInfo* ginfo = bgQueue.AddGroup(_player, NULL, bgTypeId, bracketEntry, 0, false, isPremade, 0, 0);
@@ -211,7 +203,7 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPackets::Battleground::Batt
         if (grp->GetLeaderGUID() != _player->GetGUID())
             return;
 
-        if (sFieldBotMgr->ExistWarfare() || grp->GroupExistPlayerBot())
+        if (grp->GroupExistPlayerBot())
         {
             std::string outString;
             consoleToUtf8(std::string("??j???????????"), outString);

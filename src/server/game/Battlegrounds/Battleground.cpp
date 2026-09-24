@@ -44,7 +44,6 @@
 #include "CreatureAIImpl.h"
 #include <cstdarg>
 #include "PlayerBotMgr.h"
-#include "CommandBG.h"
 
 template<class Do>
 void Battleground::BroadcastWorker(Do& _do)
@@ -368,13 +367,6 @@ inline void Battleground::_ProcessResurrect(uint32 diff)
             player->CastSpell(player, SPELL_SPIRIT_HEAL_MANA, true);
             player->SpawnCorpseBones(false);
 
-            BattlegroundMap* pBGMap = GetBgMap();
-            if (pBGMap)
-            {
-                CommandBG* pCommander = pBGMap->GetCommander(player->GetTeamId());
-                if (pCommander)
-                    pCommander->OnPlayerRevive(player);
-            }
         }
         m_ResurrectQueue.clear();
     }
@@ -493,8 +485,6 @@ inline void Battleground::_ProcessJoin(uint32 diff)
         m_Events |= BG_STARTING_EVENT_2;
         if (StartMessageIds[BG_STARTING_EVENT_SECOND])
             SendBroadcastText(StartMessageIds[BG_STARTING_EVENT_SECOND], CHAT_MSG_BG_SYSTEM_NEUTRAL);
-        m_Map->InsureCommander(GetTypeID());
-        m_Map->ReadyCommander();
     }
     // After 30 or 15 seconds, warning is signaled
     else if (GetStartDelayTime() <= StartDelayTimes[BG_STARTING_EVENT_THIRD] && !(m_Events & BG_STARTING_EVENT_3))
@@ -502,8 +492,6 @@ inline void Battleground::_ProcessJoin(uint32 diff)
         m_Events |= BG_STARTING_EVENT_3;
         if (StartMessageIds[BG_STARTING_EVENT_THIRD])
             SendBroadcastText(StartMessageIds[BG_STARTING_EVENT_THIRD], CHAT_MSG_BG_SYSTEM_NEUTRAL);
-        m_Map->InsureCommander(GetTypeID());
-        m_Map->ReadyCommander();
     }
     // Delay expired (after 2 or 1 minute)
     else if (GetStartDelayTime() <= 0 && !(m_Events & BG_STARTING_EVENT_4))
@@ -516,15 +504,6 @@ inline void Battleground::_ProcessJoin(uint32 diff)
             SendBroadcastText(StartMessageIds[BG_STARTING_EVENT_FOURTH], CHAT_MSG_BG_SYSTEM_NEUTRAL);
         SetStatus(STATUS_IN_PROGRESS);
         SetStartDelayTime(StartDelayTimes[BG_STARTING_EVENT_FOURTH]);
-
-        // SylvaniaCore (module BG BotFill): a l ouverture des portes, passer l IA des bots
-        // en mode combat (StartCommander n avait aucun site d appel : les bots restaient
-        // figes a la position de preparation pendant tout le match)
-        if (m_Map)
-        {
-            m_Map->InsureCommander(GetTypeID());
-            m_Map->StartCommander();
-        }
 
         // Remove preparation
         if (isArena())
@@ -1135,11 +1114,6 @@ void Battleground::Reset()
         delete itr->second;
     PlayerScores.clear();
 
-    if (m_Map)
-    {
-        m_Map->InsureCommander(GetTypeID());
-        m_Map->ResetCommander();
-    }
 
     ResetBGSubclass();
 }
@@ -1156,11 +1130,6 @@ void Battleground::StartBattleground()
     // and it doesn't matter if we call StartBattleground() more times, because m_Battlegrounds is a map and instance id never changes
     sBattlegroundMgr->AddBattleground(this);
 
-    if (m_Map)
-    {
-        m_Map->InsureCommander(GetTypeID());
-        m_Map->InitCommander();
-    }
 
     if (m_IsRated)
         TC_LOG_DEBUG("bg.arena", "Arena match type: %u for Team1Id: %u - Team2Id: %u started.", m_ArenaType, m_ArenaGroupIds[TEAM_ALLIANCE], m_ArenaGroupIds[TEAM_HORDE]);
@@ -1507,25 +1476,6 @@ void Battleground::RemovePlayerFromResurrectQueue(ObjectGuid player_guid)
             }
         }
     }
-}
-
-bool Battleground::HasJoinNearGrave(Player* player)
-{
-    if (!player)
-        return false;
-    const Creature* pCreature = GetClosestGraveCreature(player);
-    if (!pCreature || !pCreature->IsSpiritService())
-        return false;
-    GuidVector& ghostList = m_ReviveQueue[pCreature->GetGUID()];
-    if (ghostList.empty())
-        return false;
-    ObjectGuid playerGuid = player->GetGUID();
-    for (GuidVector::const_iterator itr = ghostList.begin(); itr != ghostList.end(); ++itr)
-    {
-        if ((*itr) == playerGuid)
-            return true;
-    }
-    return false;
 }
 
 void Battleground::RelocateDeadPlayers(ObjectGuid guideGuid)

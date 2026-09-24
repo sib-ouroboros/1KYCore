@@ -60,7 +60,6 @@
 #include "Util.h"
 #include "World.h"
 #include "PlayerBotMgr.h"
-#include "FieldBotMgr.h"
 #include "OnlineMgr.h"
 #include "BotMovementAI.h"
 #include <Config.h>
@@ -1208,7 +1207,6 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder const& holder)
             sPlayerBotMgr->LoginFriendBotByPlayer(pCurrChar);
             sPlayerBotMgr->LoginGroupBotByPlayer(pCurrChar);
         }
-        sFieldBotMgr->OnRealPlayerLogin(pCurrChar);
     }
     uint32 talent = PlayerBotSetting::FindPlayerTalentType(pCurrChar);
     sOnlineMgr->CharaterOnline(GetAccountId(), uint32(pCurrChar->GetGUID()),

@@ -21,7 +21,6 @@
 #include "Group.h"
 #include "Guild.h"
 #include "SocialMgr.h"
-#include "FieldBotMgr.h"
 #include "GuildMgr.h"
 #include "SocialPackets.h"
 #include <Packet.h>
@@ -126,16 +125,6 @@ bool PluginCommand::Saveall(Player* player)
 	return true;
 }
 
-bool PluginCommand::ToggleWarfareAid(Player* player)
-{
-	if (sFieldBotMgr->ExistWarfare())
-	{
-		FieldWarfare::AID_TARGET_TEAM = !FieldWarfare::AID_TARGET_TEAM;
-		return true;
-	}
-	return false;
-}
-
 bool PluginCommand::OnlineArenaTeamMember(Player* player, uint32 arenaType)
 {
 	/*ArenaTeam* arenaTeam = sArenaTeamMgr->GetArenaTypeTeamByGUID(player->GetGUID(), arenaType);
@@ -198,8 +187,6 @@ bool PluginCommand::ProcessCommand(Player* player, std::string cmd)
 		return OnlineFriends(player);
 	else if (cmdText == "saveall")
 		return Saveall(player);
-	else if (cmdText == "warfareaid")
-		return ToggleWarfareAid(player);
 	else if (cmdText == "onlinearenateam2")
 		return OnlineArenaTeamMember(player, 2);
 	else if (cmdText == "onlinearenateam3")
