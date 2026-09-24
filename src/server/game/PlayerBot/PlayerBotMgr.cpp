@@ -23,7 +23,6 @@
 #include "BotAI.h"
 #include "BotFieldAI.h"
 #include "BotGroupAI.h"
-#include "BotDuelAI.h"
 #include "BotArenaAI.h"
 #include "OnlineMgr.h"
 #include "Group.h"
@@ -192,26 +191,6 @@ void PlayerBotMgr::SwitchPlayerBotAI(Player* player, PlayerBotAIType aiType, boo
             pAI->Reset();
             player->SetAI(pAI);
             player->IsAIEnabled = true;
-        }
-        break;
-    case PlayerBotAIType::PBAIT_DUEL:
-        if (pAI)
-        {
-            if (dynamic_cast<BotDuelAI*>(pAI) != NULL)
-            {
-                player->IsAIEnabled = true;
-                return;
-            }
-            PlayerBotMgr::m_DelayDestroyAIs[getMSTime()].push_back(pAI);
-            player->SetAI(NULL);
-        }
-        pAI = BotDuelAI::CreateBotDuelAIByPlayerClass(player);
-        if (pAI)
-        {
-            pAI->Reset();
-            player->SetAI(pAI);
-            player->IsAIEnabled = true;
-            ((BotDuelAI*)pAI)->ResetBotAI();
         }
         break;
     case PlayerBotAIType::PBAIT_ARENA:

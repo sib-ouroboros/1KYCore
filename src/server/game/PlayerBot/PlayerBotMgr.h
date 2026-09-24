@@ -45,8 +45,7 @@ enum PlayerBotAIType
     PBAIT_BG,
     PBAIT_GROUP,
     PBAIT_DUNGEON,
-    PBAIT_DUEL,
-    PBAIT_ARENA,
+    PBAIT_ARENA = 5,
     PBAIT_OVER
 };
 

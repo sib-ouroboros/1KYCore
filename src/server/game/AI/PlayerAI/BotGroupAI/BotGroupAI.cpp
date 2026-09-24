@@ -108,7 +108,6 @@ m_Flying(player),
 m_WishStore(player),
 m_FliterCreatures(player),
 m_WaitAuras(player),
-m_CheckDuel(player),
 m_FastAid(player),
 m_MovetoUseGO(player),
 m_GroupLeader(player),
@@ -1595,8 +1594,6 @@ bool BotGroupAI::NonCombatProcess()
 	m_DelayGiveXP.ProcessGiveXP(m_MasterPlayer->getLevel());
 	{
 		std::lock_guard<std::mutex> lock(m_ItemLock);
-		if (m_CheckDuel.CheckDuel())
-			sPlayerBotMgr->SwitchPlayerBotAI(me, PlayerBotAIType::PBAIT_DUEL, true);
 		m_Guild.UpdateGuildProcess();
 		if (m_AITrade.ProcessTrade())
 			return true;

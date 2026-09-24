@@ -144,7 +144,6 @@ protected:
 	BotAIWishStore m_WishStore;
 	BotAICheckSetting m_CheckSetting;
 	BotAIRecordCastSpell m_CastRecords;
-	BotAICheckDuel m_CheckDuel;
 
 	bool m_HasReset;
 

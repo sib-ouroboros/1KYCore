@@ -94,7 +94,6 @@ m_BGAI(ai),
 m_FieldAI(NULL),
 m_GroupAI(NULL),
 m_ArenaAI(NULL),
-m_DuelAI(NULL),
 m_IsFlagTarget(false),
 lastPathfindSure(0),
 pTargetAIWP(NULL),
@@ -109,7 +108,6 @@ m_BGAI(NULL),
 m_FieldAI(ai),
 m_GroupAI(NULL),
 m_ArenaAI(NULL),
-m_DuelAI(NULL),
 m_IsFlagTarget(false),
 lastPathfindSure(0),
 pTargetAIWP(NULL),
@@ -124,7 +122,6 @@ m_BGAI(NULL),
 m_FieldAI(NULL),
 m_GroupAI(ai),
 m_ArenaAI(NULL),
-m_DuelAI(NULL),
 m_IsFlagTarget(false),
 lastPathfindSure(0),
 pTargetAIWP(NULL),
@@ -139,22 +136,6 @@ m_BGAI(NULL),
 m_FieldAI(NULL),
 m_GroupAI(NULL),
 m_ArenaAI(ai),
-m_DuelAI(NULL),
-m_IsFlagTarget(false),
-lastPathfindSure(0),
-pTargetAIWP(NULL),
-m_MovementTick(0),
-m_LastSyncTick(0)
-{
-}
-
-BotBGAIMovement::BotBGAIMovement(Player* player, BotDuelAI* ai) :
-m_Player(player),
-m_BGAI(NULL),
-m_FieldAI(NULL),
-m_GroupAI(NULL),
-m_ArenaAI(NULL),
-m_DuelAI(ai),
 m_IsFlagTarget(false),
 lastPathfindSure(0),
 pTargetAIWP(NULL),
@@ -623,8 +604,6 @@ void BotBGAIMovement::TeleportToValidPosition()
 				m_GroupAI->SetTeleport(pos);
 			else if (m_ArenaAI)
 				m_ArenaAI->SetTeleport(pos);
-			else if (m_DuelAI)
-				m_DuelAI->SetTeleport(pos);
 			m_Player->StopMoving();
 			return;
 		}

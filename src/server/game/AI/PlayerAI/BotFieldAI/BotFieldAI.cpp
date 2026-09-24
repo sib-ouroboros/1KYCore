@@ -99,7 +99,6 @@ m_CruxMovement(player),
 m_WishStore(player),
 m_CheckSetting(player),
 m_CastRecords(player),
-m_CheckDuel(player),
 m_HasReset(false)
 {
 	if (!me->IsPvP())
@@ -475,8 +474,6 @@ bool BotFieldAI::NonCombatProcess()
 {
 	{
 		std::lock_guard<std::mutex> lock(m_ItemLock);
-		if (m_CheckDuel.CheckDuel())
-			sPlayerBotMgr->SwitchPlayerBotAI(me, PlayerBotAIType::PBAIT_DUEL, true);
 		m_CheckSetting.UpdateCheckSetting();
 		//m_Guild.UpdateGuildProcess();
 		if (m_AITrade.ProcessTrade())

@@ -92,7 +92,6 @@ public:
     //static void BuildNewArenaHellSpells(SpellInfoMap& spellMap);
     static void AddArenaBotSpellsByPlayer(Player* player);
     static void RemoveArenaBotSpellsByPlayer(Player* player);
-    static void TryCancelDuel(Player* player);
     static bool SpellHasReady(Player* player, uint32 spellID);
     static uint32 GetFirstNumberByString(std::string text);
     static std::string BuildItemLinkText(const ItemTemplate* pItemTemplate);
@@ -622,18 +621,6 @@ public:
 private:
     Player* me;
     AIRECORDS m_Records;
-};
-
-class TC_GAME_API BotAICheckDuel
-{
-public:
-    BotAICheckDuel(Player* self) : me(self) {}
-    ~BotAICheckDuel() {}
-
-    bool CheckDuel();
-
-private:
-    Player* me;
 };
 
 class TC_GAME_API BotAIGroupLeader

@@ -213,7 +213,6 @@ protected:
 	BotAIWishStore m_WishStore;
 	BotAIFliterCreatures m_FliterCreatures;
 	BotAIWaitSpecialAura m_WaitAuras;
-	BotAICheckDuel m_CheckDuel;
 	BotAIFastAid m_FastAid;
 	BotAIMovetoUseGO m_MovetoUseGO;
 	BotAIGroupLeader m_GroupLeader;

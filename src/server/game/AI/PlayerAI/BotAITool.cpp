@@ -209,13 +209,6 @@ void BotUtility::RemoveArenaBotSpellsByPlayer(Player* player)
 		player->RemoveOwnedAura(ARENA_PRIEST_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
 }
 
-void BotUtility::TryCancelDuel(Player* player)
-{
-	if (!player || !player->duel)
-		return;
-	player->DuelComplete(DUEL_INTERRUPTED);
-}
-
 bool BotUtility::SpellHasReady(Player* player, uint32 spellID)
 {
     if (!player || spellID == 0)
@@ -2961,42 +2954,6 @@ bool BotAIRecordCastSpell::MatchCastRecord(Unit* pTarget, uint32 spellID, uint32
 		return true;
 	uint32 recordTick = record.castRecords[spellID];
 	return (recordTick + tickGap) <= getMSTime();
-}
-
-bool BotAICheckDuel::CheckDuel()
-{
-    if (!me->duel)
-        return false;
-    DuelInfo* duel = me->duel;
-    if (duel->isCompleted || duel->startTime > 0 || duel->startTimer > 0)
-        return false;
-    if (!duel->initiator || duel->initiator->IsPlayerBot())
-    {
-        BotUtility::TryCancelDuel(me);
-        return false;
-    }
-    if (!duel->opponent || duel->opponent == me)
-    {
-        BotUtility::TryCancelDuel(me);
-        return false;
-    }
-    if (me->IsInCombat() || !me->IsInWorld() || !me->IsSettingFinish() ||
-        me->GetMap()->IsDungeon() || me->isUsingLfg() || me->InBattleground() || me->InArena())
-    {
-        BotUtility::TryCancelDuel(me);
-        return false;
-    }
-
-    WorldSession* pSession = me->GetSession();
-    if (!pSession || pSession->HasSchedules())
-    {
-        BotUtility::TryCancelDuel(me);
-        return false;
-    }
-    WorldPacket cmd(1);
-    cmd << me->GetGUID();
-    pSession->HandleDuelAccepted();
-    return true;
 }
 
 void BotAIGroupLeader::ProcessGroupLeader()
