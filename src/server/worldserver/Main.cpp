@@ -62,7 +62,6 @@
 #include "PlayerBotMgr.h"
 #include "ToolSocket.h"
 #include "ToolSocketMgr.h"
-#include "PathfindingMgr.h"
 
 #ifdef WITH_CPR
     #include <cpr/cpr.h>
@@ -381,13 +380,11 @@ extern int main(int argc, char** argv)
     sScriptMgr->OnStartup();
 
     sPlayerBotMgr->UpAllPlayerBotSession();
-    sFPMgr->InitializePFMgr();
 
     WorldUpdateLoop();
 
     // Shutdown starts here
     threadPool.reset();
-    sFPMgr->ClearPFThreads();
 
     sLog->SetSynchronous();
 

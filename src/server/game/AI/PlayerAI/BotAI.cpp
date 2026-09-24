@@ -16,7 +16,6 @@
  */
 
 #include "BotAI.h"
-#include "PathfindingMgr.h"
 #include "WorldSession.h"
 #include "Player.h"
 #include "CommandBG.h"
@@ -567,16 +566,6 @@ void BotBGAI::UpdateAI(uint32 diff)
             BattlegroundRevive();
         }
 
-        //{
-        //	std::lock_guard<std::mutex> lock(m_movQueueLock);
-        //	if (!m_pfFinishQueue.empty())
-        //	{
-        //		PathParameter* parameter = m_pfFinishQueue.front();
-        //		m_pfFinishQueue.pop();
-        //		m_Movement->ApplyFinishPath(parameter);
-        //		delete parameter;
-        //	}
-        //}
     }
 }
 
@@ -2301,14 +2290,6 @@ void BotBGAI::ReadyBattleground()
 {
     m_AIBGStateType = BotAIBGState::AIBGState_Ready;
     m_InitRndPos = me->GetPosition();
-}
-
-void BotBGAI::PushFinishQueue(PathParameter* pathParam)
-{
-    if (!pathParam)
-        return;
-    std::lock_guard<std::mutex> lock(m_movQueueLock);
-    m_pfFinishQueue.push(pathParam);
 }
 
 bool BotBGAI::CanUseBGObject()

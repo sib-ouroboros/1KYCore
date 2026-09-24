@@ -16,7 +16,6 @@
  */
 
 #include "BotDuelAI.h"
-#include "PathfindingMgr.h"
 #include "WorldSession.h"
 #include "Player.h"
 #include "BotBGAIMovement.h"

@@ -102,7 +102,7 @@
 #include "PlayerBotMgr.h"
 #include "FieldBotMgr.h"
 #include "AIWaypointsMgr.h"
-#include "PathfindingMgr.h"
+#include "MMapManager.h"
 #include "ToolSocket.h"
 #include "SHA1.h"
 #include <boost/algorithm/string.hpp>
@@ -3004,7 +3004,6 @@ void World::Update(uint32 diff)
         //sFieldBotMgr->Update();
         m_timers[WUPDATE_FIELDBOT_MGR].Reset();
     }
-    sFPMgr->Update();
 
     // update the instance reset times
     sInstanceSaveMgr->Update();

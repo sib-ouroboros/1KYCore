@@ -17,7 +17,7 @@
 
 #include "BotMovementAI.h"
 #include "WaypointManager.h"
-#include "PathfindingMgr.h"
+#include "Pathfinding.h"
 #include "WorldSession.h"
 #include "BotAITool.h"
 #include "MapManager.h"
@@ -137,7 +137,6 @@ void BotMovementAI::MovementTo(Player* player)
 	pathParam->targetPosX = player->GetPositionX();
 	pathParam->targetPosY = player->GetPositionY();
 	pathParam->targetPosZ = player->GetPositionZ();
-	//sFPMgr->AddPFParameter(pathParam);
 
 	Pathfinding path(pathParam, NULL, NULL);
 	bool result = path.CalculatePath(pathParam->targetPosX, pathParam->targetPosY, pathParam->targetPosZ);
@@ -169,7 +168,6 @@ void BotMovementAI::MovementTo(float x, float y, float z)
 	pathParam->targetPosX = x;
 	pathParam->targetPosY = y;
 	pathParam->targetPosZ = z;
-	//sFPMgr->AddPFParameter(pathParam);
 
 	Pathfinding path(pathParam, NULL, NULL);
 	bool result = path.CalculatePath(pathParam->targetPosX, pathParam->targetPosY, pathParam->targetPosZ);

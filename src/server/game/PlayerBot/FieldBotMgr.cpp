@@ -23,7 +23,7 @@
 #include "Group.h"
 #include "BotFieldAI.h"
 #include "BotGroupAI.h"
-#include "PathfindingMgr.h"
+#include "Pathfinding.h"
 #include <cmath>
 
 bool FieldWarfare::AID_TARGET_TEAM = false;

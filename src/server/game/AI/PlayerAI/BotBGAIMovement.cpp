@@ -16,7 +16,7 @@
  */
 
 #include "BotBGAIMovement.h"
-#include "PathfindingMgr.h"
+#include "Pathfinding.h"
 #include "CommandBG.h"
 #include "WorldSession.h"
 #include "MoveSplineInit.h"

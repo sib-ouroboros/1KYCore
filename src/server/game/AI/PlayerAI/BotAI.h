@@ -38,7 +38,6 @@ class BotBGAIMovement;
 struct PathParameter;
 
 typedef std::set<uint32> UINT_SET;
-typedef std::queue<PathParameter*> MoveParameterQueue;
 typedef std::list<GameObject*> NearObjectList;
 typedef std::list<Player*> NearPlayerList;
 typedef std::vector<Player*> NearPlayerVec;
@@ -68,7 +67,6 @@ public:
 	void ReadyBattleground();
 	void StartBattleground() { m_AIBGStateType = BotAIBGState::AIBGState_Start; }
 	void LeaveBattleground() { m_AIBGStateType = BotAIBGState::AIBGState_Leave; }
-	void PushFinishQueue(PathParameter* pathParam);
 	bool CanUseBGObject();
 	NearObjectList SearchGameObject(float range);
 	bool TryUpMount();
@@ -202,8 +200,6 @@ protected:
 	BotAIFastAid m_FastAid;
 	BotAIGroupLeader m_GroupLeader;
 	BotAIMovetoUseGO m_MovetoUseGO;
-	std::mutex m_movQueueLock;
-	MoveParameterQueue m_pfFinishQueue;
 
 	Position m_InitRndPos;
 

@@ -31,7 +31,6 @@ class BotBGAIMovement;
 struct PathParameter;
 
 typedef std::set<uint32> UINT_SET;
-typedef std::queue<PathParameter*> MoveParameterQueue;
 typedef std::list<GameObject*> NearObjectList;
 typedef std::list<Player*> NearPlayerList;
 typedef std::vector<Player*> NearPlayerVec;
