@@ -30,28 +30,9 @@
 typedef std::list<Player*> PLAYER_LIST;
 typedef std::list<BotFieldAI*> FIELDAI_LIST;
 
-class TC_GAME_API WorldPoster
-{
-public:
-	WorldPoster() : currentPoster(0), sendTick(0) { InitializePoster(); }
-	~WorldPoster() {}
-
-	void SendOnceGlobalPoster();
-
-private:
-	void InitializePoster();
-	void PushPoster(std::string content);
-
-private:
-	uint32 currentPoster;
-	uint32 sendTick;
-	std::vector<std::string> m_AllPosterContent;
-};
-
 enum ACTING_TYPE
 {
 	ACTING_WARFARE,
-	ACTING_STORY
 };
 
 class TC_GAME_API FieldActing
@@ -67,28 +48,6 @@ public:
 
 private:
 	ACTING_TYPE m_ActingType;
-};
-
-class TC_GAME_API FieldStory : public FieldActing
-{
-public:
-	FieldStory();
-	~FieldStory() {}
-
-	bool FieldActingIsOver() override;
-	void Update() override;
-
-private:
-	bool FillNeedBotGUID(uint32 index);
-	bool ExistBotGUID(ObjectGuid& guid);
-
-private:
-	uint32 m_StoryTimer;
-	uint32 m_StoryEntry;
-	uint32 m_StoryStep;
-	std::vector<ObjectGuid> m_TalkBotGUIDs;
-
-	static uint32 LastStoryEntry;
 };
 
 class TC_GAME_API FieldWarfare : public FieldActing
@@ -148,7 +107,6 @@ public:
 
 	bool HasActing() { return m_FieldActing != NULL; }
 	bool ExistWarfare() { return (m_FieldActing != NULL && m_FieldActing->MatchActingType(ACTING_WARFARE)); }
-	void StartStoryTalk();
 	void Update(ObjectGuid workGUID);
 	void OnRealPlayerLogin(Player* player);
 	void OnRealPlayerLogout(ObjectGuid guid);
@@ -165,12 +123,10 @@ private:
 	void UpdateInitOnline();
 	void UpdateTeleport();
 	bool IsVaildVisiblePos(Player* pTarget, float x, float y, float z);
-	void RandomPlayerBotNormalTalk();
 	int32 GetMaxNearPlayer();
 	bool CanTriggerWarfare(Player* pAttacker, Player* deather);
 
 private:
-	WorldPoster m_WorldPoster;
 	uint32 m_WorkTick;
 	ObjectGuid m_WorkPlayerGUID;
 	int32 m_MaxNearPlayer;

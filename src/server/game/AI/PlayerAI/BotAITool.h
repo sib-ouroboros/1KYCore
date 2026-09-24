@@ -22,7 +22,6 @@
 #include "ScriptSystem.h"
 #include "PlayerAI.h"
 #include "Player.h"
-#include "PlayerBotTalkMgr.h"
 
 #define ARENA_PLAYER_BOT_AURA 80849
 #define ARENA_WARRIOR_BOT_AURA 80850

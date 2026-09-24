@@ -16,7 +16,6 @@
  */
 
 #include "FieldBotMgr.h"
-#include "PlayerBotTalkMgr.h"
 #include "World.h"
 #include "MapManager.h"
 #include "Player.h"
@@ -27,169 +26,10 @@
 #include "PathfindingMgr.h"
 #include <cmath>
 
-uint32 FieldStory::LastStoryEntry = 0;
 bool FieldWarfare::AID_TARGET_TEAM = false;
 bool FieldBotMgr::FIELDBOT_CREATURE = true;
 bool FieldBotMgr::FIELDBOT_DRIVING = false;
 uint32 FieldBotMgr::FIELDWARFARE_SIZE = 2;
-
-void WorldPoster::SendOnceGlobalPoster()
-{
-	if (m_AllPosterContent.empty())
-		return;
-	if (sendTick < 1)
-	{
-		++sendTick;
-		return;
-	}
-	sendTick = 0;
-
-	if (currentPoster >= m_AllPosterContent.size())
-		currentPoster = 0;
-
-	sWorld->SendGlobalText(m_AllPosterContent[currentPoster].c_str(), NULL);
-
-	++currentPoster;
-}
-
-void WorldPoster::InitializePoster()
-{
-	m_AllPosterContent.clear();
-	PushPoster("您现在使用的是淘宝店铺【欣颖科技魔兽直营店】的体验产品");
-	PushPoster("淘宝 欣颖科技88体验产品只开放阿拉希战场");
-	PushPoster("淘宝 欣颖科技88体验产品只开放战士、术士、牧师三个职业");
-	PushPoster("淘宝 欣颖科技88体验产品不开放野外团战系统");
-	PushPoster("淘宝 欣颖科技88体验产品不开放随机地下城系统");
-	PushPoster("淘宝 欣颖科技88体验产品不开放竞技场");
-	PushPoster("淘宝 欣颖科技88体验产品无法切换团队，无法进入团队副本");
-	PushPoster("如果您喜欢我们的产品，请购买完整版");
-	PushPoster("购买方式：请淘宝联系旺旺【欣颖科技88】或者QQ联系277922486");
-	PushPoster("其它任何联系方式都是欺骗玩家");
-}
-
-void WorldPoster::PushPoster(std::string content)
-{
-	if (content.empty())
-		return;
-
-	std::string allonlineText;
-	consoleToUtf8(std::string("|cffff8800") + content + std::string("|r"), allonlineText);
-	m_AllPosterContent.push_back(allonlineText);
-}
-
-FieldStory::FieldStory() :
-FieldActing(ACTING_STORY),
-m_StoryTimer(getMSTime()),
-m_StoryEntry(sPlayerBotTalkMgr->RandomStoryID()),
-m_StoryStep(0)
-{
-	int32 maxRnd = 5;
-	while (m_StoryEntry == FieldStory::LastStoryEntry)
-	{
-		if (maxRnd <= 0)
-			break;
-		--maxRnd;
-		m_StoryEntry = sPlayerBotTalkMgr->RandomStoryID();
-	}
-
-	FieldStory::LastStoryEntry = m_StoryEntry;
-}
-
-bool FieldStory::FieldActingIsOver()
-{
-	if (m_StoryEntry == -1 || m_StoryStep == -1)
-		return true;
-	if (!sPlayerBotTalkMgr->IsValidStoryStep(m_StoryEntry, m_StoryStep))
-	{
-		m_StoryEntry = -1;
-		m_StoryStep = -1;
-		return true;
-	}
-	return false;
-}
-
-void FieldStory::Update()
-{
-	if (!sPlayerBotTalkMgr->CanNextTalk())
-		return;
-	uint32 talkIndex = -1;
-	std::string talkText;
-	bool success = sPlayerBotTalkMgr->GetStoryByIndex(m_StoryEntry, m_StoryStep, talkIndex, talkText);
-	if (!success || talkIndex == -1 || talkText.empty())
-	{
-		m_StoryEntry = -1;
-		m_StoryStep = -1;
-		return;
-	}
-	if (!FillNeedBotGUID(talkIndex) || m_TalkBotGUIDs.size() <= talkIndex)
-	{
-		m_StoryEntry = -1;
-		m_StoryStep = -1;
-		return;
-	}
-	Player* player = ObjectAccessor::FindPlayer(m_TalkBotGUIDs[talkIndex]);
-	if (!player)
-	{
-		m_StoryEntry = -1;
-		m_StoryStep = -1;
-		return;
-	}
-	sPlayerBotTalkMgr->StoryActingTalk(player, talkText);
-	++m_StoryStep;
-}
-
-bool FieldStory::FillNeedBotGUID(uint32 index)
-{
-	if (m_TalkBotGUIDs.size() > index)
-		return true;
-	std::vector<ObjectGuid> rndGUIDs;
-	const SessionMap& allSession = sWorld->GetAllSessions();
-	for (SessionMap::const_iterator itSession = allSession.begin(); itSession != allSession.end(); itSession++)
-	{
-		if (itSession->second->PlayerLoading() || !itSession->second->IsBotSession())
-			continue;
-		Player* player = itSession->second->GetPlayer();
-		if (!player || !player->IsInWorld())
-			continue;
-		ObjectGuid botGUID = player->GetGUID();
-		if (ExistBotGUID(botGUID))
-			continue;
-		rndGUIDs.push_back(botGUID);
-	}
-	uint32 maxLoop = index + 1;
-	while (m_TalkBotGUIDs.size() <= index)
-	{
-		if (maxLoop == 0)
-			return false;
-		--maxLoop;
-		if (rndGUIDs.empty())
-			return false;
-		uint32 selIndex = urand(0, rndGUIDs.size() - 1);
-		for (std::vector<ObjectGuid>::iterator itGUID = rndGUIDs.begin(); itGUID != rndGUIDs.end(); itGUID++)
-		{
-			if (selIndex == 0)
-			{
-				m_TalkBotGUIDs.push_back(*itGUID);
-				rndGUIDs.erase(itGUID);
-				break;
-			}
-			--selIndex;
-		}
-	}
-	return true;
-}
-
-bool FieldStory::ExistBotGUID(ObjectGuid& guid)
-{
-	if (guid == ObjectGuid::Empty)
-		return true;
-	for (ObjectGuid& botGUID : m_TalkBotGUIDs)
-	{
-		if (botGUID == guid)
-			return true;
-	}
-	return false;
-}
 
 FieldWarfare::FieldWarfare(Player* trigger, Player* target) :
 FieldActing(ACTING_WARFARE),
@@ -294,7 +134,6 @@ void FieldWarfare::ProcessStart()
 		OverFieldActing();
 		return;
 	}
-	sPlayerBotTalkMgr->WarfareActingTalk(0, triggerPlayer);
 }
 
 void FieldWarfare::ProcessWarrfare(Player* targetPlayer)
@@ -302,7 +141,6 @@ void FieldWarfare::ProcessWarrfare(Player* targetPlayer)
 	if (!targetPlayer || targetPlayer->IsFlying())
 		return;
 	int32 maxCount = GetWarfareMaxCount();
-	int32 talkRate = irand(0, maxCount);
 	int32 nearAlliance = 0;
 	int32 nearHorde = 0;
 	//NearPlayerList playersNearby;
@@ -342,13 +180,6 @@ void FieldWarfare::ProcessWarrfare(Player* targetPlayer)
 		{
 			pFieldAI->SetDrivingPVP(true);
 			pFieldAI->SetWarfareTarget(targetPlayer);
-
-			--talkRate;
-			if (talkRate < 1)
-			{
-				talkRate = maxCount;
-				sPlayerBotTalkMgr->WarfareActingTalk(1, player);
-			}
 		}
 	}
 
@@ -399,24 +230,14 @@ void FieldWarfare::ProcessEpilog(Player* targetPlayer)
 	//int32 nearAlliance = 0;
 	//int32 nearHorde = 0;
 	TeamId weaknessTeam = GetWeaknessTeam();
-	int32 talkRate = irand(0, playersNearby.size());
 	for (Player* nearPlayer : playersNearby)
 	{
-		--talkRate;
 		//if (nearPlayer->GetTeamId() == TEAM_ALLIANCE)
 		//	++nearAlliance;
 		//else if (nearPlayer->GetTeamId() == TEAM_HORDE)
 		//	++nearHorde;
 		if (nearPlayer->IsAlive() && nearPlayer->IsPlayerBot())
 		{
-			if (talkRate < 1)
-			{
-				if (nearPlayer->GetTeamId() == weaknessTeam || urand(0, 99) > 75)
-				{
-					talkRate = playersNearby.size();
-					sPlayerBotTalkMgr->WarfareActingTalk((nearPlayer->GetTeamId() == weaknessTeam) ? 2 : 1, nearPlayer);
-				}
-			}
 			if (BotFieldAI* pFieldAI = dynamic_cast<BotFieldAI*>(nearPlayer->GetAI()))
 			{
 				if (nearPlayer->GetTeamId() == weaknessTeam)
@@ -615,7 +436,6 @@ void FieldWarfare::UpdateWarfareDurableTimer()
 }
 
 FieldBotMgr::FieldBotMgr() :
-m_WorldPoster(),
 m_WorkTick(getMSTime()),
 m_WorkPlayerGUID(ObjectGuid::Empty),
 m_MaxNearPlayer(4),
@@ -633,13 +453,6 @@ FieldBotMgr* FieldBotMgr::instance()
 {
 	static FieldBotMgr instance;
 	return &instance;
-}
-
-void FieldBotMgr::StartStoryTalk()
-{
-	if (HasActing())
-		return;
-	m_FieldActing = new FieldStory();
 }
 
 bool FieldBotMgr::MatchTeleportCondition(Player* p1, Player* p2)
@@ -697,7 +510,6 @@ void FieldBotMgr::Update(ObjectGuid workGUID)
 	{
 		UpdateInitOnline();
 		UpdateTeleport();
-		RandomPlayerBotNormalTalk();
 	}
 }
 
@@ -934,27 +746,6 @@ continue;
 			}
 		}
 	}
-}
-
-void FieldBotMgr::RandomPlayerBotNormalTalk()
-{
-	if (HasActing())
-		return;
-	std::vector<Player*> rndPlayers;
-	const SessionMap& allSession = sWorld->GetAllSessions();
-	for (SessionMap::const_iterator itSession = allSession.begin(); itSession != allSession.end(); itSession++)
-	{
-		if (itSession->second->PlayerLoading() || !itSession->second->IsBotSession())
-			continue;
-		Player* player = itSession->second->GetPlayer();
-		if (!player || !player->IsInWorld() || player->InBattleground() || player->GetGroup())
-			continue;
-		rndPlayers.push_back(player);
-	}
-	if (rndPlayers.empty())
-		return;
-	Player* talkPlayer = rndPlayers[urand(0, rndPlayers.size() - 1)];
-	sPlayerBotTryTalk(TTT_Normal, 0, talkPlayer);
 }
 
 int32 FieldBotMgr::GetMaxNearPlayer()

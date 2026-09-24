@@ -101,7 +101,6 @@
 #include "PetBattleSystem.h"
 #include "PlayerBotMgr.h"
 #include "FieldBotMgr.h"
-#include "PlayerBotTalkMgr.h"
 #include "AIWaypointsMgr.h"
 #include "PathfindingMgr.h"
 #include "ToolSocket.h"
@@ -1875,8 +1874,6 @@ void World::SetInitialWorldSettings()
 
     TC_LOG_INFO("server.loading", "Loading Player bot base store...");
     sPlayerBotMgr->LoadPlayerBotBaseInfo();
-    sPlayerBotTalkMgr->InitializeTalkText();
-    sPlayerBotTalkMgr->InitializeStory();
 
     TC_LOG_INFO("server.loading", "Loading AI Way points...");
     if (!sAIWPMgr->LoadAIWaypoints())

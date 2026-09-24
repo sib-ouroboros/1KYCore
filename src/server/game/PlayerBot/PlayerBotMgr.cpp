@@ -1254,7 +1254,6 @@ void PlayerBotMgr::OnPlayerBotLogin(WorldSession* pSession, Player* pPlayer)
     }
 
     BotUtility::RemoveArenaBotSpellsByPlayer(pPlayer);
-    sPlayerBotTalkMgr->JoinDefaultChannel(pPlayer);
 
     if (PlayerBotSession* pBotSession = dynamic_cast<PlayerBotSession*>(pSession))
     {
