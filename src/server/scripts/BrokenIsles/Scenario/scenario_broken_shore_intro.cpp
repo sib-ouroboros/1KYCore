@@ -17,7 +17,6 @@
 #include "GameObject.h"
 #include "ObjectMgr.h"
 #include "TaskScheduler.h"
-#include "MercenaryMgr.h"
 #include "Chat.h"
 #include "Group.h"
 
@@ -290,54 +289,6 @@ struct scenario_broken_shore_intro : public InstanceScript
 
         // objectif « embarquement » (Alliance) : credite aussi ici au cas ou
         player->KilledMonsterCredit(NPC_CREDIT_SHIP);
-
-        // =============================================================
-        // ESCORTE_MERCENAIRE
-        //
-        // DEMANDE : « cree le systeme de groupe avec playerbot pour le
-        // scenario, avec un groupe complet heal tank dps », en reprenant
-        // le principe des mercenaires mais declenche a l entree.
-        //
-        // Le scenario officiel se joue en groupe, constitue par la file
-        // d attente. Faute de ce systeme, on offre une escorte : un
-        // protecteur, un guerisseur et deux combattants, gratuitement.
-        //
-        // Le contrat reste celui des mercenaires -- rupture au premier
-        // depart du groupe -- mais sans prelevement : le jeu la fournit,
-        // le joueur ne l a pas louee.
-        //
-        // On ne complete que ce qui manque : un joueur deja accompagne
-        // garde ses compagnons.
-        // =============================================================
-        if (sMercenaryMgr->IsEnabled())
-        {
-            uint32 place = MERCENARY_GROUP_SIZE - 1;
-            if (Group* groupe = player->GetGroup())
-                place = (groupe->GetMembersCount() < MERCENARY_GROUP_SIZE)
-                      ? MERCENARY_GROUP_SIZE - groupe->GetMembersCount() : 0;
-
-            static uint8 const composition[] = { ROLE_TANK, ROLE_HEALER, ROLE_DAMAGE, ROLE_DAMAGE };
-
-            // SIGNALE EN JEU : « une se superpose a la meme position ».
-            // On espace les arrivees d'une seconde et demie : le module
-            // pose chaque mercenaire aupres de son employeur, et deux
-            // invocations simultanees se retrouvent au meme point.
-            uint8 recrutes = 0;
-            for (uint8 i = 0; i < 4 && recrutes < place; ++i)
-            {
-                uint8 const role = composition[i];
-                Player* employeur = player;
-                scheduler.Schedule(Milliseconds(1500 * (i + 1)), [employeur, role](TaskContext)
-                {
-                    sMercenaryMgr->Summon(employeur, role, nullptr, true);
-                });
-                ++recrutes;
-            }
-
-            if (recrutes)
-                ChatHandler(player->GetSession()).PSendSysMessage(
-                    "Une escorte de %u combattants se joint a vous pour l'assaut.", recrutes);
-        }
 
         if (!introDone)
         {

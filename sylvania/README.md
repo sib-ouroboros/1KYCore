@@ -24,7 +24,6 @@ maison de fonctionner avec le peuplement amont désactivé.
 | `pbot` | `0` | Aucun bot ami ni bot de groupe connecté automatiquement à l'arrivée d'un joueur (amont ; la valeur par défaut dans le code est 1, la couper est donc un choix). |
 | `pbotall` | `0` | Aucun peuplement automatique du monde ni de la file LFG (amont). |
 | `pbotbg` | `1` | **Module BG BotFill** : remplissage des champs de bataille quand de vrais joueurs sont en file (WS / AB / EY / AV / IC). Explicitement indépendant de `pbotall`. |
-| `pbotmerc` | `1` | **Module Mercenaires** : le Portail d'Invocation (créature `1000010`, 60 spawns) loue des bots au joueur solo, 100 po, contrat rompu au moindre départ du groupe. |
 | `pbotasl` | `88` | Plafond de bots connectés simultanément. |
 | `pbottitle` | `600` | Titre « Mercenaire » imposé à tout bot, pour qu'un joueur ne puisse jamais le confondre avec un vrai joueur. Entrée `char_titles` custom de la base hotfix (MaskID 380). |
 
