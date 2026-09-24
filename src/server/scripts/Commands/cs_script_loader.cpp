@@ -25,6 +25,7 @@ void AddSC_battlenet_account_commandscript();
 void AddSC_bf_commandscript();
 void AddSC_blackmarket_commandscript();
 void AddSC_cast_commandscript();
+void AddSC_customutility_commandscript();
 void AddSC_character_commandscript();
 void AddSC_cheat_commandscript();
 void AddSC_debug_commandscript();
@@ -74,6 +75,7 @@ void AddCommandsScripts()
     AddSC_bf_commandscript();
     AddSC_blackmarket_commandscript();
     AddSC_cast_commandscript();
+    AddSC_customutility_commandscript();
     AddSC_character_commandscript();
     AddSC_cheat_commandscript();
     AddSC_debug_commandscript();
