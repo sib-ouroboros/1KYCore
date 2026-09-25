@@ -93,15 +93,6 @@ class TC_GAME_API BattlegroundQueue
         void PlayerInvitedToBGUpdateAverageWaitTime(GroupQueueInfo* ginfo, BattlegroundBracketId bracket_id);
         uint32 GetAverageQueueWaitTime(GroupQueueInfo* ginfo, BattlegroundBracketId bracket_id) const;
 
-        bool ExistQueueByRatedArena(ObjectGuid& guid, bool isRated);
-        bool CheckRatedArenaMatch(BattlegroundBracketId bracket_id);
-        GroupQueueInfo* GetFirstRealPlayerGroupInfo(BattlegroundBracketId bracket_id, BattlegroundQueueGroupTypes groupType);
-        bool TryGatherPlayerBySelfRatedArena(BattlegroundBracketId bracket_id, GroupQueueInfo* gInfo);
-        bool TryGatherPlayerByEnemyRatedArena(BattlegroundBracketId bracket_id, GroupQueueInfo* gInfo, bool needBroadcast = false);
-        void RatedArenaAllPlayerBotEnter(BattlegroundBracketId bracket_id);
-        bool ExistRealPlayer(const PVPDifficultyEntry* bracketEntry, bool isRated = false);
-        bool QueryNeedPlayerCount(BattlegroundTypeId bgTypeID, BattlegroundBracketId bracket_id, uint32 aaType, int32& needAlliance, int32& needHorde, int32 teamSizeCap = 0);
-        void AllPlayerBotLeaveQueueFromRatedArena(BattlegroundBracketId bracket_id);
         typedef std::map<ObjectGuid, PlayerQueueInfo> QueuedPlayersMap;
         QueuedPlayersMap m_QueuedPlayers;
 

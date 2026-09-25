@@ -23,7 +23,6 @@
 #include "BotAI.h"
 #include "BotFieldAI.h"
 #include "BotGroupAI.h"
-#include "BotArenaAI.h"
 #include "AIWaypointsMgr.h"
 
 //class BotBGAI;
@@ -52,7 +51,6 @@ public:
 	BotBGAIMovement(Player* player, BotBGAI* ai);
 	BotBGAIMovement(Player* player, BotFieldAI* ai);
 	BotBGAIMovement(Player* player, BotGroupAI* ai);
-	BotBGAIMovement(Player* player, BotArenaAI* ai);
 	~BotBGAIMovement();
 
 	ObjectGuid GetTargetObjectID() { return targetGuid; }
@@ -83,7 +81,6 @@ private:
 	BotBGAI* m_BGAI;
 	BotFieldAI* m_FieldAI;
 	BotGroupAI* m_GroupAI;
-	BotArenaAI* m_ArenaAI;
 
 	bool m_IsFlagTarget;
 	ObjectGuid targetGuid;

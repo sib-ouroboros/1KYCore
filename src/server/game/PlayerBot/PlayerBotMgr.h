@@ -32,7 +32,6 @@
 //#include "ArenaTeamMgr.h"
 #include "Containers.h"
 
-#define CONVERT_ARENAAI_TOBG
 
 class ObjectGuid;
 struct LFGBotRequirement;
@@ -45,8 +44,7 @@ enum PlayerBotAIType
     PBAIT_BG,
     PBAIT_GROUP,
     PBAIT_DUNGEON,
-    PBAIT_ARENA = 5,
-    PBAIT_OVER
+    PBAIT_OVER = 6
 };
 
 struct PlayerBotCharBaseInfo
@@ -286,7 +284,6 @@ struct PlayerBotBaseInfo
 //using BattlegroundTypeId = uint16;
 class TC_GAME_API PlayerBotMgr
 {
-    typedef std::vector<BattlegroundTypeId> BattleGroundTypes;
 
 private:
     PlayerBotMgr();
@@ -338,11 +335,6 @@ public:
     void SupplementPlayerBot();
     void SupplementOneRandomPlayerBotPerAccount();
 
-    void OnRealPlayerJoinBattlegroundQueue(uint32 bgTypeId, uint32 level);
-    void OnRealPlayerLeaveBattlegroundQueue(uint32 bgTypeId, uint32 level);
-    void OnRealPlayerLeaveArenaQueue(uint32 bgTypeId, uint32 level, uint32 aaType);
-    void OnRealPlayerEnterBattleground(uint32 bgTypeId, uint32 level);
-    void OnRealPlayerLeaveBattleground(const Player* player);
 
     void Update();
     uint32 GetOnlineBotCount(TeamId team, bool hasReal);
@@ -388,18 +380,11 @@ private:
 
     void ClearEmptyNeedPlayer();
     void ClearNeedPlayer(uint32 bgTypeID, uint32 bracketID);
-    void AddNewPlayerBotToBG(TeamId team, uint32 minLV, uint32 maxLV, BattlegroundTypeId bgTypeID);
     void AddNewPlayerBotToLFG(lfg::LFGBotRequirement* botRequirement);
-    void AddNewPlayerBotToAA(TeamId team, BattlegroundTypeId bgTypeID, uint32 bracketID, uint32 aaType);
-    void AddTeamBotToRatedArena(uint32 arenaTeamId);
     bool FillOnlineBotScheduleByLFGRequirement(lfg::LFGBotRequirement* botRequirement, BotGlobleSchedule* botSchedule);
     uint32 GetScheduleTalentByLFGRequirement(lfg::LfgRoles roles, uint32 botCls);
-    void QueryBattlegroundRequirement();
     void UpdateIdleBotLogout();
     uint32 GetScheduledBotCount();
-    void GetBotBGActivity(uint32& activeInstanceId, uint32& queuedBgTypeId);
-    void QueryRatedArenaRequirement();
-    void QueryNonRatedArenaRequirement();
     void OnlinePlayerBotByGUIDQueue();
     bool ExistUnBGPlayerBot();
     PVPDifficultyEntry const* FindBGBracketEntry(Battleground* bg_template, uint32 level);
@@ -408,11 +393,9 @@ private:
     uint32 m_BotAccountAmount;
     uint32 m_LastBotAccountIndex;
     uint32 m_LFGSearchTick;
-    uint32 m_ArenaSearchTick;
     std::map<uint32, PlayerBotBaseInfo*> m_idPlayerBotBase;
     std::map<uint32, PlayerBotBaseInfo*> m_idAccountBotBase;
 
-    BattleGroundTypes m_BGTypes;
     std::vector<std::string> allName;
     std::vector<std::string> allArenaName;
     std::queue<ObjectGuid> m_DelayOnlineBots;

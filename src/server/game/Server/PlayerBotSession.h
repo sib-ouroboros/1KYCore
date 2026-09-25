@@ -33,11 +33,7 @@ enum BotGlobleScheduleType
 	BGSType_OutBGQueue,
 	BGSType_EnterBG,
 	BGSType_LeaveBG,
-	BGSType_InAAQueue,
-	BGSType_OutAAQueue,
-	BGSType_EnterAA,
-	BGSType_LeaveAA,
-	BGSType_Online_GUID,
+    BGSType_Online_GUID = 11,
 	BGSType_DelayLevelup,
 	BGSType_InLFGQueue,
 	BGSType_OutLFGQueue,
@@ -120,10 +116,6 @@ private:
 	bool ProcessOutBGQueue(BotGlobleSchedule& schedule);
 	bool ProcessEnterBG(BotGlobleSchedule& schedule);
 	bool ProcessLeaveBG(BotGlobleSchedule& schedule);
-	bool ProcessInAAQueue(BotGlobleSchedule& schedule);
-	bool ProcessOutAAQueue(BotGlobleSchedule& schedule);
-	bool ProcessEnterAA(BotGlobleSchedule& schedule);
-	bool ProcessLeaveAA(BotGlobleSchedule& schedule);
 	bool ProcessDelayLevelup(BotGlobleSchedule& schedule);
 	bool ProcessInLFGQueue(BotGlobleSchedule& schedule);
 	bool ProcessOutLFGQueue(BotGlobleSchedule& schedule);

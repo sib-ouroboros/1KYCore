@@ -37,7 +37,6 @@
 #include "ObjectMgr.h"
 #include "Opcodes.h"
 #include "Player.h"
-#include "PlayerBotMgr.h"
 
 void WorldSession::HandleBattlemasterHelloOpcode(WorldPackets::NPC::Hello& hello)
 {
@@ -253,8 +252,6 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPackets::Battleground::Batt
     }
 
     sBattlegroundMgr->ScheduleQueueUpdate(0, 0, bgQueueTypeId, bgTypeId, bracketEntry->GetBracketId());
-    if (!IsBotSession())
-        sPlayerBotMgr->OnRealPlayerJoinBattlegroundQueue(bgTypeId_, _player->getLevel());
 }
 
 void WorldSession::HandlePVPLogDataOpcode(WorldPackets::Battleground::PVPLogDataRequest& /*pvpLogDataRequest*/)
@@ -420,8 +417,6 @@ void WorldSession::HandleBattleFieldPortOpcode(WorldPackets::Battleground::Battl
         // bg->AddPlayer(_player, team);
         TC_LOG_DEBUG("bg.battleground", "Battleground: player %s (%s) joined battle for bg %u, bgtype %u, queue type %u.", _player->GetName().c_str(), _player->GetGUID().ToString().c_str(), bg->GetInstanceID(), bg->GetTypeID(), bgQueueTypeId);
 
-        if (!IsBotSession())
-            sPlayerBotMgr->OnRealPlayerEnterBattleground(bgTypeId, _player->getLevel());
     }
     else // leave queue
     {
@@ -450,13 +445,6 @@ void WorldSession::HandleBattleFieldPortOpcode(WorldPackets::Battleground::Battl
         TC_LOG_DEBUG("bg.battleground", "Battleground: player %s (%s) left queue for bgtype %u, queue type %u.", _player->GetName().c_str(), _player->GetGUID().ToString().c_str(), bg->GetTypeID(), bgQueueTypeId);
     }
 
-    if (!IsBotSession())
-    {
-        if (bgTypeId != BattlegroundTypeId::BATTLEGROUND_AA)
-            sPlayerBotMgr->OnRealPlayerLeaveBattlegroundQueue(bgTypeId, _player->getLevel());
-        else
-            sPlayerBotMgr->OnRealPlayerLeaveArenaQueue(bgTypeId, _player->getLevel(), 0);
-    }
 }
 
 void WorldSession::HandleBattlefieldLeaveOpcode(WorldPackets::Battleground::BattlefieldLeave& /*battlefieldLeave*/)
@@ -467,8 +455,6 @@ void WorldSession::HandleBattlefieldLeaveOpcode(WorldPackets::Battleground::Batt
             if (bg->GetStatus() != STATUS_WAIT_LEAVE)
                 return;
 
-    if (!_player->IsPlayerBot())
-        sPlayerBotMgr->OnRealPlayerLeaveBattleground(_player);
     _player->LeaveBattleground();
 }
 

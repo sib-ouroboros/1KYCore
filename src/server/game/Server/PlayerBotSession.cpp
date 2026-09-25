@@ -50,9 +50,7 @@ bool PlayerBotSession::HasBGSchedule()
 	{
 		BotGlobleScheduleType bgsType = (*itSc).bbgType;
 		if (bgsType == BGSType_EnterBG || bgsType == BGSType_InBGQueue ||
-			bgsType == BGSType_LeaveBG || bgsType == BGSType_OutBGQueue ||
-			bgsType == BGSType_EnterAA || bgsType == BGSType_InAAQueue ||
-			bgsType == BGSType_LeaveAA || bgsType == BGSType_OutAAQueue)
+            bgsType == BGSType_LeaveBG || bgsType == BGSType_OutBGQueue)
 			return true;
 	}
 	return false;
@@ -97,11 +95,6 @@ void PlayerBotSession::PushScheduleToQueue(BotGlobleSchedule& schedule)
 	{
 		RemoveScheduleByType(BotGlobleScheduleType::BGSType_InBGQueue);
 		RemoveScheduleByType(BotGlobleScheduleType::BGSType_EnterBG);
-	}
-	if (schedule.bbgType == BotGlobleScheduleType::BGSType_OutAAQueue)
-	{
-		RemoveScheduleByType(BotGlobleScheduleType::BGSType_InAAQueue);
-		RemoveScheduleByType(BotGlobleScheduleType::BGSType_EnterAA);
 	}
 	m_Schedules.push_back(schedule);
 }
@@ -266,18 +259,6 @@ void PlayerBotSession::CastSchedule(uint32 diff)
 		break;
 	case BGSType_LeaveBG:
 		result = ProcessLeaveBG(schedule);
-		break;
-	case BGSType_InAAQueue:
-		result = ProcessInAAQueue(schedule);
-		break;
-	case BGSType_OutAAQueue:
-		result = ProcessOutAAQueue(schedule);
-		break;
-	case BGSType_EnterAA:
-		result = ProcessEnterAA(schedule);
-		break;
-	case BGSType_LeaveAA:
-		result = ProcessLeaveAA(schedule);
 		break;
 	case BGSType_DelayLevelup:
 		result = ProcessDelayLevelup(schedule);
@@ -572,150 +553,6 @@ bool PlayerBotSession::ProcessLeaveBG(BotGlobleSchedule& schedule)
 	WorldPackets::Battleground::BattlefieldLeave leave(std::move(opcode));
     HandleBattlefieldLeaveOpcode(leave);
 	//HandleWorldPortAck();
-	return false;
-}
-
-bool PlayerBotSession::ProcessInAAQueue(BotGlobleSchedule& schedule)
-{
-	if (PlayerLoading())
-		return false;
-	Player* player = GetPlayer();
-	if (!player)
-	{
-		ClearAllSchedule();
-		return false;
-	}
-	if (!player->IsInWorld())
-		return false;
-	if (player->InBattlegroundQueue())
-		return true;
-	if (player->HasAura(26013) || player->InBattleground() || player->InArena() || player->GetMap()->IsDungeon())
-	{
-		ClearAllSchedule();
-		return false;
-	}
-
-	WorldPacket packet(CMSG_BATTLEMASTER_JOIN_ARENA);
-	WorldPackets::Battleground::BattlemasterJoinArena cmd(std::move(packet));
-	//cmd.RolesMask = schedule.parameter1;
-	//cmd.Bracket = schedule.parameter2;
-    HandleBattlemasterJoinArena(cmd);
-	return false;
-}
-
-bool PlayerBotSession::ProcessOutAAQueue(BotGlobleSchedule& schedule)
-{
-	if (PlayerLoading())
-		return false;
-	Player* player = GetPlayer();
-	if (!player)
-	{
-		ClearAllSchedule();
-		return false;
-	}
-	if (!player->IsInWorld() || player->InBattleground() || player->InArena() || !player->InBattlegroundQueue() || player->GetMap()->IsDungeon())
-		return true;
-
-	LogoutPlayer(false);
-	return true;
-}
-
-bool PlayerBotSession::ProcessEnterAA(BotGlobleSchedule& schedule)
-{
-	if (PlayerLoading())
-		return false;
-	Player* player = GetPlayer();
-	if (!player)
-	{
-		ClearAllSchedule();
-		return false;
-	}
-	if (!player->IsInWorld())
-		return false;
-	if (player->GetMap()->IsDungeon())
-	{
-		BotGlobleSchedule schedule1(BotGlobleScheduleType::BGSType_OutAAQueue, 0);
-		schedule1.parameter1 = schedule.parameter1;
-		schedule1.parameter2 = schedule.parameter2;
-		schedule1.parameter3 = schedule.parameter3;
-		ClearAllSchedule();
-		PushScheduleToQueue(schedule1);
-		return false;
-	}
-	if (player->InBattleground() || player->InArena())
-		return true;
-
-	if (player->InBattlegroundQueue())
-	{
-		for (uint8 i = 0; i < PLAYER_MAX_BATTLEGROUND_QUEUES; ++i)
-		{
-            BattlegroundQueueTypeId bgQueueTypeId = player->GetBattlegroundQueueTypeId(i);
-			if (!bgQueueTypeId)
-				continue;
-			if (player->IsInvitedForBattlegroundQueueType(bgQueueTypeId))
-			{
-				PlayerBotMgr::SwitchPlayerBotAI(player, PlayerBotAIType::PBAIT_ARENA, true);
-
-                WorldPacket cmd(CMSG_BATTLEFIELD_PORT);
-                WorldPackets::Battleground::BattlefieldPort packet(std::move(cmd));
-                packet.Ticket.Id = schedule.parameter1;
-                packet.Ticket.RequesterGuid = schedule.playerGUID;
-                packet.Ticket.Type = WorldPackets::LFG::RideType::Battlegrounds;
-                packet.Ticket.Time = time(0);
-                packet.AcceptedInvite = true;
-                HandleBattleFieldPortOpcode(packet);
-				break;
-			}
-			else
-			{
-				Battleground* bg_template = sBattlegroundMgr->GetBattlegroundTemplate(BattlegroundTypeId(schedule.parameter1));
-				if (!bg_template)
-					continue;
-				BattlegroundQueue& bgQueue = sBattlegroundMgr->GetBattlegroundQueue(bgQueueTypeId);
-				PVPDifficultyEntry const* bracketEntry = DB2Manager::GetBattlegroundBracketById(bg_template->GetMapId(), BattlegroundBracketId(schedule.parameter2));
-				if (bgQueue.ExistRealPlayer(bracketEntry, (schedule.parameter4 != 0) ? true : false))
-					continue;
-				BotGlobleSchedule schedule1(BotGlobleScheduleType::BGSType_OutAAQueue, 0);
-				schedule1.parameter1 = schedule.parameter1;
-				schedule1.parameter2 = schedule.parameter2;
-				schedule1.parameter3 = schedule.parameter3;
-				ClearAllSchedule();
-				PushScheduleToQueue(schedule1);
-				return false;
-			}
-		}
-	}
-	return false;
-}
-
-bool PlayerBotSession::ProcessLeaveAA(BotGlobleSchedule& schedule)
-{
-	if (PlayerLoading())
-		return false;
-	Player* player = GetPlayer();
-	if (!player)
-	{
-		ClearAllSchedule();
-		return false;
-	}
-	if (!player->InBattleground())
-		return true;
-
-	PlayerBotMgr::SwitchPlayerBotAI(player, PlayerBotAIType::PBAIT_FIELD, true);
-	//uint8 un8 = 0;
-	//uint16 un16 = 0;
-	//uint32 un32 = 0;
-	//WorldPacket opcode(1);
-	//opcode << un8;
-	//opcode << un8;
-	//opcode << un32;
-	//opcode << un16;
-	//HandleBattlefieldLeaveOpcode(opcode);
-	//HandleMoveWorldportAckOpcode();
-    WorldPacket opcode(CMSG_BATTLEFIELD_LEAVE);
-    WorldPackets::Battleground::BattlefieldLeave leave(std::move(opcode));
-    HandleBattlefieldLeaveOpcode(leave);
-    //HandleWorldPortAck();
 	return false;
 }
 
