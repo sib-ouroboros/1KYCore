@@ -27,6 +27,7 @@
 #include "SharedDefines.h"
 #include <map>
 #include "BotAI.h"
+#include "BotGroupAI.h"
 
 class Battlefield;
 class Battleground;
@@ -434,6 +435,7 @@ class TC_GAME_API Group
         void PlayerBotRoll(Player* player, const Roll& roll);
         bool GiveAtGroupPos(ObjectGuid& guid, uint32& index, uint32& count);
         bool GroupExistRealPlayer();
+        bool GroupExistPlayerBot();
         bool AllGroupNotCombat();
         bool AllGroupIsIDLE();
         void AllGroupBotGiveXP(uint32 XP);
