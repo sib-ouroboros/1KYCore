@@ -191,36 +191,7 @@ void WorldSession::HandleChatMessage(ChatMsg type, uint32 lang, std::string msg,
     if (msg.empty())
         return;
 
-    // =================================================================
-    // ORDRE_AUX_COMPAGNONS
-    //
-    // SIGNALE EN JEU : « !summon repond "You can't teleport yourself to
-    // yourself", et !follow repond "There is no such command" ».
-    //
-    // ChatHandler::ParseCommands traite le point d'exclamation comme un
-    // prefixe de commande au meme titre que le point :
-    //     if (text[0] != '!' && text[0] != '.') return false;
-    // Il intercepte donc tout ordre avant qu'il n'atteigne le canal de
-    // groupe, ou Group::ProcessGroupBotCommand l'attend. Le systeme
-    // d'ordres aux playerbots etait inaccessible depuis toujours --
-    // « !summon » partait vers la commande de maitre de jeu du meme nom.
-    //
-    // On laisse passer les messages en « ! » lorsque le joueur commande
-    // effectivement des bots. Un maitre de jeu sans compagnon garde ses
-    // commandes en « ! » ; celui qui en a passe par le point, qui reste
-    // le prefixe principal.
-    bool ordreAuxCompagnons = false;
-    if (!msg.empty() && msg[0] == '!')
-        if (Group* groupe = GetPlayer()->GetGroup())
-            for (GroupReference* itr = groupe->GetFirstMember(); itr != nullptr; itr = itr->next())
-                if (Player* membre = itr->GetSource())
-                    if (membre->IsPlayerBot())
-                    {
-                        ordreAuxCompagnons = true;
-                        break;
-                    }
-
-    if (!ordreAuxCompagnons && ChatHandler(this).ParseCommands(msg.c_str()))
+    if (ChatHandler(this).ParseCommands(msg.c_str()))
         return;
 
     // Strip invisible characters for non-addon messages
@@ -410,54 +381,7 @@ void WorldSession::HandleChatMessage(ChatMsg type, uint32 lang, std::string msg,
             packet.Initialize(ChatMsg(type), Language(lang), sender, nullptr, msg);
             group->BroadcastPacket(packet.Write(), false, group->GetMemberGroup(GetPlayer()->GetGUID()));
 
-            if (type == CHAT_MSG_PARTY_LEADER)
-                group->ProcessGroupBotCommand(GetPlayer(), msg);
 
-            // AI-PartyTalk
-            for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
-            {
-                Player* member = itr->GetSource();
-                if (!member || !member->IsPlayerBot())
-                    continue;
-
-                LocaleConstant locale = GetPlayer()->GetSession()->GetSessionDbcLocale();
-                QueryResult result;
-
-                // SylvaniaCore : meme faille que pour le chuchotement, et meme
-                // consequence - une erreur SQL abat le worldserver. Le message est
-                // echappe et borne avant de toucher la requete.
-                std::string safeGroupMsg = msg.size() > 255 ? msg.substr(0, 255) : msg;
-                WorldDatabase.EscapeString(safeGroupMsg);
-
-                // First try locale specific
-                result = WorldDatabase.PQuery(
-                    "SELECT `reply` FROM `ai_talk_group_locale` "
-                    "WHERE locale = %u AND '%s' REGEXP cname "
-                    "ORDER BY RAND() LIMIT 1",
-                    locale, safeGroupMsg.c_str()
-                );
-
-                // Fallback in English
-                if (!result)
-                {
-                    result = WorldDatabase.PQuery(
-                        "SELECT `reply` FROM `ai_talk_group` "
-                        "WHERE '%s' REGEXP cname "
-                        "ORDER BY RAND() LIMIT 1",
-                        safeGroupMsg.c_str()
-                    );
-                }
-
-                if (result)
-                {
-                    Field* fields = result->Fetch();
-                    std::string rpmsg = fields[0].GetString();
-
-                    WorldPackets::Chat::Chat botPacket;
-                    botPacket.Initialize(ChatMsg(CHAT_MSG_PARTY), LANG_UNIVERSAL, member, nullptr, rpmsg);
-                    group->BroadcastPacket(botPacket.Write(), false);
-                }
-            }
 
             break;
         }

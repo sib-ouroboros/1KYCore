@@ -32,7 +32,6 @@
 #include "WorldPacket.h"
 #include "WorldSession.h"
 #include "PlayerBotSession.h"
-#include "BotGroupAI.h"
 
 class Aura;
 
@@ -590,8 +589,6 @@ void WorldSession::HandleDoReadyCheckOpcode(WorldPackets::Party::DoReadyCheck& p
         response.Player = player->GetGUID();
         response.IsReady = true;
         group->BroadcastReadyCheck(response.Write());
-        if (BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(player->GetAI()))
-            pAI->ResetBotAI();
     }
 }
 

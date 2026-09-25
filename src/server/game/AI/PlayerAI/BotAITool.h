@@ -105,9 +105,6 @@ public:
     static void PlayerBotTogglePVP(Player* player, bool pvp);
     static void TryTeleportHome(BotFieldAI* pAI);
     static Position GetPositionFromGroup(Player* pCenterPlayer, ObjectGuid self, Group* pGroup);
-    static void ProcessGroupTankPullTargets(Player* player);
-    static void ProcessGroupRingMovement(Player* pCenterPlayer, BOTAI_WORKTYPE aiType);
-    static void ProcessGroupCombatMovement(Player* pCenterPlayer, BOTAI_WORKTYPE aiType);
     static Position FindRadiusByNearDistance(Unit* pTargetUnit, float range, Unit* pRefUnit);
     static Position FindRadiusByFarDistance(Unit* pTargetUnit, float range, Unit* pRefUnit);
     static bool FindFirstCollisionPosition(Unit* pTargetUnit, float range, Unit* pRefUnit, Position& outPos);
