@@ -20,7 +20,6 @@
 #include "BattlegroundMgr.h"
 #include "BotAI.h"
 #include "BotGroupAI.h"
-#include "BotFieldAI.h"
 #include "LFGMgr.h"
 #include "CharacterPackets.h"
 #include "MovementPackets.h"
@@ -140,11 +139,6 @@ bool PlayerBotSession::PlayerIsReady()
 		return true;
 	if (!player->IsSettingFinish())
 		return false;
-	BotFieldAI* pFieldAI = dynamic_cast<BotFieldAI*>(player->GetAI());
-	if (!pFieldAI)
-		return true;
-	if (pFieldAI->HasTeleport())
-		return false;
 
 	return true;
 }
@@ -204,7 +198,7 @@ void PlayerBotSession::ProcessNoWorld(uint32 diff)
     {
         if (player->InBattleground())
         {
-            PlayerBotMgr::SwitchPlayerBotAI(player, PlayerBotAIType::PBAIT_FIELD, true);
+            PlayerBotMgr::DisablePlayerBotAI(player);
             WorldPacket opcode(CMSG_BATTLEFIELD_LEAVE);
             WorldPackets::Battleground::BattlefieldLeave battlefieldLeave(std::move(opcode));
             HandleBattlefieldLeaveOpcode(battlefieldLeave);
@@ -212,7 +206,7 @@ void PlayerBotSession::ProcessNoWorld(uint32 diff)
         HandleMoveWorldportAck();
         m_NoWorldTick = 500;
     }
-    else// if (BotFieldAI* pGroupAI = dynamic_cast<BotFieldAI*>(player->GetAI()))
+    else
     {
         HandleMoveWorldportAck();
         m_NoWorldTick = 500;
@@ -547,7 +541,7 @@ bool PlayerBotSession::ProcessLeaveBG(BotGlobleSchedule& schedule)
 	if (!player->InBattleground())
 		return true;
 
-	PlayerBotMgr::SwitchPlayerBotAI(player, PlayerBotAIType::PBAIT_FIELD, true);
+    PlayerBotMgr::DisablePlayerBotAI(player);
 
 	WorldPacket opcode(CMSG_BATTLEFIELD_LEAVE);
 	WorldPackets::Battleground::BattlefieldLeave leave(std::move(opcode));

@@ -41,7 +41,6 @@
 #include "World.h"
 #include "WorldSession.h"
 #include "PlayerBotSession.h"
- //#include "BotFieldAI.h"
  //#include "BotGroupAI.h"
 
 namespace lfg
@@ -362,24 +361,6 @@ LFGBotRequirement* LFGMgr::SearchLFGBotRequirement()
             --needDPS;
         else if (role == LfgRoles::PLAYER_ROLE_HEALER)
             ----needHeal;
-        //if (BotFieldAI* pFieldAI = dynamic_cast<BotFieldAI*>(player->GetAI()))
-        //{
-        //	if ((player->getClass() == 1 && player->FindTalentType() == 2) || (player->getClass() == 2 && player->FindTalentType() == 1))
-        //		--needTank;
-        //	else if (pFieldAI->IsHealerBotAI())
-        //		--needHeal;
-        //	else
-        //		--needDPS;
-        //}
-        //else if (BotGroupAI* pGroupAI = dynamic_cast<BotGroupAI*>(player->GetAI()))
-        //{
-        //	if (pGroupAI->IsTankBotAI())
-        //		--needTank;
-        //	else if (pGroupAI->IsHealerBotAI())
-        //		--needHeal;
-        //	else
-        //		--needDPS;
-        //}
     }
     if (needTank <= 0 && needDPS <= 0 && needHeal <= 0)
         return NULL;

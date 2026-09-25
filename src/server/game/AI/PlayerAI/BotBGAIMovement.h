@@ -21,7 +21,6 @@
 #include "ScriptSystem.h"
 #include "PlayerAI.h"
 #include "BotAI.h"
-#include "BotFieldAI.h"
 #include "BotGroupAI.h"
 #include "AIWaypointsMgr.h"
 
@@ -49,7 +48,6 @@ class BotBGAIMovement
 {
 public:
 	BotBGAIMovement(Player* player, BotBGAI* ai);
-	BotBGAIMovement(Player* player, BotFieldAI* ai);
 	BotBGAIMovement(Player* player, BotGroupAI* ai);
 	~BotBGAIMovement();
 
@@ -79,7 +77,6 @@ private:
 private:
 	Player* m_Player;
 	BotBGAI* m_BGAI;
-	BotFieldAI* m_FieldAI;
 	BotGroupAI* m_GroupAI;
 
 	bool m_IsFlagTarget;

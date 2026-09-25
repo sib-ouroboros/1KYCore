@@ -91,20 +91,6 @@ bool BotAIVehicleMovement3D::UpdateVehicleMovement3D()
 BotBGAIMovement::BotBGAIMovement(Player* player, BotBGAI* ai) :
 m_Player(player),
 m_BGAI(ai),
-m_FieldAI(NULL),
-m_GroupAI(NULL),
-m_IsFlagTarget(false),
-lastPathfindSure(0),
-pTargetAIWP(NULL),
-m_MovementTick(0),
-m_LastSyncTick(0)
-{
-}
-
-BotBGAIMovement::BotBGAIMovement(Player* player, BotFieldAI* ai) :
-m_Player(player),
-m_BGAI(NULL),
-m_FieldAI(ai),
 m_GroupAI(NULL),
 m_IsFlagTarget(false),
 lastPathfindSure(0),
@@ -117,7 +103,6 @@ m_LastSyncTick(0)
 BotBGAIMovement::BotBGAIMovement(Player* player, BotGroupAI* ai) :
 m_Player(player),
 m_BGAI(NULL),
-m_FieldAI(NULL),
 m_GroupAI(ai),
 m_IsFlagTarget(false),
 lastPathfindSure(0),

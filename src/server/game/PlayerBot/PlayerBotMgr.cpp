@@ -21,7 +21,6 @@
 #include "Player.h"
 #include "BattlegroundMgr.h"
 #include "BotAI.h"
-#include "BotFieldAI.h"
 #include "BotGroupAI.h"
 #include "OnlineMgr.h"
 #include "Group.h"
@@ -136,6 +135,22 @@ PlayerBotMgr* PlayerBotMgr::instance()
     return &instance;
 }
 
+void PlayerBotMgr::DisablePlayerBotAI(Player* player)
+{
+    UnitAI* ai = player->GetAI();
+    if (!dynamic_cast<BotGroupAI*>(ai) && !dynamic_cast<BotBGAI*>(ai))
+        return;
+
+    player->IsAIEnabled = false;
+    player->SetAI(nullptr);
+    player->ClearInCombat();
+    player->SetSelection(ObjectGuid::Empty);
+    player->GetMotionMaster()->Clear();
+    player->StopMoving();
+    // The retired AI may still be on the update stack.
+    m_DelayDestroyAIs[getMSTime()].push_back(ai);
+}
+
 void PlayerBotMgr::SwitchPlayerBotAI(Player* player, PlayerBotAIType aiType, bool force)
 {
     if (!force && player->IsInCombat())
@@ -147,25 +162,6 @@ void PlayerBotMgr::SwitchPlayerBotAI(Player* player, PlayerBotAIType aiType, boo
     player->IsAIEnabled = false;
     switch (aiType)
     {
-    case PlayerBotAIType::PBAIT_FIELD:
-        if (pAI)
-        {
-            if (dynamic_cast<BotFieldAI*>(pAI) != NULL)
-            {
-                player->IsAIEnabled = true;
-                return;
-            }
-            PlayerBotMgr::m_DelayDestroyAIs[getMSTime()].push_back(pAI);
-            player->SetAI(NULL);
-        }
-        pAI = BotFieldAI::CreateBotFieldAIByPlayerClass(player);
-        if (pAI)
-        {
-            pAI->Reset();
-            player->SetAI(pAI);
-            player->IsAIEnabled = true;
-        }
-        break;
     case PlayerBotAIType::PBAIT_GROUP:
         if (pAI)
         {
@@ -198,18 +194,6 @@ void PlayerBotMgr::SwitchPlayerBotAI(Player* player, PlayerBotAIType aiType, boo
         }
         player->SetAI(BotBGAI::CreateBotBGAIByPlayerClass(player));
         player->IsAIEnabled = true;
-        break;
-    case PlayerBotAIType::PBAIT_DUNGEON:
-        if (pAI)
-        {
-            //if (dynamic_cast<BotFieldAI*>(pAI) != NULL)
-            //{
-            //	player->IsAIEnabled = true;
-            //	return;
-            //}
-            PlayerBotMgr::m_DelayDestroyAIs[getMSTime()].push_back(pAI);
-            player->SetAI(NULL);
-        }
         break;
     }
 }
@@ -1193,8 +1177,6 @@ void PlayerBotMgr::OnPlayerBotLogin(WorldSession* pSession, Player* pPlayer)
         else
             SwitchPlayerBotAI(pPlayer, PlayerBotAIType::PBAIT_GROUP, false);
     }
-    else
-        SwitchPlayerBotAI(pPlayer, PlayerBotAIType::PBAIT_FIELD, false);
 
     if (pPlayer->GetBattleground())
     {
@@ -1235,7 +1217,7 @@ void PlayerBotMgr::OnPlayerBotLogout(WorldSession* pSession)
 
 void PlayerBotMgr::OnPlayerBotLeaveOriginalGroup(Player* pPlayer)
 {
-    SwitchPlayerBotAI(pPlayer, PlayerBotAIType::PBAIT_FIELD, true);
+    DisablePlayerBotAI(pPlayer);
 }
 
 void PlayerBotMgr::LoginGroupBotByPlayer(Player* pPlayer)
@@ -2268,16 +2250,7 @@ void PlayerBotMgr::AddNewPlayerBotToLFG(lfg::LFGBotRequirement* botRequirement)
             if (player->GetTeamId() != botRequirement->needTeam)
                 continue;
             lfg::LfgRoles playerRole = lfg::LfgRoles::PLAYER_ROLE_NONE;
-            if (BotFieldAI* pFieldAI = dynamic_cast<BotFieldAI*>(player->GetAI()))
-            {
-                if ((player->getClass() == 1 && player->FindTalentType() == 2) || (player->getClass() == 2 && player->FindTalentType() == 1))
-                    playerRole = lfg::LfgRoles::PLAYER_ROLE_TANK;
-                else if (pFieldAI->IsHealerBotAI())
-                    playerRole = lfg::LfgRoles::PLAYER_ROLE_HEALER;
-                else
-                    playerRole = lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-            }
-            else if (BotGroupAI* pGroupAI = dynamic_cast<BotGroupAI*>(player->GetAI()))
+            if (BotGroupAI* pGroupAI = dynamic_cast<BotGroupAI*>(player->GetAI()))
             {
                 if (pGroupAI->IsTankBotAI())
                     playerRole = lfg::LfgRoles::PLAYER_ROLE_TANK;

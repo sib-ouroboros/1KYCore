@@ -68,7 +68,6 @@ struct SpellEntry;
 class Player;
 class Group;
 class BotBGAIMovement;
-class BotFieldAI;
 
 class TC_GAME_API BotUtility
 {
@@ -103,7 +102,6 @@ public:
     static uint32 FindMaxRankSpellByExist(Player* player, uint32 spellID);
     static uint32 FindPetMaxRankSpellByExist(Player* player, uint32 spellID);
     static void PlayerBotTogglePVP(Player* player, bool pvp);
-    static void TryTeleportHome(BotFieldAI* pAI);
     static Position GetPositionFromGroup(Player* pCenterPlayer, ObjectGuid self, Group* pGroup);
     static Position FindRadiusByNearDistance(Unit* pTargetUnit, float range, Unit* pRefUnit);
     static Position FindRadiusByFarDistance(Unit* pTargetUnit, float range, Unit* pRefUnit);

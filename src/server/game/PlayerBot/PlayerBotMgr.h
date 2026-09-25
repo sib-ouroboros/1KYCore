@@ -40,10 +40,8 @@ class PlayerBotSession;
 
 enum PlayerBotAIType
 {
-    PBAIT_FIELD,
-    PBAIT_BG,
+    PBAIT_BG = 1,
     PBAIT_GROUP,
-    PBAIT_DUNGEON,
     PBAIT_OVER = 6
 };
 
@@ -297,6 +295,7 @@ public:
     PlayerBotMgr& operator= (PlayerBotMgr&&) = delete;
 
     static PlayerBotMgr* instance();
+    static void DisablePlayerBotAI(Player* player);
     static void SwitchPlayerBotAI(Player* player, PlayerBotAIType aiType, bool force);
 
     std::string GetPlayerLinkText(Player const* player) const;

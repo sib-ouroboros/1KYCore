@@ -433,20 +433,6 @@ void BotUtility::PlayerBotTogglePVP(Player* player, bool pvp)
 	//player->GetSession()->HandleTogglePvP(opcode);
 }
 
-void BotUtility::TryTeleportHome(BotFieldAI* pAI)
-{
-	if (!pAI || pAI->HasTeleport())
-		return;
-	Player* player = pAI->GetAIPayer();
-	if (player->GetMapId() == player->m_homebindMapId)
-	{
-		if (player->GetDistance(player->m_homebindX, player->m_homebindY, player->m_homebindZ) < 80)
-			return;
-	}
-	Position homePosition = Position(player->m_homebindX, player->m_homebindY, player->m_homebindZ, player->GetOrientation());
-	pAI->SetTeleport(player->m_homebindMapId, homePosition);
-}
-
 uint32 BotUtility::FindPetMaxRankSpellByExist(Player* player, uint32 spellID)
 {
 	if (spellID == 0)

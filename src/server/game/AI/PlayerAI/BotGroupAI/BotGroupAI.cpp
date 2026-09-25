@@ -1331,7 +1331,7 @@ bool BotGroupAI::UpdateMasterPlayer()
 	{
 		m_Flying.CancelFly();
 		sLFGMgr->LeaveLfg(me->GetGUID());
-		PlayerBotMgr::SwitchPlayerBotAI(me, PlayerBotAIType::PBAIT_FIELD, true);
+        PlayerBotMgr::DisablePlayerBotAI(me);
 		return false;
 	}
 	if (!pGroup->GroupExistRealPlayer())
