@@ -37,12 +37,6 @@ class ObjectGuid;
 struct BotGlobleSchedule;
 class PlayerBotSession;
 
-enum PlayerBotAIType
-{
-    PBAIT_BG = 1,
-    PBAIT_OVER = 6
-};
-
 struct PlayerBotCharBaseInfo
 {
     uint64 guid;
@@ -293,8 +287,6 @@ public:
     PlayerBotMgr& operator= (PlayerBotMgr&&) = delete;
 
     static PlayerBotMgr* instance();
-    static void DisablePlayerBotAI(Player* player);
-    static void SwitchPlayerBotAI(Player* player, PlayerBotAIType aiType, bool force);
 
     std::string GetPlayerLinkText(Player const* player) const;
 
@@ -320,7 +312,6 @@ public:
     void OnPlayerBotLogin(WorldSession* pSession, Player* pPlayer);
     void ApplyBotTitle(Player* pPlayer);
     void OnPlayerBotLogout(WorldSession* pSession);
-    void OnPlayerBotLeaveOriginalGroup(Player* pPlayer);
     void LoginFriendBotByPlayer(Player* pPlayer);
     void LogoutAllGroupPlayerBot(Group* pGroup, bool force);
 
@@ -392,7 +383,6 @@ private:
     std::queue<ObjectGuid> m_DelayOnlineBots;
 
 public:
-    static std::map<uint32, std::list<UnitAI*> > m_DelayDestroyAIs;
     static std::mutex g_uniqueLock;
 };
 

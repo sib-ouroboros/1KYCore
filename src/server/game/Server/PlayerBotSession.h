@@ -29,10 +29,6 @@ enum BotGlobleScheduleType
 	BGSType_Online,
 	BGSType_Offline,
 	BGSType_Settting,
-	BGSType_InBGQueue,
-	BGSType_OutBGQueue,
-	BGSType_EnterBG,
-	BGSType_LeaveBG,
     BGSType_Online_GUID = 11,
     BGSType_OfferPetitionSign = 16
 };
@@ -89,7 +85,6 @@ public:
 	}
 
 	bool IsBotSession() override;
-	bool HasBGSchedule() override;
     bool Update(uint32 diff, PacketFilter& updater) override;
 
 	void PushScheduleToQueue(BotGlobleSchedule& schedule);
@@ -108,10 +103,6 @@ private:
 	bool ProcessOnlineByGUID(BotGlobleSchedule& schedule);
 	bool ProcessOffline(BotGlobleSchedule& schedule);
 	bool ProcessSetting(BotGlobleSchedule& schedule);
-	bool ProcessInBGQueue(BotGlobleSchedule& schedule);
-	bool ProcessOutBGQueue(BotGlobleSchedule& schedule);
-	bool ProcessEnterBG(BotGlobleSchedule& schedule);
-	bool ProcessLeaveBG(BotGlobleSchedule& schedule);
 	bool ProcessOfferPetitionSign(BotGlobleSchedule& schedule);
 
 private:

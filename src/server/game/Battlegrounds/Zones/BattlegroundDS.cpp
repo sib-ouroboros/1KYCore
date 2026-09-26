@@ -18,7 +18,6 @@
 
 #include "AIWaypointsMgr.h"
 #include "BattlegroundDS.h"
-#include "BotAI.h"
 #include "Creature.h"
 #include "Log.h"
 #include "Player.h"
@@ -138,15 +137,7 @@ void BattlegroundDS::StartingEventOpenDoors()
                 if (telePoint)
                 {
                     Position telePos = telePoint->GetPosition();
-                    if (player->IsPlayerBot())
-                    {
-                        if (BotBGAI* pBotAI = dynamic_cast<BotBGAI*>(player->GetAI()))
-                            pBotAI->SetTeleport(telePos);
-                    }
-                    else
-                    {
-                        player->TeleportTo(player->GetMapId(), telePos.GetPositionX(), telePos.GetPositionY(), telePos.GetPositionZ(), player->GetOrientation());
-                    }
+                    player->TeleportTo(player->GetMapId(), telePos.GetPositionX(), telePos.GetPositionY(), telePos.GetPositionZ(), player->GetOrientation());
                 }
             }
         }

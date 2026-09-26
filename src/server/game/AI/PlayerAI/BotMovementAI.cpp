@@ -253,7 +253,7 @@ void BotMovementAI::ProcessHorror(uint32 diff)
 			me->TeleportTo(me->GetMapId(), me->GetPositionX(), me->GetPositionY(), validZ, me->GetOrientation());
 			return;
 		}
-		pHorrorState->UpdateHorror(diff, 0);
+        pHorrorState->UpdateHorror(diff);
 	}
 	else if (pHorrorState)
 	{

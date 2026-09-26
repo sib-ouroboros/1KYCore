@@ -25,7 +25,6 @@
 #include "Language.h"
 #include "Log.h"
 #include "ObjectAccessor.h"
-#include "PlayerBotSession.h"
 #include "Player.h"
 #include "World.h"
 
@@ -497,15 +496,6 @@ bool BattlegroundQueue::InviteGroupToBG(GroupQueueInfo* ginfo, Battleground* bg,
             sBattlegroundMgr->BuildBattlegroundStatusNeedConfirmation(&battlefieldStatus, bg, player, queueSlot, player->GetBattlegroundQueueJoinTime(bgQueueTypeId), INVITE_ACCEPT_WAIT_TIME, ginfo->ArenaType);
             player->SendDirectMessage(battlefieldStatus.Write());
 
-            // SylvaniaCore (module BG BotFill): un vrai client repond a l invitation par
-            // CMSG_BATTLEFIELD_PORT ; pour un bot, personne ne poussait le schedule
-            // d acceptation -> les bots restaient invites jusqu a expiration.
-            if (PlayerBotSession* botSession = dynamic_cast<PlayerBotSession*>(player->GetSession()))
-            {
-                BotGlobleSchedule enterSchedule(BotGlobleScheduleType::BGSType_EnterBG, player->GetGUID());
-                enterSchedule.parameter1 = queueSlot;
-                botSession->PushScheduleToQueue(enterSchedule);
-            }
         }
         return true;
     }

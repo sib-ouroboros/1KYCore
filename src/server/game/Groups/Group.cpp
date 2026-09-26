@@ -45,7 +45,6 @@
 #include "World.h"
 #include "WorldSession.h"
 #include "PlayerBotMgr.h"
-#include "BotBGAIMovement.h"
 
 Roll::Roll(LootItem const& li) : itemid(li.itemid),
 itemRandomPropId(li.randomPropertyId), itemRandomSuffix(li.randomSuffix), itemCount(li.count),
@@ -588,8 +587,6 @@ bool Group::RemoveMember(ObjectGuid guid, const RemoveMethod& method /*= GROUP_R
 
                 // quest related GO state dependent from raid membership
                 player->UpdateForQuestWorldObjects();
-                if (player->IsPlayerBot())
-                    sPlayerBotMgr->OnPlayerBotLeaveOriginalGroup(player);
             }
 
             player->SetPartyType(m_groupCategory, GROUP_TYPE_NONE);
@@ -825,8 +822,6 @@ void Group::Disband(bool hideDestroy /* = false */)
                 player->SetOriginalGroup(NULL);
             else
                 player->SetGroup(NULL);
-            if (player->IsPlayerBot())
-                sPlayerBotMgr->OnPlayerBotLeaveOriginalGroup(player);
         }
 
         player->SetPartyType(m_groupCategory, GROUP_TYPE_NONE);

@@ -20,7 +20,6 @@
 #include "DB2Stores.h"
 #include "Player.h"
 #include "BattlegroundMgr.h"
-#include "BotAI.h"
 #include "OnlineMgr.h"
 #include "Group.h"
 #include "SocialMgr.h"
@@ -36,7 +35,6 @@
  //#include <boost/format.hpp>
 
 PlayerBotCharBaseInfo PlayerBotBaseInfo::empty;
-std::map<uint32, std::list<UnitAI*> > PlayerBotMgr::m_DelayDestroyAIs;
 std::mutex PlayerBotMgr::g_uniqueLock;
 
 std::string PlayerBotCharBaseInfo::GetNameANDClassesText()
@@ -131,50 +129,6 @@ PlayerBotMgr* PlayerBotMgr::instance()
 {
     static PlayerBotMgr instance;
     return &instance;
-}
-
-void PlayerBotMgr::DisablePlayerBotAI(Player* player)
-{
-    UnitAI* ai = player->GetAI();
-    if (!dynamic_cast<BotBGAI*>(ai))
-        return;
-
-    player->IsAIEnabled = false;
-    player->SetAI(nullptr);
-    player->ClearInCombat();
-    player->SetSelection(ObjectGuid::Empty);
-    player->GetMotionMaster()->Clear();
-    player->StopMoving();
-    // The retired AI may still be on the update stack.
-    m_DelayDestroyAIs[getMSTime()].push_back(ai);
-}
-
-void PlayerBotMgr::SwitchPlayerBotAI(Player* player, PlayerBotAIType aiType, bool force)
-{
-    if (!force && player->IsInCombat())
-        return;
-    if (force && player->IsInCombat())
-        player->ClearInCombat();
-    player->SetSelection(ObjectGuid::Empty);
-    UnitAI* pAI = player->GetAI();
-    player->IsAIEnabled = false;
-    switch (aiType)
-    {
-    case PlayerBotAIType::PBAIT_BG:
-        if (pAI)
-        {
-            if (dynamic_cast<BotBGAI*>(pAI) != NULL)
-            {
-                player->IsAIEnabled = true;
-                return;
-            }
-            PlayerBotMgr::m_DelayDestroyAIs[getMSTime()].push_back(pAI);
-            player->SetAI(NULL);
-        }
-        player->SetAI(BotBGAI::CreateBotBGAIByPlayerClass(player));
-        player->IsAIEnabled = true;
-        break;
-    }
 }
 
 std::string PlayerBotMgr::GetPlayerLinkText(Player const* player) const
@@ -1190,11 +1144,6 @@ void PlayerBotMgr::OnPlayerBotLogout(WorldSession* pSession)
     if (pBotSession && !pBotSession->HasScheduleByType(BotGlobleScheduleType::BGSType_Online) &&
         !pBotSession->HasScheduleByType(BotGlobleScheduleType::BGSType_Online_GUID))
         pBotSession->ClearAllSchedule();
-}
-
-void PlayerBotMgr::OnPlayerBotLeaveOriginalGroup(Player* pPlayer)
-{
-    DisablePlayerBotAI(pPlayer);
 }
 
 void PlayerBotMgr::LoginFriendBotByPlayer(Player* pPlayer)
@@ -2418,31 +2367,5 @@ void PlayerBotMgr::Update()
 
     if (!botAll)
         UpdateIdleBotLogout();
-    std::list<std::map<uint32, std::list<UnitAI*> >::iterator > delITer;
-    uint32 currentTick = getMSTime();
-    for (std::map<uint32, std::list<UnitAI*> >::iterator itDelayAi = m_DelayDestroyAIs.begin();
-        itDelayAi != m_DelayDestroyAIs.end();
-        itDelayAi++)
-    {
-        uint32 delayTick = itDelayAi->first;
-        if (delayTick + 5000 >= currentTick)
-        {
-            for (std::list<UnitAI*>::iterator itAI = itDelayAi->second.begin();
-                itAI != itDelayAi->second.end();
-                itAI++)
-            {
-                UnitAI* pAI = (*itAI);
-                if (pAI)
-                    delete pAI;
-            }
-            itDelayAi->second.clear();
-            delITer.push_back(itDelayAi);
-        }
-    }
-    for (std::list<std::map<uint32, std::list<UnitAI*> >::iterator >::iterator itDel = delITer.begin();
-        itDel != delITer.end();
-        itDel++)
-    {
-        m_DelayDestroyAIs.erase(*itDel);
-    }
+
 }

@@ -1609,7 +1609,6 @@ class TC_GAME_API WorldSession
         }
         virtual bool IsBotSession() { return false; }
         virtual bool HasSchedules() { return false; }
-        virtual bool HasBGSchedule() { return false; }
         virtual bool IsAccountBotSession() { return false; }
 
         void HandleLearnPvpTalentsOpcode(WorldPackets::Talent::LearnPvpTalents& packet);
