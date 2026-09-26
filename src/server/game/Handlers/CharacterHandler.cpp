@@ -1205,7 +1205,6 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder const& holder)
         if (isok >= 1)
         {
             sPlayerBotMgr->LoginFriendBotByPlayer(pCurrChar);
-            sPlayerBotMgr->LoginGroupBotByPlayer(pCurrChar);
         }
     }
     uint32 talent = PlayerBotSetting::FindPlayerTalentType(pCurrChar);

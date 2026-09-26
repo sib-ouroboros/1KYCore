@@ -19,7 +19,6 @@
 #include "Player.h"
 #include "BattlegroundMgr.h"
 #include "BotAI.h"
-#include "BotGroupAI.h"
 #include "LFGMgr.h"
 #include "CharacterPackets.h"
 #include "MovementPackets.h"
@@ -75,18 +74,6 @@ void PlayerBotSession::PushScheduleToQueue(BotGlobleSchedule& schedule)
 	for (BotSchedules::iterator itSc = m_Schedules.begin(); itSc != m_Schedules.end(); itSc++)
 	{
 		if ((*itSc).bbgType == schedule.bbgType)
-			return;
-	}
-	if (schedule.bbgType == BGSType_DelayLevelup)
-	{
-		if (PlayerLoading())
-			return;
-		if (Player* player = GetPlayer())
-		{
-			if (!player->IsSettingFinish())
-				return;
-		}
-		else
 			return;
 	}
 
@@ -186,15 +173,7 @@ void PlayerBotSession::ProcessNoWorld(uint32 diff)
     if (m_NoWorldTick > 0)
         return;
 
-    if (BotGroupAI* pGroupAI = dynamic_cast<BotGroupAI*>(player->GetAI()))
-    {
-        if (pGroupAI->HasTeleport())
-            pGroupAI->UpdateTeleport(diff);
-        else
-            pGroupAI->SetTeleportToMaster();
-        m_NoWorldTick = 500;
-    }
-    else if (BotBGAI* pGroupAI = dynamic_cast<BotBGAI*>(player->GetAI()))
+    if (BotBGAI* pGroupAI = dynamic_cast<BotBGAI*>(player->GetAI()))
     {
         if (player->InBattleground())
         {
@@ -253,9 +232,6 @@ void PlayerBotSession::CastSchedule(uint32 diff)
 		break;
 	case BGSType_LeaveBG:
 		result = ProcessLeaveBG(schedule);
-		break;
-	case BGSType_DelayLevelup:
-		result = ProcessDelayLevelup(schedule);
 		break;
 	case BGSType_InLFGQueue:
 		result = ProcessInLFGQueue(schedule);
@@ -548,25 +524,6 @@ bool PlayerBotSession::ProcessLeaveBG(BotGlobleSchedule& schedule)
     HandleBattlefieldLeaveOpcode(leave);
 	//HandleWorldPortAck();
 	return false;
-}
-
-bool PlayerBotSession::ProcessDelayLevelup(BotGlobleSchedule& schedule)
-{
-	if (PlayerLoading())
-		return false;
-	Player* player = GetPlayer();
-	if (!player)
-	{
-		ClearAllSchedule();
-		return false;
-	}
-	// Le rehabillage retire puis rend tout l equipement : hors de question de
-	// desarmer le bot en pleine bagarre. Renvoyer false laisse le schedule en
-	// tete de file, il sera retente au tick suivant.
-	if (player->IsInCombat())
-		return false;
-	player->OnLevelupToBotAI();
-	return true;
 }
 
 bool PlayerBotSession::ProcessInLFGQueue(BotGlobleSchedule& schedule)

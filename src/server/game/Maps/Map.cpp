@@ -53,7 +53,6 @@
 #include "WorldSession.h"
 #include "WildBattlePet.h"
 #include "PlayerBotMgr.h"
-#include "BotGroupAI.h"
 #include "Config.h"
 
 u_map_magic MapMagic        = { {'M','A','P','S'} };
@@ -4029,9 +4028,11 @@ bool InstanceMap::HasPermBoundPlayers() const
     return !!CharacterDatabase.Query(stmt);
 }
 
+bool InstanceMap::AllowFortyPlayers = false;
+
 uint32 InstanceMap::GetMaxPlayers() const
 {
-    if (BotGroupAI::PVE_MAX_DUNGEON)
+    if (InstanceMap::AllowFortyPlayers)
         return 40;
 
     MapDifficultyEntry const* mapDiff = GetMapDifficulty();

@@ -4402,35 +4402,12 @@ max_level = 6
 # Maximum Dungeon Access
 #
 #   maxdungeon
-#        Description: Restricts the maximum dungeon difficulty PlayerBots can enter.
-#        Default:     0 - No dungeon access
-#                     1 - Normal
-#                     2 - Heroic
+#        Description: Overrides instance capacity for all players.
+#        Default:     0 - Use the map difficulty player limit
+#                     1 - Allow up to 40 players
 #
 
 maxdungeon = 0
-
-#
-# Driving
-#
-#   driving
-#        Description: Enables PlayerBot vehicle/driving control.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-driving = 1
-
-#
-# Pull System
-#
-#   pull
-#        Description: Allows PlayerBots to automatically pull nearby creatures into combat.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-pull = 1
 
 #
 # Additional Damage Multiplier

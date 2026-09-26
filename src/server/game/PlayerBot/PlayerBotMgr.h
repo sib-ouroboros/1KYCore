@@ -34,14 +34,12 @@
 
 
 class ObjectGuid;
-struct LFGBotRequirement;
 struct BotGlobleSchedule;
 class PlayerBotSession;
 
 enum PlayerBotAIType
 {
     PBAIT_BG = 1,
-    PBAIT_GROUP,
     PBAIT_OVER = 6
 };
 
@@ -323,7 +321,6 @@ public:
     void ApplyBotTitle(Player* pPlayer);
     void OnPlayerBotLogout(WorldSession* pSession);
     void OnPlayerBotLeaveOriginalGroup(Player* pPlayer);
-    void LoginGroupBotByPlayer(Player* pPlayer);
     void LoginFriendBotByPlayer(Player* pPlayer);
     void LogoutAllGroupPlayerBot(Group* pGroup, bool force);
 
@@ -379,9 +376,6 @@ private:
 
     void ClearEmptyNeedPlayer();
     void ClearNeedPlayer(uint32 bgTypeID, uint32 bracketID);
-    void AddNewPlayerBotToLFG(lfg::LFGBotRequirement* botRequirement);
-    bool FillOnlineBotScheduleByLFGRequirement(lfg::LFGBotRequirement* botRequirement, BotGlobleSchedule* botSchedule);
-    uint32 GetScheduleTalentByLFGRequirement(lfg::LfgRoles roles, uint32 botCls);
     void UpdateIdleBotLogout();
     uint32 GetScheduledBotCount();
     void OnlinePlayerBotByGUIDQueue();
@@ -391,7 +385,6 @@ private:
 private:
     uint32 m_BotAccountAmount;
     uint32 m_LastBotAccountIndex;
-    uint32 m_LFGSearchTick;
     std::map<uint32, PlayerBotBaseInfo*> m_idPlayerBotBase;
     std::map<uint32, PlayerBotBaseInfo*> m_idAccountBotBase;
 

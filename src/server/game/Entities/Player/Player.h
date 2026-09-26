@@ -1189,7 +1189,6 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         bool ResetPlayerToLevel(uint32 level, uint32 talent = 3, bool needTenacity = false);
         bool IsSettingFinish();
         void SupplementAmmo();
-        void OnLevelupToBotAI();
         uint32 ReupdateTalents();
         uint32 SwitchTalent(uint32 talent);
         PlayerBotSetting* m_PlayerBotSetting;

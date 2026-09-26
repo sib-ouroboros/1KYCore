@@ -1476,11 +1476,6 @@ void Group::CountTheRoll(Rolls::iterator rollI)
                         roll->getLoot()->NotifyItemRemoved(roll->itemSlot);
                         roll->getLoot()->unlootedCount--;
                         player->StoreNewItem(dest, roll->itemid, true, item->randomPropertyId, item->GetAllowedLooters(), item->context, item->BonusListIDs);
-                        if (player->IsPlayerBot())
-                        {
-                            if (BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(player->GetAI()))
-                                pAI->OnLootedItem(roll->itemid);
-                        }
                     }
                     else
                     {
@@ -1538,11 +1533,6 @@ void Group::CountTheRoll(Rolls::iterator rollI)
                                 roll->getLoot()->NotifyItemRemoved(roll->itemSlot);
                                 roll->getLoot()->unlootedCount--;
                                 player->StoreNewItem(dest, roll->itemid, true, item->randomPropertyId, item->GetAllowedLooters(), item->context, item->BonusListIDs);
-                                if (player->IsPlayerBot())
-                                {
-                                    if (BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(player->GetAI()))
-                                        pAI->OnLootedItem(roll->itemid);
-                                }
                             }
                             else
                             {
@@ -2501,48 +2491,6 @@ bool Group::AllGroupNotCombat()
     return true;
 }
 
-bool Group::AllGroupIsIDLE()
-{
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(citr->guid);
-        if (!player)
-            continue;
-        BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(player->GetAI());
-        if (!pAI)
-            continue;
-        if (!pAI->IsIDLEBot())
-            return false;
-    }
-    return true;
-}
-
-void Group::AllGroupBotGiveXP(uint32 XP)
-{
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(citr->guid);
-        if (!player || !player->IsPlayerBot())
-            continue;
-        BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(player->GetAI());
-        if (!pAI)
-            continue;
-        pAI->DelayGiveXP(XP);
-    }
-}
-
-Unit* Group::GetGroupTankTarget()
-{
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(citr->guid);
-        if (!player || !player->IsTankPlayer())
-            continue;
-        return player->GetSelectedUnit();
-    }
-    return NULL;
-}
-
 std::vector<ObjectGuid> Group::GetGroupMemberFromNeedRevivePlayer(uint32 forMap)
 {
     std::vector<ObjectGuid> needRevivePlayers;
@@ -2597,60 +2545,6 @@ std::vector<ObjectGuid> Group::GetGroupMemberFromNeedRevivePlayer(uint32 forMap)
     }
     //ResetInstances(INSTANCE_RESET_ALL, false, pLeader);
 }*/
-
-void Group::ClearAllGroupForceFleeState()
-{
-    if (isBGGroup())
-        return;
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(citr->guid);
-        if (!player || !player->IsPlayerBot())
-            continue;
-        UnitAI* pUnitAi = player->GetAI();
-        if (!pUnitAi)
-            continue;
-        if (BotGroupAI* pGroupAI = dynamic_cast<BotGroupAI*>(pUnitAi))
-        {
-            pGroupAI->SetForceFleeState(false);
-            pGroupAI->SetSeduceTarget(ObjectGuid::Empty);
-        }
-    }
-}
-
-Creature* Group::SearchSeduceCreature(Player* centerPlayer)
-{
-    std::map<uint32, Creature*> creatures;
-    std::list<Creature*> nearCreature;
-    Trinity::AllWorldObjectsInRange checker(centerPlayer, BOTAI_FIELDTELEPORT_DISTANCE * 1.2f);
-    Trinity::CreatureListSearcher<Trinity::AllWorldObjectsInRange> searcher(centerPlayer, nearCreature, checker);
-    //centerPlayer->VisitNearbyGridObject(BOTAI_FIELDTELEPORT_DISTANCE * 1.2f, searcher);
-    for (Creature* pCreature : nearCreature)
-    {
-        if (!pCreature->IsAlive() || !pCreature->IsVisible() || pCreature->IsPet() || pCreature->IsTotem() || pCreature->getLevel() <= 1)
-            continue;
-        if (pCreature->IsInEvadeMode() || pCreature->IsInCombat() || pCreature->GetTarget() != ObjectGuid::Empty)
-            continue;
-        if (!centerPlayer->IsValidAttackTarget(pCreature))
-            continue;
-        uint32 dist = BotBGAIMovement::GetTargetFindpathPointCount(centerPlayer, pCreature);
-        creatures[dist] = pCreature;
-    }
-    uint32 minDist = 99999;
-    Creature* selectCreature = NULL;
-    for (std::map<uint32, Creature*>::iterator itCreature = creatures.begin();
-        itCreature != creatures.end(); itCreature++)
-    {
-        Creature* creature = itCreature->second;
-        uint32 dist = itCreature->first;
-        if (dist < minDist || selectCreature == NULL)
-        {
-            minDist = dist;
-            selectCreature = creature;
-        }
-    }
-    return selectCreature;
-}
 
 void Group::ResetMaxEnchantingLevel()
 {

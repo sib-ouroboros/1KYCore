@@ -41,7 +41,6 @@
 #include "World.h"
 #include "WorldSession.h"
 #include "PlayerBotSession.h"
- //#include "BotGroupAI.h"
 
 namespace lfg
 {
@@ -283,105 +282,6 @@ LFGMgr* LFGMgr::instance()
 {
     static LFGMgr instance;
     return &instance;
-}
-
-LFGBotRequirement* LFGMgr::SearchLFGBotRequirement()
-{
-    if (PlayersStore.empty())
-        return NULL;
-
-    uint8 processLevel = 0;
-    TeamId processTeam = TEAM_NEUTRAL;
-    const LfgPlayerData* processData = NULL;
-    std::queue<ObjectGuid> botGUIDs;
-    for (LfgPlayerDataContainer::iterator itLfgPlayer = PlayersStore.begin(); itLfgPlayer != PlayersStore.end(); itLfgPlayer++)
-    {
-        const LfgPlayerData& lfgPlayer = itLfgPlayer->second;
-        if (lfgPlayer.GetState() != LFG_STATE_QUEUED)
-            continue;
-        const ObjectGuid& playerGUID = itLfgPlayer->first;
-        Player* player = ObjectAccessor::FindPlayer(playerGUID);
-        if (!player || !player->IsInWorld())
-            continue;
-        if (player->IsPlayerBot())
-        {
-            botGUIDs.push(playerGUID);
-            continue;
-        }
-        if (processData)
-            continue;
-
-        processData = &lfgPlayer;
-        processLevel = player->getLevel();
-        processTeam = player->GetTeamId();
-    }
-    if (processData == NULL)
-    {
-        //int32 maxLoop = int32(botGUIDs.size());
-        while (!botGUIDs.empty())
-        {
-            //--maxLoop;
-            ObjectGuid playerGUID = botGUIDs.front();
-            botGUIDs.pop();
-            if (!playerGUID.IsEmpty())
-                LeaveLfg(playerGUID);
-            //if (maxLoop < 0)
-            //	break;
-        }
-        return NULL;
-    }
-
-    int32 needTank = 1;
-    int32 needDPS = 3;
-    int32 needHeal = 1;
-    uint8 proRoles = processData->GetRoles();
-    if (proRoles & LfgRoles::PLAYER_ROLE_TANK)
-        --needTank;
-    else if (proRoles & LfgRoles::PLAYER_ROLE_DAMAGE)
-        --needDPS;
-    else if (proRoles & LfgRoles::PLAYER_ROLE_HEALER)
-        --needHeal;
-    for (LfgPlayerDataContainer::iterator itLfgPlayer = PlayersStore.begin(); itLfgPlayer != PlayersStore.end(); itLfgPlayer++)
-    {
-        const ObjectGuid& playerGUID = itLfgPlayer->first;
-        const LfgPlayerData& lfgPlayer = itLfgPlayer->second;
-        if (lfgPlayer.GetState() != LFG_STATE_QUEUED)
-            continue;
-        Player* player = ObjectAccessor::FindPlayer(playerGUID);
-        if (!player || !player->IsPlayerBot() || !player->IsInWorld() || player->GetMap()->IsDungeon() || player->getLevel() != processLevel)
-            continue;
-        WorldSession* pSession = player->GetSession();
-        if (!pSession || pSession->HasSchedules())
-            continue;
-
-        uint8 role = lfgPlayer.GetRoles();
-        if (role == LfgRoles::PLAYER_ROLE_TANK)
-            --needTank;
-        else if (role == LfgRoles::PLAYER_ROLE_DAMAGE)
-            --needDPS;
-        else if (role == LfgRoles::PLAYER_ROLE_HEALER)
-            ----needHeal;
-    }
-    if (needTank <= 0 && needDPS <= 0 && needHeal <= 0)
-        return NULL;
-
-    LFGBotRequirement* botReq = new LFGBotRequirement();
-    botReq->needLevel = processLevel;
-    botReq->needTeam = processTeam;
-    botReq->needRole = LfgRoles::PLAYER_ROLE_NONE;
-    if (needTank > 0)
-        botReq->needRole = PLAYER_ROLE_TANK;
-    else if (needDPS > 0)
-        botReq->needRole = PLAYER_ROLE_DAMAGE;
-    else if (needHeal > 0)
-        botReq->needRole = PLAYER_ROLE_HEALER;
-    else
-    {
-        delete botReq;
-        return NULL;
-    }
-    botReq->selectedDungeons = processData->GetSelectedDungeons();
-    return botReq;
 }
 
 void LFGMgr::Update(uint32 diff)

@@ -809,6 +809,7 @@ enum InstanceResetMethod
 class TC_GAME_API InstanceMap : public Map
 {
     public:
+        static bool AllowFortyPlayers;
         InstanceMap(uint32 id, time_t, uint32 InstanceId, Difficulty SpawnMode, Map* _parent);
         ~InstanceMap();
         bool AddPlayerToMap(Player* player, bool initPlayer = true) override;

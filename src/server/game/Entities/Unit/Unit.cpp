@@ -80,7 +80,6 @@
 #include "WorldPacket.h"
 #include "WorldSession.h"
 #include <cmath>
-#include "BotGroupAI.h"
 #include "BotAI.h"
 #include "BotMovementAI.h"
 
@@ -782,9 +781,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
     if (victim && victim->ToPlayer())
     {
         Player* vicPlayer = victim->ToPlayer();
-        if (BotGroupAI* pGroupAI = dynamic_cast<BotGroupAI*>(vicPlayer->GetAI()))
-            pGroupAI->DamageEndure(this, damage, damagetype);
-        else if (BotBGAI* pBGAI = dynamic_cast<BotBGAI*>(vicPlayer->GetAI()))
+        if (BotBGAI* pBGAI = dynamic_cast<BotBGAI*>(vicPlayer->GetAI()))
             pBGAI->DamageEndure(this, damage, damagetype);
         else if (BotMovementAI* pMAI = dynamic_cast<BotMovementAI*>(vicPlayer->GetAI()))
             pMAI->DamageEndure(this, damage, damagetype);

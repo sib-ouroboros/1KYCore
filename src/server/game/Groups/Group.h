@@ -27,7 +27,6 @@
 #include "SharedDefines.h"
 #include <map>
 #include "BotAI.h"
-#include "BotGroupAI.h"
 
 class Battlefield;
 class Battleground;
@@ -437,12 +436,8 @@ class TC_GAME_API Group
         bool GroupExistRealPlayer();
         bool GroupExistPlayerBot();
         bool AllGroupNotCombat();
-        bool AllGroupIsIDLE();
-        void AllGroupBotGiveXP(uint32 XP);
-        Unit* GetGroupTankTarget();
         std::vector<ObjectGuid> GetGroupMemberFromNeedRevivePlayer(uint32 forMap);
         //void ResetRaidDungeon();
-        void ClearAllGroupForceFleeState();
         //void OnLeaderChangePhase(Player* changeTarget, uint32 newPhase);
 
         void AddDelayedEvent(uint64 timeOffset, std::function<void()>&& function)
@@ -451,7 +446,6 @@ class TC_GAME_API Group
         }
 
     protected:
-        Creature* SearchSeduceCreature(Player* centerPlayer);
 
         bool _setMembersGroup(ObjectGuid guid, uint8 group);
         void _homebindIfInstance(Player* player);

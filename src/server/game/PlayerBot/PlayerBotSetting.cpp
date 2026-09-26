@@ -1839,17 +1839,6 @@ void PlayerBotSetting::SupplementAmmo()
 	
 }
 
-// Rehabille le bot a son niveau courant.
-//
-// C est exactement le bloc equipement du re-level complet -- les etapes 6 a 10
-// de UpdateReset() -- isole pour pouvoir etre rejoue a chaque montee de niveau.
-// On ne repasse volontairement NI par ResetTalents NI par ActivateSpecialization :
-// la reattribution de specialisation en cours de partie est le chemin des crashs
-// connus de PlayerBotSetting, et les talents comme les sorts sont deja tenus a
-// jour par OnLevelupToBotAI().
-//
-// L ordre compte : AddEquipFromAll() remplit m_NeedEquips, UpequipFromAll() le
-// consomme et le vide.
 // Vide le sac de base, sans toucher a ce qui est porte.
 //
 // Extrait de UnequipFromAll(), dont c etait la seconde moitie. Sert a faire
@@ -1868,64 +1857,6 @@ void PlayerBotSetting::ViderLesSacs()
 			continue;
 		m_Player->DestroyItem(255, slot, true);
 	}
-}
-
-// Rehabille le bot a son niveau courant.
-//
-// REECRITURE. L ordre precedent etait : tout detruire, puis constituer une
-// tenue neuve, puis l enfiler.
-//
-//     UnequipFromAll();   // DETRUIT les pieces portees et le sac
-//     CheckInventroy();
-//     AddEquipFromAll();  // cree une tenue candidate dans le sac
-//     UpequipFromAll();   // l enfile
-//
-// Tant que la derniere etape aboutissait, c etait transparent. Des qu elle
-// echouait, le bot restait NU -- ses anciennes pieces ayant deja ete
-// detruites, et les nouvelles refusees.
-//
-// Quatre causes de refus ont ete trouvees et bouchees pendant l audit du
-// 09/09/2026 : type d armure incompatible avec la classe, objet reserve a
-// une race, incantation en cours, combat. Aucune n aurait produit un bot nu
-// si la routine n avait pas detruit d abord.
-//
-// Le meme symptome est documente ailleurs, sur des projets sans lien de
-// parente et pour des causes differentes -- TortoiseBots issue 182 (139 bots
-// nus sur 280, sacs pleins), mod-playerbots issue 2023 (toujours ouverte).
-// Ce qui se repete n est pas la cause : c est cette forme de defaut.
-//
-// On inverse donc l ordre. EquipItem sait deja echanger en place : il
-// calcule l emplacement de destination et, s il est occupe, retire
-// l ancienne piece avant de poser la nouvelle. Si la nouvelle est refusee,
-// il rend false sans rien toucher -- et l ancienne reste portee.
-//
-// Desormais, une piece refusee coute une piece demodee, plus un bot nu.
-void PlayerBotSetting::RefreshEquipment()
-{
-	if (!m_Player || !m_Player->IsInWorld() || m_Player->IsInCombat())
-		return;
-
-	// CanEquipItem refuse tout pendant une incantation. Un mercenaire qu on
-	// rhabille n a rien a lancer.
-	if (m_Player->IsNonMeleeSpellCast(false))
-		m_Player->InterruptNonMeleeSpells(false);
-
-	// De la place pour la tenue candidate -- le sac seulement, jamais ce qui
-	// est porte.
-	ViderLesSacs();
-	CheckInventroy();
-
-	// AddEquipFromAll remplit m_NeedEquips, UpequipFromAll le consomme.
-	AddEquipFromAll();
-	UpequipFromAll();
-
-	// Ce qui n a pas ete retenu repart : les pieces refusees, et les
-	// anciennes qu EquipItem a deposees la en echangeant.
-	ViderLesSacs();
-	SupplementOtherItems();
-
-	m_Player->UpdateAllStats();
-	m_Player->SaveToDB();
 }
 
 void PlayerBotSetting::UpdateReset()
@@ -1965,8 +1896,7 @@ void PlayerBotSetting::UpdateReset()
 		++m_ResetStep;
 		break;
 	case 6:
-		// Meme principe que dans RefreshEquipment, reecrit ci-dessus : on ne
-		// detruit plus la tenue portee avant d avoir de quoi la remplacer.
+        // Preserve equipped items until replacement equipment is ready.
 		//
 		// UnequipFromAll() detruisait les pieces portees ET le sac, trois
 		// ticks avant que UpequipFromAll (etape 9) ne tente d enfiler la
@@ -2013,13 +1943,6 @@ void PlayerBotSetting::UpdateReset()
 	}
 
 	m_Finish = (m_ResetStep >= 14);
-	if (m_Finish && m_Player->IsPlayerBot())
-	{
-		BotGlobleSchedule schedule(BotGlobleScheduleType::BGSType_DelayLevelup, m_Player->GetGUID());
-		PlayerBotSession* pSession = dynamic_cast<PlayerBotSession*>(m_Player->GetSession());
-		if (pSession)
-			pSession->PushScheduleToQueue(schedule);
-	}
 	if (m_Finish)
 		m_TenacitySetting = false;
 }

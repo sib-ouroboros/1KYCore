@@ -939,22 +939,6 @@ uint32 BotWarlockAI::TryCastSummonRiteSpell()
 		if (go->GetSpellId() == WarlockIDLE_SummonRite)
 			return 0;
 	}
-	Group* pGroup = me->GetGroup();
-	if (pGroup)
-	{
-		Group::MemberSlotList const& memList = pGroup->GetMemberSlots();
-		for (Group::MemberSlot const& slot : memList)
-		{
-			Player* player = ObjectAccessor::FindPlayer(slot.guid);
-			if (!player || !player->IsAlive() || me->GetMap() != player->GetMap() || !player->IsInWorld())
-				continue;
-			if (BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(me->GetAI()))
-			{
-				if (pAI->CastingSummonRite())
-					return 0;
-			}
-		}
-	}
 
 	SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(WarlockIDLE_SummonRite);
 	if (!spellInfo || spellInfo->IsPassive())

@@ -76,8 +76,6 @@ private:
 	void CmdPVEAutoSetting(Json::Value& info);
 	void CmdPVEMaxLevel(Json::Value& info);
 	void CmdPVEMaxDungeon(Json::Value& info);
-	void CmdPVEDriving(Json::Value& info);
-	void CmdPVEPull(Json::Value& info);
 	void CmdPVEAddion(Json::Value& info);
 	void CmdPVEAutoRevive(Json::Value& info);
 	void CmdPVPDiminishing(Json::Value& info);

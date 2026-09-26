@@ -325,14 +325,6 @@ struct LFGDungeonData
     uint32 Entry() const { return id + (type << 24); }
 };
 
-struct LFGBotRequirement
-{
-    TeamId needTeam;
-    LfgRoles needRole;
-    uint8 needLevel;
-    LfgDungeonSet selectedDungeons;
-};
-
 class TC_GAME_API LFGMgr
 {
     private:
@@ -342,7 +334,6 @@ class TC_GAME_API LFGMgr
     public:
         static LFGMgr* instance();
 
-        LFGBotRequirement* SearchLFGBotRequirement();
 
         // Functions used outside lfg namespace
         void Update(uint32 diff);

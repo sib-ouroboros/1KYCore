@@ -121,7 +121,6 @@ public:
 	void SupplementAmmo();
 	void UpdateReset();
 	void ViderLesSacs();
-	void RefreshEquipment();
 	void LearnSpells();
 	void ActivateSpecialization();
 	void LearnTalents();

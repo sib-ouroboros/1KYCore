@@ -15,7 +15,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "BotGroupAI.h"
+#include "Map.h"
 #include "ToolSocket.h"
 #include "BigNumber.h"
 #include "Opcodes.h"
@@ -133,10 +133,6 @@ void ToolSocket::ProcessToolCmd()
 			CmdPVEMaxLevel(jsonCmd);
 		else if (entry == "pve_maxdungeon")
 			CmdPVEMaxDungeon(jsonCmd);
-		else if (entry == "pve_driving")
-			CmdPVEDriving(jsonCmd);
-		else if (entry == "pve_pull")
-			CmdPVEPull(jsonCmd);
 		else if (entry == "pve_addion")
 			CmdPVEAddion(jsonCmd);
 		else if (entry == "pve_revive")
@@ -290,14 +286,8 @@ Json::Value jsonMaxLevel = sConfigMgr->GetIntDefault("max_level", 6);
 
 Json::Value jsonMaxDungeon = sConfigMgr->GetIntDefault("maxdungeon", 0);
 		int maxDungeon = sConfigMgr->GetIntDefault("maxdungeon", 0);
-		BotGroupAI::PVE_MAX_DUNGEON = (maxDungeon != 0) ? true : false;
-Json::Value jsonDriving = sConfigMgr->GetIntDefault("driving", 1);
-		int driving = sConfigMgr->GetIntDefault("driving", 1);
-		BotGroupAI::PVE_DRIVING = (driving != 0) ? true : false;
+        InstanceMap::AllowFortyPlayers = (maxDungeon != 0) ? true : false;
 
-Json::Value jsonPull = sConfigMgr->GetIntDefault("pull", 1);
-		int pull = sConfigMgr->GetIntDefault("pull", 1);
-		BotGroupAI::PVE_PULL = (pull != 0) ? true : false;
 
 Json::Value jsonAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);
 		float modifyAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);
@@ -613,22 +603,8 @@ void ToolSocket::CmdPVEMaxLevel(Json::Value& info)
 void ToolSocket::CmdPVEMaxDungeon(Json::Value& info)
 {
 	uint32 max = info["maxdungeon"].asInt();
-	BotGroupAI::PVE_MAX_DUNGEON = (max != 0) ? true : false;
+    InstanceMap::AllowFortyPlayers = (max != 0) ? true : false;
 	SendNormalResult("pve_maxdungeon", true);
-}
-
-void ToolSocket::CmdPVEDriving(Json::Value& info)
-{
-	uint32 driving = info["driving"].asInt();
-	BotGroupAI::PVE_DRIVING = (driving != 0) ? true : false;
-	SendNormalResult("pve_driving", true);
-}
-
-void ToolSocket::CmdPVEPull(Json::Value& info)
-{
-	uint32 pull = info["pull"].asInt();
-	BotGroupAI::PVE_PULL = (pull != 0) ? true : false;
-	SendNormalResult("pve_pull", true);
 }
 
 void ToolSocket::CmdPVEAddion(Json::Value& info)

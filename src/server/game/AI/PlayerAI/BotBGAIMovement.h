@@ -21,34 +21,14 @@
 #include "ScriptSystem.h"
 #include "PlayerAI.h"
 #include "BotAI.h"
-#include "BotGroupAI.h"
 #include "AIWaypointsMgr.h"
 
 //class BotBGAI;
-
-class TC_GAME_API BotAIVehicleMovement3D
-{
-public:
-	BotAIVehicleMovement3D(Player* player);
-	void SetStopMoveGap(float gap) { m_NextMoveGap = gap; }
-	void ClearMovement();
-	bool HaveNextmovement();
-	bool HaveCurrentmovement();
-	void AddMovement(Unit* pTarget, float maxOffset);
-	bool UpdateVehicleMovement3D();
-
-private:
-	Player* m_Player;
-	Position m_MovementPos;
-	Position m_NextMovementPos;
-	float m_NextMoveGap;
-};
 
 class BotBGAIMovement
 {
 public:
 	BotBGAIMovement(Player* player, BotBGAI* ai);
-	BotBGAIMovement(Player* player, BotGroupAI* ai);
 	~BotBGAIMovement();
 
 	ObjectGuid GetTargetObjectID() { return targetGuid; }
@@ -77,7 +57,6 @@ private:
 private:
 	Player* m_Player;
 	BotBGAI* m_BGAI;
-	BotGroupAI* m_GroupAI;
 
 	bool m_IsFlagTarget;
 	ObjectGuid targetGuid;

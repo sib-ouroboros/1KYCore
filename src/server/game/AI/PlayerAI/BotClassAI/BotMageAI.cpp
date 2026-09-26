@@ -1008,22 +1008,6 @@ uint32 BotMageAI::TryCastSummonRiteSpell()
 		if (go->GetSpellId() == MageIDLE_SummonRite)
 			return 0;
 	}
-	Group* pGroup = me->GetGroup();
-	if (pGroup)
-	{
-		Group::MemberSlotList const& memList = pGroup->GetMemberSlots();
-		for (Group::MemberSlot const& slot : memList)
-		{
-			Player* player = ObjectAccessor::FindPlayer(slot.guid);
-			if (!player || !player->IsAlive() || me->GetMap() != player->GetMap() || !player->IsInWorld())
-				continue;
-			if (BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(me->GetAI()))
-			{
-				if (pAI->CastingSummonRite())
-					return 0;
-			}
-		}
-	}
 
 	SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(MageIDLE_SummonRite);
 	if (!spellInfo || spellInfo->IsPassive())

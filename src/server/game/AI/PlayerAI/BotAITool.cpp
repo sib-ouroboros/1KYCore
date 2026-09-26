@@ -2421,7 +2421,6 @@ void BotAIFly::UpdateFly(Player* masterPlayer, uint32 groundMountID, BotBGAIMove
 {
 	// SylvaniaCore : cette fonction etait neutralisee par un return sec en
 	// tete de corps. Elle est le seul endroit qui fait suivre un bot en vol,
-	// et elle n est appelee que par BotGroupAI (NonCombatProcess).
 	if (m_FlyMountID == 0 || !masterPlayer || !pMovement)
 		return;
 	if (me->GetMap() != masterPlayer->GetMap())
@@ -2759,17 +2758,7 @@ bool BotAIMovetoUseGO::ProcessMovetoUseGO(BotBGAIMovement* pMovement)
 					continue;
 				if (me->GetDistance(player->GetPosition()) > BOTAI_RANGESPELL_DISTANCE)
 					continue;
-				if (BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(player->GetAI()))
-				{
-					if (pAI->SetMovetoUseGOTarget(go->GetGUID()))
-					{
-						pAI->Dismount();
-						++pickCount;
-						if (pickCount >= 3)
-							return true;
-					}
-				}
-				else if (BotBGAI* pAI = dynamic_cast<BotBGAI*>(player->GetAI()))
+                if (BotBGAI* pAI = dynamic_cast<BotBGAI*>(player->GetAI()))
 				{
 					if (pAI->SetMovetoUseGOTarget(go->GetGUID()))
 					{

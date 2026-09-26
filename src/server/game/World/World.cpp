@@ -19,7 +19,7 @@
     \ingroup world
 */
 
-#include "BotGroupAI.h"
+#include "Map.h"
 #include "World.h"
 #include "BattlePetDataStore.h"
 #include "WildBattlePet.h"
@@ -2464,14 +2464,8 @@ void World::SetInitialWorldSettings()
 
         Json::Value jsonMaxDungeon = sConfigMgr->GetIntDefault("maxdungeon", 0);
         int maxDungeon = sConfigMgr->GetIntDefault("maxdungeon", 0);
-        BotGroupAI::PVE_MAX_DUNGEON = (maxDungeon != 0) ? true : false;
-        Json::Value jsonDriving = sConfigMgr->GetIntDefault("driving", 1);
-        int driving = sConfigMgr->GetIntDefault("driving", 1);
-        BotGroupAI::PVE_DRIVING = (driving != 0) ? true : false;
+        InstanceMap::AllowFortyPlayers = (maxDungeon != 0) ? true : false;
 
-        Json::Value jsonPull = sConfigMgr->GetIntDefault("pull", 1);
-        int pull = sConfigMgr->GetIntDefault("pull", 1);
-        BotGroupAI::PVE_PULL = (pull != 0) ? true : false;
 
         Json::Value jsonAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);
         float modifyAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);

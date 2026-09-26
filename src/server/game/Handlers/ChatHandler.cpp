@@ -26,6 +26,7 @@
 #include "DatabaseEnv.h"
 #include "GridNotifiersImpl.h"
 #include "Group.h"
+#include "BotAI.h"
 #include "Guild.h"
 #include "GuildMgr.h"
 #include "Language.h"
@@ -305,9 +306,7 @@ void WorldSession::HandleChatMessage(ChatMsg type, uint32 lang, std::string msg,
 
             GetPlayer()->Whisper(msg, Language(lang), receiver);
             UnitAI* pUnitAi = receiver->GetAI();
-            if (BotGroupAI* pGroupAI = dynamic_cast<BotGroupAI*>(pUnitAi))
-                pGroupAI->ProcessBotCommand(GetPlayer(), msg);
-            else if (BotBGAI* pBGAI = dynamic_cast<BotBGAI*>(pUnitAi))
+            if (BotBGAI* pBGAI = dynamic_cast<BotBGAI*>(pUnitAi))
                 pBGAI->ProcessBotCommand(GetPlayer(), msg);
 
             if (receiver->IsPlayerBot())

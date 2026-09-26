@@ -500,24 +500,6 @@ void Player::SupplementAmmo()
     m_PlayerBotSetting->SupplementAmmo();
 }
 
-void Player::OnLevelupToBotAI()
-{
-    if (UnitAI* pUnitAI = GetAI())
-    {
-        BotGroupAI* pAI = dynamic_cast<BotGroupAI*>(pUnitAI);
-        if (pAI)
-        {
-            uint32 type = ReupdateTalents();
-            m_PlayerBotSetting->LearnSpells();
-            // Seuls les talents et les sorts suivaient la montee de niveau : le
-            // bot gardait pour tout le contrat l equipement recu a l embauche et
-            // devenait de plus en plus fragile.
-            m_PlayerBotSetting->RefreshEquipment();
-            pAI->OnLevelUp(type);
-        }
-    }
-}
-
 uint32 Player::ReupdateTalents()
 {
     if (IsPlayerBot())
@@ -2965,15 +2947,6 @@ void Player::GiveLevel(uint8 level)
 
     sScriptMgr->OnPlayerLevelChanged(this, oldLevel);
 
-    if (level > oldLevel && IsPlayerBot() && m_PlayerBotSetting)
-    {
-        PlayerBotSession* pSession = dynamic_cast<PlayerBotSession*>(GetSession());
-        if (pSession)
-        {
-            BotGlobleSchedule schedule(BotGlobleScheduleType::BGSType_DelayLevelup, GetGUID());
-            pSession->PushScheduleToQueue(schedule);
-        }
-    }
 }
 
 void Player::InitTalentForLevel()
@@ -16335,14 +16308,6 @@ void Player::RewardQuest(Quest const* quest, uint32 reward, Object* questGiver, 
     if (getLevel() < sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL))
     {
         GiveXP(XP, nullptr);
-        if (!IsPlayerBot())
-        {
-            Group* pGroup = GetGroup();
-            if (pGroup && !pGroup->isBGGroup())
-            {
-                pGroup->AllGroupBotGiveXP(XP);
-            }
-        }
     }
     else
         moneyRew = int32(quest->GetRewMoneyMaxLevel() * sWorld->getRate(RATE_DROP_MONEY));

@@ -22,88 +22,9 @@
 #include "VMapFactory.h"
 #include "MotionMaster.h"
 
-BotAIVehicleMovement3D::BotAIVehicleMovement3D(Player* player) :
-m_Player(player),
-m_NextMoveGap(3.0f)
-{
-}
-
-void BotAIVehicleMovement3D::ClearMovement()
-{
-	m_MovementPos = Position();
-	m_NextMovementPos = Position();
-}
-
-bool BotAIVehicleMovement3D::HaveNextmovement()
-{
-	if (m_NextMovementPos.GetPositionX() != 0 && m_NextMovementPos.GetPositionY() != 0 && m_NextMovementPos.GetPositionZ() != 0)
-		return true;
-	return false;
-}
-
-bool BotAIVehicleMovement3D::HaveCurrentmovement()
-{
-	if (m_MovementPos.GetPositionX() != 0 && m_MovementPos.GetPositionY() != 0 && m_MovementPos.GetPositionZ() != 0)
-		return true;
-	return false;
-}
-
-void BotAIVehicleMovement3D::AddMovement(Unit* pTarget, float maxOffset)
-{
-	if (!pTarget || HaveNextmovement())
-		return;
-	Position pos = pTarget->GetPosition();
-	float x = pos.GetPositionX() + frand(-maxOffset, maxOffset);
-	float y = pos.GetPositionY() + frand(-maxOffset, maxOffset);
-	float z = pos.GetPositionZ() + frand(-maxOffset, maxOffset);
-	m_NextMovementPos = Position(x, y, z);
-}
-
-bool BotAIVehicleMovement3D::UpdateVehicleMovement3D()
-{
-	Unit* vehicle = m_Player->GetVehicleBase();
-	if (!vehicle)
-	{
-		ClearMovement();
-		return false;
-	}
-	float dist = HaveCurrentmovement() ? vehicle->GetDistance(m_MovementPos) : 0;
-	if (dist > m_NextMoveGap)
-	{
-		vehicle->GetMotionMaster()->Clear();
-		vehicle->GetMotionMaster()->MovePoint(1, m_MovementPos);
-	}
-	else if (HaveNextmovement())
-	{
-		m_MovementPos = m_NextMovementPos;
-		m_NextMovementPos = Position();
-		vehicle->GetMotionMaster()->Clear();
-		vehicle->GetMotionMaster()->MovePoint(1, m_MovementPos);
-	}
-	else
-	{
-		ClearMovement();
-		vehicle->GetMotionMaster()->Clear();
-	}
-	return true;
-}
-
 BotBGAIMovement::BotBGAIMovement(Player* player, BotBGAI* ai) :
 m_Player(player),
 m_BGAI(ai),
-m_GroupAI(NULL),
-m_IsFlagTarget(false),
-lastPathfindSure(0),
-pTargetAIWP(NULL),
-m_MovementTick(0),
-m_LastSyncTick(0)
-{
-}
-
-BotBGAIMovement::BotBGAIMovement(Player* player, BotGroupAI* ai) :
-m_Player(player),
-m_BGAI(NULL),
-m_GroupAI(ai),
 m_IsFlagTarget(false),
 lastPathfindSure(0),
 pTargetAIWP(NULL),
@@ -568,8 +489,6 @@ void BotBGAIMovement::TeleportToValidPosition()
             Position pos = Position(findPos.x, findPos.y, findPos.z, m_Player->GetOrientation());
 			if (m_BGAI)
 				m_BGAI->SetTeleport(pos);
-			else if (m_GroupAI)
-				m_GroupAI->SetTeleport(pos);
 			m_Player->StopMoving();
 			return;
 		}
