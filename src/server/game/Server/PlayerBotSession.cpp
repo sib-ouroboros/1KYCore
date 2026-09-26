@@ -233,15 +233,6 @@ void PlayerBotSession::CastSchedule(uint32 diff)
 	case BGSType_LeaveBG:
 		result = ProcessLeaveBG(schedule);
 		break;
-	case BGSType_InLFGQueue:
-		result = ProcessInLFGQueue(schedule);
-		break;
-	case BGSType_OutLFGQueue:
-		result = ProcessOutLFGQueue(schedule);
-		break;
-	case BGSType_AcceptLFGProposal:
-		result = ProcessAcceptLFGProposal(schedule);
-		break;
 	case BGSType_OfferPetitionSign:
 		result = ProcessOfferPetitionSign(schedule);
 		break;
@@ -524,82 +515,6 @@ bool PlayerBotSession::ProcessLeaveBG(BotGlobleSchedule& schedule)
     HandleBattlefieldLeaveOpcode(leave);
 	//HandleWorldPortAck();
 	return false;
-}
-
-bool PlayerBotSession::ProcessInLFGQueue(BotGlobleSchedule& schedule)
-{
-	if (PlayerLoading())
-		return false;
-	Player* player = GetPlayer();
-	if (!player)
-	{
-		ClearAllSchedule();
-		return false;
-	}
-	if (player->isUsingLfg())
-		return true;
-	if (schedule.parameter1 != 2 && schedule.parameter1 != 4 && schedule.parameter1 != 8)
-		return true;
-	if (schedule.parameter2 > 3 || schedule.parameter2 == 0)
-		return true;
-
-    WorldPacket packet(CMSG_DF_JOIN, 50);
-    packet << schedule.parameter1;
-    packet << uint16(0);
-    packet << uint8(schedule.parameter2);
-
-	if (schedule.parameter2 >= 1)
-        packet << schedule.parameter3;
-	if (schedule.parameter2 >= 2)
-        packet << schedule.parameter4;
-	if (schedule.parameter2 >= 3)
-        packet << schedule.parameter5;
-    packet << uint32(0);
-    packet << "";
-
-    WorldPackets::LFG::DFJoin joinPacket(std::move(packet));
-    HandleLfgJoinOpcode(joinPacket);
-
-	return true;
-}
-
-bool PlayerBotSession::ProcessOutLFGQueue(BotGlobleSchedule& schedule)
-{
-	if (PlayerLoading())
-		return false;
-	Player* player = GetPlayer();
-	if (!player)
-	{
-		ClearAllSchedule();
-		return false;
-	}
-	if (!player->isUsingLfg())
-		return true;
-
-    WorldPacket packet(CMSG_DF_LEAVE, 0);
-    WorldPackets::LFG::DFLeave leavePacket(std::move(packet));
-    HandleLfgLeaveOpcode(leavePacket);
-
-	return true;
-}
-
-bool PlayerBotSession::ProcessAcceptLFGProposal(BotGlobleSchedule& schedule)
-{
-	if (PlayerLoading())
-		return false;
-	if (schedule.parameter1 == 0)
-		return true;
-	Player* player = GetPlayer();
-	if (!player)
-	{
-		ClearAllSchedule();
-		return false;
-	}
-	if (!player->isUsingLfg())
-		return true;
-
-	sLFGMgr->UpdateProposal(schedule.parameter1, player->GetGUID(), (schedule.parameter2 != 0) ? true : false);
-	return true;
 }
 
 bool PlayerBotSession::ProcessOfferPetitionSign(BotGlobleSchedule& schedule)

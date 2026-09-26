@@ -344,7 +344,6 @@ public:
     void AddNewAccountBot(bool faction, Classes prof);
     void AddNewPlayerBotByClass(uint32 count, Classes prof);
     bool ChangePlayerBotSetting(uint32 account, uint32 minLV, uint32 maxLV, uint32 talent);
-    lfg::LfgRoles GetPlayerBotCurrentLFGRoles(Player* player);
     ObjectGuid GetNoArenaMatchCharacter(TeamId team, uint32 arenaType, Classes cls, std::vector<ObjectGuid>& fliters);
     std::string GetNameANDClassesText(ObjectGuid& guid);
     bool CanReadyArenaByArenaTeamID(uint32 arenaTeamId);

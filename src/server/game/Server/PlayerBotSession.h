@@ -34,10 +34,7 @@ enum BotGlobleScheduleType
 	BGSType_EnterBG,
 	BGSType_LeaveBG,
     BGSType_Online_GUID = 11,
-    BGSType_InLFGQueue = 13,
-	BGSType_OutLFGQueue,
-	BGSType_AcceptLFGProposal,
-	BGSType_OfferPetitionSign
+    BGSType_OfferPetitionSign = 16
 };
 struct BotGlobleSchedule
 {
@@ -115,9 +112,6 @@ private:
 	bool ProcessOutBGQueue(BotGlobleSchedule& schedule);
 	bool ProcessEnterBG(BotGlobleSchedule& schedule);
 	bool ProcessLeaveBG(BotGlobleSchedule& schedule);
-	bool ProcessInLFGQueue(BotGlobleSchedule& schedule);
-	bool ProcessOutLFGQueue(BotGlobleSchedule& schedule);
-	bool ProcessAcceptLFGProposal(BotGlobleSchedule& schedule);
 	bool ProcessOfferPetitionSign(BotGlobleSchedule& schedule);
 
 private:

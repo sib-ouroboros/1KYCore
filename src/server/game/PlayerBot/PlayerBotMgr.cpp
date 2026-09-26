@@ -2104,63 +2104,6 @@ bool PlayerBotMgr::ChangePlayerBotSetting(uint32 account, uint32 minLV, uint32 m
     return false;
 }
 
-lfg::LfgRoles PlayerBotMgr::GetPlayerBotCurrentLFGRoles(Player* player)
-{
-    if (!player)
-        return lfg::LfgRoles::PLAYER_ROLE_NONE;
-    uint32 talentType = player->FindTalentType();
-    switch (player->getClass())
-    {
-    case 1:
-        if (talentType == 2)
-            return lfg::LfgRoles::PLAYER_ROLE_TANK;
-        else
-            return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-        break;
-    case 2:
-        if (talentType == 0)
-            return lfg::LfgRoles::PLAYER_ROLE_HEALER;
-        else if (talentType == 1)
-            return lfg::LfgRoles::PLAYER_ROLE_TANK;
-        else
-            return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-        break;
-    case 6:
-        if (talentType == 1)
-            return lfg::LfgRoles::PLAYER_ROLE_TANK;
-        else
-            return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-        break;
-    case 3:
-    case 4:
-    case 8:
-    case 9:
-        return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-        break;
-    case 5:
-        if (talentType == 2)
-            return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-        else
-            return lfg::LfgRoles::PLAYER_ROLE_HEALER;
-        break;
-    case 7:
-        if (talentType == 2)
-            return lfg::LfgRoles::PLAYER_ROLE_HEALER;
-        else
-            return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-        break;
-    case 11:
-        if (talentType == 2)
-            return lfg::LfgRoles::PLAYER_ROLE_HEALER;
-        else
-            return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-        break;
-    default:
-        return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-    }
-    return lfg::LfgRoles::PLAYER_ROLE_DAMAGE;
-}
-
 ObjectGuid PlayerBotMgr::GetNoArenaMatchCharacter(TeamId team, uint32 arenaType, Classes cls, std::vector<ObjectGuid>& fliters)
 {
     if (team != TEAM_ALLIANCE && team != TEAM_HORDE)

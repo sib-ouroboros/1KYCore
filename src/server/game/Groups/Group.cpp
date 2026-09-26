@@ -2435,21 +2435,6 @@ void Group::PlayerBotRoll(Player* player, const Roll& roll)
     //    CountRollVote(player->GetGUID(), roll.itemGUID, ROLL_PASS);
 }
 
-bool Group::GiveAtGroupPos(ObjectGuid& guid, uint32& index, uint32& count)
-{
-    index = 0;
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        ++index;
-        if (citr->guid == guid)
-        {
-            count = m_memberSlots.size();
-            return true;
-        }
-    }
-    return false;
-}
-
 bool Group::GroupExistRealPlayer()
 {
     for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
@@ -2474,34 +2459,6 @@ bool Group::GroupExistPlayerBot()
             return true;
     }
     return false;
-}
-
-bool Group::AllGroupNotCombat()
-{
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(citr->guid);
-        if (!player)
-            continue;
-        if (!player->IsAlive())
-            continue;
-        if (player->IsInCombat())
-            return false;
-    }
-    return true;
-}
-
-std::vector<ObjectGuid> Group::GetGroupMemberFromNeedRevivePlayer(uint32 forMap)
-{
-    std::vector<ObjectGuid> needRevivePlayers;
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(citr->guid);
-        if (!player || player->IsAlive() || player->IsPlayerBot() || player->GetMapId() != forMap)
-            continue;
-        needRevivePlayers.push_back(citr->guid);
-    }
-    return needRevivePlayers;
 }
 
 /*void Group::ResetRaidDungeon()

@@ -15,7 +15,6 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "PlayerBotMgr.h"
 #include "LFGMgr.h"
 #include "DatabaseEnv.h"
 #include "DB2Stores.h"
@@ -40,7 +39,6 @@
 #include "SocialMgr.h"
 #include "World.h"
 #include "WorldSession.h"
-#include "PlayerBotSession.h"
 
 namespace lfg
 {
@@ -417,13 +415,9 @@ void LFGMgr::JoinLfg(Player* player, uint8 roles, LfgDungeonSet& dungeons)
     uint32 rDungeonId = 0;
     uint32 queueId = 0;
     bool isContinue = grp && grp->isLFGGroup() && GetState(gguid) != LFG_STATE_FINISHED_DUNGEON;
-    if (!player->IsPlayerBot())
-    {
-
-        uint8 commandCode = roles & 1;
-        if (commandCode == 0)
-            roles += 1;
-    }
+    uint8 commandCode = roles & 1;
+    if (commandCode == 0)
+        roles += 1;
 
     // Do not allow to change dungeon in the middle of a current dungeon
     if (isContinue)
@@ -594,14 +588,11 @@ void LFGMgr::JoinLfg(Player* player, uint8 roles, LfgDungeonSet& dungeons)
 
         SetState(gguid, LFG_STATE_ROLECHECK);
         // Send update to player
-        std::list<Player*> immedCheckRolesPlayers;
         LfgUpdateData updateData = LfgUpdateData(LFG_UPDATETYPE_JOIN_QUEUE, dungeons);
         for (GroupReference* itr = grp->GetFirstMember(); itr != NULL; itr = itr->next())
         {
             if (Player* plrg = itr->GetSource())
             {
-                if (plrg->IsPlayerBot())
-                    immedCheckRolesPlayers.push_back(plrg);
                 ObjectGuid pguid = plrg->GetGUID();
                 plrg->GetSession()->SendLfgUpdateStatus(updateData, true);
                 SetState(pguid, LFG_STATE_ROLECHECK);
@@ -617,37 +608,6 @@ void LFGMgr::JoinLfg(Player* player, uint8 roles, LfgDungeonSet& dungeons)
         // Update leader role
         UpdateRoleCheck(gguid, guid, roles);
 
-        for (Player* bot : immedCheckRolesPlayers)
-        {
-            WorldSession* pSession = bot->GetSession();
-            if (pSession)
-            {
-                lfg::LfgRoles botRoles = sPlayerBotMgr->GetPlayerBotCurrentLFGRoles(bot);
-
-                WorldPacket data(CMSG_DF_SET_ROLES, 5);
-                data << uint32(botRoles);
-                data << uint8(0);
-
-                WorldPackets::LFG::DFSetRoles rolesPacket(std::move(data));
-                pSession->HandleLfgSetRolesOpcode(rolesPacket);
-
-                UpdateRoleCheck(gguid, bot->GetGUID(), botRoles);
-
-                std::string roleText = "UNKNOW";
-                if (botRoles & LfgRoles::PLAYER_ROLE_TANK)
-                    roleText = "Tanker";
-                else if (botRoles & LfgRoles::PLAYER_ROLE_HEALER)
-                    roleText = "Healer";
-                else if (botRoles & LfgRoles::PLAYER_ROLE_DAMAGE)
-                    roleText = "Damager";
-                char text[128] = { 0 };
-                if (player->GetTeamId() == TEAM_ALLIANCE)
-                    snprintf(text, 127, "|cff0000ff %s <%s> Join dungeon queue|r", roleText.c_str(), bot->GetName().c_str());
-                else
-                    snprintf(text, 127, "|cffff0000 %s <%s> Join dungeon queue|r", roleText.c_str(), bot->GetName().c_str());
-                sWorld->SendGlobalText(text, NULL);
-            }
-        }
     }
     else                                                   // Add player to queue
     {
@@ -1363,8 +1323,7 @@ void LFGMgr::InitBoot(ObjectGuid gguid, ObjectGuid kicker, ObjectGuid victim, st
     for (GuidSet::const_iterator itr = players.begin(); itr != players.end(); ++itr)
     {
         ObjectGuid guid = (*itr);
-        Player* votePlayer = ObjectAccessor::FindPlayer(guid);
-        boot.votes[guid] = (votePlayer && votePlayer->IsPlayerBot()) ? LFG_ANSWER_AGREE : LFG_ANSWER_PENDING;
+        boot.votes[guid] = LFG_ANSWER_PENDING;
     }
 
     boot.votes[victim] = LFG_ANSWER_DENY;                  // Victim auto vote NO
@@ -2067,27 +2026,7 @@ void LFGMgr::SendLfgBootProposalUpdate(ObjectGuid guid, LfgPlayerBoot const& boo
 void LFGMgr::SendLfgUpdateProposal(ObjectGuid guid, LfgProposal const& proposal)
 {
     if (Player* player = ObjectAccessor::FindConnectedPlayer(guid))
-    {
-        if (player->IsPlayerBot())
-        {
-            LfgProposalPlayerContainer::const_iterator itProposalPlayer = proposal.players.find(guid);
-            if (itProposalPlayer == proposal.players.end())
-                return;
-            if (itProposalPlayer->second.accept == LFG_ANSWER_AGREE)   // No answer (-1) or not accepted (0)
-                return;
-            PlayerBotSession* pSession = dynamic_cast<PlayerBotSession*>(player->GetSession());
-            if (pSession)
-            {
-                BotGlobleSchedule schedule2(BotGlobleScheduleType::BGSType_AcceptLFGProposal, 0);
-                schedule2.parameter1 = proposal.id;
-                schedule2.parameter2 = 1;
-                pSession->PushScheduleToQueue(schedule2);
-                //UpdateProposal(proposal.id, player->GetGUID(), true);
-            }
-        }
-        else
-            player->GetSession()->SendLfgUpdateProposal(proposal);
-    }
+        player->GetSession()->SendLfgUpdateProposal(proposal);
 }
 
 void LFGMgr::SendLfgQueueStatus(ObjectGuid guid, LfgQueueStatusData const& data)

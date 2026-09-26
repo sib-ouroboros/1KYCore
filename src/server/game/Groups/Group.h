@@ -432,11 +432,8 @@ class TC_GAME_API Group
 
         Rolls& GetAllRolls() { return RollId; }
         void PlayerBotRoll(Player* player, const Roll& roll);
-        bool GiveAtGroupPos(ObjectGuid& guid, uint32& index, uint32& count);
         bool GroupExistRealPlayer();
         bool GroupExistPlayerBot();
-        bool AllGroupNotCombat();
-        std::vector<ObjectGuid> GetGroupMemberFromNeedRevivePlayer(uint32 forMap);
         //void ResetRaidDungeon();
         //void OnLeaderChangePhase(Player* changeTarget, uint32 newPhase);
 
