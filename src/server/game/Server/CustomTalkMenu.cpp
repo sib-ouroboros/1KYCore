@@ -20,6 +20,7 @@
 #include "BotAITool.h"
 #include "GossipDef.h"
 #include "SpellAuras.h"
+#include "SpellMgr.h"
 #include "Group.h"
 #include "PlayerBotMgr.h"
 
