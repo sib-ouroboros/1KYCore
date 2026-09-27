@@ -16,6 +16,7 @@
  */
 
 #include "Player.h"
+#include "PlayerBotMgr.h"
 #include "AreaTrigger.h"
 #include "AreaTriggerPackets.h"
 #include "AccountMgr.h"
@@ -130,7 +131,6 @@
 #include <G3D/g3dmath.h>
 #include "ChallengeModeMgr.h"
 #include "BotMovementAI.h"
-#include "PlayerBotSession.h"
 #include "BotAITool.h"
 
 #define ZONE_UPDATE_INTERVAL (1*IN_MILLISECONDS)

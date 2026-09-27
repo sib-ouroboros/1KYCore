@@ -466,9 +466,6 @@ void ToolSocket::CmdPlayerChange(Json::Value& info)
 			SendNormalResult("player_change", false);
 			return;
 		}
-		PlayerBotSession* pBotSession = dynamic_cast<PlayerBotSession*>(pWorldSession);
-		if (pBotSession && pBotSession->HasSchedules())
-			return;
 		maxlv = PlayerBotSetting::CheckMaxLevel(maxlv);
 		if (maxlv < minlv)
 			maxlv = minlv;

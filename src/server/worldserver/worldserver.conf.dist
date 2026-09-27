@@ -4599,17 +4599,6 @@ pbotbg_idlelogout = 300
 pbotasl = 88
 
 #
-#    pbottitle
-#        Description: ID CharTitles du titre porte obligatoirement par tous les
-#                     playerbots, pour les distinguer des vrais joueurs.
-#                     600 = « Mercenaire », entree custom fournie par la table
-#                     `char_titles` de la base hotfix (MaskID 380).
-#        Default:     600 - (titre Mercenaire)
-#                     0   - (aucun titre force)
-
-pbottitle = 600
-
-#
 #    pbotqa
 #        Description: Harnais d assurance qualite. Par defaut, un bot de terrain qui
 #                     se retrouve sur une carte d instance est renvoye chez lui.

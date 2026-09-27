@@ -31,7 +31,6 @@
 #include "World.h"
 #include "WorldPacket.h"
 #include "WorldSession.h"
-#include "PlayerBotSession.h"
 
 class Aura;
 
@@ -106,17 +105,6 @@ void WorldSession::HandlePartyInviteOpcode(WorldPackets::Party::PartyInviteClien
     {
         SendPartyResult(PARTY_OP_INVITE, player->GetName(), ERR_IGNORING_YOU_S);
         return;
-    }
-
-    WorldSession* pWorldSession = player->GetSession();
-    if (pWorldSession && player->IsPlayerBot())
-    {
-        PlayerBotSession* pSession = dynamic_cast<PlayerBotSession*>(pWorldSession);
-        if (pSession->HasSchedules())
-        {
-            SendPartyResult(PARTY_OP_INVITE, player->GetName(), ERR_NOT_IN_GROUP);
-            return;
-        }
     }
 
     Group* group = GetPlayer()->GetGroup();

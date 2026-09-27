@@ -184,7 +184,6 @@ WorldSession::~WorldSession()
     //
     // Chaque arret du serveur produisait un vidage memoire de 120 Mo :
     //     #4 World::~World()
-    //     #3 PlayerBotSession::~PlayerBotSession()
     //     #2 WorldSession::~WorldSession()
     //     #1 DatabaseWorkerPool<LoginDatabaseConnection>::Execute()
     //     #5 __run_exit_handlers
@@ -234,9 +233,6 @@ std::string WorldSession::GetPlayerInfo() const
 /// Send a packet to the client
 void WorldSession::SendPacket(WorldPacket const* packet, bool forced /*= false*/)
 {
-    if (IsBotSession())
-        return;
-
     if (packet->GetOpcode() == NULL_OPCODE)
     {
         TC_LOG_ERROR("network.opcode", "Prevented sending of NULL_OPCODE to %s", GetPlayerInfo().c_str());
@@ -385,7 +381,7 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
     //
     // Les joueurs ordinaires restent soumis au delai : la protection
     // contre les sessions fantomes conserve tout son interet pour eux.
-    if (!IsBotSession() && GetSecurity() <= SEC_PLAYER && IsConnectionIdle())
+    if (GetSecurity() <= SEC_PLAYER && IsConnectionIdle())
         m_Socket[CONNECTION_TYPE_REALM]->CloseSocket();
 
     ///- Retrieve packets from the receive queue and call the appropriate handlers
@@ -543,7 +539,7 @@ bool WorldSession::Update(uint32 diff, PacketFilter& updater)
             }
         }
 
-        if (!IsBotSession() && !m_Socket[CONNECTION_TYPE_REALM])
+        if (!m_Socket[CONNECTION_TYPE_REALM])
             return false;                                       //Will remove this session from the world session map
     }
 
@@ -666,8 +662,6 @@ void WorldSession::LogoutPlayer(bool save)
         {
             _player->GetGroup()->SendUpdate();
             _player->GetGroup()->ResetMaxEnchantingLevel();
-            if (!IsBotSession())
-                sPlayerBotMgr->LogoutAllGroupPlayerBot(_player->GetGroup(), false);
         }
 
         //! Broadcast a logout message to the player's friends
@@ -702,8 +696,6 @@ void WorldSession::LogoutPlayer(bool save)
         stmt->setUInt32(0, GetAccountId());
         CharacterDatabase.Execute(stmt);
 
-        if (IsBotSession())
-            sPlayerBotMgr->OnPlayerBotLogout(this);
         sOnlineMgr->CharaterOffline(GetAccountId());
     }
 

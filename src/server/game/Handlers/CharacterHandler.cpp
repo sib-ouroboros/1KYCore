@@ -748,10 +748,7 @@ void WorldSession::HandleCharCreateOpcode(WorldPackets::Character::CreateCharact
 
             newChar.CleanupsBeforeDelete();
 
-            if (IsBotSession())
-                sPlayerBotMgr->OnPlayerBotCreate(newChar.GetGUID(), GetAccountId(), newChar.GetName(), newChar.GetByteValue(PLAYER_BYTES_3, PLAYER_BYTES_3_OFFSET_GENDER), newChar.getRace(), newChar.getClass(), newChar.getLevel());
-            else
-                sPlayerBotMgr->OnAccountBotCreate(newChar.GetGUID(), GetAccountId(), newChar.GetName(), newChar.GetByteValue(PLAYER_BYTES_3, PLAYER_BYTES_3_OFFSET_GENDER), newChar.getRace(), newChar.getClass(), newChar.getLevel());
+            sPlayerBotMgr->OnAccountBotCreate(newChar.GetGUID(), GetAccountId(), newChar.GetName(), newChar.GetByteValue(PLAYER_BYTES_3, PLAYER_BYTES_3_OFFSET_GENDER), newChar.getRace(), newChar.getClass(), newChar.getLevel());
             //break;
         };
 
@@ -840,7 +837,7 @@ void WorldSession::HandlePlayerLoginOpcode(WorldPackets::Character::PlayerLogin&
 
     TC_LOG_DEBUG("network", "Character %s logging in", playerLogin.Guid.ToString().c_str());
 
-    if (!IsBotSession() && !IsLegitCharacterForAccount(playerLogin.Guid))
+    if (!IsLegitCharacterForAccount(playerLogin.Guid))
     {
         if (IsClassTrialLockedCharacter(playerLogin.Guid))
         {
@@ -873,15 +870,11 @@ void WorldSession::HandleContinuePlayerLogin()
         m_playerLoading.Clear();
         return;
     }
-    if (IsBotSession())
-        TC_LOG_ERROR("server.worldserver", "QA-BOTLOG2: holder pose compte %u", GetAccountId());
 
     SendPacket(WorldPackets::Auth::ResumeComms(CONNECTION_TYPE_INSTANCE).Write());
 
     AddQueryHolderCallback(CharacterDatabase.DelayQueryHolder(holder)).AfterComplete([this](SQLQueryHolderBase const& holder)
     {
-        if (IsBotSession())
-            TC_LOG_ERROR("server.worldserver", "QA-BOTLOG2: callback holder compte %u", GetAccountId());
         HandlePlayerLogin(dynamic_cast<LoginQueryHolder const&>(holder));
     });
 }
@@ -1192,16 +1185,9 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder const& holder)
 
     TC_METRIC_EVENT("player_events", "Login", pCurrChar->GetName());
 
-    if (IsBotSession())
-    {
-        sPlayerBotMgr->OnPlayerBotLogin(this, pCurrChar);
-    }
-    else
-    {
-        pCurrChar->IsAIEnabled = true;
-        pCurrChar->NeedChangeAI = false;
-        pCurrChar->SetAI(new BotMovementAI(pCurrChar));
-    }
+    pCurrChar->IsAIEnabled = true;
+    pCurrChar->NeedChangeAI = false;
+    pCurrChar->SetAI(new BotMovementAI(pCurrChar));
     uint32 talent = PlayerBotSetting::FindPlayerTalentType(pCurrChar);
     sOnlineMgr->CharaterOnline(GetAccountId(), uint32(pCurrChar->GetGUID()),
         pCurrChar->GetName(), pCurrChar->getRace(), pCurrChar->getClass(), pCurrChar->getLevel(), talent);

@@ -25,7 +25,6 @@
 #include "SocialMgr.h"
 #include "LFGMgr.h"
 #include "Config.h"
-#include "PlayerBotSession.h"
 #include "AccountMgr.h"
 #include "BattlenetAccountMgr.h"
 #include "CharacterPackets.h"
@@ -90,8 +89,7 @@ std::string PlayerBotCharBaseInfo::GetNameANDClassesText()
 }
 
 PlayerBotMgr::PlayerBotMgr() :
-    m_LastBotAccountIndex(0),
-    m_BotOnlineCount(0)
+    m_LastBotAccountIndex(0)
 {
 #ifndef NON_SINGLE_GAME
 #endif
@@ -108,12 +106,6 @@ PlayerBotMgr* PlayerBotMgr::instance()
     return &instance;
 }
 
-bool PlayerBotMgr::IsPlayerBot(WorldSession* pSession)
-{
-    if (pSession && dynamic_cast<PlayerBotSession*> (pSession))
-        return true;
-    return false;
-}
 
 bool PlayerBotMgr::IsBotAccuntName(std::string name)
 {
@@ -308,18 +300,6 @@ void PlayerBotMgr::LoadCharBaseInfo()
     } while (result->NextRow());
 }
 
-void PlayerBotMgr::OnPlayerBotCreate(ObjectGuid const& guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level)
-{
-    PlayerBotBaseInfo* pInfo = GetPlayerBotAccountInfo(accountId);
-    if (!pInfo)
-        return;
-    uint32 id = uint32(uint64(guid));
-    if (pInfo->characters.find(id) != pInfo->characters.end())
-    {
-        return;
-    }
-    pInfo->characters[id] = PlayerBotCharBaseInfo(id, accountId, name, uint16(race), uint16(playerClass), uint16(gender), uint16(level));
-}
 
 void PlayerBotMgr::OnAccountBotCreate(ObjectGuid const& guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level)
 {
@@ -341,111 +321,6 @@ void PlayerBotMgr::OnAccountBotDelete(ObjectGuid& guid, uint32 accountId)
         return;
     pInfo->RemoveCharacterByGUID(guid);
 }
-
-// Titre obligatoire des playerbots.
-// Tous les bots portent le titre custom « Mercenaire » (CharTitles 600 /
-// MaskID 380, pousse au client par la table hotfix `char_titles`), afin que
-// les vrais joueurs les distinguent d'un coup d'oeil. Le titre est accorde
-// puis selectionne a chaque connexion : un bot ne peut donc pas s'en defaire.
-void PlayerBotMgr::ApplyBotTitle(Player* pPlayer)
-{
-    if (!pPlayer)
-        return;
-
-    uint32 titleId = uint32(sConfigMgr->GetIntDefault("pbottitle", 600));
-    if (!titleId)
-        return;
-
-    CharTitlesEntry const* title = sCharTitlesStore.LookupEntry(titleId);
-    if (!title)
-    {
-        static bool s_titleWarned = false;
-        if (!s_titleWarned)
-        {
-            s_titleWarned = true;
-            TC_LOG_ERROR("server.loading", "PlayerBotMgr: titre de bot %u absent de CharTitles - verifier la table `char_titles` de la base hotfix", titleId);
-        }
-        return;
-    }
-
-    if (!pPlayer->HasTitle(title))
-        pPlayer->SetTitle(title);
-
-    if (pPlayer->GetUInt32Value(PLAYER_CHOSEN_TITLE) != uint32(title->MaskID))
-        pPlayer->SetUInt32Value(PLAYER_CHOSEN_TITLE, uint32(title->MaskID));
-}
-
-void PlayerBotMgr::OnPlayerBotLogin(WorldSession* pSession, Player* pPlayer)
-{
-    ++m_BotOnlineCount;
-
-    ApplyBotTitle(pPlayer);
-
-    Group* pGroup = pPlayer->GetGroup();
-    if (pGroup)
-    {
-        if (!pGroup->GroupExistRealPlayer())
-        {
-            pPlayer->RemoveFromGroup(RemoveMethod::GROUP_REMOVEMETHOD_LEAVE);
-        }
-    }
-
-    if (pPlayer->GetBattleground())
-    {
-        pPlayer->LeaveBattleground();
-        if (pSession)
-            pSession->HandleMoveWorldportAck();
-    }
-
-    BotUtility::RemoveArenaBotSpellsByPlayer(pPlayer);
-
-    if (PlayerBotSession* pBotSession = dynamic_cast<PlayerBotSession*>(pSession))
-    {
-        if (!pSession->HasSchedules() && !pPlayer->EquipIsTidiness())
-        {
-            uint32 curTType = pPlayer->FindTalentType();
-            uint32 newTType = curTType;
-            while (newTType == curTType)
-                newTType = urand(0, 2);
-            BotGlobleSchedule schedule2(BotGlobleScheduleType::BGSType_Settting, 0);
-            schedule2.parameter1 = pPlayer->getLevel();
-            schedule2.parameter2 = pPlayer->getLevel();
-            schedule2.parameter3 = newTType + 1;
-            pBotSession->PushScheduleToQueue(schedule2);
-        }
-    }
-}
-
-void PlayerBotMgr::OnPlayerBotLogout(WorldSession* pSession)
-{
-    --m_BotOnlineCount;
-    if (m_BotOnlineCount < 0) m_BotOnlineCount = 0;
-
-    PlayerBotSession* pBotSession = dynamic_cast<PlayerBotSession*>(pSession);
-    if (pBotSession && !pBotSession->HasScheduleByType(BotGlobleScheduleType::BGSType_Online) &&
-        !pBotSession->HasScheduleByType(BotGlobleScheduleType::BGSType_Online_GUID))
-        pBotSession->ClearAllSchedule();
-}
-
-void PlayerBotMgr::LogoutAllGroupPlayerBot(Group* pGroup, bool force)
-{
-    if (!pGroup)
-        return;
-    if (!force && pGroup->GroupExistRealPlayer())
-        return;
-    Group::MemberSlotList const& memList = pGroup->GetMemberSlots();
-    for (Group::MemberSlot const& slot : memList)
-    {
-        ObjectGuid guid = slot.guid;
-        Player* player = ObjectAccessor::FindPlayer(guid);
-        if (!player || !player->IsPlayerBot())
-            continue;
-        WorldSession* pSession = player->GetSession();
-        if (pSession)
-            pSession->LogoutPlayer(false);
-    }
-}
-
 
 std::string PlayerBotMgr::GetNameANDClassesText(ObjectGuid& guid)
 {

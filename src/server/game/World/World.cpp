@@ -138,8 +138,6 @@ uint32 World::GetOnlineRealPlayerCount()
         WorldSession* pSession = itr->second;
         if (!pSession)
             continue;
-        if (pSession->IsBotSession())
-            continue;
         ++count;
     }
     return count;

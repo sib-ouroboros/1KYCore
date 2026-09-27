@@ -22,19 +22,17 @@
 
 #include "Log.h"
 #include "Common.h"
+#include <mutex>
 #include "SharedDefines.h"
 #include "DatabaseEnv.h"
 #include "Timer.h"
 //#include "Callback.h"
-#include "PlayerBotSession.h"
 #include "BotAITool.h"
 #include "LFGMgr.h"
 //#include "ArenaTeamMgr.h"
 #include "Containers.h"
 
 class ObjectGuid;
-struct BotGlobleSchedule;
-class PlayerBotSession;
 
 struct PlayerBotCharBaseInfo
 {
@@ -285,7 +283,6 @@ public:
 
     static PlayerBotMgr* instance();
 
-    bool IsPlayerBot(WorldSession* pSession);
     bool IsBotAccuntName(std::string name);
     void DestroyBotMail(uint32 guid);
     void LoadPlayerBotBaseInfo();
@@ -295,16 +292,10 @@ public:
 
     void UpdateLastAccountIndex(std::string& username);
 
-    void OnPlayerBotCreate(ObjectGuid const& guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level);
     void OnAccountBotCreate(ObjectGuid const& guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level);
     void OnAccountBotDelete(ObjectGuid& guid, uint32 accountId);
-    void OnPlayerBotLogin(WorldSession* pSession, Player* pPlayer);
-    void ApplyBotTitle(Player* pPlayer);
-    void OnPlayerBotLogout(WorldSession* pSession);
-    void LogoutAllGroupPlayerBot(Group* pGroup, bool force);
 
     std::string GetNameANDClassesText(ObjectGuid& guid);
-    int32 m_BotOnlineCount;
 
 private:
 

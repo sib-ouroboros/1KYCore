@@ -19,7 +19,6 @@
 #include "ObjectMgr.h"
 #include "Pet.h"
 #include "WorldSession.h"
-#include "PlayerBotSession.h"
 #include "OnlineMgr.h"
 #include "MapManager.h"
 #include "Item.h"

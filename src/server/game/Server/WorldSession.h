@@ -1039,7 +1039,7 @@ class TC_GAME_API WorldSession
 
         WorldSession(uint32 id, std::string&& name, uint32 battlenetAccountId, std::shared_ptr<WorldSocket> sock, AccountTypes sec, uint8 expansion, time_t mute_time,
             std::string os, LocaleConstant locale, uint32 recruiter, bool isARecruiter, std::string&& battlenetAccountName);
-        virtual ~WorldSession();   // SylvaniaCore : PlayerBotSession en derive, un delete sur WorldSession* ne detruisait que la moitie de l objet
+        virtual ~WorldSession();
 
         void SetAddress(std::string mybot)
         {
@@ -1608,8 +1608,6 @@ class TC_GAME_API WorldSession
             return false;
         }
         virtual bool IsBotSession() { return false; }
-        virtual bool HasSchedules() { return false; }
-        virtual bool IsAccountBotSession() { return false; }
 
         void HandleLearnPvpTalentsOpcode(WorldPackets::Talent::LearnPvpTalents& packet);
         void HandleLearnTalentsOpcode(WorldPackets::Talent::LearnTalents& packet);

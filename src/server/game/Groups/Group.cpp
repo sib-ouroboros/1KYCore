@@ -2430,18 +2430,6 @@ void Group::PlayerBotRoll(Player* player, const Roll& roll)
     //    CountRollVote(player->GetGUID(), roll.itemGUID, ROLL_PASS);
 }
 
-bool Group::GroupExistRealPlayer()
-{
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(citr->guid);
-        if (!player)
-            continue;
-        if (!player->IsPlayerBot())
-            return true;
-    }
-    return false;
-}
 
 bool Group::GroupExistPlayerBot()
 {

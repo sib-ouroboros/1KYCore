@@ -88,7 +88,6 @@ public:
     static void ModifySpecialSpells();
     //static void BuildNewArenaHellSpells(SpellInfoMap& spellMap);
     static void AddArenaBotSpellsByPlayer(Player* player);
-    static void RemoveArenaBotSpellsByPlayer(Player* player);
     static bool SpellHasReady(Player* player, uint32 spellID);
     static uint32 GetFirstNumberByString(std::string text);
     static std::string BuildItemLinkText(const ItemTemplate* pItemTemplate);

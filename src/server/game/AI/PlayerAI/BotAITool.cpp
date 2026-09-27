@@ -18,7 +18,6 @@
 #include "DB2Structure.h"
 #include "BotAITool.h"
 #include "Pet.h"
-#include "PlayerBotSession.h"
 #include "Map.h"
 #include "Group.h"
 #include "Language.h"
@@ -179,31 +178,6 @@ void BotUtility::AddArenaBotSpellsByPlayer(Player* player)
 	}
 }
 
-void BotUtility::RemoveArenaBotSpellsByPlayer(Player* player)
-{
-	if (!player)
-		return;
-	if (player->HasAura(ARENA_PLAYER_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_PLAYER_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_WARRIOR_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_WARRIOR_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_PALADIN_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_PALADIN_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_ROGUE_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_ROGUE_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_DRUID_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_DRUID_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_HUNTER_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_HUNTER_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_SHAMAN_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_SHAMAN_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_MAGE_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_MAGE_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_WARLOCK_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_WARLOCK_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-	if (player->HasAura(ARENA_PRIEST_BOT_AURA))
-		player->RemoveOwnedAura(ARENA_PRIEST_BOT_AURA, ObjectGuid::Empty, 0, AURA_REMOVE_BY_CANCEL);
-}
 
 bool BotUtility::SpellHasReady(Player* player, uint32 spellID)
 {

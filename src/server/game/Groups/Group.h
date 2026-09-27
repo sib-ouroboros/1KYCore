@@ -432,7 +432,6 @@ class TC_GAME_API Group
 
         Rolls& GetAllRolls() { return RollId; }
         void PlayerBotRoll(Player* player, const Roll& roll);
-        bool GroupExistRealPlayer();
         bool GroupExistPlayerBot();
         //void ResetRaidDungeon();
         //void OnLeaderChangePhase(Player* changeTarget, uint32 newPhase);
