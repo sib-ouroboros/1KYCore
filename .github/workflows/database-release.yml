@@ -1,0 +1,66 @@
+name: Database release
+
+on:
+  push:
+    branches: [main, cleanup/remove-bots]
+    paths:
+      - .github/workflows/database-release.yml
+      - contrib/release/prepare_database_release.py
+      - docs/database-release.md
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: New tag for the draft database release (must not already exist)
+        required: true
+        default: db735.02-r1
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download, verify and package database
+        run: python contrib/release/prepare_database_release.py --output "$RUNNER_TEMP/database-release"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 1KYCore-database
+          path: ${{ runner.temp }}/database-release/*
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+
+  draft-release:
+    if: github.event_name == 'workflow_dispatch'
+    needs: package
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: 1KYCore-database
+          path: database-release
+      - name: Create a new draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ inputs.tag }}
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          [[ "$RELEASE_TAG" =~ ^db735\.02-[A-Za-z0-9._-]+$ ]] || { echo 'Invalid database release tag'; exit 1; }
+          cat > notes.md <<EOF
+          Original DestinyCore DB735.02 database with 1KYCore SQL support from commit $SOURCE_SHA.
+
+          Extract the support ZIP and read docs/database-release.md before importing.
+          DB735.02.rar is unchanged; SHA256SUMS and database-source.json record its source and integrity.
+          Database import and server runtime compatibility have not yet been tested.
+          This release contains database files, not server binaries.
+          EOF
+          gh release create "$RELEASE_TAG" database-release/* --draft --prerelease \
+            --target "$SOURCE_SHA" --title "1KYCore database DB735.02" --notes-file notes.md
