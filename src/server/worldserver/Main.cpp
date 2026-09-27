@@ -59,7 +59,6 @@
 #include <google/protobuf/stubs/common.h>
 #include <iostream>
 #include <csignal>
-#include "PlayerBotMgr.h"
 #include "ToolSocket.h"
 #include "ToolSocketMgr.h"
 
@@ -379,7 +378,6 @@ extern int main(int argc, char** argv)
 
     sScriptMgr->OnStartup();
 
-    sPlayerBotMgr->UpAllPlayerBotSession();
 
     WorldUpdateLoop();
 

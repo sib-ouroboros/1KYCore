@@ -32,7 +32,6 @@
 //#include "ArenaTeamMgr.h"
 #include "Containers.h"
 
-
 class ObjectGuid;
 struct BotGlobleSchedule;
 class PlayerBotSession;
@@ -213,8 +212,6 @@ struct PlayerBotBaseInfo
         return empty;
     }
 
-    uint32 GetCharIDByNoArenaType(bool faction, uint32 prof, uint32 arenaType, std::vector<ObjectGuid>& fliters);
-
     bool ExistCharacterByGUID(ObjectGuid& guid)
     {
         for (CharInfoMap::iterator it = characters.begin();
@@ -288,23 +285,15 @@ public:
 
     static PlayerBotMgr* instance();
 
-    std::string GetPlayerLinkText(Player const* player) const;
-
-    std::string RandomArenaName();
-    PlayerBotSession* GetBotSessionByCharGUID(ObjectGuid& guid);
-    TeamId GetTeamIDByPlayerBotGUID(ObjectGuid& guid);
     bool IsPlayerBot(WorldSession* pSession);
     bool IsBotAccuntName(std::string name);
-    bool IsIDLEPlayerBot(Player* player);
     void DestroyBotMail(uint32 guid);
     void LoadPlayerBotBaseInfo();
     void AddNewAccountBotBaseInfo(std::string name);
-    std::set<uint32> GetArenaTeamPlayerBotIDCountByTeam(TeamId team, int32 count, ArenaGroupTypes type);
     PlayerBotBaseInfo* GetPlayerBotAccountInfo(uint32 guid);
     PlayerBotBaseInfo* GetAccountBotAccountInfo(uint32 guid);
 
     void UpdateLastAccountIndex(std::string& username);
-    void UpAllPlayerBotSession();
 
     void OnPlayerBotCreate(ObjectGuid const& guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level);
     void OnAccountBotCreate(ObjectGuid const& guid, uint32 accountId, std::string const& name, uint8 gender, uint8 race, uint8 playerClass, uint8 level);
@@ -312,75 +301,24 @@ public:
     void OnPlayerBotLogin(WorldSession* pSession, Player* pPlayer);
     void ApplyBotTitle(Player* pPlayer);
     void OnPlayerBotLogout(WorldSession* pSession);
-    void LoginFriendBotByPlayer(Player* pPlayer);
     void LogoutAllGroupPlayerBot(Group* pGroup, bool force);
 
-    void AllPlayerBotRandomLogin(const char* name = "");
-    void AllPlayerBotLogout();
-    bool PlayerBotLogout(uint32 account);
-    bool AllPlayerLeaveBG(uint32 account);
-    void SupplementPlayerBot();
-    void SupplementOneRandomPlayerBotPerAccount();
-
-
-    void Update();
-    uint32 GetOnlineBotCount(TeamId team, bool hasReal);
-    uint32 GetOnlineBotCount2(TeamId team, bool hasReal);
-
-    bool LoginBotByAccountIndex(uint32 account, uint32 index);
-    void DelayLoginPlayerBotByGUID(ObjectGuid& guid) { m_DelayOnlineBots.push(guid); }
-    bool AddNewPlayerBotByGUID(ObjectGuid& guid);
-    bool AddNewPlayerBotByGUID2(ObjectGuid& guid);
-    void AddNewPlayerBot(bool faction, Classes prof, uint32 count);
-    void AddNewAccountBot(bool faction, Classes prof);
-    void AddNewPlayerBotByClass(uint32 count, Classes prof);
-    bool ChangePlayerBotSetting(uint32 account, uint32 minLV, uint32 maxLV, uint32 talent);
-    ObjectGuid GetNoArenaMatchCharacter(TeamId team, uint32 arenaType, Classes cls, std::vector<ObjectGuid>& fliters);
     std::string GetNameANDClassesText(ObjectGuid& guid);
-    bool CanReadyArenaByArenaTeamID(uint32 arenaTeamId);
-    void SetMax(int max) { m_MaxOnlineBot = max; }
-    int32 m_MaxOnlineBot;
-    uint32 m_LastIdleScanTick = 0;
-    std::map<uint32, uint32> m_BotIdleSince;
     int32 m_BotOnlineCount;
 
 private:
-    bool ExistClassByRace(uint8 race, uint8 prof);
-    void InitializeCreatePlayerBotName();
-    std::string RandomName();
-    uint8 RandomRace(bool group, uint8 prof);
-    uint8 RandomSkinColor(uint8 race, uint8 gender, uint8 prof);
-    uint8 RandomFace(uint8 race, uint8 gender, uint8 skinColor, uint8 prof);
-    uint8 RandomHair(uint8 race, uint8 gender, uint8 prof);
-    uint8 RandomHairColor(uint8 race, uint8 gender, uint8 hairID, uint8 prof);
-    uint8 RandomFacialHair(uint8 race, uint8 gender, uint8 hairColor, uint8 prof);
-    PlayerBotSession* UpPlayerBotSessionByBaseInfo(PlayerBotBaseInfo* pAcc, bool accountInfo);
-    WorldPacket BuildCreatePlayerData(bool group, uint8 prof);
-    void CreateOncePlayerBot();
-    bool CreateQueuedPlayerBotForSession(PlayerBotBaseInfo* pInfo, WorldSession* pSession);
 
     void ClearBaseInfo();
-    void SupplementAccount();
     void LoadCharBaseInfo();
     void LoadSessionPermissionsCallback(PreparedQueryResult result);
 
     void ClearEmptyNeedPlayer();
     void ClearNeedPlayer(uint32 bgTypeID, uint32 bracketID);
-    void UpdateIdleBotLogout();
-    uint32 GetScheduledBotCount();
-    void OnlinePlayerBotByGUIDQueue();
-    bool ExistUnBGPlayerBot();
-    PVPDifficultyEntry const* FindBGBracketEntry(Battleground* bg_template, uint32 level);
 
 private:
-    uint32 m_BotAccountAmount;
     uint32 m_LastBotAccountIndex;
     std::map<uint32, PlayerBotBaseInfo*> m_idPlayerBotBase;
     std::map<uint32, PlayerBotBaseInfo*> m_idAccountBotBase;
-
-    std::vector<std::string> allName;
-    std::vector<std::string> allArenaName;
-    std::queue<ObjectGuid> m_DelayOnlineBots;
 
 public:
     static std::mutex g_uniqueLock;

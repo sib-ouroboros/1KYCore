@@ -111,20 +111,8 @@ void ToolSocket::ProcessToolCmd()
 			CmdCreateAccount(jsonCmd);
 		else if (entry == "player_acc")
 			CmdPlayerAccount(jsonCmd);
-		else if (entry == "bot_acc")
-			CmdBotAccount(jsonCmd);
 		else if (entry == "set_security")
 			CmdAccountSecurity(jsonCmd);
-		else if (entry == "bot_offline")
-			CmdOffline(jsonCmd);
-		else if (entry == "bot_offline_all")
-			CmdOfflineAll(jsonCmd);
-		else if (entry == "bot_leave_all")
-			CmdLeaveBGAll(jsonCmd);
-		else if (entry == "bot_online")
-			CmdBotOnline(jsonCmd);
-		else if (entry == "bot_change")
-			CmdBotChange(jsonCmd);
 		else if (entry == "player_change")
 			CmdPlayerChange(jsonCmd);
 		else if (entry == "pve_autosetting")
@@ -141,12 +129,6 @@ void ToolSocket::ProcessToolCmd()
 			CmdPVPDiminishing(jsonCmd);
 		else if (entry == "pvp_canbreak_controll")
 			CmdPVPCanBreakControll(jsonCmd);
-		else if (entry == "auto_build_arena")
-			CmdAutoBuildArenaTeam(jsonCmd);
-		else if (entry == "arena_reset")
-			CmdArenaTeamReset(jsonCmd);
-		else if (entry == "build_arena")
-			CmdBuildBotsArenaTeam(jsonCmd);
 		else if (entry == "down_botarena")
 			CmdDownBotArenaTeam(jsonCmd);
 		else if (entry == "arena_ishell")
@@ -454,70 +436,12 @@ void ToolSocket::CmdPlayerAccount(Json::Value& info)
 	SendResult(sOnlineMgr->SerializerPlayerAccount());
 }
 
-void ToolSocket::CmdBotAccount(Json::Value& info)
-{
-	SendResult(sOnlineMgr->SerializerBotAccount());
-}
-
 void ToolSocket::CmdAccountSecurity(Json::Value& info)
 {
 	int accID = info["accid"].asInt();
 	int secu = info["security"].asInt();
 	bool succ = sOnlineMgr->SetAccountSecurity(accID, secu);
 	SendNormalResult("set_security", succ);
-}
-
-void ToolSocket::CmdOffline(Json::Value& info)
-{
-	int accID = info["guid"].asInt();
-	bool succ = sPlayerBotMgr->PlayerBotLogout(accID);
-	SendNormalResult("bot_offline", succ);
-}
-
-void ToolSocket::CmdOfflineAll(Json::Value& info)
-{
-	sPlayerBotMgr->AllPlayerBotLogout();
-	SendNormalResult("bot_offline_all", true);
-}
-
-void ToolSocket::CmdLeaveBGAll(Json::Value& info)
-{
-	int accID = info["guid"].asInt();
-	bool isLeave = sPlayerBotMgr->AllPlayerLeaveBG(accID);
-	SendNormalResult("bot_leave_all", isLeave);
-}
-
-void ToolSocket::CmdBotOnline(Json::Value& info)
-{
-	uint32 faction = info["faction"].asInt();
-	uint32 pro = info["pro"].asInt();
-	uint32 count = info["count"].asInt();
-	if (pro < 1 || pro == 6 || pro == 10 || pro > 11 || count < 1 || count > 90)
-	{
-		SendNormalResult("bot_online", false);
-		return;
-	}
-	sPlayerBotMgr->AddNewPlayerBot((faction== 0 ? true : false), Classes(pro), count);
-	SendNormalResult("bot_online", true);
-}
-
-void ToolSocket::CmdBotChange(Json::Value& info)
-{
-	uint32 guid = info["guid"].asInt();
-	uint32 minlv = info["minlv"].asInt();
-	uint32 maxlv = info["maxlv"].asInt();
-	uint32 talent = info["talent"].asInt();
-	if (minlv < 20 || minlv > 110 || maxlv < minlv || maxlv < 20 || maxlv > 110 || talent > 2)
-	{
-		SendNormalResult("bot_change", false);
-		return;
-	}
-	minlv = PlayerBotSetting::CheckMaxLevel(minlv);
-	maxlv = PlayerBotSetting::CheckMaxLevel(maxlv);
-	if (maxlv < minlv)
-		maxlv = minlv;
-	bool result = sPlayerBotMgr->ChangePlayerBotSetting(guid, minlv, maxlv, talent);
-	SendNormalResult("bot_change", result);
 }
 
 void ToolSocket::CmdPlayerChange(Json::Value& info)
@@ -643,43 +567,6 @@ void ToolSocket::CmdPVPCanBreakControll(Json::Value& info)
 	uint32 jsonCanBreakControll = info["canbreak_controll"].asInt();
 	BotUtility::ControllSpellFromDmgBreak = (jsonCanBreakControll != 0) ? true : false;
 	SendNormalResult("pvp_canbreak_controll", true);
-}
-
-void ToolSocket::CmdAutoBuildArenaTeam(Json::Value& info)
-{
-	//uint32 jsonAutoBuildArena = info["auto_build"].asInt();
-	//ArenaTeamMgr::g_AutoBuildArenaTeam = (jsonAutoBuildArena != 0) ? true : false;
-	//if (ArenaTeamMgr::g_AutoBuildArenaTeam)
-	//	sArenaTeamMgr->ResetPlayerBotTeamFinish();
-	//SendNormalResult("auto_build_arena", true);
-}
-
-void ToolSocket::CmdArenaTeamReset(Json::Value& info)
-{
-	//sArenaTeamMgr->DestoryAllArenaTeam();
-	//sArenaTeamMgr->ResetPlayerBotTeamFinish();
-	//SendNormalResult("arena_reset", true);
-}
-
-void ToolSocket::CmdBuildBotsArenaTeam(Json::Value& info)
-{
-	//std::string name = info["name"].asString();
-	//TeamId team = (info["team"].asInt()) ? TeamId::TEAM_ALLIANCE : TeamId::TEAM_HORDE;
-	//uint32 aaType = uint32(info["type"].asUInt());
-	//uint32 cls1 = uint32(info["cls1"].asUInt());
-	//uint32 cls2 = uint32(info["cls2"].asUInt());
-	//uint32 cls3 = uint32(info["cls3"].asUInt());
-	//uint32 cls4 = uint32(info["cls4"].asUInt());
-	//uint32 cls5 = uint32(info["cls5"].asUInt());
-	//uint32 tal1 = uint32(info["tal1"].asUInt());
-	//uint32 tal2 = uint32(info["tal2"].asUInt());
-	//uint32 tal3 = uint32(info["tal3"].asUInt());
-	//uint32 tal4 = uint32(info["tal4"].asUInt());
-	//uint32 tal5 = uint32(info["tal5"].asUInt());
-	//bool result = sArenaTeamMgr->BuildBotsArenaTeam(name, team, aaType,
-	//	cls1, cls2, cls3, cls4, cls5,
-	//	tal1, tal2, tal3, tal4, tal5);
-	//SendNormalResult("build_arena", result);
 }
 
 void ToolSocket::CmdDownBotArenaTeam(Json::Value& info)

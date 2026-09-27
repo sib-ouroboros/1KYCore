@@ -224,22 +224,3 @@ std::string OnlineMgr::SerializerPlayerAccount()
 	}
 	return data.toStyledString();
 }
-
-std::string OnlineMgr::SerializerBotAccount()
-{
-	std::unique_lock<std::mutex> sessionGuard(OnlineMgr::g_uniqueMgrLock);
-	Json::Value data;
-	data["entry"] = "bot_acc";
-	int count = 100;
-	for (TOOL_ACC::iterator itInfo = m_OnlineBotAcc.begin();
-		itInfo != m_OnlineBotAcc.end();
-		itInfo++)
-	{
-		--count;
-		if (count <= 0)
-			break;
-		ToolAccountInfo& info = itInfo->second;
-		data["accounts"].append(info.SerializerInfo());
-	}
-	return data.toStyledString();
-}

@@ -65,13 +65,7 @@ private:
 	void CmdBGScoreRate(Json::Value& info);
 	void CmdCreateAccount(Json::Value& info);
 	void CmdPlayerAccount(Json::Value& info);
-	void CmdBotAccount(Json::Value& info);
 	void CmdAccountSecurity(Json::Value& info);
-	void CmdOffline(Json::Value& info);
-	void CmdOfflineAll(Json::Value& info);
-	void CmdLeaveBGAll(Json::Value& info);
-	void CmdBotOnline(Json::Value& info);
-	void CmdBotChange(Json::Value& info);
 	void CmdPlayerChange(Json::Value& info);
 	void CmdPVEAutoSetting(Json::Value& info);
 	void CmdPVEMaxLevel(Json::Value& info);
@@ -80,9 +74,6 @@ private:
 	void CmdPVEAutoRevive(Json::Value& info);
 	void CmdPVPDiminishing(Json::Value& info);
 	void CmdPVPCanBreakControll(Json::Value& info);
-	void CmdAutoBuildArenaTeam(Json::Value& info);
-	void CmdArenaTeamReset(Json::Value& info);
-	void CmdBuildBotsArenaTeam(Json::Value& info);
 	void CmdDownBotArenaTeam(Json::Value& info);
 	void CmdBotArenaHell(Json::Value& info);
 	void CmdBotArenaTeamTactics(Json::Value& info);

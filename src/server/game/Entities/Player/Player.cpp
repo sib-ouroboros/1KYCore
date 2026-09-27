@@ -24676,7 +24676,6 @@ void Player::LeaveBattleground(bool teleportToEntryPoint)
 {
     if (Battleground* bg = GetBattleground())
     {
-        //sPlayerBotMgr->AllPlayerLeaveBG(GetGUID());
         //if (this->IsGameMaster())
         //{
         if (bg->isBattleground() && !IsPlayerBot() && IsGameMaster())

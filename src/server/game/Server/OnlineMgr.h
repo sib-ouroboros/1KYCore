@@ -86,7 +86,6 @@ public:
 	bool CharaterState(uint32 accID, uint32 charID, uint16 lv, uint8 talent);
 	bool SetAccountSecurity(uint32 accID, uint8 security);
 	std::string SerializerPlayerAccount();
-	std::string SerializerBotAccount();
 
 private:
 	TOOL_ACC m_OnlinePlayerAcc;

@@ -538,37 +538,6 @@ bool CustomTalkMenu::ProcessArenaList(CustomItem* pMenuItem, Player* player)
 	TeamId team = (pMenuItem->param2 != 0) ? TeamId::TEAM_ALLIANCE : TeamId::TEAM_HORDE;
 	if (player->GetTeamId() == team)
 		return false;
-    /*if (!sArenaTeamMgr->CanJoinRatedArenaQueue(player, pMenuItem->param3))
-	{
-		std::string allonlineText;
-		consoleToUtf8(std::string("|cffff8800当前状态无法开始竞技场。|r"), allonlineText);
-		sWorld->SendGlobalText(allonlineText.c_str(), NULL);
-	}
-	else if (sPlayerBotMgr->CanReadyArenaByArenaTeamID(type))
-	{
-		uint8 arenaSlot = 3;
-		if (pMenuItem->param3 == 2)
-			arenaSlot = 0;
-		else if (pMenuItem->param3 == 3)
-			arenaSlot = 1;
-		else if (pMenuItem->param3 == 5)
-			arenaSlot = 2;
-		if (arenaSlot < 3)
-		{
-			WorldPacket opcode(1);
-			opcode << player->GetGUID();
-			opcode << arenaSlot;
-			opcode << uint8(1);
-			opcode << uint8(1);
-			player->GetSession()->HandleBattlemasterJoinArena(opcode);
-			sArenaTeamMgr->SetNextPriorArenaTeam(team, pMenuItem->param3, type);
-		}
-	}
-	else
-	{
-		std::string allonlineText;
-		consoleToUtf8(std::string("|cffff8800选定的竞技场战队有成员当前正忙，无法挑战。|r"), allonlineText);
-		sWorld->SendGlobalText(allonlineText.c_str(), NULL);
-	}*/
+
 	return true;
 }

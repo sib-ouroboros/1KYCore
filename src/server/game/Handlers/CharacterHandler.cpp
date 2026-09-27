@@ -1201,11 +1201,6 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder const& holder)
         pCurrChar->IsAIEnabled = true;
         pCurrChar->NeedChangeAI = false;
         pCurrChar->SetAI(new BotMovementAI(pCurrChar));
-        int32 isok = sConfigMgr->GetIntDefault("pbot", 1);
-        if (isok >= 1)
-        {
-            sPlayerBotMgr->LoginFriendBotByPlayer(pCurrChar);
-        }
     }
     uint32 talent = PlayerBotSetting::FindPlayerTalentType(pCurrChar);
     sOnlineMgr->CharaterOnline(GetAccountId(), uint32(pCurrChar->GetGUID()),

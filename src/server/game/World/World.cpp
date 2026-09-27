@@ -101,6 +101,7 @@
 #include "WorldSocket.h"
 #include "PetBattleSystem.h"
 #include "PlayerBotMgr.h"
+#include "PlayerBotSetting.h"
 #include "AIWaypointsMgr.h"
 #include "MMapManager.h"
 #include "ToolSocket.h"
@@ -2539,7 +2540,6 @@ void World::SetInitialWorldSettings()
 
     m_timers[WUPDATE_GUILDSAVE].SetInterval(getIntConfig(CONFIG_GUILD_SAVE_INTERVAL) * MINUTE * IN_MILLISECONDS);
 
-    m_timers[WUPDATE_PLAYERBOT_MGR].SetInterval(IN_MILLISECONDS * 2);
 
     m_timers[WUPDATE_BLACKMARKET].SetInterval(10 * IN_MILLISECONDS);
 
@@ -2672,12 +2672,7 @@ void World::SetInitialWorldSettings()
 
     uint32 startupDuration = GetMSTimeDiffToNow(startupBegin);
 
-    // SylvaniaCore: serveur blizzlike sans PlayerBots. pbotall=0 desactive toute creation/session de bot au demarrage.
-    if (sConfigMgr->GetIntDefault("pbotall", 1))
-    {
-        sPlayerBotMgr->UpAllPlayerBotSession();
-        sPlayerBotMgr->SupplementOneRandomPlayerBotPerAccount();
-    }
+    PlayerBotSetting::Initialize();
 
     TC_LOG_INFO("server.worldserver", "World initialized in %u minutes %u seconds", (startupDuration / 60000), ((startupDuration % 60000) / 1000));
 
@@ -2974,11 +2969,6 @@ void World::Update(uint32 diff)
         sGuildMgr->SaveGuilds();
     }
 
-    if (m_timers[WUPDATE_PLAYERBOT_MGR].Passed())
-    {
-        sPlayerBotMgr->Update();
-        m_timers[WUPDATE_PLAYERBOT_MGR].Reset();
-    }
     // update the instance reset times
     sInstanceSaveMgr->Update();
 
