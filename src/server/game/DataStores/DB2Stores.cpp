@@ -177,6 +177,7 @@ DB2Storage<ItemLevelSelectorQualitySetEntry>    sItemLevelSelectorQualitySetStor
 DB2Storage<ItemLimitCategoryEntry>              sItemLimitCategoryStore("ItemLimitCategory.db2", ItemLimitCategoryLoadInfo::Instance());
 DB2Storage<ItemLimitCategoryConditionEntry>     sItemLimitCategoryConditionStore("ItemLimitCategoryCondition.db2", ItemLimitCategoryConditionLoadInfo::Instance());
 DB2Storage<ItemModifiedAppearanceEntry>         sItemModifiedAppearanceStore("ItemModifiedAppearance.db2", ItemModifiedAppearanceLoadInfo::Instance());
+DB2Storage<ItemNameDescriptionEntry>            sItemNameDescriptionStore("ItemNameDescription.db2", ItemNameDescriptionLoadInfo::Instance());
 DB2Storage<ItemPriceBaseEntry>                  sItemPriceBaseStore("ItemPriceBase.db2", ItemPriceBaseLoadInfo::Instance());
 DB2Storage<ItemRandomPropertiesEntry>           sItemRandomPropertiesStore("ItemRandomProperties.db2", ItemRandomPropertiesLoadInfo::Instance());
 DB2Storage<ItemRandomSuffixEntry>               sItemRandomSuffixStore("ItemRandomSuffix.db2", ItemRandomSuffixLoadInfo::Instance());
@@ -502,7 +503,7 @@ inline void LoadDB2(uint32& availableDb2Locales, DB2StoreProblemList& errlist, S
 
         if (loadFileAllLocales)
         {
-            for (uint8 i = LOCALE_enUS; i < MAX_LOCALES; ++i)
+            for (uint8 i = LOCALE_enUS; i < TOTAL_LOCALES; ++i)
             {
                 if (LOCALE_enUS == i || i == LOCALE_none)
                     continue;
@@ -517,7 +518,7 @@ inline void LoadDB2(uint32& availableDb2Locales, DB2StoreProblemList& errlist, S
         }
         else if (loadHotfixData && loadHotfixStrings && loadHotfixAllLocales)
         {
-            for (uint8 i = LOCALE_enUS; i < MAX_LOCALES; ++i)
+            for (uint8 i = LOCALE_enUS; i < TOTAL_LOCALES; ++i)
             {
                 if (LOCALE_enUS == i || i == LOCALE_none || defaultLocale == i)
                     continue;
@@ -701,6 +702,7 @@ void DB2Manager::LoadStores(std::string const& dataPath, uint32 defaultLocale)
     LOAD_DB2(sItemLimitCategoryStore);
     LOAD_DB2(sItemLimitCategoryConditionStore);
     LOAD_DB2(sItemModifiedAppearanceStore);
+    LOAD_DB2(sItemNameDescriptionStore);
     LOAD_DB2(sItemPriceBaseStore);
     LOAD_DB2(sItemRandomPropertiesStore);
     LOAD_DB2(sItemRandomSuffixStore);

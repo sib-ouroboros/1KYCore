@@ -25,6 +25,7 @@
 #include "MiscPackets.h"
 #include "GameObjectAI.h"
 #include "ScriptMgr.h"
+#include "Group.h"
 #include "ScriptedCreature.h"
 #include "Player.h"
 #include "ObjectMgr.h"
@@ -385,12 +386,75 @@ public:
             if (etat == QUEST_STATUS_INCOMPLETE)
                 player->KilledMonsterCredit(creature->GetEntry());
 
+            // =========================================================
+            // LIAISON_PERIMEE
+            //
+            // SIGNALE EN JEU : « ca m'a affiche phase finale des le
+            // debut puis ca a disparu, je ne peux rien faire ».
+            //
+            // MESURE : le joueur etait lie a l'instance 16 du Rivage
+            // brise, alors que les copies recentes portent les numeros
+            // 29 a 34. Il rentrait donc dans une partie DEJA TERMINEE --
+            // d'ou la phase finale affichee d'emblee, puis refermee.
+            //
+            // « .instance unbind all » corrige le cas, mais la commande
+            // saute volontairement la carte ou l'on se trouve : lancee
+            // depuis le Rivage brise, elle deliait tout SAUF le Rivage
+            // brise. Le piege se refermait a chaque essai.
+            //
+            // Un scenario n'est pas un raid : rien ne justifie qu'il
+            // garde une sauvegarde d'une session a l'autre. On delie
+            // donc le joueur de ses anciennes copies avant de l'envoyer,
+            // comme on le fait deja pour les mercenaires a l'embauche.
+            // =========================================================
+            for (uint8 d = 0; d < MAX_DIFFICULTY; ++d)
+            {
+                auto binds = player->GetBoundInstances(Difficulty(d));
+                if (binds == player->m_boundInstances.end())
+                    continue;
+
+                for (auto itr = binds->second.begin(); itr != binds->second.end();)
+                {
+                    if (itr->first == 1460 && itr->first != player->GetMapId())
+                        player->UnbindInstance(itr, binds);
+                    else
+                        ++itr;
+                }
+            }
+
+            // =========================================================
+            // LIAISON_DE_GROUPE
+            //
+            // La deliaison ci-dessus ne suffisait pas : InstanceMap::Add
+            // consulte DEUX liaisons -- celle du joueur et celle de son
+            // groupe -- et c'est la seconde qui l'emporte.
+            //
+            // MESURE : apres etre passe par Angelica, le joueur retombait
+            // toujours dans l'instance 11, terminee de longue date. Son
+            // propre lien avait bien ete efface ; le groupe 1, lui,
+            // restait accroche a cette copie. Le journal le disait des le
+            // premier incident -- « the group is bound to the instance »
+            // -- et je n'avais traite que la ligne precedente.
+            // =========================================================
+            if (Group* groupe = player->GetGroup())
+            {
+                for (uint8 d = 0; d < MAX_DIFFICULTY; ++d)
+                {
+                    auto binds = groupe->GetBoundInstances(Difficulty(d));
+                    if (binds == groupe->GetBoundInstanceEnd())
+                        continue;
+
+                    if (binds->second.find(1460) != binds->second.end())
+                        groupe->UnbindInstance(1460, uint8(d));
+                }
+            }
+
             player->TeleportTo(1460, PONT_DU_NAVIRE_X, PONT_DU_NAVIRE_Y,
                                      PONT_DU_NAVIRE_Z, 0.4f);
         }
         else
             ChatHandler(player->GetSession()).PSendSysMessage(
-                "Prenez d'abord la quete La bataille du rivage Brise.");
+                "Prenez d'abord la quête « La bataille du rivage Brisé ».");
 
         return true;
     };

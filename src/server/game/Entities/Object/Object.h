@@ -140,6 +140,7 @@ class TC_GAME_API Object
         void SendUpdateToPlayer(Player* player);
 
         void BuildValuesUpdateBlockForPlayer(UpdateData* data, Player* target) const;
+        void BuildDestroyUpdateBlock(UpdateData* data) const;
         void BuildOutOfRangeUpdateBlock(UpdateData* data) const;
 
         virtual void DestroyForPlayer(Player* target) const;
@@ -247,6 +248,8 @@ class TC_GAME_API Object
         void ClearUpdateMask(bool remove);
 
         uint16 GetValuesCount() const { return m_valuesCount; }
+
+        virtual std::string GetNameForLocaleIdx(LocaleConstant locale) const = 0;
 
         virtual bool hasQuest(uint32 /* quest_id */) const { return false; }
         virtual bool hasInvolvedQuest(uint32 /* quest_id */) const { return false; }
@@ -459,9 +462,9 @@ class TC_GAME_API WorldObject : public Object, public WorldLocation
         InstanceScript* GetInstanceScript() const;
 
         std::string const& GetName() const { return m_name; }
-        void SetName(std::string const& newname) { m_name=newname; }
+        void SetName(std::string newname) { m_name = std::move(newname); }
 
-        virtual std::string const& GetNameForLocaleIdx(LocaleConstant /*locale_idx*/) const { return m_name; }
+        std::string GetNameForLocaleIdx(LocaleConstant /*locale*/) const override { return m_name; }
 
         float GetDistance(WorldObject const* obj) const;
         float GetDistance(Position const &pos) const;
