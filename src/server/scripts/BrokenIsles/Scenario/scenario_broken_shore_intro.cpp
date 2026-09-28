@@ -336,7 +336,7 @@ struct scenario_broken_shore_intro : public InstanceScript
 
             if (recrutes)
                 ChatHandler(player->GetSession()).PSendSysMessage(
-                    "Une escorte de %u combattants se joint a vous pour l'assaut.", recrutes);
+                    "Une escorte de %u combattants se joint à vous pour l'assaut.", recrutes);
         }
 
         if (!introDone)
@@ -397,6 +397,7 @@ struct scenario_broken_shore_intro : public InstanceScript
             case NPC_JAINA:         jainaGUID         = creature->GetGUID(); break;
             case NPC_SYLVANAS:      sylvanasGUID      = creature->GetGUID(); break;
             case NPC_GENN:          gennGUID          = creature->GetGUID(); break;
+            case NPC_MEKKATORQUE:   mekkaGUID         = creature->GetGUID(); break;
             case NPC_THRALL:        thrallGUID        = creature->GetGUID(); break;
             case NPC_TIRION_POSE:   tirionGUID        = creature->GetGUID(); break;
             case NPC_GULDAN_POSE:   guldanGUID        = creature->GetGUID(); break;
@@ -528,7 +529,7 @@ struct scenario_broken_shore_intro : public InstanceScript
             // qui couvre toute la greve devant le navire.
             bool debarque = false;
             Position const& plage = Anchors().beach;
-            DoOnPlayers([&debarque, &plage](Player* player)
+            DoOnVraisJoueurs([&debarque, &plage](Player* player)
             {
                 if (player->GetExactDist2d(plage.GetPositionX(), plage.GetPositionY()) < 90.0f)
                     debarque = true;
@@ -647,7 +648,10 @@ struct scenario_broken_shore_intro : public InstanceScript
         {
             // Une cage ne vaut que pendant l'assaut de la cite.
             if (stage == STAGE_RAZE_CITY)
+            {
                 DoSendEventScenario(EVENT_CITY_CAGE);
+                cityWeight += 1;   // poids officiel de l asset 44384
+            }
             return;
         }
 
@@ -702,6 +706,12 @@ struct scenario_broken_shore_intro : public InstanceScript
                 DoSendEventScenario(elite ? EVENT_CITY_ELITE : EVENT_CITY_TRASH);
                 ++cityKills;
 
+                // On tient le MEME compte que la barre officielle. Verifie
+                // sur wago.tools, build 7.3.5.26972 : l arbre 42770
+                // « Black City razed » exige 300 points, et ses quatre
+                // enfants pesent 1 (cages), 2, 5 et 10.
+                cityWeight += elite ? 10 : 5;
+
                 // Des vagues continuent d'affluer tant que la cite tient :
                 // sans cela la barre ne pourrait pas se remplir, la zone ne
                 // comptant pas assez de defenseurs pour ses 300 points.
@@ -719,10 +729,25 @@ struct scenario_broken_shore_intro : public InstanceScript
                 // barre plafonne, c'est la correspondance des poids qu'il
                 // faudra revoir, pas le nombre d'ennemis.
 
-                // FILET DE SECURITE, pas un mecanisme. Si la barre restait
-                // bloquee pour une raison qui nous echappe, le joueur ne
-                // doit pas rester prisonnier de l'etape.
-                if (cityKills >= 90)
+                // =====================================================
+                // SIGNALE EN JEU : « toujours en p7, Tirion se trouve
+                // dans le bassin de fel mais pas de dialogue », et
+                // surtout « 0/1 Tirion trouve ne se valide pas ».
+                //
+                // Le script ne quittait la cite qu a 90 morts, quand la
+                // barre officielle, elle, se remplit a 300 POINTS -- soit
+                // une soixantaine de morts seulement, les ordinaires en
+                // valant 5 et les elites 10. Le client affichait donc la
+                // phase 7 pendant que le script en etait encore a la
+                // phase 6 : StartHighlord() n etait jamais appele, la
+                // detection de proximite jamais armee, et la scene de
+                // Tirion jamais jouee. Le joueur pouvait se tenir devant
+                // lui sans que rien ne se passe.
+                //
+                // On bascule desormais sur le meme seuil que la barre.
+                // Les deux avancent ensemble, par construction.
+                // =====================================================
+                if (cityWeight >= CITY_RAZED_POINTS)
                 {
                     stage = STAGE_HIGHLORD;
                     CompleteStep();
@@ -781,6 +806,58 @@ struct scenario_broken_shore_intro : public InstanceScript
         for (uint8 i = 0; i < 3; ++i)
             SummonAt(TroopEntry(), a.city, -6.0f + i * 6.0f, -5.0f);
 
+        // =============================================================
+        // ESCORTE_DES_CHEFS
+        //
+        // SIGNALE EN JEU : « Jaina n'est pas presente en p4 », puis
+        // « je crois qu'elle est censee se deplacer de la plage vers
+        // Varian, certains PNJ bougent, la video doit le prouver ».
+        //
+        // VERIFIE SUR LA VIDEO (minutes 6 a 8) : Jaina et Genn
+        // accompagnent le joueur a pied et conversent en chemin.
+        //
+        // Nos deux PNJ restent poses en (491, 2047) et (487, 2052),
+        // Varian attendant en (1120, 2484) -- sept cent cinquante
+        // metres plus loin. Le Talk de fin de phase partait donc a
+        // l'autre bout de la carte : personne ne l'entendait. Le joueur
+        // traversait la moitie de la carte en silence, seul.
+        //
+        // On les fait suivre plutot que suivre un rail : la carte a ses
+        // tuiles de navigation, le pathfinding contourne le relief, et
+        // s'il prend la colline par la gauche ils le suivent a gauche.
+        // C'est ce que montre la video -- ils sont autour de lui, pas
+        // devant en file indienne.
+        // =============================================================
+        StartEscorteChefs();
+
+        // La conversation s'egrene selon la distance PARCOURUE, pas
+        // selon le temps : sinon on l'entendrait en entier sans bouger.
+        scheduler.Schedule(Seconds(3), [this](TaskContext context)
+        {
+            if (stage != STAGE_FIND_LEADER)
+                return;
+
+            Position const& cite = Anchors().city;
+            float reste = 99999.0f;
+            DoOnVraisJoueurs([&reste, &cite](Player* player)
+            {
+                float const d = player->GetExactDist2d(cite.GetPositionX(), cite.GetPositionY());
+                if (d < reste)
+                    reste = d;
+            });
+
+            // Cinq paliers sur les ~690 metres qui separent la plage de
+            // la cite. Le premier se declenche des le depart.
+            static float const seuils[5] = { 99999.0f, 560.0f, 400.0f, 250.0f, 110.0f };
+            if (escorteEtape < 5 && reste <= seuils[escorteEtape])
+            {
+                DireEtapeEscorte(escorteEtape);
+                ++escorteEtape;
+            }
+
+            context.Repeat(Seconds(2));
+        });
+
         // « Find Varian » : detection de proximite
         scheduler.Schedule(Seconds(2), [this](TaskContext context)
         {
@@ -790,7 +867,7 @@ struct scenario_broken_shore_intro : public InstanceScript
             Creature* leader = FindLeader();
             if (leader)
             {
-                DoOnPlayers([&found, leader](Player* player)
+                DoOnVraisJoueurs([&found, leader](Player* player)
                 {
                     if (player->IsWithinDist(leader, 35.0f, false))
                         found = true;
@@ -800,6 +877,14 @@ struct scenario_broken_shore_intro : public InstanceScript
             {
                 DoSendEventScenario(EVENT_LEADER_FOUND);
                 stage = STAGE_PORTAL;
+
+                // Ils sont arrives avec le joueur : ils s'arretent aupres
+                // de Varian au lieu de le suivre pour le reste du
+                // scenario.
+                ArreterEscorteChefs();
+
+                // La replique de fin de phase n'a de sens que si celui
+                // qui la prononce est la. Il l'est desormais.
                 if (Creature* second = instance->GetCreature(team == TEAM_HORDE ? sylvanasGUID : jainaGUID))
                     second->AI()->Talk(0);
                 StartPortal();
@@ -807,6 +892,187 @@ struct scenario_broken_shore_intro : public InstanceScript
             else
                 context.Repeat(Seconds(2));
         });
+    }
+
+    // Les deux chefs emboitent le pas au joueur, chacun sur son flanc.
+    // =================================================================
+    // DoOnVraisJoueurs
+    //
+    // SIGNALE EN JEU : « je suis passe en p8 alors que je n'ai pas encore
+    // trouve Tirion en p7 ».
+    //
+    // DoOnPlayers parcourt TOUS les joueurs de l'instance -- et un
+    // playerbot EST un joueur. Les mercenaires validaient donc les
+    // objectifs a la place de leur employeur : il suffisait qu'un seul
+    // derive a portee de Tirion, de Varian ou de la plage pour clore
+    // l'etape sans que le joueur n'ait rien fait.
+    //
+    // Le meme defaut choisissait la cible de l'escorte : Jaina et Genn
+    // pouvaient se mettre a suivre un bot plutot que le joueur.
+    //
+    // Les objectifs d'un scenario se remplissent par celui qui le joue.
+    // L'aide qu'il paie l'accompagne, elle ne le remplace pas.
+    // =================================================================
+    void DoOnVraisJoueurs(std::function<void(Player*)>&& fonction)
+    {
+        DoOnPlayers([&fonction](Player* player)
+        {
+            if (player && !player->IsPlayerBot())
+                fonction(player);
+        });
+    }
+
+    void StartEscorteChefs()
+    {
+        Player* marcheur = nullptr;
+        DoOnVraisJoueurs([&marcheur](Player* player)
+        {
+            if (!marcheur)
+                marcheur = player;
+        });
+        if (!marcheur)
+            return;
+
+        ObjectGuid const chefs[2] =
+        {
+            (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID,
+            (team == TEAM_HORDE) ? thrallGUID   : gennGUID
+        };
+
+        for (uint8 i = 0; i < 2; ++i)
+        {
+            Creature* pnj = instance->GetCreature(chefs[i]);
+            if (!pnj || !pnj->IsAlive())
+                continue;
+
+            // =========================================================
+            // ESCORTE_TENACE
+            //
+            // SIGNALE EN JEU : « les PNJ qui devaient me suivre sont
+            // retournes a leur spawn initial ; je soupconne mon
+            // speedhack de GM d'avoir casse le suivi ».
+            //
+            // Le diagnostic est juste, mais le mecanisme n'est pas la
+            // vitesse : c'est la GRILLE. Une creature n'est mise a jour
+            // que dans une grille active. Quand le joueur prend
+            // suffisamment d'avance, la grille qui porte Jaina et Genn se
+            // decharge ; a son rechargement, la creature repart de son
+            // point d'apparition avec son mouvement par defaut, et le
+            // suivi est perdu sans que rien ne le signale.
+            //
+            // setActive maintient leur grille chargee tant que dure
+            // l'escorte -- c'est ce que fait le core pour les convois de
+            // quete. On le retire a l'arrivee : garder une grille active
+            // pour rien coute cher.
+            // =========================================================
+            pnj->setActive(true);
+
+            pnj->SetWalk(false);
+            pnj->GetMotionMaster()->Clear();
+            // Un flanc chacun, a quatre metres : ils encadrent le joueur.
+            pnj->GetMotionMaster()->MoveFollow(marcheur, 4.0f,
+                (i == 0) ? float(M_PI) * 0.75f : float(M_PI) * 1.25f);
+        }
+
+        // Seconde protection : on reprend le suivi s'il s'est perdu. Un
+        // decrochage ne se voit pas autrement -- le PNJ rentre chez lui
+        // en silence, et le joueur croit le script casse.
+        scheduler.Schedule(Seconds(4), [this](TaskContext context)
+        {
+            if (stage != STAGE_FIND_LEADER)
+                return;
+
+            Player* marcheur = nullptr;
+            DoOnVraisJoueurs([&marcheur](Player* player)
+            {
+                if (!marcheur)
+                    marcheur = player;
+            });
+
+            if (marcheur)
+            {
+                ObjectGuid const chefs[2] =
+                {
+                    (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID,
+                    (team == TEAM_HORDE) ? thrallGUID   : gennGUID
+                };
+
+                for (uint8 i = 0; i < 2; ++i)
+                {
+                    Creature* pnj = instance->GetCreature(chefs[i]);
+                    if (!pnj || !pnj->IsAlive())
+                        continue;
+
+                    if (pnj->GetMotionMaster()->GetCurrentMovementGeneratorType() != FOLLOW_MOTION_TYPE)
+                    {
+                        pnj->setActive(true);
+                        pnj->SetWalk(false);
+                        pnj->GetMotionMaster()->Clear();
+                        pnj->GetMotionMaster()->MoveFollow(marcheur, 4.0f,
+                            (i == 0) ? float(M_PI) * 0.75f : float(M_PI) * 1.25f);
+                    }
+                }
+            }
+
+            context.Repeat(Seconds(4));
+        });
+    }
+
+    void ArreterEscorteChefs()
+    {
+        ObjectGuid const chefs[2] =
+        {
+            (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID,
+            (team == TEAM_HORDE) ? thrallGUID   : gennGUID
+        };
+
+        for (uint8 i = 0; i < 2; ++i)
+            if (Creature* pnj = instance->GetCreature(chefs[i]))
+            {
+                pnj->GetMotionMaster()->Clear();
+                pnj->StopMoving();
+                pnj->setActive(false);
+            }
+    }
+
+    // Une replique du chef, puis la reponse de son second apres un
+    // temps de respiration. Groupes 20 a 23, poses en base.
+    void DireEtapeEscorte(uint8 etape)
+    {
+        ObjectGuid const chefGuid   = (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID;
+        ObjectGuid const secondGuid = (team == TEAM_HORDE) ? thrallGUID   : gennGUID;
+
+        // { groupe du chef, groupe du second, delai de la reponse }
+        // -1 : personne ne parle pour ce role a ce palier.
+        static int8 const echanges[5][2] =
+        {
+            { 20, 20 },   // « Tout le monde va bien ? » / « J'ai eu chaud... »
+            { 21, 21 },   // « Nous les pleurerons plus tard. » / « D'accord. »
+            { 22, -1 },   // « Les troupes de Varian... »
+            { 23, 22 },   // « Jamais vu des demons aussi rapides. » / « Moi non plus... »
+            { -1, 23 }    // « Ils sont beaucoup trop nombreux. »
+        };
+
+        if (etape >= 5)
+            return;
+
+        int8 const groupeChef   = echanges[etape][0];
+        int8 const groupeSecond = echanges[etape][1];
+
+        if (groupeChef >= 0)
+            if (Creature* chef = instance->GetCreature(chefGuid))
+                chef->AI()->Talk(uint8(groupeChef));
+
+        if (groupeSecond >= 0)
+        {
+            ObjectGuid const guid = secondGuid;
+            uint8 const groupe = uint8(groupeSecond);
+            scheduler.Schedule(Seconds(4), [this, guid, groupe](TaskContext /*ctx*/)
+            {
+                if (Creature* second = instance->GetCreature(guid))
+                    second->AI()->Talk(groupe);
+            });
+        }
     }
 
     void StartPortal()
@@ -842,6 +1108,51 @@ struct scenario_broken_shore_intro : public InstanceScript
         if (Creature* tirion = instance->GetCreature(tirionGUID))
             tirion->SetStandState(UNIT_STAND_STATE_KNEEL);
 
+        // =============================================================
+        // CONVERSATION_DU_GOUFFRE
+        //
+        // VERIFIE SUR LA VIDEO (minute 16) : l armee arrive au bord du
+        // gouffre, Jaina repere Tirion sur l autre rive, Gelbin demande
+        // comment traverser, et Jaina gele un passage.
+        //
+        // SIGNALE EN JEU : « Tirion se trouve dans le bassin de fel mais
+        // pas de dialogue ». Aucune de ces six repliques n etait posee.
+        //
+        // Six repliques contigues, 99229 a 99234, deux portant une voix.
+        // Groupes 30 et 31 en base.
+        // =============================================================
+        {
+            // { garde du locuteur, groupe, delai en secondes }
+            static uint8 const groupes[6] = { 30, 30, 30, 31, 30, 31 };
+            static uint8 const delais[6]  = {  2,  6, 11, 16, 20, 25 };
+
+            for (uint8 i = 0; i < 6; ++i)
+            {
+                uint8 const groupe = groupes[i];
+                uint8 const rang = i;
+                scheduler.Schedule(Seconds(delais[i]), [this, groupe, rang](TaskContext /*ctx*/)
+                {
+                    if (stage != STAGE_HIGHLORD)
+                        return;
+
+                    ObjectGuid guid;
+                    switch (rang)
+                    {
+                        case 0: guid = gennGUID;  break;   // « Ils battent en retraite. »
+                        case 1: guid = (team == TEAM_HORDE) ? placedVoljinGUID : placedVarianGUID; break;
+                        case 2: guid = (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID; break;
+                        case 3: guid = (team == TEAM_HORDE) ? placedVoljinGUID : placedVarianGUID; break;
+                        case 4: guid = mekkaGUID; break;   // « Comment va-t-on traverser ? »
+                        case 5: guid = (team == TEAM_HORDE) ? thrallGUID : jainaGUID; break;
+                        default: return;
+                    }
+
+                    if (Creature* orateur = instance->GetCreature(guid))
+                        orateur->AI()->Talk(groupe);
+                });
+            }
+        }
+
         scheduler.Schedule(Seconds(2), [this](TaskContext context)
         {
             if (stage != STAGE_HIGHLORD)
@@ -861,14 +1172,26 @@ struct scenario_broken_shore_intro : public InstanceScript
             }
 
             bool atteint = false;
-            DoOnPlayers([&atteint, tirion](Player* player)
+            DoOnVraisJoueurs([&atteint, tirion](Player* player)
             {
                 // SIGNALE EN JEU : « le scenario ne se declenche que si
                 // on saute dans la lave, le perimetre de detection est
                 // trop serre ». Tirion agonise au bord du bassin, a
                 // z=40, Krosus etant a z=35 : a 25 metres, le seul point
                 // qui satisfaisait la condition etait la lave elle-meme.
-                if (player->IsWithinDist(tirion, 50.0f, false))
+                //
+                // MESURE, seconde passe : porte a 50 metres, le defaut
+                // subsistait. Releve en jeu au bord du bassin -- joueur
+                // en (1489.5, 1810.0, 37.4), Tirion en (1494.7, 1750.5,
+                // 40.3) -- la distance reelle est de 59,8 metres. Le
+                // joueur se tenait donc dix metres HORS du perimetre, et
+                // les seuls points qui l auraient satisfait etaient
+                // encore dans le bassin.
+                //
+                // Soixante-quinze metres : on valide depuis la rive, et
+                // seulement depuis la rive -- l esplanade precedente est
+                // bien au-dela.
+                if (player->IsWithinDist(tirion, 75.0f, false))
                     atteint = true;
             });
 
@@ -1086,7 +1409,12 @@ private:
     ObjectGuid tirionGUID;
     ObjectGuid krosusGUID;
     ObjectGuid arganothGUID;
+    // Total exige par l arbre officiel 42770, releve sur wago.tools.
+    static uint32 const CITY_RAZED_POINTS = 300;
+    uint32 cityWeight = 0;    // points accumules, comme la barre
+    uint8 escorteEtape = 0;   // palier de la conversation de la phase 4
     ObjectGuid gennGUID;
+    ObjectGuid mekkaGUID;
     ObjectGuid thrallGUID;
     ObjectGuid guldanGUID;
     TaskScheduler scheduler;

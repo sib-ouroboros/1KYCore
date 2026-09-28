@@ -16,6 +16,7 @@
  */
 
 #include "PlayerBotSession.h"
+#include "MapManager.h"
 #include "Player.h"
 #include "BattlegroundMgr.h"
 #include "BotAI.h"
@@ -164,11 +165,86 @@ void PlayerBotSession::ProcessNoWorld(uint32 diff)
     if (!player)
         return;
 
+    // =================================================================
+    // DESTINATION_INVALIDE
+    //
+    // PLANTAGE EN JEU (SIGSEGV, 25/09/2026) :
+    //
+    //     Trinity::Assert
+    //     Map::PlayerRelocation
+    //     Player::UpdatePosition
+    //     WorldSession::HandleMoveTeleportAck
+    //     PlayerBotSession::ProcessNoWorld
+    //
+    // Juste avant, le journal montrait l'echec d'entree d'un mercenaire
+    // dans le scenario : « failed to teleport player Lariia to map 1460
+    // because of unknown reason », precede d'un conflit de liaison
+    // d'instance.
+    //
+    // Quand un teleport echoue, le semaphore reste arme mais la
+    // destination peut etre restee invalide. Les deux simulations
+    // ci-dessous -- qui remplacent l'accuse de reception qu'un vrai
+    // client enverrait -- l'acceptaient sans rien verifier, et
+    // Player::UpdatePosition allait relocaliser le bot sur des
+    // coordonnees aberrantes. L'assertion de la carte tuait alors tout
+    // le serveur, pas seulement le bot.
+    //
+    // On verifie donc la destination avant d'accuser reception. Si elle
+    // ne tient pas debout, on desarme le semaphore : le bot reste ou il
+    // est, ce qui est sans consequence, plutot que d'emporter le monde.
+    // =================================================================
+    WorldLocation const& destination = player->GetTeleportDest();
+    bool const destinationValide = MapManager::IsValidMapCoord(
+        destination.GetMapId(), destination.GetPositionX(),
+        destination.GetPositionY(), destination.GetPositionZ(),
+        destination.GetOrientation());
+
     // Un client reel confirme le changement de monde par MSG_MOVE_WORLDPORT_ACK ;
     // sans cette simulation, un bot en jeu vise par .tele reste bloque sur le semaphore.
     if (player->IsBeingTeleportedFar())
     {
+        if (!destinationValide)
+        {
+            TC_LOG_ERROR("network", "PlayerBotSession: teleport lointain de %s abandonne, "
+                "destination invalide (carte %u, %.2f %.2f %.2f).",
+                player->GetName().c_str(), destination.GetMapId(),
+                destination.GetPositionX(), destination.GetPositionY(),
+                destination.GetPositionZ());
+            player->SetSemaphoreTeleportFar(false);
+            m_NoWorldTick = 500;
+            return;
+        }
+
         HandleMoveWorldportAck();
+        m_NoWorldTick = 500;
+        return;
+    }
+
+    // =================================================================
+    // HORS_DU_MONDE
+    //
+    // SECOND PLANTAGE, meme pile que le premier -- et la verification de
+    // destination posee juste avant n'avait rien change : elle n'a jamais
+    // parle, la destination etant valide. L'assertion etait ailleurs.
+    //
+    //     void RemoveFromGrid() { ASSERT(IsInGrid()); ... }
+    //
+    // Map::PlayerRelocation retire le joueur de sa grille avant de l'y
+    // remettre. Or ProcessNoWorld ne traite, par definition, que des bots
+    // HORS du monde : ils n'appartiennent a aucune grille. L'assertion
+    // partait donc a tous les coups, et emportait le serveur entier.
+    //
+    // Un vrai client n'envoie jamais CMSG_MOVE_TELEPORT_ACK hors du
+    // monde -- c'est MSG_MOVE_WORLDPORT_ACK qui couvre ce cas, et il est
+    // traite juste au-dessus. Notre simulation, elle, ne faisait pas la
+    // difference.
+    //
+    // On ne simule donc l'accuse de teleport proche que dans le monde.
+    // Le bot hors du monde garde son semaphore : le teleport lointain ou
+    // la sortie de file le reprendront.
+    // =================================================================
+    if (player->IsBeingTeleportedNear() && !player->IsInWorld())
+    {
         m_NoWorldTick = 500;
         return;
     }
@@ -176,6 +252,18 @@ void PlayerBotSession::ProcessNoWorld(uint32 diff)
     // idem pour un teleport proche (meme map) : un client reel repond CMSG_MOVE_TELEPORT_ACK
     if (player->IsBeingTeleportedNear())
     {
+        if (!destinationValide)
+        {
+            TC_LOG_ERROR("network", "PlayerBotSession: teleport proche de %s abandonne, "
+                "destination invalide (carte %u, %.2f %.2f %.2f).",
+                player->GetName().c_str(), destination.GetMapId(),
+                destination.GetPositionX(), destination.GetPositionY(),
+                destination.GetPositionZ());
+            player->SetSemaphoreTeleportNear(false);
+            m_NoWorldTick = 500;
+            return;
+        }
+
         WorldPacket data(CMSG_MOVE_TELEPORT_ACK);
         WorldPackets::Movement::MoveTeleportAck ack(std::move(data));
         ack.MoverGUID = player->GetGUID();

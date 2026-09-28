@@ -1606,7 +1606,7 @@ bool SpellInfo::IsChanneled() const
 
 bool SpellInfo::IsMoveAllowedChannel() const
 {
-    return IsChanneled() && HasAttribute(SPELL_ATTR5_CAN_CHANNEL_WHEN_MOVING);
+    return IsChanneled() && (HasAttribute(SPELL_ATTR5_CAN_CHANNEL_WHEN_MOVING) || (!(ChannelInterruptFlags[0] & (AURA_INTERRUPT_FLAG_MOVE | AURA_INTERRUPT_FLAG_TURNING))));
 }
 
 bool SpellInfo::NeedsComboPoints() const
@@ -4242,6 +4242,10 @@ bool SpellInfo::_IsPositiveEffect(uint32 effIndex, bool deep) const
 {
     // not found a single positive spell with this attribute
     if (HasAttribute(SPELL_ATTR0_NEGATIVE_1))
+        return false;
+
+    // these spells must not be downscaled, thus marking them negative (see GetAuraRankForLevel)
+    if (HasAttribute(SPELL_ATTR2_UNK3))
         return false;
 
     switch (SpellFamilyName)

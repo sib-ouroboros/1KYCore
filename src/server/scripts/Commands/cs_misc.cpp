@@ -1272,7 +1272,7 @@ public:
                 std::string itemName = itemNameStr+1;
                 auto itr = std::find_if(sItemSparseStore.begin(), sItemSparseStore.end(), [&itemName](ItemSparseEntry const* sparse)
                 {
-                    for (uint32 i = 0; i < MAX_LOCALES; ++i)
+                    for (uint32 i = 0; i < TOTAL_LOCALES; ++i)
                         if (itemName == sparse->Display->Str[i])
                             return true;
                     return false;
@@ -2098,7 +2098,7 @@ public:
 
         if (target)
         {
-            if (target->CanSpeak())
+            if (target->GetSession()->CanSpeak())
             {
                 handler->SendSysMessage(LANG_CHAT_ALREADY_ENABLED);
                 handler->SetSentErrorMessage(true);
@@ -2220,9 +2220,6 @@ public:
                     break;
                 case WAYPOINT_MOTION_TYPE:
                     handler->SendSysMessage(LANG_MOVEGENS_WAYPOINT);
-                    break;
-                case ANIMAL_RANDOM_MOTION_TYPE:
-                    handler->SendSysMessage(LANG_MOVEGENS_ANIMAL_RANDOM);
                     break;
                 case CONFUSED_MOTION_TYPE:
                     handler->SendSysMessage(LANG_MOVEGENS_CONFUSED);

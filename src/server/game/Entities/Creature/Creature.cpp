@@ -377,7 +377,6 @@ bool Creature::InitEntry(uint32 entry, CreatureData const* data /*= nullptr*/)
 
     SetDisplayId(displayID);
     SetNativeDisplayId(displayID);
-    SetByteValue(UNIT_FIELD_BYTES_0, UNIT_BYTES_0_OFFSET_GENDER, minfo->gender);
 
     // Load creature equipment
     if (!data || data->equipmentId == 0)
@@ -412,7 +411,7 @@ bool Creature::InitEntry(uint32 entry, CreatureData const* data /*= nullptr*/)
     if (!m_respawnradius && m_defaultMovementType == RANDOM_MOTION_TYPE)
         m_defaultMovementType = IDLE_MOTION_TYPE;
 
-    for (uint8 i=0; i < MAX_CREATURE_SPELLS; ++i)
+    for (uint8 i = 0; i < MAX_CREATURE_SPELLS; ++i)
         m_spells[i] = GetCreatureTemplate()->spells[i];
 
     return true;
@@ -484,12 +483,7 @@ bool Creature::UpdateEntry(uint32 entry, CreatureData const* data /*= nullptr*/,
 
     // checked and error show at loading templates
     if (FactionTemplateEntry const* factionTemplate = sFactionTemplateStore.LookupEntry(cInfo->faction))
-    {
-        if (factionTemplate->Flags & FACTION_TEMPLATE_FLAG_PVP)
-            SetPvP(true);
-        else
-            SetPvP(false);
-    }
+        SetPvP((factionTemplate->Flags & FACTION_TEMPLATE_FLAG_PVP) != 0);
 
     // updates spell bars for vehicles and set player's faction - should be called here, to overwrite faction that is set from the new template
     if (IsVehicle())
@@ -569,7 +563,18 @@ void Creature::Update(uint32 diff)
                     if (targetGuid == dbtableHighGuid) // if linking self, never respawn (check delayed to next day)
                         SetRespawnTime(DAY);
                     else
-                        m_respawnTime = (now > linkedRespawntime ? now : linkedRespawntime) + urand(5, MINUTE); // else copy time from master and add a little
+                    {
+                        // else copy time from master and add a little
+                        time_t baseRespawnTime = std::max(linkedRespawntime, now);
+                        time_t const offset = urand(5, MINUTE);
+
+                        // linked guid can be a boss, uses std::numeric_limits<time_t>::max to never respawn in that instance
+                        // we shall inherit it instead of adding and causing an overflow
+                        if (baseRespawnTime <= std::numeric_limits<time_t>::max() - offset)
+                            m_respawnTime = baseRespawnTime + offset;
+                        else
+                            m_respawnTime = std::numeric_limits<time_t>::max();
+                    }
                     SaveRespawnTime(); // also save to DB immediately
                 }
             }
@@ -965,15 +970,6 @@ bool Creature::Create(ObjectGuid::LowType guidlow, Map* map, uint32 entry, float
 
         //! Relocate again with updated Z coord
         Relocate(x, y, z, ang);
-    }
-
-    uint32 displayID = GetNativeDisplayId();
-    CreatureModelInfo const* minfo = sObjectMgr->GetCreatureModelRandomGender(&displayID);
-    if (minfo && !IsTotem())                               // Cancel load if no model defined or if totem
-    {
-        SetDisplayId(displayID);
-        SetNativeDisplayId(displayID);
-        SetByteValue(UNIT_FIELD_BYTES_0, UNIT_BYTES_0_OFFSET_GENDER, minfo->gender);
     }
 
     LastUsedScriptID = GetScriptId();
@@ -1909,7 +1905,7 @@ void Creature::setDeathState(DeathState s)
         SetCannotReachTarget(false);
         UpdateMovementFlags();
 
-        ClearUnitState(uint32(UNIT_STATE_ALL_STATE & ~UNIT_STATE_IGNORE_PATHFINDING));
+        ClearUnitState(UNIT_STATE_ALL_ERASABLE);
 
         if (!IsPet())
         {
@@ -1972,14 +1968,11 @@ void Creature::Respawn(bool force)
             SelectLevel();
 
         setDeathState(JUST_RESPAWNED);
-
         uint32 displayID = GetNativeDisplayId();
-        CreatureModelInfo const* minfo = sObjectMgr->GetCreatureModelRandomGender(&displayID);
-        if (minfo)                                             // Cancel load if no model defined
+        if (sObjectMgr->GetCreatureModelRandomGender(&displayID))
         {
             SetDisplayId(displayID);
             SetNativeDisplayId(displayID);
-            SetByteValue(UNIT_FIELD_BYTES_0, UNIT_BYTES_0_OFFSET_GENDER, minfo->gender);
         }
 
         GetMotionMaster()->InitDefault();
@@ -2348,7 +2341,7 @@ bool Creature::CanAssistTo(const Unit* u, const Unit* enemy, bool checkfaction /
 
 // use this function to avoid having hostile creatures attack
 // friendlies and other mobs they shouldn't attack
-bool Creature::_IsTargetAcceptable(const Unit* target) const
+bool Creature::_IsTargetAcceptable(Unit const* target) const
 {
     ASSERT(target);
 
@@ -2367,12 +2360,16 @@ bool Creature::_IsTargetAcceptable(const Unit* target) const
             return false;
     }
 
-    const Unit* myVictim = getAttackerForHelper();
-    const Unit* targetVictim = target->getAttackerForHelper();
+    Unit const* targetVictim = target->getAttackerForHelper();
 
     // if I'm already fighting target, or I'm hostile towards the target, the target is acceptable
-    if (myVictim == target || targetVictim == this || IsHostileTo(target))
+    if (GetVictim() == target || IsHostileTo(target))
         return true;
+
+    // a player is targeting me, but I'm not hostile towards it, and not currently attacking it, the target is not acceptable
+    // (players may set their victim from a distance, and doesn't mean we should attack)
+    if (target->GetTypeId() == TYPEID_PLAYER && targetVictim == this)
+        return false;
 
     // if the target's victim is friendly, and the target is neutral, the target is acceptable
     if (targetVictim && IsFriendlyTo(targetVictim))
@@ -2751,7 +2748,8 @@ uint32 Creature::GetScriptId() const
 {
     uint32 scriptId = 0;
     if (CreatureData const* creatureData = GetCreatureData())
-        scriptId = creatureData->ScriptId;
+        if (uint32 scriptId = creatureData->ScriptId)
+            return scriptId;
 
     return scriptId ? scriptId : sObjectMgr->GetCreatureTemplate(GetEntry())->ScriptID;
 }
@@ -2853,18 +2851,12 @@ TrainerSpellData const* Creature::GetTrainerSpells() const
 }
 
 // overwrite WorldObject function for proper name localization
-std::string const & Creature::GetNameForLocaleIdx(LocaleConstant loc_idx) const
+std::string Creature::GetNameForLocaleIdx(LocaleConstant locale) const
 {
-    if (loc_idx != DEFAULT_LOCALE)
-    {
-        uint8 uloc_idx = uint8(loc_idx);
-        CreatureLocale const* cl = sObjectMgr->GetCreatureLocale(GetEntry());
-        if (cl)
-        {
-            if (cl->Name.size() > uloc_idx && !cl->Name[uloc_idx].empty())
-                return cl->Name[uloc_idx];
-        }
-    }
+    if (locale != DEFAULT_LOCALE)
+        if (CreatureLocale const* cl = sObjectMgr->GetCreatureLocale(GetEntry()))
+            if (cl->Name.size() > locale && !cl->Name[locale].empty())
+                return cl->Name[locale];
 
     return GetName();
 }

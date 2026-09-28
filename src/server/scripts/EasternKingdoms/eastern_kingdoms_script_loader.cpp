@@ -120,7 +120,10 @@ void AddSC_boss_lillian_voss();
 void AddSC_boss_rattlegore();
 void AddSC_scholomance();
 void AddSC_instance_scholomance();
-void AddSC_boss_magistrate_barthilas();         //Stratholme
+void AddSC_shadowfang_keep();                //Shadowfang keep
+void AddSC_instance_shadowfang_keep();
+void AddSC_boss_apothecary_hummel();
+void AddSC_boss_magistrate_barthilas();      //Stratholme
 void AddSC_boss_maleki_the_pallid();
 void AddSC_boss_nerubenkan();
 void AddSC_boss_cannon_master_willey();
@@ -209,13 +212,11 @@ void AddSC_boss_drahga_shadowburner();
 void AddSC_boss_erudax();
 void AddSC_boss_forgemaster_throngus();
 void AddSC_grimbatol();
-void AddSC_instance_shadowfang_keep();          //Shadowfang Keep
 void AddSC_boss_baron_ashbury();
 void AddSC_boss_baron_silverlaine();
 void AddSC_boss_commander_springvale();
 void AddSC_boss_lord_walden();
 void AddSC_boss_lord_godfrey();
-void AddSC_shadowfang_keep();
 void AddSC_instance_throne_of_the_tides();      //Throne of the Tides
 void AddSC_boss_ulthok();
 void AddSC_boss_erunak_stonespeaker();
@@ -362,7 +363,10 @@ void AddEasternKingdomsScripts()
     AddSC_boss_rattlegore();
     AddSC_scholomance();
     AddSC_instance_scholomance();
-    AddSC_boss_magistrate_barthilas();          //Stratholme
+    AddSC_shadowfang_keep();                //Shadowfang keep
+    AddSC_instance_shadowfang_keep();
+    AddSC_boss_apothecary_hummel();
+    AddSC_boss_magistrate_barthilas();      //Stratholme
     AddSC_boss_maleki_the_pallid();
     AddSC_boss_nerubenkan();
     AddSC_boss_cannon_master_willey();
@@ -451,13 +455,11 @@ void AddEasternKingdomsScripts()
     AddSC_boss_erudax();
     AddSC_boss_forgemaster_throngus();
     AddSC_grimbatol();
-    AddSC_instance_shadowfang_keep();           //Shadowfang Keep
     AddSC_boss_baron_ashbury();
     AddSC_boss_baron_silverlaine();
     AddSC_boss_commander_springvale();
     AddSC_boss_lord_walden();
     AddSC_boss_lord_godfrey();
-    AddSC_shadowfang_keep();
     AddSC_instance_throne_of_the_tides();       //Throne of the Tides
     AddSC_boss_ulthok();
     AddSC_boss_erunak_stonespeaker();

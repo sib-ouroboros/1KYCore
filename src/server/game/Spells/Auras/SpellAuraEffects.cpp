@@ -820,9 +820,11 @@ void AuraEffect::ChangeAmount(int32 newAmount, bool mark, bool onStackOrReapply)
     std::list<AuraApplication*> effectApplications;
     GetApplicationList(effectApplications);
 
-    for (std::list<AuraApplication*>::const_iterator apptItr = effectApplications.begin(); apptItr != effectApplications.end(); ++apptItr)
-        if ((*apptItr)->HasEffect(GetEffIndex()))
-            HandleEffect(*apptItr, handleMask, false);
+    for (AuraApplication* aurApp : effectApplications)
+    {
+        aurApp->GetTarget()->_RegisterAuraEffect(this, false);
+        HandleEffect(aurApp, handleMask, false);
+    }
 
     if (handleMask & AURA_EFFECT_HANDLE_CHANGE_AMOUNT)
     {
@@ -833,9 +835,14 @@ void AuraEffect::ChangeAmount(int32 newAmount, bool mark, bool onStackOrReapply)
         CalculateSpellMod();
     }
 
-    for (std::list<AuraApplication*>::const_iterator apptItr = effectApplications.begin(); apptItr != effectApplications.end(); ++apptItr)
-        if ((*apptItr)->HasEffect(GetEffIndex()))
-            HandleEffect(*apptItr, handleMask, true);
+    for (AuraApplication* aurApp : effectApplications)
+    {
+        if (aurApp->GetRemoveMode() != AURA_REMOVE_NONE)
+            continue;
+
+        aurApp->GetTarget()->_RegisterAuraEffect(this, true);
+        HandleEffect(aurApp, handleMask, true);
+    }
 
     if (GetSpellInfo()->HasAttribute(SPELL_ATTR8_AURA_SEND_AMOUNT))
         GetBase()->SetNeedClientUpdateForTargets();
@@ -979,10 +986,10 @@ void AuraEffect::Update(uint32 diff, Unit* caster)
 
             std::list<AuraApplication*> effectApplications;
             GetApplicationList(effectApplications);
+
             // tick on targets of effects
-            for (std::list<AuraApplication*>::const_iterator apptItr = effectApplications.begin(); apptItr != effectApplications.end(); ++apptItr)
-                if ((*apptItr)->HasEffect(GetEffIndex()))
-                    PeriodicTick(*apptItr, caster);
+            for (AuraApplication* aurApp : effectApplications)
+                PeriodicTick(aurApp, caster);
         }
     }
 }
@@ -1734,7 +1741,22 @@ void AuraEffect::HandleAuraModShapeshift(AuraApplication const* aurApp, uint8 mo
     Unit* target = aurApp->GetTarget();
 
     ShapeshiftForm form = ShapeshiftForm(GetMiscValue());
-    uint32 modelid = target->GetModelForForm(form);
+    uint32 modelid = 0;
+
+    switch (GetId())
+    {
+        // Bear Form
+        case 7090:
+            modelid = 29414;
+            break;
+        // Roc Form
+        case 35200:
+            modelid = 4877;
+            break;
+        default:
+            modelid = target->GetModelForForm(form);
+            break;
+    }
 
     if (apply)
     {
@@ -3675,7 +3697,13 @@ void AuraEffect::HandleModTotalPercentStat(AuraApplication const* aurApp, uint8 
 
     // save current health state
     float healthPct = target->GetHealthPct();
-    bool alive = target->IsAlive();
+    bool zeroHealth = !target->IsAlive();
+
+    // players in corpse state may mean two different states:
+   /// 1. player just died but did not release (in this case health == 0)
+   /// 2. player is corpse running (ie ghost) (in this case health == 1)
+    if (target->getDeathState() == CORPSE)
+        zeroHealth = (target->GetHealth() == 0);
 
     for (int32 i = STAT_STRENGTH; i < MAX_STATS; i++)
     {
@@ -3701,7 +3729,7 @@ void AuraEffect::HandleModTotalPercentStat(AuraApplication const* aurApp, uint8 
     // recalculate current HP/MP after applying aura modifications (only for spells with SPELL_ATTR0_UNK4 0x00000010 flag)
     // this check is total bullshit i think
     if (GetMiscValueB() & 1 << STAT_STAMINA && (m_spellInfo->HasAttribute(SPELL_ATTR0_ABILITY)))
-        target->SetHealth(std::max<uint32>(uint32(healthPct * target->GetMaxHealth() * 0.01f), (alive ? 1 : 0)));
+        target->SetHealth(std::max<uint32>(CalculatePct(target->GetMaxHealth(), healthPct), (zeroHealth ? 0 : 1)));
 }
 
 void AuraEffect::HandleAuraModResistenceOfStatPercent(AuraApplication const* aurApp, uint8 mode, bool /*apply*/) const

@@ -147,15 +147,15 @@ public:
         if (choiceID != PLAYER_CHOICE_HUNTER_ARTIFACT_SELECTION)
             return;
 
+        // Le choix de l arme ne change PLUS la specialisation : le script d origine
+        // forcait ActivateTalentGroup(), ce qui basculait le joueur sur un jeu de
+        // talents vide et retirait son equipement. Les autres classes ne le font pas.
         switch (responseID)
         {
             case PLAYER_CHOICE_Hunter_Shooting:
             {
                 player->RemoveRewardedQuest(40618);
                 player->KilledMonsterCredit(KILL_CREDIT_HUNTER_ARTIFACT_CHOSEN);
-
-                if (ChrSpecializationEntry const* spec = sChrSpecializationStore.AssertEntry(577))
-                    player->ActivateTalentGroup(spec);
 
                 break;
             }   
@@ -164,18 +164,12 @@ public:
                 player->RemoveRewardedQuest(40618);
                 player->KilledMonsterCredit(KILL_CREDIT_HUNTER_ARTIFACT_CHOSEN);
 
-                if (ChrSpecializationEntry const* spec = sChrSpecializationStore.AssertEntry(581))
-                    player->ActivateTalentGroup(spec);
-
                 break;
             }   
             case PLAYER_CHOICE_Hunter_Survival:
             {
                 player->RemoveRewardedQuest(40618);
                 player->KilledMonsterCredit(KILL_CREDIT_HUNTER_ARTIFACT_CHOSEN);
-
-                if (ChrSpecializationEntry const* spec = sChrSpecializationStore.AssertEntry(582))
-                    player->ActivateTalentGroup(spec);
 
                 break;
             } 
@@ -206,7 +200,7 @@ public:
 
         if (player->HasQuest(40618) &&
             player->GetQuestStatus(40618) != QUEST_STATUS_REWARDED) {
-            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "I would like to review weapons we might pursue.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+            AddGossipItemFor(player, GOSSIP_ICON_CHAT, "J'aimerais revoir les armes que nous pourrions rechercher.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
         }
 
         SendGossipMenuFor(player, player->GetGossipTextId(creature), creature->GetGUID());

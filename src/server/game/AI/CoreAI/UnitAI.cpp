@@ -62,11 +62,10 @@ void UnitAI::DoMeleeAttackIfReady()
     if (!me->IsWithinMeleeRange(victim))
         return;
 
-    bool sparAttack = me->GetFactionTemplateEntry()->ShouldSparAttack() && victim->GetFactionTemplateEntry()->ShouldSparAttack();
     //Make sure our attack is ready and we aren't currently casting before checking distance
     if (me->isAttackReady())
     {
-        if (sparAttack)
+        if (ShouldSparWith(victim))
             me->FakeAttackerStateUpdate(victim);
         else
             me->AttackerStateUpdate(victim);
@@ -76,7 +75,7 @@ void UnitAI::DoMeleeAttackIfReady()
 
     if (me->haveOffhandWeapon() && me->isAttackReady(OFF_ATTACK))
     {
-        if (sparAttack)
+        if (ShouldSparWith(victim))
             me->FakeAttackerStateUpdate(victim, OFF_ATTACK);
         else
             me->AttackerStateUpdate(victim, OFF_ATTACK);

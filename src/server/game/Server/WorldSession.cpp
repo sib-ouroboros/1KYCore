@@ -766,6 +766,11 @@ void WorldSession::SendNotification(uint32 stringId, ...)
     }
 }
 
+bool WorldSession::CanSpeak() const
+{
+    return m_muteTime <= sWorld->GetGameTime();
+}
+
 char const* WorldSession::GetTrinityString(uint32 entry) const
 {
     return sObjectMgr->GetTrinityString(entry, GetSessionDbLocaleIndex());
