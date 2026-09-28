@@ -4419,30 +4419,6 @@ addion = 1.000000
 endure = 1.000000
 
 #
-# Core Enable
-#
-#   pbot
-#        Description: Master switch for enabling/disabling the PlayerBot system.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-pbot = 1
-
-#
-# PlayerBot Health Modifier
-#
-#   pbot_hp
-#        Description: Sets the starting/max health of PlayerBots.
-#                     0 = Disabled (no extra HP)
-#                     1 = Normal HP (default)
-#                     >1 = Multiply HP by (pbot_hp - 1) factor
-#        Default:     1
-#
-
-pbot_hp = 1
-
-#
 # LFG Queue Extra Players
 #
 #   LFGnumPlayer_Add
@@ -4478,49 +4454,6 @@ pbotall = 1
 #
 
 pbotbg = 0
-
-#
-#   pbotbg_maxperteam
-#        Description: Taille equipe visee par le remplissage (joueurs reels + bots).
-#                     0 = taille maximale du BG (10v10 WS, 15v15 AB, 40v40 AV...)
-#        Default:     0
-#
-
-pbotbg_maxperteam = 0
-
-#
-#   pbotbg_idlelogout
-#        Description: Deconnexion d un bot reste inactif (hors BG, file, donjon, combat)
-#                     pendant N secondes. 0 = jamais.
-#        Default:     300
-#
-
-pbotbg_idlelogout = 300
-
-
-#
-# PlayerBot Maximum Online Limit
-#
-#   pbotasl
-#        Description: Sets the maximum number of PlayerBots allowed to be online at the same time.
-#                     0 = No limit
-#                     >0 = Maximum number of PlayerBots allowed simultaneously (default 88)
-#        Default:     88
-#
-
-pbotasl = 88
-
-#
-#    pbotqa
-#        Description: Harnais d assurance qualite. Par defaut, un bot de terrain qui
-#                     se retrouve sur une carte d instance est renvoye chez lui.
-#                     A 1, il est autorise a y rester : cela permet d observer le
-#                     comportement des bots en donjon sans qu ils soient rapatries.
-#                     Ne pas activer en production.
-#        Default:     0 - (Desactive)
-#                     1 - (Actif)
-
-pbotqa = 0
 
 
 #

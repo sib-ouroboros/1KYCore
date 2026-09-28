@@ -1871,12 +1871,8 @@ void World::SetInitialWorldSettings()
     TC_LOG_INFO("server.loading", "Loading account directory...");
     sOnlineMgr->LoadAccounts();
 
-    TC_LOG_INFO("server.loading", "Loading AI Way points...");
-    if (!sAIWPMgr->LoadAIWaypoints())
-    {
-        exit(0);
-        return;
-    }
+    TC_LOG_INFO("server.loading", "Loading legacy arena positions...");
+    sAIWPMgr->LoadAIWaypoints();
     TC_LOG_INFO("server.loading", "Loading Custom talk menu...");
     sCustomTalkMenu->Initialize();
 

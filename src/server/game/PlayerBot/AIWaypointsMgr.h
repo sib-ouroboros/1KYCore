@@ -25,8 +25,6 @@
 #include "Position.h"
 #include <map>
 
-class AIWaypointsMgr;
-
 struct AIWaypoint
 {
 	uint32 entry;
@@ -34,11 +32,9 @@ struct AIWaypoint
 	float posX;
 	float posY;
 	float posZ;
-	std::string processLink;
-	std::string pointDesc;
 
-	AIWaypoint(uint32 id, uint32 map, float x, float y, float z, std::string linkInfo, std::string desc) :
-		entry(id), mapID(map), posX(x), posY(y), posZ(z), processLink(linkInfo)
+    AIWaypoint(uint32 id, uint32 map, float x, float y, float z) :
+        entry(id), mapID(map), posX(x), posY(y), posZ(z)
 	{
 	}
 
@@ -56,19 +52,15 @@ struct AIWaypoint
 class TC_GAME_API AIWaypointsMgr
 {
 public:
-	typedef std::map<uint32, AIWaypoint*> AIWPMap;
+    typedef std::map<uint32, AIWaypoint> AIWPMap;
 
 public:
-	AIWaypointsMgr();
-	~AIWaypointsMgr();
-
 	static AIWaypointsMgr* instance();
 
-	bool LoadAIWaypoints();
-	AIWaypoint* FindAIWaypoint(uint32 entry);
+    void LoadAIWaypoints();
+    AIWaypoint* FindAIWaypoint(uint32 entry);
 
 private:
-	uint32 m_lastAIWPEntry;
 	AIWPMap m_AIWaypointMap;
 };
 
