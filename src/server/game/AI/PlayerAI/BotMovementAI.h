@@ -26,28 +26,11 @@
 class TC_GAME_API BotMovementAI : public PlayerAI
 {
 public:
-	explicit BotMovementAI(Player* player) : PlayerAI(player), m_UpdateTick(BOTAI_UPDATE_TICK), pHorrorState(NULL)
-	{
-	}
-	~BotMovementAI()
-	{
-	}
+    explicit BotMovementAI(Player* player) : PlayerAI(player) { }
 
-	void DamageDealt(Unit* victim, uint32& damage, DamageEffectType damageType) override;
-	void DamageEndure(Unit* attacker, uint32& damage, DamageEffectType damageType);
-	void UpdateAI(uint32 diff) override;
-	void MovementTo(Player* player);
-	void MovementTo(float x, float y, float z);
-	void MovementToPath(Player* player, uint32 pid, uint32 index);
-	void ApplyFinishPath(PathParameter* pathParam);
-
-private:
-	bool HasAuraMechanic(Unit* pTarget, Mechanics mask);
-	void ProcessHorror(uint32 diff);
-
-private:
-	int32 m_UpdateTick;
-	BotAIHorrorState* pHorrorState;
+    void DamageDealt(Unit* victim, uint32& damage, DamageEffectType damageType) override;
+    void DamageEndure(Unit* attacker, uint32& damage, DamageEffectType damageType);
+    void UpdateAI(uint32 /*diff*/) override { }
 };
 
 #endif // SC_BOTFOLLOWERAI_H
