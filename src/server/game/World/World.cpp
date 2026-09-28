@@ -2422,10 +2422,6 @@ void World::SetInitialWorldSettings()
             bgScoreReate = 8.0f;
         BotUtility::BattlegroundScoreRate = bgScoreReate;
 
-        Json::Value jsonAutoSetting = sConfigMgr->GetIntDefault("auto_setting", 1);
-        int autoSetting = sConfigMgr->GetIntDefault("auto_setting", 1);
-        BotUtility::BotCanSettingToMaster = (autoSetting != 0) ? true : false;
-
         Json::Value jsonMaxLevel = sConfigMgr->GetIntDefault("max_level", 6);
         int maxLevel = sConfigMgr->GetIntDefault("max_level", 6);
         if (maxLevel >= 0 && maxLevel < 6)
@@ -2462,7 +2458,6 @@ void World::SetInitialWorldSettings()
         int maxDungeon = sConfigMgr->GetIntDefault("maxdungeon", 0);
         InstanceMap::AllowFortyPlayers = (maxDungeon != 0) ? true : false;
 
-
         Json::Value jsonAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);
         float modifyAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);
         if (modifyAddion < 0.5f)
@@ -2478,35 +2473,6 @@ void World::SetInitialWorldSettings()
         if (modifyAddion > 15.0f)
             modifyAddion = 15.0f;
         BotUtility::DungeonBotEndureModify = modifyAddion;
-
-        Json::Value jsonRevive = sConfigMgr->GetIntDefault("auto_revive", 0);
-        int revive = sConfigMgr->GetIntDefault("auto_revive", 0);
-        BotUtility::BotCanForceRevive = (revive != 0) ? true : false;
-
-        Json::Value jsonDiminishing = sConfigMgr->GetIntDefault("diminishing", 1);
-        BotUtility::ControllSpellDiminishing = (sConfigMgr->GetIntDefault("diminishing", 1) != 0) ? true : false;
-
-
-        Json::Value jsonCanBreakControll = sConfigMgr->GetIntDefault("canbreak_controll", 1);
-        BotUtility::ControllSpellFromDmgBreak = (sConfigMgr->GetIntDefault("canbreak_controll", 1) != 0) ? true : false;
-
-        //Json::Value jsonAutoBuildArena = sConfigMgr->GetIntDefault("auto_buildarena", 1);
-        //ArenaTeamMgr::g_AutoBuildArenaTeam = (sConfigMgr->GetIntDefault("auto_buildarena", 1) != 0) ? true : false;
-
-        Json::Value jsonDownBotArena = sConfigMgr->GetIntDefault("downbotarena", 1);
-        BotUtility::DownBotArenaTeam = (sConfigMgr->GetIntDefault("downbotarena", 1) != 0) ? true : false;
-
-        Json::Value jsonArenaIsHell = sConfigMgr->GetIntDefault("arenahell", 0);
-        BotUtility::ArenaIsHell = (sConfigMgr->GetIntDefault("arenahell", 0) != 0) ? true : false;
-
-        Json::Value jsonArenaTeamTactics = sConfigMgr->GetIntDefault("bottactics", 1);
-        uint32 tactics = sConfigMgr->GetIntDefault("bottactics", 1);
-        if (tactics < 3)
-            BotUtility::BotArenaTeamTactics = tactics;
-
-        Json::Value dkquest = sConfigMgr->GetIntDefault("dkquest", 0);
-        BotUtility::DisableDKQuest = (sConfigMgr->GetIntDefault("dkquest", 0) != 0) ? true : false;
-
     }
 
     ///- Initialize game time and timers

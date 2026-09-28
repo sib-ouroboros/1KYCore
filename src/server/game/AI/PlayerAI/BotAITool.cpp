@@ -24,14 +24,6 @@
 float BotUtility::BattlegroundScoreRate = 1.0f;
 float BotUtility::DungeonBotDamageModify = 1.0f;
 float BotUtility::DungeonBotEndureModify = 1.0f;
-bool BotUtility::BotCanForceRevive = false;
-bool BotUtility::BotCanSettingToMaster = true;
-bool BotUtility::ControllSpellDiminishing = true;
-bool BotUtility::ControllSpellFromDmgBreak = true;
-bool BotUtility::DownBotArenaTeam = false;
-bool BotUtility::ArenaIsHell = false;
-uint32 BotUtility::BotArenaTeamTactics = 1;
-bool BotUtility::DisableDKQuest = false;
 
 Item* BotUtility::FindItemFromAllBag(Player* player, uint32 entry, bool destroy)
 {

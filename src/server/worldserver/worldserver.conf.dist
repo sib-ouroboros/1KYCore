@@ -4373,21 +4373,10 @@ WOWToolListenPort = 8116
 bgscorerate = 1.000000
 
 #
-# Auto Setting
-#
-#   auto_setting
-#        Description: Enables automatic default configuration of PlayerBots.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-auto_setting = 1
-
-#
 # Maximum Level
 #
 #    max_level
-#        Description: Sets the maximum level of the PlayerBots.
+#        Description: Sets the maximum level for players.
 #        Default:     0 - Level 60
 #                     1 - Level 70
 #                     2 - Level 80
@@ -4413,7 +4402,7 @@ maxdungeon = 0
 # Additional Damage Multiplier
 #
 #   addion
-#        Description: Damage multiplier applied to PlayerBots' abilities.
+#        Description: Outgoing damage multiplier for players in dungeons.
 #        Default:     1.0 - Normal damage
 #
 
@@ -4423,88 +4412,11 @@ addion = 1.000000
 # Endurance Multiplier
 #
 #   endure
-#        Description: Multiplier applied to PlayerBots' health/endurance.
+#        Description: Divisor applied to incoming player damage in dungeons.
 #        Default:     1.0 - Normal endurance
 #
 
 endure = 1.000000
-
-#
-# Auto Revive
-#
-#   auto_revive
-#        Description: Enables automatic revival of PlayerBots after death.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-auto_revive = 0
-
-#
-# Diminishing Returns
-#
-#   diminishing
-#        Description: Enables diminishing returns system for PlayerBots in PvP combat.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-diminishing = 1
-
-#
-# Crowd Control Break
-#
-#   canbreak_controll
-#        Description: Allows PlayerBots to attempt breaking out of crowd-control effects.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-canbreak_controll = 1
-
-#
-# Arena Bots
-#
-#   downbotarena
-#        Description: Enables PlayerBots to participate in arena matches.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-downbotarena = 1
-
-#
-# Arena Hell Mode
-#
-#   arenahell
-#        Description: Enables a harder arena mode for PlayerBots with increased difficulty.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-arenahell = 0
-
-#
-# Tactics System
-#
-#   bottactics
-#        Description: Enables tactical AI system for PlayerBots in combat.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-bottactics = 1
-
-#
-# Death Knight Starting Quest
-#
-#   dkquest
-#        Description: Enables PlayerBots to automatically complete Death Knight starting questline.
-#        Default:     0 - Disabled
-#                     1 - Enabled
-#
-
-dkquest = 0
 
 #
 # Core Enable

@@ -117,28 +117,12 @@ void ToolSocket::ProcessToolCmd()
 			CmdAccountSecurity(jsonCmd);
 		else if (entry == "player_change")
 			CmdPlayerChange(jsonCmd);
-		else if (entry == "pve_autosetting")
-			CmdPVEAutoSetting(jsonCmd);
 		else if (entry == "pve_maxlevel")
 			CmdPVEMaxLevel(jsonCmd);
 		else if (entry == "pve_maxdungeon")
 			CmdPVEMaxDungeon(jsonCmd);
 		else if (entry == "pve_addion")
 			CmdPVEAddion(jsonCmd);
-		else if (entry == "pve_revive")
-			CmdPVEAutoRevive(jsonCmd);
-		else if (entry == "pvp_diminishing")
-			CmdPVPDiminishing(jsonCmd);
-		else if (entry == "pvp_canbreak_controll")
-			CmdPVPCanBreakControll(jsonCmd);
-		else if (entry == "down_botarena")
-			CmdDownBotArenaTeam(jsonCmd);
-		else if (entry == "arena_ishell")
-			CmdBotArenaHell(jsonCmd);
-		else if (entry == "arenateam_tactics")
-			CmdBotArenaTeamTactics(jsonCmd);
-		else if (entry == "disable_dkquest")
-			CmdDisableDKQuest(jsonCmd);
 		else
 		{
 			TC_LOG_ERROR("ToolSocket", "Can`t find tool opcode case by entry : %s.", entry.c_str());
@@ -232,10 +216,6 @@ void ToolSocket::LoadConfigure()
 			bgScoreReate = 8.0f;
 		BotUtility::BattlegroundScoreRate = bgScoreReate;
 
-       Json::Value jsonAutoSetting = sConfigMgr->GetIntDefault("auto_setting", 1);
-		int autoSetting =  sConfigMgr->GetIntDefault("auto_setting", 1);
-		BotUtility::BotCanSettingToMaster = (autoSetting != 0) ? true : false;
-
 Json::Value jsonMaxLevel = sConfigMgr->GetIntDefault("max_level", 6);
 		int maxLevel = sConfigMgr->GetIntDefault("max_level", 6);
 		if (maxLevel >= 0 && maxLevel < 7)
@@ -272,7 +252,6 @@ Json::Value jsonMaxDungeon = sConfigMgr->GetIntDefault("maxdungeon", 0);
 		int maxDungeon = sConfigMgr->GetIntDefault("maxdungeon", 0);
         InstanceMap::AllowFortyPlayers = (maxDungeon != 0) ? true : false;
 
-
 Json::Value jsonAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);
 		float modifyAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);
 		if (modifyAddion < 0.5f)
@@ -288,35 +267,6 @@ Json::Value jsonEndure = sConfigMgr->GetFloatDefault("endure", 1.0f);
 		if (modifyAddion > 15.0f)
 			modifyAddion = 15.0f;
 		BotUtility::DungeonBotEndureModify = modifyAddion;
-
-Json::Value jsonRevive = sConfigMgr->GetIntDefault("auto_revive", 0);
-		int revive  = sConfigMgr->GetIntDefault("auto_revive", 0);
-		BotUtility::BotCanForceRevive = (revive != 0) ? true : false;
-
-Json::Value jsonDiminishing = sConfigMgr->GetIntDefault("diminishing", 1);
-		BotUtility::ControllSpellDiminishing = (sConfigMgr->GetIntDefault("diminishing", 1) != 0) ? true : false;
-
-
-Json::Value jsonCanBreakControll = sConfigMgr->GetIntDefault("canbreak_controll", 1);
-		BotUtility::ControllSpellFromDmgBreak = (sConfigMgr->GetIntDefault("canbreak_controll", 1) != 0) ? true : false;
-
-//Json::Value jsonAutoBuildArena = sConfigMgr->GetIntDefault("auto_buildarena", 1);
-//		ArenaTeamMgr::g_AutoBuildArenaTeam = (sConfigMgr->GetIntDefault("auto_buildarena", 1) != 0) ? true : false;
-
-Json::Value jsonDownBotArena =sConfigMgr->GetIntDefault("downbotarena", 1);
-		BotUtility::DownBotArenaTeam = (sConfigMgr->GetIntDefault("downbotarena", 1) != 0) ? true : false;
-
-Json::Value jsonArenaIsHell = sConfigMgr->GetIntDefault("arenahell", 0);
-		BotUtility::ArenaIsHell = (sConfigMgr->GetIntDefault("arenahell", 0) != 0) ? true : false;
-
-Json::Value jsonArenaTeamTactics = sConfigMgr->GetIntDefault("bottactics", 1);
-        uint32 tactics = sConfigMgr->GetIntDefault("bottactics", 1);
-		if (tactics < 3)
-			BotUtility::BotArenaTeamTactics = tactics;
-
-Json::Value dkquest = sConfigMgr->GetIntDefault("dkquest", 0);
-		BotUtility::DisableDKQuest = (sConfigMgr->GetIntDefault("dkquest", 0) != 0) ? true : false;
-
 }
 
 void ToolSocket::ProcessCmd(std::string cmdString)
@@ -478,13 +428,6 @@ void ToolSocket::CmdPlayerChange(Json::Value& info)
 	SendNormalResult("player_change", false);
 }
 
-void ToolSocket::CmdPVEAutoSetting(Json::Value& info)
-{
-	uint32 setting = info["auto_setting"].asInt();
-	BotUtility::BotCanSettingToMaster = (setting != 0) ? true : false;
-	SendNormalResult("pve_autosetting", true);
-}
-
 void ToolSocket::CmdPVEMaxLevel(Json::Value& info)
 {
 	uint32 max_level = info["max_level"].asInt();
@@ -544,55 +487,4 @@ void ToolSocket::CmdPVEAddion(Json::Value& info)
 	BotUtility::DungeonBotDamageModify = modifyAddion;
 	BotUtility::DungeonBotEndureModify = modifyEndure;
 	SendNormalResult("pve_addion", true);
-}
-
-void ToolSocket::CmdPVEAutoRevive(Json::Value& info)
-{
-	uint32 revive = info["auto_revive"].asInt();
-	BotUtility::BotCanForceRevive = (revive != 0) ? true : false;
-	SendNormalResult("pve_revive", true);
-}
-
-void ToolSocket::CmdPVPDiminishing(Json::Value& info)
-{
-	uint32 jsonDiminishing = info["diminishing"].asInt();
-	BotUtility::ControllSpellDiminishing = (jsonDiminishing != 0) ? true : false;
-	SendNormalResult("pvp_diminishing", true);
-}
-
-void ToolSocket::CmdPVPCanBreakControll(Json::Value& info)
-{
-	uint32 jsonCanBreakControll = info["canbreak_controll"].asInt();
-	BotUtility::ControllSpellFromDmgBreak = (jsonCanBreakControll != 0) ? true : false;
-	SendNormalResult("pvp_canbreak_controll", true);
-}
-
-void ToolSocket::CmdDownBotArenaTeam(Json::Value& info)
-{
-	uint32 downBotArena = info["downbotarena"].asInt();
-	BotUtility::DownBotArenaTeam = (downBotArena != 0) ? true : false;
-	SendNormalResult("down_botarena", true);
-}
-
-void ToolSocket::CmdBotArenaHell(Json::Value& info)
-{
-	uint32 arenaHell = info["arenahell"].asInt();
-	BotUtility::ArenaIsHell = (arenaHell != 0) ? true : false;
-	SendNormalResult("arena_ishell", true);
-}
-
-void ToolSocket::CmdBotArenaTeamTactics(Json::Value& info)
-{
-	uint32 tactics = info["bottactics"].asInt();
-	if (tactics >= 3)
-		SendNormalResult("arenateam_tactics", false);
-	BotUtility::BotArenaTeamTactics = tactics;
-	SendNormalResult("arenateam_tactics", true);
-}
-
-void ToolSocket::CmdDisableDKQuest(Json::Value& info)
-{
-	uint32 dkquest = info["dkquest"].asInt();
-	BotUtility::DisableDKQuest = (dkquest != 0) ? true : false;
-	SendNormalResult("disable_dkquest", true);
 }

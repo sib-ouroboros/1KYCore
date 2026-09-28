@@ -28,14 +28,6 @@ public:
     static float BattlegroundScoreRate;
     static float DungeonBotDamageModify;
     static float DungeonBotEndureModify;
-    static bool BotCanForceRevive;
-    static bool BotCanSettingToMaster;
-    static bool ControllSpellDiminishing;
-    static bool ControllSpellFromDmgBreak;
-    static bool DownBotArenaTeam;
-    static bool ArenaIsHell;
-    static uint32 BotArenaTeamTactics;
-    static bool DisableDKQuest;
 
 public:
     // Shared inventory helpers still used by ordinary players and custom menus.

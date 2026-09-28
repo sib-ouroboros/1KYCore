@@ -68,17 +68,9 @@ private:
 	void CmdPlayerAccount(Json::Value& info);
 	void CmdAccountSecurity(Json::Value& info);
 	void CmdPlayerChange(Json::Value& info);
-	void CmdPVEAutoSetting(Json::Value& info);
 	void CmdPVEMaxLevel(Json::Value& info);
 	void CmdPVEMaxDungeon(Json::Value& info);
 	void CmdPVEAddion(Json::Value& info);
-	void CmdPVEAutoRevive(Json::Value& info);
-	void CmdPVPDiminishing(Json::Value& info);
-	void CmdPVPCanBreakControll(Json::Value& info);
-	void CmdDownBotArenaTeam(Json::Value& info);
-	void CmdBotArenaHell(Json::Value& info);
-	void CmdBotArenaTeamTactics(Json::Value& info);
-	void CmdDisableDKQuest(Json::Value& info);
 
 private:
     static std::mutex _commandLock;
