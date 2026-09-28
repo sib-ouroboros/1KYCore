@@ -35,7 +35,6 @@ float BotUtility::DungeonBotDamageModify = 1.0f;
 float BotUtility::DungeonBotEndureModify = 1.0f;
 bool BotUtility::BotCanForceRevive = false;
 bool BotUtility::BotCanSettingToMaster = true;
-int32 BotUtility::BotCritTakenAddion = 1;
 bool BotUtility::ControllSpellDiminishing = true;
 bool BotUtility::ControllSpellFromDmgBreak = true;
 bool BotUtility::DownBotArenaTeam = false;
@@ -223,29 +222,7 @@ std::string BotUtility::BuildItemLinkText(const ItemTemplate* pItemTemplate)
 	return Trinity::StringFormat(text.c_str(), pItemTemplate->BasicData->ID, pItemTemplate->BasicData->ID);
 }
 
-void BotUtility::UpdatePlayerBotRoll(Player* player)
-{
-	if (!player)
-		return;
-	Group* pGroup = player->GetGroup();
-	if (!pGroup)
-		return;
-	/*Rolls& rolls = pGroup->GetAllRolls();
-	for (Rolls::iterator iter = rolls.begin(); iter != rolls.end(); ++iter)
-	{
-		Roll* roll = (*iter);
-		if (!roll->isValid())
-			continue;
-		if (roll->rolledPlayers.find(player->GetGUID()) != roll->rolledPlayers.end())
-			continue;
-		if (roll->totalPass > 0 || roll->totalNeed > 0 || roll->totalGreed > 0)
-		{
-			roll->rolledPlayers.insert(player->GetGUID());
-			pGroup->PlayerBotRoll(player, *roll);
-			break;
-		}
-	}*/
-}
+
 
 Item* BotUtility::FindItemFromAllBag(Player* player, uint32 entry, bool destroy)
 {
@@ -394,14 +371,7 @@ uint32 BotUtility::FindMaxRankSpellByExist(Player* player, uint32 spellID)
 	return selectSpell;
 }
 
-void BotUtility::PlayerBotTogglePVP(Player* player, bool pvp)
-{
-	if (!player || !player->IsPlayerBot())
-		return;
-	//WorldPacket opcode(1);
-	//opcode << uint8(pvp ? 1 : 0);
-	//player->GetSession()->HandleTogglePvP(opcode);
-}
+
 
 uint32 BotUtility::FindPetMaxRankSpellByExist(Player* player, uint32 spellID)
 {

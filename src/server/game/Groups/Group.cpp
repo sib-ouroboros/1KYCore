@@ -1964,7 +1964,7 @@ void Group::UpdateLooterGuid(WorldObject* pLootedObject, bool ifneed)
     for (member_citerator itr = guid_itr; itr != m_memberSlots.end(); ++itr)
     {
         if (Player* player = ObjectAccessor::FindPlayer(itr->guid))
-            if (!player->IsPlayerBot() && player->IsAtGroupRewardDistance(pLootedObject))
+            if (player->IsAtGroupRewardDistance(pLootedObject))
             {
                 pNewLooter = player;
                 break;
@@ -2419,29 +2419,10 @@ void Group::BroadcastGroupUpdate(void)
     }
 }
 
-void Group::PlayerBotRoll(Player* player, const Roll& roll)
-{
-    if (!player)
-        return;
-    //if (PlayerBotSetting::IsBetterEquip(player, sObjectMgr->GetItemTemplate(roll.itemid), roll.itemRandomPropId))
-    //    CountRollVote(player->GetGUID(), roll.itemGUID, ROLL_NEED);
-    //else
-    //    CountRollVote(player->GetGUID(), roll.itemGUID, ROLL_PASS);
-}
 
 
-bool Group::GroupExistPlayerBot()
-{
-    for (member_citerator citr = m_memberSlots.begin(); citr != m_memberSlots.end(); ++citr)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(citr->guid);
-        if (!player)
-            continue;
-        if (player->IsPlayerBot())
-            return true;
-    }
-    return false;
-}
+
+
 
 /*void Group::ResetRaidDungeon()
 {

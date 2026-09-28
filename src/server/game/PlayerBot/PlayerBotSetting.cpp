@@ -1428,39 +1428,7 @@ bool PlayerBotSetting::IsPriestEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::CheckHunterPet(Player* player)
-{
-	if (!player || player->getClass() != Classes::CLASS_HUNTER)
-		return false;
-	if (player->GetPet() == NULL && beastCreatureEntrys.size() > 0)
-	{
-		uint32 rndEntry = urand(0, beastCreatureEntrys.size() - 1);
-		Pet* pet = player->CreateTamedPetFrom(beastCreatureEntrys[rndEntry], 1515);
-		if (pet)
-		{
-			player->GetMap()->AddToMap(pet->ToCreature());
-			player->SetMinion(pet, true);
-			pet->InitPetCreateSpells();
-			pet->ToCreature()->SetReactState(ReactStates(1));
-			pet->SettingAllSpellAutocast(true);
-			pet->SavePetToDB(PET_SAVE_CURRENT_STATE);
-			player->PetSpellInitialize();
-			return true;
-		}
-	}
-	else if (Pet* pet = player->GetPet())
-	{
-		pet->SetLevel(player->getLevel());
-		pet->InitPetCreateSpells();
-		//pet->resetTalents();
-		pet->ToCreature()->SetReactState(ReactStates(1));
-		//pet->FlushTalentsByPoints();
-		pet->SettingAllSpellAutocast(true);
-		player->PetSpellInitialize();
-		return true;
-	}
-	return false;
-}
+
 
 uint32 PlayerBotSetting::FindPlayerTalentType(Player* player)
 {
@@ -1790,11 +1758,6 @@ PlayerBotSetting::~PlayerBotSetting()
 
 uint32 PlayerBotSetting::UpdateTalentType()
 {
-	if (m_Player->IsPlayerBot())
-	{
-		uint32 lv = (m_Player->getLevel() < 9) ? 9 : m_Player->getLevel();
-
-	}
 	if (m_ActiveTalentType >= 3)
 	{
 		m_ActiveTalentType = PlayerBotSetting::FindPlayerTalentType(m_Player);
@@ -1922,13 +1885,10 @@ void PlayerBotSetting::UpdateReset()
 		++m_ResetStep;
 		break;
 	case 11:
-		if (!m_Player->IsPlayerBot())
-			m_Player->SendTalentsInfoData();
+        m_Player->SendTalentsInfoData();
 		++m_ResetStep;
 		break;
 	case 12:
-		if (m_Player->IsPlayerBot())
-			CheckHunterPet(m_Player);
 		++m_ResetStep;
 		break;
 	case 13:
@@ -2045,18 +2005,6 @@ void PlayerBotSetting::LearnCommonSpells()
 		m_Player->LearnSpell(spellID, false);
 	}
 
-	if (m_Player->IsPlayerBot())
-	{
-		for (BeastCreatureEntrys::iterator itMount = fastMountSpells.begin();
-			itMount != fastMountSpells.end();
-			itMount++)
-		{
-			uint32 spellID = *itMount;
-			if (m_Player->HasSpell(spellID))
-				continue;
-			m_Player->LearnSpell(spellID, false);
-		}
-	}
 }
 
 void PlayerBotSetting::RemoveSpells()
@@ -2140,7 +2088,6 @@ void PlayerBotSetting::CheckInventroy()
 
 void PlayerBotSetting::UnequipFromAll()
 {
-	bool isBot = m_Player->IsPlayerBot();
 	for (uint8 slot = EquipmentSlots::EQUIPMENT_SLOT_HEAD; slot < EquipmentSlots::EQUIPMENT_SLOT_END; slot++)
 	{
 		uint16 pos = (255 << 8) | slot;
@@ -2161,7 +2108,7 @@ void PlayerBotSetting::UnequipFromAll()
 		Item* pItem = m_Player->GetItemByPos(255, slot);
 		if (!pItem)
 			continue;
-		if (!isBot && pItem->GetEntry() == 6948)
+        if (pItem->GetEntry() == 6948)
 			continue;
 		m_Player->DestroyItem(255, slot, true);
 	}
@@ -2175,7 +2122,7 @@ void PlayerBotSetting::UnequipFromAll()
 				Item* pItem = pBag->GetItemByPos(uint8(j));
 				if (!pItem)
 					continue;
-				if (!isBot && pItem->GetEntry() == 6948)
+                if (pItem->GetEntry() == 6948)
 					continue;
 				m_Player->DestroyItem(i, uint8(j), true);
 			}

@@ -371,7 +371,7 @@ void CustomTalkMenu::UpdateArenaItems(std::list<CustomItem*>& arenaItems)
 
 bool CustomTalkMenu::ProcessTeleport(CustomItem* pMenuItem, Player* player)
 {
-	if (!pMenuItem || pMenuItem->func == 0 || !player || player->IsPlayerBot())
+    if (!pMenuItem || pMenuItem->func == 0 || !player)
 		return false;
 	if (pMenuItem->param2 == 0 && pMenuItem->param3 == 0 && pMenuItem->param4 == 0)
 		return false;
@@ -390,7 +390,7 @@ bool CustomTalkMenu::ProcessTeleport(CustomItem* pMenuItem, Player* player)
 
 bool CustomTalkMenu::ProcessSummon(CustomItem* pMenuItem, Player* player)
 {
-	if (!pMenuItem || pMenuItem->func == 0 || !player || player->IsPlayerBot())
+    if (!pMenuItem || pMenuItem->func == 0 || !player)
 		return false;
 	if (pMenuItem->param1 <= 0)
 		return false;
@@ -405,7 +405,7 @@ bool CustomTalkMenu::ProcessSummon(CustomItem* pMenuItem, Player* player)
 
 bool CustomTalkMenu::ProcessSpell(CustomItem* pMenuItem, Player* player)
 {
-	if (!pMenuItem || pMenuItem->func == 0 || !player || player->IsPlayerBot())
+    if (!pMenuItem || pMenuItem->func == 0 || !player)
 		return false;
 	if (pMenuItem->param1 <= 0)
 		return false;
@@ -420,7 +420,7 @@ bool CustomTalkMenu::ProcessSpell(CustomItem* pMenuItem, Player* player)
 
 bool CustomTalkMenu::ProcessAura(CustomItem* pMenuItem, Player* player)
 {
-	if (!pMenuItem || pMenuItem->func == 0 || !player || player->IsPlayerBot())
+    if (!pMenuItem || pMenuItem->func == 0 || !player)
 		return false;
 	if (pMenuItem->param1 <= 0)
 		return false;
@@ -452,7 +452,7 @@ bool CustomTalkMenu::ProcessAura(CustomItem* pMenuItem, Player* player)
 
 bool CustomTalkMenu::ProcessItem(CustomItem* pMenuItem, Player* player)
 {
-	if (!pMenuItem || pMenuItem->func == 0 || !player || player->IsPlayerBot())
+    if (!pMenuItem || pMenuItem->func == 0 || !player)
 		return false;
 	if (pMenuItem->param1 <= 0)
 		return false;
@@ -468,7 +468,7 @@ bool CustomTalkMenu::ProcessItem(CustomItem* pMenuItem, Player* player)
 
 bool CustomTalkMenu::ProcessInterface(CustomItem* pMenuItem, Player* player)
 {
-	if (!pMenuItem || pMenuItem->func == 0 || !player || player->IsPlayerBot())
+    if (!pMenuItem || pMenuItem->func == 0 || !player)
 		return false;
 	if (pMenuItem->param1 <= 0)
 		return false;
@@ -502,7 +502,7 @@ bool CustomTalkMenu::ProcessInterface(CustomItem* pMenuItem, Player* player)
 
 bool CustomTalkMenu::ProcessPolymorph(CustomItem* pMenuItem, Player* player)
 {
-	if (!pMenuItem || pMenuItem->func == 0 || !player || player->IsPlayerBot())
+    if (!pMenuItem || pMenuItem->func == 0 || !player)
 		return false;
 	if (player->IsFlying())
 		return false;
@@ -527,7 +527,7 @@ bool CustomTalkMenu::ProcessPolymorph(CustomItem* pMenuItem, Player* player)
 
 bool CustomTalkMenu::ProcessArenaList(CustomItem* pMenuItem, Player* player)
 {
-	if (!pMenuItem || pMenuItem->func == 0 || !player || player->IsPlayerBot() || !player->GetSession())
+    if (!pMenuItem || pMenuItem->func == 0 || !player || !player->GetSession())
 		return false;
 	if (player->IsFlying())
 		return false;

@@ -431,8 +431,6 @@ class TC_GAME_API Group
         void BroadcastGroupUpdate(void);
 
         Rolls& GetAllRolls() { return RollId; }
-        void PlayerBotRoll(Player* player, const Roll& roll);
-        bool GroupExistPlayerBot();
         //void ResetRaidDungeon();
         //void OnLeaderChangePhase(Player* changeTarget, uint32 newPhase);
 

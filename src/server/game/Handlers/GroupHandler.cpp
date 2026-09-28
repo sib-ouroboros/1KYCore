@@ -295,8 +295,6 @@ void WorldSession::HandleSetPartyLeaderOpcode(WorldPackets::Party::SetPartyLeade
 
     if (!group->IsLeader(GetPlayer()->GetGUID()) || player->GetGroup() != group)
         return;
-    if (player->IsPlayerBot())
-        return;
 
     // Everything's fine, accepted.
     group->ChangeLeader(packet.TargetGUID, packet.PartyIndex);
@@ -566,18 +564,7 @@ void WorldSession::HandleDoReadyCheckOpcode(WorldPackets::Party::DoReadyCheck& p
     // everything's fine, do it
     group->StartReadyCheck(GetPlayer()->GetGUID(), packet.PartyIndex);
 
-    Group::MemberSlotList const& memList = group->GetMemberSlots();
-    for (Group::MemberSlot const& slot : memList)
-    {
-        Player* player = ObjectAccessor::FindPlayer(slot.guid);
-        if (!player || !player->IsAlive() || !player->IsPlayerBot() || !player->IsInWorld())
-            continue;
-        WorldPackets::Party::ReadyCheckResponse response;
-        response.PartyGUID = group->GetGUID();
-        response.Player = player->GetGUID();
-        response.IsReady = true;
-        group->BroadcastReadyCheck(response.Write());
-    }
+
 }
 
 void WorldSession::HandleReadyCheckResponseOpcode(WorldPackets::Party::ReadyCheckResponseClient& packet)

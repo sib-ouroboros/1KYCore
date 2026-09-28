@@ -70,7 +70,6 @@ public:
 
 	static void Initialize();
 	static bool BindingPlayerHomePosition(Player* player);
-	static bool CheckHunterPet(Player* player);
 	static uint32 FindPlayerTalentType(Player* player);
 	static uint32 RandomMountByLevel(uint32 level);
 	static bool MatchEquipmentSlot(uint8 pos, const ItemTemplate* itemTemplate);

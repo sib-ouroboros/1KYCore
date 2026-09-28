@@ -121,7 +121,7 @@ namespace {
         for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
         {
             Player* member = itr->GetSource();
-            if (member && !member->IsPlayerBot() && member->IsInWorld() && member->GetMap() == map)
+            if (member && member->IsInWorld() && member->GetMap() == map)
                 ++count;
         }
 

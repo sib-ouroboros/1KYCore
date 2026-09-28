@@ -75,7 +75,6 @@ public:
     static float DungeonBotEndureModify;
     static bool BotCanForceRevive;
     static bool BotCanSettingToMaster;
-    static int32 BotCritTakenAddion;
     static bool ControllSpellDiminishing;
     static bool ControllSpellFromDmgBreak;
     static bool DownBotArenaTeam;
@@ -91,14 +90,12 @@ public:
     static bool SpellHasReady(Player* player, uint32 spellID);
     static uint32 GetFirstNumberByString(std::string text);
     static std::string BuildItemLinkText(const ItemTemplate* pItemTemplate);
-    static void UpdatePlayerBotRoll(Player* player);
     static Item* FindItemFromAllBag(Player* player, uint32 entry, bool destroy = false);
     static Item* FindItemFromAllBag(Player* player, uint32 entry, uint8& bag, uint8& index);
     static bool DestroyItemFromAllBag(Player* player, Item* pItem);
     static Item* StoreNewItemByEntry(Player* player, uint32 entry, int32 count = 1);
     static uint32 FindMaxRankSpellByExist(Player* player, uint32 spellID);
     static uint32 FindPetMaxRankSpellByExist(Player* player, uint32 spellID);
-    static void PlayerBotTogglePVP(Player* player, bool pvp);
     static Position FindRadiusByNearDistance(Unit* pTargetUnit, float range, Unit* pRefUnit);
     static Position FindRadiusByFarDistance(Unit* pTargetUnit, float range, Unit* pRefUnit);
     static bool FindFirstCollisionPosition(Unit* pTargetUnit, float range, Unit* pRefUnit, Position& outPos);

@@ -274,7 +274,7 @@ void WorldSession::HandleChatMessage(ChatMsg type, uint32 lang, std::string msg,
                 SendChatPlayerNotfoundNotice(target);
                 return;
             }
-            if (!receiver->IsPlayerBot() && (lang != LANG_ADDON && !receiver->isAcceptWhispers() && receiver->GetSession()->HasPermission(rbac::RBAC_PERM_CAN_FILTER_WHISPERS) && !receiver->IsInWhisperWhiteList(sender->GetGUID())))
+            if ((lang != LANG_ADDON && !receiver->isAcceptWhispers() && receiver->GetSession()->HasPermission(rbac::RBAC_PERM_CAN_FILTER_WHISPERS) && !receiver->IsInWhisperWhiteList(sender->GetGUID())))
             {
                 SendChatPlayerNotfoundNotice(target);
                 return;
@@ -305,46 +305,6 @@ void WorldSession::HandleChatMessage(ChatMsg type, uint32 lang, std::string msg,
 
             GetPlayer()->Whisper(msg, Language(lang), receiver);
 
-            if (receiver->IsPlayerBot())
-            {
-                LocaleConstant locale = sender->GetSession()->GetSessionDbcLocale();
-                QueryResult result;
-
-                // SylvaniaCore : le message etait injecte brut dans la requete. Une
-                // apostrophe - "c'est", "j'ai" - la cassait, et le core repond a
-                // une erreur SQL par un abandon du processus : n importe quel joueur
-                // faisait tomber le royaume en chuchotant a un playerbot, et pouvait
-                // y injecter du SQL. On echappe, et on borne la longueur au passage.
-                std::string safeMsg = msg.size() > 255 ? msg.substr(0, 255) : msg;
-                WorldDatabase.EscapeString(safeMsg);
-
-                // Search for locale-specific response first
-                result = WorldDatabase.PQuery(
-                    "SELECT `reply` FROM `ai_talk_whisper_locale` "
-                    "WHERE locale = %u AND '%s' REGEXP cname "
-                    "ORDER BY RAND() LIMIT 1",
-                    locale, safeMsg.c_str()
-                );
-
-                // If nothing is found, English fallback
-                if (!result)
-                {
-                    result = WorldDatabase.PQuery(
-                        "SELECT `reply` FROM `ai_talk_whisper` "
-                        "WHERE '%s' REGEXP cname "
-                        "ORDER BY RAND() LIMIT 1",
-                        safeMsg.c_str()
-                    );
-                }
-
-                if (result)
-                {
-                    Field* fields = result->Fetch();
-                    std::string rpmsg = fields[0].GetString();
-                    receiver->Whisper(rpmsg, Language::LANG_COMMON, GetPlayer());
-                }
-            }
-            else
             {
                 // Normal Whisper logic for real players
                 if (!receiver->isAcceptWhispers() && !receiver->IsInWhisperWhiteList(sender->GetGUID()))

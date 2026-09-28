@@ -242,7 +242,6 @@ public:
 
             if (handler->needReportToTarget(player))
             {
-                if (!player->IsPlayerBot())
                 {
                     if (oldLevel == newLevel)
                         ChatHandler(player->GetSession()).PSendSysMessage(LANG_YOURS_LEVEL_PROGRESS_RESET, handler->GetNameLink().c_str());

@@ -202,13 +202,6 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPackets::Battleground::Batt
         if (grp->GetLeaderGUID() != _player->GetGUID())
             return;
 
-        if (grp->GroupExistPlayerBot())
-        {
-            std::string outString;
-            consoleToUtf8(std::string("??j???????????"), outString);
-            _player->Whisper(outString, Language::LANG_COMMON, _player);
-            return;
-        }
 
         ObjectGuid errorGuid;
         err = grp->CanJoinBattlegroundQueue(bg, bgQueueTypeId, 0, bg->GetMaxPlayersPerTeam(), false, 0, errorGuid);

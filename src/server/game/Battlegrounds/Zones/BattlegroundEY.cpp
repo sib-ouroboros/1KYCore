@@ -156,26 +156,7 @@ void BattlegroundEY::StartingEventOpenDoors()
     // Achievement: Flurry
     StartCriteriaTimer(CRITERIA_TIMED_TYPE_EVENT, BG_EY_EVENT_START_BATTLE);
 
-    for (BattlegroundPlayerMap::const_iterator itr = GetPlayers().begin(); itr != GetPlayers().end(); ++itr)
-    {
-        if (Player* player = ObjectAccessor::FindPlayer(itr->first))
-        {
-            TC_LOG_ERROR("bg.battleground", "BATTLEGROUND: start tele %s ok (map: %u) ", player->GetName().c_str(), GetMapId());
-            if (player && player->IsInWorld() && player->IsPlayerBot())
-                if (player->GetTeamId() == TEAM_ALLIANCE)
-                {
 
-                    player->TeleportTo(566, 2456.89f, 1602.02f, 1206.45f, 0);
-                    player->Relocate(2456.89f, 1602.02f, 1206.45f, 0);
-                }
-                else
-                {
-                    player->TeleportTo(566, 1875.77f, 1530.65f, 1206.87f, 0);
-                    player->Relocate(1875.77f, 1530.65f, 1206.87f, 0);
-                }
-
-        }
-    }
 }
 
 void BattlegroundEY::AddPoints(uint32 Team, uint32 Points)

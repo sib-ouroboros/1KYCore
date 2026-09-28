@@ -1462,11 +1462,6 @@ void Battleground::RelocateDeadPlayers(ObjectGuid guideGuid)
             if (closestGrave)
             {
                 player->TeleportTo(GetMapId(), closestGrave->Loc.X, closestGrave->Loc.Y, closestGrave->Loc.Z, player->GetOrientation());
-                if (player->IsPlayerBot())
-                {
-                    //needInNewQueuePlayers.push_back(player);
-                    player->UpdatePosition(closestGrave->Loc.X, closestGrave->Loc.Y, closestGrave->Loc.Z, player->GetOrientation(), true);
-                }
             }
         }
         ghostList.clear();
@@ -2062,20 +2057,7 @@ uint8 Battleground::GetUniqueBracketId() const
     return uint8(GetMinLevel() / 5) - 1; // 10 - 1, 15 - 2, 20 - 3, etc.
 }
 
-bool Battleground::ExistRealPlayer()
-{
-    for (BattlegroundPlayerMap::iterator itPlayer = m_Players.begin();
-        itPlayer != m_Players.end();
-        itPlayer++)
-    {
-        Player* player = ObjectAccessor::FindConnectedPlayer(itPlayer->first);
-        if (player && !player->IsPlayerBot())
-        {
-            return true;
-        }
-    }
-    return false;
-}
+
 
 void Battleground::RewardBattleground(Player* player, bool win)
 {

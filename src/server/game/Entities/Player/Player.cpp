@@ -502,15 +502,6 @@ void Player::SupplementAmmo()
 
 uint32 Player::ReupdateTalents()
 {
-    if (IsPlayerBot())
-    {
-        if (CalculateTalentsTiers() <= 0)
-        {
-            uint32 type = m_PlayerBotSetting->GetTalentType();
-            return (type > 2) ? 0 : type;
-        }
-        m_PlayerBotSetting->LearnTalents();
-    }
     uint32 type = m_PlayerBotSetting->GetTalentType();
     SaveToDB();
     return (type > 2) ? 0 : type;
@@ -1076,8 +1067,7 @@ void Player::HandleDrowning(uint32 time_diff)
                 // Calculate and deal damage
                 /// @todo Check this formula
                 uint32 damage = GetMaxHealth() / 5 + urand(0, getLevel()-1);
-                if (!IsPlayerBot())
-                    EnvironmentalDamage(DAMAGE_DROWNING, damage);
+                EnvironmentalDamage(DAMAGE_DROWNING, damage);
             }
             else if (!(m_MirrorTimerFlagsLast & UNDERWATER_INWATER))      // Update time in client if need
                 SendMirrorTimer(BREATH_TIMER, getMaxTimer(BREATH_TIMER), m_MirrorTimer[BREATH_TIMER], -1);
@@ -1294,7 +1284,7 @@ void Player::Update(uint32 p_time)
     {
         if (GetTypeId() == TYPEID_UNIT)
             UpdateCharmAI();
-        //if (GetAI() == nullptr)// && IsPlayerBot())
+
         //{
         //	if (i_AI)
         //	{
@@ -1382,7 +1372,7 @@ void Player::Update(uint32 p_time)
                     }
                 }
                 //120 degrees of radiant range, if player is not in boundary radius
-                else if (!IsPlayerBot() && !IsWithinBoundaryRadius(victim) && !HasInArc(2 * float(M_PI) / 3, victim))
+                else if (!IsWithinBoundaryRadius(victim) && !HasInArc(2 * float(M_PI) / 3, victim))
                 {
                     setAttackTimer(BASE_ATTACK, 100);
                     if (m_swingErrorMsg != 2)               // send single time (client auto repeat)
@@ -1410,7 +1400,7 @@ void Player::Update(uint32 p_time)
             {
                 if (!IsWithinMeleeRange(victim))
                     setAttackTimer(OFF_ATTACK, 100);
-                else if (!IsPlayerBot() && !IsWithinBoundaryRadius(victim) && !HasInArc(2 * float(M_PI) / 3, victim))
+                else if (!IsWithinBoundaryRadius(victim) && !HasInArc(2 * float(M_PI) / 3, victim))
                 {
                     setAttackTimer(BASE_ATTACK, 100);
                 }
@@ -2957,9 +2947,7 @@ void Player::InitTalentForLevel()
         ResetTalentSpecialization();
 
     uint32 talentTiers = CalculateTalentsTiers();
-	if (IsPlayerBot());
-		//SetFreeTalentPoints(0);
-	else if (!GetSession()->HasPermission(rbac::RBAC_PERM_SKIP_CHECK_MORE_TALENTS_THAN_ALLOWED))
+    if (!GetSession()->HasPermission(rbac::RBAC_PERM_SKIP_CHECK_MORE_TALENTS_THAN_ALLOWED))
 		for (uint32 t = talentTiers; t < MAX_TALENT_TIERS; ++t)
 			for (uint32 c = 0; c < MAX_TALENT_COLUMNS; ++c)
 				for (TalentEntry const* talent : sDB2Manager.GetTalentsByPosition(getClass(), t, c))
@@ -5486,13 +5474,6 @@ void Player::ApplyRatingMod(CombatRating combatRating, int32 value, bool apply)
 void Player::UpdateRating(CombatRating cr)
 {
     int32 amount = m_baseRatingValue[cr];
-    if (cr == CombatRating::CR_RESILIENCE_CRIT_TAKEN || cr == CombatRating::CR_RESILIENCE_PLAYER_DAMAGE || cr == CombatRating::CR_LIFESTEAL)
-    {
-        if (IsPlayerBot())
-        {
-            amount += int32(getLevel()) * BotUtility::BotCritTakenAddion;
-        }
-    }
     // Apply bonus from SPELL_AURA_MOD_RATING_FROM_STAT
     // stat used stored in miscValueB for this aura
     AuraEffectList const& modRatingFromStat = GetAuraEffectsByType(SPELL_AURA_MOD_RATING_FROM_STAT);
@@ -11736,11 +11717,8 @@ InventoryResult Player::CanStoreItems(Item** items, int count, uint32* offending
             return EQUIP_ERR_LOOT_GONE;
 
         // item it 'bind'
-        if (!otherPlayer || (!otherPlayer->IsPlayerBot() && !IsPlayerBot()))
-        {
-            if (item->IsBindedNotWith(this))
-                return EQUIP_ERR_ONLY_ONE_QUIVER;
-        }
+        if (item->IsBindedNotWith(this))
+            return EQUIP_ERR_ONLY_ONE_QUIVER;
 
         ItemTemplate const* pBagProto;
 
@@ -18613,10 +18591,7 @@ bool Player::LoadFromDB(ObjectGuid guid, CharacterDatabaseQueryHolder const& hol
     m_name = fields[2].GetString();
 
     // check name limitations
-    // SylvaniaCore (module BG BotFill): les sessions bots ne sont pas soumises au check de
-    // nom - sinon echec de login silencieux (return false) + flag rename pose en boucle
-    if (!GetSession()->IsBotSession() &&
-        (ObjectMgr::CheckPlayerName(m_name, GetSession()->GetSessionDbcLocale()) != CHAR_NAME_SUCCESS ||
+    if ((ObjectMgr::CheckPlayerName(m_name, GetSession()->GetSessionDbcLocale()) != CHAR_NAME_SUCCESS ||
         (!GetSession()->HasPermission(rbac::RBAC_PERM_SKIP_CHECK_CHARACTER_CREATION_RESERVEDNAME) && sObjectMgr->IsReservedName(m_name))))
     {
         CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_UPD_ADD_AT_LOGIN_FLAG);
@@ -21705,8 +21680,6 @@ void Player::_SaveActions(CharacterDatabaseTransaction& trans)
 
 void Player::_SaveAuras(CharacterDatabaseTransaction& trans)
 {
-    if (IsPlayerBot())
-        return;
 
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_CHAR_AURA_EFFECT);
     stmt->setUInt64(0, GetGUID().GetCounter());
@@ -24678,7 +24651,7 @@ void Player::LeaveBattleground(bool teleportToEntryPoint)
     {
         //if (this->IsGameMaster())
         //{
-        if (bg->isBattleground() && !IsPlayerBot() && IsGameMaster())
+        if (bg->isBattleground() && IsGameMaster())
         {
             bg->EndBattleground((GetTeamId() == TEAM_ALLIANCE) ? HORDE : ALLIANCE);
             //bg->EndBattleground(HORDE);
@@ -24688,7 +24661,7 @@ void Player::LeaveBattleground(bool teleportToEntryPoint)
         bg->RemovePlayerAtLeave(GetGUID(), teleportToEntryPoint, true);
 
         // call after remove to be sure that player resurrected for correct cast
-        if (bg->isBattleground() && !IsGameMaster() && sWorld->getBoolConfig(CONFIG_BATTLEGROUND_CAST_DESERTER) && !IsPlayerBot())
+        if (bg->isBattleground() && !IsGameMaster() && sWorld->getBoolConfig(CONFIG_BATTLEGROUND_CAST_DESERTER))
         {
             if (bg->GetStatus() == STATUS_IN_PROGRESS || bg->GetStatus() == STATUS_WAIT_JOIN)
             {
@@ -29129,9 +29102,6 @@ void Player::SendTimeSync()
     m_timeSyncTimer = 10000;
     m_timeSyncServer = getMSTime();
 
-    // Check if it is a PlayerBot
-    if (IsPlayerBot())
-        return;
 
     if (m_timeSyncQueue.size() > 3)
         TC_LOG_ERROR("network", "Player::SendTimeSync: Did not receive CMSG_TIME_SYNC_RESP for over 30 seconds from '%s' (%s), possible cheater",

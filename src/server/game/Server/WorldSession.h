@@ -1607,7 +1607,6 @@ class TC_GAME_API WorldSession
                     return true;
             return false;
         }
-        virtual bool IsBotSession() { return false; }
 
         void HandleLearnPvpTalentsOpcode(WorldPackets::Talent::LearnPvpTalents& packet);
         void HandleLearnTalentsOpcode(WorldPackets::Talent::LearnTalents& packet);

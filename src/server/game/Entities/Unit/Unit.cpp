@@ -771,7 +771,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
 
     if (IsAIEnabled)
         GetAI()->DamageDealt(victim, damage, damagetype);
-    //else if (victim->GetMap()->IsDungeon() && ToPlayer() && !IsPlayerBot())
+
     //{
     //	Player* vicPlayer = victim->ToPlayer();
     //	if (!vicPlayer->InBattleground())
@@ -782,7 +782,7 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
         Player* vicPlayer = victim->ToPlayer();
         if (BotMovementAI* pMAI = dynamic_cast<BotMovementAI*>(vicPlayer->GetAI()))
             pMAI->DamageEndure(this, damage, damagetype);
-        //else if (victim->GetMap()->IsDungeon() && !vicPlayer->InBattleground() && !victim->IsPlayerBot())
+
         //{
         //	damage *= 1.0f / (BotUtility::DungeonBotEndureModify * 0.95f);
         //}
@@ -9263,12 +9263,12 @@ Unit* Creature::SelectVictim()
     }
 
     // enter in evade mode in other case
-    if (!IsPlayerBot() && !HasUnitState(UNIT_STATE_EVADE) && IsInCombat())
+    if (!HasUnitState(UNIT_STATE_EVADE) && IsInCombat())
     {
         if (GetVictim())
         {
             if (GetVictim()->IsInWorld())
-                if (GetVictim()->GetTypeId() == TYPEID_PLAYER && !GetVictim()->IsPlayerBot())
+                if (GetVictim()->GetTypeId() == TYPEID_PLAYER)
                 {
                     if (GetVictim()->ToPlayer()->IsGameMaster())
                     {
@@ -9284,11 +9284,6 @@ Unit* Creature::SelectVictim()
                 target = m_ThreatManager.getHostilTarget();
             if (target && CanCreatureAttack(target))
             {
-                if (target->IsPlayerBot() && !target->ToPlayer()->GetGroup())
-                {
-                    AI()->EnterEvadeMode(CreatureAI::EVADE_REASON_NO_HOSTILES);
-                    return nullptr;
-                }
 
                 //if (target->ToPlayer()->GetGroup() || target->ToPlayer() || target->IsPet() )
                 if ((!target->HasUnitState(UNIT_STATE_UNATTACKABLE) && GetDistance(target) <= 60.0f) && ((!target->HasAura(5384) && !target->HasAura(1784) && !target->HasAura(1785) && !target->HasAura(1786) && !target->HasAura(1787) && !target->HasAura(1856) && !target->HasAura(1857) && !target->HasAura(66))))
@@ -9298,38 +9293,13 @@ Unit* Creature::SelectVictim()
                 }
             }
         }
-        /*
-       if (!target)
-       {
-                target = SelectNearestTargetInAttackDistance(28.0f);
-               if (target && _IsTargetAcceptable(target) && CanCreatureAttack(target) )
-       {
-       if (target->IsPlayerBot() && !target->ToPlayer()->GetGroup())
-       {
-        AI()->EnterEvadeMode(CreatureAI::EVADE_REASON_NO_HOSTILES);
-       return nullptr;
-       }
 
-       //if (target->ToPlayer()->GetGroup() || target->ToPlayer() || target->IsPet() )
-       if ((!target->HasUnitState(UNIT_STATE_UNATTACKABLE) && GetDistance(target) <=50.0f) && ( (!target->HasAura(5384)  && !target->HasAura(1784) && !target->HasAura(1785) && !target->HasAura(1786) && !target->HasAura(1787) && !target->HasAura(1856) && !target->HasAura(1857) && !target->HasAura(66))))
-       {
-           //AI()->AttackStart(target);
-                   return target;
-        }
-        }
-       }
-       */
         if (!target)
         {
-            if (GetVictim() && !IsPlayerBot())
+            if (GetVictim())
             {
                 target = GetVictim();
                 //GetVictim()->IsInWorld() &&
-                if (target->IsPlayerBot() && !target->ToPlayer()->GetGroup())
-                {
-                    AI()->EnterEvadeMode(CreatureAI::EVADE_REASON_NO_HOSTILES);
-                    return nullptr;
-                }
                 //if (target->ToPlayer()->GetGroup() || target->ToPlayer() || target->IsPet() )
                 if (CanCreatureAttack(target))
                     if ((!target->HasUnitState(UNIT_STATE_UNATTACKABLE) && GetDistance(target) <= 60.0f) && ((!target->HasAura(5384) && !target->HasAura(1784) && !target->HasAura(1785) && !target->HasAura(1786) && !target->HasAura(1787) && !target->HasAura(1856) && !target->HasAura(1857) && !target->HasAura(66))))
@@ -10249,18 +10219,7 @@ void Unit::CleanupsBeforeDelete(bool finalCleanup)
     WorldObject::CleanupsBeforeDelete(finalCleanup);
 }
 
-bool Unit::IsPlayerBot()
-{
-    //if (GetTypeId() != TYPEID_PLAYER)
-    //	return false;
-    Player* player = ToPlayer();//dynamic_cast<Player*> (this);
-    if (!player)
-        return false;
-    WorldSession* pSession = player->GetSession();
-    if (!pSession)
-        return false;
-    return pSession->IsBotSession();
-}
+
 
 void Unit::UpdateCharmAI()
 {
@@ -11194,8 +11153,6 @@ void Unit::ApplyAttackTimePercentMod(WeaponAttackType att, float val, bool apply
                 pet->UpdatePlayerFieldModPetHaste();
         }
 
-    if (IsPlayerBot() && getLevel() < 50)
-        return;
     float remainingTimePct = float(m_attackTimer[att]) / (m_baseAttackSpeed[att] * m_modAttackSpeedPct[att]);
     if (val > 0)
     {
@@ -11222,8 +11179,6 @@ void Unit::ApplyAttackTimePercentMod(WeaponAttackType att, float val, bool apply
 
 void Unit::ApplyCastTimePercentMod(float val, bool apply)
 {
-    if (IsPlayerBot() && getLevel() < 50)
-        return;
 
     if (val > 0)
     {
