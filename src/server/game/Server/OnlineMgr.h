@@ -23,6 +23,8 @@
 #include "SharedDefines.h"
 #include "DatabaseEnv.h"
 #include "json.h"
+#include <mutex>
+#include <set>
 
 struct ToolCharaterInfo
 {
@@ -80,6 +82,9 @@ public:
 
 	static OnlineMgr* instance();
 
+    void LoadAccounts();
+    static bool IsLegacyBotAccountName(std::string const& name);
+    bool IsLegacyBotAccount(uint32 accountId);
 	bool AddNewAccount(uint32 guid, std::string& name);
 	bool CharaterOnline(uint32 accID, uint32 charID, const std::string& charName, uint16 race, uint16 pro, uint16 lv, uint8 talent);
 	bool CharaterOffline(uint32 accID);
@@ -89,7 +94,8 @@ public:
 
 private:
 	TOOL_ACC m_OnlinePlayerAcc;
-	TOOL_ACC m_OnlineBotAcc;
+    // Preserve legacy account filtering and character-retention protection.
+    std::set<uint32> m_LegacyBotAccounts;
 
 public:
 	static std::mutex g_uniqueMgrLock;

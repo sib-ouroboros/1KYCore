@@ -59,7 +59,6 @@
 #include "SystemPackets.h"
 #include "Util.h"
 #include "World.h"
-#include "PlayerBotMgr.h"
 #include "OnlineMgr.h"
 #include "BotMovementAI.h"
 #include <Config.h>
@@ -748,7 +747,6 @@ void WorldSession::HandleCharCreateOpcode(WorldPackets::Character::CreateCharact
 
             newChar.CleanupsBeforeDelete();
 
-            sPlayerBotMgr->OnAccountBotCreate(newChar.GetGUID(), GetAccountId(), newChar.GetName(), newChar.GetByteValue(PLAYER_BYTES_3, PLAYER_BYTES_3_OFFSET_GENDER), newChar.getRace(), newChar.getClass(), newChar.getLevel());
             //break;
         };
 
@@ -819,7 +817,6 @@ void WorldSession::HandleCharDeleteOpcode(WorldPackets::Character::CharDelete& c
     sGuildFinderMgr->RemoveAllMembershipRequestsFromPlayer(charDelete.Guid);
     sCalendarMgr->RemoveAllPlayerEventsAndInvites(charDelete.Guid);
     Player::DeleteFromDB(charDelete.Guid, accountId);
-    sPlayerBotMgr->OnAccountBotDelete(charDelete.Guid, accountId);
 
     SendCharDelete(CHAR_DELETE_SUCCESS);
 }

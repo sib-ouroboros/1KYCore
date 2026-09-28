@@ -15,6 +15,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "WorldSession.h"
+#include "BotAITool.h"
 #include "Map.h"
 #include "ToolSocket.h"
 #include "BigNumber.h"
@@ -22,7 +24,6 @@
 #include "SharedDefines.h"
 #include "World.h"
 #include "AccountMgr.h"
-#include "PlayerBotMgr.h"
 #include "OnlineMgr.h"
 #include "ToolSocketMgr.h"
 #include "Config.h"
@@ -36,6 +37,7 @@
 using boost::asio::ip::tcp;
 
 ToolSocket* ToolSocket::g_Tool = NULL;
+std::mutex ToolSocket::_commandLock;
 
 ToolSocket::ToolSocket(tcp::socket&& socket)
 	: Socket(std::move(socket)), _authed(false)
@@ -76,7 +78,7 @@ void ToolSocket::Start()
 bool ToolSocket::Update()
 {
 	{
-		std::unique_lock<std::mutex> sessionGuard(PlayerBotMgr::g_uniqueLock);
+        std::unique_lock<std::mutex> sessionGuard(_commandLock);
 		while (_bufferQueue.size())
 		{
 			MessageBuffer* buffer = _bufferQueue.front();
@@ -94,7 +96,7 @@ bool ToolSocket::Update()
 
 void ToolSocket::ProcessToolCmd()
 {
-	std::unique_lock<std::mutex> sessionGuard(PlayerBotMgr::g_uniqueLock);
+    std::unique_lock<std::mutex> sessionGuard(_commandLock);
 	while (_processCmd.size())
 	{
 		Json::Value& jsonCmd = _processCmd.front();
@@ -326,7 +328,7 @@ void ToolSocket::ProcessCmd(std::string cmdString)
 		TC_LOG_ERROR("ToolSocket", "Parse tool string error. text is %s", cmdString.c_str());
 		return;
 	}
-	std::unique_lock<std::mutex> sessionGuard(PlayerBotMgr::g_uniqueLock);
+    std::unique_lock<std::mutex> sessionGuard(_commandLock);
 	_processCmd.push(jsonValue);
 	//std::unique_lock<std::mutex> sessionGuard(_consoleLock, std::defer_lock);
 	//sessionGuard.lock();
@@ -410,8 +412,7 @@ void ToolSocket::CmdCreateAccount(Json::Value& info)
 {
 	std::string name = info["cmdName"].asString();
 	std::string pass = info["cmdPass"].asString();
-	std::string lowerName = boost::algorithm::to_lower_copy(name);
-	bool isBotAcc = sPlayerBotMgr->IsBotAccuntName(lowerName);
+    bool isBotAcc = OnlineMgr::IsLegacyBotAccountName(name);
 	if (isBotAcc || name.empty() || pass.empty())
 	{
 		Json::Value test;
@@ -425,8 +426,8 @@ void ToolSocket::CmdCreateAccount(Json::Value& info)
 	createResult = sAccountMgr->CreateAccount(name, pass, "") == AccountOpResult::AOR_OK;
 	if (createResult)
 	{
-		sPlayerBotMgr->UpdateLastAccountIndex(name);
-		sPlayerBotMgr->AddNewAccountBotBaseInfo(name);
+        Utf8ToUpperOnlyLatin(name);
+        sOnlineMgr->AddNewAccount(AccountMgr::GetId(name), name);
 	}
 	SendNormalResult("create_acc", createResult);
 }

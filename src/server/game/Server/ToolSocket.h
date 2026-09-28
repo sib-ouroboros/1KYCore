@@ -25,6 +25,7 @@
 #include "DatabaseEnv.h"
 #include "json.h"
 #include <chrono>
+#include <mutex>
 #include <boost/asio/ip/tcp.hpp>
 
 using boost::asio::ip::tcp;
@@ -80,6 +81,7 @@ private:
 	void CmdDisableDKQuest(Json::Value& info);
 
 private:
+    static std::mutex _commandLock;
 	std::mutex _consoleLock;
 	bool _authed;
 	std::queue<MessageBuffer*> _bufferQueue;

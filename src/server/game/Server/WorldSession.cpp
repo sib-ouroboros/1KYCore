@@ -50,7 +50,6 @@
 #include "WardenWin.h"
 #include "World.h"
 #include "WorldSocket.h"
-#include "PlayerBotMgr.h"
 #include "OnlineMgr.h"
 
 namespace {

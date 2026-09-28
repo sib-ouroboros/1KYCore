@@ -19,6 +19,8 @@
     \ingroup world
 */
 
+#include "BotAITool.h"
+#include "OnlineMgr.h"
 #include "Map.h"
 #include "World.h"
 #include "BattlePetDataStore.h"
@@ -100,7 +102,6 @@
 #include "WorldSession.h"
 #include "WorldSocket.h"
 #include "PetBattleSystem.h"
-#include "PlayerBotMgr.h"
 #include "PlayerBotSetting.h"
 #include "AIWaypointsMgr.h"
 #include "MMapManager.h"
@@ -1871,8 +1872,8 @@ void World::SetInitialWorldSettings()
     if (VMAP::VMapManager2* vmmgr2 = dynamic_cast<VMAP::VMapManager2*>(VMAP::VMapFactory::createOrGetVMapManager()))
         vmmgr2->InitializeThreadUnsafe(mapData);
 
-    TC_LOG_INFO("server.loading", "Loading Player bot base store...");
-    sPlayerBotMgr->LoadPlayerBotBaseInfo();
+    TC_LOG_INFO("server.loading", "Loading account directory...");
+    sOnlineMgr->LoadAccounts();
 
     TC_LOG_INFO("server.loading", "Loading AI Way points...");
     if (!sAIWPMgr->LoadAIWaypoints())

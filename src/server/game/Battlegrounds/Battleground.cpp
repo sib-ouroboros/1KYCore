@@ -43,7 +43,6 @@
 #include "WorldStatePackets.h"
 #include "CreatureAIImpl.h"
 #include <cstdarg>
-#include "PlayerBotMgr.h"
 
 template<class Do>
 void Battleground::BroadcastWorker(Do& _do)

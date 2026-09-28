@@ -22,7 +22,6 @@
 #include "SpellAuras.h"
 #include "SpellMgr.h"
 #include "Group.h"
-#include "PlayerBotMgr.h"
 
 CustomTalkMenu::~CustomTalkMenu()
 {

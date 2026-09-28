@@ -15,12 +15,13 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "Timer.h"
 #include "OnlineMgr.h"
-#include "PlayerBotMgr.h"
 #include "World.h"
 #include "WorldSession.h"
 
 #include <boost/algorithm/string.hpp>
+#include <cstdlib>
 
 std::mutex OnlineMgr::g_uniqueMgrLock;
 
@@ -68,25 +69,54 @@ OnlineMgr* OnlineMgr::instance()
 	return &instance;
 }
 
+void OnlineMgr::LoadAccounts()
+{
+    uint32 oldMSTime = getMSTime();
+    QueryResult result = LoginDatabase.Query("SELECT id, username FROM account");
+    if (!result)
+    {
+        TC_LOG_INFO("server.loading", ">> Loaded 0 accounts");
+        return;
+    }
+
+    uint32 count = 0;
+    do
+    {
+        Field* fields = result->Fetch();
+        uint32 accountId = fields[0].GetUInt32();
+        std::string name = fields[1].GetString();
+        if (AddNewAccount(accountId, name))
+            ++count;
+    } while (result->NextRow());
+
+    TC_LOG_INFO("server.loading", ">> Loaded %u accounts in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
+}
+
+bool OnlineMgr::IsLegacyBotAccountName(std::string const& name)
+{
+    // Keep the historical classification until legacy data is migrated explicitly.
+    std::string lowerName = boost::algorithm::to_lower_copy(name);
+    if (lowerName.size() < 10 || lowerName.substr(0, 9) != "playerbot")
+        return false;
+    return std::atoi(lowerName.substr(9).c_str()) > 0;
+}
+
+bool OnlineMgr::IsLegacyBotAccount(uint32 accountId)
+{
+    std::unique_lock<std::mutex> guard(g_uniqueMgrLock);
+    return m_LegacyBotAccounts.find(accountId) != m_LegacyBotAccounts.end();
+}
+
 bool OnlineMgr::AddNewAccount(uint32 guid, std::string& name)
 {
 	if (guid == 0 || name.empty())
 		return false;
 	std::unique_lock<std::mutex> sessionGuard(OnlineMgr::g_uniqueMgrLock);
-	std::string lowerName = boost::algorithm::to_lower_copy(name);
-	bool isBotAcc = sPlayerBotMgr->IsBotAccuntName(lowerName);
-	if (isBotAcc)
-	{
-		if (m_OnlineBotAcc.find(guid) != m_OnlineBotAcc.end())
-			return false;
-		m_OnlineBotAcc[guid] = ToolAccountInfo(guid, name.c_str());
-	}
-	else
-	{
-		if (m_OnlinePlayerAcc.find(guid) != m_OnlinePlayerAcc.end())
-			return false;
-		m_OnlinePlayerAcc[guid] = ToolAccountInfo(guid, name.c_str());
-	}
+    if (IsLegacyBotAccountName(name))
+        return m_LegacyBotAccounts.insert(guid).second;
+    if (m_OnlinePlayerAcc.find(guid) != m_OnlinePlayerAcc.end())
+        return false;
+    m_OnlinePlayerAcc[guid] = ToolAccountInfo(guid, name.c_str());
 	return true;
 }
 
@@ -96,19 +126,6 @@ bool OnlineMgr::CharaterOnline(uint32 accID, uint32 charID, const std::string& c
 	if (m_OnlinePlayerAcc.find(accID) != m_OnlinePlayerAcc.end())
 	{
 		ToolAccountInfo& info = m_OnlinePlayerAcc.find(accID)->second;
-		if (info.online.guid != 0)
-			return false;
-		info.online.guid = charID;
-		info.online.name = charName;
-		info.online.race = race;
-		info.online.profession = pro;
-		info.online.level = lv;
-		info.online.talent = talent;
-		return true;
-	}
-	else if (m_OnlineBotAcc.find(accID) != m_OnlineBotAcc.end())
-	{
-		ToolAccountInfo& info = m_OnlineBotAcc.find(accID)->second;
 		if (info.online.guid != 0)
 			return false;
 		info.online.guid = charID;
@@ -138,19 +155,6 @@ bool OnlineMgr::CharaterOffline(uint32 accID)
 		info.online.talent = -1;
 		return true;
 	}
-	else if (m_OnlineBotAcc.find(accID) != m_OnlineBotAcc.end())
-	{
-		ToolAccountInfo& info = m_OnlineBotAcc.find(accID)->second;
-		if (info.online.guid == 0)
-			return false;
-		info.online.guid = 0;
-		info.online.name.clear();
-		info.online.race = 0;
-		info.online.profession = 0;
-		info.online.level = 0;
-		info.online.talent = -1;
-		return true;
-	}
 	return false;
 }
 
@@ -160,15 +164,6 @@ bool OnlineMgr::CharaterState(uint32 accID, uint32 charID, uint16 lv, uint8 tale
 	if (m_OnlinePlayerAcc.find(accID) != m_OnlinePlayerAcc.end())
 	{
 		ToolAccountInfo& info = m_OnlinePlayerAcc.find(accID)->second;
-		if (info.online.guid == 0)
-			return false;
-		info.online.level = lv;
-		info.online.talent = talent;
-		return true;
-	}
-	else if (m_OnlineBotAcc.find(accID) != m_OnlineBotAcc.end())
-	{
-		ToolAccountInfo& info = m_OnlineBotAcc.find(accID)->second;
 		if (info.online.guid == 0)
 			return false;
 		info.online.level = lv;

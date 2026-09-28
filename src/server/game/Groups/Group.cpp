@@ -44,7 +44,6 @@
 #include "Util.h"
 #include "World.h"
 #include "WorldSession.h"
-#include "PlayerBotMgr.h"
 
 Roll::Roll(LootItem const& li) : itemid(li.itemid),
 itemRandomPropId(li.randomPropertyId), itemRandomSuffix(li.randomSuffix), itemCount(li.count),

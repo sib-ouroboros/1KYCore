@@ -15,8 +15,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "OnlineMgr.h"
 #include "Player.h"
-#include "PlayerBotMgr.h"
 #include "AreaTrigger.h"
 #include "AreaTriggerPackets.h"
 #include "AccountMgr.h"
@@ -4595,7 +4595,7 @@ void Player::DeleteOldCharacters(uint32 keepDays)
          {
             Field* fields = result->Fetch();
             uint32 account = fields[1].GetUInt32();
-            if (account > 0 && sPlayerBotMgr->GetPlayerBotAccountInfo(account))
+            if (account > 0 && sOnlineMgr->IsLegacyBotAccount(account))
                 continue;
             Player::DeleteFromDB(ObjectGuid::Create<HighGuid::Player>(fields[0].GetUInt64()), account, true, true);
          }

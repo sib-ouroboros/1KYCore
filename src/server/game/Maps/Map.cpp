@@ -52,7 +52,6 @@
 #include "World.h"
 #include "WorldSession.h"
 #include "WildBattlePet.h"
-#include "PlayerBotMgr.h"
 #include "Config.h"
 
 u_map_magic MapMagic        = { {'M','A','P','S'} };
