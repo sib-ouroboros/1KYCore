@@ -416,7 +416,6 @@ class BattlegroundEY : public Battleground
         void HandleKillPlayer(Player* player, Player* killer) override;
         WorldSafeLocsEntry const* GetClosestGraveYard(Player* player) override;
         WorldSafeLocsEntry const* GetExploitTeleportLocation(Team team) override;
-        Creature const* GetClosestGraveCreature(const Player* player) override;
         bool EYPointIsControl(uint32 team, uint32 pointIndex);
 
         bool SetupBattleground() override;

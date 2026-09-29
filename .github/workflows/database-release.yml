@@ -7,6 +7,7 @@ on:
       - .github/workflows/database-release.yml
       - contrib/release/prepare_database_release.py
       - docs/database-release.md
+      - sql/updates/**
   workflow_dispatch:
     inputs:
       tag:

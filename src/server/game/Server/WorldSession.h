@@ -1600,7 +1600,7 @@ class TC_GAME_API WorldSession
         void HandleUpdateMissileTrajectory(WorldPackets::Spells::UpdateMissileTrajectory& packet);
 
         // SylvaniaCore : m_Socket est un tableau -- le comparer a NULL testait son
-        // adresse, donc renvoyait toujours true (y compris pour un playerbot).
+        // adresse, donc renvoyait toujours true, meme sans connexion.
         bool HasSocket() const
         {
             for (std::shared_ptr<WorldSocket> const& socket : m_Socket)

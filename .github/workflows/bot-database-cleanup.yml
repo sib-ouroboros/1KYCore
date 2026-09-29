@@ -1,0 +1,47 @@
+name: Bot database cleanup
+
+on:
+  push:
+    branches: [cleanup/remove-bots]
+    paths:
+      - sql/updates/**
+      - contrib/tests/**
+      - .github/workflows/bot-database-cleanup.yml
+  pull_request:
+    paths:
+      - sql/updates/**
+      - contrib/tests/**
+      - .github/workflows/bot-database-cleanup.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mysql:
+    runs-on: ubuntu-22.04
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: disposable-test-only
+          MYSQL_ROOT_HOST: '%'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pdisposable-test-only"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install MySQL client
+        run: sudo apt-get update && sudo apt-get install -y mysql-client
+      - name: Test fresh, existing and empty databases
+        env:
+          MYSQL_PWD: disposable-test-only
+          MYSQL_DISPOSABLE_TEST_SERVER: '1'
+        run: python contrib/tests/test_bot_database_cleanup.py

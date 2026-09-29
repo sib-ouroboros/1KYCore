@@ -102,21 +102,7 @@ namespace {
         if (!group)
             return 1;
 
-        // Les playerbots ne comptent pas.
-        //
-        // SIGNALE EN JEU : « quatre mercenaires contre un gangreseigneur elite,
-        // ils meurent tous, alors que seul j y arrive ».
-        //
-        // Solocraft existe pour compenser l absence de joueurs. Un mercenaire
-        // n en remplace pas un : sa couche de combat est restee en identifiants
-        // de sorts WotLK et il ne lance qu une poignee de ses capacites. Le
-        // compter comme un joueur entier divisait le bonus de l employeur par
-        // cinq sans rien apporter en face -- l escorte etait strictement
-        // perdante, un piege plutot qu un arbitrage.
-        //
-        // Cela supprime aussi une oscillation : chaque mercenaire qui debarquait
-        // faisait recalculer et fondre le buff d un cran, d ou les cycles de
-        // retrait/reapplication visibles dans le journal.
+        // Count group members currently present in this instance.
         uint32 count = 0;
         for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
         {
@@ -125,9 +111,7 @@ namespace {
                 ++count;
         }
 
-        // Un groupe entierement compose de bots retombe sur 1 : ils recoivent
-        // alors le meme bonus qu un joueur seul, ce qui est coherent avec le
-        // principe -- personne de reel n est la pour porter le contenu.
+        // Keep a nonzero divisor while members enter or leave the instance.
         return std::max<uint32>(count, 1);
     }
 

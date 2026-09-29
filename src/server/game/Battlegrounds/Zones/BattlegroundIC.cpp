@@ -910,41 +910,6 @@ WorldSafeLocsEntry const * BattlegroundIC::GetExploitTeleportLocation(Team team)
     return sWorldSafeLocsStore.LookupEntry(team == ALLIANCE ? IC_EXPLOIT_TELEPORT_LOCATION_ALLIANCE : IC_EXPLOIT_TELEPORT_LOCATION_HORDE);
 }
 
-Creature const* BattlegroundIC::GetClosestGraveCreature(const Player* player)
-{
-    TeamId teamIndex = GetTeamIndexByTeamId(player->GetTeam());
-    std::vector<uint8> nodes;
-    for (uint8 i = 0; i < MAX_NODE_TYPES; ++i)
-    {
-        if (nodePoint[i].faction == player->GetTeamId())
-            nodes.push_back(i);
-    }
-    int32 creatureIndex = BG_IC_NPC_SPIRIT_GUIDE_1 + ((player->GetTeamId() == TEAM_ALLIANCE) ? ICNodePointType::NODE_TYPE_GRAVEYARD_A : ICNodePointType::NODE_TYPE_GRAVEYARD_H) - 2;
-    if (!nodes.empty())
-    {
-        float player_x = player->GetPositionX();
-        float player_y = player->GetPositionY();
-
-        float mindist = 999999.0f;
-        for (uint8 i = 0; i < nodes.size(); ++i)
-        {
-            WorldSafeLocsEntry const* entry = sWorldSafeLocsStore.LookupEntry(BG_IC_GraveyardIds[nodes[i]]);
-            if (!entry)
-                continue;
-            uint32 index = BG_IC_NPC_SPIRIT_GUIDE_1 + nodePoint[nodes[i]].nodeType - 2;
-            float dist = (entry->Loc.X - player_x) * (entry->Loc.X - player_x) + (entry->Loc.Y - player_y) * (entry->Loc.Y - player_y);
-            if (mindist > dist && !(BgCreatures[index].IsEmpty()))
-            {
-                mindist = dist;
-                creatureIndex = index;
-            }
-        }
-        nodes.clear();
-    }
-    if (BgCreatures[creatureIndex].IsEmpty())
-        return NULL;
-    return GetBGCreature(creatureIndex);
-}
 
 GameObject const* BattlegroundIC::GetClosestEnemyFlagByRange(Player* player, float range)
 {

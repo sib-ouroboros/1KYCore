@@ -1652,7 +1652,6 @@ class BattlegroundAV : public Battleground
 
         WorldSafeLocsEntry const* GetClosestGraveYard(Player* player) override;
         WorldSafeLocsEntry const* GetExploitTeleportLocation(Team team) override;
-        Creature const* GetClosestGraveCreature(const Player* player) override;
         GameObject const* GetClosestEnemyNodeObject(Player* player);
         GameObject const* GetEnemyNodeObjectByRange(Player* player, uint32 range);
         GameObject const* GetNodeObjectByEnemyType(Player* player, BG_AV_Nodes nodeType);

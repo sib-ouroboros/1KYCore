@@ -678,88 +678,9 @@ WorldSafeLocsEntry const* BattlegroundAB::GetExploitTeleportLocation(Team team)
     return sWorldSafeLocsStore.LookupEntry(team == ALLIANCE ? AB_EXPLOIT_TELEPORT_LOCATION_ALLIANCE : AB_EXPLOIT_TELEPORT_LOCATION_HORDE);
 }
 
-Creature const* BattlegroundAB::GetClosestGraveCreature(const Player* player)
-{
-    TeamId teamIndex = GetTeamIndexByTeamId(player->GetTeam());
-    std::vector<uint8> nodes;
-    for (uint8 i = 0; i < BG_AB_DYNAMIC_NODES_COUNT; ++i)
-    {
-        if (m_Nodes[i] == teamIndex + 3)
-            nodes.push_back(i);
-    }
-    int32 creatureIndex = (player->GetTeamId() == TEAM_ALLIANCE) ? BG_AB_BattlegroundNodes::BG_AB_SPIRIT_ALIANCE : BG_AB_BattlegroundNodes::BG_AB_SPIRIT_HORDE;
-    if (!nodes.empty())
-    {
-        float plr_x = player->GetPositionX();
-        float plr_y = player->GetPositionY();
-
-        float mindist = 999999.0f;
-        for (uint8 i = 0; i < nodes.size(); ++i)
-        {
-            WorldSafeLocsEntry const* entry = sWorldSafeLocsStore.LookupEntry(BG_AB_GraveyardIds[nodes[i]]);
-            if (!entry)
-                continue;
-            float dist = (entry->Loc.X - plr_x) * (entry->Loc.X - plr_x) + (entry->Loc.Y - plr_y) * (entry->Loc.Y - plr_y);
-            if (mindist > dist && !(BgCreatures[nodes[i]].IsEmpty()))
-            {
-                mindist = dist;
-                creatureIndex = nodes[i];
-            }
-        }
-        nodes.clear();
-    }
-    if (BgCreatures[creatureIndex].IsEmpty())
-        return NULL;
-    return GetBGCreature(creatureIndex);
-}
-
-GameObject const* BattlegroundAB::GetNearGameObjectFlag(const Player* player)
-{
-    // SylvaniaCore (module BG BotFill): reecriture. L ancienne version reperait le noeud via
-    // un objet d aura avec des indices approximatifs et un rayon de 6 m : les bots cliquaient
-    // une banniere a 30 m (sort d ouverture hors portee, aucune capture possible).
-    // On renvoie la banniere cliquable (etat courant du noeud) la plus proche dans 30 m ;
-    // l IA rapproche le bot avant de lancer le sort.
-    if (!player)
-        return NULL;
-    TeamId teamIndex = GetTeamIndexByTeamId(player->GetTeam());
-    GameObject* best = NULL;
-    float bestDist = 30.0f;
-    for (uint8 node = 0; node < BG_AB_DYNAMIC_NODES_COUNT; ++node)
-    {
-        uint8 status = m_Nodes[node];
-        // cliquable si neutre, ou tenu/conteste par l equipe adverse
-        if (!(status == 0 || teamIndex == status % 2))
-            continue;
-        // Ce coeur n'a QU'UNE banniere par noeud, aux indices 0 a 4
-        // (BG_AB_OBJECT_BANNER + node) : _ChangeBanner modifie son visuel
-        // selon l'etat au lieu d'echanger huit objets distincts.
-        //
-        // L'indexation node*8+status ecrite ici venait de l'ancien Bassin
-        // d'Arathi de TrinityCore, ou chaque noeud possedait bien huit
-        // objets. Elle donnait 24 pour le noeud 3 et 32 pour le noeud 4,
-        // dans un tableau qui n'en compte que 22 : lecture hors limites,
-        // GUID arbitraires, et plantage selon ce qui suit le tampon.
-        GameObject* flag = GetBGObject(BG_AB_OBJECT_BANNER + node, false);
-        if (!flag || !flag->isSpawned())
-            continue;
-        float dist = player->GetDistance(flag);
-        if (dist < bestDist)
-        {
-            bestDist = dist;
-            best = flag;
-        }
-    }
-    return best;
-}
 
 
-uint8 BattlegroundAB::GetABNodeState(uint32 abNode)
-{
-    if (abNode >= BG_AB_BattlegroundNodes::BG_AB_DYNAMIC_NODES_COUNT)
-        return 0;
-    return m_Nodes[abNode];
-}
+
 
 bool BattlegroundAB::UpdatePlayerScore(Player* player, uint32 type, uint32 value, bool doAddHonor)
 {

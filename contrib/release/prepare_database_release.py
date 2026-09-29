@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 import urllib.request
@@ -16,6 +17,23 @@ SIZE = 88150908
 def digest(path):
     with path.open('rb') as stream:
         return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+
+RETIRED_TABLES = ('playerbot_arena', 'playerbot_names', 'ai_playerbot_names',
+                  'ai_playerbot_locks', 'capital_siege_state', 'capital_siege_history')
+
+
+def validate_support_bundle(bundle):
+    tables = '|'.join(RETIRED_TABLES)
+    pattern = re.compile(r'\b(?:CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?|INSERT\s+(?:IGNORE\s+)?INTO\s+)`?(?:' + tables + r')`?\b', re.I)
+    with zipfile.ZipFile(bundle) as package:
+        for kind in ('auth', 'world', 'characters'):
+            required = f'sql/updates/{kind}/2026_09_29_00_{kind}_remove_bot_tables.sql'
+            if required not in package.namelist():
+                raise SystemExit(f'Missing bot cleanup update: {required}')
+        for name in package.namelist():
+            if name.endswith('.sql') and pattern.search(package.read(name).decode('utf-8-sig', errors='replace')):
+                raise SystemExit(f'Retired bot tables are still installed by {name}')
 
 
 def main():
@@ -56,6 +74,8 @@ def main():
         'upstream_size': SIZE,
         'database_modified': False,
         'runtime_compatibility_tested': False,
+        'retired_bot_tables': list(RETIRED_TABLES),
+        'sql_support_installs_bot_tables': False,
     }
     bundle = output / f'1KYCore-database-support-{commit[:12]}.zip'
     subprocess.run([
@@ -64,6 +84,7 @@ def main():
         'sql/base/shop_database.sql', 'sql/updates', 'sql/custom',
         'docs/database-release.md', 'COPYING',
     ], cwd=repo, check=True)
+    validate_support_bundle(bundle)
     metadata_text = json.dumps(metadata, indent=2) + '\n'
     with zipfile.ZipFile(bundle, 'a', compression=zipfile.ZIP_DEFLATED) as package:
         package.writestr('database-source.json', metadata_text)
