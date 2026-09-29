@@ -71,10 +71,8 @@ public:
 	static void Initialize();
 	static bool BindingPlayerHomePosition(Player* player);
 	static uint32 FindPlayerTalentType(Player* player);
-	static uint32 RandomMountByLevel(uint32 level);
 	static bool MatchEquipmentSlot(uint8 pos, const ItemTemplate* itemTemplate);
 	static uint32 GetItemLevelByAI(const ItemTemplate* item);
-	static bool IsBetterEquip(Player* player, const ItemTemplate* itemTemplate, int32 rndPropID);
 	static void ClearUnknowMount(Player* player);
 	static uint32 CheckMaxLevel(uint32 level);
 	static bool IsBotFlyMountAura(uint32 aura);
@@ -84,7 +82,6 @@ private:
 	//static bool MatchEquipmentSlotsByArmor(EquipmentSlots slot, InventoryType iType);
 	//static bool MatchRangeEquipmentSlots(uint32 cls, const ItemTemplate* itemTemplate);
 	static bool IsCommonEquip(const ItemTemplate* itemTemplate);
-	static bool IsFingerEquip(const ItemTemplate* itemTemplate);
 	static bool IsTrinketEquip(const ItemTemplate* itemTemplate);
 	static bool IsWarriorEquip(const ItemTemplate* itemTemplate);
 	static bool IsPaladinEquip(const ItemTemplate* itemTemplate);
@@ -129,13 +126,11 @@ private:
 	void RemoveSpells();
 	void LearnCommonSpells();
 	void CheckInventroy();
-	void UnequipFromAll();
 	void AddEquipFromAll();
 	void UpequipFromAll();
 	void SupplementOtherItems();
 
 	bool IsTenacityEquipSlot(uint8 slot);
-	bool IsTenacityInventoryType(InventoryType iType);
 	void AddOnceEquip(const ItemTemplate* item);
 	const ItemTemplate* GetRandomAmmoByType(ItemSubclassProjectile ammoType, uint32 startLV);
 	const ItemTemplate* GetRandomItemFromLoopLV(uint32 prof, InventoryType iType, uint32 startLV, const ItemTemplate* filter = 0);
@@ -165,7 +160,6 @@ private:
 	static BotTalentPage classesTalents[MAX_CLASSES][3];
 	static BotEquips classesEquips[MAX_CLASSES][InventoryType::INVTYPE_RELIC+1];
 	static BotCommonSpells classesCommonSpells[MAX_CLASSES];
-	static BeastCreatureEntrys beastCreatureEntrys;
 	static BeastCreatureEntrys normalMountSpells;
 	static BeastCreatureEntrys fastMountSpells;
 	static SetEntrys botFlyMountEntrys;

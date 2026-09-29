@@ -32,7 +32,6 @@ uint32 PlayerBotSetting::classesTrainersGUID[MAX_CLASSES][2];
 std::set<BotTalentEntry> PlayerBotSetting::classesTalents[MAX_CLASSES][3] = { std::set<BotTalentEntry>() };
 std::map<uint32, ItemsForLevel> PlayerBotSetting::classesEquips[MAX_CLASSES][InventoryType::INVTYPE_RELIC+1] = { std::map<uint32, ItemsForLevel>() };
 std::list<uint32> PlayerBotSetting::classesCommonSpells[MAX_CLASSES] = { std::list<uint32>() };
-std::vector<uint32> PlayerBotSetting::beastCreatureEntrys = std::vector<uint32>();
 std::vector<uint32> PlayerBotSetting::normalMountSpells = std::vector<uint32>();
 std::vector<uint32> PlayerBotSetting::fastMountSpells = std::vector<uint32>();
 std::set<uint32> PlayerBotSetting::botFlyMountEntrys = std::set<uint32>();
@@ -497,64 +496,6 @@ uint32 PlayerBotSetting::GetItemLevelByAI(const ItemTemplate* item)
 	return level;
 }
 
-bool PlayerBotSetting::IsBetterEquip(Player* player, const ItemTemplate* itemTemplate, int32 rndPropID)
-{
-	if (!itemTemplate || itemTemplate->GetBaseRequiredLevel() > player->getLevel())
-		return false;
-	if (!IsEquipByClsAndTal(player->getClass(), player->FindTalentType(), itemTemplate, rndPropID))
-		return false;
-	uint16 eDest;
-	InventoryResult msg = player->CanEquipNewItem(NULL_SLOT, eDest, itemTemplate->GetId(), true);
-	if (msg != EQUIP_ERR_OK)
-		return false;
-	bool mainhandIsTwo = false;
-	for (uint8 slot = EquipmentSlots::EQUIPMENT_SLOT_HEAD; slot < EquipmentSlots::EQUIPMENT_SLOT_END; slot++)
-	{
-		if (!MatchEquipmentSlot(slot, itemTemplate))
-			continue;
-		//uint16 pos = (255 << 8) | slot;
-		//if (!player->IsEquipmentPos(pos))
-		//	continue;
-
-		Item* pItem = player->GetItemByPos(255, slot);
-		if (!pItem)
-		{
-			if (slot == EquipmentSlots::EQUIPMENT_SLOT_OFFHAND && mainhandIsTwo)
-				return false;
-			return true;
-		}
-		const ItemTemplate* selfTemplate = pItem->GetTemplate();
-		if (!selfTemplate)
-			continue;
-		if (slot == EquipmentSlots::EQUIPMENT_SLOT_MAINHAND)
-		{
-			if (selfTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON && selfTemplate->GetInventoryType() == INVTYPE_2HWEAPON)
-				mainhandIsTwo = true;
-			else
-				mainhandIsTwo = false;
-		}
-		if (selfTemplate->GetClass() != itemTemplate->GetClass())
-			continue;
-		if (selfTemplate->GetSubClass() != itemTemplate->GetSubClass())
-		{
-			if (selfTemplate->GetClass() != ItemClass::ITEM_CLASS_WEAPON || itemTemplate->GetClass() != ItemClass::ITEM_CLASS_WEAPON)
-				continue;
-			if ((selfTemplate->GetInventoryType() != INVTYPE_2HWEAPON && selfTemplate->GetInventoryType() != INVTYPE_WEAPON && selfTemplate->GetInventoryType() != INVTYPE_WEAPONMAINHAND) ||
-				(itemTemplate->GetInventoryType() != INVTYPE_2HWEAPON && itemTemplate->GetInventoryType() != INVTYPE_WEAPON && itemTemplate->GetInventoryType() != INVTYPE_WEAPONMAINHAND))
-				continue;
-		}
-		if (GetItemLevelByAI(selfTemplate) >= GetItemLevelByAI(itemTemplate))
-		{
-			//if (IsTrinketEquip(itemTemplate) || IsFingerEquip(itemTemplate))
-			//	continue;
-			return false;
-		}
-		return true;
-	}
-
-	return false;
-}
-
 void PlayerBotSetting::ClearUnknowMount(Player* player)
 {
 	for (uint32 mountID : normalMountSpells)
@@ -857,20 +798,6 @@ bool PlayerBotSetting::IsCommonEquip(const ItemTemplate* itemTemplate)
 		break;
 	}
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_ARMOR /*&& itemTemplate->GetSubClass() == ItemSubclassArmor::ITEM_SUBCLASS_ARMOR_MISC */&& itemTemplate->GetInventoryType() == INVTYPE_TRINKET)
-		return true;
-	return false;
-}
-
-bool PlayerBotSetting::IsFingerEquip(const ItemTemplate* itemTemplate)
-{
-	switch (itemTemplate->GetInventoryType())
-	{
-	case INVTYPE_FINGER:
-		return true;
-	default:
-		break;
-	}
-	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_ARMOR /*&& itemTemplate->GetSubClass() == ItemSubclassArmor::ITEM_SUBCLASS_ARMOR_MISC*/ && itemTemplate->GetInventoryType() == INVTYPE_FINGER)
 		return true;
 	return false;
 }
@@ -1469,24 +1396,6 @@ uint32 PlayerBotSetting::FindPlayerTalentType(Player* player)
 	return maxPageIndex;
 }
 
-uint32 PlayerBotSetting::RandomMountByLevel(uint32 level)
-{
-	//if (level < 40)
-	//{
-	//	return 6777;
-	//}
-	//else
-	{
-		uint32 count = fastMountSpells.size();
-		if (count == 0)
-			return 6777;
-		uint32 rnd = urand(0, count - 1);
-		return fastMountSpells[rnd];
-	}
-
-	return 6777;
-}
-
 void PlayerBotSetting::Initialize()
 {
 	for (int i = 0; i < MAX_CLASSES; i++)
@@ -1502,7 +1411,6 @@ void PlayerBotSetting::Initialize()
 
 		classesCommonSpells[i].clear();
 	}
-	beastCreatureEntrys.clear();
 	normalMountSpells.clear();
 	fastMountSpells.clear();
 	botFlyMountEntrys.clear();
@@ -1595,14 +1503,6 @@ void PlayerBotSetting::Initialize()
 				forLevel.AddItem(&item);
 			}
 		}
-	}
-
-	auto const* ctc = sObjectMgr->GetCreatureTemplates();
-	for (auto itr = ctc->begin(); itr != ctc->end(); ++itr)
-	{
-		const CreatureTemplate& creature = itr->second;
-		if (creature.type == CreatureType::CREATURE_TYPE_BEAST && (creature.type_flags & CreatureTypeFlags::CREATURE_TYPE_FLAG_TAMEABLE_PET))
-			beastCreatureEntrys.push_back(creature.Entry);
 	}
 
 	classesCommonSpells[1].push_back(33388);
@@ -2086,51 +1986,6 @@ void PlayerBotSetting::CheckInventroy()
 	}
 }
 
-void PlayerBotSetting::UnequipFromAll()
-{
-	for (uint8 slot = EquipmentSlots::EQUIPMENT_SLOT_HEAD; slot < EquipmentSlots::EQUIPMENT_SLOT_END; slot++)
-	{
-		uint16 pos = (255 << 8) | slot;
-		if (m_Player->IsEquipmentPos(pos) || m_Player->IsBagPos(pos))
-		{
-			InventoryResult msg = m_Player->CanUnequipItem(pos, false);
-			if (msg != EQUIP_ERR_OK)
-				continue;
-		}
-		Item* pItem = m_Player->GetItemByPos(255, slot);
-		if (!pItem)
-			continue;
-		m_Player->DestroyItem(255, slot, true);
-	}
-
-	for (uint8 slot = InventoryPackSlots::INVENTORY_SLOT_ITEM_START+1; slot < InventoryPackSlots::INVENTORY_SLOT_ITEM_END; slot++)
-	{
-		Item* pItem = m_Player->GetItemByPos(255, slot);
-		if (!pItem)
-			continue;
-        if (pItem->GetEntry() == 6948)
-			continue;
-		m_Player->DestroyItem(255, slot, true);
-	}
-
-	for (uint8 i = INVENTORY_SLOT_BAG_START; i < INVENTORY_SLOT_BAG_END; ++i)
-	{
-		if (Bag* pBag = m_Player->GetBagByPos(i))
-		{
-			for (uint32 j = 0; j < pBag->GetBagSize(); j++)
-			{
-				Item* pItem = pBag->GetItemByPos(uint8(j));
-				if (!pItem)
-					continue;
-                if (pItem->GetEntry() == 6948)
-					continue;
-				m_Player->DestroyItem(i, uint8(j), true);
-			}
-		}
-	}
-
-}
-
 void PlayerBotSetting::AddEquipFromAll()
 {
 	m_NeedEquips.clear();
@@ -2445,15 +2300,6 @@ bool PlayerBotSetting::CheckNeedTenacityFlush()
 		}
 	}
 	return false;
-}
-
-bool PlayerBotSetting::IsTenacityInventoryType(InventoryType iType)
-{
-	if (iType == InventoryType::INVTYPE_NON_EQUIP || iType == InventoryType::INVTYPE_TRINKET || iType == InventoryType::INVTYPE_BAG ||
-		iType == InventoryType::INVTYPE_TABARD || iType == InventoryType::INVTYPE_HOLDABLE || iType == InventoryType::INVTYPE_AMMO ||
-		/*iType == InventoryType::INVTYPE_QUIVER||*/ iType == InventoryType::INVTYPE_RELIC)
-		return false;
-	return true;
 }
 
 void PlayerBotSetting::AddOnceEquip(const ItemTemplate* item)
