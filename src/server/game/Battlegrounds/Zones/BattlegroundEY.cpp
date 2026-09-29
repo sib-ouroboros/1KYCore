@@ -974,12 +974,6 @@ WorldSafeLocsEntry const* BattlegroundEY::GetExploitTeleportLocation(Team team)
 }
 
 
-bool BattlegroundEY::EYPointIsControl(uint32 team, uint32 pointIndex)
-{
-    if (pointIndex >= EY_POINTS_MAX)
-        return false;
-    return (m_PointOwnedByTeam[pointIndex] == team && m_PointState[pointIndex] == EY_POINT_UNDER_CONTROL);
-}
 
 bool BattlegroundEY::IsAllNodesControlledByTeam(uint32 team) const
 {

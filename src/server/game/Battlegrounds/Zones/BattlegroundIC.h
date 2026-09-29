@@ -977,8 +977,6 @@ class BattlegroundIC : public Battleground
 
         WorldSafeLocsEntry const* GetClosestGraveYard(Player* player) override;
         WorldSafeLocsEntry const* GetExploitTeleportLocation(Team team) override;
-        GameObject const* GetClosestEnemyFlagByRange(Player* player, float range);
-        uint32 GetNodeObjectType(uint32 type);
         bool NodeIsOccupied(uint32 type, TeamId team);
 
         /* Scorekeeping */

@@ -1193,19 +1193,6 @@ GameObject const* BattlegroundAV::GetClosestEnemyNodeObject(Player* player)
     return pClosestGameObject;
 }
 
-GameObject const* BattlegroundAV::GetEnemyNodeObjectByRange(Player* player, uint32 range)
-{
-    for (uint32 nodeType = BG_AV_Nodes::BG_AV_NODES_FIRSTAID_STATION; nodeType < BG_AV_Nodes::BG_AV_NODES_MAX; nodeType++)
-    {
-        GameObject const* pGameObject = GetNodeObjectByEnemyType(player, BG_AV_Nodes(nodeType));
-        if (!pGameObject)
-            continue;
-        if (player->GetDistance(pGameObject->GetPosition()) > range)
-            continue;
-        return pGameObject;
-    }
-    return NULL;
-}
 
 GameObject const* BattlegroundAV::GetNodeObjectByEnemyType(Player* player, BG_AV_Nodes nodeType)
 {
@@ -1401,111 +1388,8 @@ GameObject const* BattlegroundAV::GetNodeObjectByEnemyType(Player* player, BG_AV
         return NULL;
 }
 
-GameObject const* BattlegroundAV::GetNodeObjectByPosType(BG_AV_Nodes nodeType)
-{
-    int32 objectIndex = -1;
-    switch (nodeType)
-    {
-    case BG_AV_NODES_FIRSTAID_STATION:
-        objectIndex = BG_AV_OBJECT_FLAG_A_FIRSTAID_STATION;
-        break;
-    case BG_AV_NODES_STORMPIKE_GRAVE:
-        objectIndex = BG_AV_OBJECT_FLAG_A_STORMPIKE_GRAVE;
-        break;
-    case BG_AV_NODES_STONEHEART_GRAVE:
-        objectIndex = BG_AV_OBJECT_FLAG_A_STONEHEART_GRAVE;
-        break;
-    case BG_AV_NODES_SNOWFALL_GRAVE:
-        objectIndex = BG_AV_OBJECT_FLAG_N_SNOWFALL_GRAVE;
-        break;
-    case BG_AV_NODES_ICEBLOOD_GRAVE:
-        objectIndex = BG_AV_OBJECT_FLAG_H_ICEBLOOD_GRAVE;
-        break;
-    case BG_AV_NODES_FROSTWOLF_GRAVE:
-        objectIndex = BG_AV_OBJECT_FLAG_H_FROSTWOLF_GRAVE;
-        break;
-    case BG_AV_NODES_FROSTWOLF_HUT:
-        objectIndex = BG_AV_OBJECT_FLAG_H_FROSTWOLF_HUT;
-        break;
-    case BG_AV_NODES_DUNBALDAR_SOUTH:
-        objectIndex = BG_AV_OBJECT_FLAG_A_DUNBALDAR_SOUTH;
-        break;
-    case BG_AV_NODES_DUNBALDAR_NORTH:
-        objectIndex = BG_AV_OBJECT_FLAG_A_DUNBALDAR_NORTH;
-        break;
-    case BG_AV_NODES_ICEWING_BUNKER:
-        objectIndex = BG_AV_OBJECT_FLAG_A_ICEWING_BUNKER;
-        break;
-    case BG_AV_NODES_STONEHEART_BUNKER:
-        objectIndex = BG_AV_OBJECT_FLAG_A_STONEHEART_BUNKER;
-        break;
-    case BG_AV_NODES_ICEBLOOD_TOWER:
-        objectIndex = BG_AV_OBJECT_FLAG_H_ICEBLOOD_TOWER;
-        break;
-    case BG_AV_NODES_TOWER_POINT:
-        objectIndex = BG_AV_OBJECT_FLAG_H_TOWER_POINT;
-        break;
-    case BG_AV_NODES_FROSTWOLF_ETOWER:
-        objectIndex = BG_AV_OBJECT_FLAG_H_FROSTWOLF_ETOWER;
-        break;
-    case BG_AV_NODES_FROSTWOLF_WTOWER:
-        objectIndex = BG_AV_OBJECT_FLAG_H_FROSTWOLF_WTOWER;
-        break;
-    default:
-        return NULL;
-    }
-    if (objectIndex < 0 || objectIndex >= (int32)BgObjects.size())
-        return NULL;
-    ObjectGuid& guid = BgObjects[objectIndex];
-    GameObject const* pGameObject = GetBgMap()->GetGameObject(guid);
-    if (pGameObject)
-        return pGameObject;
-    return NULL;
-}
 
-bool BattlegroundAV::NodeIsOccupyByTeamType(TeamId team, BG_AV_Nodes nodeType)
-{
-    BG_AV_NodeInfo& nodeInfo = m_Nodes[nodeType];
-    if (nodeInfo.State == POINT_NEUTRAL || nodeInfo.State == POINT_ASSAULTED)
-        return false;
-    else if (nodeInfo.State == POINT_DESTROYED)
-        return true;
-    else if (nodeInfo.State == POINT_CONTROLED)//Team: ALLIANCE HORDE
-    {
-        if (team == TEAM_ALLIANCE)
-            return (nodeInfo.Owner == Team::ALLIANCE);
-        else
-            return (nodeInfo.Owner == Team::HORDE);
-    }
-    return true;
-}
 
-Creature const* BattlegroundAV::GetAVAliveCaptainByTeam(TeamId team)
-{
-    if (team == TEAM_ALLIANCE)
-    {
-        if (m_AllianceCaptainGUID.IsEmpty())
-        {
-            TC_LOG_ERROR("BattlegroundAV", "BattlegroundAV not find alliance captain, creature guid is null.");
-            return NULL;
-        }
-        Creature* pCaptain = GetBgMap()->GetCreature(m_AllianceCaptainGUID);
-        if (pCaptain && pCaptain->IsAlive())
-            return pCaptain;
-    }
-    else
-    {
-        if (m_HordeCaptainGUID.IsEmpty())
-        {
-            TC_LOG_ERROR("BattlegroundAV", "BattlegroundAV not find horde captain, creature guid is null.");
-            return NULL;
-        }
-        Creature* pCaptain = GetBgMap()->GetCreature(m_HordeCaptainGUID);
-        if (pCaptain && pCaptain->IsAlive())
-            return pCaptain;
-    }
-    return NULL;
-}
 
 uint32 BattlegroundAV::GetBGCreatureIndexByGUID(ObjectGuid& guid)
 {
