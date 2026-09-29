@@ -15,16 +15,16 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "BotMovementAI.h"
+#include "PlayerCombatModifiersAI.h"
 #include "WaypointManager.h"
 #include "Pathfinding.h"
 #include "WorldSession.h"
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 #include "MapManager.h"
 #include "MotionMaster.h"
 #include "WaypointMovementGenerator.h"
 
-void BotMovementAI::DamageDealt(Unit* victim, uint32& damage, DamageEffectType damageType)
+void PlayerCombatModifiersAI::DamageDealt(Unit* victim, uint32& damage, DamageEffectType damageType)
 {
 	if (!victim || !me->IsInWorld() || damage == 0)
 		return;
@@ -67,11 +67,11 @@ void BotMovementAI::DamageDealt(Unit* victim, uint32& damage, DamageEffectType d
 	}
 	else if (me->GetMap()->IsDungeon())
 	{
-		damage = uint32(float(damage) * BotUtility::DungeonBotDamageModify);
+        damage = uint32(float(damage) * PlayerGameplayUtility::DungeonPlayerDamageMultiplier);
 	}
 }
 
-void BotMovementAI::DamageEndure(Unit* attacker, uint32& damage, DamageEffectType damageType)
+void PlayerCombatModifiersAI::DamageEndure(Unit* attacker, uint32& damage, DamageEffectType damageType)
 {
 	if (!attacker || !me->IsInWorld() || damage == 0)
 		return;
@@ -114,6 +114,6 @@ void BotMovementAI::DamageEndure(Unit* attacker, uint32& damage, DamageEffectTyp
 	}
 	else if (me->GetMap()->IsDungeon())
 	{
-		damage = uint32(float(damage) * (1.0f / BotUtility::DungeonBotEndureModify));
+        damage = uint32(float(damage) * (1.0f / PlayerGameplayUtility::DungeonPlayerDamageDivisor));
 	}
 }

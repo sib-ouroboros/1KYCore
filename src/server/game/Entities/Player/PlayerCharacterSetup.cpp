@@ -15,7 +15,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "PlayerBotSetting.h"
+#include "PlayerCharacterSetup.h"
 #include "ObjectMgr.h"
 #include "Pet.h"
 #include "WorldSession.h"
@@ -28,13 +28,13 @@
 #include "DB2Stores.h"
 #include "Random.h"
 
-uint32 PlayerBotSetting::classesTrainersGUID[MAX_CLASSES][2];
-std::set<BotTalentEntry> PlayerBotSetting::classesTalents[MAX_CLASSES][3] = { std::set<BotTalentEntry>() };
-std::map<uint32, ItemsForLevel> PlayerBotSetting::classesEquips[MAX_CLASSES][InventoryType::INVTYPE_RELIC+1] = { std::map<uint32, ItemsForLevel>() };
-std::list<uint32> PlayerBotSetting::classesCommonSpells[MAX_CLASSES] = { std::list<uint32>() };
-std::vector<uint32> PlayerBotSetting::normalMountSpells = std::vector<uint32>();
-std::vector<uint32> PlayerBotSetting::fastMountSpells = std::vector<uint32>();
-std::set<uint32> PlayerBotSetting::botFlyMountEntrys = std::set<uint32>();
+uint32 PlayerCharacterSetup::classesTrainersGUID[MAX_CLASSES][2];
+std::set<ClassTalentEntry> PlayerCharacterSetup::classesTalents[MAX_CLASSES][3] = { std::set<ClassTalentEntry>() };
+std::map<uint32, ItemsForLevel> PlayerCharacterSetup::classesEquips[MAX_CLASSES][InventoryType::INVTYPE_RELIC+1] = { std::map<uint32, ItemsForLevel>() };
+std::list<uint32> PlayerCharacterSetup::classesCommonSpells[MAX_CLASSES] = { std::list<uint32>() };
+std::vector<uint32> PlayerCharacterSetup::normalMountSpells = std::vector<uint32>();
+std::vector<uint32> PlayerCharacterSetup::fastMountSpells = std::vector<uint32>();
+std::set<uint32> PlayerCharacterSetup::specialFlyingMountSpells = std::set<uint32>();
 
 bool ItemsForLevel::IsTenacityItem(const ItemTemplate* itemTemplate)
 {
@@ -71,7 +71,7 @@ void ItemsForLevel::AddItem(const ItemTemplate* pItem)
 	if (IsTenacityItem(pItem))
 	{
 		bool exist = false;
-		for (BotItems::iterator itItem = m_TenacityItems.begin(); itItem != m_TenacityItems.end(); itItem++)
+        for (LevelItems::iterator itItem = m_TenacityItems.begin(); itItem != m_TenacityItems.end(); itItem++)
 		{
 			if ((*itItem) == pItem)
 			{
@@ -86,7 +86,7 @@ void ItemsForLevel::AddItem(const ItemTemplate* pItem)
 		}
 	}
 	bool exist = false;
-	for (BotItems::iterator itItem = m_Items.begin(); itItem != m_Items.end(); itItem++)
+    for (LevelItems::iterator itItem = m_Items.begin(); itItem != m_Items.end(); itItem++)
 	{
 		if ((*itItem) == pItem)
 		{
@@ -114,7 +114,7 @@ const ItemTemplate* ItemsForLevel::RandomTenacityItem()
 	return m_TenacityItems[index];
 }
 
-bool BotTalentEntry::operator < (const BotTalentEntry &tal) const
+bool ClassTalentEntry::operator < (const ClassTalentEntry &tal) const
 {
     if (!talentEntry || !tal.talentEntry)
         return false;
@@ -129,7 +129,7 @@ bool BotTalentEntry::operator < (const BotTalentEntry &tal) const
     }
 }
 
-bool PlayerBotSetting::IsEquipByClasses(uint32 cls, const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsEquipByClasses(uint32 cls, const ItemTemplate* itemTemplate)
 {
 	if (!itemTemplate || itemTemplate->ExtendedData->AllowableClass == 0)
 		return false;
@@ -254,7 +254,7 @@ bool PlayerBotSetting::IsEquipByClasses(uint32 cls, const ItemTemplate* itemTemp
 	return false;
 }
 
-bool PlayerBotSetting::IsEquipByClsAndTal(uint32 cls, uint32 tal, const ItemTemplate* itemTemplate, int32 rndPropID)
+bool PlayerCharacterSetup::IsEquipByClsAndTal(uint32 cls, uint32 tal, const ItemTemplate* itemTemplate, int32 rndPropID)
 {
 	if (tal > 2 || !itemTemplate || cls < 1 || cls == 10 || cls > 11)
 		return false;
@@ -400,7 +400,7 @@ bool PlayerBotSetting::IsEquipByClsAndTal(uint32 cls, uint32 tal, const ItemTemp
 	return false;
 }
 
-bool PlayerBotSetting::MatchEquipmentSlot(uint8 pos, const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::MatchEquipmentSlot(uint8 pos, const ItemTemplate* itemTemplate)
 {
 	EquipmentSlots slot = EquipmentSlots(pos);
 	InventoryType type = InventoryType(itemTemplate->GetInventoryType());
@@ -482,7 +482,7 @@ bool PlayerBotSetting::MatchEquipmentSlot(uint8 pos, const ItemTemplate* itemTem
 	return false;
 }
 
-uint32 PlayerBotSetting::GetItemLevelByAI(const ItemTemplate* item)
+uint32 PlayerCharacterSetup::GetItemLevelByAI(const ItemTemplate* item)
 {
 	if (!item)
 		return 0;
@@ -496,7 +496,7 @@ uint32 PlayerBotSetting::GetItemLevelByAI(const ItemTemplate* item)
 	return level;
 }
 
-void PlayerBotSetting::ClearUnknowMount(Player* player)
+void PlayerCharacterSetup::ClearUnknowMount(Player* player)
 {
 	for (uint32 mountID : normalMountSpells)
 	{
@@ -515,7 +515,7 @@ void PlayerBotSetting::ClearUnknowMount(Player* player)
 	}
 }
 
-uint32 PlayerBotSetting::CheckMaxLevel(uint32 level)
+uint32 PlayerCharacterSetup::CheckMaxLevel(uint32 level)
 {
 	uint32 worldMaxLevel = sWorld->getIntConfig(CONFIG_MAX_PLAYER_LEVEL);
 	if (level > worldMaxLevel)
@@ -527,14 +527,14 @@ uint32 PlayerBotSetting::CheckMaxLevel(uint32 level)
 	return level;
 }
 
-bool PlayerBotSetting::IsBotFlyMountAura(uint32 aura)
+bool PlayerCharacterSetup::IsSpecialFlyingMountAura(uint32 aura)
 {
 	if (!aura)
 		return false;
-	return botFlyMountEntrys.find(aura) != botFlyMountEntrys.end();
+    return specialFlyingMountSpells.find(aura) != specialFlyingMountSpells.end();
 }
 
-bool PlayerBotSetting::IsOnlyPhysicsAttributeEquip(const ItemTemplate* itemTemplate, bool coverIntellect)
+bool PlayerCharacterSetup::IsOnlyPhysicsAttributeEquip(const ItemTemplate* itemTemplate, bool coverIntellect)
 {
 	if (!itemTemplate->HasStats())
 		return false;
@@ -564,7 +564,7 @@ bool PlayerBotSetting::IsOnlyPhysicsAttributeEquip(const ItemTemplate* itemTempl
 	return true;
 }
 
-bool PlayerBotSetting::IsOnlyMagicAttributeEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsOnlyMagicAttributeEquip(const ItemTemplate* itemTemplate)
 {
 	if (!itemTemplate->HasStats())
 		return false;
@@ -589,7 +589,7 @@ bool PlayerBotSetting::IsOnlyMagicAttributeEquip(const ItemTemplate* itemTemplat
 	return true;
 }
 
-bool PlayerBotSetting::IsTankAttributeEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsTankAttributeEquip(const ItemTemplate* itemTemplate)
 {
 	if (!itemTemplate->HasStats())
 		return false;
@@ -613,7 +613,7 @@ bool PlayerBotSetting::IsTankAttributeEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsOnlyPhysicsRandomAttributeByEquip(std::list<uint32>& enchants, bool coverIntellect)
+bool PlayerCharacterSetup::IsOnlyPhysicsRandomAttributeByEquip(std::list<uint32>& enchants, bool coverIntellect)
 {
 	if (enchants.empty())
 		return false;
@@ -656,7 +656,7 @@ bool PlayerBotSetting::IsOnlyPhysicsRandomAttributeByEquip(std::list<uint32>& en
 	return have;
 }
 
-bool PlayerBotSetting::IsOnlyMagicRandomAttributeByEquip(std::list<uint32>& enchants)
+bool PlayerCharacterSetup::IsOnlyMagicRandomAttributeByEquip(std::list<uint32>& enchants)
 {
 	if (enchants.empty())
 		return false;
@@ -692,7 +692,7 @@ bool PlayerBotSetting::IsOnlyMagicRandomAttributeByEquip(std::list<uint32>& ench
 	return have;
 }
 
-bool PlayerBotSetting::IsTankRandomAttributeByEquip(std::list<uint32>& enchants)
+bool PlayerCharacterSetup::IsTankRandomAttributeByEquip(std::list<uint32>& enchants)
 {
 	if (enchants.empty())
 		return false;
@@ -724,7 +724,7 @@ bool PlayerBotSetting::IsTankRandomAttributeByEquip(std::list<uint32>& enchants)
 	return false;
 }
 
-void PlayerBotSetting::GetRandomPropEnchantments(int32 rndPropID, std::list<uint32>& enchants)
+void PlayerCharacterSetup::GetRandomPropEnchantments(int32 rndPropID, std::list<uint32>& enchants)
 {
 	enchants.clear();
 	if (rndPropID == 0)
@@ -755,7 +755,7 @@ void PlayerBotSetting::GetRandomPropEnchantments(int32 rndPropID, std::list<uint
 	}
 }
 
-//bool PlayerBotSetting::MatchEquipmentSlotsByWeapon(EquipmentSlots slot, InventoryType iType)
+//bool PlayerCharacterSetup::MatchEquipmentSlotsByWeapon(EquipmentSlots slot, InventoryType iType)
 //{
 //	if (slot == EquipmentSlots::EQUIPMENT_SLOT_MAINHAND)
 //		return (iType == InventoryType::INVTYPE_2HWEAPON || iType == InventoryType::INVTYPE_WEAPON || iType == InventoryType::INVTYPE_WEAPONMAINHAND);
@@ -765,7 +765,7 @@ void PlayerBotSetting::GetRandomPropEnchantments(int32 rndPropID, std::list<uint
 //	return false;
 //}
 //
-//bool PlayerBotSetting::MatchEquipmentSlotsByArmor(EquipmentSlots slot, InventoryType iType)
+//bool PlayerCharacterSetup::MatchEquipmentSlotsByArmor(EquipmentSlots slot, InventoryType iType)
 //{
 //	if (slot == EquipmentSlots::EQUIPMENT_SLOT_BODY)
 //		return (iType == InventoryType::INVTYPE_BODY || iType == InventoryType::INVTYPE_ROBE);
@@ -780,12 +780,12 @@ void PlayerBotSetting::GetRandomPropEnchantments(int32 rndPropID, std::list<uint
 //	return false;
 //}
 //
-//bool PlayerBotSetting::MatchRangeEquipmentSlots(uint32 cls, const ItemTemplate* itemTemplate)
+//bool PlayerCharacterSetup::MatchRangeEquipmentSlots(uint32 cls, const ItemTemplate* itemTemplate)
 //{
 //	return false;
 //}
 
-bool PlayerBotSetting::IsCommonEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsCommonEquip(const ItemTemplate* itemTemplate)
 {
 	switch (itemTemplate->GetInventoryType())
 	{
@@ -802,7 +802,7 @@ bool PlayerBotSetting::IsCommonEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsTrinketEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsTrinketEquip(const ItemTemplate* itemTemplate)
 {
 	switch (itemTemplate->GetInventoryType())
 	{
@@ -816,7 +816,7 @@ bool PlayerBotSetting::IsTrinketEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsWarriorEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsWarriorEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -871,7 +871,7 @@ bool PlayerBotSetting::IsWarriorEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsPaladinEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsPaladinEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -922,7 +922,7 @@ bool PlayerBotSetting::IsPaladinEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsDeathKightEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsDeathKightEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -978,7 +978,7 @@ bool PlayerBotSetting::IsDeathKightEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsRogueEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsRogueEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -1029,7 +1029,7 @@ bool PlayerBotSetting::IsRogueEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsDruidEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsDruidEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -1079,7 +1079,7 @@ bool PlayerBotSetting::IsDruidEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsHunterEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsHunterEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -1142,7 +1142,7 @@ bool PlayerBotSetting::IsHunterEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsShamanEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsShamanEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -1199,7 +1199,7 @@ bool PlayerBotSetting::IsShamanEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsMageEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsMageEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -1251,7 +1251,7 @@ bool PlayerBotSetting::IsMageEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsWarlockEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsWarlockEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -1303,7 +1303,7 @@ bool PlayerBotSetting::IsWarlockEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerBotSetting::IsPriestEquip(const ItemTemplate* itemTemplate)
+bool PlayerCharacterSetup::IsPriestEquip(const ItemTemplate* itemTemplate)
 {
 	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
 	{
@@ -1357,7 +1357,7 @@ bool PlayerBotSetting::IsPriestEquip(const ItemTemplate* itemTemplate)
 
 
 
-uint32 PlayerBotSetting::FindPlayerTalentType(Player* player)
+uint32 PlayerCharacterSetup::FindPlayerTalentType(Player* player)
 {
 	if (!player)
 		return 0;
@@ -1366,8 +1366,8 @@ uint32 PlayerBotSetting::FindPlayerTalentType(Player* player)
 	uint32 pageTalents[3] = { 0 };
 	for (uint32 page = 0; page < 3; page++)
 	{
-		BotTalentPage& botPage = classesTalents[cls][page];
-		for (BotTalentPage::iterator itPage = botPage.begin();
+        ClassTalentPage& botPage = classesTalents[cls][page];
+        for (ClassTalentPage::iterator itPage = botPage.begin();
 			itPage != botPage.end();
 			itPage++)
 		{
@@ -1396,7 +1396,7 @@ uint32 PlayerBotSetting::FindPlayerTalentType(Player* player)
 	return maxPageIndex;
 }
 
-void PlayerBotSetting::Initialize()
+void PlayerCharacterSetup::Initialize()
 {
 	for (int i = 0; i < MAX_CLASSES; i++)
 	{
@@ -1413,7 +1413,7 @@ void PlayerBotSetting::Initialize()
 	}
 	normalMountSpells.clear();
 	fastMountSpells.clear();
-	botFlyMountEntrys.clear();
+    specialFlyingMountSpells.clear();
 
 	classesTrainersGUID[Classes::CLASS_WARRIOR][0] = 5113;
 	classesTrainersGUID[Classes::CLASS_WARRIOR][1] = 4593;
@@ -1462,8 +1462,8 @@ void PlayerBotSetting::Initialize()
 		//{
 		//	if (talentTabInfo->GetClass()Mask & (1 << (cls - 1)))
 		//	{
-		//		BotTalentPage& botPage = classesTalents[cls][talentTabInfo->tabpage];
-		//		botPage.insert(BotTalentEntry(cls, talentTabInfo->tabpage, talentInfo));
+        //		ClassTalentPage& botPage = classesTalents[cls][talentTabInfo->tabpage];
+        //		botPage.insert(ClassTalentEntry(cls, talentTabInfo->tabpage, talentInfo));
 		//	}
 		//}
 	}
@@ -1497,8 +1497,8 @@ void PlayerBotSetting::Initialize()
 			//if (item.AllowableClass & classMask)
 			{
 				InventoryType iType = InventoryType((item.ExtendedData->InventoryType == InventoryType::INVTYPE_ROBE) ? (InventoryType::INVTYPE_CHEST) : item.ExtendedData->InventoryType);
-				BotEquips& equips = classesEquips[i][iType];
-				BotEquips::iterator itEquip = equips.find(item.GetBaseRequiredLevel());
+                EquipmentByLevel& equips = classesEquips[i][iType];
+                EquipmentByLevel::iterator itEquip = equips.find(item.GetBaseRequiredLevel());
 				ItemsForLevel& forLevel = (itEquip == equips.end()) ? equips[item.GetBaseRequiredLevel()] : itEquip->second;
 				forLevel.AddItem(&item);
 			}
@@ -1621,15 +1621,15 @@ void PlayerBotSetting::Initialize()
 	fastMountSpells.push_back(41252);
 	fastMountSpells.push_back(68057);
 
-	botFlyMountEntrys.insert(69395);
-	botFlyMountEntrys.insert(67336);
-	botFlyMountEntrys.insert(65439);
-	botFlyMountEntrys.insert(32345);
-	botFlyMountEntrys.insert(46199);
-	botFlyMountEntrys.insert(75596);
+    specialFlyingMountSpells.insert(69395);
+    specialFlyingMountSpells.insert(67336);
+    specialFlyingMountSpells.insert(65439);
+    specialFlyingMountSpells.insert(32345);
+    specialFlyingMountSpells.insert(46199);
+    specialFlyingMountSpells.insert(75596);
 }
 
-bool PlayerBotSetting::BindingPlayerHomePosition(Player* player)
+bool PlayerCharacterSetup::BindingPlayerHomePosition(Player* player)
 {
 	if (!player || !player->IsInWorld() || player->GetMap()->IsDungeon())
 		return false;
@@ -1643,7 +1643,7 @@ bool PlayerBotSetting::BindingPlayerHomePosition(Player* player)
 	return true;
 }
 
-PlayerBotSetting::PlayerBotSetting(Player* player) :
+PlayerCharacterSetup::PlayerCharacterSetup(Player* player) :
 m_Finish(true),
 m_TenacitySetting(false),
 m_ResetStep(0),
@@ -1652,26 +1652,26 @@ m_ActiveTalentType(3)
 {
 }
 
-PlayerBotSetting::~PlayerBotSetting()
+PlayerCharacterSetup::~PlayerCharacterSetup()
 {
 }
 
-uint32 PlayerBotSetting::UpdateTalentType()
+uint32 PlayerCharacterSetup::UpdateTalentType()
 {
 	if (m_ActiveTalentType >= 3)
 	{
-		m_ActiveTalentType = PlayerBotSetting::FindPlayerTalentType(m_Player);
+        m_ActiveTalentType = PlayerCharacterSetup::FindPlayerTalentType(m_Player);
 	}
 	return m_ActiveTalentType;
 }
 
-uint32 PlayerBotSetting::GetTalentType()
+uint32 PlayerCharacterSetup::GetTalentType()
 {
 
 	return m_ActiveTalentType;
 }
 
-bool PlayerBotSetting::ResetPlayerToLevel(uint32 level, uint32 talent, bool tenacity)
+bool PlayerCharacterSetup::ResetPlayerToLevel(uint32 level, uint32 talent, bool tenacity)
 {
 	if (!m_Player)
 		return false;
@@ -1691,12 +1691,12 @@ bool PlayerBotSetting::ResetPlayerToLevel(uint32 level, uint32 talent, bool tena
 	return true;
 }
 
-uint32 PlayerBotSetting::SwitchPlayerTalent(uint32 talent)
+uint32 PlayerCharacterSetup::SwitchPlayerTalent(uint32 talent)
 {
 	return m_ActiveTalentType;
 }
 
-void PlayerBotSetting::SupplementAmmo()
+void PlayerCharacterSetup::SupplementAmmo()
 {
 	
 }
@@ -1706,7 +1706,7 @@ void PlayerBotSetting::SupplementAmmo()
 // Extrait de UnequipFromAll(), dont c etait la seconde moitie. Sert a faire
 // de la place avant de creer une tenue candidate, puis a evacuer les pieces
 // que le personnage n a pas retenues.
-void PlayerBotSetting::ViderLesSacs()
+void PlayerCharacterSetup::ViderLesSacs()
 {
 	for (uint8 slot = InventoryPackSlots::INVENTORY_SLOT_ITEM_START + 1;
 		slot < InventoryPackSlots::INVENTORY_SLOT_ITEM_END; ++slot)
@@ -1721,7 +1721,7 @@ void PlayerBotSetting::ViderLesSacs()
 	}
 }
 
-void PlayerBotSetting::UpdateReset()
+void PlayerCharacterSetup::UpdateReset()
 {
 	if (m_Finish)
 		return;
@@ -1792,7 +1792,7 @@ void PlayerBotSetting::UpdateReset()
 		++m_ResetStep;
 		break;
 	case 13:
-		PlayerBotSetting::ClearUnknowMount(m_Player);
+        PlayerCharacterSetup::ClearUnknowMount(m_Player);
 		m_Player->SetFullHealth();
 		m_Player->UpdateSkillsForLevel();
 		m_Player->UpdateAllStats();
@@ -1811,7 +1811,7 @@ void PlayerBotSetting::UpdateReset()
 // PLAYER_FIELD_CURRENT_SPEC_ID a la main en plein re-level et provoquait un
 // debordement de pile : ActivateTalentGroup fait le travail complet, y compris
 // InitTalentForLevel, les boutons d action, la puissance et les auras de forme.
-void PlayerBotSetting::ActivateSpecialization()
+void PlayerCharacterSetup::ActivateSpecialization()
 {
 	if (!m_Player)
 		return;
@@ -1835,7 +1835,7 @@ void PlayerBotSetting::ActivateSpecialization()
 	}
 }
 
-void PlayerBotSetting::LearnTalents()
+void PlayerCharacterSetup::LearnTalents()
 {
 	// SylvaniaCore : cette fonction etait un corps vide alors que l etape
 	// precedente du re-level appelle ResetTalents(true). Les bots repartaient
@@ -1879,13 +1879,13 @@ void PlayerBotSetting::LearnTalents()
 	}
 }
 
-void PlayerBotSetting::LearnCommonSpells()
+void PlayerCharacterSetup::LearnCommonSpells()
 {
 	uint8 cls = m_Player->getClass();
 	if (cls <= 0 || cls >= 12 || cls == 10)
 		return;
-	BotCommonSpells& commonSpells = classesCommonSpells[cls];
-	for (BotCommonSpells::iterator itSpell = commonSpells.begin();
+    ClassCommonSpells& commonSpells = classesCommonSpells[cls];
+    for (ClassCommonSpells::iterator itSpell = commonSpells.begin();
 		itSpell != commonSpells.end();
 		itSpell++)
 	{
@@ -1895,7 +1895,7 @@ void PlayerBotSetting::LearnCommonSpells()
 		m_Player->LearnSpell(spellID, false);
 	}
 
-	for (BeastCreatureEntrys::iterator itMount = normalMountSpells.begin();
+    for (MountSpellIds::iterator itMount = normalMountSpells.begin();
 		itMount != normalMountSpells.end();
 		itMount++)
 	{
@@ -1907,7 +1907,7 @@ void PlayerBotSetting::LearnCommonSpells()
 
 }
 
-void PlayerBotSetting::RemoveSpells()
+void PlayerCharacterSetup::RemoveSpells()
 {
 	const TrainerSpellData* spellData = sObjectMgr->GetNpcTrainerSpells(classesTrainersGUID[m_Player->getClass()][(m_Player->GetTeamId() == TeamId::TEAM_ALLIANCE) ? 0 : 1]);
 	if (!spellData)
@@ -1925,7 +1925,7 @@ void PlayerBotSetting::RemoveSpells()
 	}
 }
 
-void PlayerBotSetting::LearnSpells()
+void PlayerCharacterSetup::LearnSpells()
 {
 	uint8 level = m_Player->getLevel();
 
@@ -1958,14 +1958,14 @@ void PlayerBotSetting::LearnSpells()
 		if (tSpell.IsCastable())
 		{
 			m_Player->CastSpell(m_Player, spellID, true);
-			//TC_LOG_WARN("PlayerBotSetting", "Player %s Learn spell %d, spell is castable, do cast.", m_Player->GetName().c_str(), spellID);
+            //TC_LOG_WARN("PlayerCharacterSetup", "Player %s Learn spell %d, spell is castable, do cast.", m_Player->GetName().c_str(), spellID);
 		}
 		else
 			m_Player->LearnSpell(spellID, false);
 	}
 }
 
-void PlayerBotSetting::CheckInventroy()
+void PlayerCharacterSetup::CheckInventroy()
 {
 	if (!m_Player->GetItemByPos(255, InventorySlots::INVENTORY_SLOT_BAG_START) ||
 		!m_Player->GetItemByPos(255, InventorySlots::INVENTORY_SLOT_BAG_START + 1) ||
@@ -1986,7 +1986,7 @@ void PlayerBotSetting::CheckInventroy()
 	}
 }
 
-void PlayerBotSetting::AddEquipFromAll()
+void PlayerCharacterSetup::AddEquipFromAll()
 {
 	m_NeedEquips.clear();
 	uint32 level = m_Player->getLevel();
@@ -1997,8 +1997,8 @@ void PlayerBotSetting::AddEquipFromAll()
 	const ItemTemplate* firstTrinket = NULL;
 	for (int i = 0; i < InventoryType::INVTYPE_RELIC; i++)
 	{
-		//BotEquips& equips = classesEquips[prof][i];
-		//BotEquips::iterator itEquip = equips.find(level);
+        //EquipmentByLevel& equips = classesEquips[prof][i];
+        //EquipmentByLevel::iterator itEquip = equips.find(level);
 		//if (itEquip == equips.end())
 		//	continue;
 		if (i != InventoryType::INVTYPE_CLOAK && i > InventoryType::INVTYPE_TRINKET)
@@ -2063,9 +2063,9 @@ void PlayerBotSetting::AddEquipFromAll()
 	}
 }
 
-void PlayerBotSetting::UpequipFromAll()
+void PlayerCharacterSetup::UpequipFromAll()
 {
-	for (BotNeedEquips::iterator itNeed = m_NeedEquips.begin();
+    for (PendingEquipment::iterator itNeed = m_NeedEquips.begin();
 		itNeed != m_NeedEquips.end();
 		itNeed++)
 	{
@@ -2080,7 +2080,7 @@ void PlayerBotSetting::UpequipFromAll()
 	m_NeedEquips.clear();
 }
 
-bool PlayerBotSetting::EquipItem(Item* pItem)
+bool PlayerCharacterSetup::EquipItem(Item* pItem)
 {
 	uint16 dest;
 	InventoryResult msg = m_Player->CanEquipItem(NULL_SLOT, dest, pItem, !pItem->IsBag());
@@ -2162,7 +2162,7 @@ bool PlayerBotSetting::EquipItem(Item* pItem)
 	return true;
 }
 
-void PlayerBotSetting::SupplementOtherItems()
+void PlayerCharacterSetup::SupplementOtherItems()
 {
 	uint8 prof = m_Player->getClass();
 	switch (prof)
@@ -2176,12 +2176,12 @@ void PlayerBotSetting::SupplementOtherItems()
 	}
 }
 
-const ItemTemplate* PlayerBotSetting::GetRandomAmmoByType(ItemSubclassProjectile iType, uint32 startLV)
+const ItemTemplate* PlayerCharacterSetup::GetRandomAmmoByType(ItemSubclassProjectile iType, uint32 startLV)
 {
-	BotEquips& equips = classesEquips[3][InventoryType::INVTYPE_AMMO];
+    EquipmentByLevel& equips = classesEquips[3][InventoryType::INVTYPE_AMMO];
 	for (int i = startLV; i > 0; i--)
 	{
-		BotEquips::iterator itEquip = equips.find(i);
+        EquipmentByLevel::iterator itEquip = equips.find(i);
 		if (itEquip == equips.end() || itEquip->second.m_Items.size() <= 0)
 			continue;
 		for (int j = 0; j < 3; j++)
@@ -2194,12 +2194,12 @@ const ItemTemplate* PlayerBotSetting::GetRandomAmmoByType(ItemSubclassProjectile
 	return NULL;
 }
 
-const ItemTemplate* PlayerBotSetting::GetRandomItemFromLoopLV(uint32 prof, InventoryType iType, uint32 startLV, const ItemTemplate* filter)
+const ItemTemplate* PlayerCharacterSetup::GetRandomItemFromLoopLV(uint32 prof, InventoryType iType, uint32 startLV, const ItemTemplate* filter)
 {
-	BotEquips& equips = classesEquips[prof][iType];
+    EquipmentByLevel& equips = classesEquips[prof][iType];
 	for (int i = startLV; i > 0; i--)
 	{
-		BotEquips::iterator itEquip = equips.find(i);
+        EquipmentByLevel::iterator itEquip = equips.find(i);
 		if (itEquip == equips.end())
 			continue;
 		if (m_TenacitySetting)
@@ -2221,7 +2221,7 @@ const ItemTemplate* PlayerBotSetting::GetRandomItemFromLoopLV(uint32 prof, Inven
 	return NULL;
 }
 
-bool PlayerBotSetting::IsTenacityEquipSlot(uint8 slot)
+bool PlayerCharacterSetup::IsTenacityEquipSlot(uint8 slot)
 {
 	switch (EquipmentSlots(slot))
 	{
@@ -2246,7 +2246,7 @@ bool PlayerBotSetting::IsTenacityEquipSlot(uint8 slot)
 	return false;
 }
 
-bool PlayerBotSetting::EquipIsTidiness()
+bool PlayerCharacterSetup::EquipIsTidiness()
 {
 	uint8 level = m_Player->getLevel();
 	uint32 noMatchEquipCount = 0;
@@ -2269,7 +2269,7 @@ bool PlayerBotSetting::EquipIsTidiness()
 	return true;
 }
 
-bool PlayerBotSetting::CheckNeedTenacityFlush()
+bool PlayerCharacterSetup::CheckNeedTenacityFlush()
 {
 	uint32 noMatchEquipCount = 0;
 	for (uint8 slot = EquipmentSlots::EQUIPMENT_SLOT_HEAD; slot < EquipmentSlots::EQUIPMENT_SLOT_END; slot++)
@@ -2302,7 +2302,7 @@ bool PlayerBotSetting::CheckNeedTenacityFlush()
 	return false;
 }
 
-void PlayerBotSetting::AddOnceEquip(const ItemTemplate* item)
+void PlayerCharacterSetup::AddOnceEquip(const ItemTemplate* item)
 {
 	if (!item)
 		return;
@@ -2322,7 +2322,7 @@ void PlayerBotSetting::AddOnceEquip(const ItemTemplate* item)
 		m_NeedEquips.push_back(itemInst);
 }
 
-void PlayerBotSetting::RandomWeaponByWarrior()
+void PlayerCharacterSetup::RandomWeaponByWarrior()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 1;
@@ -2361,7 +2361,7 @@ void PlayerBotSetting::RandomWeaponByWarrior()
 	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_THROWN, level));
 }
 
-void PlayerBotSetting::RandomWeaponByPaladin()
+void PlayerCharacterSetup::RandomWeaponByPaladin()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 2;
@@ -2397,7 +2397,7 @@ void PlayerBotSetting::RandomWeaponByPaladin()
 	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RELIC, level));
 }
 
-void PlayerBotSetting::RandomWeaponByDeathKight()
+void PlayerCharacterSetup::RandomWeaponByDeathKight()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 6;
@@ -2424,7 +2424,7 @@ void PlayerBotSetting::RandomWeaponByDeathKight()
 	}
 }
 
-void PlayerBotSetting::RandomWeaponByRogue()
+void PlayerCharacterSetup::RandomWeaponByRogue()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 4;
@@ -2439,7 +2439,7 @@ void PlayerBotSetting::RandomWeaponByRogue()
 	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_THROWN, level));
 }
 
-void PlayerBotSetting::RandomWeaponByDruid()
+void PlayerCharacterSetup::RandomWeaponByDruid()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 11;
@@ -2447,7 +2447,7 @@ void PlayerBotSetting::RandomWeaponByDruid()
 	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RELIC, level));
 }
 
-void PlayerBotSetting::RandomWeaponByHunter()
+void PlayerCharacterSetup::RandomWeaponByHunter()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 3;
@@ -2472,7 +2472,7 @@ void PlayerBotSetting::RandomWeaponByHunter()
 	}
 }
 
-void PlayerBotSetting::RandomWeaponByShaman()
+void PlayerCharacterSetup::RandomWeaponByShaman()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 7;
@@ -2520,7 +2520,7 @@ void PlayerBotSetting::RandomWeaponByShaman()
 	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RELIC, level));
 }
 
-void PlayerBotSetting::RandomWeaponByMage()
+void PlayerCharacterSetup::RandomWeaponByMage()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 8;
@@ -2534,7 +2534,7 @@ void PlayerBotSetting::RandomWeaponByMage()
 	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RANGEDRIGHT, level));
 }
 
-void PlayerBotSetting::RandomWeaponByWarlock()
+void PlayerCharacterSetup::RandomWeaponByWarlock()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 9;
@@ -2548,7 +2548,7 @@ void PlayerBotSetting::RandomWeaponByWarlock()
 	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RANGEDRIGHT, level));
 }
 
-void PlayerBotSetting::RandomWeaponByPriest()
+void PlayerCharacterSetup::RandomWeaponByPriest()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 5;
@@ -2562,7 +2562,7 @@ void PlayerBotSetting::RandomWeaponByPriest()
 	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RANGEDRIGHT, level));
 }
 
-void PlayerBotSetting::SupplementItemByWarrior()
+void PlayerCharacterSetup::SupplementItemByWarrior()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 1;
@@ -2593,7 +2593,7 @@ void PlayerBotSetting::SupplementItemByWarrior()
 	m_NeedEquips.clear();
 }
 
-void PlayerBotSetting::SupplementItemByPaladin()
+void PlayerCharacterSetup::SupplementItemByPaladin()
 {
 	uint32 level = m_Player->getLevel();
 	uint32 prof = 2;

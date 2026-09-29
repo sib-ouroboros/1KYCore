@@ -16,7 +16,7 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "AIWaypointsMgr.h"
+#include "ArenaPositionStore.h"
 #include "BattlegroundDS.h"
 #include "Creature.h"
 #include "Log.h"
@@ -32,8 +32,8 @@ BattlegroundDS::BattlegroundDS()
     _pipeKnockBackTimer = 0;
     _pipeKnockBackCount = 0;
 
-    m_LMStartPoint = sAIWPMgr->FindAIWaypoint(72);
-    m_BLStartPoint = sAIWPMgr->FindAIWaypoint(73);
+    m_LMStartPoint = sArenaPositionStore->FindPosition(72);
+    m_BLStartPoint = sArenaPositionStore->FindPosition(73);
 }
 
 void BattlegroundDS::PostUpdateImpl(uint32 diff)
@@ -129,7 +129,7 @@ void BattlegroundDS::StartingEventOpenDoors()
             player->RemoveAurasDueToSpell(SPELL_WARL_DEMONIC_CIRCLE);
             if (m_LMStartPoint && m_BLStartPoint)
             {
-                AIWaypoint* telePoint = NULL;
+                LegacyArenaPosition* telePoint = NULL;
                 if (player->GetTeamId() == TEAM_ALLIANCE)
                     telePoint = m_LMStartPoint;
                 else if (player->GetTeamId() == TEAM_HORDE)

@@ -15,8 +15,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __AIWAYPOINTSMGR_H__
-#define __AIWAYPOINTSMGR_H__
+#ifndef TRINITY_ARENA_POSITION_STORE_H
+#define TRINITY_ARENA_POSITION_STORE_H
 
 #include "Log.h"
 #include "Common.h"
@@ -25,7 +25,7 @@
 #include "Position.h"
 #include <map>
 
-struct AIWaypoint
+struct LegacyArenaPosition
 {
 	uint32 entry;
 	uint32 mapID;
@@ -33,7 +33,7 @@ struct AIWaypoint
 	float posY;
 	float posZ;
 
-    AIWaypoint(uint32 id, uint32 map, float x, float y, float z) :
+    LegacyArenaPosition(uint32 id, uint32 map, float x, float y, float z) :
         entry(id), mapID(map), posX(x), posY(y), posZ(z)
 	{
 	}
@@ -49,21 +49,21 @@ struct AIWaypoint
 
 };
 
-class TC_GAME_API AIWaypointsMgr
+class TC_GAME_API ArenaPositionStore
 {
 public:
-    typedef std::map<uint32, AIWaypoint> AIWPMap;
+    typedef std::map<uint32, LegacyArenaPosition> ArenaPositionMap;
 
 public:
-	static AIWaypointsMgr* instance();
+    static ArenaPositionStore* instance();
 
-    void LoadAIWaypoints();
-    AIWaypoint* FindAIWaypoint(uint32 entry);
+    void LoadPositions();
+    LegacyArenaPosition* FindPosition(uint32 entry);
 
 private:
-	AIWPMap m_AIWaypointMap;
+    ArenaPositionMap m_ArenaPositions;
 };
 
-#define sAIWPMgr AIWaypointsMgr::instance()
+#define sArenaPositionStore ArenaPositionStore::instance()
 
-#endif // __AIWAYPOINTSMGR_H__
+#endif // TRINITY_ARENA_POSITION_STORE_H

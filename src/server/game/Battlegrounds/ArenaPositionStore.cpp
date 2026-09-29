@@ -15,20 +15,20 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "AIWaypointsMgr.h"
+#include "ArenaPositionStore.h"
 
-AIWaypointsMgr* AIWaypointsMgr::instance()
+ArenaPositionStore* ArenaPositionStore::instance()
 {
-    static AIWaypointsMgr instance;
+    static ArenaPositionStore instance;
     return &instance;
 }
 
-void AIWaypointsMgr::LoadAIWaypoints()
+void ArenaPositionStore::LoadPositions()
 {
-    m_AIWaypointMap.clear();
+    m_ArenaPositions.clear();
 
     // The bot editor is gone; Dalaran Sewers still reads its configured positions.
-    WorldDatabasePreparedStatement* stmt = WorldDatabase.GetPreparedStatement(WORLD_SEL_ALL_AIWAYPOINTS);
+    WorldDatabasePreparedStatement* stmt = WorldDatabase.GetPreparedStatement(WORLD_SEL_LEGACY_ARENA_POSITIONS);
     PreparedQueryResult result = WorldDatabase.Query(stmt);
     if (!result)
     {
@@ -44,13 +44,13 @@ void AIWaypointsMgr::LoadAIWaypoints()
         float x = fields[2].GetFloat();
         float y = fields[3].GetFloat();
         float z = fields[4].GetFloat();
-        m_AIWaypointMap.emplace(entry, AIWaypoint(entry, map, x, y, z));
+        m_ArenaPositions.emplace(entry, LegacyArenaPosition(entry, map, x, y, z));
     }
     while (result->NextRow());
 }
 
-AIWaypoint* AIWaypointsMgr::FindAIWaypoint(uint32 entry)
+LegacyArenaPosition* ArenaPositionStore::FindPosition(uint32 entry)
 {
-    auto itr = m_AIWaypointMap.find(entry);
-    return itr != m_AIWaypointMap.end() ? &itr->second : nullptr;
+    auto itr = m_ArenaPositions.find(entry);
+    return itr != m_ArenaPositions.end() ? &itr->second : nullptr;
 }

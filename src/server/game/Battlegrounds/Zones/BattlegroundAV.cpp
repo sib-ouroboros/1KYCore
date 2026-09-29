@@ -17,7 +17,7 @@
  */
 
 #include "BattlegroundAV.h"
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 #include "Config.h"
 #include "Creature.h"
 #include "CreatureAI.h"
@@ -1902,7 +1902,7 @@ void BattlegroundAV::ResetBGSubclass()
     {
         for (uint8 j=0; j<9; j++)
             m_Team_QuestStatus[i][j]=0;
-        float scoreFinal = BG_AV_SCORE_INITIAL_POINTS * BotUtility::BattlegroundScoreRate;
+        float scoreFinal = BG_AV_SCORE_INITIAL_POINTS * PlayerGameplayUtility::BattlegroundScoreRate;
         if (scoreFinal < 40) scoreFinal = 40;
         m_Team_Scores[i] = scoreFinal;
         m_IsInformedNearVictory[i]=false;

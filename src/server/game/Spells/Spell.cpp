@@ -55,7 +55,7 @@
 #include "World.h"
 #include "WorldSession.h"
 #include <numeric>
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 
 extern pEffect SpellEffects[TOTAL_SPELL_EFFECTS];
 

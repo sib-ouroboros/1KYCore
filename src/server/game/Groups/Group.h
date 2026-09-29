@@ -26,7 +26,7 @@
 #include "Object.h"
 #include "SharedDefines.h"
 #include <map>
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 
 class Battlefield;
 class Battleground;

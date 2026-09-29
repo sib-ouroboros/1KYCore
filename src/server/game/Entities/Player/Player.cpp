@@ -131,8 +131,8 @@
 #include "WorldStatePackets.h"
 #include <G3D/g3dmath.h>
 #include "ChallengeModeMgr.h"
-#include "BotMovementAI.h"
-#include "BotAITool.h"
+#include "PlayerCombatModifiersAI.h"
+#include "PlayerGameplayUtility.h"
 
 #define ZONE_UPDATE_INTERVAL (1*IN_MILLISECONDS)
 #define SHOP_UPDATE_INTERVAL (30*IN_MILLISECONDS)
@@ -399,7 +399,7 @@ Player::Player(WorldSession* session) : Unit(true), m_sceneMgr(this), _vignetteM
     m_reputationMgr = new ReputationMgr(this);
     m_questObjectiveCriteriaMgr = std::make_unique<QuestObjectiveCriteriaMgr>(this);
 
-    m_PlayerBotSetting = new PlayerBotSetting(this);
+    m_CharacterSetup = new PlayerCharacterSetup(this);
     m_EquipCombatPower = 0;
 
     for (uint8 i = 0; i < MAX_CUF_PROFILES; ++i)
@@ -452,7 +452,7 @@ Player::~Player()
     delete m_reputationMgr;
     delete _cinematicMgr;
 
-    delete m_PlayerBotSetting;
+    delete m_CharacterSetup;
 
     for (uint8 i = 0; i < VOID_STORAGE_MAX_SLOT; ++i)
         delete _voidStorageItems[i];
@@ -468,61 +468,61 @@ Player::~Player()
 
 uint32 Player::FindTalentType()
 {
-    return m_PlayerBotSetting->UpdateTalentType();
+    return m_CharacterSetup->UpdateTalentType();
 }
 
 bool Player::AIEquipItem(uint32 entry)
 {
-    Item* pItem = BotUtility::FindItemFromAllBag(this, entry);
+    Item* pItem = PlayerGameplayUtility::FindItemFromAllBag(this, entry);
     if (!pItem)
         return false;
-    return m_PlayerBotSetting->EquipItem(pItem);
+    return m_CharacterSetup->EquipItem(pItem);
 }
 
 bool Player::CheckNeedTenacityFlush()
 {
-    if (m_PlayerBotSetting)
-        return m_PlayerBotSetting->CheckNeedTenacityFlush();
+    if (m_CharacterSetup)
+        return m_CharacterSetup->CheckNeedTenacityFlush();
     return false;
 }
 
 bool Player::ResetPlayerToLevel(uint32 level, uint32 talent, bool needTenacity)
 {
-    return m_PlayerBotSetting->ResetPlayerToLevel(level, talent, needTenacity);
+    return m_CharacterSetup->ResetPlayerToLevel(level, talent, needTenacity);
 }
 
 bool Player::IsSettingFinish()
 {
-    return m_PlayerBotSetting->IsFinish();
+    return m_CharacterSetup->IsFinish();
 }
 
 void Player::SupplementAmmo()
 {
-    m_PlayerBotSetting->SupplementAmmo();
+    m_CharacterSetup->SupplementAmmo();
 }
 
 uint32 Player::ReupdateTalents()
 {
-    uint32 type = m_PlayerBotSetting->GetTalentType();
+    uint32 type = m_CharacterSetup->GetTalentType();
     SaveToDB();
     return (type > 2) ? 0 : type;
 }
 
 uint32 Player::SwitchTalent(uint32 talent)
 {
-    return m_PlayerBotSetting->SwitchPlayerTalent(talent);
+    return m_CharacterSetup->SwitchPlayerTalent(talent);
 }
 
 bool Player::IsTankPlayer()
 {
-    if (!m_PlayerBotSetting)
+    if (!m_CharacterSetup)
         return false;
     if (getLevel() < 10)
         return false;
     Classes cls = Classes(getClass());
     if (cls != CLASS_DRUID && cls != CLASS_PALADIN && cls != CLASS_WARRIOR)
         return false;
-    uint32 type = m_PlayerBotSetting->UpdateTalentType();
+    uint32 type = m_CharacterSetup->UpdateTalentType();
     if (cls == CLASS_DRUID && type == 1)
         return true;
     if (cls == CLASS_PALADIN && type == 1)
@@ -563,7 +563,7 @@ void Player::FlushEquipCombatPower(uint8 eSlot, bool apply, const ItemTemplate* 
 
 bool Player::EquipIsTidiness()
 {
-    return m_PlayerBotSetting->EquipIsTidiness();
+    return m_CharacterSetup->EquipIsTidiness();
 }
 
 void Player::CleanupsBeforeDelete(bool finalCleanup)
@@ -1272,7 +1272,7 @@ void Player::Update(uint32 p_time)
 
     UpdateAfkReport(now);
 
-    m_PlayerBotSetting->UpdateReset();
+    m_CharacterSetup->UpdateReset();
 
     if (GetCombatTimer()) // Only set when in pvp combat
         if (Aura* aura = GetAura(SPELL_PVP_RULES_ENABLED))
@@ -1292,7 +1292,7 @@ void Player::Update(uint32 p_time)
         //		i_AI->Reset();
         //		delete i_AI;
         //	}
-        //	i_AI = new BotMovementAI(this);
+        //	i_AI = new PlayerCombatModifiersAI(this);
         //}
         NeedChangeAI = false;
         IsAIEnabled = (GetAI() != nullptr);
@@ -26902,7 +26902,7 @@ void Player::UpdateAreaDependentAuras()
             // CheckLocation echoue sur la restriction de vol -> aura monture retiree -> demontage
             // en plein vol -> chute (bug "lache en plein vol"). Carve-out bot etendu aux joueurs.
             bool isMountOrFlyAura = iter->second->HasEffectType(SPELL_AURA_MOUNTED) || iter->second->HasEffectType(SPELL_AURA_FLY);
-            if (scr != SPELL_CAST_OK && !PlayerBotSetting::IsBotFlyMountAura(iter->first) && !isMountOrFlyAura)
+            if (scr != SPELL_CAST_OK && !PlayerCharacterSetup::IsSpecialFlyingMountAura(iter->first) && !isMountOrFlyAura)
                 RemoveOwnedAura(iter);
             else
                 ++iter;

@@ -80,7 +80,7 @@
 #include "WorldPacket.h"
 #include "WorldSession.h"
 #include <cmath>
-#include "BotMovementAI.h"
+#include "PlayerCombatModifiersAI.h"
 
 float baseMoveSpeed[MAX_MOVE_TYPE] =
 {
@@ -775,16 +775,16 @@ uint32 Unit::DealDamage(Unit* victim, uint32 damage, CleanDamage const* cleanDam
     //{
     //	Player* vicPlayer = victim->ToPlayer();
     //	if (!vicPlayer->InBattleground())
-    //		damage *= BotUtility::DungeonBotDamageModify * 0.95f;
+    //		damage *= PlayerGameplayUtility::DungeonPlayerDamageMultiplier * 0.95f;
     //}
     if (victim && victim->ToPlayer())
     {
         Player* vicPlayer = victim->ToPlayer();
-        if (BotMovementAI* pMAI = dynamic_cast<BotMovementAI*>(vicPlayer->GetAI()))
+        if (PlayerCombatModifiersAI* pMAI = dynamic_cast<PlayerCombatModifiersAI*>(vicPlayer->GetAI()))
             pMAI->DamageEndure(this, damage, damagetype);
 
         //{
-        //	damage *= 1.0f / (BotUtility::DungeonBotEndureModify * 0.95f);
+        //	damage *= 1.0f / (PlayerGameplayUtility::DungeonPlayerDamageDivisor * 0.95f);
         //}
     }
 

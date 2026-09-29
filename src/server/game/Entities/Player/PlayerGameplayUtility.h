@@ -15,19 +15,19 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _BOT_AI_TOOL_H
-#define _BOT_AI_TOOL_H
+#ifndef TRINITY_PLAYER_GAMEPLAY_UTILITY_H
+#define TRINITY_PLAYER_GAMEPLAY_UTILITY_H
 
 #include "ScriptSystem.h"
 #include "PlayerAI.h"
 #include "Player.h"
 
-class TC_GAME_API BotUtility
+class TC_GAME_API PlayerGameplayUtility
 {
 public:
     static float BattlegroundScoreRate;
-    static float DungeonBotDamageModify;
-    static float DungeonBotEndureModify;
+    static float DungeonPlayerDamageMultiplier;
+    static float DungeonPlayerDamageDivisor;
 
 public:
     // Shared inventory helpers still used by ordinary players and custom menus.
@@ -35,4 +35,4 @@ public:
     static Item* StoreNewItemByEntry(Player* player, uint32 entry, int32 count = 1);
 };
 
-#endif // !_BOT_AI_TOOL_H
+#endif // !TRINITY_PLAYER_GAMEPLAY_UTILITY_H

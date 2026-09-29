@@ -15,17 +15,17 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 #include "Item.h"
 #include "Bag.h"
 #include "ObjectMgr.h"
 #include "ItemEnchantmentMgr.h"
 
-float BotUtility::BattlegroundScoreRate = 1.0f;
-float BotUtility::DungeonBotDamageModify = 1.0f;
-float BotUtility::DungeonBotEndureModify = 1.0f;
+float PlayerGameplayUtility::BattlegroundScoreRate = 1.0f;
+float PlayerGameplayUtility::DungeonPlayerDamageMultiplier = 1.0f;
+float PlayerGameplayUtility::DungeonPlayerDamageDivisor = 1.0f;
 
-Item* BotUtility::FindItemFromAllBag(Player* player, uint32 entry, bool destroy)
+Item* PlayerGameplayUtility::FindItemFromAllBag(Player* player, uint32 entry, bool destroy)
 {
 	if (!player || entry == 0)
 		return NULL;
@@ -68,7 +68,7 @@ Item* BotUtility::FindItemFromAllBag(Player* player, uint32 entry, bool destroy)
 	return NULL;
 }
 
-Item* BotUtility::StoreNewItemByEntry(Player* player, uint32 entry, int32 count)
+Item* PlayerGameplayUtility::StoreNewItemByEntry(Player* player, uint32 entry, int32 count)
 {
 	if (!player || entry == 0 || count == 0)
 		return NULL;

@@ -15,22 +15,22 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SC_BOTFOLLOWERAI_H
-#define SC_BOTFOLLOWERAI_H
+#ifndef TRINITY_PLAYER_COMBAT_MODIFIERS_AI_H
+#define TRINITY_PLAYER_COMBAT_MODIFIERS_AI_H
 
 #include "ScriptSystem.h"
 #include "PlayerAI.h"
 #include "Pathfinding.h"
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 
-class TC_GAME_API BotMovementAI : public PlayerAI
+class TC_GAME_API PlayerCombatModifiersAI : public PlayerAI
 {
 public:
-    explicit BotMovementAI(Player* player) : PlayerAI(player) { }
+    explicit PlayerCombatModifiersAI(Player* player) : PlayerAI(player) { }
 
     void DamageDealt(Unit* victim, uint32& damage, DamageEffectType damageType) override;
     void DamageEndure(Unit* attacker, uint32& damage, DamageEffectType damageType);
     void UpdateAI(uint32 /*diff*/) override { }
 };
 
-#endif // SC_BOTFOLLOWERAI_H
+#endif // TRINITY_PLAYER_COMBAT_MODIFIERS_AI_H

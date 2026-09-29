@@ -16,7 +16,7 @@
  */
 
 #include "WorldSession.h"
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 #include "Map.h"
 #include "ToolSocket.h"
 #include "BigNumber.h"
@@ -214,7 +214,7 @@ void ToolSocket::LoadConfigure()
 			bgScoreReate = 0.2f;
 		if (bgScoreReate > 8.0f)
 			bgScoreReate = 8.0f;
-		BotUtility::BattlegroundScoreRate = bgScoreReate;
+        PlayerGameplayUtility::BattlegroundScoreRate = bgScoreReate;
 
 Json::Value jsonMaxLevel = sConfigMgr->GetIntDefault("max_level", 6);
 		int maxLevel = sConfigMgr->GetIntDefault("max_level", 6);
@@ -258,7 +258,7 @@ Json::Value jsonAddion = sConfigMgr->GetFloatDefault("addion", 1.0f);
 			modifyAddion = 0.5f;
 		if (modifyAddion > 15.0f)
 			modifyAddion = 15.0f;
-		BotUtility::DungeonBotDamageModify = modifyAddion;
+        PlayerGameplayUtility::DungeonPlayerDamageMultiplier = modifyAddion;
 
 Json::Value jsonEndure = sConfigMgr->GetFloatDefault("endure", 1.0f);
 		modifyAddion = sConfigMgr->GetFloatDefault("endure", 1.0f);
@@ -266,7 +266,7 @@ Json::Value jsonEndure = sConfigMgr->GetFloatDefault("endure", 1.0f);
 			modifyAddion = 0.5f;
 		if (modifyAddion > 15.0f)
 			modifyAddion = 15.0f;
-		BotUtility::DungeonBotEndureModify = modifyAddion;
+        PlayerGameplayUtility::DungeonPlayerDamageDivisor = modifyAddion;
 }
 
 void ToolSocket::ProcessCmd(std::string cmdString)
@@ -354,7 +354,7 @@ void ToolSocket::CmdBGScoreRate(Json::Value& info)
 		rate = 0.2f;
 	if (rate > 8.0f)
 		rate = 8.0f;
-	BotUtility::BattlegroundScoreRate = rate;
+    PlayerGameplayUtility::BattlegroundScoreRate = rate;
 	SendNormalResult("bg_scorerate", true);
 }
 
@@ -406,7 +406,7 @@ void ToolSocket::CmdPlayerChange(Json::Value& info)
 		SendNormalResult("player_change", false);
 		return;
 	}
-	minlv = PlayerBotSetting::CheckMaxLevel(minlv);
+    minlv = PlayerCharacterSetup::CheckMaxLevel(minlv);
 	WorldSession* pWorldSession = sWorld->FindSession(guid);
 	if (pWorldSession && !pWorldSession->PlayerLoading())
 	{
@@ -417,7 +417,7 @@ void ToolSocket::CmdPlayerChange(Json::Value& info)
 			SendNormalResult("player_change", false);
 			return;
 		}
-		maxlv = PlayerBotSetting::CheckMaxLevel(maxlv);
+        maxlv = PlayerCharacterSetup::CheckMaxLevel(maxlv);
 		if (maxlv < minlv)
 			maxlv = minlv;
 		uint32 level = urand(minlv, maxlv);
@@ -484,7 +484,7 @@ void ToolSocket::CmdPVEAddion(Json::Value& info)
 		modifyEndure = 0.5f;
 	if (modifyEndure > 15.0f)
 		modifyEndure = 15.0f;
-	BotUtility::DungeonBotDamageModify = modifyAddion;
-	BotUtility::DungeonBotEndureModify = modifyEndure;
+    PlayerGameplayUtility::DungeonPlayerDamageMultiplier = modifyAddion;
+    PlayerGameplayUtility::DungeonPlayerDamageDivisor = modifyEndure;
 	SendNormalResult("pve_addion", true);
 }

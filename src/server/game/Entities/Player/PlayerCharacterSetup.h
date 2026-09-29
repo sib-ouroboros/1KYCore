@@ -15,8 +15,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __PLAYERBOTSETTING_H__
-#define __PLAYERBOTSETTING_H__
+#ifndef TRINITY_PLAYER_CHARACTER_SETUP_H
+#define TRINITY_PLAYER_CHARACTER_SETUP_H
 
 #include "Log.h"
 #include "Common.h"
@@ -25,7 +25,7 @@
 #include "Player.h"
 #include "ItemTemplate.h"
 
-typedef std::vector<const ItemTemplate*> BotItems;
+typedef std::vector<const ItemTemplate*> LevelItems;
 class TC_GAME_API ItemsForLevel
 {
 public:
@@ -37,20 +37,20 @@ public:
 	const ItemTemplate* RandomItem();
 	const ItemTemplate* RandomTenacityItem();
 
-	BotItems m_Items;
-	BotItems m_TenacityItems;
+    LevelItems m_Items;
+    LevelItems m_TenacityItems;
 };
 
 struct TalentEntry;
-class TC_GAME_API BotTalentEntry
+class TC_GAME_API ClassTalentEntry
 {
 public:
-	BotTalentEntry(uint32 cls, uint32 index, const TalentEntry* entry) :
+    ClassTalentEntry(uint32 cls, uint32 index, const TalentEntry* entry) :
 		prof(cls), pageIndex(index), talentEntry(entry)
 	{
 	}
 
-	bool operator < (const BotTalentEntry &tal) const;
+    bool operator < (const ClassTalentEntry &tal) const;
 
 public:
 	uint32 prof;
@@ -58,15 +58,15 @@ public:
 	const TalentEntry* talentEntry;
 };
 
-class TC_GAME_API PlayerBotSetting
+class TC_GAME_API PlayerCharacterSetup
 {
 public:
 	typedef std::set<uint32> SetEntrys;
-	typedef std::set<BotTalentEntry> BotTalentPage;
-	typedef std::map<uint32, ItemsForLevel> BotEquips;
-	typedef std::list<Item*> BotNeedEquips;
-	typedef std::list<uint32> BotCommonSpells;
-	typedef std::vector<uint32> BeastCreatureEntrys;
+    typedef std::set<ClassTalentEntry> ClassTalentPage;
+    typedef std::map<uint32, ItemsForLevel> EquipmentByLevel;
+    typedef std::list<Item*> PendingEquipment;
+    typedef std::list<uint32> ClassCommonSpells;
+    typedef std::vector<uint32> MountSpellIds;
 
 	static void Initialize();
 	static bool BindingPlayerHomePosition(Player* player);
@@ -75,7 +75,7 @@ public:
 	static uint32 GetItemLevelByAI(const ItemTemplate* item);
 	static void ClearUnknowMount(Player* player);
 	static uint32 CheckMaxLevel(uint32 level);
-	static bool IsBotFlyMountAura(uint32 aura);
+    static bool IsSpecialFlyingMountAura(uint32 aura);
 
 private:
 	//static bool MatchEquipmentSlotsByWeapon(EquipmentSlots slot, InventoryType iType);
@@ -104,8 +104,8 @@ private:
 	static void GetRandomPropEnchantments(int32 rndPropID, std::list<uint32>& enchants);
 
 public:
-	PlayerBotSetting(Player* player);
-	~PlayerBotSetting();
+    PlayerCharacterSetup(Player* player);
+    ~PlayerCharacterSetup();
 
 	bool EquipIsTidiness();
 	bool CheckNeedTenacityFlush();
@@ -153,16 +153,16 @@ private:
 	bool m_TenacitySetting;
 	uint32 m_ResetStep;
 	Player* m_Player;
-	BotNeedEquips m_NeedEquips;
+    PendingEquipment m_NeedEquips;
 	uint32 m_ActiveTalentType;
 
 	static uint32 classesTrainersGUID[MAX_CLASSES][2];
-	static BotTalentPage classesTalents[MAX_CLASSES][3];
-	static BotEquips classesEquips[MAX_CLASSES][InventoryType::INVTYPE_RELIC+1];
-	static BotCommonSpells classesCommonSpells[MAX_CLASSES];
-	static BeastCreatureEntrys normalMountSpells;
-	static BeastCreatureEntrys fastMountSpells;
-	static SetEntrys botFlyMountEntrys;
+    static ClassTalentPage classesTalents[MAX_CLASSES][3];
+    static EquipmentByLevel classesEquips[MAX_CLASSES][InventoryType::INVTYPE_RELIC+1];
+    static ClassCommonSpells classesCommonSpells[MAX_CLASSES];
+    static MountSpellIds normalMountSpells;
+    static MountSpellIds fastMountSpells;
+    static SetEntrys specialFlyingMountSpells;
 };
 
-#endif // __PLAYERBOTSETTING_H__
+#endif // TRINITY_PLAYER_CHARACTER_SETUP_H

@@ -45,7 +45,7 @@
 #	 SOLO LFG
 #	 SOLOCRAFT
 #	 CHALLENGE MYTHIC
-#    PLAYERBOT SETTINGS
+#    CUSTOM PLAYER SETTINGS
 #
 ###################################################################################################
 
@@ -4339,23 +4339,15 @@ Challenge.Enabled = 1
 ####################################################################################################
 
 ####################################################################################################
-# PLAYERBOT SETTINGS
-#
-# Fear Distance
-#
-#   CustomSpecialFearDistance
-#        Description: Defines the custom distance in yards at which PlayerBots will react to fear effects.
-#        Default:     0.0 - Disabled (use core default)
-#                     >0  - Custom distance in yards
+# CUSTOM PLAYER SETTINGS
 #
 
-CustomSpecialFearDistance = 0.000000
 
 #
 # WoWTool Port
 #
 #   WOWToolListenPort
-#        Description: TCP port used for external tool connections to PlayerBot system (e.g. WoWTool).
+#        Description: TCP port used by the external administration tool (WoWTool).
 #        Default:     8116
 #
 
@@ -4365,7 +4357,7 @@ WOWToolListenPort = 8116
 # Battleground Score Rate
 #
 #   bgscorerate
-#        Description: Multiplier for score gained by PlayerBots in battlegrounds.
+#        Description: Multiplier for initial reinforcements in Alterac Valley and Isle of Conquest.
 #        Default:     1.0 - Normal score rate
 #                     2.0 - Double score rate
 #
@@ -4431,29 +4423,16 @@ endure = 1.000000
 LFGnumPlayer_Add = 0
 
 #
-# PlayerBot Global Enable
-#
-#   pbotall
-#        Description: Enables or disables the automatic spawning of PlayerBots in the server.
-#                     0 = Disabled, no new PlayerBots will be added
-#                     1 = Enabled, PlayerBots can join the LFG queue (default)
-#        Default:     1
-#
-
-pbotall = 1
-
-###################################################################################################
-# MODULE BG BOTFILL (SylvaniaCore)
-#
-#   pbotbg
-#        Description: Remplissage des champs de bataille par PlayerBots quand des joueurs
-#                     reels sont en file (WS / AB / EY / AV / IC), sans activer les bots
-#                     de monde, LFG ni arene (independant de pbotall).
-#        Default:     0 - Desactive
-#                     1 - Active
+#    Battleground.PreloadNavigation
+#        Description: Preload navigation tiles for maps 30, 489, 529, 566 and 628.
+#                     This controls navigation data only and does not create players.
+#                     Read at startup. Existing configurations without this key retain
+#                     the former pbotbg/pbotall navigation-preload behavior.
+#        Default:     1 - Enabled
+#                     0 - Disabled
 #
 
-pbotbg = 0
+Battleground.PreloadNavigation = 1
 
 
 #

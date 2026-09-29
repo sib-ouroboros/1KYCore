@@ -60,7 +60,7 @@
 #include "Util.h"
 #include "World.h"
 #include "OnlineMgr.h"
-#include "BotMovementAI.h"
+#include "PlayerCombatModifiersAI.h"
 #include <Config.h>
 
 class LoginQueryHolder : public CharacterDatabaseQueryHolder
@@ -1184,8 +1184,8 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder const& holder)
 
     pCurrChar->IsAIEnabled = true;
     pCurrChar->NeedChangeAI = false;
-    pCurrChar->SetAI(new BotMovementAI(pCurrChar));
-    uint32 talent = PlayerBotSetting::FindPlayerTalentType(pCurrChar);
+    pCurrChar->SetAI(new PlayerCombatModifiersAI(pCurrChar));
+    uint32 talent = PlayerCharacterSetup::FindPlayerTalentType(pCurrChar);
     sOnlineMgr->CharaterOnline(GetAccountId(), uint32(pCurrChar->GetGUID()),
         pCurrChar->GetName(), pCurrChar->getRace(), pCurrChar->getClass(), pCurrChar->getLevel(), talent);
 }

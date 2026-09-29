@@ -17,7 +17,7 @@
 
 #include "CustomTalkMenu.h"
 #include "WorldSession.h"
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 #include "GossipDef.h"
 #include "SpellAuras.h"
 #include "SpellMgr.h"
@@ -461,7 +461,7 @@ bool CustomTalkMenu::ProcessItem(CustomItem* pMenuItem, Player* player)
 
 	uint32 entry = uint32(pMenuItem->param1);
 	uint32 count = (pMenuItem->param2 <= 0) ? 1 : uint32(pMenuItem->param2);
-	if (BotUtility::StoreNewItemByEntry(player, entry, count))
+    if (PlayerGameplayUtility::StoreNewItemByEntry(player, entry, count))
 		return true;
 	return false;
 }

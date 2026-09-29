@@ -32,7 +32,7 @@
 #include "SpellAuraDefines.h"
 #include "SpellInfo.h"
 #include <G3D/g3dmath.h>
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 
 PetFamilySpellsStore sPetFamilySpellsStore;
 

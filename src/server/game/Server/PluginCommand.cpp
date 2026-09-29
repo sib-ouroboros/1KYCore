@@ -32,7 +32,7 @@ PluginCommand* PluginCommand::instance()
 
 bool PluginCommand::BindingHomePosition(Player* player)
 {
-	return PlayerBotSetting::BindingPlayerHomePosition(player);
+    return PlayerCharacterSetup::BindingPlayerHomePosition(player);
 }
 
 bool PluginCommand::SuperMenu(Player* player)

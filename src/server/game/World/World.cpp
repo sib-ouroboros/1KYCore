@@ -19,7 +19,7 @@
     \ingroup world
 */
 
-#include "BotAITool.h"
+#include "PlayerGameplayUtility.h"
 #include "OnlineMgr.h"
 #include "Map.h"
 #include "World.h"
@@ -102,8 +102,8 @@
 #include "WorldSession.h"
 #include "WorldSocket.h"
 #include "PetBattleSystem.h"
-#include "PlayerBotSetting.h"
-#include "AIWaypointsMgr.h"
+#include "PlayerCharacterSetup.h"
+#include "ArenaPositionStore.h"
 #include "MMapManager.h"
 #include "ToolSocket.h"
 #include "SHA1.h"
@@ -1742,7 +1742,6 @@ void World::LoadConfigSettings(bool reload)
     // prevent character rename on character customization
     m_bool_configs[CONFIG_PREVENT_RENAME_CUSTOMIZATION] = sConfigMgr->GetBoolDefault("PreventRenameCharacterOnCustomization", false);
 
-    m_float_configs[CONFIG_SPECIAL_FEAR_DISTANCE] = sConfigMgr->GetFloatDefault("CustomSpecialFearDistance", 0);
     m_int_configs[CONFIG_WOWTOOL_LISTENPORT] = sConfigMgr->GetIntDefault("WOWToolListenPort", 8116);
 
     // Allow 5-man parties to use raid warnings
@@ -1872,18 +1871,17 @@ void World::SetInitialWorldSettings()
     sOnlineMgr->LoadAccounts();
 
     TC_LOG_INFO("server.loading", "Loading legacy arena positions...");
-    sAIWPMgr->LoadAIWaypoints();
+    sArenaPositionStore->LoadPositions();
     TC_LOG_INFO("server.loading", "Loading Custom talk menu...");
     sCustomTalkMenu->Initialize();
 
     MMAP::MMapManager* mmmgr = MMAP::MMapFactory::createOrGetMMapManager();
     mmmgr->InitializeThreadUnsafe(mapData);
 
-    // SylvaniaCore (module BG BotFill): precharge les tuiles navmesh des cartes de champs de
-    // bataille. Sans cela, les tuiles ne se chargent qu avec les grilles (la ou il y a des
-    // joueurs) et le pathfinding des bots vers les zones vides retombe en ligne droite
-    // (BuildShortcut) : bots a travers le decor.
-    if (sConfigMgr->GetIntDefault("pbotbg", 0) || sConfigMgr->GetIntDefault("pbotall", 1))
+    // Preserve legacy configuration when the dedicated navigation option is absent.
+    bool const preloadBattlegroundNavigation = sConfigMgr->GetBoolDefault("Battleground.PreloadNavigation",
+        sConfigMgr->GetIntDefault("pbotbg", 0) != 0 || sConfigMgr->GetIntDefault("pbotall", 1) != 0);
+    if (preloadBattlegroundNavigation)
     {
         uint32 preloadTiles = 0;
         uint32 const bgNavMaps[5] = { 30, 489, 529, 566, 628 };
@@ -1892,7 +1890,7 @@ void World::SetInitialWorldSettings()
                 for (int32 gy = 0; gy < 64; ++gy)
                     if (mmmgr->loadMap(m_dataPath, bgMapId, gx, gy))
                         ++preloadTiles;
-        TC_LOG_INFO("server.loading", ">> BG BotFill: %u tuiles navmesh prechargees pour les champs de bataille", preloadTiles);
+        TC_LOG_INFO("server.loading", ">> Preloaded %u battleground navigation tiles", preloadTiles);
     }
 
     TC_LOG_INFO("server.loading", "Loading SpellInfo store...");
@@ -2416,7 +2414,7 @@ void World::SetInitialWorldSettings()
             bgScoreReate = 0.2f;
         if (bgScoreReate > 8.0f)
             bgScoreReate = 8.0f;
-        BotUtility::BattlegroundScoreRate = bgScoreReate;
+        PlayerGameplayUtility::BattlegroundScoreRate = bgScoreReate;
 
         Json::Value jsonMaxLevel = sConfigMgr->GetIntDefault("max_level", 6);
         int maxLevel = sConfigMgr->GetIntDefault("max_level", 6);
@@ -2460,7 +2458,7 @@ void World::SetInitialWorldSettings()
             modifyAddion = 0.5f;
         if (modifyAddion > 15.0f)
             modifyAddion = 15.0f;
-        BotUtility::DungeonBotDamageModify = modifyAddion;
+        PlayerGameplayUtility::DungeonPlayerDamageMultiplier = modifyAddion;
 
         Json::Value jsonEndure = sConfigMgr->GetFloatDefault("endure", 1.0f);
         modifyAddion = sConfigMgr->GetFloatDefault("endure", 1.0f);
@@ -2468,7 +2466,7 @@ void World::SetInitialWorldSettings()
             modifyAddion = 0.5f;
         if (modifyAddion > 15.0f)
             modifyAddion = 15.0f;
-        BotUtility::DungeonBotEndureModify = modifyAddion;
+        PlayerGameplayUtility::DungeonPlayerDamageDivisor = modifyAddion;
     }
 
     ///- Initialize game time and timers
@@ -2629,7 +2627,7 @@ void World::SetInitialWorldSettings()
 
     uint32 startupDuration = GetMSTimeDiffToNow(startupBegin);
 
-    PlayerBotSetting::Initialize();
+    PlayerCharacterSetup::Initialize();
 
     TC_LOG_INFO("server.worldserver", "World initialized in %u minutes %u seconds", (startupDuration / 60000), ((startupDuration % 60000) / 1000));
 

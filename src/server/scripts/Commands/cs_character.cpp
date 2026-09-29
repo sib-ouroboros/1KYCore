@@ -916,7 +916,7 @@ public:
 
         if (newlevel > STRONG_MAX_LEVEL)                         // hardcoded maximum level
             newlevel = STRONG_MAX_LEVEL;
-        newlevel = PlayerBotSetting::CheckMaxLevel(newlevel);
+        newlevel = PlayerCharacterSetup::CheckMaxLevel(newlevel);
         if (newlevel == oldlevel)
             return true;
 

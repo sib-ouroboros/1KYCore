@@ -21,7 +21,7 @@
 #include "Arena.h"
 #include "ArenaHelper.h"
 #include "ArchaeologyPlayerMgr.h"
-#include "PlayerBotSetting.h"
+#include "PlayerCharacterSetup.h"
 #include "Unit.h"
 #include "CUFProfile.h"
 #include "DatabaseEnvFwd.h"
@@ -87,7 +87,7 @@ class LootStore;
 class OutdoorPvP;
 class Pet;
 class PetAura;
-class PlayerBotSetting;
+class PlayerCharacterSetup;
 class PlayerAchievementMgr;
 class PlayerMenu;
 class PlayerSocial;
@@ -1191,7 +1191,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         void SupplementAmmo();
         uint32 ReupdateTalents();
         uint32 SwitchTalent(uint32 talent);
-        PlayerBotSetting* m_PlayerBotSetting;
+        PlayerCharacterSetup* m_CharacterSetup;
         bool IsTankPlayer();
         int32 GetEquipCombatPower() { return m_EquipCombatPower; }
         void FlushEquipCombatPower(uint8 eSlot, bool apply, const ItemTemplate* pEquipTemplate);
