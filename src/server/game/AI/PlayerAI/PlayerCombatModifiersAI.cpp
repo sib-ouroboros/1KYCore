@@ -17,7 +17,7 @@
 
 #include "PlayerCombatModifiersAI.h"
 #include "WaypointManager.h"
-#include "Pathfinding.h"
+#include "Map.h"
 #include "WorldSession.h"
 #include "PlayerGameplayUtility.h"
 #include "MapManager.h"

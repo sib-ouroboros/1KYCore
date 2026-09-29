@@ -20,7 +20,6 @@
 
 #include "ScriptSystem.h"
 #include "PlayerAI.h"
-#include "Pathfinding.h"
 #include "PlayerGameplayUtility.h"
 
 class TC_GAME_API PlayerCombatModifiersAI : public PlayerAI

@@ -33,7 +33,7 @@
 #include "SplineChainMovementGenerator.h"
 #include "MoveSpline.h"
 #include "MoveSplineInit.h"
-#include "Pathfinding.h"
+#include "PathGenerator.h"
 
 inline bool IsStatic(MovementGenerator* movement)
 {
@@ -448,22 +448,6 @@ void MotionMaster::MoveCharge(PathGenerator const& path, float speed /*= SPEED_C
     if (spellEffectExtraData)
         init.SetSpellEffectExtraData(*spellEffectExtraData);
     init.Launch();
-}
-
-void MotionMaster::MovePathfinding(PathParameter* pathParam)
-{
-    if (!pathParam)
-        return;
-    // SylvaniaCore (module BG BotFill): l ancien PointMovementGenerator (generatePath=false)
-    // relancait un deplacement en ligne droite au moindre evenement (changement de vitesse),
-    // ecrasant la spline du chemin calcule -> bots a travers le decor et vitesse anormale.
-    // On lance la spline du chemin puis on pose un generateur passif qui attend sa fin.
-    Movement::MoveSplineInit init(_owner);
-    init.MovebyPath(pathParam->finishPaths);
-    init.SetSmooth();
-    init.SetWalk(false);
-    init.Launch();
-    Mutate(new EffectMovementGenerator(0), MOTION_SLOT_CONTROLLED);
 }
 
 void MotionMaster::MoveKnockbackFrom(float srcX, float srcY, float speedXY, float speedZ, Movement::SpellEffectExtraData const* spellEffectExtraData /*= nullptr*/)
