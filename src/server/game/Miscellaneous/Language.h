@@ -1052,9 +1052,6 @@ enum TrinityStrings
     LANG_NPC_RELOADED                   = 5073,
     LANG_NPCS_RELOADED                  = 5074,
 
-    // Playerbots
-    LANG_PLAYERBOT_TRADE                = 5500,
-
     // Level requirement notifications
     LANG_SAY_REQ                        = 6604,
     LANG_WHISPER_REQ                    = 6605,
