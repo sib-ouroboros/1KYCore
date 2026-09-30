@@ -494,7 +494,7 @@ uint32 Player::ReupdateTalents()
 {
     uint32 type = m_CharacterSetup->GetTalentType();
     SaveToDB();
-    return (type > 2) ? 0 : type;
+    return type;
 }
 
 

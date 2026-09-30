@@ -908,6 +908,7 @@ enum SpellAttr13
 
 #define MIN_SPECIALIZATION_LEVEL    10
 #define MAX_SPECIALIZATIONS         4
+#define PLAYER_SPECIALIZATION_KEEP 0xFF // Separate from druid OrderIndex 3.
 #define PET_SPEC_OVERRIDE_CLASS_INDEX MAX_CLASSES
 
 // Custom values

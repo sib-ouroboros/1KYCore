@@ -1188,7 +1188,7 @@ m_Finish(true),
 m_TenacitySetting(false),
 m_ResetStep(0),
 m_Player(player),
-m_ActiveTalentType(3)
+m_ActiveTalentType(PLAYER_SPECIALIZATION_KEEP)
 {
 }
 
@@ -1200,17 +1200,24 @@ PlayerCharacterSetup::~PlayerCharacterSetup()
 uint32 PlayerCharacterSetup::GetTalentType()
 {
 
-	return m_ActiveTalentType;
+    return FindPlayerTalentType(m_Player);
 }
 
 bool PlayerCharacterSetup::ResetPlayerToLevel(uint32 level, uint32 talent, bool tenacity)
 {
-	if (!m_Player)
-		return false;
-	if (talent <= 2)
-		m_ActiveTalentType = talent;
-	else
-		m_ActiveTalentType = 3;
+    if (!m_Player || !m_Finish)
+        return false;
+
+    // Validate before changing level or starting the reset pipeline.
+    ChrSpecializationEntry const* spec = talent == PLAYER_SPECIALIZATION_KEEP
+        ? sChrSpecializationStore.LookupEntry(m_Player->GetSpecializationId())
+        : (talent < MAX_SPECIALIZATIONS
+            ? sDB2Manager.GetChrSpecializationByIndex(m_Player->getClass(), talent) : nullptr);
+    if (!spec || spec->IsPetSpecialization() || spec->ClassID != m_Player->getClass() ||
+        spec->OrderIndex < 0 || spec->OrderIndex >= MAX_SPECIALIZATIONS)
+        return false;
+
+    m_ActiveTalentType = spec->OrderIndex;
 	//TC_LOG_INFO("server.reset", ">> Reset player level to %d !", level);
 	if (m_Player->getLevel() != level)
 	{
@@ -1344,8 +1351,8 @@ void PlayerCharacterSetup::ActivateSpecialization()
 	if (!m_Player)
 		return;
 
-	// 3 signifie  garder la specialisation du personnage  : rien a faire.
-	if (m_ActiveTalentType > 2)
+    // KEEP was resolved at reset start; index 3 is the fourth druid specialization.
+    if (m_ActiveTalentType >= MAX_SPECIALIZATIONS)
 		return;
 
 	uint8 const playerClass = m_Player->getClass();
@@ -1724,29 +1731,36 @@ const ItemTemplate* PlayerCharacterSetup::GetRandomAmmoByType(ItemSubclassProjec
 
 const ItemTemplate* PlayerCharacterSetup::GetRandomItemFromLoopLV(uint32 prof, InventoryType iType, uint32 startLV, const ItemTemplate* filter)
 {
+    if (!m_Player || prof == 0 || prof >= MAX_CLASSES || iType > INVTYPE_RELIC)
+        return nullptr;
     EquipmentByLevel& equips = classesEquips[prof][iType];
-	for (int i = startLV; i > 0; i--)
-	{
-        EquipmentByLevel::iterator itEquip = equips.find(i);
-		if (itEquip == equips.end())
-			continue;
-		if (m_TenacitySetting)
-		{
-			for (int j = 0; j < 2; j++)
-			{
-				const ItemTemplate* item = itEquip->second.RandomTenacityItem();
-				if (item && item != filter)
-					return item;
-			}
-		}
-		for (int j = 0; j < 2; j++)
-		{
-			const ItemTemplate* item = itEquip->second.RandomItem();
-			if (item && item != filter)
-				return item;
-		}
-	}
-	return NULL;
+    auto select = [this, filter](LevelItems const& items) -> ItemTemplate const*
+    {
+        ItemTemplate const* selected = nullptr;
+        uint32 count = 0;
+        for (ItemTemplate const* item : items)
+            if (item && item != filter &&
+                item->IsUsableBySpecialization(m_Player->GetSpecializationId(), m_Player->getLevel(), false) &&
+                m_Player->CanUseItem(item) == EQUIP_ERR_OK)
+            {
+                // Sample all eligible candidates instead of two possibly incompatible draws.
+                if (urand(1, ++count) == 1)
+                    selected = item;
+            }
+        return selected;
+    };
+    for (uint32 level = startLV; level > 0; --level)
+    {
+        auto itr = equips.find(level);
+        if (itr == equips.end())
+            continue;
+        if (m_TenacitySetting)
+            if (ItemTemplate const* item = select(itr->second.m_TenacityItems))
+                return item;
+        if (ItemTemplate const* item = select(itr->second.m_Items))
+            return item;
+    }
+    return nullptr;
 }
 
 bool PlayerCharacterSetup::IsTenacityEquipSlot(uint8 slot)

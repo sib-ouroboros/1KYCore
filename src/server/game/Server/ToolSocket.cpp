@@ -401,7 +401,8 @@ void ToolSocket::CmdPlayerChange(Json::Value& info)
 	uint32 minlv = info["minlv"].asInt();
 	uint32 maxlv = info["maxlv"].asInt();
 	uint32 talent = info["talent"].asInt();
-	if (minlv < 20 || minlv > 110 || maxlv < minlv || maxlv < 20 || maxlv > 110 || talent > 2)
+    if (minlv < 20 || minlv > 110 || maxlv < minlv || maxlv < 20 || maxlv > 110 ||
+        (talent >= MAX_SPECIALIZATIONS && talent != PLAYER_SPECIALIZATION_KEEP))
 	{
 		SendNormalResult("player_change", false);
 		return;

@@ -1,4 +1,4 @@
-name: Specialization reporting
+name: Specialization regression
 
 on:
   push:
@@ -7,12 +7,18 @@ on:
       - src/server/game/Entities/Player/PlayerCharacterSetup.cpp
       - src/server/game/Miscellaneous/SharedDefines.h
       - contrib/tests/test_specialization_reporting.py
+      - contrib/tests/test_specialization_command.py
+      - src/server/game/Entities/Player/Player.h
+      - src/server/game/Server/ToolSocket.cpp
       - .github/workflows/specialization-reporting.yml
   pull_request:
     paths:
       - src/server/game/Entities/Player/PlayerCharacterSetup.cpp
       - src/server/game/Miscellaneous/SharedDefines.h
       - contrib/tests/test_specialization_reporting.py
+      - contrib/tests/test_specialization_command.py
+      - src/server/game/Entities/Player/Player.h
+      - src/server/game/Server/ToolSocket.cpp
       - .github/workflows/specialization-reporting.yml
   workflow_dispatch:
 
@@ -28,4 +34,6 @@ jobs:
         with:
           python-version: '3.12'
       - name: Compile and run reporting regression cases
-        run: python contrib/tests/test_specialization_reporting.py
+        run: |
+          python contrib/tests/test_specialization_reporting.py
+          python contrib/tests/test_specialization_command.py
