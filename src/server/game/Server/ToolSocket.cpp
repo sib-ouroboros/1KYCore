@@ -31,6 +31,8 @@
 
 
 #include <memory>
+#include <cmath>
+#include <limits>
 #include <fstream>
 #include <boost/algorithm/string.hpp>
 
@@ -81,10 +83,8 @@ bool ToolSocket::Update()
         std::unique_lock<std::mutex> sessionGuard(_commandLock);
 		while (_bufferQueue.size())
 		{
-			MessageBuffer* buffer = _bufferQueue.front();
-			QueuePacket(std::move(*buffer));
-			_bufferQueue.pop();
-			delete buffer;
+            QueuePacket(std::move(_bufferQueue.front()));
+            _bufferQueue.pop();
 		}
 	}
 
@@ -94,41 +94,105 @@ bool ToolSocket::Update()
 	return true;
 }
 
+namespace
+{
+bool IsValidToolCommand(Json::Value const& info)
+{
+    if (info.type() != Json::objectValue || !info["entry"].isString())
+        return false;
+    auto integer = [&info](char const* key, int minimum, int maximum)
+    {
+        Json::Value const& value = info[key];
+        if (!value.isInt() && !value.isUInt())
+            return false;
+        // This bundled JsonCpp version throws at UINT >= INT_MAX in asInt().
+        double number = value.asDouble();
+        return number >= minimum && number <= maximum &&
+            (!value.isUInt() || number < std::numeric_limits<int>::max());
+    };
+    auto number = [&info](char const* key)
+    {
+        Json::Value const& value = info[key];
+        return (value.isInt() || value.isUInt() || value.isDouble()) && std::isfinite(value.asDouble());
+    };
+    std::string const entry = info["entry"].asString();
+    if (entry == "heartbeat" || entry == "player_acc")
+        return true;
+    if (entry == "authorization")
+        return info["authorization"].isString();
+    if (entry == "create_acc")
+        return info["cmdName"].isString() && info["cmdPass"].isString();
+    if (entry == "xp_reward")
+        return info["reward"].isBool() || integer("reward", 0, 1);
+    if (entry == "bg_scorerate")
+        return number("scorerate");
+    if (entry == "set_security")
+        return integer("accid", 1, std::numeric_limits<int>::max()) && integer("security", 0, 4);
+    if (entry == "player_change")
+        return integer("guid", 1, std::numeric_limits<int>::max()) && integer("minlv", 20, 110) &&
+            integer("maxlv", 20, 110) && info["maxlv"].asInt() >= info["minlv"].asInt() &&
+            (info["talent"].isNull() || integer("talent", 0, MAX_SPECIALIZATIONS - 1) ||
+                integer("talent", PLAYER_SPECIALIZATION_KEEP, PLAYER_SPECIALIZATION_KEEP));
+    if (entry == "pve_maxlevel")
+        return integer("max_level", 0, 6);
+    if (entry == "pve_maxdungeon")
+        return integer("maxdungeon", 0, std::numeric_limits<int>::max());
+    if (entry == "pve_addion")
+        return number("addion") && number("endure");
+    return false;
+}
+}
+
 void ToolSocket::ProcessToolCmd()
 {
     std::unique_lock<std::mutex> sessionGuard(_commandLock);
 	while (_processCmd.size())
 	{
-		Json::Value& jsonCmd = _processCmd.front();
-		std::string entry = jsonCmd["entry"].asString();
-		if (entry == "heartbeat")
-			CmdHeartbeat(jsonCmd);
-		else if (entry == "authorization")
-			CmdAuthorization(jsonCmd);
-		else if (entry == "xp_reward")
-			CmdBGXPReward(jsonCmd);
-		else if (entry == "bg_scorerate")
-			CmdBGScoreRate(jsonCmd);
-		else if (entry == "create_acc")
-			CmdCreateAccount(jsonCmd);
-		else if (entry == "player_acc")
-			CmdPlayerAccount(jsonCmd);
-		else if (entry == "set_security")
-			CmdAccountSecurity(jsonCmd);
-		else if (entry == "player_change")
-			CmdPlayerChange(jsonCmd);
-		else if (entry == "pve_maxlevel")
-			CmdPVEMaxLevel(jsonCmd);
-		else if (entry == "pve_maxdungeon")
-			CmdPVEMaxDungeon(jsonCmd);
-		else if (entry == "pve_addion")
-			CmdPVEAddion(jsonCmd);
-		else
-		{
-			TC_LOG_ERROR("ToolSocket", "Can`t find tool opcode case by entry : %s.", entry.c_str());
-			SendNormalResult(entry, false);
-		}
-		_processCmd.pop();
+        Json::Value jsonCmd = _processCmd.front();
+        _processCmd.pop();
+        std::string entry = "invalid_command";
+        try
+        {
+            if (jsonCmd.type() == Json::objectValue && jsonCmd["entry"].isString())
+                entry = jsonCmd["entry"].asString();
+            if (!IsValidToolCommand(jsonCmd))
+            {
+                SendNormalResult(entry, false);
+                continue;
+            }
+            if (entry == "heartbeat")
+                CmdHeartbeat(jsonCmd);
+            else if (entry == "authorization")
+                CmdAuthorization(jsonCmd);
+            else if (entry == "xp_reward")
+                CmdBGXPReward(jsonCmd);
+            else if (entry == "bg_scorerate")
+                CmdBGScoreRate(jsonCmd);
+            else if (entry == "create_acc")
+                CmdCreateAccount(jsonCmd);
+            else if (entry == "player_acc")
+                CmdPlayerAccount(jsonCmd);
+            else if (entry == "set_security")
+                CmdAccountSecurity(jsonCmd);
+            else if (entry == "player_change")
+                CmdPlayerChange(jsonCmd);
+            else if (entry == "pve_maxlevel")
+                CmdPVEMaxLevel(jsonCmd);
+            else if (entry == "pve_maxdungeon")
+                CmdPVEMaxDungeon(jsonCmd);
+            else if (entry == "pve_addion")
+                CmdPVEAddion(jsonCmd);
+            else
+            {
+                TC_LOG_ERROR("ToolSocket", "Can`t find tool opcode case by entry : %s.", entry.c_str());
+                SendNormalResult(entry, false);
+            }
+        }
+        catch (std::exception const&)
+        {
+            TC_LOG_ERROR("ToolSocket", "Rejected invalid tool command");
+            SendNormalResult(entry, false);
+        }
 	}
 }
 
@@ -138,38 +202,37 @@ void ToolSocket::OnClose()
 
 void ToolSocket::ReadHandler()
 {
-	if (!IsOpen() || !_authed)
-		return;
-
-	MessageBuffer& packet = GetReadBuffer();
-	while (packet.GetActiveSize() > 0)
-	{
-		uint16 size = 0;
-		std::size_t readHeaderSize = 2;
-		memcpy((void*)&size, packet.GetReadPointer(), readHeaderSize);
-		packet.ReadCompleted(readHeaderSize);
-
-		if (size > 0 && size <= 1024 && packet.GetRemainingSpace() >= size)
-		{
-			char* data = new char[size];
-			memcpy(data, packet.GetReadPointer(), size);
-			packet.ReadCompleted(size);
-			ProcessCmd(data);
-		}
-		else if (size != 0)
-		{
-			_authed = false;
-			DelayedCloseSocket();
-			return;
-		}
-		else
-		{
-			packet.ReadCompleted(packet.GetActiveSize());
-			break;
-		}
-	}
-
-	AsyncRead();
+    if (!IsOpen() || !_authed)
+        return;
+    MessageBuffer& packet = GetReadBuffer();
+    while (packet.GetActiveSize() >= sizeof(uint16))
+    {
+        uint16 size = 0;
+        memcpy(&size, packet.GetReadPointer(), sizeof(size));
+        if (size > 1024)
+        {
+            _authed = false;
+            DelayedCloseSocket();
+            return;
+        }
+        if (packet.GetActiveSize() < sizeof(size) + size)
+            break; // Leave the header and partial payload for the next TCP read.
+        packet.ReadCompleted(sizeof(size));
+        if (!size)
+            continue;
+        std::string command(reinterpret_cast<char const*>(packet.GetReadPointer()), size);
+        packet.ReadCompleted(size);
+        if (!command.empty() && command.back() == '\0')
+            command.pop_back(); // Legacy clients include a trailing NUL in their frame size.
+        if (command.find('\0') != std::string::npos)
+        {
+            _authed = false;
+            DelayedCloseSocket();
+            return;
+        }
+        ProcessCmd(std::move(command));
+    }
+    AsyncRead();
 }
 
 void ToolSocket::LoadConfigure()
@@ -275,7 +338,7 @@ void ToolSocket::ProcessCmd(std::string cmdString)
 	Json::Value jsonValue;
 	if (!jsonReader.parse(cmdString, jsonValue))
 	{
-		TC_LOG_ERROR("ToolSocket", "Parse tool string error. text is %s", cmdString.c_str());
+        TC_LOG_ERROR("ToolSocket", "Invalid JSON in tool command");
 		return;
 	}
     std::unique_lock<std::mutex> sessionGuard(_commandLock);
@@ -311,22 +374,25 @@ void ToolSocket::SendNormalResult(std::string entry, bool result)
 
 void ToolSocket::SendResult(std::string result)
 {
-	if (result.empty() || !IsOpen())
-		return;
-	uint16 size = result.size() + 1;
-	MessageBuffer* retMsg = new MessageBuffer(2 + size);
-	retMsg->Write(&size, 2);
-	retMsg->Write(result.c_str(), size);
-	retMsg->WriteCompleted(2 + size);
-	SendPacket(retMsg);
+    if (result.empty() || !IsOpen())
+        return;
+    if (result.size() >= std::numeric_limits<uint16>::max())
+    {
+        TC_LOG_ERROR("ToolSocket", "Tool response exceeds the 16-bit protocol length");
+        DelayedCloseSocket();
+        return;
+    }
+    uint16 size = static_cast<uint16>(result.size() + 1);
+    MessageBuffer message(sizeof(size) + size);
+    message.Write(&size, sizeof(size));
+    message.Write(result.c_str(), size); // Write already advances the buffer position.
+    SendPacket(std::move(message));
 }
 
-void ToolSocket::SendPacket(MessageBuffer* packet)
+void ToolSocket::SendPacket(MessageBuffer&& packet)
 {
-	if (!IsOpen())
-		return;
-
-	_bufferQueue.push(packet);
+    if (IsOpen())
+        _bufferQueue.push(std::move(packet));
 }
 
 void ToolSocket::CmdHeartbeat(Json::Value& info)

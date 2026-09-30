@@ -58,7 +58,7 @@ protected:
 private:
 	void SendNormalResult(std::string entry, bool result);
 	void SendResult(std::string result);
-	void SendPacket(MessageBuffer* packet);
+    void SendPacket(MessageBuffer&& packet);
 
 	void CmdHeartbeat(Json::Value& info);
 	void CmdAuthorization(Json::Value& info);
@@ -76,7 +76,7 @@ private:
     static std::mutex _commandLock;
 	std::mutex _consoleLock;
 	bool _authed;
-	std::queue<MessageBuffer*> _bufferQueue;
+    std::queue<MessageBuffer> _bufferQueue;
 	std::queue<Json::Value> _processCmd;
 
 public:

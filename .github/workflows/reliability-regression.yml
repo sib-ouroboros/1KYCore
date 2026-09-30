@@ -1,0 +1,36 @@
+name: Reliability regression
+
+on:
+  push:
+    branches: [cleanup/remove-bots, main]
+    paths:
+      - src/server/game/Server/ToolSocket.*
+      - src/common/Utilities/MessageBuffer.h
+      - src/server/game/Server/Json/**
+      - src/server/game/Entities/Player/PlayerCharacterSetup.*
+      - cmake/genrev.cmake
+      - revision_data.h.in.cmake
+      - contrib/tests/test_tool_socket.py
+      - contrib/tests/test_character_setup_inventory.py
+      - contrib/tests/test_revision_metadata.py
+      - .github/workflows/reliability-regression.yml
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test real CMake revision generation
+        run: python contrib/tests/test_revision_metadata.py
+      - name: Test tool protocol with address and undefined behavior sanitizers
+        run: python contrib/tests/test_tool_socket.py
+      - name: Test inventory lifetime and bag handling with sanitizers
+        run: python contrib/tests/test_character_setup_inventory.py

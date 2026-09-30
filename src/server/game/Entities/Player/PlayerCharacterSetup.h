@@ -65,7 +65,7 @@ public:
 	typedef std::set<uint32> SetEntrys;
     typedef std::set<ClassTalentEntry> ClassTalentPage;
     typedef std::map<uint32, ItemsForLevel> EquipmentByLevel;
-    typedef std::list<std::pair<Item*, uint8>> PendingEquipment;
+    typedef std::list<std::pair<ObjectGuid, uint8>> PendingEquipment;
     typedef std::list<uint32> ClassCommonSpells;
     typedef std::vector<uint32> MountSpellIds;
 

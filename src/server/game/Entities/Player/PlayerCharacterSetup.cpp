@@ -1512,23 +1512,23 @@ void PlayerCharacterSetup::LearnSpells()
 
 void PlayerCharacterSetup::CheckInventroy()
 {
-	if (!m_Player->GetItemByPos(255, InventorySlots::INVENTORY_SLOT_BAG_START) ||
-		!m_Player->GetItemByPos(255, InventorySlots::INVENTORY_SLOT_BAG_START + 1) ||
-		!m_Player->GetItemByPos(255, InventorySlots::INVENTORY_SLOT_BAG_START + 2))
-	{
-		const ItemTemplate* item = sObjectMgr->GetItemTemplate(21876);
-		uint32 count = 1;
-		uint32 noSpaceForCount = 0;
-		ItemPosCountVec dest;
-		InventoryResult msg = m_Player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, item->GetId(), count, &noSpaceForCount);
-		if (msg != EQUIP_ERR_OK)
-			count -= noSpaceForCount;
-		if (count <= 0 || dest.empty())
-			return;
-		Item* itemInst = m_Player->StoreNewItem(dest, item->GetId(), true, GenerateItemRandomPropertyId(item->GetId()));
-		if (itemInst)
-			EquipItem(itemInst);
-	}
+    ItemTemplate const* item = sObjectMgr->GetItemTemplate(21876);
+    if (!item)
+    {
+        TC_LOG_ERROR("entities.player", "Character setup: missing bag template 21876");
+        return;
+    }
+    for (uint8 slot = INVENTORY_SLOT_BAG_START; slot < INVENTORY_SLOT_BAG_END; ++slot)
+    {
+        if (m_Player->GetItemByPos(INVENTORY_SLOT_BAG_0, slot))
+            continue;
+        ItemPosCountVec dest;
+        if (m_Player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, item->GetId(), 1) != EQUIP_ERR_OK || dest.empty())
+            return;
+        Item* bag = m_Player->StoreNewItem(dest, item->GetId(), true, GenerateItemRandomPropertyId(item->GetId()));
+        if (!bag || !EquipItem(bag, slot))
+            return; // Keep the stored bag; do not create more items after a failed equip.
+    }
 }
 
 void PlayerCharacterSetup::AddEquipFromAll()
@@ -1580,7 +1580,9 @@ void PlayerCharacterSetup::UpequipFromAll()
 		itNeed != m_NeedEquips.end();
 		itNeed++)
 	{
-        Item* itemInst = itNeed->first;
+        Item* itemInst = m_Player->GetItemByGuid(itNeed->first);
+        if (!itemInst || !m_Player->IsInventoryPos(itemInst->GetPos()) || m_Player->IsBankPos(itemInst->GetPos()))
+            continue; // Removed, equipped or banked since the previous reset step.
 		if (itemInst->GetTemplate()->GetInventoryType() == InventoryType::INVTYPE_AMMO)
 		{
 			//m_Player->SetAmmo(itemInst->GetEntry());
@@ -1837,7 +1839,7 @@ void PlayerCharacterSetup::AddOnceEquip(const ItemTemplate* item, uint8 slot)
 		return;
 	Item* itemInst = m_Player->StoreNewItem(dest, item->GetId(), true, GenerateItemRandomPropertyId(item->GetId()));
 	if (itemInst)
-        m_NeedEquips.emplace_back(itemInst, slot);
+        m_NeedEquips.emplace_back(itemInst->GetGUID(), slot);
 }
 
 void PlayerCharacterSetup::RandomWeaponsForSpecialization()
