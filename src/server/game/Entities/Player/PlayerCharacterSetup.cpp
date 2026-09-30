@@ -922,41 +922,18 @@ bool PlayerCharacterSetup::IsPriestEquip(const ItemTemplate* itemTemplate)
 
 uint32 PlayerCharacterSetup::FindPlayerTalentType(Player* player)
 {
-	if (!player)
-		return 0;
-	uint32 spec = player->GetSpecializationId();
-	uint32 cls = player->getClass();
-	uint32 pageTalents[3] = { 0 };
-	for (uint32 page = 0; page < 3; page++)
-	{
-        ClassTalentPage& talentPage = classesTalents[cls][page];
-        for (ClassTalentPage::iterator itPage = talentPage.begin();
-            itPage != talentPage.end();
-			itPage++)
-		{
-            const TalentEntry* talentEntry = (*itPage).talentEntry;
-            if (!talentEntry) continue;
-			//for (int8 rank = MAX_TALENT_RANK - 1; rank >= 0; --rank)
-			//{
-            //	if (talentEntry->RankID[rank] == 0)
-			//		continue;
-            //	if (player->HasTalent(talentEntry->RankID[rank], spec))
-			//		++pageTalents[page];
-			//}
-		}
-	}
+    // OnlineMgr uses an unsigned byte with 0xFF for an unknown specialization.
+    constexpr uint32 unknownSpecialization = 0xFF;
+    if (!player)
+        return unknownSpecialization;
 
-	uint32 maxPageIndex = 0;
-	uint32 maxPagePoint = 0;
-	for (uint32 page = 0; page < 3; page++)
-	{
-		if (pageTalents[page] > maxPagePoint)
-		{
-			maxPageIndex = page;
-			maxPagePoint = pageTalents[page];
-		}
-	}
-	return maxPageIndex;
+    ChrSpecializationEntry const* specialization = sChrSpecializationStore.LookupEntry(player->GetSpecializationId());
+    if (!specialization || specialization->IsPetSpecialization() ||
+        specialization->ClassID != player->getClass() ||
+        specialization->OrderIndex < 0 || specialization->OrderIndex >= MAX_SPECIALIZATIONS)
+        return unknownSpecialization;
+
+    return uint32(specialization->OrderIndex);
 }
 
 void PlayerCharacterSetup::Initialize()

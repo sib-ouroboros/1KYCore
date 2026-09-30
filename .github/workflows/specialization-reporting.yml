@@ -1,0 +1,31 @@
+name: Specialization reporting
+
+on:
+  push:
+    branches: [main, cleanup/remove-bots]
+    paths:
+      - src/server/game/Entities/Player/PlayerCharacterSetup.cpp
+      - src/server/game/Miscellaneous/SharedDefines.h
+      - contrib/tests/test_specialization_reporting.py
+      - .github/workflows/specialization-reporting.yml
+  pull_request:
+    paths:
+      - src/server/game/Entities/Player/PlayerCharacterSetup.cpp
+      - src/server/game/Miscellaneous/SharedDefines.h
+      - contrib/tests/test_specialization_reporting.py
+      - .github/workflows/specialization-reporting.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile and run reporting regression cases
+        run: python contrib/tests/test_specialization_reporting.py
