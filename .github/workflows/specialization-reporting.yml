@@ -8,6 +8,9 @@ on:
       - src/server/game/Miscellaneous/SharedDefines.h
       - contrib/tests/test_specialization_reporting.py
       - contrib/tests/test_specialization_command.py
+      - contrib/tests/test_specialization_weapons.py
+      - src/server/game/Entities/Player/PlayerCharacterSetup.h
+      - src/server/game/Entities/Item/ItemTemplate.h
       - src/server/game/Entities/Player/Player.h
       - src/server/game/Server/ToolSocket.cpp
       - .github/workflows/specialization-reporting.yml
@@ -17,6 +20,9 @@ on:
       - src/server/game/Miscellaneous/SharedDefines.h
       - contrib/tests/test_specialization_reporting.py
       - contrib/tests/test_specialization_command.py
+      - contrib/tests/test_specialization_weapons.py
+      - src/server/game/Entities/Player/PlayerCharacterSetup.h
+      - src/server/game/Entities/Item/ItemTemplate.h
       - src/server/game/Entities/Player/Player.h
       - src/server/game/Server/ToolSocket.cpp
       - .github/workflows/specialization-reporting.yml
@@ -37,3 +43,4 @@ jobs:
         run: |
           python contrib/tests/test_specialization_reporting.py
           python contrib/tests/test_specialization_command.py
+          python contrib/tests/test_specialization_weapons.py

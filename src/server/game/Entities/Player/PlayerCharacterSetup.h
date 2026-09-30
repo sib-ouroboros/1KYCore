@@ -64,7 +64,7 @@ public:
 	typedef std::set<uint32> SetEntrys;
     typedef std::set<ClassTalentEntry> ClassTalentPage;
     typedef std::map<uint32, ItemsForLevel> EquipmentByLevel;
-    typedef std::list<Item*> PendingEquipment;
+    typedef std::list<std::pair<Item*, uint8>> PendingEquipment;
     typedef std::list<uint32> ClassCommonSpells;
     typedef std::vector<uint32> MountSpellIds;
 
@@ -107,7 +107,7 @@ public:
 	void LearnSpells();
 	void ActivateSpecialization();
 	void LearnTalents();
-	bool EquipItem(Item* pItem);
+    bool EquipItem(Item* pItem, uint8 slot = NULL_SLOT);
 
 private:
 	void RemoveSpells();
@@ -118,19 +118,11 @@ private:
 	void SupplementOtherItems();
 
 	bool IsTenacityEquipSlot(uint8 slot);
-	void AddOnceEquip(const ItemTemplate* item);
+    void AddOnceEquip(const ItemTemplate* item, uint8 slot = NULL_SLOT);
 	const ItemTemplate* GetRandomAmmoByType(ItemSubclassProjectile ammoType, uint32 startLV);
 	const ItemTemplate* GetRandomItemFromLoopLV(uint32 prof, InventoryType iType, uint32 startLV, const ItemTemplate* filter = 0);
-	void RandomWeaponByWarrior();
-	void RandomWeaponByPaladin();
-	void RandomWeaponByDeathKight();
-	void RandomWeaponByRogue();
-	void RandomWeaponByDruid();
-	void RandomWeaponByHunter();
-	void RandomWeaponByShaman();
-	void RandomWeaponByMage();
-	void RandomWeaponByWarlock();
-	void RandomWeaponByPriest();
+
+    void RandomWeaponsForSpecialization();
 
 	void SupplementItemByWarrior();
 	void SupplementItemByPaladin();

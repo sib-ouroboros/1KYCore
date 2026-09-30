@@ -224,6 +224,10 @@ bool PlayerCharacterSetup::IsEquipByClasses(uint32 cls, const ItemTemplate* item
 		if (!IsOnlyPhysicsAttributeEquip(itemTemplate, (cls == 3) ? false : true))
 			return false;
 	}
+    // Weapon proficiency and specialization are checked for the actual player at selection.
+    // Legacy class lists excluded Legion weapons (including Frost one-handers and druid polearms).
+    if (itemTemplate->GetClass() == ITEM_CLASS_WEAPON)
+        return true;
 	if (IsCommonEquip(itemTemplate))
 		return true;
 	switch (cls)
@@ -246,6 +250,9 @@ bool PlayerCharacterSetup::IsEquipByClasses(uint32 cls, const ItemTemplate* item
 		return IsMageEquip(itemTemplate);
 	case 9:
 		return IsWarlockEquip(itemTemplate);
+    case CLASS_MONK:
+    case CLASS_DEMON_HUNTER:
+        return itemTemplate->GetClass() == ITEM_CLASS_ARMOR;
 	case 11:
 		return IsDruidEquip(itemTemplate);
 	default:
@@ -1331,7 +1338,10 @@ void PlayerCharacterSetup::UpdateReset()
 		m_Player->SetFullHealth();
 		m_Player->UpdateSkillsForLevel();
 		m_Player->UpdateAllStats();
-		m_Player->SaveToDB();
+        m_Player->SaveToDB();
+        if (WorldSession* session = m_Player->GetSession())
+            sOnlineMgr->CharaterState(session->GetAccountId(), uint32(m_Player->GetGUID()),
+                m_Player->getLevel(), FindPlayerTalentType(m_Player));
 		++m_ResetStep;
 		break;
 	}
@@ -1542,13 +1552,13 @@ void PlayerCharacterSetup::AddEquipFromAll()
 		{
 			const ItemTemplate* item = GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_FINGER, level, firstFinger);
 			firstFinger = item;
-			AddOnceEquip(item);
+            AddOnceEquip(item, EQUIPMENT_SLOT_FINGER1);
 		}
 		else if (i == InventoryType::INVTYPE_TRINKET && !firstTrinket)
 		{
-			const ItemTemplate* item = GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_TRINKET, level, firstFinger);
+            const ItemTemplate* item = GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_TRINKET, level, firstTrinket);
 			firstTrinket = item;
-			AddOnceEquip(item);
+            AddOnceEquip(item, EQUIPMENT_SLOT_TRINKET1);
 		}
 		else
 		{
@@ -1557,45 +1567,11 @@ void PlayerCharacterSetup::AddEquipFromAll()
 		}
 	}
 	if (firstFinger)
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_FINGER, level, firstFinger));
+        AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_FINGER, level, firstFinger), EQUIPMENT_SLOT_FINGER2);
 	if (firstTrinket)
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_TRINKET, level, firstTrinket));
+        AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_TRINKET, level, firstTrinket), EQUIPMENT_SLOT_TRINKET2);
 
-	switch (prof)
-	{
-	case 1:
-		RandomWeaponByWarrior();
-		break;
-	case 2:
-		RandomWeaponByPaladin();
-		break;
-	case 3:
-		RandomWeaponByHunter();
-		break;
-	case 4:
-		RandomWeaponByRogue();
-		break;
-	case 5:
-		RandomWeaponByPriest();
-		break;
-	case 6:
-		RandomWeaponByDeathKight();
-		break;
-	case 7:
-		RandomWeaponByShaman();
-		break;
-	case 8:
-		RandomWeaponByMage();
-		break;
-	case 9:
-		RandomWeaponByWarlock();
-		break;
-	case 11:
-		RandomWeaponByDruid();
-		break;
-	default:
-		break;
-	}
+    RandomWeaponsForSpecialization();
 }
 
 void PlayerCharacterSetup::UpequipFromAll()
@@ -1604,21 +1580,21 @@ void PlayerCharacterSetup::UpequipFromAll()
 		itNeed != m_NeedEquips.end();
 		itNeed++)
 	{
-		Item* itemInst = (*itNeed);
+        Item* itemInst = itNeed->first;
 		if (itemInst->GetTemplate()->GetInventoryType() == InventoryType::INVTYPE_AMMO)
 		{
 			//m_Player->SetAmmo(itemInst->GetEntry());
 		}
 		else
-			EquipItem(itemInst);
+            EquipItem(itemInst, itNeed->second);
 	}
 	m_NeedEquips.clear();
 }
 
-bool PlayerCharacterSetup::EquipItem(Item* pItem)
+bool PlayerCharacterSetup::EquipItem(Item* pItem, uint8 slot)
 {
 	uint16 dest;
-	InventoryResult msg = m_Player->CanEquipItem(NULL_SLOT, dest, pItem, !pItem->IsBag());
+    InventoryResult msg = m_Player->CanEquipItem(slot, dest, pItem, !pItem->IsBag());
 	if (msg != EQUIP_ERR_OK)
 	{
 		return false;
@@ -1844,7 +1820,7 @@ bool PlayerCharacterSetup::CheckNeedTenacityFlush()
 	return false;
 }
 
-void PlayerCharacterSetup::AddOnceEquip(const ItemTemplate* item)
+void PlayerCharacterSetup::AddOnceEquip(const ItemTemplate* item, uint8 slot)
 {
 	if (!item)
 		return;
@@ -1861,247 +1837,98 @@ void PlayerCharacterSetup::AddOnceEquip(const ItemTemplate* item)
 		return;
 	Item* itemInst = m_Player->StoreNewItem(dest, item->GetId(), true, GenerateItemRandomPropertyId(item->GetId()));
 	if (itemInst)
-		m_NeedEquips.push_back(itemInst);
+        m_NeedEquips.emplace_back(itemInst, slot);
 }
 
-void PlayerCharacterSetup::RandomWeaponByWarrior()
+void PlayerCharacterSetup::RandomWeaponsForSpecialization()
 {
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 1;
-	switch (m_ActiveTalentType)
-	{
-	case 0:
-	{
-		AddOnceEquip(GetRandomItemFromLoopLV(1, InventoryType::INVTYPE_2HWEAPON, level));
-	}
-	break;
-	case 1:
-	{
-		ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level);
-		if (!item1)
-			item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-		AddOnceEquip(item1);
-		ItemTemplate* item2 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level, item1);
-		if (!item2)
-			item2 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONOFFHAND, level);
-		AddOnceEquip(item2);
-	}
-	break;
-	case 2:
-	{
-		ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level);
-		if (!item1)
-			item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-		AddOnceEquip(item1);
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_SHIELD, level));
-	}
-	break;
-	default:
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-		break;
-	}
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_THROWN, level));
-}
-
-void PlayerCharacterSetup::RandomWeaponByPaladin()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 2;
-	switch (m_ActiveTalentType)
-	{
-	case 0:
-	{
-		ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level);
-		if (!item1)
-			item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-		AddOnceEquip(item1);
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_SHIELD, level));
-	}
-	break;
-	case 1:
-	{
-		ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level);
-		if (!item1)
-			item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-		AddOnceEquip(item1);
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_SHIELD, level));
-	}
-	break;
-	case 2:
-	{
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-	}
-	break;
-	default:
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-		break;
-	}
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RELIC, level));
-}
-
-void PlayerCharacterSetup::RandomWeaponByDeathKight()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 6;
-	switch (m_ActiveTalentType)
-	{
-	case 0:
-	{
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-	}
-	break;
-	case 1:
-	{
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-	}
-	break;
-	case 2:
-	{
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-	}
-	break;
-	default:
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-		break;
-	}
-}
-
-void PlayerCharacterSetup::RandomWeaponByRogue()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 4;
-	ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level);
-	if (!item1)
-		item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-	AddOnceEquip(item1);
-	ItemTemplate* item2 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level, item1);
-	if (!item2)
-		item2 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONOFFHAND, level);
-	AddOnceEquip(item2);
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_THROWN, level));
-}
-
-void PlayerCharacterSetup::RandomWeaponByDruid()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 11;
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RELIC, level));
-}
-
-void PlayerCharacterSetup::RandomWeaponByHunter()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 3;
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-	InventoryType iType = (irand(0, 99) < 50) ? InventoryType::INVTYPE_RANGED : InventoryType::INVTYPE_RANGEDRIGHT;
-	const ItemTemplate* item = GetRandomItemFromLoopLV(prof, iType, level);
-	AddOnceEquip(item);
-	if (item && item->GetClass() == ItemClass::ITEM_CLASS_WEAPON)
-	{
-		switch (item->GetSubClass())
-		{
-		case ItemSubclassWeapon::ITEM_SUBCLASS_WEAPON_BOW:
-		case ItemSubclassWeapon::ITEM_SUBCLASS_WEAPON_CROSSBOW:
-			AddOnceEquip(GetRandomAmmoByType(ItemSubclassProjectile::ITEM_SUBCLASS_ARROW, level));
-			break;
-		case ItemSubclassWeapon::ITEM_SUBCLASS_WEAPON_GUN:
-			AddOnceEquip(GetRandomAmmoByType(ItemSubclassProjectile::ITEM_SUBCLASS_BULLET, level));
-			break;
-		default:
-			break;
-		}
-	}
-}
-
-void PlayerCharacterSetup::RandomWeaponByShaman()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 7;
-	switch (m_ActiveTalentType)
-	{
-	case 0:
-	{
-		ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level);
-		if (!item1)
-			item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-		AddOnceEquip(item1);
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_SHIELD, level));
-	}
-	break;
-	case 1:
-	{
-		if (m_Player->HasSpell(30798)) // talent two weapon
-		{
-			ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level);
-			if (!item1)
-				item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-			AddOnceEquip(item1);
-			ItemTemplate* item2 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level, item1);
-			if (!item2)
-				item2 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONOFFHAND, level);
-			AddOnceEquip(item2);
-		}
-		else
-			AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-	}
-	break;
-	case 2:
-	{
-		ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPON, level);
-		if (!item1)
-			item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-		AddOnceEquip(item1);
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_SHIELD, level));
-	}
-	break;
-	default:
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_2HWEAPON, level));
-		break;
-	}
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RELIC, level));
-}
-
-void PlayerCharacterSetup::RandomWeaponByMage()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 8;
-	InventoryType iType = (irand(0, 99) < 50) ? InventoryType::INVTYPE_2HWEAPON : InventoryType::INVTYPE_WEAPON;
-	ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, iType, level);
-	if (!item1)
-		item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-	AddOnceEquip(item1);
-	if (iType == InventoryType::INVTYPE_WEAPON)
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_HOLDABLE, level, item1));
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RANGEDRIGHT, level));
-}
-
-void PlayerCharacterSetup::RandomWeaponByWarlock()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 9;
-	InventoryType iType = (irand(0, 99) < 50) ? InventoryType::INVTYPE_2HWEAPON : InventoryType::INVTYPE_WEAPON;
-	ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, iType, level);
-	if (!item1)
-		item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-	AddOnceEquip(item1);
-	if (iType == InventoryType::INVTYPE_WEAPON)
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_HOLDABLE, level, item1));
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RANGEDRIGHT, level));
-}
-
-void PlayerCharacterSetup::RandomWeaponByPriest()
-{
-	uint32 level = m_Player->getLevel();
-	uint32 prof = 5;
-	InventoryType iType = (irand(0, 99) < 50) ? InventoryType::INVTYPE_2HWEAPON : InventoryType::INVTYPE_WEAPON;
-	ItemTemplate* item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, iType, level);
-	if (!item1)
-		item1 = (ItemTemplate*)GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_WEAPONMAINHAND, level);
-	AddOnceEquip(item1);
-	if (iType == InventoryType::INVTYPE_WEAPON)
-		AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_HOLDABLE, level, item1));
-	AddOnceEquip(GetRandomItemFromLoopLV(prof, InventoryType::INVTYPE_RANGEDRIGHT, level));
+    uint32 const level = m_Player->getLevel();
+    uint32 const playerClass = m_Player->getClass();
+    auto choose = [this, playerClass, level](InventoryType type, ItemTemplate const* exclude = nullptr)
+    {
+        return GetRandomItemFromLoopLV(playerClass, type, level, exclude);
+    };
+    auto oneHand = [&choose](bool offhand, ItemTemplate const* exclude = nullptr)
+    {
+        ItemTemplate const* item = choose(INVTYPE_WEAPON, exclude);
+        return item ? item : choose(offhand ? INVTYPE_WEAPONOFFHAND : INVTYPE_WEAPONMAINHAND, exclude);
+    };
+    auto dualWield = [this, &choose, &oneHand](bool twoHanded)
+    {
+        ItemTemplate const* main = twoHanded ? choose(INVTYPE_2HWEAPON) : oneHand(false);
+        AddOnceEquip(main, EQUIPMENT_SLOT_MAINHAND);
+        if (main && m_Player->CanDualWield())
+            AddOnceEquip(twoHanded ? choose(INVTYPE_2HWEAPON, main) : oneHand(true, main), EQUIPMENT_SLOT_OFFHAND);
+    };
+    switch (m_Player->GetSpecializationId())
+    {
+        case TALENT_SPEC_WARRIOR_FURY:
+            dualWield(m_Player->CanTitanGrip());
+            return;
+        case TALENT_SPEC_DEATHKNIGHT_FROST:
+        case TALENT_SPEC_ROGUE_ASSASSINATION:
+        case TALENT_SPEC_ROGUE_COMBAT:
+        case TALENT_SPEC_ROGUE_SUBTLETY:
+        case TALENT_SPEC_SHAMAN_ENHANCEMENT:
+        case TALENT_SPEC_MONK_BATTLEDANCER:
+        case TALENT_SPEC_DEMON_HUNTER_HAVOC:
+        case TALENT_SPEC_DEMON_HUNTER_VENGEANCE:
+            dualWield(false);
+            return;
+        case TALENT_SPEC_WARRIOR_ARMS:
+        case TALENT_SPEC_PALADIN_RETRIBUTION:
+        case TALENT_SPEC_DEATHKNIGHT_BLOOD:
+        case TALENT_SPEC_DEATHKNIGHT_UNHOLY:
+        case TALENT_SPEC_HUNTER_SURVIVAL:
+        case TALENT_SPEC_DRUID_CAT:
+        case TALENT_SPEC_DRUID_BEAR:
+        case TALENT_SPEC_MONK_BREWMASTER:
+            AddOnceEquip(choose(INVTYPE_2HWEAPON), EQUIPMENT_SLOT_MAINHAND);
+            return;
+        case TALENT_SPEC_HUNTER_BEASTMASTER:
+        case TALENT_SPEC_HUNTER_MARKSMAN:
+        {
+            ItemTemplate const* item = choose(INVTYPE_RANGED);
+            AddOnceEquip(item ? item : choose(INVTYPE_RANGEDRIGHT), EQUIPMENT_SLOT_MAINHAND);
+            return;
+        }
+        case TALENT_SPEC_WARRIOR_PROTECTION:
+        case TALENT_SPEC_PALADIN_HOLY:
+        case TALENT_SPEC_PALADIN_PROTECTION:
+        case TALENT_SPEC_SHAMAN_ELEMENTAL:
+        case TALENT_SPEC_SHAMAN_RESTORATION:
+            AddOnceEquip(oneHand(false), EQUIPMENT_SLOT_MAINHAND);
+            AddOnceEquip(choose(INVTYPE_SHIELD), EQUIPMENT_SLOT_OFFHAND);
+            return;
+        case TALENT_SPEC_MAGE_ARCANE:
+        case TALENT_SPEC_MAGE_FIRE:
+        case TALENT_SPEC_MAGE_FROST:
+        case TALENT_SPEC_PRIEST_DISCIPLINE:
+        case TALENT_SPEC_PRIEST_HOLY:
+        case TALENT_SPEC_PRIEST_SHADOW:
+        case TALENT_SPEC_WARLOCK_AFFLICTION:
+        case TALENT_SPEC_WARLOCK_DEMONOLOGY:
+        case TALENT_SPEC_WARLOCK_DESTRUCTION:
+        case TALENT_SPEC_DRUID_BALANCE:
+        case TALENT_SPEC_DRUID_RESTORATION:
+        case TALENT_SPEC_MONK_MISTWEAVER:
+        {
+            if (ItemTemplate const* staff = choose(INVTYPE_2HWEAPON))
+                AddOnceEquip(staff, EQUIPMENT_SLOT_MAINHAND);
+            else
+            {
+                ItemTemplate const* main = oneHand(false);
+                if (!main)
+                    main = choose(INVTYPE_RANGEDRIGHT); // Wands occupy the main hand in Legion.
+                AddOnceEquip(main, EQUIPMENT_SLOT_MAINHAND);
+                if (main)
+                    AddOnceEquip(choose(INVTYPE_HOLDABLE), EQUIPMENT_SLOT_OFFHAND);
+            }
+            return;
+        }
+        default:
+            return;
+    }
 }
 
 void PlayerCharacterSetup::SupplementItemByWarrior()

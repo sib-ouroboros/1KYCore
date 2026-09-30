@@ -164,7 +164,7 @@ bool OnlineMgr::CharaterState(uint32 accID, uint32 charID, uint16 lv, uint8 tale
 	if (m_OnlinePlayerAcc.find(accID) != m_OnlinePlayerAcc.end())
 	{
 		ToolAccountInfo& info = m_OnlinePlayerAcc.find(accID)->second;
-		if (info.online.guid == 0)
+        if (info.online.guid == 0 || info.online.guid != charID)
 			return false;
 		info.online.level = lv;
 		info.online.talent = talent;
