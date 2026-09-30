@@ -31,39 +31,6 @@ void PlayerCombatModifiersAI::DamageDealt(Unit* victim, uint32& damage, DamageEf
 
 	if (me->InBattleground())
 	{
-		//Player* vicPlayer = victim->ToPlayer();
-		//if (!vicPlayer)
-		//	return;
-		//int32 meCP = me->GetEquipCombatPower();
-		//int32 vicCP = vicPlayer->GetEquipCombatPower();
-		//int32 cpGap = meCP - vicCP;
-		//if (cpGap == 0)
-		//	return;
-		//float addion = 0;
-		//if (cpGap > 0 && meCP > 0)
-		//{
-		//	addion = float(cpGap) / float(meCP);
-		//	addion = 1.0f - addion;
-		//}
-		//else if (cpGap < 0 && vicCP > 0)
-		//{
-		//	addion = float(cpGap * (-1.0f)) / float(vicCP);
-		//	addion += 1.0f;
-		//}
-		//if (addion <= 0)
-		//	return;
-		//float result = float(damage);
-		//switch (damageType)
-		//{
-		//case DamageEffectType::DIRECT_DAMAGE:
-		//case DamageEffectType::SPELL_DIRECT_DAMAGE:
-		//case DamageEffectType::DOT:
-		//	result *= addion;
-		//	break;
-		//default:
-		//	return;
-		//}
-		//damage = uint32(result);
 	}
 	else if (me->GetMap()->IsDungeon())
 	{
@@ -78,39 +45,6 @@ void PlayerCombatModifiersAI::DamageEndure(Unit* attacker, uint32& damage, Damag
 
 	if (me->InBattleground())
 	{
-		//Player* attPlayer = attacker->ToPlayer();
-		//if (!attPlayer)
-		//	return;
-		//int32 meCP = me->GetEquipCombatPower();
-		//int32 attCP = attPlayer->GetEquipCombatPower();
-		//int32 cpGap = attCP - meCP;
-		//if (cpGap == 0)
-		//	return;
-		//float addion = 0;
-		//if (cpGap > 0)
-		//{
-		//	addion = float(cpGap) / float(attPlayer->GetEquipCombatPower());
-		//	addion = 1.0f - addion;
-		//}
-		//else
-		//{
-		//	addion = float(cpGap * (-1.0f)) / float(me->GetEquipCombatPower());
-		//	addion += 1.0f;
-		//}
-		//if (addion <= 0)
-		//	return;
-		//float result = float(damage);
-		//switch (damageType)
-		//{
-		//case DamageEffectType::DIRECT_DAMAGE:
-		//case DamageEffectType::SPELL_DIRECT_DAMAGE:
-		//case DamageEffectType::DOT:
-		//	result *= addion;
-		//	break;
-		//default:
-		//	return;
-		//}
-		//damage = uint32(result);
 	}
 	else if (me->GetMap()->IsDungeon())
 	{

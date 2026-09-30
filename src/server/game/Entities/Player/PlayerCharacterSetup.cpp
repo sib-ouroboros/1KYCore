@@ -325,196 +325,11 @@ bool PlayerCharacterSetup::IsOnlyPhysicsAttributeEquip(const ItemTemplate* itemT
 	return true;
 }
 
-bool PlayerCharacterSetup::IsOnlyMagicAttributeEquip(const ItemTemplate* itemTemplate)
-{
-	if (!itemTemplate->HasStats())
-		return false;
-	for (uint32 i = 0; i < MAX_ITEM_PROTO_STATS; i++)
-	{
-		auto type = itemTemplate->ExtendedData->StatModifierBonusStat[i];
-		switch (type)
-		{
-		case ItemModType::ITEM_MOD_AGILITY:
-		case ItemModType::ITEM_MOD_STRENGTH:
-		case ItemModType::ITEM_MOD_HIT_MELEE_RATING:
-		case ItemModType::ITEM_MOD_CRIT_MELEE_RATING:
-		case ItemModType::ITEM_MOD_HIT_TAKEN_MELEE_RATING:
-		case ItemModType::ITEM_MOD_CRIT_TAKEN_MELEE_RATING:
-		case ItemModType::ITEM_MOD_HASTE_MELEE_RATING:
-		case ItemModType::ITEM_MOD_ATTACK_POWER:
-		case ItemModType::ITEM_MOD_RANGED_ATTACK_POWER:
-		case ItemModType::ITEM_MOD_ARMOR_PENETRATION_RATING:
-			return false;
-		}
-	}
-	return true;
-}
 
-bool PlayerCharacterSetup::IsTankAttributeEquip(const ItemTemplate* itemTemplate)
-{
-	if (!itemTemplate->HasStats())
-		return false;
-	for (uint32 i = 0; i < MAX_ITEM_PROTO_STATS; i++)
-	{
-		auto type = itemTemplate->ExtendedData->StatModifierBonusStat[i];
-		switch (type)
-		{
-		case ItemModType::ITEM_MOD_DEFENSE_SKILL_RATING:
-		case ItemModType::ITEM_MOD_DODGE_RATING:
-		case ItemModType::ITEM_MOD_PARRY_RATING:
-		case ItemModType::ITEM_MOD_BLOCK_RATING:
-		case ItemModType::ITEM_MOD_HIT_TAKEN_MELEE_RATING:
-		case ItemModType::ITEM_MOD_HIT_TAKEN_RANGED_RATING:
-		case ItemModType::ITEM_MOD_HIT_TAKEN_SPELL_RATING:
-		case ItemModType::ITEM_MOD_HIT_TAKEN_RATING:
-		case ItemModType::ITEM_MOD_BLOCK_VALUE:
-			return true;
-		}
-	}
-	return false;
-}
 
-bool PlayerCharacterSetup::IsOnlyPhysicsRandomAttributeByEquip(std::list<uint32>& enchants, bool coverIntellect)
-{
-	if (enchants.empty())
-		return false;
-	bool have = false;
-	for (uint32 enchant_id : enchants)
-	{
-		SpellItemEnchantmentEntry const* pEnchant = sSpellItemEnchantmentStore.LookupEntry(enchant_id);
-		if (!pEnchant)
-			continue;
-		for (int s = 0; s < MAX_ITEM_ENCHANTMENT_EFFECTS; ++s)
-		{
-			uint32 enchant_spell_id = pEnchant->Effect[s];
-			if (enchant_spell_id == 0)
-				continue;
-			switch (enchant_spell_id)
-			{
-			case ItemModType::ITEM_MOD_MANA:
-			case ItemModType::ITEM_MOD_SPIRIT:
-			case ItemModType::ITEM_MOD_HIT_SPELL_RATING:
-			case ItemModType::ITEM_MOD_CRIT_SPELL_RATING:
-			case ItemModType::ITEM_MOD_HIT_TAKEN_SPELL_RATING:
-			case ItemModType::ITEM_MOD_CRIT_TAKEN_SPELL_RATING:
-			case ItemModType::ITEM_MOD_HASTE_SPELL_RATING:
-			case ItemModType::ITEM_MOD_SPELL_HEALING_DONE:
-			case ItemModType::ITEM_MOD_SPELL_DAMAGE_DONE:
-			case ItemModType::ITEM_MOD_MANA_REGENERATION:
-			case ItemModType::ITEM_MOD_SPELL_POWER:
-			case ItemModType::ITEM_MOD_SPELL_PENETRATION:
-				return false;
-			case ItemModType::ITEM_MOD_INTELLECT:
-				if (coverIntellect)
-					return false;
-				have = true;
-				break;
-			default:
-				have = true;
-			}
-		}
-	}
-	return have;
-}
 
-bool PlayerCharacterSetup::IsOnlyMagicRandomAttributeByEquip(std::list<uint32>& enchants)
-{
-	if (enchants.empty())
-		return false;
-	bool have = false;
-	for (uint32 enchant_id : enchants)
-	{
-		SpellItemEnchantmentEntry const* pEnchant = sSpellItemEnchantmentStore.LookupEntry(enchant_id);
-		if (!pEnchant)
-			continue;
-		for (int s = 0; s < MAX_ITEM_ENCHANTMENT_EFFECTS; ++s)
-		{
-			uint32 enchant_spell_id = pEnchant->Effect[s];
-			if (enchant_spell_id == 0)
-				continue;
-			switch (enchant_spell_id)
-			{
-			case ItemModType::ITEM_MOD_AGILITY:
-			case ItemModType::ITEM_MOD_STRENGTH:
-			case ItemModType::ITEM_MOD_HIT_MELEE_RATING:
-			case ItemModType::ITEM_MOD_CRIT_MELEE_RATING:
-			case ItemModType::ITEM_MOD_HIT_TAKEN_MELEE_RATING:
-			case ItemModType::ITEM_MOD_CRIT_TAKEN_MELEE_RATING:
-			case ItemModType::ITEM_MOD_HASTE_MELEE_RATING:
-			case ItemModType::ITEM_MOD_ATTACK_POWER:
-			case ItemModType::ITEM_MOD_RANGED_ATTACK_POWER:
-			case ItemModType::ITEM_MOD_ARMOR_PENETRATION_RATING:
-				return false;
-			default:
-				have = true;
-			}
-		}
-	}
-	return have;
-}
 
-bool PlayerCharacterSetup::IsTankRandomAttributeByEquip(std::list<uint32>& enchants)
-{
-	if (enchants.empty())
-		return false;
-	for (uint32 enchant_id : enchants)
-	{
-		SpellItemEnchantmentEntry const* pEnchant = sSpellItemEnchantmentStore.LookupEntry(enchant_id);
-		if (!pEnchant)
-			continue;
-		for (int s = 0; s < MAX_ITEM_ENCHANTMENT_EFFECTS; ++s)
-		{
-			uint32 enchant_spell_id = pEnchant->Effect[s];
-			if (enchant_spell_id == 0)
-				continue;
-			switch (enchant_spell_id)
-			{
-			case ItemModType::ITEM_MOD_DEFENSE_SKILL_RATING:
-			case ItemModType::ITEM_MOD_DODGE_RATING:
-			case ItemModType::ITEM_MOD_PARRY_RATING:
-			case ItemModType::ITEM_MOD_BLOCK_RATING:
-			case ItemModType::ITEM_MOD_HIT_TAKEN_MELEE_RATING:
-			case ItemModType::ITEM_MOD_HIT_TAKEN_RANGED_RATING:
-			case ItemModType::ITEM_MOD_HIT_TAKEN_SPELL_RATING:
-			case ItemModType::ITEM_MOD_HIT_TAKEN_RATING:
-			case ItemModType::ITEM_MOD_BLOCK_VALUE:
-				return true;
-			}
-		}
-	}
-	return false;
-}
 
-void PlayerCharacterSetup::GetRandomPropEnchantments(int32 rndPropID, std::list<uint32>& enchants)
-{
-	enchants.clear();
-	if (rndPropID == 0)
-		return;
-	if (rndPropID > 0)
-	{
-		if (ItemRandomPropertiesEntry const* item_rand = sItemRandomPropertiesStore.LookupEntry(rndPropID))
-		{
-			for (uint32 i = PROP_ENCHANTMENT_SLOT_2; i < PROP_ENCHANTMENT_SLOT_2 + 3; ++i)
-			{
-				uint32 enchant_id = item_rand->Enchantment[i - PROP_ENCHANTMENT_SLOT_2];
-				if (enchant_id > 0)
-					enchants.push_back(enchant_id);
-			}
-		}
-	}
-	if (rndPropID < 0)
-	{
-		if (ItemRandomSuffixEntry const* item_rand = sItemRandomSuffixStore.LookupEntry(-rndPropID))
-		{
-			for (uint32 i = PROP_ENCHANTMENT_SLOT_0; i < PROP_ENCHANTMENT_SLOT_0 + 3; ++i)
-			{
-				uint32 enchant_id = item_rand->Enchantment[i - PROP_ENCHANTMENT_SLOT_0];
-				if (enchant_id > 0)
-					enchants.push_back(enchant_id);
-			}
-		}
-	}
-}
 
 //bool PlayerCharacterSetup::MatchEquipmentSlotsByWeapon(EquipmentSlots slot, InventoryType iType)
 //{
@@ -563,19 +378,6 @@ bool PlayerCharacterSetup::IsCommonEquip(const ItemTemplate* itemTemplate)
 	return false;
 }
 
-bool PlayerCharacterSetup::IsTrinketEquip(const ItemTemplate* itemTemplate)
-{
-	switch (itemTemplate->GetInventoryType())
-	{
-	case INVTYPE_TRINKET:
-		return true;
-	default:
-		break;
-	}
-	if (itemTemplate->GetClass() == ItemClass::ITEM_CLASS_ARMOR/* && itemTemplate->GetSubClass() == ItemSubclassArmor::ITEM_SUBCLASS_ARMOR_MISC*/ && itemTemplate->GetInventoryType() == INVTYPE_TRINKET)
-		return true;
-	return false;
-}
 
 bool PlayerCharacterSetup::IsWarriorEquip(const ItemTemplate* itemTemplate)
 {
@@ -1127,18 +929,18 @@ uint32 PlayerCharacterSetup::FindPlayerTalentType(Player* player)
 	uint32 pageTalents[3] = { 0 };
 	for (uint32 page = 0; page < 3; page++)
 	{
-        ClassTalentPage& botPage = classesTalents[cls][page];
-        for (ClassTalentPage::iterator itPage = botPage.begin();
-			itPage != botPage.end();
+        ClassTalentPage& talentPage = classesTalents[cls][page];
+        for (ClassTalentPage::iterator itPage = talentPage.begin();
+            itPage != talentPage.end();
 			itPage++)
 		{
-			const TalentEntry* botTEntry = (*itPage).talentEntry;
-			if (!botTEntry) continue;
+            const TalentEntry* talentEntry = (*itPage).talentEntry;
+            if (!talentEntry) continue;
 			//for (int8 rank = MAX_TALENT_RANK - 1; rank >= 0; --rank)
 			//{
-			//	if (botTEntry->RankID[rank] == 0)
+            //	if (talentEntry->RankID[rank] == 0)
 			//		continue;
-			//	if (player->HasTalent(botTEntry->RankID[rank], spec))
+            //	if (player->HasTalent(talentEntry->RankID[rank], spec))
 			//		++pageTalents[page];
 			//}
 		}
@@ -1223,8 +1025,8 @@ void PlayerCharacterSetup::Initialize()
 		//{
 		//	if (talentTabInfo->GetClass()Mask & (1 << (cls - 1)))
 		//	{
-        //		ClassTalentPage& botPage = classesTalents[cls][talentTabInfo->tabpage];
-        //		botPage.insert(ClassTalentEntry(cls, talentTabInfo->tabpage, talentInfo));
+        //		ClassTalentPage& talentPage = classesTalents[cls][talentTabInfo->tabpage];
+        //		talentPage.insert(ClassTalentEntry(cls, talentTabInfo->tabpage, talentInfo));
 		//	}
 		//}
 	}
@@ -1417,14 +1219,6 @@ PlayerCharacterSetup::~PlayerCharacterSetup()
 {
 }
 
-uint32 PlayerCharacterSetup::UpdateTalentType()
-{
-	if (m_ActiveTalentType >= 3)
-	{
-        m_ActiveTalentType = PlayerCharacterSetup::FindPlayerTalentType(m_Player);
-	}
-	return m_ActiveTalentType;
-}
 
 uint32 PlayerCharacterSetup::GetTalentType()
 {
@@ -1452,10 +1246,6 @@ bool PlayerCharacterSetup::ResetPlayerToLevel(uint32 level, uint32 talent, bool 
 	return true;
 }
 
-uint32 PlayerCharacterSetup::SwitchPlayerTalent(uint32 talent)
-{
-	return m_ActiveTalentType;
-}
 
 void PlayerCharacterSetup::SupplementAmmo()
 {

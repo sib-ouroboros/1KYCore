@@ -1178,8 +1178,6 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         explicit Player(WorldSession* session);
         ~Player();
 
-        bool m_bot;
-        int32 FakerMoveTimer;
 
         PlayerAI* AI() const { return reinterpret_cast<PlayerAI*>(i_AI); }
 
@@ -1189,8 +1187,6 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         void SupplementAmmo();
         uint32 ReupdateTalents();
         PlayerCharacterSetup* m_CharacterSetup;
-        int32 GetEquipCombatPower() { return m_EquipCombatPower; }
-        void FlushEquipCombatPower(uint8 eSlot, bool apply, const ItemTemplate* pEquipTemplate);
         bool EquipIsTidiness();
 
         void CleanupsBeforeDelete(bool finalCleanup = true) override;
@@ -3128,7 +3124,6 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
 
         WorldLocation _corpseLocation;
 
-        int32 m_EquipCombatPower;
 
         SceneMgr m_sceneMgr;
         Vignette::Manager _vignetteMgr;

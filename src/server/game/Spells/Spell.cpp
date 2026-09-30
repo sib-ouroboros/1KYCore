@@ -547,33 +547,7 @@ SpellValue::SpellValue(Difficulty diff, SpellInfo const* proto)
     Duration = 0;
 }
 
-void SpellInterruptCondition::ClearInterruptCondition()
-{
-    conditionType = SICT_NONE;
-    castTarget = ObjectGuid::Empty;
-    conditionValue = 0;
-}
 
-bool SpellInterruptCondition::CheckInterruptCondition(Unit* caster)
-{
-    if (conditionType == SICT_NONE)
-        return false;
-    if (!caster || castTarget == ObjectGuid::Empty)
-    {
-        ClearInterruptCondition();
-        return false;
-    }
-    Unit* pTarget = ObjectAccessor::GetUnit(*caster, castTarget);
-    if (!pTarget)
-    {
-        ClearInterruptCondition();
-        return false;
-    }
-    uint32 lifePCT = uint32(pTarget->GetHealthPct());
-    if (lifePCT >= conditionValue)
-        return true;
-    return false;
-}
 
 class TC_GAME_API SpellEvent : public BasicEvent
 {
@@ -3925,20 +3899,10 @@ void Spell::update(uint32 difftime)
                 if (difftime >= (uint32)m_timer)
                 {
                     m_timer = 0;
-                    if (m_SpellInterruptCondition.CheckInterruptCondition(m_caster))
-                    {
-                        cancel();
-                        return;
-                    }
                 }
                 else
                 {
                     m_timer -= difftime;
-                    if (m_timer <= 200 && m_SpellInterruptCondition.CheckInterruptCondition(m_caster))
-                    {
-                        cancel();
-                        return;
-                    }
                 }
             }
 
@@ -3968,20 +3932,10 @@ void Spell::update(uint32 difftime)
                     if (difftime >= (uint32)m_timer)
                     {
                         m_timer = 0;
-                        if (m_SpellInterruptCondition.CheckInterruptCondition(m_caster))
-                        {
-                            cancel();
-                            return;
-                        }
                     }
                     else
                     {
                         m_timer -= difftime;
-                        if (m_timer <= 200 && m_SpellInterruptCondition.CheckInterruptCondition(m_caster))
-                        {
-                            cancel();
-                            return;
-                        }
                     }
                 }
             }
@@ -4000,7 +3954,6 @@ void Spell::update(uint32 difftime)
 
 void Spell::finish(bool ok)
 {
-    m_SpellInterruptCondition.ClearInterruptCondition();
 
     if (!m_caster)
         return;
@@ -8342,21 +8295,6 @@ bool Spell::HasEffect(SpellEffectName effect) const
     return false;
 }
 
-void Spell::SetInterruptConditionByLifePCT(ObjectGuid& target, uint32 pct)
-{
-    if (pct < 1)
-        return;
-    if (pct > 99)
-        pct = 99;
-    if (target == ObjectGuid::Empty)
-    {
-        m_SpellInterruptCondition.ClearInterruptCondition();
-        return;
-    }
-    m_SpellInterruptCondition.conditionType = SICT_LIFE_PCT;
-    m_SpellInterruptCondition.castTarget = target;
-    m_SpellInterruptCondition.conditionValue = pct;
-}
 
 namespace Trinity
 {

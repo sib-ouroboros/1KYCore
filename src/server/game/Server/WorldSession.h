@@ -1041,14 +1041,6 @@ class TC_GAME_API WorldSession
             std::string os, LocaleConstant locale, uint32 recruiter, bool isARecruiter, std::string&& battlenetAccountName);
         virtual ~WorldSession();
 
-        void SetAddress(std::string mybot)
-        {
-            m_Address = mybot;
-        }
-        void Setexpansion(uint8 mybot)
-        {
-            m_expansion = mybot;
-        }
 
         bool PlayerLoading() const { return !m_playerLoading.IsEmpty(); }
         bool PlayerLogout() const { return m_playerLogout; }

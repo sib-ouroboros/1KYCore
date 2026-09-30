@@ -162,8 +162,6 @@ Player::Player(WorldSession* session) : Unit(true), m_sceneMgr(this), _vignetteM
 
     _lastSummonedBattlePet = 0;
 
-    FakerMoveTimer = 0;
-    m_bot = false;
 
     for (size_t i = 0; i < MAX_PETBATTLE_SLOTS; ++i)
         _battlePetCombatTeam[i] = std::shared_ptr<BattlePet>();
@@ -400,7 +398,6 @@ Player::Player(WorldSession* session) : Unit(true), m_sceneMgr(this), _vignetteM
     m_questObjectiveCriteriaMgr = std::make_unique<QuestObjectiveCriteriaMgr>(this);
 
     m_CharacterSetup = new PlayerCharacterSetup(this);
-    m_EquipCombatPower = 0;
 
     for (uint8 i = 0; i < MAX_CUF_PROFILES; ++i)
         _CUFProfiles[i] = nullptr;
@@ -502,34 +499,6 @@ uint32 Player::ReupdateTalents()
 
 
 
-void Player::FlushEquipCombatPower(uint8 eSlot, bool apply, const ItemTemplate* pEquipTemplate)
-{
-    int32 equipCPLevel = 0;
-    for (uint8 slot = EquipmentSlots::EQUIPMENT_SLOT_HEAD; slot < EquipmentSlots::EQUIPMENT_SLOT_END; slot++)
-    {
-        Item* pItem = GetItemByPos(255, slot);
-        if (!pItem)
-            continue;
-        if (slot == eSlot)
-        {
-            if (apply)
-            {
-                if (pEquipTemplate)
-                    equipCPLevel += int32(pEquipTemplate->ExtendedData->ItemLevel);
-            }
-            continue;
-        }
-        const ItemTemplate* pTemplate = pItem->GetTemplate();
-        if (!pTemplate)
-            continue;
-        equipCPLevel += int32(pTemplate->ExtendedData->ItemLevel);
-        if (equipCPLevel < 0)
-            equipCPLevel = 0;
-    }
-    if (equipCPLevel < 0)
-        equipCPLevel = 0;
-    m_EquipCombatPower = equipCPLevel;
-}
 
 bool Player::EquipIsTidiness()
 {
@@ -8255,7 +8224,6 @@ void Player::_ApplyItemBonuses(Item* item, uint8 slot, bool apply)
     if (CanUseAttackType(attType))
         _ApplyWeaponDamage(slot, item, apply);
 
-    FlushEquipCombatPower(slot, apply, proto);
 }
 
 void Player::_ApplyWeaponDamage(uint8 slot, Item* item, bool apply)

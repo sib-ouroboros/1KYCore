@@ -80,7 +80,6 @@ private:
 	//static bool MatchEquipmentSlotsByArmor(EquipmentSlots slot, InventoryType iType);
 	//static bool MatchRangeEquipmentSlots(uint32 cls, const ItemTemplate* itemTemplate);
 	static bool IsCommonEquip(const ItemTemplate* itemTemplate);
-	static bool IsTrinketEquip(const ItemTemplate* itemTemplate);
 	static bool IsWarriorEquip(const ItemTemplate* itemTemplate);
 	static bool IsPaladinEquip(const ItemTemplate* itemTemplate);
 	static bool IsDeathKightEquip(const ItemTemplate* itemTemplate);
@@ -93,12 +92,6 @@ private:
 	static bool IsPriestEquip(const ItemTemplate* itemTemplate);
 	static bool IsEquipByClasses(uint32 cls, const ItemTemplate* itemTemplate);
 	static bool IsOnlyPhysicsAttributeEquip(const ItemTemplate* itemTemplate, bool coverIntellect);
-	static bool IsOnlyMagicAttributeEquip(const ItemTemplate* itemTemplate);
-	static bool IsTankAttributeEquip(const ItemTemplate* itemTemplate);
-	static bool IsOnlyPhysicsRandomAttributeByEquip(std::list<uint32>& enchants, bool coverIntellect);
-	static bool IsOnlyMagicRandomAttributeByEquip(std::list<uint32>& enchants);
-	static bool IsTankRandomAttributeByEquip(std::list<uint32>& enchants);
-	static void GetRandomPropEnchantments(int32 rndPropID, std::list<uint32>& enchants);
 
 public:
     PlayerCharacterSetup(Player* player);
@@ -106,11 +99,8 @@ public:
 
 	bool EquipIsTidiness();
 	bool CheckNeedTenacityFlush();
-	uint32 UpdateTalentType();
 	uint32 GetTalentType();
-	bool IsFinish() { return m_Finish; }
 	bool ResetPlayerToLevel(uint32 level, uint32 talent, bool tenacity = false);
-	uint32 SwitchPlayerTalent(uint32 talent);
 	void SupplementAmmo();
 	void UpdateReset();
 	void ViderLesSacs();
