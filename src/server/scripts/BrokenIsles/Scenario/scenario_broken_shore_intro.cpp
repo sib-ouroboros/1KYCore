@@ -56,6 +56,9 @@ enum BrokenShoreCreatures
     // communs
     NPC_KHADGAR             = 90707,
     NPC_ARGANOTH            = 90705,
+    // Le commandant de la Horde : « Defeat the Commander » vise Azgalor,
+    // pose sur la carte au meme titre qu'Arganoth.
+    NPC_AZGALOR             = 93719,
     NPC_TIRION              = 90367,
     NPC_KROSUS              = 90544,
     NPC_GULDAN              = 90413,
@@ -222,9 +225,33 @@ FactionAnchors const AllianceAnchors =
     { 1572.4f, 1719.1f, 77.4f, 5.30f },
 };
 
+// =====================================================================
+// SIGNALE EN JEU : « cote Horde ca reste en p1 sans jamais declencher
+// la p2 ». L'etape 1 s'acheve quand un vrai joueur se trouve a moins de
+// 90 metres de `beach` -- et l'ancre Horde etait posee sur personne.
+//
+// MESURE. Les deux corps de troupe sont nets sur la carte 1460 :
+// l'Alliance se masse vers (485, 2055) -- gardes gilneens, canonniers
+// de Forgefer, mages du Kirin Tor -- et la Horde vers (584, 1904) --
+// chasseurs de tetes Sombrelance, chamans du Cercle terrestre,
+// artificiers Gangrepotion, Vol'jin en (568, 1887).
+//
+// L'ancre Horde, elle, etait a (525.4, 1967.5) : entre les deux camps,
+// a 85 metres des siens. Le joueur debarque en (519.26, 1880.1), soit
+// 87.6 metres de cette ancre -- dans le cercle, mais de justesse ; des
+// qu'il marchait vers Vol'jin il en sortait (91 metres) et n'y rentrait
+// plus jamais. Cote Alliance le meme calcul donne 52 metres, largement
+// dedans : d'ou une faction qui passe et l'autre qui reste bloquee.
+//
+// On repose donc l'ancre a mi-chemin du point de debarquement officiel
+// et du centre mesure des troupes hordeuses : 34 metres de chacun des
+// deux, le pont du navire comme le camp restant tres largement dans le
+// cercle. `beach` ne sert qu'a ce test de proximite, rien d'autre sur
+// la carte n'en depend.
+// =====================================================================
 FactionAnchors const HordeAnchors =
 {
-    { 525.4f, 1967.5f, 0.9f, 5.90f },
+    { 551.6f, 1892.0f, 1.0f, 5.90f },
     { 570.0f, 1955.0f, 1.5f, 3.00f },
     { 982.1f, 1847.4f, 21.6f, 5.90f },
     { 865.6f, 1841.3f, 54.1f, 0.90f },
@@ -256,6 +283,38 @@ struct scenario_broken_shore_intro : public InstanceScript
     FactionAnchors const& Anchors() const { return team == TEAM_HORDE ? HordeAnchors : AllianceAnchors; }
     uint32 LeaderEntry() const { return team == TEAM_HORDE ? NPC_VOLJIN : NPC_KING_VARIAN; }
     uint32 TroopEntry() const { return team == TEAM_HORDE ? NPC_HORDE_GRUNT : NPC_ALLIANCE_SOLDIER; }
+
+    // =================================================================
+    // ROLES_DE_FACTION_INVERSES
+    //
+    // SIGNALE EN JEU : « la p4 c'est pas bon ».
+    //
+    // L'etape 4 de l'Alliance s'intitule « Find Varian » ; celle de la
+    // Horde, relevee dans ScenarioStep.db2 du build 7.3.5.26972, porte
+    // un autre titre : « Locate Sylvanas and Baine ». Le script traitait
+    // pourtant Vol'jin comme l'equivalent de Varian.
+    //
+    // MESURE sur la carte 1460. Les quatre chefs de chaque camp sont
+    // poses en miroir exact :
+    //
+    //            sur la plage                  a la cite
+    //   ALLI  Jaina (491,2047)            Varian (1120,2484)
+    //         Genn  (487,2052)
+    //   HORDE Vol'jin (568,1887)          Sylvanas (1000,1881)
+    //         Thrall  (572,1882)          Baine    ( 992,1874)
+    //
+    // Cote Horde les deux roles etaient intervertis : Sylvanas, qui
+    // attend a la cite comme Varian, etait envoyee escorter le joueur,
+    // et Vol'jin, poste sur la plage comme Jaina et Genn, servait de
+    // cible a « rejoindre ». Le joueur marchait donc quatre cents
+    // metres vers la cite pendant que le test de proximite guettait un
+    // Vol'jin reste DERRIERE lui : l'etape ne pouvait pas s'achever.
+    //
+    // On remet chacun a sa place. Vol'jin et Thrall escortent depuis la
+    // plage ; Sylvanas, entouree de Baine, est celle que l'on rejoint.
+    // =================================================================
+    ObjectGuid EscorteChef() const   { return (team == TEAM_HORDE) ? placedVoljinGUID : jainaGUID; }
+    ObjectGuid EscorteSecond() const { return (team == TEAM_HORDE) ? thrallGUID       : gennGUID; }
 
     void OnPlayerEnter(Player* player) override
     {
@@ -347,6 +406,7 @@ struct scenario_broken_shore_intro : public InstanceScript
             case NPC_VOLJIN:        placedVoljinGUID  = creature->GetGUID(); break;
             case NPC_JAINA:         jainaGUID         = creature->GetGUID(); break;
             case NPC_SYLVANAS:      sylvanasGUID      = creature->GetGUID(); break;
+            case NPC_BAINE:         baineGUID         = creature->GetGUID(); break;
             case NPC_GENN:          gennGUID          = creature->GetGUID(); break;
             case NPC_MEKKATORQUE:   mekkaGUID         = creature->GetGUID(); break;
             case NPC_THRALL:        thrallGUID        = creature->GetGUID(); break;
@@ -354,6 +414,7 @@ struct scenario_broken_shore_intro : public InstanceScript
             case NPC_GULDAN_POSE:   guldanGUID        = creature->GetGUID(); break;
             case NPC_KROSUS:        krosusGUID        = creature->GetGUID(); break;
             case NPC_ARGANOTH:      arganothGUID      = creature->GetGUID(); break;
+            case NPC_AZGALOR:       azgalorGUID       = creature->GetGUID(); break;
             default: break;
         }
     }
@@ -362,7 +423,7 @@ struct scenario_broken_shore_intro : public InstanceScript
     // copie invoquee par le script.
     Creature* FindLeader() const
     {
-        ObjectGuid const pose = (team == TEAM_HORDE) ? placedVoljinGUID : placedVarianGUID;
+        ObjectGuid const pose = (team == TEAM_HORDE) ? sylvanasGUID : placedVarianGUID;
         if (Creature* leader = instance->GetCreature(pose))
             return leader;
         return instance->GetCreature(leaderGUID);
@@ -451,7 +512,7 @@ struct scenario_broken_shore_intro : public InstanceScript
         // est ailleurs -- c'est tout l'objet de l'etape « Trouver
         // Varian » d'aller le chercher.
         // =============================================================
-        leaderGUID = (team == TEAM_HORDE) ? placedVoljinGUID : placedVarianGUID;
+        leaderGUID = (team == TEAM_HORDE) ? sylvanasGUID : placedVarianGUID;
 
         if (Creature* orateur = instance->GetCreature(team == TEAM_HORDE ? placedVoljinGUID : gennGUID))
             orateur->AI()->Talk(0);
@@ -530,15 +591,20 @@ struct scenario_broken_shore_intro : public InstanceScript
                 if (stage == STAGE_STORM_BEACH)
                 {
                     ++felLordKills;
-                    DoSendEventScenario(EVENT_FEL_LORDS_SLAIN);
+                    DoSendEventScenario(AssetSeigneurs());
                     TryFinishBeach();
                 }
                 break;
             case NPC_ARGANOTH:
+            case NPC_AZGALOR:
+                // Arganoth cote Alliance, Azgalor cote Horde : la meme
+                // etape, deux adversaires. On accepte les deux entrees
+                // plutot que de brancher sur l'equipe -- le mauvais des
+                // deux n'est de toute facon jamais engage.
                 if (stage == STAGE_COMMANDER)
                 {
                     creature->AI()->Talk(1);
-                    DoSendEventScenario(EVENT_COMMANDER_SLAIN);
+                    DoSendEventScenario(AssetCommandant());
                     stage = STAGE_FIND_LEADER;
                     StartFindLeader();
                 }
@@ -548,7 +614,7 @@ struct scenario_broken_shore_intro : public InstanceScript
                     break;
 
                 // Une activation par ancre : le critere en exige quatre.
-                DoSendEventScenario(EVENT_ANCHOR_DESTROYED);
+                DoSendEventScenario(AssetAncre());
 
                 if (++anchorsDown >= ANCHORS_PORTAL)
                 {
@@ -610,7 +676,7 @@ struct scenario_broken_shore_intro : public InstanceScript
             return;
 
         ++spiresDown;
-        DoSendEventScenario(EVENT_SPIRES_DESTROYED);
+        DoSendEventScenario(AssetFleches());
         TryFinishBeach();
     }
 
@@ -634,7 +700,8 @@ struct scenario_broken_shore_intro : public InstanceScript
         // Arganoth est POSE sur la carte en (613, 2085) : quatrieme
         // occurrence du meme defaut, apres Varian, Tirion, Krosus et la
         // distribution de la plage. On emploie celui de la base.
-        if (Creature* arganoth = instance->GetCreature(arganothGUID))
+        ObjectGuid const commandantGuid = (team == TEAM_HORDE) ? azgalorGUID : arganothGUID;
+        if (Creature* arganoth = instance->GetCreature(commandantGuid))
         {
             arganoth->AI()->Talk(0);
             arganoth->SetInCombatWithZone();
@@ -647,7 +714,7 @@ struct scenario_broken_shore_intro : public InstanceScript
         {
             case STAGE_STORM_BEACH:
                 ++beachKills;
-                DoSendEventScenario(EVENT_DEMONS_SLAIN);
+                DoSendEventScenario(AssetDemons());
                 TryFinishBeach();
                 break;
             case STAGE_RAZE_CITY:
@@ -700,8 +767,29 @@ struct scenario_broken_shore_intro : public InstanceScript
                 // =====================================================
                 if (cityWeight >= CITY_RAZED_POINTS)
                 {
+                    // =============================================
+                    // DOUBLE_AVANCEE
+                    //
+                    // SIGNALE EN JEU : « la p7 a encore ete validee
+                    // automatiquement ».
+                    //
+                    // Le moteur cloture « Raze the Black City » de
+                    // lui-meme des que l arbre 42770 atteint ses 300
+                    // points -- ce sont nos propres evenements qui l y
+                    // amenent. Un CompleteStep() ici faisait avancer une
+                    // SECONDE fois, et le scenario sautait par-dessus
+                    // « The Highlord ».
+                    //
+                    // L avertissement figurait deja quelques lignes plus
+                    // haut, ecrit lors du meme defaut sur la phase 2. En
+                    // alignant hier ce seuil sur celui de la barre, j ai
+                    // rendu la collision exacte au lieu de la supprimer.
+                    //
+                    // On ne touche donc plus a l etape : on met seulement
+                    // notre propre suivi a jour, et on arme la detection
+                    // de Tirion.
+                    // =============================================
                     stage = STAGE_HIGHLORD;
-                    CompleteStep();
                     StartHighlord();
                 }
                 break;
@@ -826,7 +914,7 @@ struct scenario_broken_shore_intro : public InstanceScript
             }
             if (found)
             {
-                DoSendEventScenario(EVENT_LEADER_FOUND);
+                DoSendEventScenario(AssetChefTrouve());
                 stage = STAGE_PORTAL;
 
                 // Ils sont arrives avec le joueur : ils s'arretent aupres
@@ -836,7 +924,7 @@ struct scenario_broken_shore_intro : public InstanceScript
 
                 // La replique de fin de phase n'a de sens que si celui
                 // qui la prononce est la. Il l'est desormais.
-                if (Creature* second = instance->GetCreature(team == TEAM_HORDE ? sylvanasGUID : jainaGUID))
+                if (Creature* second = instance->GetCreature(EscorteChef()))
                     second->AI()->Talk(0);
                 StartPortal();
             }
@@ -846,6 +934,43 @@ struct scenario_broken_shore_intro : public InstanceScript
     }
 
     // Les deux chefs emboitent le pas au joueur, chacun sur son flanc.
+    // =================================================================
+    // ASSETS_PAR_FACTION
+    //
+    // Les deux factions jouent des scenarios DISTINCTS : 786 cote
+    // Alliance, 1189 cote Horde. Le script envoyait les assets de
+    // l'Alliance en dur ; cote Horde ils ne nourrissaient aucun critere,
+    // et la progression restait morte de bout en bout.
+    //
+    // Releve sur wago.tools, build 7.3.5.26972, arbre par arbre. Six
+    // assets seulement different -- les quatre dernieres etapes sont
+    // PARTAGEES, y compris la barre de la cite avec ses memes poids :
+    //
+    //   etape            Alliance   Horde
+    //   demons tues        44095     54116
+    //   gangreseigneurs    52643     54114
+    //   fleches            44077     54117
+    //   commandant         45131     54109
+    //   chef trouve        45228     54123
+    //   ancres             45288     54141
+    //   cite / Tirion / Krosus / finale  -> identiques
+    //
+    // Cote Horde, « Trouver Varian » devient « Trouver les autres »
+    // (Sylvanas et Baine) et « Arreter Gul'dan » devient « Tenir la
+    // crete » -- mais l'asset de cette derniere est le meme.
+    // =================================================================
+    uint32 Asset(uint32 alliance, uint32 horde) const
+    {
+        return (team == TEAM_HORDE) ? horde : alliance;
+    }
+
+    uint32 AssetDemons() const     { return Asset(EVENT_DEMONS_SLAIN,     54116); }
+    uint32 AssetSeigneurs() const  { return Asset(EVENT_FEL_LORDS_SLAIN,  54114); }
+    uint32 AssetFleches() const    { return Asset(EVENT_SPIRES_DESTROYED, 54117); }
+    uint32 AssetCommandant() const { return Asset(EVENT_COMMANDER_SLAIN,  54109); }
+    uint32 AssetChefTrouve() const { return Asset(EVENT_LEADER_FOUND,     54123); }
+    uint32 AssetAncre() const      { return Asset(EVENT_ANCHOR_DESTROYED, 54141); }
+
     void StartEscorteChefs()
     {
         Player* marcheur = nullptr;
@@ -859,8 +984,8 @@ struct scenario_broken_shore_intro : public InstanceScript
 
         ObjectGuid const chefs[2] =
         {
-            (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID,
-            (team == TEAM_HORDE) ? thrallGUID   : gennGUID
+            EscorteChef(),
+            EscorteSecond()
         };
 
         for (uint8 i = 0; i < 2; ++i)
@@ -917,8 +1042,8 @@ struct scenario_broken_shore_intro : public InstanceScript
             {
                 ObjectGuid const chefs[2] =
                 {
-                    (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID,
-                    (team == TEAM_HORDE) ? thrallGUID   : gennGUID
+                    EscorteChef(),
+                    EscorteSecond()
                 };
 
                 for (uint8 i = 0; i < 2; ++i)
@@ -927,7 +1052,26 @@ struct scenario_broken_shore_intro : public InstanceScript
                     if (!pnj || !pnj->IsAlive())
                         continue;
 
-                    if (pnj->GetMotionMaster()->GetCurrentMovementGeneratorType() != FOLLOW_MOTION_TYPE)
+                    // =============================================
+                    // PIVOTEMENT
+                    //
+                    // SIGNALE EN JEU : « les deplacements de Jaina et
+                    // Genn sont etranges, ils tournent sur eux-memes
+                    // quand ils marchent, mais ils suivent bien ».
+                    //
+                    // La reprise se fondait sur le TYPE de generateur de
+                    // mouvement. Or celui-ci change le temps d'un
+                    // recalcul de chemin, ce qui arrive sans cesse
+                    // derriere une cible mobile. On vidait donc la pile
+                    // de mouvement et on relancait le suivi toutes les
+                    // quatre secondes : a chaque reprise le PNJ se
+                    // reoriente d'un bloc, d'ou le pivotement.
+                    //
+                    // On ne reprend plus que sur un vrai decrochage --
+                    // trente metres, largement au-dela de l'ecart normal
+                    // d'un suiveur a quatre metres, meme en virage.
+                    // =============================================
+                    if (pnj->GetDistance(marcheur) > 30.0f)
                     {
                         pnj->setActive(true);
                         pnj->SetWalk(false);
@@ -946,8 +1090,8 @@ struct scenario_broken_shore_intro : public InstanceScript
     {
         ObjectGuid const chefs[2] =
         {
-            (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID,
-            (team == TEAM_HORDE) ? thrallGUID   : gennGUID
+            EscorteChef(),
+            EscorteSecond()
         };
 
         for (uint8 i = 0; i < 2; ++i)
@@ -963,8 +1107,8 @@ struct scenario_broken_shore_intro : public InstanceScript
     // temps de respiration. Groupes 20 a 23, poses en base.
     void DireEtapeEscorte(uint8 etape)
     {
-        ObjectGuid const chefGuid   = (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID;
-        ObjectGuid const secondGuid = (team == TEAM_HORDE) ? thrallGUID   : gennGUID;
+        ObjectGuid const chefGuid   = EscorteChef();
+        ObjectGuid const secondGuid = EscorteSecond();
 
         // { groupe du chef, groupe du second, delai de la reponse }
         // -1 : personne ne parle pour ce role a ce palier.
@@ -1059,15 +1203,37 @@ struct scenario_broken_shore_intro : public InstanceScript
                     if (stage != STAGE_HIGHLORD)
                         return;
 
+                    // =========================================
+                    // DISTRIBUTION_HORDE
+                    //
+                    // La scene se joue a l'identique dans les deux camps,
+                    // avec deux distributions. Le bloc Horde
+                    // (99393-99399) repond un pour un a celui de
+                    // l'Alliance (99229-99234) :
+                    //
+                    //   Genn    « ils battent en retraite »  -> Vol'jin
+                    //   Varian  « pas encore terminee »      -> Sylvanas
+                    //   Jaina   repere Tirion                -> Thrall
+                    //   Varian  « suivez Jaina »             -> Vol'jin
+                    //   Gelbin  « comment traverser ? »      -> Baine
+                    //   Jaina   gele un passage              -> Thrall
+                    //
+                    // Thrall appelle la terre la ou Jaina gele l'eau.
+                    //
+                    // Deux locuteurs etaient restes en dur cote Alliance
+                    // -- Genn au premier rang, Gelbin au cinquieme --
+                    // et la Horde serait restee muette sur ces deux-la.
+                    // =========================================
+                    bool const horde = (team == TEAM_HORDE);
                     ObjectGuid guid;
                     switch (rang)
                     {
-                        case 0: guid = gennGUID;  break;   // « Ils battent en retraite. »
-                        case 1: guid = (team == TEAM_HORDE) ? placedVoljinGUID : placedVarianGUID; break;
-                        case 2: guid = (team == TEAM_HORDE) ? sylvanasGUID : jainaGUID; break;
-                        case 3: guid = (team == TEAM_HORDE) ? placedVoljinGUID : placedVarianGUID; break;
-                        case 4: guid = mekkaGUID; break;   // « Comment va-t-on traverser ? »
-                        case 5: guid = (team == TEAM_HORDE) ? thrallGUID : jainaGUID; break;
+                        case 0: guid = horde ? placedVoljinGUID : gennGUID;         break;
+                        case 1: guid = horde ? sylvanasGUID     : placedVarianGUID; break;
+                        case 2: guid = horde ? thrallGUID       : jainaGUID;        break;
+                        case 3: guid = horde ? placedVoljinGUID : placedVarianGUID; break;
+                        case 4: guid = horde ? baineGUID        : mekkaGUID;        break;
+                        case 5: guid = horde ? thrallGUID       : jainaGUID;        break;
                         default: return;
                     }
 
@@ -1328,11 +1494,13 @@ private:
     ObjectGuid leaderGUID;
     ObjectGuid jainaGUID;
     ObjectGuid sylvanasGUID;
+    ObjectGuid baineGUID;
     ObjectGuid placedVarianGUID;
     ObjectGuid placedVoljinGUID;
     ObjectGuid tirionGUID;
     ObjectGuid krosusGUID;
     ObjectGuid arganothGUID;
+    ObjectGuid azgalorGUID;
     // Total exige par l arbre officiel 42770, releve sur wago.tools.
     static uint32 const CITY_RAZED_POINTS = 300;
     uint32 cityWeight = 0;    // points accumules, comme la barre

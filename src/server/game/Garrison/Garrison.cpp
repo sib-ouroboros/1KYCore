@@ -318,7 +318,11 @@ void Garrison::SaveToDB(CharacterDatabaseTransaction& trans)
         stmt->setUInt8(index++, _garrisonType);
         stmt->setUInt32(index++, mission.PacketInfo.MissionRecID);
         stmt->setUInt32(index++, mission.PacketInfo.OfferTime);
-        stmt->setUInt32(index++, mission.PacketInfo.StartTime != time_t(2254525440) ? mission.PacketInfo.StartTime: 0);
+        // Mission offerte mais pas lancee : StartTime vaut une valeur sentinelle -- 2254525440 au
+        // chargement, mais 2288912640 par defaut dans GarrisonMission (AddMission). Seule la
+        // premiere etait reconnue : la seconde partait telle quelle en base, « Out of range value
+        // for column startTime » (erreur SQL MySQL 1264, 30/09/2026, premiere mission de domaine).
+        stmt->setUInt32(index++, (mission.PacketInfo.StartTime == time_t(2254525440) || mission.PacketInfo.StartTime == time_t(2288912640)) ? 0 : uint32(mission.PacketInfo.StartTime));
         stmt->setUInt32(index++, mission.PacketInfo.MissionState);
         trans->Append(stmt);
 
@@ -467,7 +471,7 @@ void Garrison::AddFollower(uint32 garrFollowerId)
     addFollowerResult.Follower = follower.PacketInfo;
     _owner->SendDirectMessage(addFollowerResult.Write());
 
-    _owner->UpdateCriteria(CRITERIA_TYPE_RECRUIT_GARRISON_FOLLOWER, follower.PacketInfo.DbID);
+    _owner->UpdateCriteria(CRITERIA_TYPE_RECRUIT_GARRISON_FOLLOWER, follower.PacketInfo.GarrFollowerID);
 
     CharacterDatabaseTransaction trans = CharacterDatabase.BeginTransaction();
     SaveToDB(trans);
@@ -500,7 +504,7 @@ void Garrison::AddShipmentFollower(uint32 garrFollowerId)
     addFollowerResult.Follower = follower.PacketInfo;
     _owner->SendDirectMessage(addFollowerResult.Write());
 
-    _owner->UpdateCriteria(CRITERIA_TYPE_RECRUIT_GARRISON_FOLLOWER, follower.PacketInfo.DbID);
+    _owner->UpdateCriteria(CRITERIA_TYPE_RECRUIT_GARRISON_FOLLOWER, follower.PacketInfo.GarrFollowerID);
 
     CharacterDatabaseTransaction trans = CharacterDatabase.BeginTransaction();
     SaveToDB(trans);
@@ -1051,6 +1055,11 @@ void Garrison::CompleteMission(uint32 garrMissionId)
 
         success = roll_chance_i(mission->PacketInfo.SuccessChance);
         mission->PacketInfo.MissionState = success ? GarrisonMission::State::Completed : GarrisonMission::State::Reward2Claimed;
+
+        // Rien ne mettait ce critere a jour : les etapes « mission » des campagnes de
+        // domaine (ex. chasseur 42523/42525/42384/42402) etaient impossibles a valider.
+        if (success)
+            _owner->UpdateCriteria(CRITERIA_TYPE_COMPLETE_GARRISON_MISSION, missionEntry->ID);
     }
 
     WorldPackets::Garrison::GarrisonCompleteMissionResult garrisonCompleteMissionResult;
