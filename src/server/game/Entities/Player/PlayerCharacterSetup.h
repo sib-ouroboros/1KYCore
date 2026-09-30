@@ -71,8 +71,6 @@ public:
 	static void Initialize();
 	static bool BindingPlayerHomePosition(Player* player);
 	static uint32 FindPlayerTalentType(Player* player);
-	static bool MatchEquipmentSlot(uint8 pos, const ItemTemplate* itemTemplate);
-	static uint32 GetItemLevelByAI(const ItemTemplate* item);
 	static void ClearUnknowMount(Player* player);
 	static uint32 CheckMaxLevel(uint32 level);
     static bool IsSpecialFlyingMountAura(uint32 aura);
@@ -94,7 +92,6 @@ private:
 	static bool IsWarlockEquip(const ItemTemplate* itemTemplate);
 	static bool IsPriestEquip(const ItemTemplate* itemTemplate);
 	static bool IsEquipByClasses(uint32 cls, const ItemTemplate* itemTemplate);
-	static bool IsEquipByClsAndTal(uint32 cls, uint32 tal, const ItemTemplate* itemTemplate, int32 rndPropID);
 	static bool IsOnlyPhysicsAttributeEquip(const ItemTemplate* itemTemplate, bool coverIntellect);
 	static bool IsOnlyMagicAttributeEquip(const ItemTemplate* itemTemplate);
 	static bool IsTankAttributeEquip(const ItemTemplate* itemTemplate);

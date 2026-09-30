@@ -1183,16 +1183,12 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
 
         PlayerAI* AI() const { return reinterpret_cast<PlayerAI*>(i_AI); }
 
-        uint32 FindTalentType();
         bool AIEquipItem(uint32 entry);
         bool CheckNeedTenacityFlush();
         bool ResetPlayerToLevel(uint32 level, uint32 talent = 3, bool needTenacity = false);
-        bool IsSettingFinish();
         void SupplementAmmo();
         uint32 ReupdateTalents();
-        uint32 SwitchTalent(uint32 talent);
         PlayerCharacterSetup* m_CharacterSetup;
-        bool IsTankPlayer();
         int32 GetEquipCombatPower() { return m_EquipCombatPower; }
         void FlushEquipCombatPower(uint8 eSlot, bool apply, const ItemTemplate* pEquipTemplate);
         bool EquipIsTidiness();

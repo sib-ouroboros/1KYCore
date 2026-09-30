@@ -45,7 +45,6 @@ public:
     bool HasItem(ObjectGuid itemGuid) const;
     TradeSlots GetTradeSlotForItem(ObjectGuid itemGuid) const;
     void SetItem(TradeSlots slot, Item* item, bool update = false);
-    bool SetItemAtNullSlot(Item* item, bool update = false);
 
     uint32 GetSpell() const { return _spell; }
     void SetSpell(uint32 spell_id, Item* castItem = nullptr);

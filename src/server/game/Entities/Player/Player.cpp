@@ -466,10 +466,6 @@ Player::~Player()
     sWorld->DecreasePlayerCount();
 }
 
-uint32 Player::FindTalentType()
-{
-    return m_CharacterSetup->UpdateTalentType();
-}
 
 bool Player::AIEquipItem(uint32 entry)
 {
@@ -491,10 +487,6 @@ bool Player::ResetPlayerToLevel(uint32 level, uint32 talent, bool needTenacity)
     return m_CharacterSetup->ResetPlayerToLevel(level, talent, needTenacity);
 }
 
-bool Player::IsSettingFinish()
-{
-    return m_CharacterSetup->IsFinish();
-}
 
 void Player::SupplementAmmo()
 {
@@ -508,29 +500,7 @@ uint32 Player::ReupdateTalents()
     return (type > 2) ? 0 : type;
 }
 
-uint32 Player::SwitchTalent(uint32 talent)
-{
-    return m_CharacterSetup->SwitchPlayerTalent(talent);
-}
 
-bool Player::IsTankPlayer()
-{
-    if (!m_CharacterSetup)
-        return false;
-    if (getLevel() < 10)
-        return false;
-    Classes cls = Classes(getClass());
-    if (cls != CLASS_DRUID && cls != CLASS_PALADIN && cls != CLASS_WARRIOR)
-        return false;
-    uint32 type = m_CharacterSetup->UpdateTalentType();
-    if (cls == CLASS_DRUID && type == 1)
-        return true;
-    if (cls == CLASS_PALADIN && type == 1)
-        return true;
-    if (cls == CLASS_WARRIOR && type == 2)
-        return true;
-    return false;
-}
 
 void Player::FlushEquipCombatPower(uint8 eSlot, bool apply, const ItemTemplate* pEquipTemplate)
 {

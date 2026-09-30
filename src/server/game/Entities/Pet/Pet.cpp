@@ -1560,21 +1560,6 @@ void Pet::InitPetCreateSpells()
     CastPetAuras(false);
 }
 
-void Pet::SettingAllSpellAutocast(bool autocast, uint32 excludeSpell)
-{
-    for (PetSpellMap::iterator itrSpell = m_spells.begin(); itrSpell != m_spells.end(); ++itrSpell)
-    {
-        uint32 petSpellID = itrSpell->first;
-        if (petSpellID == excludeSpell)
-            continue;
-        SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(petSpellID);
-        if (!spellInfo || spellInfo->IsPassive() || !spellInfo->IsAutocastable())
-            continue;
-        ToggleAutocast(spellInfo, (petSpellID == 1742) ? false : autocast);
-        if (CharmInfo* charmInfo = GetCharmInfo())
-            charmInfo->SetSpellAutocast(spellInfo, (petSpellID == 1742) ? false : autocast);
-    }
-}
 
 void Pet::ToggleAutocast(SpellInfo const* spellInfo, bool apply)
 {
