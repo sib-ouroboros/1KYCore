@@ -22,6 +22,7 @@
 #include "Common.h"
 #include "SharedDefines.h"
 #include "DatabaseEnv.h"
+#include "Unit.h" // NULL_SLOT is used by the equipment API defaults.
 #include "Player.h"
 #include "ItemTemplate.h"
 
