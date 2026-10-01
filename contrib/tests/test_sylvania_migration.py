@@ -83,7 +83,16 @@ def test_generic_restoration(restore, registry, tables, label):
         for template in registry['templates']:
             if int(template['entry']) == orphan:
                 continue
-            expected_rows.append('(' + ' AND '.join('`'+key+'`='+value for key,value in template.items()) + ')')
+            comparisons = []
+            for key, value in template.items():
+                # MySQL stores size as FLOAT; source decimal 0.65 is rounded to
+                # binary32. Compare within single-precision rounding, not as an
+                # exact decimal/double equality.
+                if key == 'size':
+                    comparisons.append(f'ABS(`size`-({value}))<=ABS({value})*0.0000001')
+                else:
+                    comparisons.append('`'+key+'`='+value)
+            expected_rows.append('(' + ' AND '.join(comparisons) + ')')
         count = sql('SELECT COUNT(*) FROM gameobject_template WHERE ' + ' OR '.join(expected_rows) + ';').stdout.strip()
         assert count == str(len(expected_rows)), 'Source model/name/icon/size/build fields changed'
     complete = checksum(tables)
