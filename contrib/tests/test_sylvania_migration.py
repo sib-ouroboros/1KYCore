@@ -70,7 +70,8 @@ def test_generic_restoration(restore, registry, tables, label):
     assert checksum(tables) == before, 'Incompatible template rejection modified data'
     compatible = next((t for t in registry.get('templates', []) if int(t['entry']) == orphan), None)
     fields = ['type'] + ['Data'+str(i) for i in range(33)]
-    assignments = ','.join('`'+k+'`='+compatible.get(k, '0') for k in fields) if compatible else 'type=5'
+    compatible = compatible or {'type': '5'}
+    assignments = ','.join('`'+k+'`='+compatible.get(k, '0') for k in fields)
     sql(f'UPDATE gameobject_template SET {assignments} WHERE entry={orphan};')
     # Matching type alone is insufficient: reject altered behavior and scripts.
     original = sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout
