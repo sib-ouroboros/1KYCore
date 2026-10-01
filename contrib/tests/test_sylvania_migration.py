@@ -25,7 +25,7 @@ def sql(text, database=True, ok=True):
     if ok and p.returncode:
         raise RuntimeError(p.stderr[-6000:])
     if not ok and not p.returncode:
-        raise AssertionError('Expected a GUID collision to reject the migration')
+        raise AssertionError('Expected a conflict to reject the migration')
     return p
 
 
@@ -38,7 +38,7 @@ def test_generic_restoration(restore, registry, tables, label):
     guids = ','.join(str(row['guid']) for row in registry['spawns'])
     first = registry['spawns'][0]
     # The original migration removed these invalid spawns; restore a small
-    # verified generic-only group, protecting both ownership and custom data.
+    # verified native-object group, protecting both ownership and custom data.
     assert sql(f'SELECT COUNT(*) FROM gameobject_template WHERE entry IN ({entries});').stdout.strip() == '0'
     assert sql(f'SELECT COUNT(*) FROM gameobject WHERE guid IN ({guids});').stdout.strip() == '0'
     sql(f"INSERT INTO gameobject(guid,id,map,position_x) VALUES ({first['guid']},9000010,1,99);")
@@ -64,6 +64,13 @@ def test_generic_restoration(restore, registry, tables, label):
     assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
     assert checksum(tables) == before, 'Orphan quest item rejection modified data'
     sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry={orphan};')
+    expected_addon = next((a for a in registry.get('addons', []) if int(a['entry']) == orphan), None)
+    def install_expected_addon():
+        columns = ','.join('`'+k+'`' for k in expected_addon)
+        values = ','.join(expected_addon.values())
+        sql(f'INSERT INTO gameobject_template_addon ({columns}) VALUES ({values});')
+    if expected_addon:
+        install_expected_addon()  # compatible orphan data must remain unchanged
     sql(f"INSERT INTO gameobject_template(entry,type,name) VALUES ({orphan},3,'Custom chest');")
     before = checksum(tables)
     assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
@@ -73,6 +80,21 @@ def test_generic_restoration(restore, registry, tables, label):
     compatible = compatible or {'type': '5'}
     assignments = ','.join('`'+k+'`='+compatible.get(k, '0') for k in fields)
     sql(f'UPDATE gameobject_template SET {assignments} WHERE entry={orphan};')
+    if expected_addon:
+        original_addon = sql(f'SELECT * FROM gameobject_template_addon WHERE entry={orphan};').stdout
+        sql(f'DELETE FROM gameobject_template_addon WHERE entry={orphan};')
+        before = checksum(tables)
+        assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
+        assert checksum(tables) == before, 'Missing addon on custom template changed data'
+        install_expected_addon()
+        addon_assignments = ','.join('`'+k+'`='+v for k,v in expected_addon.items() if k != 'entry')
+        for alteration in ('flags=0', 'faction=114', 'maxgold=1', 'WorldEffectID=2437'):
+            sql(f'UPDATE gameobject_template_addon SET {alteration} WHERE entry={orphan};')
+            before = checksum(tables)
+            assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
+            assert checksum(tables) == before, 'Addon conflict rejection modified data'
+            sql(f'UPDATE gameobject_template_addon SET {addon_assignments} WHERE entry={orphan};')
+            assert sql(f'SELECT * FROM gameobject_template_addon WHERE entry={orphan};').stdout == original_addon
     # Matching type alone is insufficient: reject altered behavior and scripts.
     original = sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout
     for alteration in ('Data32=99', "ScriptName='custom_script'", "AIName='SmartGameObjectAI'"):
@@ -85,10 +107,18 @@ def test_generic_restoration(restore, registry, tables, label):
     original_template = sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout
     sql(f"INSERT INTO gameobject(guid,id,map,position_x) VALUES ({first['guid']},{first['id']},1,99);")
     original_spawn = sql(f"SELECT * FROM gameobject WHERE guid={first['guid']};").stdout
-    protected_tables = [t for t in tables if t not in ('gameobject','gameobject_template')]
+    mutable = ('gameobject','gameobject_template') + (('gameobject_template_addon',) if expected_addon else ())
+    protected_tables = [t for t in tables if t not in mutable]
+    if expected_addon:
+        unrelated_addons = sql(f'SELECT * FROM gameobject_template_addon WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout
     protected = checksum(protected_tables)
     sql(restore)
     assert checksum(protected_tables) == protected, 'Restoration changed unrelated tables'
+    if expected_addon:
+        assert sql(f'SELECT * FROM gameobject_template_addon WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout == unrelated_addons
+        assert sql(f'SELECT * FROM gameobject_template_addon WHERE entry={orphan};').stdout == original_addon
+        predicates = ['('+' AND '.join('`'+k+'`='+v for k,v in a.items())+')' for a in registry['addons']]
+        assert sql('SELECT COUNT(*) FROM gameobject_template_addon WHERE '+' OR '.join(predicates)+';').stdout.strip() == str(len(predicates))
     assert sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout == original_template
     assert sql(f"SELECT * FROM gameobject WHERE guid={first['guid']};").stdout == original_spawn
     assert sql(f'SELECT COUNT(*) FROM gameobject_template WHERE entry IN ({entries});').stdout.strip() == str(len(registry['entries']))
@@ -120,6 +150,16 @@ def test_generic_restoration(restore, registry, tables, label):
     sql(restore[:boundary])
     sql(restore)
     assert checksum(tables) == complete, 'Partial restoration retry differs'
+    if expected_addon:
+        # Interrupt after addon insertion, before creating ANY new templates.
+        sql(f'DELETE FROM gameobject_template WHERE entry IN ({entries}) AND entry<>{orphan};')
+        sql(f'DELETE FROM gameobject_template_addon WHERE entry IN ({entries}) AND entry<>{orphan};')
+        sql(f"DELETE FROM gameobject WHERE guid IN ({guids}) AND guid<>{first['guid']};")
+        sql(restore[:restore.index('-- Add only absent templates')])
+        assert sql(f'SELECT COUNT(*) FROM gameobject_template WHERE entry IN ({entries});').stdout.strip() == '1'
+        assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == str(len(registry['addons']))
+        sql(restore)
+        assert checksum(tables) == complete, 'Addon-only interruption retry differs'
     print('PASS: ' + label + ', repeated/partial restoration, custom data and conflict guards', flush=True)
 
 
@@ -184,6 +224,9 @@ def main():
         third = (ROOT / 'sql/updates/world/2026_10_01_03_world_campaign_chairs_visibility.sql').read_text('utf8')
         third_registry = json.loads((ROOT / 'docs/audit-data/campaign-chairs-visibility-restoration.json').read_text('utf8'))
         test_generic_restoration(third, third_registry, tables, '21 templates / 62 spawns')
+        fourth = (ROOT / 'sql/updates/world/2026_10_01_04_world_campaign_generic_addons.sql').read_text('utf8')
+        fourth_registry = json.loads((ROOT / 'docs/audit-data/campaign-generic-addon-restoration.json').read_text('utf8'))
+        test_generic_restoration(fourth, fourth_registry, tables, '25 templates / 60 spawns / 25 addons')
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)
