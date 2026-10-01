@@ -98,7 +98,7 @@ int main(){
         cpp=Path(tmp)/'inventory.cpp';exe=Path(tmp)/'inventory'
         cpp.write_text(harness,encoding='utf8')
         subprocess.run([os.environ.get('CXX','c++'),'-std=c++17','-Wall','-Wextra','-Werror',
-            '-fsanitize=address,undefined','-fno-omit-frame-pointer','-g',str(cpp),'-o',str(exe)],check=True)
+            '-fsanitize=address,undefined','-fno-sanitize-recover=undefined','-fno-omit-frame-pointer','-g',str(cpp),'-o',str(exe)],check=True)
         subprocess.run([str(exe)],check=True)
 
 
