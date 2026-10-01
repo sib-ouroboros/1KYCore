@@ -1,0 +1,222 @@
+{
+  "entries": [
+    226941,
+    245435,
+    246161,
+    246419,
+    246420,
+    246429
+  ],
+  "spawns": [
+    {
+      "guid": 210301279,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301301,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301302,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301303,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301304,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301308,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301309,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210302382,
+      "id": 246420,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302385,
+      "id": 246429,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302389,
+      "id": 246419,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302517,
+      "id": 246420,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302518,
+      "id": 246420,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210307912,
+      "id": 246161,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "0"
+    },
+    {
+      "guid": 210307918,
+      "id": 246161,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "0"
+    },
+    {
+      "guid": 210309074,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309075,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309076,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309077,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309123,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309124,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309125,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309126,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309127,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309129,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309130,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309131,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309132,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309133,
+      "id": 226941,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210310289,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310295,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310296,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310297,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310298,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310302,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310303,
+      "id": 245435,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    }
+  ]
+}

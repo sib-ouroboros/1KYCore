@@ -4,6 +4,9 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/server/game/Globals/ObjectMgr.*
+      - src/server/scripts/World/PetBattleTrainer.cpp
+      - contrib/tests/test_garrison_reward_reload.py
       - src/server/game/Server/OnlineMgr.*
       - src/server/game/Server/WorldSession.cpp
       - src/server/game/Server/ToolSocket.*
@@ -41,3 +44,5 @@ jobs:
         run: python contrib/tests/test_character_setup_inventory.py
       - name: Test specialization, uninterrupted preparation, status and pagination
         run: python contrib/tests/test_character_operations.py
+      - name: Test reward reload and trainer fallback with strict sanitizers
+        run: python contrib/tests/test_garrison_reward_reload.py

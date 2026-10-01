@@ -57,10 +57,9 @@ public:
 
     bool OnGossipSelect(Player* player, Creature* creature, uint32 /*uiSender*/, uint32 uiAction) override
     {
-        player->PlayerTalkClass->ClearMenus();
-
         if (player->QuestObjectiveActiveInPlayerByObject(creature->GetEntry()))
         {
+            player->PlayerTalkClass->ClearMenus();
             if (uiAction == 0)
             {
                 CloseGossipMenuFor(player);
@@ -213,6 +212,7 @@ public:
 
             return true;
         }
+        return false; // Keep the menu available for the core's normal gossip fallback.
     }
 };
 

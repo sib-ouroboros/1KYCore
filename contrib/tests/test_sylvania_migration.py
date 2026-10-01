@@ -2,6 +2,7 @@
 """Real release-database regression. ONLY a disposable local MySQL server."""
 import gzip
 import hashlib
+import json
 import os
 from pathlib import Path
 import re
@@ -40,6 +41,12 @@ def main():
     split = migration.index('-- Source: sql/sylvania/campagne_mage_legioncore.sql')
     old = (ROOT / 'sql/updates/world/2026_09_28_00_world_1kycore_scenario_artifact.sql').read_text('utf8')
     cleanup = (ROOT / 'sql/updates/world/2026_09_29_00_world_remove_bot_tables.sql').read_text('utf8')
+    restore = (ROOT / 'sql/updates/world/2026_10_01_00_world_campaign_generic_objects.sql').read_text('utf8')
+    registry = json.loads((ROOT / 'docs/audit-data/campaign-generic-restoration.json').read_text('utf8'))
+    entries = ','.join(map(str, registry['entries']))
+    guids = ','.join(str(row['guid']) for row in registry['spawns'])
+    first = registry['spawns'][0]
+
     with tempfile.TemporaryDirectory() as tmp:
         archive = Path(tmp) / ASSET
         urllib.request.urlretrieve(URL, archive)
@@ -81,6 +88,59 @@ def main():
         sql(migration)
         assert checksum(tables) == canonical, 'Recovery after partial application differs'
         print('PASS: partial application followed by full retry', flush=True)
+
+        # The original migration removed these invalid spawns; restore a small
+        # verified generic-only group, protecting both ownership and custom data.
+        assert sql(f'SELECT COUNT(*) FROM gameobject_template WHERE entry IN ({entries});').stdout.strip() == '0'
+        assert sql(f'SELECT COUNT(*) FROM gameobject WHERE guid IN ({guids});').stdout.strip() == '0'
+        sql(f"INSERT INTO gameobject(guid,id,map,position_x) VALUES ({first['guid']},9000010,1,99);")
+        before = checksum(tables)
+        failure = sql(restore, ok=False)
+        assert '_1kycore_generic_guard' in failure.stderr and 'Duplicate entry' in failure.stderr
+        assert checksum(tables) == before, 'Generic GUID rejection modified data'
+        sql(f"DELETE FROM gameobject WHERE guid={first['guid']};")
+        # Orphaned addon/quest-item data must not acquire a new meaning silently.
+        orphan = registry['entries'][0]
+        existing_addon = sql(f'SELECT * FROM gameobject_template_addon WHERE entry={orphan};').stdout
+        assert not existing_addon, 'Fixture requires no original addon'
+        sql(f'INSERT INTO gameobject_template_addon(entry,flags) VALUES ({orphan},1);')
+        before = checksum(tables)
+        assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
+        assert checksum(tables) == before, 'Orphan addon rejection modified data'
+        sql(f'DELETE FROM gameobject_template_addon WHERE entry={orphan};')
+        assert not sql(f'SELECT * FROM gameobject_questitem WHERE GameObjectEntry={orphan};').stdout
+        sql(f'INSERT INTO gameobject_questitem(GameObjectEntry,Idx,ItemId) VALUES ({orphan},0,6948);')
+        before = checksum(tables)
+        assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
+        assert checksum(tables) == before, 'Orphan quest item rejection modified data'
+        sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry={orphan};')
+        sql(f"INSERT INTO gameobject_template(entry,type,name) VALUES ({orphan},3,'Custom chest');")
+        before = checksum(tables)
+        assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
+        assert checksum(tables) == before, 'Incompatible template rejection modified data'
+        sql(f'UPDATE gameobject_template SET type=5 WHERE entry={orphan};')
+        original_template = sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout
+        sql(f"INSERT INTO gameobject(guid,id,map,position_x) VALUES ({first['guid']},{first['id']},1,99);")
+        original_spawn = sql(f"SELECT * FROM gameobject WHERE guid={first['guid']};").stdout
+        protected_tables = [t for t in tables if t not in ('gameobject','gameobject_template')]
+        protected = checksum(protected_tables)
+        sql(restore)
+        assert checksum(protected_tables) == protected, 'Restoration changed unrelated tables'
+        assert sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout == original_template
+        assert sql(f"SELECT * FROM gameobject WHERE guid={first['guid']};").stdout == original_spawn
+        assert sql(f'SELECT COUNT(*) FROM gameobject_template WHERE entry IN ({entries});').stdout.strip() == str(len(registry['entries']))
+        assert sql(f'SELECT COUNT(*) FROM gameobject WHERE guid IN ({guids});').stdout.strip() == str(len(registry['spawns']))
+        complete = checksum(tables)
+        sql(restore)
+        assert checksum(tables) == complete, 'Repeated restoration changed data'
+        # Reproduce interruption after templates, before restoring the spawns.
+        sql(f'DELETE FROM gameobject_template WHERE entry IN ({entries}) AND entry<>{orphan};')
+        sql(f"DELETE FROM gameobject WHERE guid IN ({guids}) AND guid<>{first['guid']};")
+        boundary = restore.index('-- Restore exact imported spawns')
+        sql(restore[:boundary])
+        sql(restore)
+        assert checksum(tables) == complete, 'Partial restoration retry differs'
+        print('PASS: six generic templates, 35 spawns, repeated/partial restoration, custom data and conflict guards', flush=True)
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)
