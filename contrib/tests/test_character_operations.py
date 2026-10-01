@@ -78,8 +78,8 @@ struct OnlineMgr {
     bool SetCharacterOperation(uint32,uint32,std::string const&,std::string const&,uint32);
     std::string SerializerCharacterOperation(uint32);
     bool CharaterState(uint32,uint32,uint32,uint32){return true;}
-} onlineManager;
-OnlineMgr* sOnlineMgr=&onlineManager;
+};
+OnlineMgr* sOnlineMgr=nullptr;
 struct PlayerCharacterSetup;
 struct Player {
     PlayerCharacterSetup* m_CharacterSetup=nullptr;
@@ -145,6 +145,7 @@ Json::Value parse(std::string const& value){
 }
 std::string state(){return parse(sOnlineMgr->SerializerCharacterOperation(1))["operation"]["state"].asString();}
 int main(){
+    OnlineMgr manager;sOnlineMgr=&manager; // Match the production singleton constructed after JsonCpp initialization.
     for(int8 order=0;order<4;++order)sChrSpecializationStore.entries[100+order]={11,order,uint32(100+order)};
     sChrSpecializationStore.entries[200]={12,0,200};
     sOnlineMgr->m_OnlinePlayerAcc[1].id=1;sOnlineMgr->m_OnlinePlayerAcc[1].online.guid=42;
