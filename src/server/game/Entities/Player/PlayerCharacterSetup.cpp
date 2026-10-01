@@ -1225,12 +1225,8 @@ bool PlayerCharacterSetup::ResetPlayerToLevel(uint32 level, uint32 talent, bool 
         return false;
 
     m_ActiveTalentType = spec->OrderIndex;
-	//TC_LOG_INFO("server.reset", ">> Reset player level to %d !", level);
-	if (m_Player->getLevel() != level)
-	{
-		m_Player->GiveLevel(level);
-		m_Player->SetUInt32Value(PLAYER_XP, 0);
-	}
+    m_TargetLevel = level;
+    m_SetupFailures = 0;
 	m_ResetStep = 0;
 	m_Finish = false;
 	m_TenacitySetting = tenacity;
@@ -1243,24 +1239,26 @@ void PlayerCharacterSetup::SupplementAmmo()
 	
 }
 
-// Vide le sac de base, sans toucher a ce qui est porte.
-//
-// Extrait de UnequipFromAll(), dont c etait la seconde moitie. Sert a faire
-// de la place avant de creer une tenue candidate, puis a evacuer les pieces
-// que le personnage n a pas retenues.
-void PlayerCharacterSetup::ViderLesSacs()
+bool PlayerCharacterSetup::ChangeSpecialization(uint32 talent)
 {
-	for (uint8 slot = InventoryPackSlots::INVENTORY_SLOT_ITEM_START + 1;
-		slot < InventoryPackSlots::INVENTORY_SLOT_ITEM_END; ++slot)
-	{
-		Item* pItem = m_Player->GetItemByPos(255, slot);
-		if (!pItem)
-			continue;
-		// La pierre de foyer ne se remplace pas.
-		if (pItem->GetEntry() == 6948)
-			continue;
-		m_Player->DestroyItem(255, slot, true);
-	}
+    if (!m_Player || !m_Finish)
+        return false;
+    ChrSpecializationEntry const* spec = talent == PLAYER_SPECIALIZATION_KEEP
+        ? sChrSpecializationStore.LookupEntry(m_Player->GetSpecializationId())
+        : (talent < MAX_SPECIALIZATIONS
+            ? sDB2Manager.GetChrSpecializationByIndex(m_Player->getClass(), talent) : nullptr);
+    if (!spec || spec->IsPetSpecialization() || spec->ClassID != m_Player->getClass() ||
+        spec->OrderIndex < 0 || spec->OrderIndex >= MAX_SPECIALIZATIONS)
+        return false;
+    m_Player->ActivateTalentGroup(spec);
+    if (m_Player->GetSpecializationId() != spec->ID)
+        return false;
+    m_Player->SendTalentsInfoData();
+    m_Player->SaveToDB();
+    if (WorldSession* session = m_Player->GetSession())
+        sOnlineMgr->CharaterState(session->GetAccountId(), uint32(m_Player->GetGUID()),
+            m_Player->getLevel(), FindPlayerTalentType(m_Player));
+    return true;
 }
 
 void PlayerCharacterSetup::UpdateReset()
@@ -1268,14 +1266,22 @@ void PlayerCharacterSetup::UpdateReset()
 	if (m_Finish)
 		return;
 
+    if (WorldSession* session = m_Player->GetSession())
+        sOnlineMgr->SetCharacterOperation(session->GetAccountId(), uint32(m_Player->GetGUID()),
+            "preparation", "running", m_SetupFailures);
 	if (m_Player->IsInCombat())
 		m_Player->CombatStop(true);
+    // Finish on this player update: no session packet or autosave can split the steps.
+    while (m_ResetStep < 14)
+    {
 	switch (m_ResetStep)
 	{
-	case 0:
-		// Sur son propre tick, avant l effacement des talents : changer de
-		// specialisation pendant que les stats et les auras sont recalculees
-		// est precisement ce qui faisait exploser la pile.
+    case 0:
+        if (m_Player->getLevel() != m_TargetLevel)
+        {
+            m_Player->GiveLevel(m_TargetLevel);
+            m_Player->SetUInt32Value(PLAYER_XP, 0);
+        }
 		ActivateSpecialization();
 		++m_ResetStep;
 		break;
@@ -1299,17 +1305,10 @@ void PlayerCharacterSetup::UpdateReset()
 		LearnSpells();
 		++m_ResetStep;
 		break;
-	case 6:
-        // Preserve equipped items until replacement equipment is ready.
-		//
-		// UnequipFromAll() detruisait les pieces portees ET le sac, trois
-		// ticks avant que UpequipFromAll (etape 9) ne tente d enfiler la
-		// tenue neuve. Tout refus dans cet intervalle laissait le bot nu.
-		// Vider le sac suffit a faire la place ; EquipItem echangera chaque
-		// piece en place, et gardera l ancienne si la nouvelle est refusee.
-		ViderLesSacs();
-		++m_ResetStep;
-		break;
+    case 6:
+        // Preserve all existing inventory; report insufficient space instead of deleting items.
+        ++m_ResetStep;
+        break;
 	case 7:
 		CheckInventroy();
 		++m_ResetStep;
@@ -1338,14 +1337,20 @@ void PlayerCharacterSetup::UpdateReset()
 		m_Player->SetFullHealth();
 		m_Player->UpdateSkillsForLevel();
 		m_Player->UpdateAllStats();
+        m_Finish = true; // Allow the final transaction through the save guard.
         m_Player->SaveToDB();
         if (WorldSession* session = m_Player->GetSession())
+        {
             sOnlineMgr->CharaterState(session->GetAccountId(), uint32(m_Player->GetGUID()),
                 m_Player->getLevel(), FindPlayerTalentType(m_Player));
+            sOnlineMgr->SetCharacterOperation(session->GetAccountId(), uint32(m_Player->GetGUID()),
+                "preparation", m_SetupFailures ? "completed_with_warnings" : "completed", m_SetupFailures);
+        }
 		++m_ResetStep;
 		break;
 	}
 
+    }
 	m_Finish = (m_ResetStep >= 14);
 	if (m_Finish)
 		m_TenacitySetting = false;
@@ -1516,6 +1521,7 @@ void PlayerCharacterSetup::CheckInventroy()
     if (!item)
     {
         TC_LOG_ERROR("entities.player", "Character setup: missing bag template 21876");
+        ++m_SetupFailures;
         return;
     }
     for (uint8 slot = INVENTORY_SLOT_BAG_START; slot < INVENTORY_SLOT_BAG_END; ++slot)
@@ -1524,10 +1530,16 @@ void PlayerCharacterSetup::CheckInventroy()
             continue;
         ItemPosCountVec dest;
         if (m_Player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, item->GetId(), 1) != EQUIP_ERR_OK || dest.empty())
+        {
+            ++m_SetupFailures;
             return;
+        }
         Item* bag = m_Player->StoreNewItem(dest, item->GetId(), true, GenerateItemRandomPropertyId(item->GetId()));
         if (!bag || !EquipItem(bag, slot))
-            return; // Keep the stored bag; do not create more items after a failed equip.
+        {
+            ++m_SetupFailures;
+            return;
+        } // Keep the stored bag; do not create more items after a failed equip.
     }
 }
 
@@ -1582,13 +1594,16 @@ void PlayerCharacterSetup::UpequipFromAll()
 	{
         Item* itemInst = m_Player->GetItemByGuid(itNeed->first);
         if (!itemInst || !m_Player->IsInventoryPos(itemInst->GetPos()) || m_Player->IsBankPos(itemInst->GetPos()))
-            continue; // Removed, equipped or banked since the previous reset step.
+        {
+            ++m_SetupFailures;
+            continue;
+        } // Removed, equipped or banked since the previous reset step.
 		if (itemInst->GetTemplate()->GetInventoryType() == InventoryType::INVTYPE_AMMO)
 		{
 			//m_Player->SetAmmo(itemInst->GetEntry());
 		}
-		else
-            EquipItem(itemInst, itNeed->second);
+        else if (!EquipItem(itemInst, itNeed->second))
+            ++m_SetupFailures;
 	}
 	m_NeedEquips.clear();
 }
@@ -1824,8 +1839,12 @@ bool PlayerCharacterSetup::CheckNeedTenacityFlush()
 
 void PlayerCharacterSetup::AddOnceEquip(const ItemTemplate* item, uint8 slot)
 {
-	if (!item)
-		return;
+    if (!item)
+    {
+        if (slot != NULL_SLOT)
+            ++m_SetupFailures;
+        return;
+    }
 	//m_Player->AddItem(item->GetId(), 1);
 	uint32 count = 1;
 	if (item->GetClass() == ItemClass::ITEM_CLASS_PROJECTILE && item->GetInventoryType() == InventoryType::INVTYPE_AMMO)
@@ -1835,11 +1854,16 @@ void PlayerCharacterSetup::AddOnceEquip(const ItemTemplate* item, uint8 slot)
 	InventoryResult msg = m_Player->CanStoreNewItem(NULL_BAG, NULL_SLOT, dest, item->GetId(), count, &noSpaceForCount);
 	if (msg != EQUIP_ERR_OK)
 		count -= noSpaceForCount;
-	if (count <= 0 || dest.empty())
-		return;
+    if (count <= 0 || dest.empty())
+    {
+        ++m_SetupFailures;
+        return;
+    }
 	Item* itemInst = m_Player->StoreNewItem(dest, item->GetId(), true, GenerateItemRandomPropertyId(item->GetId()));
 	if (itemInst)
         m_NeedEquips.emplace_back(itemInst->GetGUID(), slot);
+    else
+        ++m_SetupFailures;
 }
 
 void PlayerCharacterSetup::RandomWeaponsForSpecialization()

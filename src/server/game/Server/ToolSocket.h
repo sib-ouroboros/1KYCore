@@ -68,6 +68,8 @@ private:
 	void CmdPlayerAccount(Json::Value& info);
 	void CmdAccountSecurity(Json::Value& info);
 	void CmdPlayerChange(Json::Value& info);
+    void CmdPlayerSpecialization(Json::Value& info);
+    void CmdPlayerChangeStatus(Json::Value& info);
 	void CmdPVEMaxLevel(Json::Value& info);
 	void CmdPVEMaxDungeon(Json::Value& info);
 	void CmdPVEAddion(Json::Value& info);

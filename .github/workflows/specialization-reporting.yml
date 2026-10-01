@@ -2,7 +2,7 @@ name: Specialization regression
 
 on:
   push:
-    branches: [main, cleanup/remove-bots]
+    branches: [main, cleanup/remove-bots, 'development/**']
     paths:
       - src/server/game/Entities/Player/PlayerCharacterSetup.cpp
       - src/server/game/Miscellaneous/SharedDefines.h

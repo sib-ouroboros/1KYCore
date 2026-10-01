@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - cleanup/remove-bots
+      - development/**
 
   pull_request:
     branches:

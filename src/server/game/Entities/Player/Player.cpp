@@ -479,6 +479,16 @@ bool Player::CheckNeedTenacityFlush()
     return false;
 }
 
+bool Player::ChangeToolSpecialization(uint32 talent)
+{
+    return m_CharacterSetup->ChangeSpecialization(talent);
+}
+
+void Player::CompleteCharacterSetup()
+{
+    m_CharacterSetup->UpdateReset();
+}
+
 bool Player::ResetPlayerToLevel(uint32 level, uint32 talent, bool needTenacity)
 {
     return m_CharacterSetup->ResetPlayerToLevel(level, talent, needTenacity);
@@ -21174,6 +21184,8 @@ bool Player::_LoadHomeBind(PreparedQueryResult result)
 
 void Player::SaveToDB(bool create /*=false*/)
 {
+    if (m_CharacterSetup && m_CharacterSetup->HasPendingReset())
+        return; // UpdateReset performs the complete character save after finishing all steps.
     // delay auto save at any saves (manual, in code, or autosave)
     m_nextSave = sWorld->getIntConfig(CONFIG_INTERVAL_SAVE);
 

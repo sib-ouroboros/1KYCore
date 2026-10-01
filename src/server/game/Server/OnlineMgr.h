@@ -55,6 +55,7 @@ struct ToolAccountInfo
 	uint32 id;
 	std::string username;
 	ToolCharaterInfo online;
+    Json::Value operation;
 
 	ToolAccountInfo() : id(0) {}
 	ToolAccountInfo(uint32 uid, const char *name) : id(uid), username(name)
@@ -90,10 +91,14 @@ public:
 	bool CharaterOffline(uint32 accID);
 	bool CharaterState(uint32 accID, uint32 charID, uint16 lv, uint8 talent);
 	bool SetAccountSecurity(uint32 accID, uint8 security);
-	std::string SerializerPlayerAccount();
+    std::string SerializerPlayerAccount(uint32 after = 0, uint32 limit = 99);
+    bool SetCharacterOperation(uint32 accID, uint32 charID, std::string const& kind,
+        std::string const& state, uint32 failures);
+    std::string SerializerCharacterOperation(uint32 accID);
 
 private:
 	TOOL_ACC m_OnlinePlayerAcc;
+    uint32 m_OperationSequence = 0;
     // Preserve legacy account filtering and character-retention protection.
     std::set<uint32> m_LegacyBotAccounts;
 

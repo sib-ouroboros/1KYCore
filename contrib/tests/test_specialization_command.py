@@ -68,6 +68,7 @@ struct PlayerCharacterSetup {
     using EquipmentByLevel=std::map<uint32,ItemsForLevel>;
     inline static EquipmentByLevel classesEquips[MAX_CLASSES][INVTYPE_RELIC+1];
     Player* m_Player;
+    uint32 m_TargetLevel=0,m_SetupFailures=0;
     bool m_Finish=true,m_TenacitySetting=false;
     uint32 m_ActiveTalentType=255,m_ResetStep=14;
     bool ResetPlayerToLevel(uint32,uint32,bool=false);
@@ -90,9 +91,9 @@ int main(){
         Player p;PlayerCharacterSetup setup{&p};
         check(setup.ResetPlayerToLevel(110,order),"valid druid specialization rejected");
         setup.ActivateSpecialization();
-        check(p.spec==100+order && p.level==110 && p.xp==0,"wrong activation/level");
+        check(p.spec==100+order && p.level==100 && p.xp==123 && setup.m_TargetLevel==110,"wrong activation/level");
         check(!setup.ResetPlayerToLevel(20,0),"concurrent reset accepted");
-        check(p.level==110,"concurrent reset changed level");
+        check(p.level==100,"concurrent reset changed level");
     }
     Player p;p.spec=102;
     PlayerCharacterSetup keep{&p};

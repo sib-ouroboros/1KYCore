@@ -116,8 +116,18 @@ bool IsValidToolCommand(Json::Value const& info)
         return (value.isInt() || value.isUInt() || value.isDouble()) && std::isfinite(value.asDouble());
     };
     std::string const entry = info["entry"].asString();
-    if (entry == "heartbeat" || entry == "player_acc")
+    if (entry == "heartbeat")
         return true;
+    if (entry == "player_acc")
+        return (info["after"].isNull() || info["after"].isUInt() ||
+            (info["after"].isInt() && info["after"].asInt() >= 0)) &&
+            (info["limit"].isNull() || integer("limit", 1, 100));
+    if (entry == "player_change_status")
+        return integer("guid", 1, std::numeric_limits<int>::max());
+    if (entry == "player_specialization")
+        return integer("guid", 1, std::numeric_limits<int>::max()) &&
+            (integer("talent", 0, MAX_SPECIALIZATIONS - 1) ||
+                integer("talent", PLAYER_SPECIALIZATION_KEEP, PLAYER_SPECIALIZATION_KEEP));
     if (entry == "authorization")
         return info["authorization"].isString();
     if (entry == "create_acc")
@@ -176,6 +186,10 @@ void ToolSocket::ProcessToolCmd()
                 CmdAccountSecurity(jsonCmd);
             else if (entry == "player_change")
                 CmdPlayerChange(jsonCmd);
+            else if (entry == "player_specialization")
+                CmdPlayerSpecialization(jsonCmd);
+            else if (entry == "player_change_status")
+                CmdPlayerChangeStatus(jsonCmd);
             else if (entry == "pve_maxlevel")
                 CmdPVEMaxLevel(jsonCmd);
             else if (entry == "pve_maxdungeon")
@@ -450,7 +464,9 @@ void ToolSocket::CmdCreateAccount(Json::Value& info)
 
 void ToolSocket::CmdPlayerAccount(Json::Value& info)
 {
-	SendResult(sOnlineMgr->SerializerPlayerAccount());
+    uint32 after = info["after"].isNull() ? 0 : info["after"].asUInt();
+    uint32 limit = info["limit"].isNull() ? 99 : info["limit"].asUInt();
+    SendResult(sOnlineMgr->SerializerPlayerAccount(after, limit));
 }
 
 void ToolSocket::CmdAccountSecurity(Json::Value& info)
@@ -478,7 +494,8 @@ void ToolSocket::CmdPlayerChange(Json::Value& info)
 	if (pWorldSession && !pWorldSession->PlayerLoading())
 	{
 		Player* player = pWorldSession->GetPlayer();
-		if (!player || player->InBattlegroundQueue() || player->InBattleground() ||
+        if (!player || !player->IsAlive() || player->IsInFlight() || player->IsBeingTeleported() ||
+            player->GetTradeData() || player->InBattlegroundQueue() || player->InBattleground() ||
 			player->GetBattleground() || player->IsInCombat())
 		{
 			SendNormalResult("player_change", false);
@@ -488,11 +505,38 @@ void ToolSocket::CmdPlayerChange(Json::Value& info)
 		if (maxlv < minlv)
 			maxlv = minlv;
 		uint32 level = urand(minlv, maxlv);
-		bool result = player->ResetPlayerToLevel(level, talent);
-		SendNormalResult("player_change", result);
+        bool result = player->ResetPlayerToLevel(level, talent);
+        if (result)
+            sOnlineMgr->SetCharacterOperation(guid, uint32(player->GetGUID()), "preparation", "queued", 0);
+        SendNormalResult("player_change", result);
 		return;
 	}
 	SendNormalResult("player_change", false);
+}
+
+void ToolSocket::CmdPlayerSpecialization(Json::Value& info)
+{
+    uint32 const account = info["guid"].asInt();
+    WorldSession* session = sWorld->FindSession(account);
+    Player* player = session && !session->PlayerLoading() ? session->GetPlayer() : nullptr;
+    if (!player || !player->IsAlive() || player->getLevel() < 10 || player->IsInCombat() ||
+        player->IsInFlight() || player->IsBeingTeleported() || player->GetTradeData() ||
+        player->InBattlegroundQueue() || player->InBattleground() || player->GetBattleground() ||
+        player->m_CharacterSetup->HasPendingReset())
+    {
+        SendNormalResult("player_specialization", false);
+        return;
+    }
+    sOnlineMgr->SetCharacterOperation(account, uint32(player->GetGUID()), "specialization", "running", 0);
+    bool success = player->ChangeToolSpecialization(info["talent"].asInt());
+    sOnlineMgr->SetCharacterOperation(account, uint32(player->GetGUID()), "specialization",
+        success ? "completed" : "rejected", 0);
+    SendNormalResult("player_specialization", success);
+}
+
+void ToolSocket::CmdPlayerChangeStatus(Json::Value& info)
+{
+    SendResult(sOnlineMgr->SerializerCharacterOperation(info["guid"].asInt()));
 }
 
 void ToolSocket::CmdPVEMaxLevel(Json::Value& info)

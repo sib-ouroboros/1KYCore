@@ -2,7 +2,7 @@ name: Sylvania release migration
 
 on:
   push:
-    branches: [cleanup/remove-bots]
+    branches: [cleanup/remove-bots, 'development/**']
     paths:
       - sql/updates/**
       - contrib/tests/**

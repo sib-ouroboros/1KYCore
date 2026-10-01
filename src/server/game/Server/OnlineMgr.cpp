@@ -52,6 +52,8 @@ Json::Value ToolAccountInfo::SerializerInfo()
 	result["name"] = username.c_str();
 	result["security"] = (pSession) ? uint32(pSession->GetSecurity()) : 0;
 	result["charater"] = online.SerializerInfo();
+    if (!operation.isNull())
+        result["operation"] = operation;
 	return result;
 }
 
@@ -201,21 +203,76 @@ bool OnlineMgr::SetAccountSecurity(uint32 accID, uint8 security)
 	return true;
 }
 
-std::string OnlineMgr::SerializerPlayerAccount()
+std::string OnlineMgr::SerializerPlayerAccount(uint32 after, uint32 limit)
 {
-	std::unique_lock<std::mutex> sessionGuard(OnlineMgr::g_uniqueMgrLock);
-	Json::Value data;
-	data["entry"] = "player_acc";
-	int count = 100;
-	for (TOOL_ACC::iterator itInfo = m_OnlinePlayerAcc.begin();
-		itInfo != m_OnlinePlayerAcc.end();
-		itInfo++)
-	{
-		--count;
-		if (count <= 0)
-			break;
-		ToolAccountInfo& info = itInfo->second;
-		data["accounts"].append(info.SerializerInfo());
-	}
-	return data.toStyledString();
+    std::unique_lock<std::mutex> sessionGuard(OnlineMgr::g_uniqueMgrLock);
+    Json::Value data;
+    data["entry"] = "player_acc";
+    data["result"] = "success";
+    data["accounts"] = Json::Value(Json::arrayValue);
+    data["total"] = Json::UInt(m_OnlinePlayerAcc.size());
+    data["after"] = after;
+    if (limit == 0 || limit > 100)
+        limit = 99;
+    data["limit"] = limit;
+    uint32 next = after;
+    auto itr = m_OnlinePlayerAcc.upper_bound(after);
+    for (uint32 count = 0; itr != m_OnlinePlayerAcc.end() && count < limit; ++count)
+    {
+        data["accounts"].append(itr->second.SerializerInfo());
+        // Reserve room for cursor/status fields and the legacy frame's trailing NUL.
+        if (data.toStyledString().size() > 60000)
+        {
+            data["accounts"].resize(data["accounts"].size() - 1);
+            if (count == 0)
+            {
+                data["result"] = "error";
+                data["error"] = "account_too_large";
+            }
+            break;
+        }
+        next = itr->first;
+        ++itr;
+    }
+    data["next_after"] = next;
+    data["has_more"] = itr != m_OnlinePlayerAcc.end();
+    return data.toStyledString();
+}
+
+bool OnlineMgr::SetCharacterOperation(uint32 accID, uint32 charID, std::string const& kind,
+    std::string const& state, uint32 failures)
+{
+    std::unique_lock<std::mutex> sessionGuard(OnlineMgr::g_uniqueMgrLock);
+    auto itr = m_OnlinePlayerAcc.find(accID);
+    if (itr == m_OnlinePlayerAcc.end() || !charID || itr->second.online.guid != charID)
+        return false;
+    Json::Value& operation = itr->second.operation;
+    if (state == "queued" || (kind == "specialization" && state == "running"))
+    {
+        if (++m_OperationSequence == 0)
+            ++m_OperationSequence;
+        operation["id"] = m_OperationSequence;
+    }
+    operation["character_guid"] = charID;
+    operation["kind"] = kind;
+    operation["state"] = state;
+    operation["item_failures"] = failures;
+    return true;
+}
+
+std::string OnlineMgr::SerializerCharacterOperation(uint32 accID)
+{
+    std::unique_lock<std::mutex> sessionGuard(OnlineMgr::g_uniqueMgrLock);
+    Json::Value data;
+    data["entry"] = "player_change_status";
+    data["guid"] = accID;
+    auto itr = m_OnlinePlayerAcc.find(accID);
+    if (itr == m_OnlinePlayerAcc.end())
+        data["result"] = "error";
+    else
+    {
+        data["result"] = "success";
+        data["operation"] = itr->second.operation;
+    }
+    return data.toStyledString();
 }

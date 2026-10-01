@@ -2,7 +2,7 @@ name: Database release
 
 on:
   push:
-    branches: [main, cleanup/remove-bots]
+    branches: [main, cleanup/remove-bots, 'development/**']
     paths:
       - .github/workflows/database-release.yml
       - contrib/release/prepare_database_release.py

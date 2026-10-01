@@ -2,14 +2,19 @@ name: Reliability regression
 
 on:
   push:
-    branches: [cleanup/remove-bots, main]
+    branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/server/game/Server/OnlineMgr.*
+      - src/server/game/Server/WorldSession.cpp
       - src/server/game/Server/ToolSocket.*
       - src/common/Utilities/MessageBuffer.h
       - src/server/game/Server/Json/**
       - src/server/game/Entities/Player/PlayerCharacterSetup.*
+      - src/server/game/Entities/Player/Player.cpp
+      - src/server/game/Entities/Player/Player.h
       - cmake/genrev.cmake
       - revision_data.h.in.cmake
+      - contrib/tests/test_character_operations.py
       - contrib/tests/test_tool_socket.py
       - contrib/tests/test_character_setup_inventory.py
       - contrib/tests/test_revision_metadata.py
@@ -34,3 +39,5 @@ jobs:
         run: python contrib/tests/test_tool_socket.py
       - name: Test inventory lifetime and bag handling with sanitizers
         run: python contrib/tests/test_character_setup_inventory.py
+      - name: Test specialization, uninterrupted preparation, status and pagination
+        run: python contrib/tests/test_character_operations.py

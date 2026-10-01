@@ -14,7 +14,7 @@ def main():
         return re.search(r'^(?:bool|void) '+re.escape(name)+r'\([^\n]*\)\n\{.*?^\}',source,re.M|re.S)[0]
     names=['ProcessCmd','ProcessToolCmd','ReadHandler','SendResult','SendPacket']
     handlers=['Heartbeat','Authorization','BGXPReward','BGScoreRate','CreateAccount','PlayerAccount',
-              'AccountSecurity','PlayerChange','PVEMaxLevel','PVEMaxDungeon','PVEAddion']
+              'AccountSecurity','PlayerChange','PlayerSpecialization','PlayerChangeStatus','PVEMaxLevel','PVEMaxDungeon','PVEAddion']
     harness=r'''
 #include "MessageBuffer.h"
 #include "json.h"
@@ -93,6 +93,21 @@ int main(){
         "{\"entry\":\"player_change\",\"guid\":1,\"minlv\":20,\"maxlv\":110,\"talent\":3}",
         "{\"entry\":\"xp_reward\",\"reward\":1}","{\"entry\":\"xp_reward\",\"reward\":false}"})valid.ProcessCmd(json);
     valid.ProcessToolCmd();check(valid.handled==5 && valid.rejected==0,"compatible request rejected");
+    ToolSocket newCommands;
+    for(char const* json:{R"({"entry":"player_specialization","guid":1,"talent":3})",
+        R"({"entry":"player_specialization","guid":1,"talent":255})",
+        R"({"entry":"player_change_status","guid":1})",
+        R"({"entry":"player_acc","after":4294967295,"limit":100})"})newCommands.ProcessCmd(json);
+    newCommands.ProcessToolCmd();check(newCommands.handled==4,"new command rejected");
+    for(char const* json:{R"({"entry":"player_specialization","guid":1})",
+        R"({"entry":"player_specialization","guid":1,"talent":4})",
+        R"({"entry":"player_change_status","guid":0})",
+        R"({"entry":"player_acc","after":-1})",
+        R"({"entry":"player_acc","after":true})",
+        R"({"entry":"player_acc","limit":0})",
+        R"({"entry":"player_acc","limit":101})",
+        R"({"entry":"player_acc","after":"1"})"})newCommands.ProcessCmd(json);
+    newCommands.ProcessToolCmd();check(newCommands.handled==4 && newCommands.rejected==8,"bad new schema accepted");
     ToolSocket exceptions;exceptions.ProcessCmd("{\"entry\":\"heartbeat\",\"throw\":true}");exceptions.ProcessCmd(message);
     exceptions.ProcessToolCmd();check(exceptions.handled==2 && exceptions.rejected==1,"exception prevents next command");
     for(std::size_t length:{1u,100u,65534u}){

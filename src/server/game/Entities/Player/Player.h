@@ -1183,6 +1183,8 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
 
         bool AIEquipItem(uint32 entry);
         bool CheckNeedTenacityFlush();
+        bool ChangeToolSpecialization(uint32 talent);
+        void CompleteCharacterSetup();
         bool ResetPlayerToLevel(uint32 level, uint32 talent = PLAYER_SPECIALIZATION_KEEP, bool needTenacity = false);
         void SupplementAmmo();
         uint32 ReupdateTalents();

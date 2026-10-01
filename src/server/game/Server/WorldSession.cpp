@@ -557,6 +557,8 @@ void WorldSession::LogoutPlayer(bool save)
 
     if (_player)
     {
+        _player->CompleteCharacterSetup(); // Finish queued preparation before logout persists the player.
+
         if (!_player->GetLootGUID().IsEmpty())
             DoLootReleaseAll();
 

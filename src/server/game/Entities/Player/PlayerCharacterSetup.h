@@ -104,7 +104,8 @@ public:
 	bool ResetPlayerToLevel(uint32 level, uint32 talent, bool tenacity = false);
 	void SupplementAmmo();
 	void UpdateReset();
-	void ViderLesSacs();
+    bool ChangeSpecialization(uint32 talent);
+    bool HasPendingReset() const { return !m_Finish; }
 	void LearnSpells();
 	void ActivateSpecialization();
 	void LearnTalents();
@@ -135,6 +136,8 @@ private:
 	Player* m_Player;
     PendingEquipment m_NeedEquips;
 	uint32 m_ActiveTalentType;
+    uint32 m_TargetLevel = 0;
+    uint32 m_SetupFailures = 0;
 
 	static uint32 classesTrainersGUID[MAX_CLASSES][2];
     static ClassTalentPage classesTalents[MAX_CLASSES][3];

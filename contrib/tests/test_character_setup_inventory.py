@@ -61,6 +61,7 @@ struct PlayerCharacterSetup {
     Player* m_Player;
     PendingEquipment m_NeedEquips;
     std::vector<std::pair<uint16,uint8>> equipped;
+    uint32 m_SetupFailures=0;
     void CheckInventroy();void UpequipFromAll();
     bool EquipItem(Item* item,uint8 slot){
         if(!m_Player->canEquip)return false;
