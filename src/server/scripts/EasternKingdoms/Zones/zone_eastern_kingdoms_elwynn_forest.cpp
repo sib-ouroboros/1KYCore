@@ -1058,25 +1058,37 @@ struct npc_hogger : public ScriptedAI
                     break;
 
                 case EVENT_RAGAMUFFIN_SAY_CLAY:
-                    GetRagamuffin2()->AI()->Talk(SAY_CLAY);
-                    GetRagamuffin2()->SetFacingTo(GetRagamuffin2()->GetAngle(me));
+                    if (Creature* ragamuffin = GetRagamuffin2())
+                    {
+                        ragamuffin->AI()->Talk(SAY_CLAY);
+                        ragamuffin->SetFacingTo(ragamuffin->GetAngle(me));
+                    }
                     _events.ScheduleEvent(EVENT_RUN_1, 5s);
                     break;
 
                 case EVENT_RUN_1:
-                    GetRagamuffin1()->SetWalk(false);
-                    GetRagamuffin1()->GetMotionMaster()->MovePoint(0, RagamuffinCoordinates[5], true);
+                    if (Creature* ragamuffin = GetRagamuffin1())
+                    {
+                        ragamuffin->SetWalk(false);
+                        ragamuffin->GetMotionMaster()->MovePoint(0, RagamuffinCoordinates[4], true);
+                    }
                     break;
 
                 case EVENT_RAGAMUFFIN_SAY_WOW:
-                    GetRagamuffin1()->AI()->Talk(SAY_WOW);
-                    GetRagamuffin1()->SetFacingTo(GetRagamuffin1()->GetAngle(me));
+                    if (Creature* ragamuffin = GetRagamuffin1())
+                    {
+                        ragamuffin->AI()->Talk(SAY_WOW);
+                        ragamuffin->SetFacingTo(ragamuffin->GetAngle(me));
+                    }
                     _events.ScheduleEvent(EVENT_RUN_2, 4s);
                     break;
 
                 case EVENT_RUN_2:
-                    GetRagamuffin2()->SetWalk(false);
-                    GetRagamuffin2()->GetMotionMaster()->MovePoint(0, RagamuffinCoordinates[6], true);
+                    if (Creature* ragamuffin = GetRagamuffin2())
+                    {
+                        ragamuffin->SetWalk(false);
+                        ragamuffin->GetMotionMaster()->MovePoint(0, RagamuffinCoordinates[5], true);
+                    }
                     break;
 
                 case EVENT_DISMOUNT_HAMMOND_CLAY:

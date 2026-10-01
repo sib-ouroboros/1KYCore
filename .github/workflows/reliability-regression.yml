@@ -17,6 +17,8 @@ on:
       - src/server/scripts/Pandaria/SiegeOfOrgrimmar/boss_korkron_dark_shaman.cpp
       - src/server/game/AI/CoreAI/UnitAI.*
       - contrib/tests/test_dark_shaman_target.py
+      - src/server/scripts/EasternKingdoms/Zones/zone_eastern_kingdoms_elwynn_forest.cpp
+      - contrib/tests/test_hogger_scene.py
       - src/server/scripts/Spells/spell_monk.cpp
       - contrib/tests/test_monk_mastery_guard.py
       - src/server/game/Server/OnlineMgr.*
@@ -68,3 +70,5 @@ jobs:
         run: python contrib/tests/test_vmap_model_names.py
       - name: Test dark shaman target selection and fallback with strict sanitizers
         run: python contrib/tests/test_dark_shaman_target.py
+      - name: Test Hogger scene actors and escape destinations with strict sanitizers
+        run: python contrib/tests/test_hogger_scene.py
