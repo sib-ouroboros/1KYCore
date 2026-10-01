@@ -211,10 +211,11 @@ int main(){
 '''
     with tempfile.TemporaryDirectory() as tmp:
         tmp=Path(tmp);cpp=tmp/'operations.cpp';exe=tmp/'operations'
+        (tmp/'Define.h').write_text('#pragma once\n#include <cstdint>\n',encoding='utf8')
         cpp.write_text(harness,encoding='utf8')
         json=root/'src/server/game/Server/Json'
         subprocess.run([os.environ.get('CXX','c++'),'-std=c++17','-fsanitize=address,undefined',
-            '-fno-omit-frame-pointer','-g','-I'+str(json),str(cpp),
+            '-fno-omit-frame-pointer','-g','-I'+str(tmp),'-I'+str(json),str(cpp),
             *[str(json/f) for f in ('json_reader.cpp','json_value.cpp','json_writer.cpp')],'-o',str(exe)],check=True)
         subprocess.run([str(exe)],check=True)
 
