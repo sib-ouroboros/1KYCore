@@ -195,6 +195,10 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        # Validate the existing release path before importing any new objects:
+        # enum naming is not a flags whitelist; this exact pair is native data.
+        assert sql('SELECT COUNT(*) FROM gameobject_template t JOIN gameobject_template_addon a ON a.entry=t.entry WHERE t.type=5 AND (a.flags & 8192)<>0 AND t.Data7=1;').stdout.strip() == '193'
+        assert sql('SELECT COUNT(*) FROM gameobject_template t JOIN gameobject_template_addon a ON a.entry=t.entry WHERE t.type=5 AND (a.flags & 8192)<>0 AND t.Data7<>1;').stdout.strip() == '0'
         tables = sql('SHOW TABLES;').stdout.splitlines()
         changed = set(re.findall(r'(?:UPDATE|INSERT INTO|DELETE FROM)\s+`?(\w+)', migration, re.I))
         changed |= {'creature', 'gameobject'}  # aliased DELETE statements
@@ -227,6 +231,9 @@ def main():
         fourth = (ROOT / 'sql/updates/world/2026_10_01_04_world_campaign_generic_addons.sql').read_text('utf8')
         fourth_registry = json.loads((ROOT / 'docs/audit-data/campaign-generic-addon-restoration.json').read_text('utf8'))
         test_generic_restoration(fourth, fourth_registry, tables, '25 templates / 60 spawns / 25 addons')
+        fifth = (ROOT / 'sql/updates/world/2026_10_01_05_world_campaign_visibility_phaseable.sql').read_text('utf8')
+        fifth_registry = json.loads((ROOT / 'docs/audit-data/campaign-visibility-phaseable-restoration.json').read_text('utf8'))
+        test_generic_restoration(fifth, fifth_registry, tables, '38 templates / 90 spawns / 38 addons')
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)
