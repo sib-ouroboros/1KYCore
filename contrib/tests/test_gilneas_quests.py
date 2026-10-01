@@ -30,14 +30,17 @@ def main():
     recovery=dusk[dusk.index('class player_gilneas_stocks_recovery :'):]
     avery=city[city.index('class npc_josiah_avery_35369 :'):]
     command=city[city.index('class spell_gilneas_attack_lurker :'):]
+    event_source=(root/'src/common/Utilities/EventMap.cpp').read_text('utf8')
     harness=r'''
 #include <cstdint>
+#include <chrono>
 #include <functional>
 #include <iostream>
 #include <map>
 #include <stdexcept>
 #include <vector>
-using uint32=std::uint32_t;
+using uint32=std::uint32_t;using uint64=std::uint64_t;
+using namespace std::chrono_literals;
 constexpr int QUEST_FROM_THE_SHADOWS=14204,QUEST_LAST_CHANCE_AT_HUMANITY=14375,QUEST_THE_REBEL_LORDS_ARSENAL=14159;
 constexpr int QUEST_STATUS_NONE=0,QUEST_STATUS_INCOMPLETE=1,QUEST_STATUS_COMPLETE=2,QUEST_STATUS_REWARDED=3;
 constexpr int NPC_GILNEAN_MASTIFF=35631,NPC_BLOODFANG_LURKER=35463;
@@ -105,6 +108,24 @@ RECOVERY
 struct Avery{
 AVERY
 };
+struct EventMap{
+    using EventStore=std::multimap<uint32,uint64>;
+    EventStore _eventMap;uint32 _time=0;uint64 _lastEvent=0;unsigned _phase=0;
+    bool Empty()const{return _eventMap.empty();}
+    void Update(uint32 diff){_time+=diff;}
+    template<typename Rep,typename Period> void ScheduleEvent(uint32 id,std::chrono::duration<Rep,Period> delay){
+        _eventMap.emplace(_time+std::chrono::duration_cast<std::chrono::milliseconds>(delay).count(),id);
+    }
+EVENT_EXECUTE
+};
+namespace ObjectAccessor{Player* GetPlayer(Creature&,int){return nullptr;}}
+constexpr int EVENT_START_ANIM=999;
+struct AveryDialogue{
+AVERY_EVENTS
+    Creature* me=nullptr;EventMap m_events;int m_playerGUID=0;std::vector<unsigned> lines;
+    void Talk(unsigned line){lines.push_back(line);}
+AVERY_UPDATE
+};
 void check(bool ok){if(!ok)throw std::runtime_error("Gilneas quest regression failed");}
 int main(){
     Player owner;owner.player=&owner;Creature dog,target;dog.entry=35631;dog.player=&owner;target.entry=35463;
@@ -134,6 +155,10 @@ int main(){
     recovery.OnLogin(&login,false);check(login.HasAura(68481)&&!login.HasAura(69196)&&login.flags==0x100);
     Player unrelated;unrelated.quest=QUEST_STATUS_NONE;unrelated.auras[69196]={};recovery.OnLogin(&unrelated,false);
     check(unrelated.HasAura(69196)&&unrelated.casts.empty());
+    AveryDialogue dialogue;dialogue.m_events.ScheduleEvent(dialogue.EVENT_SAY_JOSIAH_AVERY_TEXT_00,10s);
+    for(uint32 delta:{10000,30000,25000,30000,25000,30000})dialogue.UpdateAI(delta);
+    check(dialogue.lines==std::vector<unsigned>({0,1,2,3,4,5}));
+    dialogue.UpdateAI(25000);check(dialogue.lines.back()==0&&dialogue.lines.size()==7);
     Avery avery;Creature giver;Quest arsenal{14159,67352};
     avery.OnQuestReward(&owner,&giver,&arsenal,0);check(giver.bites==1&&giver.casts.empty());
     arsenal.reward=0;avery.OnQuestReward(&owner,&giver,&arsenal,0);check(giver.casts.size()==1&&giver.casts[0]==67352);
@@ -145,6 +170,9 @@ int main(){
         'STOCKS':method(dusk,'    void ReleaseGilneasStocks('),
         'KING':method(king,'    bool OnQuestReward('),
         'RECOVERY':method(recovery,'    void OnLogin('),
+        'EVENT_EXECUTE':method(event_source,'uint32 EventMap::ExecuteEvent(').replace('EventMap::',''),
+        'AVERY_EVENTS':method(avery,'    enum eNpc')+';',
+        'AVERY_UPDATE':method(avery,'        void UpdateAI('),
         'AVERY':method(avery,'    bool OnQuestReward(')}.items():
         harness=harness.replace('\n'+token+'\n','\n'+value+'\n')
     with tempfile.TemporaryDirectory() as tmp:

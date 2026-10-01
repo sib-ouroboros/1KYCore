@@ -2435,12 +2435,12 @@ public:
         JOSIAH_AVERY_TEXT_04                = 4,
         JOSIAH_AVERY_TEXT_05                = 5,
 
-        EVENT_SAY_JOSIAH_AVERY_TEXT_00      = 0,
-        EVENT_SAY_JOSIAH_AVERY_TEXT_01      = 1,
-        EVENT_SAY_JOSIAH_AVERY_TEXT_02      = 2,
-        EVENT_SAY_JOSIAH_AVERY_TEXT_03      = 3,
-        EVENT_SAY_JOSIAH_AVERY_TEXT_04      = 4,
-        EVENT_SAY_JOSIAH_AVERY_TEXT_05      = 5,
+        EVENT_SAY_JOSIAH_AVERY_TEXT_00      = 1,
+        EVENT_SAY_JOSIAH_AVERY_TEXT_01      = 2,
+        EVENT_SAY_JOSIAH_AVERY_TEXT_02      = 3,
+        EVENT_SAY_JOSIAH_AVERY_TEXT_03      = 4,
+        EVENT_SAY_JOSIAH_AVERY_TEXT_04      = 5,
+        EVENT_SAY_JOSIAH_AVERY_TEXT_05      = 6,
 
         ACTION_START_ANIM                   = 102
     };
