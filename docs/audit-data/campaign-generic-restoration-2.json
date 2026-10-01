@@ -1,0 +1,1136 @@
+{
+  "entries": [
+    246499,
+    246781,
+    246783,
+    247353,
+    247354,
+    247355,
+    248907,
+    249352,
+    249426,
+    249427,
+    249776,
+    249811,
+    249815,
+    249816,
+    249817,
+    251331,
+    251332,
+    251396,
+    251606,
+    251625,
+    251644,
+    251645,
+    251646,
+    251647,
+    251648,
+    251653,
+    251654,
+    251658,
+    251659,
+    252777,
+    266293,
+    266486,
+    266945,
+    267798,
+    267799,
+    268721
+  ],
+  "templates": [
+    {
+      "entry": "246499",
+      "type": "5",
+      "displayId": "16847",
+      "name": "'Large Campfire'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "2",
+      "VerifiedBuild": "21021"
+    },
+    {
+      "entry": "246781",
+      "type": "5",
+      "displayId": "15586",
+      "name": "'Books'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "20994"
+    },
+    {
+      "entry": "246783",
+      "type": "5",
+      "displayId": "27750",
+      "name": "'Books'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "20994"
+    },
+    {
+      "entry": "247353",
+      "type": "5",
+      "displayId": "32086",
+      "name": "'Falling Debris Large'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21021"
+    },
+    {
+      "entry": "247354",
+      "type": "5",
+      "displayId": "32087",
+      "name": "'Falling Debris Medium'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21021"
+    },
+    {
+      "entry": "247355",
+      "type": "5",
+      "displayId": "32088",
+      "name": "'Falling Debris Small'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21021"
+    },
+    {
+      "entry": "248907",
+      "type": "5",
+      "displayId": "29634",
+      "name": "'Gates'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.5",
+      "VerifiedBuild": "21287"
+    },
+    {
+      "entry": "249352",
+      "type": "5",
+      "displayId": "15152",
+      "name": "'Demonic Portal'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "4",
+      "VerifiedBuild": "21232"
+    },
+    {
+      "entry": "249426",
+      "type": "5",
+      "displayId": "33361",
+      "name": "'Oar'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.65",
+      "VerifiedBuild": "21384"
+    },
+    {
+      "entry": "249427",
+      "type": "5",
+      "displayId": "33362",
+      "name": "'Poster'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.65",
+      "VerifiedBuild": "21384"
+    },
+    {
+      "entry": "249776",
+      "type": "5",
+      "displayId": "33032",
+      "name": "'Calyduss Candles'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21232"
+    },
+    {
+      "entry": "249811",
+      "type": "5",
+      "displayId": "31962",
+      "name": "'Platform Base'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.65",
+      "VerifiedBuild": "21232"
+    },
+    {
+      "entry": "249815",
+      "type": "5",
+      "displayId": "33710",
+      "name": "'Ground energy'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1.5",
+      "VerifiedBuild": "21384"
+    },
+    {
+      "entry": "249816",
+      "type": "5",
+      "displayId": "298",
+      "name": "'Blue Aura'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "3",
+      "VerifiedBuild": "21384"
+    },
+    {
+      "entry": "249817",
+      "type": "5",
+      "displayId": "33711",
+      "name": "'Blue glow'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "5",
+      "VerifiedBuild": "21384"
+    },
+    {
+      "entry": "251331",
+      "type": "5",
+      "displayId": "34352",
+      "name": "'Tomb of the High Inquisitor of Whiteman.'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "2",
+      "VerifiedBuild": "23420"
+    },
+    {
+      "entry": "251332",
+      "type": "5",
+      "displayId": "13370",
+      "name": "'Tomb of the High Inquisitor of Whiteman.'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "2",
+      "VerifiedBuild": "23420"
+    },
+    {
+      "entry": "251396",
+      "type": "5",
+      "displayId": "6628",
+      "name": "'Door to the Monastery of the Scarlet Order'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.5",
+      "VerifiedBuild": "23420"
+    },
+    {
+      "entry": "251606",
+      "type": "5",
+      "displayId": "8276",
+      "name": "'Portal'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1.5",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251625",
+      "type": "5",
+      "displayId": "35261",
+      "name": "'Broken Crate'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1.5",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251644",
+      "type": "5",
+      "displayId": "11428",
+      "name": "'Debris'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251645",
+      "type": "5",
+      "displayId": "35267",
+      "name": "'Burning Debris'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251646",
+      "type": "5",
+      "displayId": "13654",
+      "name": "'Rubble'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.75",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251647",
+      "type": "5",
+      "displayId": "12785",
+      "name": "'Rubble'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.75",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251648",
+      "type": "5",
+      "displayId": "11418",
+      "name": "'Debris'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.75",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251653",
+      "type": "5",
+      "displayId": "13654",
+      "name": "'Rubble'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251654",
+      "type": "5",
+      "displayId": "13653",
+      "name": "'Rubble'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.75",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251658",
+      "type": "5",
+      "displayId": "11038",
+      "name": "'Desk'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "251659",
+      "type": "5",
+      "displayId": "11039",
+      "name": "'Stool'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "entry": "252777",
+      "type": "5",
+      "displayId": "27632",
+      "name": "'Fel Locker'",
+      "IconName": "'questinteract'",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "23360"
+    },
+    {
+      "entry": "266293",
+      "type": "5",
+      "displayId": "28949",
+      "name": "'Cage'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "0.75",
+      "VerifiedBuild": "1"
+    },
+    {
+      "entry": "266486",
+      "type": "5",
+      "displayId": "29815",
+      "name": "'Ritual Platform'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "1"
+    },
+    {
+      "entry": "266945",
+      "type": "5",
+      "displayId": "4391",
+      "name": "'Alchemical Table'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "1"
+    },
+    {
+      "entry": "267798",
+      "type": "5",
+      "displayId": "13842",
+      "name": "'Supplies'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "24015"
+    },
+    {
+      "entry": "267799",
+      "type": "5",
+      "displayId": "6448",
+      "name": "'Box'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "24015"
+    },
+    {
+      "entry": "268721",
+      "type": "5",
+      "displayId": "37313",
+      "name": "'Barricade'",
+      "IconName": "''",
+      "caption": "''",
+      "unk1": "''",
+      "size": "1",
+      "VerifiedBuild": "24015"
+    }
+  ],
+  "spawns": [
+    {
+      "guid": 210301299,
+      "id": 249427,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301300,
+      "id": 249426,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301372,
+      "id": 268721,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210301373,
+      "id": 268721,
+      "source": "sql/sylvania/campagne_chasseur_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210302519,
+      "id": 246499,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302548,
+      "id": 247353,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302549,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302550,
+      "id": 247353,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302551,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302552,
+      "id": 247354,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302553,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302554,
+      "id": 247354,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302555,
+      "id": 247353,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302556,
+      "id": 247354,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302557,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302558,
+      "id": 247354,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302559,
+      "id": 247354,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302560,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302561,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302562,
+      "id": 247353,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302563,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302564,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302565,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302566,
+      "id": 247354,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302567,
+      "id": 247355,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302568,
+      "id": 247353,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302569,
+      "id": 247354,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1545"
+    },
+    {
+      "guid": 210302570,
+      "id": 248907,
+      "source": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "map": "1607"
+    },
+    {
+      "guid": 210303611,
+      "id": 252777,
+      "source": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "map": "1604"
+    },
+    {
+      "guid": 210303638,
+      "id": 252777,
+      "source": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "map": "1604"
+    },
+    {
+      "guid": 210305723,
+      "id": 266945,
+      "source": "sql/sylvania/campagne_pretre_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210305775,
+      "id": 267798,
+      "source": "sql/sylvania/campagne_pretre_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210305776,
+      "id": 267799,
+      "source": "sql/sylvania/campagne_pretre_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210305777,
+      "id": 267799,
+      "source": "sql/sylvania/campagne_pretre_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210306787,
+      "id": 246783,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210306790,
+      "id": 246781,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210306800,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306802,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306805,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306809,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306810,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306811,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306813,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306817,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306818,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306819,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306822,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306824,
+      "id": 249815,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306825,
+      "id": 249816,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210306826,
+      "id": 249817,
+      "source": "sql/sylvania/campagne_mage_legioncore.sql",
+      "map": "1583"
+    },
+    {
+      "guid": 210307833,
+      "id": 266293,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210307872,
+      "id": 249352,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1522"
+    },
+    {
+      "guid": 210307882,
+      "id": 249811,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210307883,
+      "id": 249776,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210307884,
+      "id": 249776,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210307885,
+      "id": 249776,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210307886,
+      "id": 249776,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210307887,
+      "id": 249776,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210308060,
+      "id": 266486,
+      "source": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210309099,
+      "id": 251331,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309100,
+      "id": 251332,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210309122,
+      "id": 251396,
+      "source": "sql/sylvania/campagne_dk_legioncore.sql",
+      "map": "1618"
+    },
+    {
+      "guid": 210310293,
+      "id": 249427,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310294,
+      "id": 249426,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310411,
+      "id": 268721,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210310412,
+      "id": 268721,
+      "source": "sql/sylvania/campagne_dh_legioncore.sql",
+      "map": "1220"
+    },
+    {
+      "guid": 210313675,
+      "id": 251606,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313676,
+      "id": 251646,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313677,
+      "id": 251645,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313678,
+      "id": 251644,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313679,
+      "id": 251625,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313680,
+      "id": 251647,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313681,
+      "id": 251646,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313683,
+      "id": 251625,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313685,
+      "id": 251646,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313686,
+      "id": 251647,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313688,
+      "id": 251647,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313689,
+      "id": 251625,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313690,
+      "id": 251648,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313691,
+      "id": 251648,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313692,
+      "id": 251654,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313694,
+      "id": 251647,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313695,
+      "id": 251648,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313696,
+      "id": 251625,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313697,
+      "id": 251625,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313699,
+      "id": 251646,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313700,
+      "id": 251646,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313701,
+      "id": 251653,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313703,
+      "id": 251648,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313704,
+      "id": 251646,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313705,
+      "id": 251646,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313706,
+      "id": 251645,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313707,
+      "id": 251653,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313708,
+      "id": 251653,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313709,
+      "id": 251647,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313710,
+      "id": 251625,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313711,
+      "id": 251658,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313712,
+      "id": 251659,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313713,
+      "id": 251658,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313714,
+      "id": 251659,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313715,
+      "id": 251659,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313716,
+      "id": 251658,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313717,
+      "id": 251658,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313718,
+      "id": 251659,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313719,
+      "id": 251658,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313720,
+      "id": 251659,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313721,
+      "id": 251659,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313722,
+      "id": 251658,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313723,
+      "id": 251659,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313724,
+      "id": 251658,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313725,
+      "id": 251658,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313726,
+      "id": 251659,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313727,
+      "id": 251646,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313728,
+      "id": 251647,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313729,
+      "id": 251653,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    },
+    {
+      "guid": 210313730,
+      "id": 251648,
+      "source": "sql/sylvania/campagne_moine_legioncore.sql",
+      "map": "1625"
+    }
+  ]
+}
