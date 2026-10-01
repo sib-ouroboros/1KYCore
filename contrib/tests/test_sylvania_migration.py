@@ -148,6 +148,19 @@ def main():
         assert 'Duplicate entry' in failure.stderr and '_1kycore_spawn_guard' in failure.stderr, failure.stderr
         assert checksum(tables) == collision, 'Collision rejection modified content'
         print('PASS: custom NPC GUID collision rejects before any content mutation', flush=True)
+        command = (ROOT / 'sql/updates/world/2026_10_01_01_world_gilneas_attack_lurker.sql').read_text('utf8')
+        sql("INSERT INTO spell_script_names (spell_id,ScriptName) VALUES (67805,'test_gilneas_custom');")
+        previous = sql("SELECT * FROM spell_script_names ORDER BY spell_id,ScriptName;").stdout
+        protected = checksum([table for table in tables if table != 'spell_script_names'])
+        sql(command)
+        assert sql("SELECT COUNT(*) FROM spell_script_names WHERE spell_id=67805 AND ScriptName='spell_gilneas_attack_lurker';").stdout.strip() == '1'
+        retained = sql("SELECT * FROM spell_script_names WHERE ScriptName<>'spell_gilneas_attack_lurker' ORDER BY spell_id,ScriptName;").stdout
+        assert retained == previous, 'Quest command overwrote unrelated spell bindings'
+        assert checksum([table for table in tables if table != 'spell_script_names']) == protected
+        complete = checksum(['spell_script_names'])
+        sql(command)
+        assert checksum(['spell_script_names']) == complete, 'Quest binding retry is not idempotent'
+        print('PASS: Gilneas command binding first/repeat import preserves other scripts and all other tables', flush=True)
         sql(f'DROP DATABASE `{DB}`;', False)
 
 

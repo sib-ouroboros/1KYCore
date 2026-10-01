@@ -33,6 +33,7 @@
 #include "MoveSpline.h"
 #include "PassiveAI.h"
 #include "Pet.h"
+#include "TemporarySummon.h"
 #include "Player.h"
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
@@ -191,6 +192,15 @@ public:
 
     void OnQuestStatusChange(Player* player, uint32 questId) override
     {
+        if (questId == QUEST_FROM_THE_SHADOWS &&
+            player->GetQuestStatus(questId) != QUEST_STATUS_INCOMPLETE)
+        {
+            if (Pet* pet = player->GetPet())
+                if (pet->GetEntry() == NPC_GILNEAN_MASTIFF)
+                    player->RemovePet(pet, PET_SAVE_AS_DELETED, true);
+            player->UnsummonCreatureByEntry(NPC_GILNEAN_MASTIFF);
+        }
+
         if (player->GetQuestStatus(questId) == QUEST_STATUS_INCOMPLETE ||
             player->GetQuestStatus(questId) == QUEST_STATUS_COMPLETE)
             return;
@@ -2440,8 +2450,8 @@ public:
         if (quest->GetQuestId() == QUEST_THE_REBEL_LORDS_ARSENAL)
         {
             creature->AddAura(SPELL_WORGEN_BITE, player);
-            creature->GetAI()->SetGUID(player->GetGUID(), PLAYER_GUID);
-            creature->AI()->DoAction(ACTION_START_ANIM);
+            if (quest->GetRewSpell() != SPELL_FORCE_CAST_SUMMON_JOSIAH)
+                creature->CastSpell(player, SPELL_FORCE_CAST_SUMMON_JOSIAH, true);
         }
 
         return true;
@@ -2616,7 +2626,18 @@ public:
                     case EVENTS_ANIM_1:
                     {
                         if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                            if (Creature* badAvery = me->FindNearestCreature(NPC_JOSIAH_AVERY_35370, 25.0f, true))
+                        {
+                            std::list<Creature*> candidates;
+                            me->GetCreatureListWithEntryInGrid(candidates, NPC_JOSIAH_AVERY_35370, 25.0f);
+                            Creature* badAvery = nullptr;
+                            for (Creature* candidate : candidates)
+                                if (TempSummon* summon = candidate->ToTempSummon())
+                                    if (candidate->IsAlive() && summon->GetSummonerGUID() == m_playerGUID)
+                                    {
+                                        badAvery = candidate;
+                                        break;
+                                    }
+                            if (badAvery)
                             {
                                 m_badAveryGUID = badAvery->GetGUID();
                                 badAvery->SetOrientation(badAvery->GetAngle(player)); // Face Player
@@ -2624,6 +2645,7 @@ public:
                                 //player->GetMotionMaster()->MoveKnockTo(-1791.94f, 1427.29f, 12.4584f, 22.0f, 8.0f, m_playerGUID.GetCounter());
                                 badAvery->getThreatManager().resetAllAggro();
                             }
+                        }
                         m_events.ScheduleEvent(EVENTS_ANIM_2, 1s + 200ms);
                         break;
                     }
@@ -2650,7 +2672,7 @@ public:
                                 badAvery->CastSpell(badAvery, SPELL_GET_SHOT, true);
                                 badAvery->setDeathState(JUST_DIED);
                             player->SaveToDB();
-                            badAvery->DespawnOrUnsummon(1s);
+                            badAvery->DespawnOrUnsummon(5s);
                             me->DespawnOrUnsummon(1s);
                         }
 
@@ -2689,6 +2711,75 @@ public:
         }
         return true;
     }
+};
+
+namespace
+{
+    bool CanFightGilneasLurker(Unit* unit)
+    {
+        Player* player = unit ? unit->GetCharmerOrOwnerPlayerOrPlayerItself() : nullptr;
+        return player && player->IsAlive() &&
+            player->GetQuestStatus(QUEST_FROM_THE_SHADOWS) == QUEST_STATUS_INCOMPLETE;
+    }
+
+    void StartGilneasMastiffAttack(Unit* mastiff, Unit* target)
+    {
+        if (!mastiff || !target || mastiff->GetEntry() != NPC_GILNEAN_MASTIFF ||
+            target->GetEntry() != NPC_BLOODFANG_LURKER || !target->IsAlive() ||
+            !CanFightGilneasLurker(mastiff))
+            return;
+
+        target->RemoveAura(SPELL_SHADOWSTALKER_STEALTH);
+        if (CharmInfo* info = mastiff->GetCharmInfo())
+        {
+            info->SetIsFollowing(false);
+            info->SetIsReturning(false);
+            info->SetIsAtStay(false);
+            info->SetIsCommandFollow(false);
+            info->SetIsCommandAttack(true);
+        }
+        if (Creature* dog = mastiff->ToCreature())
+        {
+            dog->SetReactState(REACT_DEFENSIVE);
+            dog->AI()->AttackStart(target);
+        }
+        if (Creature* lurker = target->ToCreature())
+            lurker->AI()->AttackStart(mastiff);
+    }
+}
+
+// The quest summon can use PetAI. A spell hook also handles that path without
+// changing AI selection for ordinary pets.
+class spell_gilneas_attack_lurker : public SpellScriptLoader
+{
+public:
+    spell_gilneas_attack_lurker() : SpellScriptLoader("spell_gilneas_attack_lurker") { }
+
+    class script : public SpellScript
+    {
+        PrepareSpellScript(script);
+
+        SpellCastResult CheckTarget()
+        {
+            if (!GetCaster() || GetCaster()->GetEntry() != NPC_GILNEAN_MASTIFF ||
+                !CanFightGilneasLurker(GetCaster()))
+                return SPELL_FAILED_BAD_TARGETS;
+            return SPELL_CAST_OK;
+        }
+
+        void HandleHit()
+        {
+            StartGilneasMastiffAttack(GetCaster(), GetHitUnit());
+        }
+
+        void Register() override
+        {
+            OnCheckCast += SpellCheckCastFn(script::CheckTarget);
+            AfterHit += SpellHitFn(script::HandleHit);
+        }
+    };
+
+    SpellScript* GetSpellScript() const override { return new script(); }
 };
 
 class npc_gilnean_mastiff_35631 : public CreatureScript
@@ -2741,13 +2832,7 @@ public:
         void SpellHitTarget(Unit* worgenTarget, SpellInfo const* Spell) override
         {
             if (Spell->Id == SPELL_ATTACK_LURKER)
-            {
-                worgenTarget->RemoveAura(SPELL_SHADOWSTALKER_STEALTH);
-                worgenTarget->AddThreat(me, 1.0f);
-                me->AddThreat(worgenTarget, 1.0f);
-                me->AI()->AttackStart(worgenTarget);
-                me->GetMotionMaster()->MoveCharge(worgenTarget->GetPositionX(), worgenTarget->GetPositionY(), worgenTarget->GetPositionZ(), 5.0f, 0);
-            }
+                StartGilneasMastiffAttack(me, worgenTarget);
         }
 
         void JustDied(Unit* /*killer*/) override // Otherwise, player is stuck with pet corpse they cannot remove from world
@@ -2814,31 +2899,54 @@ public:
             DoCast(me, SPELL_SHADOWSTALKER_STEALTH);
         }
 
-        void SpellHit(Unit* caster, const SpellInfo* spell)
+        void AttackStart(Unit* target) override
         {
-            if (me->HasReactState(REACT_PASSIVE))
-                if (spell->Id == SPELL_ATTACK_LURKER)
-                {
-                    me->SetReactState(REACT_AGGRESSIVE);
-                    AttackStart(caster);
-                }
+            if (!CanFightGilneasLurker(target))
+                return;
+            // Stay passive toward unrelated players; an explicit eligible victim
+            // can still be chased and fought normally.
+            me->RemoveAura(SPELL_SHADOWSTALKER_STEALTH);
+            ScriptedAI::AttackStart(target);
+        }
+
+        void DamageTaken(Unit* attacker, uint32& /*damage*/) override
+        {
+            if (!me->GetVictim())
+                AttackStart(attacker);
+        }
+
+        void SpellHit(Unit* caster, SpellInfo const* spell) override
+        {
+            if (spell->Id == SPELL_ATTACK_LURKER)
+                AttackStart(caster);
         }
 
         void UpdateAI(uint32 diff) override
         {
+            if (me->GetVictim() && !CanFightGilneasLurker(me->GetVictim()))
+            {
+                EnterEvadeMode(EVADE_REASON_NO_HOSTILES);
+                return;
+            }
+
             if (tSeek <= diff)
             {
-                if ((me->IsAlive()) && (!me->IsInCombat() && (me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 2.0f)))
-                    if (Player* player = me->SelectNearestPlayer(2.0f))
-                    {
-                        if (!player->IsInCombat())
+                tSeek = urand(5000, 10000);
+                if (me->IsAlive() && !me->IsInCombat() &&
+                    me->GetDistance2d(me->GetHomePosition().GetPositionX(), me->GetHomePosition().GetPositionY()) <= 2.0f)
+                {
+                    std::list<Player*> players;
+                    me->GetPlayerListInGrid(players, 2.0f);
+                    for (Player* player : players)
+                        if (CanFightGilneasLurker(player) && me->IsValidAttackTarget(player))
                         {
-                            me->AI()->AttackStart(player);
-                            tSeek = urand(5000, 10000);
+                            AttackStart(player);
+                            break;
                         }
-                    }
+                }
             }
-            else tSeek -= diff;
+            else
+                tSeek -= diff;
 
             if (!UpdateVictim())
                 return;
@@ -2850,7 +2958,7 @@ public:
                 tEnrage = COOLDOWN_ENRAGE;
             }
             else
-                tEnrage -= diff;
+                tEnrage = tEnrage > diff ? tEnrage - diff : 0;
 
             DoMeleeAttackIfReady();
         }
@@ -4500,6 +4608,7 @@ void AddSC_zone_gilneas_city1()
     new npc_lorna_crowley_35378();
     new npc_bloodfang_lurker_35463();
     new npc_gilnean_mastiff_35631();
+    new spell_gilneas_attack_lurker();
     new npc_lord_godfrey_35906();
     new npc_gilnean_city_guard_35504();
     new npc_king_genn_greymane_35550();

@@ -125,7 +125,7 @@ enum eDuskHaven
     SPELL_CATACLYSM_1                           = 68953,
     SPELL_FORCECAST_CATACLYSM_I                 = 69027,
     SPELL_BARREL_KEG                            = 69094,
-    SPELL_IN_STOCKS                             = 69169,
+    SPELL_IN_STOCKS                             = 69196,
     SPELL_FORCECAST_SUMMON_SWIFT_MOUNTAIN_HORSE = 69256,
     SPELL_FORCECAST_GILNEAS_TELESCOPE           = 69258,
     SPELL_STEALTH_70456                         = 70456,
@@ -175,6 +175,37 @@ public:
     }
 };
 
+namespace
+{
+    void ReleaseGilneasStocks(Player* player)
+    {
+        player->RemoveAura(SPELL_IN_STOCKS);
+        player->RemoveAura(SPELL_SELF_ROOT);
+        player->RemoveFlag(UNIT_FIELD_FLAGS_2, UNIT_FLAG2_DISABLE_TURN);
+        player->RemoveAura(50220);
+        player->RemoveAura(58284);
+        player->RemoveAura(68630);
+    }
+}
+
+class player_gilneas_stocks_recovery : public PlayerScript
+{
+public:
+    player_gilneas_stocks_recovery() : PlayerScript("player_gilneas_stocks_recovery") { }
+
+    void OnLogin(Player* player, bool /*firstLogin*/) override
+    {
+        if (player->GetMapId() != 654 || player->GetAreaId() != 4786 ||
+            player->GetQuestStatus(QUEST_LAST_CHANCE_AT_HUMANITY) != QUEST_STATUS_REWARDED)
+            return;
+        if (player->HasAura(SPELL_IN_STOCKS))
+            ReleaseGilneasStocks(player);
+        if (!player->HasAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_06))
+            player->CastSpell(player, SPELL_PHASE_QUEST_ZONE_SPECIFIC_06, true);
+        player->RemoveAura(SPELL_FADE_BACK);
+    }
+};
+
 // 36332
 class npc_king_genn_greymane_36332 : public CreatureScript
 {
@@ -185,12 +216,23 @@ public:
     {
         if (quest->GetQuestId() == QUEST_LAST_CHANCE_AT_HUMANITY)
         {
-            player->CastSpell(player, SPELL_PHASE_QUEST_ZONE_SPECIFIC_06, true);
-            player->SetUInt32Value(UNIT_FIELD_FLAGS_2, 2048);
-            player->RemoveAura(42716);
-            player->RemoveAura(50220);
-            player->RemoveAura(58284);
-            player->RemoveAura(68630);
+            player->CastSpell(player, SPELL_FADE_BACK, true);
+            if (Aura* fade = player->GetAura(SPELL_FADE_BACK))
+            {
+                fade->SetMaxDuration(3000);
+                fade->SetDuration(3000);
+            }
+            ReleaseGilneasStocks(player);
+            // Owned by the player, so despawning the old phase's questgiver
+            // cannot cancel the transition or leave a dangling NPC pointer.
+            player->AddDelayedEvent(3000, [player]()
+            {
+                if (player->GetQuestStatus(QUEST_LAST_CHANCE_AT_HUMANITY) == QUEST_STATUS_REWARDED)
+                {
+                    player->CastSpell(player, SPELL_PHASE_QUEST_ZONE_SPECIFIC_06, true);
+                    player->RemoveAura(SPELL_FADE_BACK);
+                }
+            });
             return true;
         }
         return false;
@@ -3372,6 +3414,7 @@ void AddSC_zone_gilneas_duskhaven()
     new npc_slain_watchman_36205();
     new npc_krennan_aranas_36331();
     new npc_king_genn_greymane_36332();
+    new player_gilneas_stocks_recovery();
     new npc_gwen_armstead_34571();
     new go_mandragore_196394();
     new npc_horrid_abomination_36231();

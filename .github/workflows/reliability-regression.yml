@@ -4,6 +4,8 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/server/scripts/EasternKingdoms/Gilneas/**
+      - contrib/tests/test_gilneas_quests.py
       - src/server/game/Globals/ObjectMgr.*
       - src/server/scripts/World/PetBattleTrainer.cpp
       - contrib/tests/test_garrison_reward_reload.py
@@ -54,3 +56,5 @@ jobs:
         run: python contrib/tests/test_malkorok_barrier.py
       - name: Test monk mastery spell mapping and unknown spell fallback
         run: python contrib/tests/test_monk_mastery_guard.py
+      - name: Test Gilneas quest combat and story transition with strict sanitizers
+        run: python contrib/tests/test_gilneas_quests.py
