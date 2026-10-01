@@ -47,6 +47,8 @@ def test_generic_restoration(restore, registry, tables, label):
     assert '_1kycore_generic_guard' in failure.stderr and 'Duplicate entry' in failure.stderr, failure.stderr
     assert checksum(tables) == before, 'Generic GUID rejection modified data'
     sql(f"DELETE FROM gameobject WHERE guid={first['guid']};")
+    assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == '0', 'Unexpected original addon dependency'
+    assert sql(f'SELECT COUNT(*) FROM gameobject_questitem WHERE GameObjectEntry IN ({entries});').stdout.strip() == '0', 'Unexpected original quest-item dependency'
     # Orphaned addon/quest-item data must not acquire a new meaning silently.
     orphan = registry['entries'][0]
     existing_addon = sql(f'SELECT * FROM gameobject_template_addon WHERE entry={orphan};').stdout
@@ -66,7 +68,19 @@ def test_generic_restoration(restore, registry, tables, label):
     before = checksum(tables)
     assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
     assert checksum(tables) == before, 'Incompatible template rejection modified data'
-    sql(f'UPDATE gameobject_template SET type=5 WHERE entry={orphan};')
+    compatible = next((t for t in registry.get('templates', []) if int(t['entry']) == orphan), None)
+    fields = ['type'] + ['Data'+str(i) for i in range(33)]
+    assignments = ','.join('`'+k+'`='+compatible.get(k, '0') for k in fields) if compatible else 'type=5'
+    sql(f'UPDATE gameobject_template SET {assignments} WHERE entry={orphan};')
+    # Matching type alone is insufficient: reject altered behavior and scripts.
+    original = sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout
+    for alteration in ('Data32=99', "ScriptName='custom_script'", "AIName='SmartGameObjectAI'"):
+        sql(f'UPDATE gameobject_template SET {alteration} WHERE entry={orphan};')
+        before = checksum(tables)
+        assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
+        assert checksum(tables) == before, 'Behavior conflict rejection modified data'
+        sql(f"UPDATE gameobject_template SET {assignments},AIName='',ScriptName='' WHERE entry={orphan};")
+        assert sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout == original
     original_template = sql(f'SELECT * FROM gameobject_template WHERE entry={orphan};').stdout
     sql(f"INSERT INTO gameobject(guid,id,map,position_x) VALUES ({first['guid']},{first['id']},1,99);")
     original_spawn = sql(f"SELECT * FROM gameobject WHERE guid={first['guid']};").stdout
@@ -166,6 +180,9 @@ def main():
         second = (ROOT / 'sql/updates/world/2026_10_01_02_world_campaign_generic_objects.sql').read_text('utf8')
         second_registry = json.loads((ROOT / 'docs/audit-data/campaign-generic-restoration-2.json').read_text('utf8'))
         test_generic_restoration(second, second_registry, tables, '36 templates / 116 spawns')
+        third = (ROOT / 'sql/updates/world/2026_10_01_03_world_campaign_chairs_visibility.sql').read_text('utf8')
+        third_registry = json.loads((ROOT / 'docs/audit-data/campaign-chairs-visibility-restoration.json').read_text('utf8'))
+        test_generic_restoration(third, third_registry, tables, '21 templates / 62 spawns')
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)
