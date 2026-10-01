@@ -1,5 +1,6 @@
 #include "siege_of_orgrimmar.hpp"
 #include "SpellAuraEffects.h"
+#include <limits>
 
 #define MALKOROK_POWER_TYPE POWER_ENERGY
 #define MALKOROK_POWER_MAX 100
@@ -1191,14 +1192,10 @@ class spell_malkorok_ancient_miasma_heal_absorb : public SpellScriptLoader
 
                 if (AuraEffect* aurEffect = GetUnitOwner()->GetAuraEffect(SPELL_ANCIENT_BARRIER, EFFECT_0))
                 {
-                    uint32 oldAmount = aurEffect->GetAmount();
-                    //uint32 newAmount = std::min(GetUnitOwner()->GetMaxHealth(), oldAmount + absorbAmount);
-                    uint32 newAmount;
-                    if (GetUnitOwner()->GetMaxHealth() < oldAmount + absorbAmount)
-                        newAmount = GetUnitOwner()->GetMaxHealth();
-                    else if (oldAmount + absorbAmount < GetUnitOwner()->GetMaxHealth())
-                        newAmount = oldAmount + absorbAmount;
-
+                    int32 oldAmount = aurEffect->GetAmount();
+                    uint64 totalAmount = uint64(std::max<int32>(oldAmount, 0)) + absorbAmount;
+                    int32 newAmount = int32(std::min<uint64>(totalAmount,
+                        std::min<uint64>(GetUnitOwner()->GetMaxHealth(), std::numeric_limits<int32>::max())));
                     if (oldAmount != newAmount)
                     {
                         aurEffect->SetAmount(newAmount);
@@ -1206,12 +1203,8 @@ class spell_malkorok_ancient_miasma_heal_absorb : public SpellScriptLoader
                 }
                 else
                 {
-                    //int32 basePoints = std::min(GetUnitOwner()->GetMaxHealth(), absorbAmount);
-                    int32 basePoints;
-                    if (GetUnitOwner()->GetMaxHealth() < absorbAmount)
-                        basePoints = GetUnitOwner()->GetMaxHealth();
-                    else if (absorbAmount < GetUnitOwner()->GetMaxHealth())
-                        basePoints = absorbAmount;
+                    int32 basePoints = int32(std::min<uint64>(absorbAmount,
+                        std::min<uint64>(GetUnitOwner()->GetMaxHealth(), std::numeric_limits<int32>::max())));
 
                     GetUnitOwner()->CastCustomSpell(GetUnitOwner(), SPELL_ANCIENT_BARRIER, &basePoints, NULL, NULL, true);
                 }
