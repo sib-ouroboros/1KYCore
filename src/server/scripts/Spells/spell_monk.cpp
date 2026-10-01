@@ -1493,6 +1493,8 @@ public:
                 spellHandleId = SPELL_MONK_SPINNING_CRANE_KICK;
             else if (GetSpellInfo()->Id == SPELL_MONK_WHIRLING_DRAGON_PUNCH_DAMAGE)
                 spellHandleId = SPELL_MONK_WHIRLING_DRAGON_PUNCH;
+            else
+                return;
 
             int32 damage = GetHitDamage();
             spell_monk_mastery_combo_strikes::TryToHandleDamage(player, spellHandleId, damage, true);

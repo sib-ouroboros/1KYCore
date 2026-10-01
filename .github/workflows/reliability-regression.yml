@@ -9,6 +9,8 @@ on:
       - contrib/tests/test_garrison_reward_reload.py
       - src/server/scripts/Pandaria/SiegeOfOrgrimmar/boss_malkorok.cpp
       - contrib/tests/test_malkorok_barrier.py
+      - src/server/scripts/Spells/spell_monk.cpp
+      - contrib/tests/test_monk_mastery_guard.py
       - src/server/game/Server/OnlineMgr.*
       - src/server/game/Server/WorldSession.cpp
       - src/server/game/Server/ToolSocket.*
@@ -50,3 +52,5 @@ jobs:
         run: python contrib/tests/test_garrison_reward_reload.py
       - name: Test Malkorok barrier boundaries with strict sanitizers
         run: python contrib/tests/test_malkorok_barrier.py
+      - name: Test monk mastery spell mapping and unknown spell fallback
+        run: python contrib/tests/test_monk_mastery_guard.py
