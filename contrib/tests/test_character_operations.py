@@ -15,7 +15,7 @@ def main():
     session = (root/'src/server/game/Server/WorldSession.cpp').read_text('utf8')
 
     def body(source, name):
-        match = re.search(r'^[^\n]+ '+re.escape(name)+r'\([^\n]*\)\n\{.*?^\}', source, re.M|re.S)
+        match = re.search(r'^[^\n]+ '+re.escape(name)+r'\([^)]*\)\n\{.*?^\}', source, re.M|re.S)
         assert match, name
         return match[0]
 
