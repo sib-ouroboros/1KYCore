@@ -26,6 +26,7 @@ def main():
 #include <stdexcept>
 #include <iostream>
 #define TC_LOG_ERROR(...) ((void)0)
+using uint32=std::uint32_t;
 #define MAX_SPECIALIZATIONS 4
 #define PLAYER_SPECIALIZATION_KEEP 255
 void check(bool ok,char const* message){if(!ok)throw std::runtime_error(message);}
@@ -106,8 +107,10 @@ int main(){
         R"({"entry":"player_acc","after":true})",
         R"({"entry":"player_acc","limit":0})",
         R"({"entry":"player_acc","limit":101})",
-        R"({"entry":"player_acc","after":"1"})"})newCommands.ProcessCmd(json);
-    newCommands.ProcessToolCmd();check(newCommands.handled==4 && newCommands.rejected==8,"bad new schema accepted");
+        R"({"entry":"player_acc","after":"1"})",
+        R"({"entry":"player_acc","after":4294967296})",
+        R"({"entry":"player_acc","after":1.5})"})newCommands.ProcessCmd(json);
+    newCommands.ProcessToolCmd();check(newCommands.handled==4 && newCommands.rejected==10,"bad new schema accepted");
     ToolSocket exceptions;exceptions.ProcessCmd("{\"entry\":\"heartbeat\",\"throw\":true}");exceptions.ProcessCmd(message);
     exceptions.ProcessToolCmd();check(exceptions.handled==2 && exceptions.rejected==1,"exception prevents next command");
     for(std::size_t length:{1u,100u,65534u}){

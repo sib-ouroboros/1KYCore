@@ -119,9 +119,16 @@ bool IsValidToolCommand(Json::Value const& info)
     if (entry == "heartbeat")
         return true;
     if (entry == "player_acc")
-        return (info["after"].isNull() || info["after"].isUInt() ||
-            (info["after"].isInt() && info["after"].asInt() >= 0)) &&
-            (info["limit"].isNull() || integer("limit", 1, 100));
+    {
+        Json::Value const& after = info["after"];
+        // This bundled JsonCpp parses values near UINT_MAX as doubles.
+        bool const validCursor = after.isNull() || after.isUInt() ||
+            (after.isInt() && after.asInt() >= 0) ||
+            (after.isDouble() && std::isfinite(after.asDouble()) && after.asDouble() >= 0 &&
+                after.asDouble() <= std::numeric_limits<uint32>::max() &&
+                std::floor(after.asDouble()) == after.asDouble());
+        return validCursor && (info["limit"].isNull() || integer("limit", 1, 100));
+    }
     if (entry == "player_change_status")
         return integer("guid", 1, std::numeric_limits<int>::max());
     if (entry == "player_specialization")
