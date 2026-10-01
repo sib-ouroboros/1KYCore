@@ -27,6 +27,7 @@
 #include <algorithm>
 #include <cstdio>
 #include <limits>
+#include <string>
 
 extern CASC::StorageHandle CascStorage;
 
@@ -155,9 +156,8 @@ Vec3D fixCoordSystem(Vec3D const& v)
 
 void Doodad::Extract(ADT::MDDF const& doodadDef, char const* ModelInstName, uint32 mapID, uint32 originalMapId, FILE* pDirfile, std::vector<ADTOutputCache>* dirfileCache)
 {
-    char tempname[512];
-    sprintf(tempname, "%s/%s", szWorkDirWmo, ModelInstName);
-    FILE* input = fopen(tempname, "r+b");
+    std::string tempname = std::string(szWorkDirWmo) + "/" + ModelInstName;
+    FILE* input = fopen(tempname.c_str(), "r+b");
 
     if (!input)
         return;
@@ -242,8 +242,10 @@ void Doodad::ExtractSet(WMODoodadData const& doodadData, ADT::MODF const& wmo, b
 
         WMO::MODD const& doodad = doodadData.Spawns[doodadIndex];
 
-        char ModelInstName[1024];
-        sprintf(ModelInstName, "%s", GetPlainName(&doodadData.Paths[doodad.NameIndex]));
+        std::string modelName = GetPlainName(&doodadData.Paths[doodad.NameIndex]);
+        if (modelName.empty())
+            continue;
+        char* ModelInstName = &modelName[0];
         uint32 nlen = strlen(ModelInstName);
         FixNameCase(ModelInstName, nlen);
         FixNameSpaces(ModelInstName, nlen);
@@ -254,12 +256,12 @@ void Doodad::ExtractSet(WMODoodadData const& doodadData, ADT::MODF const& wmo, b
             {
                 ModelInstName[nlen - 2] = '2';
                 ModelInstName[nlen - 1] = '\0';
+                --nlen;
             }
         }
 
-        char tempname[512];
-        sprintf(tempname, "%s/%s", szWorkDirWmo, ModelInstName);
-        FILE* input = fopen(tempname, "r+b");
+        std::string tempname = std::string(szWorkDirWmo) + "/" + ModelInstName;
+        FILE* input = fopen(tempname.c_str(), "r+b");
         if (!input)
             continue;
 

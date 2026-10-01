@@ -43,18 +43,29 @@ char* GetPlainName(char* FileName)
 
 void FixNameCase(char* name, size_t len)
 {
-    char* ptr = name + len - 1;
+    if (!len)
+        return;
 
-    //extension in lowercase
-    for (; *ptr != '.'; --ptr)
-        *ptr |= 0x20;
+    size_t extension = len;
+    for (size_t i = len; i > 0; --i)
+        if (name[i - 1] == '.')
+        {
+            extension = i - 1;
+            break;
+        }
 
-    for (; ptr >= name; --ptr)
+    // Normalize an extension only when one exists, without walking before name.
+    for (size_t i = extension; i < len; ++i)
+        if (name[i] >= 'A' && name[i] <= 'Z')
+            name[i] |= 0x20;
+
+    for (size_t i = 0; i < extension; ++i)
     {
-        if (ptr > name && *ptr >= 'A' && *ptr <= 'Z' && isalpha(*(ptr - 1)))
-            *ptr |= 0x20;
-        else if ((ptr == name || !isalpha(*(ptr - 1))) && *ptr >= 'a' && *ptr <= 'z')
-            *ptr &= ~0x20;
+        bool previousIsLetter = i > 0 && isalpha(static_cast<unsigned char>(name[i - 1]));
+        if (previousIsLetter && name[i] >= 'A' && name[i] <= 'Z')
+            name[i] |= 0x20;
+        else if (!previousIsLetter && name[i] >= 'a' && name[i] <= 'z')
+            name[i] &= ~0x20;
     }
 }
 

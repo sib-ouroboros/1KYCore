@@ -4,6 +4,9 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/tools/vmap4_extractor/model.cpp
+      - src/tools/vmap4_extractor/adtfile.cpp
+      - contrib/tests/test_vmap_model_names.py
       - src/server/scripts/EasternKingdoms/Gilneas/**
       - contrib/tests/test_gilneas_quests.py
       - src/server/game/Globals/ObjectMgr.*
@@ -58,3 +61,5 @@ jobs:
         run: python contrib/tests/test_monk_mastery_guard.py
       - name: Test Gilneas quest combat and story transition with strict sanitizers
         run: python contrib/tests/test_gilneas_quests.py
+      - name: Test extractor model names and long paths with strict sanitizers
+        run: python contrib/tests/test_vmap_model_names.py
