@@ -611,7 +611,7 @@ Reader::decodeNumber( Token &token )
    bool isNegative = *current == '-';
    if ( isNegative )
       ++current;
-   Value::UInt threshold = (isNegative ? Value::UInt(Value::maxInt) + 1u 
+   Value::UInt threshold = (isNegative ? Value::UInt(Value::maxInt) + 1u
                                        : Value::maxUInt) / 10;
    Value::UInt value = 0;
    while ( current < token.end_ )
