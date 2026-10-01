@@ -9,7 +9,7 @@ DROP TEMPORARY TABLE IF EXISTS `_1kycore_generic_guard`, `_1kycore_generic_templ
 CREATE TEMPORARY TABLE `_1kycore_generic_guard` (`ok` INT PRIMARY KEY);
 INSERT INTO `_1kycore_generic_guard` VALUES (1);
 CREATE TEMPORARY TABLE `_1kycore_generic_templates` LIKE `gameobject_template`;
-INSERT INTO `_1kycore_generic_templates` (`entry`,`type`,`displayId`,`name`,`IconName`,`caption`,`unk1`,`size`,`VerifiedBuild`) VALUES
+INSERT INTO `_1kycore_generic_templates` (`entry`,`type`,`displayId`,`name`,`IconName`,`castBarCaption`,`unk1`,`size`,`VerifiedBuild`) VALUES
 (246499,5,16847,'Large Campfire','','','',2,21021),
 (246781,5,15586,'Books','','','',1,20994),
 (246783,5,27750,'Books','','','',1,20994),
@@ -181,8 +181,8 @@ SELECT 1 FROM gameobject_template t JOIN `_1kycore_generic_templates` expected O
 WHERE t.type<>5 OR t.AIName<>'' OR t.ScriptName<>'' OR t.Data0<>0 OR t.Data1<>0 OR t.Data2<>0 OR t.Data3<>0 OR t.Data4<>0 OR t.Data5<>0 OR t.Data6<>0 OR t.Data7<>0 OR t.Data8<>0 OR t.Data9<>0 OR t.Data10<>0 OR t.Data11<>0 OR t.Data12<>0 OR t.Data13<>0 OR t.Data14<>0 OR t.Data15<>0 OR t.Data16<>0 OR t.Data17<>0 OR t.Data18<>0 OR t.Data19<>0 OR t.Data20<>0 OR t.Data21<>0 OR t.Data22<>0 OR t.Data23<>0 OR t.Data24<>0 OR t.Data25<>0 OR t.Data26<>0 OR t.Data27<>0 OR t.Data28<>0 OR t.Data29<>0 OR t.Data30<>0 OR t.Data31<>0 OR t.Data32<>0 LIMIT 1;
 
 -- Add only absent templates; retain every pre-existing template unchanged.
-INSERT INTO gameobject_template (`entry`,`type`,`displayId`,`name`,`IconName`,`caption`,`unk1`,`size`,`VerifiedBuild`)
-SELECT expected.`entry`,expected.`type`,expected.`displayId`,expected.`name`,expected.`IconName`,expected.`caption`,expected.`unk1`,expected.`size`,expected.`VerifiedBuild`
+INSERT INTO gameobject_template (`entry`,`type`,`displayId`,`name`,`IconName`,`castBarCaption`,`unk1`,`size`,`VerifiedBuild`)
+SELECT expected.`entry`,expected.`type`,expected.`displayId`,expected.`name`,expected.`IconName`,expected.`castBarCaption`,expected.`unk1`,expected.`size`,expected.`VerifiedBuild`
 FROM `_1kycore_generic_templates` expected LEFT JOIN gameobject_template t ON t.entry=expected.entry
 WHERE t.entry IS NULL;
 

@@ -44,7 +44,7 @@ def test_generic_restoration(restore, registry, tables, label):
     sql(f"INSERT INTO gameobject(guid,id,map,position_x) VALUES ({first['guid']},9000010,1,99);")
     before = checksum(tables)
     failure = sql(restore, ok=False)
-    assert '_1kycore_generic_guard' in failure.stderr and 'Duplicate entry' in failure.stderr
+    assert '_1kycore_generic_guard' in failure.stderr and 'Duplicate entry' in failure.stderr, failure.stderr
     assert checksum(tables) == before, 'Generic GUID rejection modified data'
     sql(f"DELETE FROM gameobject WHERE guid={first['guid']};")
     # Orphaned addon/quest-item data must not acquire a new meaning silently.
