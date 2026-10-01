@@ -203,7 +203,7 @@ int main(){
     pages.m_OnlinePlayerAcc[3].username=std::string(40000,'x');
     pages.m_OnlinePlayerAcc[6].username=std::string(40000,'y');
     auto bounded=parse(pages.SerializerPlayerAccount());check(bounded["accounts"].size()==1 && bounded["next_after"].asUInt()==3 && bounded["has_more"].asBool(),"byte limit skips row");
-    auto resumed=parse(pages.SerializerPlayerAccount(3));check(resumed["accounts"][0]["id"].asUInt()==6,"byte-limited continuation skips row");
+    auto resumed=parse(pages.SerializerPlayerAccount(3));check(resumed["accounts"][Json::UInt(0)]["id"].asUInt()==6,"byte-limited continuation skips row");
     pages.m_OnlinePlayerAcc[3].username=std::string(70000,'z');
     auto oversized=parse(pages.SerializerPlayerAccount());check(oversized["result"].asString()=="error" && oversized["error"].asString()=="account_too_large","oversized account hidden");
     std::cout<<"PASS: ordinary specialization, deferred preparation, save/logout guard, item preservation, warnings, status identity, bounded pagination\n";
