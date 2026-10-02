@@ -2114,6 +2114,7 @@
   "source_commit": "a6145c22e9ad6ac69690d4a2f7794bae4e1caf95",
   "source_archive_sha256": "cf681e1fb2e7443daab2a5db04f4efa2fc53cc485ea8de6b6ec3d60d569c2696",
   "restored_placeholder_entries": [
+    248575,
     250220,
     250221,
     250222,
@@ -2128,10 +2129,12 @@
     250231,
     250232,
     250233,
-    250234
+    250234,
+    266734
   ],
-  "remaining_placeholder_candidates": 75,
+  "remaining_placeholder_candidates": 73,
   "restoration_migrations": [
-    "2026_10_02_01_world_campaign_placeholder_models.sql"
+    "2026_10_02_01_world_campaign_placeholder_models.sql",
+    "2026_10_02_02_world_campaign_simple_goober_models.sql"
   ]
 }

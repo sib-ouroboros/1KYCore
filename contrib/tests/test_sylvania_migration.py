@@ -78,6 +78,31 @@ def test_generic_restoration(restore, registry, tables, label):
             sql(f'UPDATE page_text SET {page_assignments} WHERE ID={page_id};')
             assert sql(f'SELECT * FROM page_text WHERE ID={page_id};').stdout == original_page
         original_pages = sql('SELECT * FROM page_text ORDER BY ID;').stdout
+    destinations = registry.get('destinations', [])
+    original_destinations = {}
+    unrelated_destinations = None
+    if destinations:
+        selected = ' OR '.join(f"(ID={row['ID']} AND EffectIndex={row['EffectIndex']})" for row in destinations)
+        for row in destinations:
+            where = f"ID={row['ID']} AND EffectIndex={row['EffectIndex']}"
+            original_destinations[(row['ID'],row['EffectIndex'])] = sql('SELECT * FROM spell_target_position WHERE '+where+';').stdout
+        probe = destinations[0]
+        where = f"ID={probe['ID']} AND EffectIndex={probe['EffectIndex']}"
+        assert original_destinations[(probe['ID'],probe['EffectIndex'])], 'Fixture requires original route'
+        for field in ('MapID','PositionX','PositionY','PositionZ'):
+            sql(f'UPDATE spell_target_position SET `{field}`={probe[field]}+10 WHERE '+where+';')
+            before = checksum(tables)
+            failure = sql(restore, ok=False)
+            assert '_1kycore_generic_guard' in failure.stderr, failure.stderr
+            assert checksum(tables) == before, 'Destination conflict changed permanent data'
+            sql(f'UPDATE spell_target_position SET `{field}`={probe[field]} WHERE '+where+';')
+            assert sql('SELECT * FROM spell_target_position WHERE '+where+';').stdout == original_destinations[(probe['ID'],probe['EffectIndex'])]
+        # VerifiedBuild is provenance, not a reason to overwrite a valid route.
+        sql('UPDATE spell_target_position SET VerifiedBuild=12345 WHERE '+where+';')
+        original_destinations[(probe['ID'],probe['EffectIndex'])] = sql('SELECT * FROM spell_target_position WHERE '+where+';').stdout
+        # Other effects of the same spell belong to administrators as well.
+        sql("INSERT INTO spell_target_position(ID,EffectIndex,MapID,PositionX) VALUES (233947,9,1,99);")
+        unrelated_destinations = sql('SELECT * FROM spell_target_position WHERE NOT ('+selected+') ORDER BY ID,EffectIndex;').stdout
     # Orphaned addon/quest-item data must not acquire a new meaning silently.
     orphan = registry['entries'][0]
     existing_addon = sql(f'SELECT * FROM gameobject_template_addon WHERE entry={orphan};').stdout
@@ -141,12 +166,26 @@ def test_generic_restoration(restore, registry, tables, label):
     sql(f"INSERT INTO gameobject(guid,id,map,position_x) VALUES ({first['guid']},{first['id']},1,99);")
     original_spawn = sql(f"SELECT * FROM gameobject WHERE guid={first['guid']};").stdout
     mutable = ('gameobject','gameobject_template') + (('gameobject_template_addon',) if expected_addon else ())
+    if destinations:
+        mutable += ('spell_target_position',)
     protected_tables = [t for t in tables if t not in mutable]
     if expected_addon:
         unrelated_addons = sql(f'SELECT * FROM gameobject_template_addon WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout
     protected = checksum(protected_tables)
     sql(restore)
     assert checksum(protected_tables) == protected, 'Restoration changed unrelated tables'
+    if destinations:
+        assert sql('SELECT * FROM spell_target_position WHERE NOT ('+selected+') ORDER BY ID,EffectIndex;').stdout == unrelated_destinations
+        for row in destinations:
+            where = f"ID={row['ID']} AND EffectIndex={row['EffectIndex']}"
+            previous = original_destinations[(row['ID'],row['EffectIndex'])]
+            if previous:
+                assert sql('SELECT * FROM spell_target_position WHERE '+where+';').stdout == previous
+            else:
+                assert sql('SELECT VerifiedBuild FROM spell_target_position WHERE '+where+';').stdout.strip() == '0'
+            comparisons = [f'ID={row["ID"]}', f'EffectIndex={row["EffectIndex"]}', f'MapID={row["MapID"]}']
+            comparisons += [f'ABS(`{k}`-({row[k]}))<=ABS({row[k]})*0.0000001' for k in ('PositionX','PositionY','PositionZ')]
+            assert sql('SELECT COUNT(*) FROM spell_target_position WHERE '+' AND '.join(comparisons)+';').stdout.strip() == '1'
     if original_pages is not None:
         assert sql('SELECT * FROM page_text ORDER BY ID;').stdout == original_pages
     if expected_addon:
@@ -216,6 +255,16 @@ def test_generic_restoration(restore, registry, tables, label):
         missing_page_complete = checksum(tables)
         sql(restore)
         assert checksum(tables) == missing_page_complete
+    if destinations:
+        # Stop after restoring absent target rows, before addons/templates/spawns.
+        for row in destinations:
+            if not original_destinations[(row['ID'],row['EffectIndex'])]:
+                sql(f"DELETE FROM spell_target_position WHERE ID={row['ID']} AND EffectIndex={row['EffectIndex']};")
+        protected = checksum([t for t in tables if t != 'spell_target_position'])
+        sql(restore[:restore.index('-- Restore exact source addons before templates')])
+        assert checksum([t for t in tables if t != 'spell_target_position']) == protected
+        sql(restore)
+        assert checksum(tables) == complete, 'Destination-only interruption retry differs'
     print('PASS: ' + label + ', repeated/partial restoration, custom data and conflict guards', flush=True)
 
 
@@ -283,6 +332,77 @@ def test_placeholder_models(tables):
     sql(restore)
     assert checksum(tables) == complete
     print('PASS:15 placeholder models, exact source data, custom/missing/dependency guards, repeated/partial restoration and unchanged spawns', flush=True)
+
+
+
+def test_simple_goober_models(tables):
+    restore = (ROOT / 'sql/updates/world/2026_10_02_02_world_campaign_simple_goober_models.sql').read_text('utf8')
+    registry = json.loads((ROOT / 'docs/audit-data/campaign-simple-goober-restoration.json').read_text('utf8'))
+    entries = ','.join(map(str,registry['entries']))
+    first = registry['baseline'][0]
+    entry = int(first['entry'])
+    addon = registry['addons'][0]
+    def assignments(row):
+        return ','.join('`'+k+'`='+v for k,v in row.items() if k != 'entry')
+    def insert_row(table,row):
+        sql('INSERT INTO '+table+' ('+','.join('`'+k+'`' for k in row)+') VALUES ('+','.join(row.values())+');')
+    def assert_rows(table,rows):
+        predicates = ['('+' AND '.join('BINARY `'+k+'` <=> BINARY '+v if k in ('name','IconName','castBarCaption','unk1','AIName','ScriptName') else f'ABS(`size`-({v}))<=ABS({v})*0.0000001' if k=='size' else '`'+k+'` <=> '+v for k,v in row.items())+')' for row in rows]
+        assert sql('SELECT COUNT(*) FROM '+table+' WHERE '+' OR '.join(predicates)+';').stdout.strip() == str(len(rows))
+    assert_rows('gameobject_template',registry['baseline'])
+    assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == '0'
+    assert sql(f'SELECT COUNT(*) FROM gameobject_questitem WHERE GameObjectEntry IN ({entries});').stdout.strip() == '0'
+    def rejection():
+        before = checksum(tables)
+        failure = sql(restore,ok=False)
+        assert '_1kycore_model_guard' in failure.stderr and 'Duplicate entry' in failure.stderr, failure.stderr
+        assert checksum(tables) == before, 'GOOBER conflict changed permanent data'
+    sql(f'DELETE FROM gameobject_template WHERE entry={entry};')
+    rejection()
+    insert_row('gameobject_template',first)
+    for alteration in ("name='Custom GOOBER'", 'displayId=12345', 'RequiredLevel=80', 'Data32=99', "AIName='SmartGameObjectAI'", "ScriptName='custom_script'"):
+        sql(f'UPDATE gameobject_template SET {alteration} WHERE entry={entry};')
+        rejection()
+        sql(f'UPDATE gameobject_template SET {assignments(first)} WHERE entry={entry};')
+    insert_row('gameobject_template_addon',addon)
+    for field in ('faction','flags','mingold','maxgold','WorldEffectID'):
+        sql(f'UPDATE gameobject_template_addon SET `{field}`={int(addon[field])^1} WHERE entry={entry};')
+        rejection()
+        sql(f'UPDATE gameobject_template_addon SET {assignments(addon)} WHERE entry={entry};')
+    sql(f'INSERT INTO gameobject_questitem(GameObjectEntry,Idx,ItemId) VALUES ({entry},0,6948);')
+    rejection()
+    sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry={entry};')
+    original_addon = sql(f'SELECT * FROM gameobject_template_addon WHERE entry={entry};').stdout
+    protected_tables = [t for t in tables if t not in ('gameobject_template','gameobject_template_addon')]
+    protected = checksum(protected_tables)
+    unrelated_templates = sql(f'SELECT * FROM gameobject_template WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout
+    unrelated_addons = sql(f'SELECT * FROM gameobject_template_addon WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout
+    sql(restore)
+    assert_rows('gameobject_template',registry['templates'])
+    assert_rows('gameobject_template_addon',registry['addons'])
+    assert checksum(protected_tables) == protected, 'GOOBER models changed spawns/other tables'
+    assert sql(f'SELECT * FROM gameobject_template WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout == unrelated_templates
+    assert sql(f'SELECT * FROM gameobject_template_addon WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout == unrelated_addons
+    assert sql(f'SELECT * FROM gameobject_template_addon WHERE entry={entry};').stdout == original_addon
+    complete = checksum(tables)
+    sql(restore)
+    assert checksum(tables) == complete
+    sql(f'DELETE FROM gameobject_template_addon WHERE entry={entry};')
+    rejection()  # native template without its source flags/faction is unsafe
+    insert_row('gameobject_template_addon',addon)
+    for row in registry['baseline'][1:]:
+        sql(f"UPDATE gameobject_template SET {assignments(row)} WHERE entry={row['entry']};")
+    sql(restore)
+    assert checksum(tables) == complete, 'Mixed baseline/native GOOBER retry differs'
+    for row in registry['baseline']:
+        sql(f"UPDATE gameobject_template SET {assignments(row)} WHERE entry={row['entry']};")
+    sql(f'DELETE FROM gameobject_template_addon WHERE entry IN ({entries});')
+    sql(restore[:restore.index('-- Rewrite only byte-compatible release placeholders')])
+    assert_rows('gameobject_template',registry['baseline'])
+    assert_rows('gameobject_template_addon',registry['addons'])
+    sql(restore)
+    assert checksum(tables) == complete, 'Addon-only GOOBER interruption retry differs'
+    print('PASS:two native GOOBER models/addons, full conflict guards, repeated/partial restoration and unchanged spawns',flush=True)
 
 
 def main():
@@ -360,6 +480,10 @@ def main():
         test_generic_restoration(sixth, sixth_registry, tables, 'five doors / one book / 10 spawns / page5121')
 
         test_placeholder_models(tables)
+        test_simple_goober_models(tables)
+        client_group = (ROOT / 'sql/updates/world/2026_10_02_03_world_campaign_client_validated_objects.sql').read_text('utf8')
+        client_registry = json.loads((ROOT / 'docs/audit-data/campaign-client-validated-restoration.json').read_text('utf8'))
+        test_generic_restoration(client_group, client_registry, tables, '12 client-validated templates / 12 spawns / native portal destinations')
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)
