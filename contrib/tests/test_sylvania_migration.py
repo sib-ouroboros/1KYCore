@@ -49,6 +49,35 @@ def test_generic_restoration(restore, registry, tables, label):
     sql(f"DELETE FROM gameobject WHERE guid={first['guid']};")
     assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == '0', 'Unexpected original addon dependency'
     assert sql(f'SELECT COUNT(*) FROM gameobject_questitem WHERE GameObjectEntry IN ({entries});').stdout.strip() == '0', 'Unexpected original quest-item dependency'
+    # A missing page is restored atomically with respect to conflict checks.
+    # Keep matching pages and every unrelated page unchanged.
+    pages = registry.get('pages', [])
+    original_pages = None
+    if pages:
+        assert len(pages) == 1
+        page = pages[0]
+        page_id = int(page['ID'])
+        assert not sql(f'SELECT * FROM page_text WHERE ID={page_id};').stdout
+        assert not sql(f'SELECT * FROM page_text_locale WHERE ID={page_id};').stdout
+        sql(f"INSERT INTO page_text_locale(ID,locale,Text) VALUES ({page_id},'ruRU','orphan custom page');")
+        before = checksum(tables)
+        failure = sql(restore, ok=False)
+        assert '_1kycore_generic_guard' in failure.stderr, failure.stderr
+        assert checksum(tables) == before, 'Orphan page translation modified permanent data'
+        sql(f'DELETE FROM page_text_locale WHERE ID={page_id};')
+        columns = ','.join('`'+k+'`' for k in page)
+        sql(f"INSERT INTO page_text ({columns}) VALUES ({','.join(page.values())});")
+        page_assignments = ','.join('`'+k+'`='+v for k,v in page.items() if k != 'ID')
+        original_page = sql(f'SELECT * FROM page_text WHERE ID={page_id};').stdout
+        for alteration in ("Text='custom page'", 'Text=NULL', 'NextPageID=5121', 'PlayerConditionID=1', 'Flags=0', 'VerifiedBuild=0'):
+            sql(f'UPDATE page_text SET {alteration} WHERE ID={page_id};')
+            before = checksum(tables)
+            failure = sql(restore, ok=False)
+            assert '_1kycore_generic_guard' in failure.stderr, failure.stderr
+            assert checksum(tables) == before, 'Page conflict modified permanent data'
+            sql(f'UPDATE page_text SET {page_assignments} WHERE ID={page_id};')
+            assert sql(f'SELECT * FROM page_text WHERE ID={page_id};').stdout == original_page
+        original_pages = sql('SELECT * FROM page_text ORDER BY ID;').stdout
     # Orphaned addon/quest-item data must not acquire a new meaning silently.
     orphan = registry['entries'][0]
     existing_addon = sql(f'SELECT * FROM gameobject_template_addon WHERE entry={orphan};').stdout
@@ -118,6 +147,8 @@ def test_generic_restoration(restore, registry, tables, label):
     protected = checksum(protected_tables)
     sql(restore)
     assert checksum(protected_tables) == protected, 'Restoration changed unrelated tables'
+    if original_pages is not None:
+        assert sql('SELECT * FROM page_text ORDER BY ID;').stdout == original_pages
     if expected_addon:
         assert sql(f'SELECT * FROM gameobject_template_addon WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout == unrelated_addons
         assert sql(f'SELECT * FROM gameobject_template_addon WHERE entry={orphan};').stdout == original_addon
@@ -164,6 +195,27 @@ def test_generic_restoration(restore, registry, tables, label):
         assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == str(len(registry['addons']))
         sql(restore)
         assert checksum(tables) == complete, 'Addon-only interruption retry differs'
+    if pages:
+        sql(f'DELETE FROM gameobject WHERE guid IN ({guids});')
+        sql(f'DELETE FROM gameobject_template WHERE entry IN ({entries});')
+        sql(f'DELETE FROM gameobject_template_addon WHERE entry IN ({entries});')
+        sql(f'DELETE FROM page_text WHERE ID={page_id};')
+        unrelated_pages = sql(f'SELECT * FROM page_text WHERE ID<>{page_id} ORDER BY ID;').stdout
+        # Stop immediately after the first permanent write (page), then retry.
+        boundary = restore.index('-- Restore exact source addons before templates')
+        sql(restore[:boundary])
+        assert sql(f'SELECT * FROM page_text WHERE ID={page_id};').stdout == original_page
+        assert sql(f'SELECT COUNT(*) FROM gameobject_template WHERE entry IN ({entries});').stdout.strip() == '0'
+        sql(restore)
+        assert sql(f'SELECT * FROM page_text WHERE ID<>{page_id} ORDER BY ID;').stdout == unrelated_pages
+        assert sql(f'SELECT * FROM page_text WHERE ID={page_id};').stdout == original_page
+        # Custom original records were deliberately removed for this test;
+        # compare restored source counts and idempotence instead of their checksum.
+        assert sql(f'SELECT COUNT(*) FROM gameobject_template WHERE entry IN ({entries});').stdout.strip() == str(len(registry['entries']))
+        assert sql(f'SELECT COUNT(*) FROM gameobject WHERE guid IN ({guids});').stdout.strip() == str(len(registry['spawns']))
+        missing_page_complete = checksum(tables)
+        sql(restore)
+        assert checksum(tables) == missing_page_complete
     print('PASS: ' + label + ', repeated/partial restoration, custom data and conflict guards', flush=True)
 
 
@@ -238,6 +290,9 @@ def main():
         fifth = (ROOT / 'sql/updates/world/2026_10_01_05_world_campaign_visibility_phaseable.sql').read_text('utf8')
         fifth_registry = json.loads((ROOT / 'docs/audit-data/campaign-visibility-phaseable-restoration.json').read_text('utf8'))
         test_generic_restoration(fifth, fifth_registry, tables, '38 templates / 90 spawns / 38 addons')
+        sixth = (ROOT / 'sql/updates/world/2026_10_02_00_world_campaign_doors_book.sql').read_text('utf8')
+        sixth_registry = json.loads((ROOT / 'docs/audit-data/campaign-doors-book-restoration.json').read_text('utf8'))
+        test_generic_restoration(sixth, sixth_registry, tables, 'five doors / one book / 10 spawns / page5121')
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)
