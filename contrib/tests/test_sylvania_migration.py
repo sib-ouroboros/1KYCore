@@ -220,6 +220,71 @@ def test_generic_restoration(restore, registry, tables, label):
 
 
 
+
+def test_placeholder_models(tables):
+    restore = (ROOT / 'sql/updates/world/2026_10_02_01_world_campaign_placeholder_models.sql').read_text('utf8')
+    registry = json.loads((ROOT / 'docs/audit-data/campaign-placeholder-model-restoration.json').read_text('utf8'))
+    entries = ','.join(map(str, registry['entries']))
+    first = registry['baseline'][0]
+    entry = int(first['entry'])
+    def assignments(row):
+        return ','.join('`'+k+'`='+v for k,v in row.items() if k != 'entry')
+    def insert_row(row):
+        sql('INSERT INTO gameobject_template ('+','.join('`'+k+'`' for k in row)+') VALUES ('+','.join(row.values())+');')
+    def assert_rows(rows):
+        predicates = ['('+' AND '.join('BINARY `'+k+'` <=> BINARY '+v if k in ('name','IconName','castBarCaption','unk1','AIName','ScriptName') else f'ABS(`size`-({v}))<=ABS({v})*0.0000001' if k=='size' else '`'+k+'` <=> '+v for k,v in row.items())+')' for row in rows]
+        assert sql('SELECT COUNT(*) FROM gameobject_template WHERE '+' OR '.join(predicates)+';').stdout.strip() == str(len(rows)), 'Placeholder/source template fields differ'
+    assert_rows(registry['baseline'])
+    assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == '0'
+    assert sql(f'SELECT COUNT(*) FROM gameobject_questitem WHERE GameObjectEntry IN ({entries});').stdout.strip() == '0'
+    def rejection():
+        before = checksum(tables)
+        failure = sql(restore, ok=False)
+        assert '_1kycore_model_guard' in failure.stderr and 'Duplicate entry' in failure.stderr, failure.stderr
+        assert checksum(tables) == before, 'Model guard changed permanent data'
+    # Do not recreate rows that an administrator deliberately removed.
+    sql(f'DELETE FROM gameobject_template WHERE entry={entry};')
+    rejection()
+    insert_row(first)
+    for alteration in ("name='Custom decoration'", 'displayId=12345', 'RequiredLevel=80', 'Data32=99', "AIName='SmartGameObjectAI'", "ScriptName='custom_script'"):
+        sql(f'UPDATE gameobject_template SET {alteration} WHERE entry={entry};')
+        rejection()
+        sql(f'UPDATE gameobject_template SET {assignments(first)} WHERE entry={entry};')
+    for column in ('faction','flags','mingold','maxgold','WorldEffectID'):
+        sql(f'INSERT INTO gameobject_template_addon(entry,`{column}`) VALUES ({entry},1);')
+        rejection()
+        sql(f'DELETE FROM gameobject_template_addon WHERE entry={entry};')
+    sql(f'INSERT INTO gameobject_questitem(GameObjectEntry,Idx,ItemId) VALUES ({entry},0,6948);')
+    rejection()
+    sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry={entry};')
+    # Neutral custom addon is retained; no addon or questitem records are added.
+    sql(f'INSERT INTO gameobject_template_addon(entry) VALUES ({entry});')
+    protected_tables = [t for t in tables if t != 'gameobject_template']
+    protected = checksum(protected_tables)
+    unrelated = sql(f'SELECT * FROM gameobject_template WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout
+    sql(restore)
+    assert_rows(registry['templates'])
+    assert checksum(protected_tables) == protected, 'Models changed spawns or unrelated tables'
+    assert sql(f'SELECT * FROM gameobject_template WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout == unrelated
+    complete = checksum(tables)
+    sql(restore)
+    assert checksum(tables) == complete, 'Repeated model restoration changed data'
+    # Simulate interruption after any subset of the15 templates was restored.
+    for row in registry['baseline'][3:]:
+        sql(f"UPDATE gameobject_template SET {assignments(row)} WHERE entry={row['entry']};")
+    sql(restore)
+    assert checksum(tables) == complete, 'Partial model restoration retry differs'
+    # A customized already-restored row also rejects before touching another placeholder.
+    row = registry['baseline'][1]
+    sql(f"UPDATE gameobject_template SET {assignments(row)} WHERE entry={row['entry']};")
+    sql(f"UPDATE gameobject_template SET ScriptName='custom_native' WHERE entry={entry};")
+    rejection()
+    sql(f"UPDATE gameobject_template SET {assignments(registry['templates'][0])} WHERE entry={entry};")
+    sql(restore)
+    assert checksum(tables) == complete
+    print('PASS:15 placeholder models, exact source data, custom/missing/dependency guards, repeated/partial restoration and unchanged spawns', flush=True)
+
+
 def main():
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
         raise SystemExit('Requires MYSQL_DISPOSABLE_TEST_SERVER=1; never use a production server.')
@@ -293,6 +358,8 @@ def main():
         sixth = (ROOT / 'sql/updates/world/2026_10_02_00_world_campaign_doors_book.sql').read_text('utf8')
         sixth_registry = json.loads((ROOT / 'docs/audit-data/campaign-doors-book-restoration.json').read_text('utf8'))
         test_generic_restoration(sixth, sixth_registry, tables, 'five doors / one book / 10 spawns / page5121')
+
+        test_placeholder_models(tables)
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)
