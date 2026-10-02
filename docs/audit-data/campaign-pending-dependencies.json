@@ -36,10 +36,11 @@
       "source_spawns": 1,
       "references": {},
       "additional_source_fields": {
-        "AIName": "'SmartGameObjectAI'"
+        "AIName": "'SmartGameObjectAI'",
+        "control_entry": "245234"
       },
       "required_review": [
-        "Требуется исходный AI и все связанные сценарии. Для 245233 найден SmartScript event38 SetData(1,1) -> action9 ACTIVATE_GOBJECT self; в release его нет, отправитель события ещё не подтверждён."
+        "Требуется исходный AI и все связанные сценарии. Для 245233 найден SmartScript event38 SetData(1,1) -> action9 ACTIVATE_GOBJECT self; в release его нет, отправитель найден: GO 245234 event70 state2 -> SetData(1,1), но его release-шаблон — заготовка с type=0/displayId=0; исходный GOOBER использует Lock1691, BroadcastText33516, PlayerCondition19467."
       ]
     },
     {

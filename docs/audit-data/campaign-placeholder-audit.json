@@ -1,0 +1,2116 @@
+{
+  "basis": "Static comparison of clean release with 37 pinned Sylvania files and original Legion SQL, not live database counts",
+  "imported_unique_entries": 581,
+  "release_zero_display_candidates": 90,
+  "source_nonzero_display_candidates": [
+    {
+      "entry": 245102,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Lever'",
+      "source_type": 10,
+      "source_displayId": 28635,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "faction": "114"
+      },
+      "source_data": {
+        "Data3": "3000"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 245234,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Barrier Control'",
+      "source_type": 10,
+      "source_displayId": 28635,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "300000",
+        "Data14": "33516",
+        "Data22": "19467"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 2,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 245794,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Compass'",
+      "source_type": 3,
+      "source_displayId": 30433,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "132377"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data2": "1",
+        "Data14": "19676"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 245924,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Tome of Blighted Implements'",
+      "source_type": 3,
+      "source_displayId": 26998,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113536"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data2": "1",
+        "Data3": "1",
+        "Data14": "19676",
+        "Data17": "37624"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 245994,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Ulthalesh, the Deadwind Harvester'",
+      "source_type": 10,
+      "source_displayId": 32046,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "300000",
+        "Data10": "199727",
+        "Data14": "19676",
+        "Data22": "39238",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 246148,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Heart of the Overlord'",
+      "source_type": 10,
+      "source_displayId": 30858,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "SpellVisualID": "51993"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "100000",
+        "Data13": "1",
+        "Data14": "35196"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 246518,
+      "release_type": 3,
+      "release_displayId": 0,
+      "release_name": "'Waterlogged Chest'",
+      "source_type": 3,
+      "source_displayId": 31287,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "8194",
+        "WorldEffectID": "2437"
+      },
+      "source_data": {
+        "Data0": "5",
+        "Data1": "64289",
+        "Data3": "1",
+        "Data28": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 2,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 246984,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Odyn\\'s Cauldron'",
+      "source_type": 10,
+      "source_displayId": 31885,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "93",
+        "Data10": "218574",
+        "Data14": "21295",
+        "Data22": "41517",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 247037,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Amaranthine Hops'",
+      "source_type": 10,
+      "source_displayId": 35434,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "1000",
+        "Data10": "203994",
+        "Data14": "96631",
+        "Data22": "38308",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 5,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 247038,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Blackwort'",
+      "source_type": 10,
+      "source_displayId": 35433,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "1000",
+        "Data10": "203995",
+        "Data14": "96631",
+        "Data22": "38308",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 4,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 247052,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Pillow'",
+      "source_type": 10,
+      "source_displayId": 31977,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "32"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "1",
+        "Data10": "204230",
+        "Data13": "1",
+        "Data14": "56085",
+        "Data22": "38374",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_druide_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 248475,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Fel Spike'",
+      "source_type": 10,
+      "source_displayId": 27619,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1952",
+        "Data3": "3000",
+        "Data5": "1",
+        "Data22": "39037",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 14,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 248575,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Campfire'",
+      "source_type": 10,
+      "source_displayId": 7748,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "16",
+        "faction": "1375"
+      },
+      "source_data": {
+        "Data26": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 7,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 248781,
+      "release_type": 3,
+      "release_displayId": 0,
+      "release_name": "'Spotted Gloomcap'",
+      "source_type": 3,
+      "source_displayId": 32890,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "128758"
+      },
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "19676",
+        "Data30": "65643"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 15,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 248782,
+      "release_type": 3,
+      "release_displayId": 0,
+      "release_name": "'Spotted Gloomcap'",
+      "source_type": 3,
+      "source_displayId": 32891,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "128758"
+      },
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "19676",
+        "Data30": "65643"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 11,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 248876,
+      "release_type": 3,
+      "release_displayId": 0,
+      "release_name": "'Rune of Portals'",
+      "source_type": 3,
+      "source_displayId": 2650,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "136603"
+      },
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "108167",
+        "Data17": "39397",
+        "Data31": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 248908,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Twisted Gateway'",
+      "source_type": 10,
+      "source_displayId": 33093,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data10": "209812",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 249744,
+      "release_type": 3,
+      "release_displayId": 0,
+      "release_name": "'Can of Overheated Oil'",
+      "source_type": 3,
+      "source_displayId": 9663,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "4",
+        "questItem1": "136985"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data8": "42128",
+        "Data14": "37379"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 2,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 249748,
+      "release_type": 3,
+      "release_displayId": 0,
+      "release_name": "'Aged Snowplum Brandy'",
+      "source_type": 3,
+      "source_displayId": 12418,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "136987"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data2": "1",
+        "Data8": "42128",
+        "Data14": "19676"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250220,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Malformed Abyssal'",
+      "source_type": 5,
+      "source_displayId": 32912,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250221,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Houndstooth Hauberk'",
+      "source_type": 5,
+      "source_displayId": 32913,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250222,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Flayed-Skin Chronicle'",
+      "source_type": 5,
+      "source_displayId": 32911,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250223,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Imp\\'s Cup'",
+      "source_type": 5,
+      "source_displayId": 32910,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250224,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Orb of Inner Chaos'",
+      "source_type": 5,
+      "source_displayId": 32111,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250225,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Violetglass Vessel'",
+      "source_type": 5,
+      "source_displayId": 32914,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250226,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Nobleman\\'s Letter Opener'",
+      "source_type": 5,
+      "source_displayId": 32918,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250227,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Inert Leystone Charm'",
+      "source_type": 5,
+      "source_displayId": 32915,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250228,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Pre-War Highborne Tapestry'",
+      "source_type": 5,
+      "source_displayId": 32917,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250229,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Quietwine Vial'",
+      "source_type": 5,
+      "source_displayId": 32916,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250230,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Stonewood Bow'",
+      "source_type": 5,
+      "source_displayId": 32923,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250231,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Trailhead Drum'",
+      "source_type": 5,
+      "source_displayId": 32919,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250232,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Moosebone Fish-Hook'",
+      "source_type": 5,
+      "source_displayId": 32920,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250233,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Drogbar Gem-Roller'",
+      "source_type": 5,
+      "source_displayId": 32922,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250234,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Hand-Smoothed Pyrestone'",
+      "source_type": 5,
+      "source_displayId": 32921,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data1": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250295,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Old Campfire'",
+      "source_type": 10,
+      "source_displayId": 8464,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262176"
+      },
+      "source_data": {
+        "Data2": "51128",
+        "Data3": "3000",
+        "Data13": "1",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250364,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Broken Sword'",
+      "source_type": 10,
+      "source_displayId": 19875,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262176"
+      },
+      "source_data": {
+        "Data2": "51140",
+        "Data3": "3000",
+        "Data13": "1",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250367,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Broken Statue'",
+      "source_type": 10,
+      "source_displayId": 33527,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262176"
+      },
+      "source_data": {
+        "Data2": "51142",
+        "Data3": "3000",
+        "Data13": "1",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 250650,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Witherbark Supplies'",
+      "source_type": 10,
+      "source_displayId": 34362,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262148"
+      },
+      "source_data": {
+        "Data0": "2556",
+        "Data1": "42535",
+        "Data3": "120000",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 21,
+      "source_files": [
+        "sql/sylvania/campagne_dk_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 251262,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Portal to Violet Hold'",
+      "source_type": 22,
+      "source_displayId": 8111,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "215687",
+        "Data3": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 251504,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Mass Grave'",
+      "source_type": 10,
+      "source_displayId": 13907,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "2565",
+        "Data3": "40000",
+        "Data10": "217183",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 9,
+      "source_files": [
+        "sql/sylvania/campagne_dk_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 251615,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Dying Tree'",
+      "source_type": 3,
+      "source_displayId": 34137,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "2584",
+        "Data1": "251615",
+        "Data3": "1",
+        "Data14": "116437"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 6,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 251696,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Council Notice'",
+      "source_type": 10,
+      "source_displayId": 15139,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data3": "4",
+        "Data7": "5313",
+        "Data9": "1",
+        "Data10": "218330",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 251697,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Forgotten Letter'",
+      "source_type": 10,
+      "source_displayId": 9130,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data3": "4",
+        "Data7": "5314",
+        "Data9": "1",
+        "Data10": "218330",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 251698,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Logbook of Ur\\'dan'",
+      "source_type": 10,
+      "source_displayId": 25779,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data3": "4",
+        "Data7": "5315",
+        "Data9": "1",
+        "Data10": "218330",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 252017,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'The Raven\\'s Eye'",
+      "source_type": 10,
+      "source_displayId": 31225,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "219701",
+        "Data14": "19700",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 252045,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Communicator'",
+      "source_type": 10,
+      "source_displayId": 27635,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "32"
+      },
+      "source_data": {
+        "Data3": "999999999",
+        "Data13": "1",
+        "Data22": "21439"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 252049,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Soul Harvester'",
+      "source_type": 10,
+      "source_displayId": 28634,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "32"
+      },
+      "source_data": {
+        "Data3": "999999999",
+        "Data13": "1",
+        "Data22": "21439"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 6,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 252241,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Cage'",
+      "source_type": 10,
+      "source_displayId": 26854,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "220835",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data23": "1",
+        "Data25": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 252243,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Cage'",
+      "source_type": 10,
+      "source_displayId": 26854,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "220844",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data23": "1",
+        "Data25": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 252244,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Cage'",
+      "source_type": 10,
+      "source_displayId": 26854,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "220845",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data23": "1",
+        "Data25": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 252796,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Artifact Research Notes'",
+      "source_type": 45,
+      "source_displayId": 15781,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "186"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 252800,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Artifact Research Notes'",
+      "source_type": 45,
+      "source_displayId": 15781,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "190"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 260004,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Lively Highmountain Salmon School'",
+      "source_type": 25,
+      "source_displayId": 6435,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "4",
+        "Data1": "64266",
+        "Data2": "3",
+        "Data3": "5",
+        "Data4": "1628"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 3,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266081,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Thorim\\'s Beacon'",
+      "source_type": 10,
+      "source_displayId": 30744,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data2": "55277",
+        "Data3": "3000",
+        "Data10": "233450",
+        "Data14": "28503",
+        "Data20": "1",
+        "Data22": "48083",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_dk_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266166,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Offering to Aviana'",
+      "source_type": 10,
+      "source_displayId": 41159,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1690",
+        "Data3": "1",
+        "Data10": "239044",
+        "Data14": "83759",
+        "Data20": "1",
+        "Data22": "46899",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_druide_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266291,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Fel Crystal'",
+      "source_type": 3,
+      "source_displayId": 21960,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "questItem1": "142393"
+      },
+      "source_data": {
+        "Data0": "93",
+        "Data2": "1",
+        "Data14": "19676",
+        "Data30": "70459"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 5,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266307,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Depleted Fel Crystal'",
+      "source_type": 10,
+      "source_displayId": 21959,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "236018",
+        "Data14": "35196",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 5,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266588,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Moonfang Chest'",
+      "source_type": 3,
+      "source_displayId": 10313,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "143330"
+      },
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "21400",
+        "Data30": "70531"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266594,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Moonfang Chest'",
+      "source_type": 3,
+      "source_displayId": 10313,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "143331"
+      },
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "21400",
+        "Data30": "70532"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266595,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Moonfang Chest'",
+      "source_type": 3,
+      "source_displayId": 10313,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "143332"
+      },
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "21400",
+        "Data30": "70533"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266732,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Legion Portal'",
+      "source_type": 10,
+      "source_displayId": 30007,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "2663",
+        "Data3": "3000",
+        "Data10": "232078",
+        "Data13": "1",
+        "Data14": "24585",
+        "Data16": "1",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 5,
+      "source_files": [
+        "sql/sylvania/campagne_dh_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266734,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Spire of Woe'",
+      "source_type": 10,
+      "source_displayId": 27285,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data3": "3000",
+        "Data13": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_dh_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 266886,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Death Gate to Pit of Saron'",
+      "source_type": 10,
+      "source_displayId": 8046,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data3": "1000",
+        "Data10": "232727",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_dk_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267003,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Fel Spreader'",
+      "source_type": 10,
+      "source_displayId": 28632,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "99",
+        "Data3": "1",
+        "Data10": "233399",
+        "Data14": "24585",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 5,
+      "source_files": [
+        "sql/sylvania/campagne_pretre_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267041,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Fel-Infused Gunpowder Cache'",
+      "source_type": 10,
+      "source_displayId": 15383,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "1690",
+        "Data10": "233370",
+        "Data14": "125962",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267176,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Felsworn Cage'",
+      "source_type": 10,
+      "source_displayId": 8235,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data1": "45632",
+        "Data3": "5000",
+        "Data10": "233857",
+        "Data13": "1",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data22": "47096",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_guerrier_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267177,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Felsworn Cage'",
+      "source_type": 10,
+      "source_displayId": 8235,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data1": "45648",
+        "Data3": "5000",
+        "Data10": "233896",
+        "Data13": "1",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data22": "47097",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_guerrier_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267180,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Felfire Explosive'",
+      "source_type": 10,
+      "source_displayId": 32278,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "2693",
+        "Data14": "35196",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 4,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267222,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Prison Cage'",
+      "source_type": 10,
+      "source_displayId": 26854,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "2668",
+        "Data1": "45725",
+        "Data10": "233966",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 15,
+      "source_files": [
+        "sql/sylvania/campagne_chaman_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267227,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Legion Portal'",
+      "source_type": 10,
+      "source_displayId": 29634,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "30000",
+        "Data10": "241336",
+        "Data13": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 3,
+      "source_files": [
+        "sql/sylvania/campagne_guerrier_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267353,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Stabilizing Crystal'",
+      "source_type": 3,
+      "source_displayId": 28634,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "questItem1": "143918"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data2": "1",
+        "Data14": "24982"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 7,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267492,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'False Orders'",
+      "source_type": 10,
+      "source_displayId": 15781,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "2693",
+        "Data2": "56349",
+        "Data14": "51667",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267641,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Fel Contagion'",
+      "source_type": 3,
+      "source_displayId": 39368,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "2113540",
+        "questItem1": "143654"
+      },
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "19676",
+        "Data30": "70957"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 16,
+      "source_files": [
+        "sql/sylvania/campagne_pretre_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 267952,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Stolen Crate'",
+      "source_type": 3,
+      "source_displayId": 335,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "unkInt32": "100",
+        "questItem1": "142312"
+      },
+      "source_data": {
+        "Data0": "1690",
+        "Data2": "1",
+        "Data3": "1",
+        "Data13": "1",
+        "Data14": "19680",
+        "Data17": "47913",
+        "Data18": "100",
+        "Data19": "4",
+        "Data20": "100",
+        "Data30": "71556",
+        "Data31": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 50,
+      "source_files": [
+        "sql/sylvania/campagne_guerrier_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268359,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Felstone Pendant'",
+      "source_type": 10,
+      "source_displayId": 9410,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data1": "45147",
+        "Data10": "237385",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268377,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Barrel of Celebration Brew'",
+      "source_type": 10,
+      "source_displayId": 10976,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "2640",
+        "Data10": "237619",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268378,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Barrel of Celebration Brew'",
+      "source_type": 10,
+      "source_displayId": 10976,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "2640",
+        "Data10": "237620",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268379,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Barrel of Celebration Brew'",
+      "source_type": 10,
+      "source_displayId": 10976,
+      "source_AIName": "'SmartGameObjectAI'",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "2640",
+        "Data10": "237621",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268408,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Thorim\\'s Flame'",
+      "source_type": 10,
+      "source_displayId": 30744,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "3000",
+        "Data10": "237673",
+        "Data20": "1",
+        "Data22": "48092",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_dk_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268448,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Fel Cauldron'",
+      "source_type": 3,
+      "source_displayId": 16741,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "8196",
+        "questItem1": "146310"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data1": "268448",
+        "Data3": "1",
+        "Data14": "114339",
+        "Data28": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 12,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268454,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Brew Still'",
+      "source_type": 10,
+      "source_displayId": 11278,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "1690",
+        "Data3": "3000",
+        "Data10": "238436",
+        "Data14": "19700",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_moine_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268458,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'False Orders'",
+      "source_type": 10,
+      "source_displayId": 15781,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "2693",
+        "Data2": "56349",
+        "Data14": "51667",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_voleur_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268474,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Erno\\'s Enigma'",
+      "source_type": 3,
+      "source_displayId": 6896,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "questItem1": "146402"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "19676",
+        "Data30": "71934"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268475,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Twilight Reliquary'",
+      "source_type": 3,
+      "source_displayId": 9849,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "8196",
+        "questItem1": "146403"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "21400",
+        "Data28": "1",
+        "Data30": "71935"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268476,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Cache of the Sin\\'dorei'",
+      "source_type": 3,
+      "source_displayId": 41126,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "8196",
+        "questItem1": "146404"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "21400",
+        "Data28": "1",
+        "Data30": "71936"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268477,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Crystallized Sillithid Essence'",
+      "source_type": 3,
+      "source_displayId": 6426,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "4",
+        "questItem1": "146405"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "19676",
+        "Data30": "71938"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268479,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Nightborne Soulstone'",
+      "source_type": 3,
+      "source_displayId": 41127,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "questItem1": "146409"
+      },
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "19676",
+        "Data30": "71943"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268617,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Control Console'",
+      "source_type": 10,
+      "source_displayId": 31826,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "1690",
+        "Data2": "57304",
+        "Data13": "1",
+        "Data14": "27700",
+        "Data20": "1",
+        "Data22": "49035",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_dh_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268626,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Fel Crystal'",
+      "source_type": 10,
+      "source_displayId": 21960,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {
+        "flags": "262144"
+      },
+      "source_data": {
+        "Data0": "2668",
+        "Data3": "1",
+        "Data14": "24585",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 6,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ]
+    },
+    {
+      "entry": 268736,
+      "release_type": 0,
+      "release_displayId": 0,
+      "release_name": "'Doomstone Pedestal'",
+      "source_type": 10,
+      "source_displayId": 36278,
+      "source_AIName": "''",
+      "source_ScriptName": "''",
+      "source_additional_fields": {},
+      "source_data": {
+        "Data0": "2688",
+        "Data3": "3000",
+        "Data10": "240221",
+        "Data20": "1",
+        "Data22": "48622",
+        "Data23": "1"
+      },
+      "source_override": null,
+      "imported_spawn_occurrences": 1,
+      "source_files": [
+        "sql/sylvania/campagne_chaman_legioncore.sql"
+      ]
+    }
+  ],
+  "source_commit": "a6145c22e9ad6ac69690d4a2f7794bae4e1caf95",
+  "source_archive_sha256": "cf681e1fb2e7443daab2a5db04f4efa2fc53cc485ea8de6b6ec3d60d569c2696"
+}
