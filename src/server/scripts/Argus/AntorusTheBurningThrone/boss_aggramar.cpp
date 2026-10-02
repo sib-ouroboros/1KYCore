@@ -106,9 +106,9 @@ struct SpawnData
 
 SpawnData const spawnData[] =
 {
-    { EVNET_PHASE_2, NPC_EMBER_OF_TAESHALACH, -12679.456f, -2254.8264f, 2514.2646f },
+    { EVNET_PHASE_2, NPC_EMBER_OF_TAESHALACH, -12679.456f, -2254.8264f, 2514.2646f, 0.0f },
     { EVNET_PHASE_2, NPC_EMBER_OF_TAESHALACH, -12588.12f,  -2254.8215f, 2514.6276f, 3.101369f },
-    { EVNET_PHASE_3, NPC_EMBER_OF_TAESHALACH, -12679.456f, -2254.8264f, 2514.2646f },
+    { EVNET_PHASE_3, NPC_EMBER_OF_TAESHALACH, -12679.456f, -2254.8264f, 2514.2646f, 0.0f },
     { EVNET_PHASE_3, NPC_EMBER_OF_TAESHALACH, -12588.12f,  -2254.8215f, 2514.6276f, 3.101369f },
 };
 
@@ -124,14 +124,11 @@ struct boss_aggramar : public BossAI
         PhaseStatus = Phases::PHASE_INTRO;
     }
 
-    void LoadNPC(uint32 event, const SpawnData* data)
+    void LoadNPC(uint32 event)
     {
-        while (data->event)
-        {
-            if (data->event == event)
-                me->SummonCreature(data->npcId, Position(data->X, data->Y, data->Z, data->orientation), TEMPSUMMON_MANUAL_DESPAWN, WEEK);
-            ++data;
-        }
+        for (SpawnData const& data : spawnData)
+            if (data.event == event)
+                me->SummonCreature(data.npcId, Position(data.X, data.Y, data.Z, data.orientation), TEMPSUMMON_MANUAL_DESPAWN, WEEK);
     }
 
     void EnterCombat(Unit* who) override
@@ -162,7 +159,7 @@ struct boss_aggramar : public BossAI
             me->GetMotionMaster()->MovePoint(1, Position(-12634.2f, -2255.2478f, 2514.2617f, 4.674f));
             Talk(TALK_AGGRAMAR_HP80);
             DoCastSelf(SPELL_CORRUPT_AEGIS);
-            LoadNPC(EVNET_PHASE_2, spawnData);
+            LoadNPC(EVNET_PHASE_2);
             killCount = 2;
             events.RescheduleEvent(EVNET_PHASE_2, 1s);
         }
@@ -172,7 +169,7 @@ struct boss_aggramar : public BossAI
             events.Reset();
             me->GetMotionMaster()->MovePoint(1, Position(-12634.2f, -2255.2478f, 2514.2617f, 4.674f));
             DoCastSelf(SPELL_CORRUPT_AEGIS);
-            LoadNPC(EVNET_PHASE_3, spawnData);
+            LoadNPC(EVNET_PHASE_3);
             killCount = 2;
             events.RescheduleEvent(EVNET_PHASE_3, 1s);
             //SPELL_WAKE_OF_FLAME replace by 245983 flare Talk(7)
@@ -416,15 +413,31 @@ struct npc_ember_of_taeshalach_122532 : public ScriptedAI
     }
 };
 
+// The player owns this event, so logout/removal cancels the delayed teleport.
+class MagniTeleportEvent final : public BasicEvent
+{
+public:
+    explicit MagniTeleportEvent(Player* player) : _player(player) { }
+
+    bool Execute(uint64 /*time*/, uint32 /*diff*/) override
+    {
+        _player->TeleportTo(1712, 2826.39f, -4567.94f, 291.95f, 0.02513274f);
+        return true;
+    }
+
+private:
+    Player* _player;
+};
+
 struct npc_magni_bronzebeard_128169 : public ScriptedAI
 {
     npc_magni_bronzebeard_128169(Creature* creature) : ScriptedAI(creature) { }
 
-    void sGossipSelect(Player* player, uint32 /*menuId*/, uint32 gossipListId)
+    void sGossipSelect(Player* player, uint32 /*menuId*/, uint32 /*gossipListId*/) override
     {
         CloseGossipMenuFor(player);
         player->CastSpell(player, SPELL_TITANS_ASSEMBLE_MOVIE, true);
-        player->TeleportTo(4000, 1712, 2826.39f, -4567.94f, 291.95f, 0.02513274f);
+        player->m_Events.AddEvent(new MagniTeleportEvent(player), player->m_Events.CalculateTime(4000));
     }
 };
 

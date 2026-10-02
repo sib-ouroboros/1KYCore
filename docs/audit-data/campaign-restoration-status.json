@@ -110,6 +110,7 @@
     251648,
     251653,
     251654,
+    251657,
     251658,
     251659,
     251679,
@@ -147,7 +148,7 @@
     269028,
     301343
   ],
-  "restored_spawns": 385,
+  "restored_spawns": 387,
   "pending_entries": [
     245100,
     245233,
@@ -161,7 +162,6 @@
     250899,
     250908,
     251591,
-    251657,
     252018,
     252981,
     254253,
@@ -169,7 +169,7 @@
     269053,
     269055
   ],
-  "pending_spawns": 117,
+  "pending_spawns": 115,
   "migrations": [
     "2026_10_01_00_world_campaign_generic_objects.sql",
     "2026_10_01_02_world_campaign_generic_objects.sql",
@@ -177,6 +177,7 @@
     "2026_10_01_04_world_campaign_generic_addons.sql",
     "2026_10_01_05_world_campaign_visibility_phaseable.sql",
     "2026_10_02_00_world_campaign_doors_book.sql",
-    "2026_10_02_03_world_campaign_client_validated_objects.sql"
+    "2026_10_02_03_world_campaign_client_validated_objects.sql",
+    "2026_10_02_05_world_campaign_smart_wall.sql"
   ]
 }
