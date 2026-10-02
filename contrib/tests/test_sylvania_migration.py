@@ -88,7 +88,11 @@ def test_generic_restoration(restore, registry, tables, label):
         assert checksum(tables) == before, 'Missing addon on custom template changed data'
         install_expected_addon()
         addon_assignments = ','.join('`'+k+'`='+v for k,v in expected_addon.items() if k != 'entry')
-        for alteration in ('flags=0', 'faction=114', 'maxgold=1', 'WorldEffectID=2437'):
+        # Every probe must differ from this object's source value; zero flags
+        # and faction 114 are legitimate values in later restoration groups.
+        for field in ('flags', 'faction', 'maxgold', 'WorldEffectID'):
+            conflicting = int(expected_addon[field]) ^ 1
+            alteration = f'`{field}`={conflicting}'
             sql(f'UPDATE gameobject_template_addon SET {alteration} WHERE entry={orphan};')
             before = checksum(tables)
             assert '_1kycore_generic_guard' in sql(restore, ok=False).stderr
