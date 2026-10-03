@@ -446,7 +446,7 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         insert_row('gameobject_loot_template',probe)
         for field in ('Chance','QuestRequired','Reference','LootMode','GroupId','MinCount','MaxCount'):
             changed = dict(probe)
-            changed[field] = str(int(probe[field]) + 1)
+            changed[field] = str(int(probe[field]) ^ 1) if field=='LootMode' else str(int(probe[field]) + 1)
             sql(f"UPDATE gameobject_loot_template SET `{field}`={changed[field]} WHERE Entry={probe['Entry']} AND Item={probe['Item']};")
             rejection()
             sql(f"UPDATE gameobject_loot_template SET `{field}`={probe[field]} WHERE Entry={probe['Entry']} AND Item={probe['Item']};")
@@ -488,9 +488,11 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         rejection()
         sql(f'UPDATE creature_template SET entry={creature} WHERE entry=9000020;')
     for objective in registry.get('required_objectives', []):
-        sql(f"UPDATE quest_objectives SET ObjectID=9000021 WHERE ID={objective['ID']};")
-        rejection()
-        sql(f"UPDATE quest_objectives SET ObjectID={objective['ObjectID']} WHERE ID={objective['ID']};")
+        for field in ('ObjectID','QuestID','Type','Amount'):
+            changed = int(objective[field]) + 1
+            sql(f"UPDATE quest_objectives SET `{field}`={changed} WHERE ID={objective['ID']};")
+            rejection()
+            sql(f"UPDATE quest_objectives SET `{field}`={objective[field]} WHERE ID={objective['ID']};")
     for quest in registry.get('required_quests', []):
         sql(f'UPDATE quest_template SET ID=9000022 WHERE ID={quest};')
         rejection()
@@ -597,6 +599,7 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
+    parser.add_argument('--wildcard-loot-only', action='store_true', help='Run source wildcard loot translation against the real release.')
     parser.add_argument('--source-loot-only', action='store_true', help='Run the complete source loot object group against the real release.')
     args = parser.parse_args()
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
@@ -629,6 +632,14 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.wildcard_loot_only:
+            sql(migration)
+            tables = sql('SHOW TABLES;').stdout.splitlines()
+            restore = (ROOT / 'sql/updates/world/2026_10_03_01_world_campaign_wildcard_loot_objects.sql').read_text('utf8')
+            registry = json.loads((ROOT / 'docs/audit-data/campaign-wildcard-loot-restoration.json').read_text('utf8'))
+            test_simple_goober_models(tables,restore,registry,'two wildcard loot objects / all native modes / preserved group and quest loot')
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.source_loot_only:
             sql(migration)
             tables = sql('SHOW TABLES;').stdout.splitlines()
@@ -703,6 +714,9 @@ def main():
         source_loot = (ROOT / 'sql/updates/world/2026_10_03_00_world_campaign_source_loot_objects.sql').read_text('utf8')
         source_loot_registry = json.loads((ROOT / 'docs/audit-data/campaign-source-loot-restoration.json').read_text('utf8'))
         test_simple_goober_models(tables,source_loot,source_loot_registry,'five source loot objects / quest hints / compatible native loot')
+        wildcard_loot = (ROOT / 'sql/updates/world/2026_10_03_01_world_campaign_wildcard_loot_objects.sql').read_text('utf8')
+        wildcard_registry = json.loads((ROOT / 'docs/audit-data/campaign-wildcard-loot-restoration.json').read_text('utf8'))
+        test_simple_goober_models(tables,wildcard_loot,wildcard_registry,'two wildcard loot objects / all native modes / preserved group and quest loot')
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)

@@ -874,7 +874,7 @@ void WorldSession::HandleRequestAreaPoiUpdate(WorldPackets::Quest::RequestAreaPo
 
     if (needSend)
     {
-        TC_LOG_DEBUG("network", "Sending %u POIs to player", response.Pois.size());
+        TC_LOG_DEBUG("network", "Sending %zu POIs to player", response.Pois.size());
         SendPacket(response.Write());
     }
     else

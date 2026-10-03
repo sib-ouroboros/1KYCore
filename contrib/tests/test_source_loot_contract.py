@@ -19,10 +19,11 @@ def main():
     registry=json.loads((root/'docs/audit-data/campaign-source-loot-restoration.json').read_text('utf8'))
     key=method((root/'src/server/game/Entities/GameObject/GameObjectData.h').read_text('utf8'),'    uint32 GetLootId() const')
     allowed=method((root/'src/server/game/Loot/Loot.cpp').read_text('utf8'),'bool LootItem::AllowedForPlayer(')
+    registry2=json.loads((root/'docs/audit-data/campaign-wildcard-loot-restoration.json').read_text('utf8'))
     rows=[]
-    for template,loot in zip(registry['templates'],registry['loot']):
+    for template,loot in zip(registry['templates']+registry2['templates'],registry['loot']+registry2['loot']):
         assert template['entry']==loot['Entry']==template['Data1'] and template['Data30']=='0'
-        assert loot['Reference']=='0' and loot['LootMode']=='1' and loot['Chance']=='100'
+        assert loot['Reference']=='0' and loot['LootMode'] in ('1','65535') and loot['Chance']=='100'
         rows.append('{'+','.join((template['type'],template['Data1'],loot['Item'],loot['QuestRequired']))+'}')
     harness=r'''
 #include <cstdint>
@@ -72,7 +73,7 @@ int main(){
         objectMgr.proto.flags2=ITEM_FLAG2_FACTION_ALLIANCE;check(!item.AllowedForPlayer(&player));objectMgr.proto.flags2=0;
     }
     GameObjectTemplate unrelated;unrelated.type=5;unrelated.chest.chestLoot=123;check(unrelated.GetLootId()==0);
-    std::cout<<"PASS: actual native loot ID and item eligibility, all five source rows, needed/completed/unrelated quest, conditions, missing item and faction restriction\n";
+    std::cout<<"PASS: actual native loot ID and item eligibility, all seven source rows, needed/completed/unrelated quest, conditions, missing item and faction restriction\n";
 }
 '''.replace('ALLOWED',allowed).replace('KEY',key).replace('ROWS',','.join(rows))
     with tempfile.TemporaryDirectory() as tmp:

@@ -1,0 +1,458 @@
+{
+  "basis": "Current source plus original immutable source SQL and core; clean release and user DB2. Read-only dependency review, not client acceptance.",
+  "reviewed_objects": 32,
+  "entries": [
+    {
+      "entry": 245102,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 28635,
+        "FactionTemplate": 114
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 246148,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 30858,
+        "Lock": 1691,
+        "BroadcastText": 35196
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 250295,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 8464,
+        "GameEvent": 51128
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 250364,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 19875,
+        "GameEvent": 51140
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 250367,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 33527,
+        "GameEvent": 51142
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 251262,
+      "source_type": 22,
+      "references": {
+        "GameObjectDisplayInfo": 8111,
+        "Spell": 215687
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 251615,
+      "source_type": 3,
+      "references": {
+        "GameObjectDisplayInfo": 34137,
+        "Lock": 2584,
+        "BroadcastText": 116437,
+        "LootEntry": 251615
+      },
+      "decision": "Restore: source ordinary/explicitly-chanced group handlers accept mode 0 wildcard; translate only selected loot rows to uint16 mask65535 with native processing regression."
+    },
+    {
+      "entry": 251696,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 15139,
+        "Spell": 218330,
+        "PageText": 5313
+      },
+      "decision": "Deferred: page_text 5313/5315 are present in original source but absent in clean release; spell 218330 uses area targets 22/7 and credit 109693, requiring chain review."
+    },
+    {
+      "entry": 251697,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 9130,
+        "Spell": 218330,
+        "PageText": 5314
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 251698,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 25779,
+        "Spell": 218330,
+        "PageText": 5315
+      },
+      "decision": "Deferred: page_text 5313/5315 are present in original source but absent in clean release; spell 218330 uses area targets 22/7 and credit 109693, requiring chain review."
+    },
+    {
+      "entry": 252017,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 31225,
+        "Lock": 93,
+        "Spell": 219701,
+        "BroadcastText": 19700
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 252241,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 26854,
+        "Lock": 93,
+        "Spell": 220835,
+        "BroadcastText": 21400
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 252243,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 26854,
+        "Lock": 93,
+        "Spell": 220844,
+        "BroadcastText": 21400
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 252244,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 26854,
+        "Lock": 93,
+        "Spell": 220845,
+        "BroadcastText": 21400
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 252796,
+      "source_type": 45,
+      "references": {
+        "GameObjectDisplayInfo": 15781,
+        "CharShipmentContainer": 186
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 252800,
+      "source_type": 45,
+      "references": {
+        "GameObjectDisplayInfo": 15781,
+        "CharShipmentContainer": 190
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 266307,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 21959,
+        "Lock": 93,
+        "Spell": 236018,
+        "BroadcastText": 35196
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 266594,
+      "source_type": 3,
+      "references": {
+        "GameObjectDisplayInfo": 10313,
+        "Lock": 43,
+        "BroadcastText": 21400,
+        "PersonalLootEntry": 70532
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 267003,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 28632,
+        "Lock": 99,
+        "Spell": 233399,
+        "BroadcastText": 24585
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 267041,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 15383,
+        "Lock": 1690,
+        "Spell": 233370,
+        "BroadcastText": 125962
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 267180,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 32278,
+        "Lock": 2693,
+        "BroadcastText": 35196
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 267227,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 29634,
+        "Lock": 1691,
+        "Spell": 241336
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 267353,
+      "source_type": 3,
+      "references": {
+        "GameObjectDisplayInfo": 28634,
+        "Lock": 1691,
+        "BroadcastText": 24982
+      },
+      "decision": "Restore: source ordinary/explicitly-chanced group handlers accept mode 0 wildcard; translate only selected loot rows to uint16 mask65535 with native processing regression."
+    },
+    {
+      "entry": 267492,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 15781,
+        "Lock": 2693,
+        "GameEvent": 56349,
+        "BroadcastText": 51667
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 267952,
+      "source_type": 3,
+      "references": {
+        "GameObjectDisplayInfo": 335,
+        "Lock": 1690,
+        "PlayerCondition": 47913,
+        "BroadcastText": 19680,
+        "PersonalLootEntry": 71556
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 268359,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 9410,
+        "Spell": 237385,
+        "Quest": 45147
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 268377,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 10976,
+        "Lock": 2640,
+        "Spell": 237619
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 268378,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 10976,
+        "Lock": 2640,
+        "Spell": 237620
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 268379,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 10976,
+        "Lock": 2640,
+        "Spell": 237621
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 268448,
+      "source_type": 3,
+      "references": {
+        "GameObjectDisplayInfo": 16741,
+        "Lock": 1691,
+        "BroadcastText": 114339,
+        "LootEntry": 268448
+      },
+      "decision": "Deferred: preserve unsupported source fields; do not silently discard visuals or animation fields."
+    },
+    {
+      "entry": 268454,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 11278,
+        "Lock": 1690,
+        "Spell": 238436,
+        "BroadcastText": 19700
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    },
+    {
+      "entry": 268458,
+      "source_type": 10,
+      "references": {
+        "GameObjectDisplayInfo": 15781,
+        "Lock": 2693,
+        "GameEvent": 56349,
+        "BroadcastText": 51667
+      },
+      "decision": "Deferred: source script/quest/event/shipment chain needs full compatibility verification."
+    }
+  ],
+  "spell_effects": {
+    "218330": [
+      {
+        "ID": 325059,
+        "Effect": 90,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 109693,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 22,
+        "ImplicitTarget2": 7
+      }
+    ],
+    "236018": [
+      {
+        "ID": 356766,
+        "Effect": 3,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 18,
+        "ImplicitTarget2": 8
+      },
+      {
+        "ID": 357326,
+        "Effect": 61,
+        "EffectIndex": 1,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 56752,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 1,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "233399": [
+      {
+        "ID": 352488,
+        "Effect": 3,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 18,
+        "ImplicitTarget2": 8
+      }
+    ],
+    "241336": [
+      {
+        "ID": 366187,
+        "Effect": 134,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 117416,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 22,
+        "ImplicitTarget2": 7
+      }
+    ],
+    "237385": [
+      {
+        "ID": 359426,
+        "Effect": 160,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 230493,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 1,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "238436": [
+      {
+        "ID": 361187,
+        "Effect": 24,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 1,
+        "ImplicitTarget2": 0
+      }
+    ]
+  },
+  "source_release_pages": [
+    {
+      "ID": "5313",
+      "Text": "'Gul\\'dan has returned! A better Gul\\'dan! \\n\\nHe is extending his hand out to all those that have fled or gone into hiding due to failures of the past. The Legion is here and now is our chance to prove we belong with the victors.\\n\\nGul\\'dan plans a powerful ritual that will bring all opposition to their knees. I am gathering forces at Caer Darrow to retrieve something that he requires. If you would rejoin a stronger Shadow Council, join me there. Once we\\'ve \\\"convinced\\\" the necromancers to aid us, we will move to another task.\\n\\nOur time has come, don\\'t be left behind.\\n\\n- Jergosh'",
+      "NextPageID": "0",
+      "PlayerConditionID": "0",
+      "Flags": "36",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "ID": "5314",
+      "Text": "'The necromancers delay and argue. They say they don\\'t have the Book of Medivh, they says its lost in the stacks, adventurers took it, the excuses are endless!\\n\\nThe tides are turning, however. More and more cultists arrive and my power grows. The pathetic corpse lovers grow more scared that I will take by force what I can\\'t take by words.\\n\\nToday Braelyn Firehand arrived from whatever stone she crawled under so long ago. We will go back into Scholomance and see if her silver tongue can yield better results here than her efforts in Stonetalon. If not...\\n\\nEither way, I expect to have the book soon and I will join you at the other area to assist however I can. I\\'m sure I can be of immense assistance to you, the mighty Athrikus Nassarin.'",
+      "NextPageID": "0",
+      "PlayerConditionID": "0",
+      "Flags": "46",
+      "VerifiedBuild": "21491"
+    },
+    {
+      "ID": "5315",
+      "Text": "'Caer Darrow Assets:\\n- 7 warlocks, middling ability\\n- 9 warriors, well equipped\\n- 4 months supplies\\n\\nUnknown how long this will take. Jergosh getting very angry.\\n\\nTol Barad Expedition Assets:\\n- unknown number of forces\\n- Nagaz, bringing Argus Wake?\\n- possible Dark Strand presence, at least Athrikus\\n- unsure how long they will wait for success here\\n\\nTol Barad Obstacles:\\n- completely broken prison, inmates running around crazy\\n- uncontrolled demons, beasts, criminals\\n- exact location of Eye of Dalaran unknown, heavy scouting required'",
+      "NextPageID": "0",
+      "PlayerConditionID": "0",
+      "Flags": "34",
+      "VerifiedBuild": "21491"
+    }
+  ]
+}

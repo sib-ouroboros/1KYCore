@@ -21,6 +21,15 @@ on:
       - contrib/tests/test_source_loot_contract.py
       - src/server/database/Database/MySQLConnection.cpp
       - contrib/tests/test_mysql_prepare_logging.py
+      - src/server/game/Loot/LootMgr.cpp
+      - docs/audit-data/campaign-wildcard-loot-restoration.json
+      - contrib/tests/test_wildcard_loot_modes.py
+      - contrib/tests/test_diagnostic_formats.py
+      - src/server/game/ChallengeMode/ChallengeModeMgr.cpp
+      - src/server/game/Globals/BattlePetDataStore.cpp
+      - src/server/game/Handlers/QuestHandler.cpp
+      - src/server/game/Server/CustomTalkMenu.cpp
+      - src/server/game/Instances/InstanceScript.cpp
       - src/server/game/AI/CoreAI/UnitAI.*
       - src/common/Utilities/Duration.h
       - contrib/tests/test_ai_delay_units.py
@@ -100,3 +109,7 @@ jobs:
         run: python contrib/tests/test_source_loot_contract.py
       - name: Test MySQL prepare logging with bounded string views
         run: python contrib/tests/test_mysql_prepare_logging.py
+      - name: Test actual native grouped and ordinary wildcard loot modes
+        run: python contrib/tests/test_wildcard_loot_modes.py
+      - name: Test full diagnostic sizes and GUIDs with strict format checks
+        run: python contrib/tests/test_diagnostic_formats.py

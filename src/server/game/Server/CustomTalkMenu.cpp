@@ -198,7 +198,7 @@ void CustomTalkMenu::Initialize()
 		m_MenuItems[entry] = item;
 	} while (result->NextRow());
 
-	TC_LOG_INFO("server.loading", ">> Loaded %u Talk menu info in %u ms", m_MenuItems.size(), GetMSTimeDiffToNow(oldMSTime));
+    TC_LOG_INFO("server.loading", ">> Loaded %zu Talk menu info in %u ms", m_MenuItems.size(), GetMSTimeDiffToNow(oldMSTime));
 }
 
 void CustomTalkMenu::DisplayMainMenu(Player* player)

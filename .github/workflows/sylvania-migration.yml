@@ -40,6 +40,11 @@ jobs:
           python-version: '3.12'
       - name: Install MySQL client
         run: sudo apt-get update && sudo apt-get install -y mysql-client
+      - name: Test source wildcard loot modes against real release first
+        env:
+          MYSQL_PWD: disposable-test-only
+          MYSQL_DISPOSABLE_TEST_SERVER: '1'
+        run: python contrib/tests/test_sylvania_migration.py --wildcard-loot-only
       - name: Test source loot objects against real release first
         env:
           MYSQL_PWD: disposable-test-only

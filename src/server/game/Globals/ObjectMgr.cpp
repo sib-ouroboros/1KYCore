@@ -2247,13 +2247,13 @@ void ObjectMgr::LoadCreatures()
 
         if (data.movementmode < 0.0f)
         {
-            TC_LOG_ERROR("sql.sql", "Table `creature` has creature (GUID: %u Entry: %u) with `movementmode`< 0, set to 0.", guid, data.id);
+            TC_LOG_ERROR("sql.sql", "Table `creature` has creature (GUID: " UI64FMTD " Entry: %u) with `movementmode`< 0, set to 0.", guid, data.id);
             data.movementmode = 0.0f;
         }
 
         if (data.movementmode > 1.0f)
         {
-            TC_LOG_ERROR("sql.sql", "Table `creature` has creature (GUID: %u Entry: %u) with `movementmode` > 1, set to 1.", guid, data.id);
+            TC_LOG_ERROR("sql.sql", "Table `creature` has creature (GUID: " UI64FMTD " Entry: %u) with `movementmode` > 1, set to 1.", guid, data.id);
             data.movementmode = 1.0f;
         }
 
