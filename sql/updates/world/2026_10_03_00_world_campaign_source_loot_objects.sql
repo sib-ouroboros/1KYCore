@@ -65,7 +65,7 @@ WHERE NOT ((a.`entry` <=> expected.`entry`) AND (a.`faction` <=> expected.`facti
 INSERT INTO `_1kycore_model_guard`
 SELECT 1 FROM gameobject_template t JOIN `_1kycore_model_source` n ON n.entry=t.entry
 LEFT JOIN gameobject_template_addon a ON a.entry=t.entry
-WHERE t.type=n.type AND a.entry IS NULL LIMIT 1;
+WHERE t.type=n.type AND t.displayId=n.displayId AND a.entry IS NULL LIMIT 1;
 -- Reject extra/custom quest-item or loot rows; retain compatible provenance markers.
 INSERT INTO `_1kycore_model_guard`
 SELECT 1 FROM gameobject_questitem q JOIN `_1kycore_model_source` n ON n.entry=q.GameObjectEntry
@@ -75,6 +75,8 @@ INSERT INTO `_1kycore_model_guard`
 SELECT 1 FROM gameobject_loot_template l JOIN `_1kycore_model_source` n ON n.entry=l.Entry
 LEFT JOIN `_1kycore_chest_loot` e ON e.Entry=l.Entry AND e.Item=l.Item
 WHERE e.Entry IS NULL OR NOT (l.`Reference` <=> e.`Reference`) OR NOT (l.`Chance` <=> e.`Chance`) OR NOT (l.`QuestRequired` <=> e.`QuestRequired`) OR NOT (l.`LootMode` <=> e.`LootMode`) OR NOT (l.`GroupId` <=> e.`GroupId`) OR NOT (l.`MinCount` <=> e.`MinCount`) OR NOT (l.`MaxCount` <=> e.`MaxCount`) LIMIT 1;
+-- Full template validation above admits only baseline or native rows. Native display IDs distinguish
+-- existing type-3 placeholders from restored chests before requiring native dependencies.
 -- A native chest without any required dependency is inconsistent; reject rather than patch it silently.
 INSERT INTO `_1kycore_model_guard`
 SELECT 1 FROM gameobject_template t JOIN `_1kycore_model_source` n ON n.entry=t.entry
@@ -82,7 +84,7 @@ LEFT JOIN `_1kycore_chest_items` e ON e.GameObjectEntry=t.entry
 LEFT JOIN gameobject_questitem q ON q.GameObjectEntry=e.GameObjectEntry AND q.Idx=e.Idx
 JOIN `_1kycore_chest_loot` el ON el.Entry=t.entry
 LEFT JOIN gameobject_loot_template l ON l.Entry=el.Entry AND l.Item=el.Item
-WHERE t.type=n.type AND ((e.GameObjectEntry IS NOT NULL AND q.GameObjectEntry IS NULL) OR l.Entry IS NULL) LIMIT 1;
+WHERE t.type=n.type AND t.displayId=n.displayId AND ((e.GameObjectEntry IS NOT NULL AND q.GameObjectEntry IS NULL) OR l.Entry IS NULL) LIMIT 1;
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=280951 AND `QuestID`=40606 AND `Type`=1 AND `ObjectID`=132377 AND `Amount`=1);
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=283780 AND `QuestID`=42128 AND `Type`=1 AND `ObjectID`=136985 AND `Amount`=1);
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=283790 AND `QuestID`=42128 AND `Type`=1 AND `ObjectID`=136987 AND `Amount`=1);
