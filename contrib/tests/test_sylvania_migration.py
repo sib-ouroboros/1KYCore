@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Real release-database regression. ONLY a disposable local MySQL server."""
+import argparse
 import gzip
 import hashlib
 import json
@@ -526,6 +527,9 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
+    args = parser.parse_args()
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
         raise SystemExit('Requires MYSQL_DISPOSABLE_TEST_SERVER=1; never use a production server.')
     migration = (ROOT / 'sql/updates/world/2026_09_30_00_world_sylvania_content.sql').read_text('utf8')
@@ -556,6 +560,14 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.smart_wall_only:
+            sql(migration)
+            tables = sql('SHOW TABLES;').stdout.splitlines()
+            wall = (ROOT / 'sql/updates/world/2026_10_02_05_world_campaign_smart_wall.sql').read_text('utf8')
+            wall_registry = json.loads((ROOT / 'docs/audit-data/campaign-smart-wall-restoration.json').read_text('utf8'))
+            test_generic_restoration(wall, wall_registry, tables, 'focused native Smart wall / two spawns / complete guards')
+            sql(f'DROP DATABASE `{DB}`;', False)
+            return
         # Validate the existing release path before importing any new objects:
         # enum naming is not a flags whitelist; this exact pair is native data.
         assert sql('SELECT COUNT(*) FROM gameobject_template t JOIN gameobject_template_addon a ON a.entry=t.entry WHERE t.type=5 AND (a.flags & 8192)<>0 AND t.Data7=1;').stdout.strip() == '193'
