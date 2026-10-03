@@ -426,6 +426,34 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         failure = sql(restore,ok=False)
         assert '_1kycore_model_guard' in failure.stderr and 'Duplicate entry' in failure.stderr, failure.stderr
         assert checksum(tables) == before, 'GOOBER conflict changed permanent data'
+    expected_loot = registry.get('loot', [])
+    expected_items = registry.get('questitems', [])
+    unrelated_loot = unrelated_items = None
+    if expected_loot:
+        assert sql(f'SELECT COUNT(*) FROM gameobject_loot_template WHERE Entry IN ({entries});').stdout.strip() == '0'
+        unrelated_loot = sql(f'SELECT * FROM gameobject_loot_template WHERE Entry NOT IN ({entries}) ORDER BY Entry,Item;').stdout
+        unrelated_items = sql(f'SELECT * FROM gameobject_questitem WHERE GameObjectEntry NOT IN ({entries}) ORDER BY GameObjectEntry,Idx;').stdout
+        probe = expected_loot[0]
+        insert_row('gameobject_loot_template',probe)
+        for field in ('Chance','QuestRequired','Reference','LootMode','GroupId','MinCount','MaxCount'):
+            changed = dict(probe)
+            changed[field] = str(int(probe[field]) + 1)
+            sql(f"UPDATE gameobject_loot_template SET `{field}`={changed[field]} WHERE Entry={probe['Entry']} AND Item={probe['Item']};")
+            rejection()
+            sql(f"UPDATE gameobject_loot_template SET `{field}`={probe[field]} WHERE Entry={probe['Entry']} AND Item={probe['Item']};")
+        custom = dict(probe);custom['Item'] = '6948'
+        insert_row('gameobject_loot_template',custom)
+        rejection()
+        sql(f"DELETE FROM gameobject_loot_template WHERE Entry={probe['Entry']} AND Item=6948;")
+        sql(f"DELETE FROM gameobject_loot_template WHERE Entry={probe['Entry']};")
+        hint = expected_items[0]
+        insert_row('gameobject_questitem',hint)
+        sql(f"INSERT INTO gameobject_questitem(GameObjectEntry,Idx,ItemId) VALUES ({entry},1,6948);")
+        rejection()
+        sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry={entry};')
+        sql(f'INSERT INTO conditions(SourceTypeOrReferenceId,SourceGroup,SourceEntry,ConditionTypeOrReference,ConditionValue1) VALUES (4,{entry},6948,2,6948);')
+        rejection()
+        sql(f'DELETE FROM conditions WHERE SourceTypeOrReferenceId=4 AND SourceGroup={entry};')
     destinations = registry.get('destinations', [])
     selected_destinations = ' OR '.join(f"(ID={row['ID']} AND EffectIndex={row['EffectIndex']})" for row in destinations)
     preserved_destination = None
@@ -474,7 +502,7 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
     rejection()
     sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry={entry};')
     original_addon = sql(f'SELECT * FROM gameobject_template_addon WHERE entry={entry};').stdout
-    mutable = ('gameobject_template','gameobject_template_addon') + (('spell_target_position',) if destinations else ())
+    mutable = ('gameobject_template','gameobject_template_addon') + (('spell_target_position',) if destinations else ()) + (('gameobject_loot_template','gameobject_questitem') if expected_loot else ())
     protected_tables = [t for t in tables if t not in mutable]
     protected = checksum(protected_tables)
     unrelated_templates = sql(f'SELECT * FROM gameobject_template WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout
@@ -482,6 +510,11 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
     sql(restore)
     assert_rows('gameobject_template',registry['templates'])
     assert_rows('gameobject_template_addon',registry['addons'])
+    if expected_loot:
+        assert_rows('gameobject_loot_template',expected_loot)
+        assert_rows('gameobject_questitem',expected_items)
+        assert sql(f'SELECT * FROM gameobject_loot_template WHERE Entry NOT IN ({entries}) ORDER BY Entry,Item;').stdout == unrelated_loot
+        assert sql(f'SELECT * FROM gameobject_questitem WHERE GameObjectEntry NOT IN ({entries}) ORDER BY GameObjectEntry,Idx;').stdout == unrelated_items
     assert checksum(protected_tables) == protected, 'GOOBER models changed spawns/other tables'
     assert sql(f'SELECT * FROM gameobject_template WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout == unrelated_templates
     assert sql(f'SELECT * FROM gameobject_template_addon WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout == unrelated_addons
@@ -502,6 +535,14 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
     sql(f'DELETE FROM gameobject_template_addon WHERE entry={entry};')
     rejection()  # native template without its source flags/faction is unsafe
     insert_row('gameobject_template_addon',addon)
+    if expected_loot:
+        hint = expected_items[0];probe = expected_loot[0]
+        sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry={entry};')
+        rejection()
+        insert_row('gameobject_questitem',hint)
+        sql(f'DELETE FROM gameobject_loot_template WHERE Entry={entry};')
+        rejection()
+        insert_row('gameobject_loot_template',probe)
     for row in registry['baseline'][1:]:
         sql(f"UPDATE gameobject_template SET {assignments(row)} WHERE entry={row['entry']};")
     sql(restore)
@@ -514,6 +555,24 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
     assert_rows('gameobject_template_addon',registry['addons'])
     sql(restore)
     assert checksum(tables) == complete, 'Addon-only GOOBER interruption retry differs'
+    if expected_loot:
+        # Interrupt after addon / item-hint writes, before loot and native templates.
+        for row in registry['baseline']:
+            sql(f"UPDATE gameobject_template SET {assignments(row)} WHERE entry={row['entry']};")
+        sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry IN ({entries});')
+        sql(f'DELETE FROM gameobject_loot_template WHERE Entry IN ({entries});')
+        sql(restore[:restore.index('INSERT INTO gameobject_loot_template (')])
+        assert_rows('gameobject_template',registry['baseline'])
+        assert_rows('gameobject_questitem',expected_items)
+        assert sql(f'SELECT COUNT(*) FROM gameobject_loot_template WHERE Entry IN ({entries});').stdout.strip() == '0'
+        sql(restore)
+        assert checksum(tables) == complete, 'Quest-item-only interruption retry differs'
+        # Matching quest-item provenance is retained, never forced to invented source builds.
+        hint = expected_items[0]
+        sql(f"UPDATE gameobject_questitem SET VerifiedBuild=12345 WHERE GameObjectEntry={hint['GameObjectEntry']} AND Idx={hint['Idx']};")
+        compatible = checksum(tables)
+        sql(restore)
+        assert checksum(tables) == compatible, 'Compatible quest-item provenance changed'
     if destinations:
         row = destinations[1]
         sql(f"DELETE FROM spell_target_position WHERE ID={row['ID']} AND EffectIndex={row['EffectIndex']};")
@@ -529,6 +588,7 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
+    parser.add_argument('--source-loot-only', action='store_true', help='Run the complete source loot object group against the real release.')
     args = parser.parse_args()
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
         raise SystemExit('Requires MYSQL_DISPOSABLE_TEST_SERVER=1; never use a production server.')
@@ -560,6 +620,14 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.source_loot_only:
+            sql(migration)
+            tables = sql('SHOW TABLES;').stdout.splitlines()
+            restore = (ROOT / 'sql/updates/world/2026_10_03_00_world_campaign_source_loot_objects.sql').read_text('utf8')
+            registry = json.loads((ROOT / 'docs/audit-data/campaign-source-loot-restoration.json').read_text('utf8'))
+            test_simple_goober_models(tables,restore,registry,'five source loot objects / quest hints / compatible native loot')
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.smart_wall_only:
             sql(migration)
             tables = sql('SHOW TABLES;').stdout.splitlines()
@@ -622,6 +690,10 @@ def main():
         smart_wall = (ROOT / 'sql/updates/world/2026_10_02_05_world_campaign_smart_wall.sql').read_text('utf8')
         wall_registry = json.loads((ROOT / 'docs/audit-data/campaign-smart-wall-restoration.json').read_text('utf8'))
         test_generic_restoration(smart_wall, wall_registry, tables, 'one native Smart wall / two spawns / compatible entry script')
+
+        source_loot = (ROOT / 'sql/updates/world/2026_10_03_00_world_campaign_source_loot_objects.sql').read_text('utf8')
+        source_loot_registry = json.loads((ROOT / 'docs/audit-data/campaign-source-loot-restoration.json').read_text('utf8'))
+        test_simple_goober_models(tables,source_loot,source_loot_registry,'five source loot objects / quest hints / compatible native loot')
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)

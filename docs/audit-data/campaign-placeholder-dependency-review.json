@@ -171,7 +171,7 @@
         "BroadcastText": 19676
       },
       "missing_client_references": {},
-      "review_status": "requires_quest_items_and_loot",
+      "review_status": "restored_source_loot_objects",
       "client_references_present": {
         "GameObjectDisplayInfo": 30433,
         "Lock": 1691
@@ -184,7 +184,8 @@
         "gameobject_questitem": {
           "questItem1": "132377"
         }
-      }
+      },
+      "restoration_migration": "2026_10_03_00_world_campaign_source_loot_objects.sql"
     },
     {
       "entry": 245924,
@@ -692,7 +693,7 @@
         "WorldEffect": 2437
       },
       "missing_client_references": {},
-      "review_status": "requires_dependency_review",
+      "review_status": "restored_source_loot_objects",
       "client_references_present": {
         "GameObjectDisplayInfo": 31287,
         "Lock": 5,
@@ -702,7 +703,8 @@
       "release_smart_references": [],
       "unsupported_source_fields": {},
       "remaining_candidate": true,
-      "additional_table_dependencies": {}
+      "additional_table_dependencies": {},
+      "restoration_migration": "2026_10_03_00_world_campaign_source_loot_objects.sql"
     },
     {
       "entry": 246984,
@@ -1133,7 +1135,7 @@
         "BroadcastText": 37379
       },
       "missing_client_references": {},
-      "review_status": "requires_quest_items_and_loot",
+      "review_status": "restored_source_loot_objects",
       "client_references_present": {
         "GameObjectDisplayInfo": 9663,
         "Lock": 1691
@@ -1146,7 +1148,8 @@
         "gameobject_questitem": {
           "questItem1": "136985"
         }
-      }
+      },
+      "restoration_migration": "2026_10_03_00_world_campaign_source_loot_objects.sql"
     },
     {
       "entry": 249748,
@@ -1179,7 +1182,7 @@
         "BroadcastText": 19676
       },
       "missing_client_references": {},
-      "review_status": "requires_quest_items_and_loot",
+      "review_status": "restored_source_loot_objects",
       "client_references_present": {
         "GameObjectDisplayInfo": 12418,
         "Lock": 1691
@@ -1257,7 +1260,8 @@
         "gameobject_questitem": {
           "questItem1": "136987"
         }
-      }
+      },
+      "restoration_migration": "2026_10_03_00_world_campaign_source_loot_objects.sql"
     },
     {
       "entry": 250295,
@@ -1602,7 +1606,8 @@
       "release_smart_references": [],
       "unsupported_source_fields": {},
       "remaining_candidate": true,
-      "additional_table_dependencies": {}
+      "additional_table_dependencies": {},
+      "native_loot_review": "Original loot row uses LootMode=0 and would be rejected by current LootTemplate::Process mask. Deferred; not silently changed to 1."
     },
     {
       "entry": 251696,
@@ -2155,7 +2160,7 @@
         "GameObjectLootEntry": 64266
       },
       "missing_client_references": {},
-      "review_status": "requires_dependency_review",
+      "review_status": "restored_source_loot_objects",
       "client_references_present": {
         "GameObjectDisplayInfo": 6435,
         "Lock": 1628
@@ -2165,7 +2170,8 @@
       "unsupported_source_fields": {},
       "remaining_candidate": true,
       "additional_table_dependencies": {},
-      "loot_table_review": "Native Player::SendLoot LOOT_FISHINGHOLE fills LootTemplates_Gameobject; Data1 is gameobject_loot_template64266, not fishing_loot_template."
+      "loot_table_review": "Native Player::SendLoot LOOT_FISHINGHOLE fills LootTemplates_Gameobject; Data1 is gameobject_loot_template64266, not fishing_loot_template.",
+      "restoration_migration": "2026_10_03_00_world_campaign_source_loot_objects.sql"
     },
     {
       "entry": 266081,
@@ -3077,7 +3083,8 @@
         "gameobject_questitem": {
           "questItem1": "143918"
         }
-      }
+      },
+      "native_loot_review": "Original loot row uses LootMode=0 and would be rejected by current LootTemplate::Process mask. Deferred; not silently changed to 1."
     },
     {
       "entry": 267492,
@@ -4278,15 +4285,15 @@
       "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
     }
   },
-  "pending_candidates": 66,
+  "pending_candidates": 61,
   "review_counts": {
     "requires_script_chain": 9,
     "missing_client_reference": 18,
-    "requires_quest_items_and_loot": 15,
+    "requires_quest_items_and_loot": 12,
     "unsupported_source_field": 10,
-    "requires_dependency_review": 14
+    "requires_dependency_review": 12
   },
-  "scope": "All73 candidates pending before this batch; seven restored here;66 remain. Full source extras checked against actual45-column destination schema.",
+  "scope": "Original 73-candidate dependency snapshot with subsequent restoration status: 7 GOOBER + 5 source-loot objects restored; 61 remain.",
   "assurance": "Base DB2 ID presence; hotfix data may add records. PlayerCondition release hotfix table is empty. QuestItem fields map to gameobject_questitem and are dependency work, not unsupported schema fields.",
   "missing_spell_hotfix_review": {
     "basis": "Clean release hotfix spell table",
