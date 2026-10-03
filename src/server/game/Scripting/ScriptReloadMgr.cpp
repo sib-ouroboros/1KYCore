@@ -757,7 +757,7 @@ private:
     {
         auto path = fs::temp_directory_path();
         path /= Trinity::StringFormat("tc_script_cache_%s_%s",
-            GitRevision::GetBranch(),
+            CalculateSHA1Hash(GitRevision::GetBranch()).c_str(),
             CalculateSHA1Hash(sConfigMgr->GetFilename()).c_str());
 
         return path;

@@ -30,6 +30,8 @@ on:
       - src/server/game/Spells/Spell.cpp
       - src/server/game/Miscellaneous/SharedDefines.h
       - contrib/tests/test_spell_lock_keys.py
+      - src/server/game/Scripting/ScriptReloadMgr.cpp
+      - contrib/tests/test_script_cache_path.py
       - src/server/game/ChallengeMode/ChallengeModeMgr.cpp
       - src/server/game/Globals/BattlePetDataStore.cpp
       - src/server/game/Handlers/QuestHandler.cpp
@@ -122,3 +124,5 @@ jobs:
         run: python contrib/tests/test_wowtime_holiday_arithmetic.py
       - name: Test actual item, skill and spell lock validation
         run: python contrib/tests/test_spell_lock_keys.py
+      - name: Test dynamic cache path for branch names with separators
+        run: python contrib/tests/test_script_cache_path.py
