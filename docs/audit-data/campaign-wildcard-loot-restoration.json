@@ -486,7 +486,8 @@
     "commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
     "LootMgr.cpp_sha256": "db583c0b78635059ac52486ca89fd145c155f3214d4cf0ea401ad6b99d2e50aa",
     "mode_translation": "0 wildcard -> all uint16 bits (65535), explicit chances 100 and group IDs preserved",
-    "original_dispatch": "Nonpersonal chest -> LootTemplate::Process; group 1 row -> LootGroup::Process/Roll explicitly-chanced branch"
+    "original_dispatch": "Nonpersonal chest -> LootTemplate::Process; group 1 row -> LootGroup::Process/Roll explicitly-chanced branch",
+    "Spell.cpp_sha256": "d65de9244c95fa111fc020c21494f0336b3e0e91ca0a654bc38acf816ee38251"
   },
   "assurance": "No raw DB2 committed; base item/model/lock identity validated. No live DB or client acceptance.",
   "source_conditions": {
@@ -581,6 +582,119 @@
           "SoundEntriesID1": "0",
           "SoundEntriesID2": "0",
           "VerifiedBuild": "24330"
+        }
+      ]
+    }
+  },
+  "decoded_locks": {
+    "2584": {
+      "Index": [
+        0,
+        219181,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Skill": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Type": [
+        0,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Action": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "1691": {
+      "Index": [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Skill": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Type": [
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Action": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  },
+  "tree_opening_spell": {
+    "file": "SpellEffect.db2",
+    "sha256": "dfcb7076421e3b99fb23e769acddb9215d051069fe5e7488fc33b67770c194db",
+    "layout_hash": "0x3244098b",
+    "record_count": 269623,
+    "copy_rows": 0,
+    "identity_count": 269623,
+    "format": "WDC1",
+    "locale": "enUS",
+    "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+    "effects": {
+      "219181": [
+        {
+          "ID": 326411,
+          "Effect": 33,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 5,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 23,
+          "ImplicitTarget2": 0
         }
       ]
     }

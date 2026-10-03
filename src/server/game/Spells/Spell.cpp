@@ -7782,11 +7782,12 @@ SpellCastResult Spell::CanOpenLock(uint32 effIndex, uint32 lockId, SkillType& sk
                 // check key skill (only single first fit case can be)
             case LOCK_KEY_SKILL:
             {
-                // wrong locktype, skip
+                reqKey = true;
+
+                // A required skill key must not become an unrestricted lock
+                // when the opening spell has a different lock type.
                 if (effect->MiscValue != lockInfo->Index[j])
                     continue;
-
-                reqKey = true;
 
                 skillId = SkillByLockType(LockType(lockInfo->Index[j]));
 
@@ -7812,6 +7813,14 @@ SpellCastResult Spell::CanOpenLock(uint32 effIndex, uint32 lockId, SkillType& sk
 
                 return SPELL_CAST_OK;
             }
+            case LOCK_KEY_SPELL:
+                // Retain the original access-aura alternative for this key.
+                if (lockInfo->Index[j] == 143917 && m_caster->HasAura(146589))
+                    return SPELL_CAST_OK;
+                if (lockInfo->Index[j] > 0 && uint32(lockInfo->Index[j]) == m_spellInfo->Id)
+                    return SPELL_CAST_OK;
+                reqKey = true;
+                break;
         }
     }
 
