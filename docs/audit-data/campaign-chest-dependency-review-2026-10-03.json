@@ -1,0 +1,1187 @@
+{
+  "basis": "Original Legion SQL and clean no-mercenaries release; exact DB2 identity/layout checks; no live database writes",
+  "count": 15,
+  "client_item_proof": {
+    "file": "Item.db2",
+    "sha256": "67b3b9b5c33dfa226910b3c62fdaec674e6198c54b39a6cd07d622a90374b010",
+    "layout_hash": "0xdfcc83d",
+    "record_count": 32785,
+    "copy_rows": 96081,
+    "identity_count": 128866,
+    "format": "WDC1",
+    "locale": "enUS",
+    "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+  },
+  "entries": [
+    {
+      "entry": 245794,
+      "item": 132377,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 0,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "245794",
+          "item": "132377",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "280951",
+          "QuestID": "40606",
+          "Type": "1",
+          "StorageIndex": "0",
+          "ObjectID": "132377",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "0",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "21737",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "280951",
+          "QuestID": "40606",
+          "Type": "1",
+          "Order": "0",
+          "StorageIndex": "0",
+          "ObjectID": "132377",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 248781,
+      "item": 128758,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 65643,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "248781",
+          "item": "128758",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        },
+        {
+          "entry": "248782",
+          "item": "128758",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "282793",
+          "QuestID": "41780",
+          "Type": "1",
+          "StorageIndex": "1",
+          "ObjectID": "128758",
+          "Amount": "8",
+          "Flags": "0",
+          "Flags2": "0",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "21737",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "282793",
+          "QuestID": "41780",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "1",
+          "ObjectID": "128758",
+          "Amount": "8",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 248782,
+      "item": 128758,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 65643,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "248781",
+          "item": "128758",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        },
+        {
+          "entry": "248782",
+          "item": "128758",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "282793",
+          "QuestID": "41780",
+          "Type": "1",
+          "StorageIndex": "1",
+          "ObjectID": "128758",
+          "Amount": "8",
+          "Flags": "0",
+          "Flags2": "0",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "21737",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "282793",
+          "QuestID": "41780",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "1",
+          "ObjectID": "128758",
+          "Amount": "8",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 249744,
+      "item": 136985,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 0,
+      "source_quest_gate_Data8": 42128,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "249744",
+          "item": "136985",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "283780",
+          "QuestID": "42128",
+          "Type": "1",
+          "StorageIndex": "2",
+          "ObjectID": "136985",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "0",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "21737",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "283780",
+          "QuestID": "42128",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "2",
+          "ObjectID": "136985",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 249748,
+      "item": 136987,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 0,
+      "source_quest_gate_Data8": 42128,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "249748",
+          "item": "136987",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "283790",
+          "QuestID": "42128",
+          "Type": "1",
+          "StorageIndex": "3",
+          "ObjectID": "136987",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "0",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "21737",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "283790",
+          "QuestID": "42128",
+          "Type": "1",
+          "Order": "2",
+          "StorageIndex": "3",
+          "ObjectID": "136987",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 266291,
+      "item": 142393,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 70459,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_demoniste_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "266291",
+          "item": "142393",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "287428",
+          "QuestID": "45025",
+          "Type": "1",
+          "StorageIndex": "0",
+          "ObjectID": "142393",
+          "Amount": "5",
+          "Flags": "0",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "287428",
+          "QuestID": "45025",
+          "Type": "1",
+          "Order": "0",
+          "StorageIndex": "0",
+          "ObjectID": "142393",
+          "Amount": "5",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 266588,
+      "item": 143330,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 70531,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "266588",
+          "item": "143330",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "287652",
+          "QuestID": "45145",
+          "Type": "1",
+          "StorageIndex": "2",
+          "ObjectID": "143330",
+          "Amount": "1",
+          "Flags": "28",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "287652",
+          "QuestID": "45145",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "2",
+          "ObjectID": "143330",
+          "Amount": "1",
+          "Flags": "28",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 266595,
+      "item": 143332,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 70533,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_paladin_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "266595",
+          "item": "143332",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "287654",
+          "QuestID": "45145",
+          "Type": "1",
+          "StorageIndex": "4",
+          "ObjectID": "143332",
+          "Amount": "1",
+          "Flags": "28",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "287654",
+          "QuestID": "45145",
+          "Type": "1",
+          "Order": "3",
+          "StorageIndex": "4",
+          "ObjectID": "143332",
+          "Amount": "1",
+          "Flags": "28",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 267353,
+      "item": 143918,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 0,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_chasseur_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "267353",
+          "item": "143918",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "288552",
+          "QuestID": "45764",
+          "Type": "1",
+          "StorageIndex": "2",
+          "ObjectID": "143918",
+          "Amount": "3",
+          "Flags": "0",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "288552",
+          "QuestID": "45764",
+          "Type": "1",
+          "Order": "0",
+          "StorageIndex": "2",
+          "ObjectID": "143918",
+          "Amount": "3",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 267641,
+      "item": 143654,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 70957,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_pretre_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "267641",
+          "item": "143654",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "287970",
+          "QuestID": "45344",
+          "Type": "1",
+          "StorageIndex": "0",
+          "ObjectID": "143654",
+          "Amount": "6",
+          "Flags": "0",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "287970",
+          "QuestID": "45344",
+          "Type": "1",
+          "Order": "0",
+          "StorageIndex": "0",
+          "ObjectID": "143654",
+          "Amount": "6",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 268474,
+      "item": 146402,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 71934,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268474",
+          "item": "146402",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "289289",
+          "QuestID": "46335",
+          "Type": "1",
+          "StorageIndex": "0",
+          "ObjectID": "146402",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289289",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "0",
+          "StorageIndex": "0",
+          "ObjectID": "146402",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 268475,
+      "item": 146403,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 71935,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268475",
+          "item": "146403",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "289290",
+          "QuestID": "46335",
+          "Type": "1",
+          "StorageIndex": "1",
+          "ObjectID": "146403",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289290",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "1",
+          "ObjectID": "146403",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 268476,
+      "item": 146404,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 71936,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268476",
+          "item": "146404",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "289291",
+          "QuestID": "46335",
+          "Type": "1",
+          "StorageIndex": "2",
+          "ObjectID": "146404",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289291",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "2",
+          "StorageIndex": "2",
+          "ObjectID": "146404",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 268477,
+      "item": 146405,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 71938,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268477",
+          "item": "146405",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "289292",
+          "QuestID": "46335",
+          "Type": "1",
+          "StorageIndex": "3",
+          "ObjectID": "146405",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289292",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "3",
+          "StorageIndex": "3",
+          "ObjectID": "146405",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    },
+    {
+      "entry": 268479,
+      "item": 146409,
+      "source_type": 3,
+      "source_chestLoot_Data1": 0,
+      "source_personalLoot_Data30": 71943,
+      "source_quest_gate_Data8": 0,
+      "item_present_in_client": true,
+      "source_files": [
+        "sql/sylvania/campagne_mage_legioncore.sql"
+      ],
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268479",
+          "item": "146409",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_loot_rows_for_item_or_entry": [],
+      "source_item_objectives": [
+        {
+          "ID": "289294",
+          "QuestID": "46335",
+          "Type": "1",
+          "StorageIndex": "4",
+          "ObjectID": "146409",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "TaskStep": "0",
+          "Description": "NULL",
+          "VerifiedBuild": "23877",
+          "Bugged": "0"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289294",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "4",
+          "StorageIndex": "4",
+          "ObjectID": "146409",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ],
+      "release_questitem_rows": [],
+      "source_smart_scripts": [],
+      "release_smart_scripts": [],
+      "decision": "Defer: do not invent chestLoot, drop personal loot or equate quest-item hint with loot generation"
+    }
+  ],
+  "runtime_evidence": {
+    "GetLootId": "src/server/game/Entities/GameObject/GameObjectData.h: CHEST returns Data1 chestLoot",
+    "SendLoot": "src/server/game/Entities/Player/Player.cpp: FillLoot only when GetLootId() nonzero",
+    "personal_loot": "Data30 is a distinct Treasure reference; no chestPersonalLoot consumer found in current source",
+    "quest_item_hint": "gameobject_questitem records do not replace gameobject_loot_template rows"
+  },
+  "source_quest_42128": [
+    {
+      "ID": "42128",
+      "QuestType": "2",
+      "QuestLevel": "-1",
+      "QuestMaxScalingLevel": "255",
+      "QuestPackageID": "0",
+      "MinLevel": "98",
+      "QuestSortID": "-406",
+      "QuestInfoID": "107",
+      "SuggestedGroupNum": "0",
+      "RewardNextQuest": "42168",
+      "RewardXPDifficulty": "5",
+      "RewardXPMultiplier": "1",
+      "RewardMoney": "154000",
+      "RewardMoneyDifficulty": "5",
+      "RewardMoneyMultiplier": "1",
+      "RewardBonusMoney": "182850",
+      "RewardDisplaySpell1": "0",
+      "RewardDisplaySpell2": "0",
+      "RewardDisplaySpell3": "0",
+      "RewardSpell": "0",
+      "RewardHonor": "0",
+      "RewardKillHonor": "0",
+      "RewardArtifactXP": "0",
+      "RewardArtifactXPMultiplier": "1",
+      "RewardArtifactCategoryID": "0",
+      "StartItem": "0",
+      "Flags": "37748736",
+      "FlagsEx": "33562880",
+      "RewardItem1": "0",
+      "RewardAmount1": "0",
+      "RewardItem2": "0",
+      "RewardAmount2": "0",
+      "RewardItem3": "0",
+      "RewardAmount3": "0",
+      "RewardItem4": "0",
+      "RewardAmount4": "0",
+      "ItemDrop1": "0",
+      "ItemDropQuantity1": "0",
+      "ItemDrop2": "0",
+      "ItemDropQuantity2": "0",
+      "ItemDrop3": "0",
+      "ItemDropQuantity3": "0",
+      "ItemDrop4": "0",
+      "ItemDropQuantity4": "0",
+      "RewardChoiceItemID1": "0",
+      "RewardChoiceItemQuantity1": "0",
+      "RewardChoiceItemDisplayID1": "0",
+      "RewardChoiceItemID2": "0",
+      "RewardChoiceItemQuantity2": "0",
+      "RewardChoiceItemDisplayID2": "0",
+      "RewardChoiceItemID3": "0",
+      "RewardChoiceItemQuantity3": "0",
+      "RewardChoiceItemDisplayID3": "0",
+      "RewardChoiceItemID4": "0",
+      "RewardChoiceItemQuantity4": "0",
+      "RewardChoiceItemDisplayID4": "0",
+      "RewardChoiceItemID5": "0",
+      "RewardChoiceItemQuantity5": "0",
+      "RewardChoiceItemDisplayID5": "0",
+      "RewardChoiceItemID6": "0",
+      "RewardChoiceItemQuantity6": "0",
+      "RewardChoiceItemDisplayID6": "0",
+      "POIContinent": "0",
+      "POIx": "0",
+      "POIy": "0",
+      "POIPriority": "0",
+      "RewardTitle": "0",
+      "RewardArenaPoints": "0",
+      "RewardSkillLineID": "0",
+      "RewardNumSkillUps": "0",
+      "PortraitGiver": "0",
+      "PortraitTurnIn": "0",
+      "RewardFactionID1": "0",
+      "RewardFactionValue1": "0",
+      "RewardFactionOverride1": "0",
+      "FactionCapIn1": "0",
+      "RewardFactionID2": "0",
+      "RewardFactionValue2": "0",
+      "RewardFactionOverride2": "0",
+      "FactionCapIn2": "0",
+      "RewardFactionID3": "0",
+      "RewardFactionValue3": "0",
+      "RewardFactionOverride3": "0",
+      "FactionCapIn3": "0",
+      "RewardFactionID4": "0",
+      "RewardFactionValue4": "0",
+      "RewardFactionOverride4": "0",
+      "FactionCapIn4": "0",
+      "RewardFactionID5": "0",
+      "RewardFactionValue5": "0",
+      "RewardFactionOverride5": "0",
+      "FactionCapIn5": "0",
+      "RewardFactionFlags": "0",
+      "RewardCurrencyID1": "0",
+      "RewardCurrencyQty1": "0",
+      "RewardCurrencyID2": "0",
+      "RewardCurrencyQty2": "0",
+      "RewardCurrencyID3": "0",
+      "RewardCurrencyQty3": "0",
+      "RewardCurrencyID4": "0",
+      "RewardCurrencyQty4": "0",
+      "AcceptedSoundKitID": "890",
+      "CompleteSoundKitID": "878",
+      "AreaGroupID": "0",
+      "TimeAllowed": "0",
+      "AllowableRaces": "18446744073709551615",
+      "QuestRewardID": "0",
+      "Expansion": "0",
+      "LogTitle": "NULL",
+      "LogDescription": "NULL",
+      "QuestDescription": "NULL",
+      "AreaDescription": "NULL",
+      "QuestCompletionLog": "NULL",
+      "PortraitGiverText": "NULL",
+      "PortraitGiverName": "NULL",
+      "PortraitTurnInText": "NULL",
+      "PortraitTurnInName": "NULL",
+      "StartScript": "0",
+      "CompleteScript": "0",
+      "VerifiedBuild": "21737"
+    }
+  ],
+  "release_quest_42128": [
+    {
+      "ID": "42128",
+      "QuestType": "2",
+      "QuestLevel": "-1",
+      "MaxScalingLevel": "255",
+      "QuestPackageID": "0",
+      "MinLevel": "98",
+      "QuestSortID": "-406",
+      "QuestInfoID": "107",
+      "SuggestedGroupNum": "0",
+      "RewardNextQuest": "42168",
+      "RewardXPDifficulty": "5",
+      "RewardXPMultiplier": "1",
+      "RewardMoney": "50",
+      "RewardMoneyDifficulty": "5",
+      "RewardMoneyMultiplier": "1",
+      "RewardBonusMoney": "150",
+      "RewardDisplaySpell1": "0",
+      "RewardDisplaySpell2": "0",
+      "RewardDisplaySpell3": "0",
+      "RewardSpell": "0",
+      "RewardHonor": "0",
+      "RewardKillHonor": "0",
+      "StartItem": "0",
+      "RewardArtifactXPDifficulty": "0",
+      "RewardArtifactXPMultiplier": "1",
+      "RewardArtifactCategoryID": "0",
+      "Flags": "37748736",
+      "FlagsEx": "33562880",
+      "RewardItem1": "0",
+      "RewardAmount1": "0",
+      "RewardItem2": "0",
+      "RewardAmount2": "0",
+      "RewardItem3": "0",
+      "RewardAmount3": "0",
+      "RewardItem4": "0",
+      "RewardAmount4": "0",
+      "ItemDrop1": "0",
+      "ItemDropQuantity1": "0",
+      "ItemDrop2": "0",
+      "ItemDropQuantity2": "0",
+      "ItemDrop3": "0",
+      "ItemDropQuantity3": "0",
+      "ItemDrop4": "0",
+      "ItemDropQuantity4": "0",
+      "RewardChoiceItemID1": "0",
+      "RewardChoiceItemQuantity1": "0",
+      "RewardChoiceItemDisplayID1": "0",
+      "RewardChoiceItemID2": "0",
+      "RewardChoiceItemQuantity2": "0",
+      "RewardChoiceItemDisplayID2": "0",
+      "RewardChoiceItemID3": "0",
+      "RewardChoiceItemQuantity3": "0",
+      "RewardChoiceItemDisplayID3": "0",
+      "RewardChoiceItemID4": "0",
+      "RewardChoiceItemQuantity4": "0",
+      "RewardChoiceItemDisplayID4": "0",
+      "RewardChoiceItemID5": "0",
+      "RewardChoiceItemQuantity5": "0",
+      "RewardChoiceItemDisplayID5": "0",
+      "RewardChoiceItemID6": "0",
+      "RewardChoiceItemQuantity6": "0",
+      "RewardChoiceItemDisplayID6": "0",
+      "POIContinent": "0",
+      "POIx": "0",
+      "POIy": "0",
+      "POIPriority": "0",
+      "RewardTitle": "0",
+      "RewardArenaPoints": "0",
+      "RewardSkillLineID": "0",
+      "RewardNumSkillUps": "0",
+      "PortraitGiver": "0",
+      "PortraitTurnIn": "0",
+      "RewardFactionID1": "0",
+      "RewardFactionValue1": "0",
+      "RewardFactionOverride1": "0",
+      "RewardFactionCapIn1": "7",
+      "RewardFactionID2": "0",
+      "RewardFactionValue2": "0",
+      "RewardFactionOverride2": "0",
+      "RewardFactionCapIn2": "7",
+      "RewardFactionID3": "0",
+      "RewardFactionValue3": "0",
+      "RewardFactionOverride3": "0",
+      "RewardFactionCapIn3": "7",
+      "RewardFactionID4": "0",
+      "RewardFactionValue4": "0",
+      "RewardFactionOverride4": "0",
+      "RewardFactionCapIn4": "7",
+      "RewardFactionID5": "0",
+      "RewardFactionValue5": "0",
+      "RewardFactionOverride5": "0",
+      "RewardFactionCapIn5": "7",
+      "RewardFactionFlags": "0",
+      "RewardCurrencyID1": "0",
+      "RewardCurrencyQty1": "0",
+      "RewardCurrencyID2": "0",
+      "RewardCurrencyQty2": "0",
+      "RewardCurrencyID3": "0",
+      "RewardCurrencyQty3": "0",
+      "RewardCurrencyID4": "0",
+      "RewardCurrencyQty4": "0",
+      "AcceptedSoundKitID": "890",
+      "CompleteSoundKitID": "878",
+      "AreaGroupID": "0",
+      "TimeAllowed": "0",
+      "AllowableRaces": "18446744073709551615",
+      "QuestRewardID": "0",
+      "Expansion": "6",
+      "LogTitle": "'Ritual Reagents'",
+      "LogDescription": "'Search within Dalaran for Grave Dust, a Can of Overheated Oil, an Aged Snowplum Brandy, and a Stag Blood Sample.'",
+      "QuestDescription": "'The Skull of the Man\\'ari, oh good choice! It\\'s very powerful and it\\'s held by an even more powerful Dreadlord!$b$bThere is a weakness, the skull has a will of its own! If we can commune with the skull we might be able to convince it to serve you instead!$b$bWe will need reagents from the floating city before we can perform the ritual to commune with it. Dust from a fresh grave, dark oil, and a powerful alcohol catalyst.$b$bOh, and blood! I sense a beast whose blood should be perfect.'",
+      "AreaDescription": "''",
+      "PortraitGiverText": "''",
+      "PortraitGiverName": "''",
+      "PortraitTurnInText": "''",
+      "PortraitTurnInName": "''",
+      "QuestCompletionLog": "''",
+      "VerifiedBuild": "26365"
+    }
+  ]
+}

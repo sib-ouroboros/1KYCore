@@ -1,0 +1,1216 @@
+{
+  "basis": "Lexical inventory after C++ comment removal; receiver-name classes are review hints, not type inference or proof every call executes",
+  "source_head": "cda20cfeff83ca2b04247be7ebf6b2b651c96406",
+  "sites": [
+    {
+      "file": "src/common/Utilities/EventProcessor.cpp",
+      "line": 137,
+      "api": "AddDelayedEvent",
+      "receiver": null,
+      "classification": "declaration_or_definition",
+      "excerpt": "AddDelayedEvent(uint64 t_offset, std::function<void()>&& function)\n{\n    AddFunction(std::move(function), m_time + t_offset);\n}"
+    },
+    {
+      "file": "src/server/game/AI/CoreAI/UnitAI.cpp",
+      "line": 275,
+      "api": "AddDelayedEvent",
+      "receiver": null,
+      "classification": "declaration_or_definition",
+      "excerpt": "AddDelayedEvent(Minutes delayTime, std::function<void()>&& function)\n{\n    AddDelayedEvent(std::chrono::duration_cast<Seconds>(delayTime), std::move(function));\n}"
+    },
+    {
+      "file": "src/server/game/AI/CoreAI/UnitAI.cpp",
+      "line": 277,
+      "api": "AddDelayedEvent",
+      "receiver": null,
+      "classification": "call_requires_owner_review",
+      "excerpt": "AddDelayedEvent(std::chrono::duration_cast<Seconds>(delayTime), std::move(function));\n}\n\nvoid UnitAI::AddDelayedEvent(Seconds delayTime, std::function<void()>&& function)"
+    },
+    {
+      "file": "src/server/game/AI/CoreAI/UnitAI.cpp",
+      "line": 280,
+      "api": "AddDelayedEvent",
+      "receiver": null,
+      "classification": "declaration_or_definition",
+      "excerpt": "AddDelayedEvent(Seconds delayTime, std::function<void()>&& function)\n{\n    me->AddDelayedEvent(delayTime.count(), std::move(function));\n}"
+    },
+    {
+      "file": "src/server/game/AI/CoreAI/UnitAI.cpp",
+      "line": 282,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(delayTime.count(), std::move(function));\n}\n\nvoid UnitAI::KillAllDelayedEvents()"
+    },
+    {
+      "file": "src/server/game/AI/CoreAI/UnitAI.cpp",
+      "line": 285,
+      "api": "KillAllDelayedEvents",
+      "receiver": null,
+      "classification": "declaration_or_definition",
+      "excerpt": "KillAllDelayedEvents()\n{\n    me->KillAllDelayedEvents();\n}"
+    },
+    {
+      "file": "src/server/game/AI/CoreAI/UnitAI.cpp",
+      "line": 287,
+      "api": "KillAllDelayedEvents",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedEvents();\n}\n\nThreatManager& UnitAI::GetThreatManager()"
+    },
+    {
+      "file": "src/server/game/AI/CreatureAI.cpp",
+      "line": 60,
+      "api": "AddDelayedEvent",
+      "receiver": null,
+      "classification": "declaration_or_definition",
+      "excerpt": "AddDelayedEvent(uint64 timeOffset, std::function<void()>&& function)\n{\n    me->AddDelayedEvent(timeOffset, std::move(function));\n}"
+    },
+    {
+      "file": "src/server/game/AI/CreatureAI.cpp",
+      "line": 62,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(timeOffset, std::move(function));\n}\n\nvoid CreatureAI::KillAllDelayedEvents()"
+    },
+    {
+      "file": "src/server/game/AI/CreatureAI.cpp",
+      "line": 65,
+      "api": "KillAllDelayedEvents",
+      "receiver": null,
+      "classification": "declaration_or_definition",
+      "excerpt": "KillAllDelayedEvents()\n{\n    me->KillAllDelayedEvents();\n}"
+    },
+    {
+      "file": "src/server/game/AI/CreatureAI.cpp",
+      "line": 67,
+      "api": "KillAllDelayedEvents",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedEvents();\n}\n\nvoid CreatureAI::AddDelayedCombat(uint64 timeOffset, std::function<void()>&& function)"
+    },
+    {
+      "file": "src/server/game/AI/CreatureAI.cpp",
+      "line": 70,
+      "api": "AddDelayedCombat",
+      "receiver": null,
+      "classification": "declaration_or_definition",
+      "excerpt": "AddDelayedCombat(uint64 timeOffset, std::function<void()>&& function)\n{\n    me->AddDelayedCombat(timeOffset, std::move(function));\n}"
+    },
+    {
+      "file": "src/server/game/AI/CreatureAI.cpp",
+      "line": 72,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(timeOffset, std::move(function));\n}\n\nvoid CreatureAI::KillAllDelayedCombats()"
+    },
+    {
+      "file": "src/server/game/AI/CreatureAI.cpp",
+      "line": 75,
+      "api": "KillAllDelayedCombats",
+      "receiver": null,
+      "classification": "declaration_or_definition",
+      "excerpt": "KillAllDelayedCombats()\n{\n    me->KillAllDelayedCombats();\n}"
+    },
+    {
+      "file": "src/server/game/AI/CreatureAI.cpp",
+      "line": 77,
+      "api": "KillAllDelayedCombats",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedCombats();\n}\n\nvoid CreatureAI::DoZoneInCombat(Creature* creature              , float maxRangeToNearestTarget              )"
+    },
+    {
+      "file": "src/server/game/BrawlersGuild/BrawlersGuild.cpp",
+      "line": 190,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(500, [player] () -> void\n                    {\n                        player->CastSpell(player, SPELL_ARENA_TELEPORTATION, true);\n                    });"
+    },
+    {
+      "file": "src/server/game/BrawlersGuild/BrawlersGuild.cpp",
+      "line": 206,
+      "api": "AddDelayedEvent",
+      "receiver": "ann",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "ann->AddDelayedEvent(1000, [ann, repRank, player_guid] () -> void\n                        {\n                                ann->AI()->Talk(repRank);\n                        });"
+    },
+    {
+      "file": "src/server/game/BrawlersGuild/BrawlersGuild.cpp",
+      "line": 273,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(1000, [player] () -> void\n        {\n            player->NearTeleportTo(player->GetMapId(), &BrawlersTeleportLocations[player->GetTeamId() == TEAM_ALLIANCE ? 1 : 3]);\n"
+    },
+    {
+      "file": "src/server/game/BrawlersGuild/BrawlersGuild.cpp",
+      "line": 277,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(500, [player] () -> void\n            {\n                player->CastSpell(player, SPELL_ARENA_TELEPORTATION, true);\n            });"
+    },
+    {
+      "file": "src/server/game/Entities/Creature/Creature.cpp",
+      "line": 3377,
+      "api": "AddDelayedEvent",
+      "receiver": null,
+      "classification": "call_requires_owner_review",
+      "excerpt": "AddDelayedEvent(delay, [this, st]() -> void { SetReactState(st); });\n}\n\nvoid Creature::StopAttack(bool clearMove            , bool interruptSpells            )"
+    },
+    {
+      "file": "src/server/game/Entities/Unit/Unit.cpp",
+      "line": 15230,
+      "api": "AddDelayedCombat",
+      "receiver": null,
+      "classification": "call_requires_owner_review",
+      "excerpt": "AddDelayedCombat(delay, [this, spellId, triggered, castItem, triggeredByAura, originalCaster, targetGUID]() -> void\n    {\n        Unit* target = ObjectAccessor::GetUnit(*this, targetGUID);\n        if (!target)"
+    },
+    {
+      "file": "src/server/game/Entities/Unit/Unit.cpp",
+      "line": 15248,
+      "api": "AddDelayedCombat",
+      "receiver": null,
+      "classification": "call_requires_owner_review",
+      "excerpt": "AddDelayedCombat(delay, [this, pos, spellId, triggered]() -> void\n        {\n            CastSpell(pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ(), spellId, triggered);\n        });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_five.cpp",
+      "line": 180,
+      "api": "AddDelayedEvent",
+      "receiver": "summon",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "summon->AddDelayedEvent(1000, [summon] () -> void\n                {\n                    summon->SetReactState(REACT_PASSIVE);\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_five.cpp",
+      "line": 345,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(1000, [player] () -> void\n                {\n\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_five.cpp",
+      "line": 363,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(1000, [player] () -> void\n                {\n \n                });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_five.cpp",
+      "line": 378,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(1000, [player] () -> void\n                {\n\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "line": 311,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1000, [this, guid] () -> void\n            {\n                if (Creature* gnome = me->FindNearestCreature(68475, 10.0f, true))\n                {"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "line": 315,
+      "api": "AddDelayedEvent",
+      "receiver": "gnome",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "gnome->AddDelayedEvent(1000, [gnome, this, guid] () -> void\n                    {\n                        gnome->AI()->Talk(0);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "line": 320,
+      "api": "AddDelayedEvent",
+      "receiver": "gnome",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "gnome->AddDelayedEvent(5000, [gnome] () -> void\n                    {\n                        gnome->AI()->Talk(1);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "line": 325,
+      "api": "AddDelayedEvent",
+      "receiver": "gnome",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "gnome->AddDelayedEvent(5000, [gnome] () -> void\n                    {\n                        gnome->CastSpell(gnome, 134917);\n                        gnome->DespawnOrUnsummon(4000);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "line": 333,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(10000, [this] () -> void\n            {\n\n            });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "line": 450,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(700, [this] () -> void\n                {\n                    if (Unit* owner = me->GetOwner())\n                        AttackStart(owner);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "line": 580,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(700, [this] ()-> void\n                        {\n                            if (Creature* totem = me->FindNearestCreature(67500, 30.0f, true))\n                            {"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "line": 688,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1000, [this] () -> void\n                        {\n                            if (Unit* owner = me->GetOwner())\n                                me->CastSpell(owner, SPELL_AURA_OF_ROT_TICK);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_one.cpp",
+      "line": 115,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(2400, [this]() -> void\n                    {\n                        if (me && me->IsAlive())\n                            me->ClearUnitState(UNIT_STATE_ROOT);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_one.cpp",
+      "line": 125,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(2400 + 7500, [this]() -> void\n                    {\n                        me->SetWalk(false);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_one.cpp",
+      "line": 289,
+      "api": "AddDelayedEvent",
+      "receiver": "morozec",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "morozec->AddDelayedEvent(6000, [morozec, this]() -> void\n                {\n                    me->CastSpell(morozec, 93330);\n                    morozec->CastSpell(morozec, 234213);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_one.cpp",
+      "line": 339,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(2200, [this]() -> void\n                    {\n                        Position pos;\n                        me->CastSpell(pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ(), SPELL_JUMP_GRIZZLY);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_one.cpp",
+      "line": 343,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(2200, [this]() -> void\n                        {\n                            Position pos;\n                            me->CastSpell(pos.GetPositionX(), pos.GetPositionY(), pos.GetPositionZ(), SPELL_JUMP_GRIZZLY);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_seven.cpp",
+      "line": 180,
+      "api": "AddDelayedEvent",
+      "receiver": "summon",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "summon->AddDelayedEvent(2000, [summon]() -> void\n                {\n                    summon->CastSpell(summon, 236794);\n                    summon->DespawnOrUnsummon(500);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_seven.cpp",
+      "line": 248,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1000, [this]() -> void\n            {\n                if (Creature* razrubait = me->SummonCreature(67526, me->GetPositionX() + irand(-5, 5), me->GetPositionY(), me->GetPositionZ(), me->GetOrientation()))\n                {"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_seven.cpp",
+      "line": 254,
+      "api": "AddDelayedEvent",
+      "receiver": "razrubait",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "razrubait->AddDelayedEvent(2000, [razrubait]() -> void\n                    {\n                        razrubait->AI()->Talk(1);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_seven.cpp",
+      "line": 259,
+      "api": "AddDelayedEvent",
+      "receiver": "razrubait",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "razrubait->AddDelayedEvent(5000, [razrubait]() -> void\n                    {\n                        razrubait->AI()->Talk(2);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_seven.cpp",
+      "line": 264,
+      "api": "AddDelayedEvent",
+      "receiver": "razrubait",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "razrubait->AddDelayedEvent(8000, [razrubait]() -> void\n                    {\n                        razrubait->AI()->Talk(3);\n                        razrubait->CastSpell(razrubait, 84768);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_seven.cpp",
+      "line": 443,
+      "api": "AddDelayedEvent",
+      "receiver": "visual",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "visual->AddDelayedEvent(6000, [visual, this]() -> void\n                        {\n                            visual->RemoveAura(last_spell);\n                        });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_six.cpp",
+      "line": 352,
+      "api": "AddDelayedEvent",
+      "receiver": "target",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "target->AddDelayedEvent(10, [target]() -> void\n                    {\n\n                        target->SetOrientation(1.57f);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_six.cpp",
+      "line": 359,
+      "api": "AddDelayedEvent",
+      "receiver": "target",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "target->AddDelayedEvent(20, [target]() -> void\n                    {\n                        target->SetOrientation(3.14f);\n                        target->CastSpell(target, SPELL_LAVA_WAVES);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_six.cpp",
+      "line": 365,
+      "api": "AddDelayedEvent",
+      "receiver": "target",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "target->AddDelayedEvent(30, [target]() -> void\n                    {\n                        target->SetOrientation(4.71f);\n                        target->CastSpell(target, SPELL_LAVA_WAVES);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_six.cpp",
+      "line": 573,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(100, [this]() -> void\n                    {\n                        me->RemoveAura(SPELL_PROTECT_SHIELD_BUFF);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_two.cpp",
+      "line": 489,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(3000, [this]() -> void\n                {\n                    if (me->GetOwner() && me->GetOwner()->IsPlayer())\n                    {"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_two.cpp",
+      "line": 517,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(20000, [this]() -> void\n                {\n                    if (me->GetOwner() && me->GetOwner()->IsPlayer())\n                    {"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_two.cpp",
+      "line": 553,
+      "api": "AddDelayedEvent",
+      "receiver": "summon",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "summon->AddDelayedEvent(47000, [summon, player]() -> void\n                    {\n                        summon->GetMotionMaster()->Clear();\n                        summon->GetMotionMaster()->MovePath(player->GetTeamId() == TEAM_ALLIANCE ? a_WP[urand(0, 5)] : h_WP[urand(0, 5)], false);"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_two.cpp",
+      "line": 588,
+      "api": "KillAllDelayedEvents",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedEvents();\n\n            if (!who)\n                return;"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_two.cpp",
+      "line": 603,
+      "api": "KillAllDelayedEvents",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedEvents();\n                    _Reset();\n                }\n                else"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_two.cpp",
+      "line": 623,
+      "api": "KillAllDelayedEvents",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedEvents();\n                    Player* player = me->GetOwner()->ToPlayer();\n                    player->AddDelayedEvent(700, [player]() -> void\n                    {"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_two.cpp",
+      "line": 625,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(700, [player]() -> void\n                    {\n                                                          \n                                                                                          "
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/BrawlersGuild.cpp",
+      "line": 187,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(500, [player] () -> void\n                    {\n                        player->CastSpell(player, SPELL_ARENA_TELEPORTATION, true);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/BrawlersGuild.cpp",
+      "line": 203,
+      "api": "AddDelayedEvent",
+      "receiver": "ann",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "ann->AddDelayedEvent(1000, [ann, repRank, player_guid] () -> void\n                        {\n                            ann->AI()->Talk(repRank);\n                        });"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/BrawlersGuild.cpp",
+      "line": 270,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(1000, [player] () -> void\n        {\n                                                                                                                               \n"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/BrawlersGuild.cpp",
+      "line": 274,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(500, [player] () -> void\n            {\n                player->CastSpell(player, SPELL_ARENA_TELEPORTATION, true);\n            });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/Scenario/scenario_assault_broken_shore.cpp",
+      "line": 266,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(20000, [moi]() -> void\n            {\n                moi->SetData(DATA_ARRIVEE_ACCOMPLIE, 1);\n            });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/Scenario/scenario_assault_broken_shore.cpp",
+      "line": 271,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(5000, [player]() -> void\n            {\n                                             \n                TC_LOG_ERROR(\"misc\", \"RIVAGEDBG invocation du corbeau (sort %u)\", uint32(SPELL_ENTREE_INVOCATION));"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/Scenario/scenario_assault_broken_shore.cpp",
+      "line": 282,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(4000, [player]() -> void\n                {\n                    player->RemoveAura(SPELL_ENTREE_A_RETIRER);\n                    Conversation::CreateConversation(CONV_ENTREE, player, player->GetPosition(), { player->GetGUID() });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/Scenario/scenario_assault_broken_shore.cpp",
+      "line": 476,
+      "api": "AddDelayedEvent",
+      "receiver": "player",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "player->AddDelayedEvent(4000, [player]() -> void\n                {\n                    Conversation::CreateConversation(CONV_FINALE, player, player->GetPosition(), { player->GetGUID() });\n                    player->CastSpell(player, SPELL_FINALE, true);"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/Scenario/scenario_assault_broken_shore.cpp",
+      "line": 678,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(4000, [moi]() -> void\n            {\n                moi->GetMotionMaster()->MovePath(CHEMIN_CORBEAU, false);\n            });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_DemonicInquisition.cpp",
+      "line": 96,
+      "api": "KillAllDelayedEvents",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedEvents();\n            me->RemoveAllAreaTriggers();\n\n            if (me->IsAlive())"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_DemonicInquisition.cpp",
+      "line": 127,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(6500, [this]() -> void\n                    {\n                        Talk(0);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_DemonicInquisition.cpp",
+      "line": 142,
+      "api": "AddDelayedEvent",
+      "receiver": "other",
+      "classification": "call_requires_owner_review",
+      "excerpt": "other->AddDelayedEvent(100, [other,who]() -> void\n                {\n                    if (who)\n                        if(!other->IsInCombat())"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_DemonicInquisition.cpp",
+      "line": 159,
+      "api": "AddDelayedEvent",
+      "receiver": "other",
+      "classification": "call_requires_owner_review",
+      "excerpt": "other->AddDelayedEvent(100, [other]() -> void\n                {\n                    if (other->IsInCombat())\n                        other->AI()->EnterEvadeMode();"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_DemonicInquisition.cpp",
+      "line": 259,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(5000, [this, target]()\n                            {\n                                if (!target)\n                                    return;"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_DemonicInquisition.cpp",
+      "line": 277,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1 + time * 50, [=]()\n                                        {\n                                            me->CastSpell({ me->GetPositionX() + new_x + frand(-2, 2), me->GetPositionY() + new_y + frand(-2, 2), me->GetPositionZ(), 0 }, 233435, true);\n"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_DemonicInquisition.cpp",
+      "line": 448,
+      "api": "AddDelayedEvent",
+      "receiver": "caster",
+      "classification": "call_requires_owner_review",
+      "excerpt": "caster->AddDelayedEvent(1500, [caster]() -> void {\n                    caster->RemoveAurasDueToSpell(233652);\n                    caster->GetMotionMaster()->Clear();\n                    caster->ToPlayer()->TeleportTo(caster->GetMapId(), 6403.13f, -935.55f, 3060.23f, caster->GetOrientation(),TELE_TO_SEAMLESS);"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 314,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(500, [&]() -> void\n            {\n                if (Creature* maiden = summons.GetCreature(NPC_AVATARA_MAIDEN))\n                {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 354,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(30000, [this]() -> void\n        {\n            if (Creature* kiljedan = instance->instance->GetCreature(instance->GetGuidData(NPC_KILDJEDAN_AVATARA)))\n            {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 359,
+      "api": "AddDelayedEvent",
+      "receiver": "kiljedan",
+      "classification": "call_requires_owner_review",
+      "excerpt": "kiljedan->AddDelayedEvent(4000, [kiljedan]() -> void\n                {\n                    kiljedan->SetVisible(false);\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 366,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(58000, [this]() -> void\n        {\n            if (Creature* velen = summons.GetCreature(121170))\n            {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 372,
+      "api": "AddDelayedEvent",
+      "receiver": "velen",
+      "classification": "call_requires_owner_review",
+      "excerpt": "velen->AddDelayedEvent(4000, [velen]() -> void\n                {\n                    velen->SetVisible(false);\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 379,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(115000, [this]() -> void\n        {\n            for (auto id : { 121171, 121169})\n                if (Creature* add = summons.GetCreature(id))"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 386,
+      "api": "AddDelayedEvent",
+      "receiver": "add",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "add->AddDelayedEvent(3000, [add]() -> void\n                    {\n                        add->SetVisible(false);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 420,
+      "api": "AddDelayedEvent",
+      "receiver": "go",
+      "classification": "GameObject_wrapper_verify_static_type",
+      "excerpt": "go->AddDelayedEvent(6000, [go]() -> void\n                {\n                    go->SetDestructibleState(GO_DESTRUCTIBLE_DESTROYED, nullptr, false);\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 452,
+      "api": "AddDelayedEvent",
+      "receiver": "summon",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "summon->AddDelayedEvent(7000, [summon]() -> void\n                    {\n                        summon->CastSpell(summon, SPELL_CORRUPTED_BLADE_REMOVE);\n                        summon->DespawnOrUnsummon(2000);"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 492,
+      "api": "AddDelayedEvent",
+      "receiver": "kiljedan",
+      "classification": "call_requires_owner_review",
+      "excerpt": "kiljedan->AddDelayedEvent(27000, [kiljedan, this]() -> void\n                {\n                    kiljedan->CastSpell(me, 240897);\n                    me->AddDelayedEvent(3000, [this]() -> void"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 495,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(3000, [this]() -> void\n                    {\n                        me->SetAIAnimKitId(12758);     \n                        me->AddDelayedEvent(10000, [this]() -> void"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 498,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(10000, [this]() -> void\n                        {\n                            DoCast(SPELL_VISUAL_SWORD);\n                        });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 504,
+      "api": "AddDelayedEvent",
+      "receiver": "kiljedan",
+      "classification": "call_requires_owner_review",
+      "excerpt": "kiljedan->AddDelayedEvent(13000, [kiljedan]() -> void\n                    {\n                        kiljedan->CastSpell(kiljedan, 240923);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 541,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(500, [this]() -> void\n                {\n                    SetCombatMovement(true);\n                    me->GetMotionMaster()->Clear();"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 558,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(2000, [this]() -> void\n                    {\n                        DoCast(me, SPELL_SEAR, true);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 564,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(5000, [this]() -> void\n                    {\n                                                                   \n                        for (auto pair : perephaseEvent)"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 577,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(7000, [this]() -> void\n                    {\n                        instance->instance->ApplyOnEveryPlayer([](Player* player) -> void\n                        {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 592,
+      "api": "AddDelayedEvent",
+      "receiver": "go",
+      "classification": "GameObject_wrapper_verify_static_type",
+      "excerpt": "go->AddDelayedEvent(me->GetDistance(pair.second) * 3 + 1, [go]() -> void\n                        {\n                            go->SetDestructibleState(GO_DESTRUCTIBLE_DESTROYED, nullptr, false);\n                        });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 626,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(500, [this]() -> void\n                    {\n                        DoCast(SPELL_ANNIHILATION);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 748,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(500, [this]() -> void\n                        {\n                            DoCast(SPELL_ANNIHILATION);\n                        });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 795,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(2500, [this]() -> void\n                    {\n                        std::vector<Position> positions = sargerasPositions;\n"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 814,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(i++ * 50 + 10, [this, pair]() -> void\n                        {\n                            me->CastSpell(pair.second.GetPositionX() + frand(-3, 3), pair.second.GetPositionY() + frand(-3, 3), pair.second.GetPositionZ(), SPELL_RAIN_OF_THE_DESTROYER_SUM, true);\n                        });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 850,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(500, [&]() -> void\n            {\n                if (Unit* owner = me->GetAnyOwner())\n                    if (!owner->IsInCombat())"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_FallenAvatar.cpp",
+      "line": 1285,
+      "api": "AddDelayedEvent",
+      "receiver": "add",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "add->AddDelayedEvent(1000, [add, end]() -> void\n            {\n                add->GetMotionMaster()->MovePoint(0, end);\n            });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Harjatan.cpp",
+      "line": 460,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1500, [this]()-> void\n        {\n            if (Unit* target = me->GetVictim())\n            {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 418,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(4000, [this] () -> void\n            {\n                me->GetMotionMaster()->MovePoint(2, flyPos[randList.front()], false);\n            });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 440,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(timer, [this] () -> void { RupturingSingularity(); });\n                }\n            }\n"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 444,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(delayTimer, [this] () -> void\n            {\n                flymove = true;\n                me->GetMotionMaster()->MovePoint(3, flyPos[randList.back()], false);"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 468,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(timer, [this] () -> void { RupturingSingularity(); });\n                }\n            }\n"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 472,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(delayTimer, [this] () -> void\n            {\n                flymove = true;\n                me->GetMotionMaster()->MovePoint(4, flyPos[4], false);"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 747,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(3000, [this, pos] () -> void { me->SummonCreature(NPC_SHADOWSOUL, pos); });\n                    }\n                    centrPos.SimplePosXYRelocationByAngle(pos, frand(15.0f, 35.0f), frand(0.0f, 6.28f));\n                    me->AddDelayedCombat(7000, [this, pos] () -> void { me->SummonCreature(NPC_STAGE4_ILLIDAN_STORMRAGE, pos);"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 750,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(7000, [this, pos] () -> void { me->SummonCreature(NPC_STAGE4_ILLIDAN_STORMRAGE, pos); });\n                    break;\n                }\n                case EVENT_DARKNESS_THOUSAND_SOULS:"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 877,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(500, [this] () -> void { me->HandleEmoteCommand(EMOTE_ONESHOT_BATTLE_ROAR); });\n        me->SetReactState(REACT_AGGRESSIVE, 2000);\n    }\n"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 924,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(500, [this] () -> void { me->HandleEmoteCommand(EMOTE_ONESHOT_BATTLE_ROAR); });\n        me->SetReactState(REACT_AGGRESSIVE, 2000);\n\n        sorrowfulWailTimer = 16000;"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 1041,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(500, [this] () -> void { me->SetVisible(false); });\n                }\n            }\n            else"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_Kiljaeden.cpp",
+      "line": 1131,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(500, [this] () -> void\n        {\n            Talk(SAY_ILLIDAN_STAGE_4);\n            me->CastSpell(me, SPELL_CURSED_SIGHT, true);"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_MaidenofVigilance.cpp",
+      "line": 135,
+      "api": "KillAllDelayedEvents",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedEvents();\n        wrathOfCreatorsCasts = 0;\n        countOfTeleports = 0;\n        empoweredPhase = false;                                        "
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_MaidenofVigilance.cpp",
+      "line": 153,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(480000, [this]() -> void\n        {\n            DoCast(me, SPELL_ENRAGE, true);\n        });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_MaidenofVigilance.cpp",
+      "line": 406,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(8000, [this]()\n                    {\n                        Talk(SAY_SECOND_PHASE_LATER);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_MaidenofVigilance.cpp",
+      "line": 433,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(3000, [this, guid, isFelFragment, pos]() -> void\n                    {\n                        me->SummonCreature((isFelFragment ? NPC_ESSENCE_FEL : NPC_ESSENCE_LIGHT), pos, TEMPSUMMON_TIMED_DESPAWN, 10000);\n                    });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_MistressSasszine.cpp",
+      "line": 439,
+      "api": "AddDelayedEvent",
+      "receiver": "summon",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "summon->AddDelayedEvent(200, [summon, targetGuid] () -> void\n                    {\n                        if (summon)\n                            if (Unit* target = ObjectAccessor::GetUnit(*summon, targetGuid))"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_MistressSasszine.cpp",
+      "line": 691,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1000, [this] () -> void\n            {\n                me->SetVisible(false);\n            });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_MistressSasszine.cpp",
+      "line": 775,
+      "api": "KillAllDelayedCombats",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->KillAllDelayedCombats();\n        }\n\n        if (actionID == ACTION_2)"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_SistersoftheMoon.cpp",
+      "line": 161,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(500, [=] () -> void { DoAction(ACTION_1); });\n        }\n    }\n"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_SistersoftheMoon.cpp",
+      "line": 220,
+      "api": "AddDelayedCombat",
+      "receiver": null,
+      "classification": "call_requires_owner_review",
+      "excerpt": "AddDelayedCombat(5000, [=] () -> void { DoAction(ACTION_1); });\n                }\n                break;\n            }"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_SistersoftheMoon.cpp",
+      "line": 403,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(2000, [=] () -> void\n                {\n                    me->CastSpell(me->GetHomePosition(), SPELL_SABERLEAP, true);\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_SistersoftheMoon.cpp",
+      "line": 461,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(500, [=] () -> void { me->SetFacingTo(centrPos.GetAngle(me) - M_PI); });\n                    break;\n            }\n        }"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_SistersoftheMoon.cpp",
+      "line": 652,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(1000, [=] () -> void { me->SetFacingTo(centrPos.GetAngle(me) - M_PI); });\n                break;\n        }\n    }"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_SistersoftheMoon.cpp",
+      "line": 805,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(2000, [=] () -> void\n                {\n                    me->CastSpell(me->GetHomePosition(), SPELL_INCORPOREAL_TELEPORT, true);\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_SistersoftheMoon.cpp",
+      "line": 876,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(1000, [=] () -> void { me->SetFacingTo(centrPos.GetAngle(me) - M_PI); });\n                break;\n        }\n    }"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_TheDesolateHost.cpp",
+      "line": 177,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(500, [=] () -> void { DoAction(ACTION_1); });\n        }\n    }\n"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_TheDesolateHost.cpp",
+      "line": 264,
+      "api": "AddDelayedEvent",
+      "receiver": null,
+      "classification": "call_requires_owner_review",
+      "excerpt": "AddDelayedEvent(15000, [=] () -> void { DoAction(ACTION_1); });\n                }\n                break;\n            }"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_TheDesolateHost.cpp",
+      "line": 620,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(100, [this, guidA, guidB] () -> void\n                    {\n                        if (me)\n                        {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_TheDesolateHost.cpp",
+      "line": 763,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(4000, [this] () -> void\n            {\n                if (me)\n                {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/boss_TheDesolateHost.cpp",
+      "line": 1264,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(5000, [=] () -> void { me->DespawnOrUnsummon(); });\n            }\n        }\n    }"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/instance_tomb_of_sargeras.cpp",
+      "line": 166,
+      "api": "AddDelayedEvent",
+      "receiver": "creature",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "creature->AddDelayedEvent(1000, [creature] () -> void {creature->SetUInt32Value(UNIT_NPC_EMOTESTATE, EMOTE_ONESHOT_ATTACK1H);});\n                            addsIntro.push_back(creature->GetGUID());\n                        }\n                    }"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/instance_tomb_of_sargeras.cpp",
+      "line": 326,
+      "api": "AddDelayedEvent",
+      "receiver": "sivash",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "sivash->AddDelayedEvent(2000, [sivash] {sivash->AI()->ZoneTalk(0); });\n                            break;\n                        case DATA_THE_DESOLATE_HOST:\n                            for (auto id : { NPC_ELUNES_1, NPC_ELUNES_2 })"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 30,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(100 + 600 * i, [this, i]() -> void\n                {\n                    me->CastSpell(InfernalsPos[i], 242915, false);\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 91,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(8500, [this]() -> void\n        {\n            me->GetMotionMaster()->Clear();\n            me->GetMotionMaster()->MovePoint(0, introPositions[0].GetPositionX() + 217.0f, introPositions[0].GetPositionY(), introPositions[0].GetPositionZ());"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 103,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(25000, [this]() -> void\n        {\n            if (Creature* egvin = me->SummonCreature(NPC_EGVIN, 6213.44f, -795.67f, 2975.00, 3.18f))\n            {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 110,
+      "api": "AddDelayedEvent",
+      "receiver": "egvin",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "egvin->AddDelayedEvent(600, [egvin] {\n                    egvin->SetWalk(true);\n                    egvin->GetMotionMaster()->MovePoint(0, 6209.66f, -795.69f, 2974.36f);\n                });"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 128,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1000, [this] {me->SetFacingTo(6.25f); });\n\n            for (uint8 i = 0; i < 4; ++i)\n                if (auto add = me->GetMap()->GetCreature(instance->GetGuidData(introEntries[i])))"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 142,
+      "api": "AddDelayedEvent",
+      "receiver": "add",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "add->AddDelayedEvent(1000, [add] {add->SetFacingTo(6.25f); });\n                }\n\n            if (auto visual_boss = me->GetMap()->GetCreature(instance->GetGuidData(NPC_ATRIGAN_MISC)))"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 168,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(2000, [this] () -> void\n            {\n                Talk(1);\n                me->CastStop();"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 173,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1000, [this] {me->SetFacingTo(6.25f); });\n\n                for (uint8 i =0; i < 4; ++i)\n                    if (auto add = me->GetMap()->GetCreature(instance->GetGuidData(introEntries[i])))"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 187,
+      "api": "AddDelayedEvent",
+      "receiver": "add",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "add->AddDelayedEvent(1000, [add] {add->SetFacingTo(6.25f); });\n                    }\n\n              instance->SetData(1, 1);"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 195,
+      "api": "AddDelayedEvent",
+      "receiver": "go",
+      "classification": "GameObject_wrapper_verify_static_type",
+      "excerpt": "go->AddDelayedEvent(4000, [go] {\n                       go->SetByteValue(GAMEOBJECT_BYTES_1, 0, 1);\n                   });\n               }"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 210,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(7000, [this]() -> void\n            {\n                if (auto boss = me->GetMap()->GetCreature(instance->GetGuidData(DATA_GOROTH)))\n                {"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 218,
+      "api": "AddDelayedEvent",
+      "receiver": "boss",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "boss->AddDelayedEvent(4000, [boss]() -> void\n                    {\n                        boss->AI()->Talk(0);\n                        boss->SetHomePosition(boss->GetPosition());"
+    },
+    {
+      "file": "src/server/scripts/BrokenIsles/TombOfSargeras/tomb_of_sargeras.cpp",
+      "line": 225,
+      "api": "AddDelayedEvent",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedEvent(1000, [this]() -> void {\n                    if (auto summoner = me->GetMap()->GetCreature(instance->GetGuidData(NPC_BREACH_IN_WINDOW)))\n                        summoner->AI()->DoAction(1);\n                });"
+    },
+    {
+      "file": "src/server/scripts/Invasion/invasion_point_world_bosses.cpp",
+      "line": 610,
+      "api": "AddDelayedCombat",
+      "receiver": "me",
+      "classification": "Unit_or_AI_function_queue_verify_static_type",
+      "excerpt": "me->AddDelayedCombat(500, [=]() -> void { me->SetPower(POWER_ENERGY, 0); });\n                }\n            }\n        }"
+    },
+    {
+      "file": "src/server/scripts/Pandaria/StormstoutBrewery/instance_stormstout_brewery.cpp",
+      "line": 180,
+      "api": "AddDelayedEvent",
+      "receiver": "creature->m_Events",
+      "classification": "EventProcessor_function_queue_unprocessed",
+      "excerpt": "creature->m_Events.AddDelayedEvent(1500, [this, creatureGUID]()\n                    {\n                        if (Creature* trigger = instance->GetCreature(creatureGUID))\n                            if (Creature* flyTrigger = trigger->FindNearestCreature(NPC_PURPOSE_BUNNY_FLYING, 30.0f, true))"
+    }
+  ],
+  "classification_counts": {
+    "declaration_or_definition": 8,
+    "call_requires_owner_review": 13,
+    "Unit_or_AI_function_queue_verify_static_type": 119,
+    "GameObject_wrapper_verify_static_type": 3,
+    "EventProcessor_function_queue_unprocessed": 1
+  },
+  "legacy_encoding_files": [
+    "src/server/game/DungeonFinding/LFGMgr.cpp",
+    "src/server/game/Server/CustomTalkMenu.cpp",
+    "src/server/scripts/BrokenIsles/EmeraldNightmare/boss_dragons_of_nightmare.cpp",
+    "src/server/scripts/BrokenIsles/EmeraldNightmare/emerald_nightmare.cpp",
+    "src/server/scripts/BrokenIsles/VaultOfTheWardens/boss_cordana_felsong.cpp",
+    "src/server/scripts/DarkmoonIsland/darkmoon_faire.cpp",
+    "src/server/scripts/Draenor/BloodmaulSlagMines/boss_forgemaster_gogduh.cpp",
+    "src/server/scripts/Draenor/BloodmaulSlagMines/mob_bloodmaul.cpp",
+    "src/server/scripts/Draenor/Highmaul/boss_imperator_margok.cpp",
+    "src/server/scripts/Draenor/TanaanIntro/tanaan_intro_finale.cpp",
+    "src/server/scripts/Draenor/TanaanIntro/tanaan_intro_shadowmoon.cpp",
+    "src/server/scripts/Draenor/TanaanIntro/tanaan_intro_shattered_hand.cpp",
+    "src/server/scripts/Draenor/Zones/zone_draenor_frostfire_ridge.cpp",
+    "src/server/scripts/Draenor/Zones/zone_draenor_shadowmoon_dreanor.cpp",
+    "src/server/scripts/EasternKingdoms/GrimBatol/mob_trash_grimbatol.cpp",
+    "src/server/scripts/EasternKingdoms/Scholomance/boss_rattlegore.cpp",
+    "src/server/scripts/EasternKingdoms/Zones/zone_eastern_kingdoms_blasted_lands.cpp",
+    "src/server/scripts/Invasion/invasion_point_world_bosses.cpp",
+    "src/server/scripts/Kalimdor/CavernsOfTime/DragonSoul/boss_hagara.cpp",
+    "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/boss_echo_of_sylvanas.cpp",
+    "src/server/scripts/Kalimdor/Firelands/boss_alysrazor.cpp",
+    "src/server/scripts/Kalimdor/Firelands/boss_shannox.cpp",
+    "src/server/scripts/Kalimdor/Firelands/firelands.cpp",
+    "src/server/scripts/Spells/spell_warrior.cpp"
+  ],
+  "verified_queue_evidence": {
+    "EventProcessor::Update": "Processes only m_events; no m_functions_queue consumer",
+    "Unit::Update": "Updates m_Events and _scheduler, not m_Functions or m_CombatFunctions",
+    "GameObject": "Own AddDelayedEvent creates BasicEvent on m_Events; distinguish from EventProcessor::AddDelayedEvent",
+    "UnitAI": "Seconds forwarding lacked milliseconds conversion; repaired separately",
+    "global_fix_deferred": "Audit reset/combat cancellation, AI lifetimes and foreign raw captures before global activation"
+  },
+  "priorities": [
+    {
+      "file": "src/server/scripts/BrokenIsles/Scenario/scenario_assault_broken_shore.cpp",
+      "risk": "Player-owned 20s lambda captures raw InstanceScript pointer; map departure can outlive instance; currently dormant"
+    },
+    {
+      "file": "src/server/scripts/Pandaria/StormstoutBrewery/instance_stormstout_brewery.cpp",
+      "risk": "m_Events.AddDelayedEvent calls the unprocessed function queue despite m_Events BasicEvent updates"
+    },
+    {
+      "file": "src/server/scripts/BrawlersGuild/brawlers_guild_bosses_rank_four.cpp",
+      "risk": "Gnome-owned lambdas capture a different boss AI this; owner destruction does not guarantee foreign AI lifetime"
+    },
+    {
+      "file": "src/server/game/Entities/Unit/Unit.cpp",
+      "risk": "CastSpellDelay combat callbacks capture raw Item/AuraEffect; assess lifetime before enabling"
+    }
+  ]
+}

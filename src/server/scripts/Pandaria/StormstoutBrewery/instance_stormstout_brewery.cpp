@@ -51,6 +51,25 @@ static const AddSpellPair yanzhuPairs[3] =
 
 static const Position ookOokDoorPos = { -766.863f, 1391.67f, 146.739f, 0.298219f };
 
+namespace
+{
+    class StormstoutGushingBrewEvent final : public BasicEvent
+    {
+    public:
+        explicit StormstoutGushingBrewEvent(Creature* trigger) : _trigger(trigger) { }
+
+        bool Execute(uint64 /*time*/, uint32 /*diff*/) override
+        {
+            if (Creature* target = _trigger->FindNearestCreature(NPC_PURPOSE_BUNNY_FLYING, 30.0f, true))
+                _trigger->CastSpell(target, SPELL_GUSHING_BREW, true);
+            return true;
+        }
+
+    private:
+        Creature* _trigger;
+    };
+}
+
 class instance_stormstout_brewery : public InstanceMapScript
 {
 public:
@@ -175,14 +194,8 @@ public:
             {
                 creature->RemoveAurasDueToSpell(128571);
 
-                ObjectGuid creatureGUID = creature->GetGUID();
-
-                creature->m_Events.AddDelayedEvent(1500, [this, creatureGUID]()
-                    {
-                        if (Creature* trigger = instance->GetCreature(creatureGUID))
-                            if (Creature* flyTrigger = trigger->FindNearestCreature(NPC_PURPOSE_BUNNY_FLYING, 30.0f, true))
-                                trigger->CastSpell(flyTrigger, SPELL_GUSHING_BREW, true);
-                    });
+                creature->m_Events.AddEvent(new StormstoutGushingBrewEvent(creature),
+                    creature->m_Events.CalculateTime(1500));
 
                 break;
             }

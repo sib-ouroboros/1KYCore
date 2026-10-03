@@ -16,6 +16,11 @@ on:
       - contrib/tests/test_malkorok_barrier.py
       - src/server/scripts/Pandaria/SiegeOfOrgrimmar/boss_korkron_dark_shaman.cpp
       - src/server/game/AI/CoreAI/UnitAI.*
+      - src/common/Utilities/Duration.h
+      - contrib/tests/test_ai_delay_units.py
+      - src/server/scripts/Pandaria/StormstoutBrewery/instance_stormstout_brewery.cpp
+      - src/server/scripts/Pandaria/StormstoutBrewery/stormstout_brewery.h
+      - contrib/tests/test_stormstout_brew_event.py
       - contrib/tests/test_dark_shaman_target.py
       - src/server/scripts/EasternKingdoms/Zones/zone_eastern_kingdoms_elwynn_forest.cpp
       - contrib/tests/test_hogger_scene.py
@@ -81,3 +86,7 @@ jobs:
         run: python contrib/tests/test_magni_teleport.py
       - name: Test Aggramar spawn array bounds and exact phase actors
         run: python contrib/tests/test_aggramar_spawns.py
+      - name: Test actual AI delayed-event duration conversion
+        run: python contrib/tests/test_ai_delay_units.py
+      - name: Test Stormstout brew event and owner lifetime
+        run: python contrib/tests/test_stormstout_brew_event.py

@@ -279,7 +279,7 @@ void UnitAI::AddDelayedEvent(Minutes delayTime, std::function<void()>&& function
 
 void UnitAI::AddDelayedEvent(Seconds delayTime, std::function<void()>&& function)
 {
-    me->AddDelayedEvent(delayTime.count(), std::move(function));
+    me->AddDelayedEvent(std::chrono::duration_cast<Milliseconds>(delayTime).count(), std::move(function));
 }
 
 void UnitAI::KillAllDelayedEvents()
