@@ -2,6 +2,7 @@
 """Exercise actual key item, skill and spell validation against decoded locks."""
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import tempfile
@@ -23,7 +24,9 @@ def main():
     tree, crystal = registry['decoded_locks']['2584'], registry['decoded_locks']['1691']
     assert tree['Type'][1] == 3 and tree['Index'][1] == 219181
     assert crystal['Type'][1] == 2 and crystal['Index'][1] == 5
-    enum = method((root / 'src/server/game/Miscellaneous/SharedDefines.h').read_text('latin1'), 'enum LockKeyType') + ';'
+    defines = (root / 'src/server/game/Miscellaneous/SharedDefines.h').read_text('latin1')
+    enum = method(defines, 'enum LockKeyType') + ';'
+    item_target = re.search(r'TARGET_GAMEOBJECT_ITEM_TARGET\s*=\s*(\d+)', defines)[1]
     body = method((root / 'src/server/game/Spells/Spell.cpp').read_text('latin1'), 'SpellCastResult Spell::CanOpenLock(')
     harness = r'''
 #include <cstdint>
@@ -36,7 +39,7 @@ enum SpellCastResult {SPELL_CAST_OK,SPELL_FAILED_BAD_TARGETS,SPELL_FAILED_LOW_CA
 enum SkillType {SKILL_NONE,SKILL_TEST};
 enum LockType {LOCKTYPE_PICKLOCK=1,LOCKTYPE_TEST=2};
 KEY_ENUM
-constexpr int TARGET_GAMEOBJECT_ITEM_TARGET=23;
+constexpr int TARGET_GAMEOBJECT_ITEM_TARGET=ITEM_TARGET;
 SkillType SkillByLockType(LockType type){return type==LOCKTYPE_TEST?SKILL_TEST:SKILL_NONE;}
 struct LockEntry {int32 Index[8]={};uint32 Skill[8]={},Type[8]={};};
 struct LockStore {
@@ -90,7 +93,7 @@ int main(){
     legacy.Index[0]=-1;sLockStore.entries[14]=legacy;check(spell.open(14)==SPELL_FAILED_BAD_TARGETS);
     std::cout<<"PASS: actual CanOpenLock, decoded tree/crystal, wrong spell/skill rejection, item alternatives, skill/level/bonus boundaries, missing data and source access aura\n";
 }
-'''.replace('KEY_ENUM', enum).replace('BODY', body)
+'''.replace('KEY_ENUM', enum).replace('BODY', body).replace('ITEM_TARGET;', item_target + ';')
     with tempfile.TemporaryDirectory() as tmp:
         cpp, exe = Path(tmp) / 'lock.cpp', Path(tmp) / 'lock'
         cpp.write_text(harness, encoding='utf8')
