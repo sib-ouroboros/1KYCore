@@ -177,6 +177,28 @@ public:
 
 namespace
 {
+    // Unit::AddDelayedEvent uses a dormant function queue in this core.
+    // Use the player's updated and lifetime-owned BasicEvent queue instead.
+    class GilneasStocksTransitionEvent final : public BasicEvent
+    {
+    public:
+        explicit GilneasStocksTransitionEvent(Player* player) : _player(player) { }
+
+        bool Execute(uint64 /*time*/, uint32 /*diff*/) override
+        {
+            if (_player->GetMapId() == 654 && _player->GetAreaId() == 4786 &&
+                _player->GetQuestStatus(QUEST_LAST_CHANCE_AT_HUMANITY) == QUEST_STATUS_REWARDED)
+            {
+                _player->CastSpell(_player, SPELL_PHASE_QUEST_ZONE_SPECIFIC_06, true);
+                _player->RemoveAura(SPELL_FADE_BACK);
+            }
+            return true;
+        }
+
+    private:
+        Player* _player;
+    };
+
     void ReleaseGilneasStocks(Player* player)
     {
         player->RemoveAura(SPELL_IN_STOCKS);
@@ -225,14 +247,8 @@ public:
             ReleaseGilneasStocks(player);
             // Owned by the player, so despawning the old phase's questgiver
             // cannot cancel the transition or leave a dangling NPC pointer.
-            player->AddDelayedEvent(3000, [player]()
-            {
-                if (player->GetQuestStatus(QUEST_LAST_CHANCE_AT_HUMANITY) == QUEST_STATUS_REWARDED)
-                {
-                    player->CastSpell(player, SPELL_PHASE_QUEST_ZONE_SPECIFIC_06, true);
-                    player->RemoveAura(SPELL_FADE_BACK);
-                }
-            });
+            player->m_Events.AddEvent(new GilneasStocksTransitionEvent(player),
+                player->m_Events.CalculateTime(3000));
             return true;
         }
         return false;

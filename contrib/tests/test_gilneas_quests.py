@@ -32,6 +32,7 @@ def main():
     command=city[city.index('class spell_gilneas_attack_lurker :'):]
     event_source=(root/'src/common/Utilities/EventMap.cpp').read_text('utf8')
     harness=r'''
+#include "EventProcessor.h"
 #include <cstdint>
 #include <chrono>
 #include <functional>
@@ -67,13 +68,12 @@ struct Unit{
 struct Aura{int duration=0,maxDuration=0;void SetDuration(int v){duration=v;}void SetMaxDuration(int v){maxDuration=v;}};
 struct Player:Unit{
     int quest=QUEST_STATUS_NONE,map=654,area=4786;unsigned flags=UNIT_FLAG2_DISABLE_TURN|0x100;
-    std::map<int,Aura> auras;std::vector<int> casts;std::vector<std::function<void()>> callbacks;unsigned delay=0;
+    std::map<int,Aura> auras;std::vector<int> casts;EventProcessor m_Events;
     int GetQuestStatus(int)const{return quest;}int GetMapId()const{return map;}int GetAreaId()const{return area;}
     void RemoveAura(int id)override{auras.erase(id);}bool HasAura(int id)const{return auras.count(id);}
     Aura* GetAura(int id){return HasAura(id)?&auras[id]:nullptr;}
     void RemoveFlag(unsigned,unsigned bit){flags&=~bit;}
     void CastSpell(Player*,int id,bool){casts.push_back(id);auras[id]={};}
-    void AddDelayedEvent(unsigned ms,std::function<void()> fn){delay=ms;callbacks.push_back(fn);}
 };
 struct AI{Unit* victim=nullptr;unsigned attacks=0;virtual ~AI()=default;
     virtual void AttackStart(Unit* target){victim=target;++attacks;}};
@@ -97,6 +97,7 @@ struct Lurker:ScriptedAI{using ScriptedAI::ScriptedAI;
 ATTACK
 DAMAGE
 };
+STOCKS_EVENT
 STOCKS
 struct Quest{int id,reward;int GetQuestId()const{return id;}int GetRewSpell()const{return reward;}};
 struct King{
@@ -147,10 +148,23 @@ int main(){
     owner.quest=QUEST_STATUS_INCOMPLETE;lurker.DamageTaken(&dog,dmg);check(enemy.ai.victim==&dog&&dmg==1);
     Quest stocks{14375,68639};King king;Player player;player.quest=QUEST_STATUS_REWARDED;
     for(int aura:{69196,42716,50220,58284,68630})player.auras[aura]={};
-    check(king.OnQuestReward(&player,nullptr,&stocks,0));check(player.delay==3000&&player.callbacks.size()==1);
+    check(king.OnQuestReward(&player,nullptr,&stocks,0));check(!player.HasAura(68481));
     check(player.flags==0x100&&!player.HasAura(69196)&&!player.HasAura(42716));
     check(player.HasAura(94053)&&player.GetAura(94053)->duration==3000&&!player.HasAura(68481));
-    player.callbacks[0]();check(player.HasAura(68481)&&!player.HasAura(94053));
+    player.m_Events.Update(2999);check(!player.HasAura(68481)&&player.HasAura(94053));
+    player.m_Events.Update(1);check(player.HasAura(68481)&&!player.HasAura(94053));
+    auto casts=player.casts.size();player.m_Events.Update(10000);check(player.casts.size()==casts);
+    Player cancelled;cancelled.quest=QUEST_STATUS_REWARDED;
+    king.OnQuestReward(&cancelled,nullptr,&stocks,0);cancelled.m_Events.KillAllEvents(false);
+    cancelled.m_Events.Update(3000);check(!cancelled.HasAura(68481));
+    Player moved;moved.quest=QUEST_STATUS_REWARDED;
+    king.OnQuestReward(&moved,nullptr,&stocks,0);moved.map=1;
+    moved.m_Events.Update(3000);check(!moved.HasAura(68481));
+    Player abandoned;abandoned.quest=QUEST_STATUS_REWARDED;
+    king.OnQuestReward(&abandoned,nullptr,&stocks,0);abandoned.quest=QUEST_STATUS_NONE;
+    abandoned.m_Events.Update(3000);check(!abandoned.HasAura(68481));
+    {Player destroyed;destroyed.quest=QUEST_STATUS_REWARDED;king.OnQuestReward(&destroyed,nullptr,&stocks,0);}
+
     Player login;login.quest=QUEST_STATUS_REWARDED;login.auras[69196]={};Recovery recovery;
     recovery.OnLogin(&login,false);check(login.HasAura(68481)&&!login.HasAura(69196)&&login.flags==0x100);
     Player unrelated;unrelated.quest=QUEST_STATUS_NONE;unrelated.auras[69196]={};recovery.OnLogin(&unrelated,false);
@@ -167,6 +181,7 @@ int main(){
 '''
     for token,value in {'HELPERS':helpers,'ATTACK':attack,'DAMAGE':damage,
         'CHECKCAST':method(command,'        SpellCastResult CheckTarget('),
+        'STOCKS_EVENT':method(dusk,'    class GilneasStocksTransitionEvent final')+';',
         'STOCKS':method(dusk,'    void ReleaseGilneasStocks('),
         'KING':method(king,'    bool OnQuestReward('),
         'RECOVERY':method(recovery,'    void OnLogin('),
@@ -176,10 +191,13 @@ int main(){
         'AVERY':method(avery,'    bool OnQuestReward(')}.items():
         harness=harness.replace('\n'+token+'\n','\n'+value+'\n')
     with tempfile.TemporaryDirectory() as tmp:
+        processor=root/'src/common/Utilities/EventProcessor.cpp'
+        (Path(tmp)/'Define.h').write_text('#pragma once\n#include <cstdint>\n#include <mutex>\nusing uint8=std::uint8_t;using uint32=std::uint32_t;using uint64=std::uint64_t;\n#define TC_COMMON_API\n',encoding='utf8')
+        (Path(tmp)/'Errors.h').write_text('#pragma once\n#include <cassert>\n#define ASSERT(value) assert(value)\n',encoding='utf8')
         cpp=Path(tmp)/'gilneas.cpp';exe=Path(tmp)/'gilneas';cpp.write_text(harness,encoding='utf8')
         subprocess.run([os.environ.get('CXX','c++'),'-std=c++17','-Wall','-Wextra','-Werror',
             '-fsanitize=address,undefined','-fno-sanitize-recover=undefined',
-            '-fno-omit-frame-pointer','-g',str(cpp),'-o',str(exe)],check=True)
+            '-fno-omit-frame-pointer','-g','-pthread','-I',tmp,'-I',str(processor.parent),str(cpp),str(processor),'-o',str(exe)],check=True)
         subprocess.run([str(exe)],check=True)
 
 

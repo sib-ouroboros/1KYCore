@@ -255,7 +255,7 @@ def test_generic_restoration(restore, registry, tables, label):
                 else:
                     comparisons.append('`'+key+'`='+value)
             expected_rows.append('(' + ' AND '.join(comparisons) + ')')
-        count = sql('SELECT COUNT(*) FROM gameobject_template WHERE ' + ' OR '.join(expected_rows) + ';').stdout.strip()
+        count = sql('SELECT COUNT(*) FROM gameobject_template WHERE ' + (' OR '.join(expected_rows) or '0') + ';').stdout.strip()
         assert count == str(len(expected_rows)), 'Source model/name/icon/size/build fields changed'
     complete = checksum(tables)
     sql(restore)
@@ -323,6 +323,11 @@ def test_generic_restoration(restore, registry, tables, label):
         sql(restore)
         assert sql(f'SELECT COUNT(*) FROM gameobject_template WHERE entry IN ({entries});').stdout.strip() == str(len(registry['entries']))
         assert sql(f'SELECT COUNT(*) FROM gameobject WHERE guid IN ({guids});').stdout.strip() == str(len(registry['spawns']))
+        for template in registry.get('templates', []):
+            checks = ['`'+k+'`='+v for k,v in template.items() if k != 'size']
+            size = template['size']
+            checks.append(f'ABS(`size`-({size}))<=ABS({size})*0.0000001')
+            assert sql('SELECT COUNT(*) FROM gameobject_template WHERE '+' AND '.join(checks)+';').stdout.strip() == '1', 'Native wall source template changed'
         complete = checksum(tables)
         sql(restore)
         assert checksum(tables) == complete, 'Script-only wall interruption retry differs'
