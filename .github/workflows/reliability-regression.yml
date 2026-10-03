@@ -25,6 +25,8 @@ on:
       - docs/audit-data/campaign-wildcard-loot-restoration.json
       - contrib/tests/test_wildcard_loot_modes.py
       - contrib/tests/test_diagnostic_formats.py
+      - src/common/Utilities/WowTime.cpp
+      - contrib/tests/test_wowtime_holiday_arithmetic.py
       - src/server/game/ChallengeMode/ChallengeModeMgr.cpp
       - src/server/game/Globals/BattlePetDataStore.cpp
       - src/server/game/Handlers/QuestHandler.cpp
@@ -113,3 +115,5 @@ jobs:
         run: python contrib/tests/test_wildcard_loot_modes.py
       - name: Test full diagnostic sizes and GUIDs with strict format checks
         run: python contrib/tests/test_diagnostic_formats.py
+      - name: Test holiday minute arithmetic with strict shift and overflow checks
+        run: python contrib/tests/test_wowtime_holiday_arithmetic.py
