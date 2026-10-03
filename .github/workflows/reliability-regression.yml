@@ -19,6 +19,8 @@ on:
       - src/server/game/Loot/Loot.cpp
       - docs/audit-data/campaign-source-loot-restoration.json
       - contrib/tests/test_source_loot_contract.py
+      - src/server/database/Database/MySQLConnection.cpp
+      - contrib/tests/test_mysql_prepare_logging.py
       - src/server/game/AI/CoreAI/UnitAI.*
       - src/common/Utilities/Duration.h
       - contrib/tests/test_ai_delay_units.py
@@ -96,3 +98,5 @@ jobs:
         run: python contrib/tests/test_stormstout_brew_event.py
       - name: Test native source loot keys and quest-item eligibility
         run: python contrib/tests/test_source_loot_contract.py
+      - name: Test MySQL prepare logging with bounded string views
+        run: python contrib/tests/test_mysql_prepare_logging.py

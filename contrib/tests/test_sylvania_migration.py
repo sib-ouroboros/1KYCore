@@ -419,13 +419,22 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         predicates = ['('+' AND '.join('BINARY `'+k+'` <=> BINARY '+v if k in ('name','IconName','castBarCaption','unk1','AIName','ScriptName') else f'ABS(`size`-({v}))<=ABS({v})*0.0000001' if k=='size' else '`'+k+'` <=> '+v for k,v in row.items())+')' for row in rows]
         assert sql('SELECT COUNT(*) FROM '+table+' WHERE '+' OR '.join(predicates)+';').stdout.strip() == str(len(rows))
     assert_rows('gameobject_template',registry['baseline'])
-    assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == '0'
+    baseline_addons = registry.get('baseline_addons', [])
+    assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == str(len(baseline_addons))
+    if baseline_addons:
+        assert_rows('gameobject_template_addon',baseline_addons)
     assert sql(f'SELECT COUNT(*) FROM gameobject_questitem WHERE GameObjectEntry IN ({entries});').stdout.strip() == '0'
     def rejection():
         before = checksum(tables)
         failure = sql(restore,ok=False)
         assert '_1kycore_model_guard' in failure.stderr and 'Duplicate entry' in failure.stderr, failure.stderr
         assert checksum(tables) == before, 'GOOBER conflict changed permanent data'
+    if baseline_addons:
+        legacy = baseline_addons[0]
+        for field in ('faction','flags','mingold','maxgold','WorldEffectID'):
+            sql(f"UPDATE gameobject_template_addon SET `{field}`=1 WHERE entry={legacy['entry']};")
+            rejection()
+            sql(f"UPDATE gameobject_template_addon SET `{field}`={legacy[field]} WHERE entry={legacy['entry']};")
     expected_loot = registry.get('loot', [])
     expected_items = registry.get('questitems', [])
     unrelated_loot = unrelated_items = None

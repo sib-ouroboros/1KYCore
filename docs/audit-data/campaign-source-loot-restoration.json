@@ -1397,5 +1397,31 @@
       "conditions": [],
       "smart_scripts": []
     }
-  }
+  },
+  "baseline_addons": [
+    {
+      "entry": "246518",
+      "faction": "0",
+      "flags": "0",
+      "mingold": "0",
+      "maxgold": "0",
+      "WorldEffectID": "0"
+    },
+    {
+      "entry": "249744",
+      "faction": "0",
+      "flags": "0",
+      "mingold": "0",
+      "maxgold": "0",
+      "WorldEffectID": "0"
+    },
+    {
+      "entry": "249748",
+      "faction": "0",
+      "flags": "0",
+      "mingold": "0",
+      "maxgold": "0",
+      "WorldEffectID": "0"
+    }
+  ]
 }
