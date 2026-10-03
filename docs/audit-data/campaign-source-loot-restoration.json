@@ -971,6 +971,7 @@
     }
   ],
   "required_quests": [
+    40606,
     42128
   ],
   "item_identity_validation": {

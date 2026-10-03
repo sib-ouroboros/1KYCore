@@ -86,6 +86,7 @@ WHERE t.type=n.type AND ((e.GameObjectEntry IS NOT NULL AND q.GameObjectEntry IS
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=280951 AND `QuestID`=40606 AND `Type`=1 AND `ObjectID`=132377 AND `Amount`=1);
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=283780 AND `QuestID`=42128 AND `Type`=1 AND `ObjectID`=136985 AND `Amount`=1);
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=283790 AND `QuestID`=42128 AND `Type`=1 AND `ObjectID`=136987 AND `Amount`=1);
+INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_template WHERE ID=40606);
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_template WHERE ID=42128);
 INSERT INTO `_1kycore_model_guard` SELECT 1 FROM conditions c JOIN `_1kycore_model_source` n ON n.entry=c.SourceGroup WHERE c.SourceTypeOrReferenceId=4 LIMIT 1;
 
