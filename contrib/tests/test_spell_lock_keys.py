@@ -39,7 +39,7 @@ enum SpellCastResult {SPELL_CAST_OK,SPELL_FAILED_BAD_TARGETS,SPELL_FAILED_LOW_CA
 enum SkillType {SKILL_NONE,SKILL_TEST};
 enum LockType {LOCKTYPE_PICKLOCK=1,LOCKTYPE_TEST=2};
 KEY_ENUM
-constexpr int TARGET_GAMEOBJECT_ITEM_TARGET=ITEM_TARGET;
+constexpr int TARGET_GAMEOBJECT_ITEM_TARGET=TARGET_VALUE;
 SkillType SkillByLockType(LockType type){return type==LOCKTYPE_TEST?SKILL_TEST:SKILL_NONE;}
 struct LockEntry {int32 Index[8]={};uint32 Skill[8]={},Type[8]={};};
 struct LockStore {
@@ -93,7 +93,7 @@ int main(){
     legacy.Index[0]=-1;sLockStore.entries[14]=legacy;check(spell.open(14)==SPELL_FAILED_BAD_TARGETS);
     std::cout<<"PASS: actual CanOpenLock, decoded tree/crystal, wrong spell/skill rejection, item alternatives, skill/level/bonus boundaries, missing data and source access aura\n";
 }
-'''.replace('KEY_ENUM', enum).replace('BODY', body).replace('ITEM_TARGET;', item_target + ';')
+'''.replace('KEY_ENUM', enum).replace('BODY', body).replace('TARGET_VALUE', item_target)
     with tempfile.TemporaryDirectory() as tmp:
         cpp, exe = Path(tmp) / 'lock.cpp', Path(tmp) / 'lock'
         cpp.write_text(harness, encoding='utf8')
