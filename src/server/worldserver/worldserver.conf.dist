@@ -4443,11 +4443,11 @@ HeroicLeap.HeightMult = 2.5
 #
 ###################################################################################################
 
-# Optional melee NPC combat slots. Disabled until client/geometry acceptance testing.
+# Melee NPC combat slots. Enabled by default; set Enable = 0 for legacy chase.
 # Pets, bosses, vehicles, flying/swimming, follow and ranged offsets are excluded.
 # Padding: 0..0.5 units. Interval: 100..5000 ms. MaxNeighbors: 1..128.
 # Unreachable/full rings fall back to normal chase. No physical pushing.
-Creature.CrowdSeparation.Enable = 0
+Creature.CrowdSeparation.Enable = 1
 Creature.CrowdSeparation.Padding = 0.2
 Creature.CrowdSeparation.RecalculateInterval = 500
 Creature.CrowdSeparation.MaxNeighbors = 64

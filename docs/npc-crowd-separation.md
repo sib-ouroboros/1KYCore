@@ -95,7 +95,7 @@ No periodic reshuffling of stationary melee creatures is introduced.
 ## Config
 
 ```ini
-Creature.CrowdSeparation.Enable = 0
+Creature.CrowdSeparation.Enable = 1
 Creature.CrowdSeparation.Padding = 0.2
 Creature.CrowdSeparation.RecalculateInterval = 500
 Creature.CrowdSeparation.MaxNeighbors = 64
@@ -150,7 +150,7 @@ Passed locally with GCC, `-Wall -Wextra -Werror`:
 - Existing elevated-surface native regression: platform, stairs, storeys,
   collision walls, forced endpoint, invalid spawn, terrain and special motion.
 
-Still required before enabling by default or declaring the full task accepted:
+Still required before declaring the full task accepted:
 
 - Full GCC/Windows builds and CI sanitizer results for this branch.
 - Real client/server Phase C: same-side 2 and 5–8 attackers; stop/start, moving
@@ -170,7 +170,8 @@ must not be marked passed based on the fixture suite alone.
 
 ## Risks and next review
 
-Feature is off by default. Its strict surface/path conditions can reject valid
+Feature is enabled by default at the project owner's request. Set
+`Creature.CrowdSeparation.Enable = 0` to restore legacy chase. Its strict surface/path conditions can reject valid
 points and fall back, especially on steep stairs or elevated dynamic geometry.
 Very closely spaced storeys can evade a fixed vertical filter; LoS/path checks
 reduce but do not eliminate the need for live multi-level tests. During the
@@ -179,6 +180,6 @@ The selector is conservative, so crowded geometry can fall back earlier than
 an exact circle solver. Boss classification and unusual scripted chase
 patterns require encounter review even with the provided exclusions.
 
-Review the focused diff and CI first; then enable only in an isolated test
-server, capture Phase C scenarios, and decide whether bounded local steering
+Review the focused diff and CI, capture Phase C scenarios in an isolated test
+server, and decide whether bounded local steering
 is necessary. No working server configuration or data was changed.
