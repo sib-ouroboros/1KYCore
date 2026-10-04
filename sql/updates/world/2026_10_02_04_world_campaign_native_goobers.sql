@@ -65,9 +65,9 @@ WHERE p.MapID<>expected.MapID OR p.PositionX<>expected.PositionX
 OR p.PositionY<>expected.PositionY OR p.PositionZ<>expected.PositionZ LIMIT 1;
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM creature_template WHERE entry=116547);
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM creature_template WHERE entry=116838);
-INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=284492 AND `QuestID`=42535 AND `Type`=2 AND `ObjectID`=250650);
-INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=289509 AND `QuestID`=45792 AND `Type`=2 AND `ObjectID`=268626);
-INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=287812 AND `QuestID`=45329 AND `Type`=0 AND `ObjectID`=116547);
+INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=284492 AND `QuestID`=42535 AND `Type`=2 AND `ObjectID`=250650 AND `Amount`=10);
+INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=289509 AND `QuestID`=45792 AND `Type`=2 AND `ObjectID`=268626 AND `Amount`=5);
+INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_objectives WHERE `ID`=287812 AND `QuestID`=45329 AND `Type`=0 AND `ObjectID`=116547 AND `Amount`=3);
 INSERT INTO `_1kycore_model_guard` SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM quest_template WHERE ID=42535);
 
 -- Restore absent native effect0 destinations; retain matching administrator build markers.

@@ -601,6 +601,7 @@ def main():
     parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
     parser.add_argument('--wildcard-loot-only', action='store_true', help='Run source wildcard loot translation against the real release.')
     parser.add_argument('--source-loot-only', action='store_true', help='Run the complete source loot object group against the real release.')
+    parser.add_argument('--native-goobers-only', action='store_true', help='Run all seven native GOOBER dependency and retry checks against the real release.')
     args = parser.parse_args()
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
         raise SystemExit('Requires MYSQL_DISPOSABLE_TEST_SERVER=1; never use a production server.')
@@ -632,6 +633,14 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.native_goobers_only:
+            sql(migration)
+            tables = sql('SHOW TABLES;').stdout.splitlines()
+            restore = (ROOT / 'sql/updates/world/2026_10_02_04_world_campaign_native_goobers.sql').read_text('utf8')
+            registry = json.loads((ROOT / 'docs/audit-data/campaign-native-goober-restoration.json').read_text('utf8'))
+            test_simple_goober_models(tables,restore,registry,'focused seven native GOOBER objects / exact objective amounts / two teleport routes')
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.wildcard_loot_only:
             sql(migration)
             tables = sql('SHOW TABLES;').stdout.splitlines()
