@@ -431,7 +431,8 @@
     }
   ],
   "existing_spawn_occurrences": 2,
-  "source_world_sha256": "cf681e1fb2e7443daab2a5db04f4efa2fc53cc485ea8de6b6ec3d60d569c2696",
   "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
-  "assurance": "Exact source fields and supported native page/GOOBER/personal-credit paths; no live client acceptance. Spell retains original area selection; no new targeting/quest restriction invented."
+  "assurance": "Exact source fields and supported native page/GOOBER/personal-credit paths; no live client acceptance. Spell retains original area selection; no new targeting/quest restriction invented.",
+  "source_world_archive_sha256": "cf681e1fb2e7443daab2a5db04f4efa2fc53cc485ea8de6b6ec3d60d569c2696",
+  "source_world_sql_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c"
 }
