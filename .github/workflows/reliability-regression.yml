@@ -126,3 +126,5 @@ jobs:
         run: python contrib/tests/test_spell_lock_keys.py
       - name: Test dynamic cache path for branch names with separators
         run: python contrib/tests/test_script_cache_path.py
+      - name: Test navigation option precedence and legacy configuration compatibility
+        run: python contrib/tests/test_navigation_config.py

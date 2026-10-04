@@ -1878,9 +1878,20 @@ void World::SetInitialWorldSettings()
     MMAP::MMapManager* mmmgr = MMAP::MMapFactory::createOrGetMMapManager();
     mmmgr->InitializeThreadUnsafe(mapData);
 
-    // Preserve legacy configuration when the dedicated navigation option is absent.
-    bool const preloadBattlegroundNavigation = sConfigMgr->GetBoolDefault("Battleground.PreloadNavigation",
-        sConfigMgr->GetIntDefault("pbotbg", 0) != 0 || sConfigMgr->GetIntDefault("pbotall", 1) != 0);
+    // Read legacy navigation settings only when the dedicated option is absent.
+    bool const preloadBattlegroundNavigation = []()
+    {
+        auto const hasConfigKey = [](std::string const& name)
+        {
+            auto const keys = sConfigMgr->GetKeysByString(name);
+            return std::find(keys.begin(), keys.end(), name) != keys.end();
+        };
+        if (hasConfigKey("Battleground.PreloadNavigation"))
+            return sConfigMgr->GetBoolDefault("Battleground.PreloadNavigation", true);
+        bool const legacyBattlegrounds = hasConfigKey("pbotbg") && sConfigMgr->GetIntDefault("pbotbg", 0) != 0;
+        bool const legacyAllMaps = !hasConfigKey("pbotall") || sConfigMgr->GetIntDefault("pbotall", 1) != 0;
+        return legacyBattlegrounds || legacyAllMaps;
+    }();
     if (preloadBattlegroundNavigation)
     {
         uint32 preloadTiles = 0;
