@@ -23,7 +23,7 @@ int main() {
     check(value.size()==3 && value[1].size()==2 && value[2]["x"].asInt()==4);
     for (auto malformed : {"[1 2 3]", "[1 true 3]", "[1 : 3]", "[1 } 3]", "[1 {\"x\":2},3]", "[[1 2 3]]", "[1,]", "[1,,2]"}) {
         check(!reader.parse(malformed,value));
-        check(!reader.getFormattedErrorMessages().empty());
+        check(!reader.getFormatedErrorMessages().empty());
     }
     check(reader.parse("[4,5]",value) && value.size()==2 && value[1].asInt()==5);
     std::cout << "PASS: actual JSON library preserves valid arrays and rejects missing or invalid separators without discarding tokens\n";
