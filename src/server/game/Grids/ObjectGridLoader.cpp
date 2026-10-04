@@ -215,6 +215,8 @@ void ObjectGridUnloader::Visit(GridRefManager<T> &m)
         //So we need this even after cleaner (maybe we can remove cleaner)
         //Example: Flame Leviathan Turret 33139 is summoned when a creature is deleted
         /// @todo Check if that script has the correct logic. Do we really need to summons something before deleting?
+        if (Map* map = obj->FindMap())
+            map->PurgeFromActive(obj);
         obj->CleanupsBeforeDelete();
         ///- object will get delinked from the manager when deleted
         delete obj;

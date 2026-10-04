@@ -1604,6 +1604,8 @@ void WorldObject::setActive(bool on)
             map->RemoveFromActive(this->ToCreature());
         else if (GetTypeId() == TYPEID_DYNAMICOBJECT)
             map->RemoveFromActive((DynamicObject*)this);
+        else
+            map->PurgeFromActive(this);
     }
 }
 

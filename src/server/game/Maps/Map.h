@@ -466,6 +466,8 @@ class TC_GAME_API Map : public GridRefManager<NGridType>
         // must called with RemoveFromWorld
         template<class T>
         void RemoveFromActive(T* obj);
+        // Membership cleanup only; preserves specialized creature grid-lock accounting.
+        void PurgeFromActive(WorldObject* obj) { RemoveFromActiveHelper(obj); }
 
         template<class T> void SwitchGridContainers(T* obj, bool on);
         CreatureGroupHolderType CreatureGroupHolder;
