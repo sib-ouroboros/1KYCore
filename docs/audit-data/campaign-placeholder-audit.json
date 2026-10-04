@@ -2147,10 +2147,12 @@
     266886,
     267227,
     267353,
+    267492,
     268454,
+    268458,
     268626
   ],
-  "remaining_placeholder_candidates": 55,
+  "remaining_placeholder_candidates": 53,
   "restoration_migrations": [
     "2026_10_02_01_world_campaign_placeholder_models.sql",
     "2026_10_02_02_world_campaign_simple_goober_models.sql",
@@ -2158,6 +2160,7 @@
     "2026_10_03_00_world_campaign_source_loot_objects.sql",
     "2026_10_03_01_world_campaign_wildcard_loot_objects.sql",
     "2026_10_05_00_world_campaign_native_interactions.sql",
-    "2026_10_04_00_world_campaign_council_books.sql"
+    "2026_10_04_00_world_campaign_council_books.sql",
+    "2026_10_05_02_world_campaign_false_orders.sql"
   ]
 }

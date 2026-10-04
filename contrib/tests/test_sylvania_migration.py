@@ -448,6 +448,19 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
                 rejection()
             finally:
                 sql(removal)
+    for event in registry.get('protected_events', []):
+        spawn_guid = registry['protected_spawn_guids'][0]
+        overrides = [
+            (f"INSERT INTO event_scripts(id,delay,command,datalong) VALUES ({event},0,0,1);", f'DELETE FROM event_scripts WHERE id={event};'),
+            (f"INSERT INTO smart_scripts(entryorguid,source_type,id,event_type,action_type,target_type,comment) VALUES ({event},2,99,64,1,1,'test event override');", f'DELETE FROM smart_scripts WHERE entryorguid={event} AND source_type=2 AND id=99;'),
+            (f"INSERT INTO smart_scripts(entryorguid,source_type,id,event_type,action_type,target_type,comment) VALUES ({entry},1,99,64,1,1,'test GO override');", f'DELETE FROM smart_scripts WHERE entryorguid={entry} AND source_type=1 AND id=99;'),
+            (f"INSERT INTO smart_scripts(entryorguid,source_type,id,event_type,action_type,target_type,comment) VALUES ({-spawn_guid},1,99,64,1,1,'test spawn override');", f'DELETE FROM smart_scripts WHERE entryorguid={-spawn_guid} AND source_type=1 AND id=99;')]
+        for addition, removal in overrides:
+            sql(addition)
+            try:
+                rejection()
+            finally:
+                sql(removal)
     pages = registry.get('pages', [])
     page_ids = ','.join(p['ID'] for p in pages)
     if pages:
@@ -539,7 +552,7 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         rejection()
         sql(f'UPDATE creature_template SET entry={creature} WHERE entry=9000020;')
     for objective in registry.get('required_objectives', []):
-        for field in ('ObjectID','QuestID','Type','Amount'):
+        for field in ('ObjectID','QuestID','Type','Amount') + tuple(k for k in ('StorageIndex','Flags','Flags2') if k in objective):
             changed = int(objective[field]) + 1
             sql(f"UPDATE quest_objectives SET `{field}`={changed} WHERE ID={objective['ID']};")
             rejection()
@@ -928,6 +941,10 @@ def main():
         native_interactions = (ROOT / 'sql/updates/world/2026_10_05_00_world_campaign_native_interactions.sql').read_text('utf8')
         interaction_registry = json.loads((ROOT / 'docs/audit-data/campaign-native-interactions-restoration.json').read_text('utf8'))
         test_simple_goober_models(tables,native_interactions,interaction_registry,'native portal and brew interactions / protected credit dependencies')
+
+        false_orders = (ROOT / 'sql/updates/world/2026_10_05_02_world_campaign_false_orders.sql').read_text('utf8')
+        orders_registry = json.loads((ROOT / 'docs/audit-data/campaign-false-orders-restoration.json').read_text('utf8'))
+        test_simple_goober_models(tables,false_orders,orders_registry,'two False Orders / four objectives / protected event and spawn overrides')
 
         test_nearest_conversations()
 

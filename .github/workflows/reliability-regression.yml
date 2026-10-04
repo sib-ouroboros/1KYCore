@@ -4,6 +4,7 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - contrib/tests/test_false_orders_credit.py
       - src/server/scripts/World/conversation_scripts.cpp
       - contrib/tests/test_campaign_nearest_actors.py
       - docs/audit-data/campaign-nearest-conversation-restoration.json
@@ -100,6 +101,8 @@ jobs:
           python-version: '3.12'
       - name: Test elevated creature paths with address and undefined behavior sanitizers
         run: python contrib/tests/test_elevated_surface_pathing.py
+      - name: Test native False Orders quest credit
+        run: python contrib/tests/test_false_orders_credit.py
       - name: Test source-compatible nearest conversation actors
         run: python contrib/tests/test_campaign_nearest_actors.py
       - name: Test real CMake revision generation

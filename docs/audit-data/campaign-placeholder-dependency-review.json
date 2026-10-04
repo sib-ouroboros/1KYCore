@@ -179,7 +179,7 @@
       "source_smart_references": [],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {
         "gameobject_questitem": {
           "questItem1": "132377"
@@ -702,7 +702,7 @@
       "source_smart_references": [],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {},
       "restoration_migration": "2026_10_03_00_world_campaign_source_loot_objects.sql"
     },
@@ -1143,7 +1143,7 @@
       "source_smart_references": [],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {
         "gameobject_questitem": {
           "questItem1": "136985"
@@ -1255,7 +1255,7 @@
         }
       ],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {
         "gameobject_questitem": {
           "questItem1": "136987"
@@ -2182,7 +2182,7 @@
       "source_smart_references": [],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {},
       "loot_table_review": "Native Player::SendLoot LOOT_FISHINGHOLE fills LootTemplates_Gameobject; Data1 is gameobject_loot_template64266, not fishing_loot_template.",
       "restoration_migration": "2026_10_03_00_world_campaign_source_loot_objects.sql"
@@ -3131,7 +3131,7 @@
         "BroadcastText": 51667
       },
       "missing_client_references": {},
-      "review_status": "requires_dependency_review",
+      "review_status": "restored_false_orders",
       "client_references_present": {
         "GameObjectDisplayInfo": 15781,
         "Lock": 2693
@@ -3139,7 +3139,7 @@
       "source_smart_references": [],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {}
     },
     {
@@ -3853,7 +3853,7 @@
         "BroadcastText": 51667
       },
       "missing_client_references": {},
-      "review_status": "requires_dependency_review",
+      "review_status": "restored_false_orders",
       "client_references_present": {
         "GameObjectDisplayInfo": 15781,
         "Lock": 2693
@@ -3861,7 +3861,7 @@
       "source_smart_references": [],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {}
     },
     {

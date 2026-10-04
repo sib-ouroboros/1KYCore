@@ -1,0 +1,1022 @@
+{
+  "remaining_count": 53,
+  "restored_count": 37,
+  "overlapping_blocker_counts": {
+    "script_chain_not_translated": 16,
+    "missing_native_client_reference": 19,
+    "unsupported_source_template_fields": 10,
+    "loot_and_quest_item_dependencies": 11,
+    "no_native_garrison_shipment_use_handler": 2,
+    "native_spell_or_external_dependency_review": 3
+  },
+  "rows": [
+    {
+      "entry": 245102,
+      "type": 10,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data3": "3000"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 245234,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference",
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "300000",
+        "Data14": "33516",
+        "Data22": "19467"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 19467
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 245924,
+      "type": 3,
+      "blockers": [
+        "missing_native_client_reference",
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data2": "1",
+        "Data3": "1",
+        "Data14": "19676",
+        "Data17": "37624"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 37624
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 245994,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference",
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "300000",
+        "Data10": "199727",
+        "Data14": "19676",
+        "Data22": "39238",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 39238
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 246148,
+      "type": 10,
+      "blockers": [
+        "unsupported_source_template_fields",
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "100000",
+        "Data13": "1",
+        "Data14": "35196"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "SpellVisualID": "51993"
+      }
+    },
+    {
+      "entry": 246984,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "93",
+        "Data10": "218574",
+        "Data14": "21295",
+        "Data22": "41517",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 41517
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 247037,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "1000",
+        "Data10": "203994",
+        "Data14": "96631",
+        "Data22": "38308",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 38308
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 247038,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "1000",
+        "Data10": "203995",
+        "Data14": "96631",
+        "Data22": "38308",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 38308
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 247052,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "1",
+        "Data10": "204230",
+        "Data13": "1",
+        "Data14": "56085",
+        "Data22": "38374",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 38374
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 248475,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1952",
+        "Data3": "3000",
+        "Data5": "1",
+        "Data22": "39037",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 39037
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 248781,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "19676",
+        "Data30": "65643"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 248782,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "19676",
+        "Data30": "65643"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 248876,
+      "type": 3,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "108167",
+        "Data17": "39397",
+        "Data31": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 39397
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 250295,
+      "type": 10,
+      "blockers": [
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data2": "51128",
+        "Data3": "3000",
+        "Data13": "1",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "StateWorldEffectID": "2654"
+      }
+    },
+    {
+      "entry": 250364,
+      "type": 10,
+      "blockers": [
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data2": "51140",
+        "Data3": "3000",
+        "Data13": "1",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "StateWorldEffectID": "2654"
+      }
+    },
+    {
+      "entry": 250367,
+      "type": 10,
+      "blockers": [
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data2": "51142",
+        "Data3": "3000",
+        "Data13": "1",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "StateWorldEffectID": "2654"
+      }
+    },
+    {
+      "entry": 251262,
+      "type": 22,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "215687",
+        "Data3": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 251504,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference",
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "2565",
+        "Data3": "40000",
+        "Data10": "217183",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "Spell": 217183
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 251697,
+      "type": 10,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data3": "4",
+        "Data7": "5314",
+        "Data9": "1",
+        "Data10": "218330",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 252017,
+      "type": 10,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "219701",
+        "Data14": "19700",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 252241,
+      "type": 10,
+      "blockers": [
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "220835",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data23": "1",
+        "Data25": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "SpellStateAnimID": "149"
+      }
+    },
+    {
+      "entry": 252243,
+      "type": 10,
+      "blockers": [
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "220844",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data23": "1",
+        "Data25": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "SpellStateAnimID": "147"
+      }
+    },
+    {
+      "entry": 252244,
+      "type": 10,
+      "blockers": [
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "220845",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data23": "1",
+        "Data25": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "SpellStateAnimID": "147"
+      }
+    },
+    {
+      "entry": 252796,
+      "type": 45,
+      "blockers": [
+        "no_native_garrison_shipment_use_handler"
+      ],
+      "source_data": {
+        "Data0": "186"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 252800,
+      "type": 45,
+      "blockers": [
+        "no_native_garrison_shipment_use_handler"
+      ],
+      "source_data": {
+        "Data0": "190"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 266081,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data2": "55277",
+        "Data3": "3000",
+        "Data10": "233450",
+        "Data14": "28503",
+        "Data20": "1",
+        "Data22": "48083",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 48083
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 266166,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference",
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "1690",
+        "Data3": "1",
+        "Data10": "239044",
+        "Data14": "83759",
+        "Data20": "1",
+        "Data22": "46899",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 46899
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 266291,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "93",
+        "Data2": "1",
+        "Data14": "19676",
+        "Data30": "70459"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 266307,
+      "type": 10,
+      "blockers": [
+        "native_spell_or_external_dependency_review"
+      ],
+      "source_data": {
+        "Data0": "93",
+        "Data3": "1",
+        "Data10": "236018",
+        "Data14": "35196",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 266588,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "21400",
+        "Data30": "70531"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 266594,
+      "type": 3,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "21400",
+        "Data30": "70532"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 266595,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "21400",
+        "Data30": "70533"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 267003,
+      "type": 10,
+      "blockers": [
+        "native_spell_or_external_dependency_review"
+      ],
+      "source_data": {
+        "Data0": "99",
+        "Data3": "1",
+        "Data10": "233399",
+        "Data14": "24585",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 267041,
+      "type": 10,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "1690",
+        "Data10": "233370",
+        "Data14": "125962",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 267176,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data1": "45632",
+        "Data3": "5000",
+        "Data10": "233857",
+        "Data13": "1",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data22": "47096",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 47096
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 267177,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data1": "45648",
+        "Data3": "5000",
+        "Data10": "233896",
+        "Data13": "1",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data22": "47097",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 47097
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 267180,
+      "type": 10,
+      "blockers": [
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data0": "2693",
+        "Data14": "35196",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "StateWorldEffectID": "5424",
+        "SpellStateVisualID": "8743"
+      }
+    },
+    {
+      "entry": 267222,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference",
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "2668",
+        "Data1": "45725",
+        "Data10": "233966",
+        "Data14": "21400",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "Spell": 233966
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 267641,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "43",
+        "Data2": "1",
+        "Data14": "19676",
+        "Data30": "70957"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 267952,
+      "type": 3,
+      "blockers": [
+        "missing_native_client_reference",
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data0": "1690",
+        "Data2": "1",
+        "Data3": "1",
+        "Data13": "1",
+        "Data14": "19680",
+        "Data17": "47913",
+        "Data18": "100",
+        "Data19": "4",
+        "Data20": "100",
+        "Data30": "71556",
+        "Data31": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 47913
+      },
+      "unsupported_source_fields": {
+        "unkInt32": "100"
+      }
+    },
+    {
+      "entry": 268359,
+      "type": 10,
+      "blockers": [
+        "native_spell_or_external_dependency_review"
+      ],
+      "source_data": {
+        "Data1": "45147",
+        "Data10": "237385",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268377,
+      "type": 10,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "2640",
+        "Data10": "237619",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268378,
+      "type": 10,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "2640",
+        "Data10": "237620",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268379,
+      "type": 10,
+      "blockers": [
+        "script_chain_not_translated"
+      ],
+      "source_data": {
+        "Data0": "2640",
+        "Data10": "237621",
+        "Data20": "1",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268408,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data3": "3000",
+        "Data10": "237673",
+        "Data20": "1",
+        "Data22": "48092",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 48092
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268448,
+      "type": 3,
+      "blockers": [
+        "unsupported_source_template_fields"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data1": "268448",
+        "Data3": "1",
+        "Data14": "114339",
+        "Data28": "1"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {
+        "SpellStateVisualID": "65309"
+      }
+    },
+    {
+      "entry": 268474,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "19676",
+        "Data30": "71934"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268475,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "21400",
+        "Data28": "1",
+        "Data30": "71935"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268476,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "21400",
+        "Data28": "1",
+        "Data30": "71936"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268477,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "19676",
+        "Data30": "71938"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268479,
+      "type": 3,
+      "blockers": [
+        "loot_and_quest_item_dependencies"
+      ],
+      "source_data": {
+        "Data0": "1691",
+        "Data14": "19676",
+        "Data30": "71943"
+      },
+      "missing_native_client_references": {},
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268617,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "1690",
+        "Data2": "57304",
+        "Data13": "1",
+        "Data14": "27700",
+        "Data20": "1",
+        "Data22": "49035",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 49035
+      },
+      "unsupported_source_fields": {}
+    },
+    {
+      "entry": 268736,
+      "type": 10,
+      "blockers": [
+        "missing_native_client_reference"
+      ],
+      "source_data": {
+        "Data0": "2688",
+        "Data3": "3000",
+        "Data10": "240221",
+        "Data20": "1",
+        "Data22": "48622",
+        "Data23": "1"
+      },
+      "missing_native_client_references": {
+        "PlayerCondition": 48622
+      },
+      "unsupported_source_fields": {}
+    }
+  ],
+  "garrison_shipment_evidence": {
+    "entries": [
+      252796,
+      252800
+    ],
+    "native_type": 45,
+    "Use_implementation": "src/server/game/Entities/GameObject/GameObject.cpp",
+    "native_use_handler_present": false,
+    "RewardWorkOrder_call_sites": 0,
+    "note": "Function exists but has no caller; importing models/containers alone does not restore reward collection."
+  },
+  "assurance": "Classification, not verified fixes. Missing client IDs are not silently replaced. Existing scripts and NPC AI unchanged.",
+  "next_spell_chain_review": {
+    "entries": {
+      "266307": 236018,
+      "267003": 233399,
+      "268359": 237385
+    },
+    "evidence": {
+      "file": "SpellEffect.db2",
+      "sha256": "dfcb7076421e3b99fb23e769acddb9215d051069fe5e7488fc33b67770c194db",
+      "layout_hash": "0x3244098b",
+      "record_count": 269623,
+      "copy_rows": 0,
+      "identity_count": 269623,
+      "format": "WDC1",
+      "locale": "enUS",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "effects": {
+        "237385": [
+          {
+            "ID": 359426,
+            "Effect": 160,
+            "EffectIndex": 0,
+            "EffectItemType": 0,
+            "DifficultyID": 0,
+            "TriggerSpell": 230493,
+            "MiscValue1": 0,
+            "MiscValue2": 0,
+            "PositionFacing": 0.0,
+            "ImplicitTarget1": 1,
+            "ImplicitTarget2": 0
+          }
+        ],
+        "236018": [
+          {
+            "ID": 356766,
+            "Effect": 3,
+            "EffectIndex": 0,
+            "EffectItemType": 0,
+            "DifficultyID": 0,
+            "TriggerSpell": 0,
+            "MiscValue1": 0,
+            "MiscValue2": 0,
+            "PositionFacing": 0.0,
+            "ImplicitTarget1": 18,
+            "ImplicitTarget2": 8
+          },
+          {
+            "ID": 357326,
+            "Effect": 61,
+            "EffectIndex": 1,
+            "EffectItemType": 0,
+            "DifficultyID": 0,
+            "TriggerSpell": 0,
+            "MiscValue1": 56752,
+            "MiscValue2": 0,
+            "PositionFacing": 0.0,
+            "ImplicitTarget1": 1,
+            "ImplicitTarget2": 0
+          }
+        ],
+        "233399": [
+          {
+            "ID": 352488,
+            "Effect": 3,
+            "EffectIndex": 0,
+            "EffectItemType": 0,
+            "DifficultyID": 0,
+            "TriggerSpell": 0,
+            "MiscValue1": 0,
+            "MiscValue2": 0,
+            "PositionFacing": 0.0,
+            "ImplicitTarget1": 18,
+            "ImplicitTarget2": 8
+          }
+        ]
+      }
+    },
+    "decision": "Deferred: native spell presence is insufficient.233399 has DUMMY effect;236018 has DUMMY and SEND_EVENT56752;237385 triggers230493. Need original handlers and downstream dependencies before claiming restored gameplay."
+  }
+}

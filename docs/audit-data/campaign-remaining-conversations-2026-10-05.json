@@ -1,0 +1,761 @@
+{
+  "basis": "All45 remaining IDs: original source semantics and supplied DB2 plus prepared isolated release; no source GUID requirement",
+  "count": 45,
+  "overlapping_blocker_counts": {
+    "source_duration_does_not_cover_lines": 17,
+    "packed_fields_require_semantic_review": 15,
+    "actor_template_requires_separate_translation": 2,
+    "missing_native_camera": 32,
+    "source_player_sentinel_actor": 5,
+    "client_line_chain_mismatch": 1,
+    "source_actor_template_precedes_world_actor_rows": 1
+  },
+  "client_validation": {
+    "UiCamera": {
+      "file": "UiCamera.db2",
+      "sha256": "6cb64ffd7d647d45e1bb8e8f849a0f9f80c7a441db9f1cecddedd2aa97d96c4d",
+      "layout_hash": "0xca6c98d4",
+      "record_count": 1060,
+      "copy_rows": 0,
+      "identity_count": 1060,
+      "format": "WDC1",
+      "locale": "enUS",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "AnimKit": {
+      "file": "AnimKit.db2",
+      "sha256": "b3b895f30bee3ced65a107c638eead9931fdf5c4f1efe1da73d328fc99faa5f1",
+      "layout_hash": "0x81d6d250",
+      "record_count": 483,
+      "copy_rows": 11799,
+      "identity_count": 12282,
+      "format": "WDC1",
+      "locale": "enUS",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    }
+  },
+  "rows": [
+    {
+      "conversation": 738,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review",
+        "actor_template_requires_separate_translation"
+      ],
+      "packed_fields": [
+        {
+          "line": 1762,
+          "raw": 538968064,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 8224
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 1416,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        1
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 1477,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review"
+      ],
+      "packed_fields": [
+        {
+          "line": 3318,
+          "raw": 1411383296,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 21536
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 1667,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "actor_template_requires_separate_translation"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 1841,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review"
+      ],
+      "packed_fields": [
+        {
+          "line": 3907,
+          "raw": 538968064,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 8224
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 1900,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review"
+      ],
+      "packed_fields": [
+        {
+          "line": 4017,
+          "raw": 540016640,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 8240
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 1986,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        75592
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2000,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        4285107616
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2048,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review",
+        "source_player_sentinel_actor"
+      ],
+      "packed_fields": [
+        {
+          "line": 4324,
+          "raw": 257,
+          "actor_index": 1,
+          "flags": 1,
+          "padding": 0
+        },
+        {
+          "line": 4395,
+          "raw": 257,
+          "actor_index": 1,
+          "flags": 1,
+          "padding": 0
+        },
+        {
+          "line": 4359,
+          "raw": 257,
+          "actor_index": 1,
+          "flags": 1,
+          "padding": 0
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2246,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review"
+      ],
+      "packed_fields": [
+        {
+          "line": 4730,
+          "raw": 16711680,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 255
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2314,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        1367019216
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2434,
+      "blockers": [
+        "source_player_sentinel_actor",
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        2311023888
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2666,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        1796582640
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2778,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review"
+      ],
+      "packed_fields": [
+        {
+          "line": 5782,
+          "raw": 540803072,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 8252
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2869,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        22662400
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2870,
+      "blockers": [
+        "client_line_chain_mismatch",
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review",
+        "missing_native_camera"
+      ],
+      "packed_fields": [
+        {
+          "line": 6001,
+          "raw": 258,
+          "actor_index": 2,
+          "flags": 1,
+          "padding": 0
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        92791
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2871,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review"
+      ],
+      "packed_fields": [
+        {
+          "line": 6009,
+          "raw": 256,
+          "actor_index": 0,
+          "flags": 1,
+          "padding": 0
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 2976,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        138293
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3029,
+      "blockers": [
+        "packed_fields_require_semantic_review",
+        "missing_native_camera"
+      ],
+      "packed_fields": [
+        {
+          "line": 6408,
+          "raw": 1811939328,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 27648
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        808923696
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3108,
+      "blockers": [
+        "packed_fields_require_semantic_review",
+        "source_player_sentinel_actor",
+        "missing_native_camera"
+      ],
+      "packed_fields": [
+        {
+          "line": 6575,
+          "raw": 258,
+          "actor_index": 2,
+          "flags": 1,
+          "padding": 0
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        3718228896
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3183,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        2555358216
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3186,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        3718226304
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3192,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        1060835600
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3235,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        1060824944
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3260,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        105415
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3524,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        3237982400
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3525,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        3237982400
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3574,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        934091984
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3638,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        106637
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3640,
+      "blockers": [
+        "source_duration_does_not_cover_lines",
+        "packed_fields_require_semantic_review",
+        "source_player_sentinel_actor"
+      ],
+      "packed_fields": [
+        {
+          "line": 8791,
+          "raw": 257,
+          "actor_index": 1,
+          "flags": 1,
+          "padding": 0
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3769,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        2772806912
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3770,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        2772806912
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3789,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        98618
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3790,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        98618
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 3914,
+      "blockers": [
+        "packed_fields_require_semantic_review"
+      ],
+      "packed_fields": [
+        {
+          "line": 8928,
+          "raw": 6553600,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 100
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4204,
+      "blockers": [
+        "packed_fields_require_semantic_review"
+      ],
+      "packed_fields": [
+        {
+          "line": 9570,
+          "raw": 136183808,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 2078
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4229,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        5
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4304,
+      "blockers": [
+        "source_player_sentinel_actor",
+        "source_actor_template_precedes_world_actor_rows"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4313,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        2750931696
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4568,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        45256909
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4572,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        2154798120
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4575,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        3314581
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4657,
+      "blockers": [
+        "packed_fields_require_semantic_review",
+        "missing_native_camera"
+      ],
+      "packed_fields": [
+        {
+          "line": 10328,
+          "raw": 540672000,
+          "actor_index": 0,
+          "flags": 0,
+          "padding": 8250
+        }
+      ],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        878681136
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4658,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        2
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    },
+    {
+      "conversation": 4730,
+      "blockers": [
+        "missing_native_camera"
+      ],
+      "packed_fields": [],
+      "missing_npc_templates": [],
+      "missing_native_cameras": [
+        161917554
+      ],
+      "missing_native_animkits": [],
+      "missing_target_broadcast_texts": []
+    }
+  ],
+  "assurance": "No remapping, camera suppression, NPC creation or invented timing. Packed byte Flags differs from ActorIdx; nonzero high word is Padding and cannot be silently discarded."
+}

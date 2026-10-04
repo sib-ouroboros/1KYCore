@@ -1,0 +1,267 @@
+{
+  "count": 18,
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_GameObject_cpp_sha256": "7f685f4c98effc4df3cc31b5aba5a172d47dcc2e96d2738e5928832d97cc5600",
+  "overlapping_blocker_counts": {
+    "visual_storage_and_lifecycle_translation": 6,
+    "complete_smartai_chain": 5,
+    "external_dependency_chain_review": 4,
+    "garrison_shipment_missing_native_use": 2,
+    "unknown_source_field": 2
+  },
+  "rows": [
+    {
+      "entry": 245100,
+      "type": 5,
+      "blockers": [
+        "visual_storage_and_lifecycle_translation"
+      ],
+      "previous_dependency_review": [
+        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
+      ],
+      "source_additional_fields": {
+        "SpellVisualID": "8742"
+      }
+    },
+    {
+      "entry": 245233,
+      "type": 0,
+      "blockers": [
+        "complete_smartai_chain"
+      ],
+      "previous_dependency_review": [
+        "Требуется исходный AI и все связанные сценарии. Для 245233 найден SmartScript event38 SetData(1,1) -> action9 ACTIVATE_GOBJECT self; в release его нет, отправитель найден: GO 245234 event70 state2 -> SetData(1,1), но его release-шаблон — заготовка с type=0/displayId=0; исходный GOOBER использует Lock1691, BroadcastText33516, PlayerCondition19467.",
+        "У управляющего GO245234 отсутствует клиентский PlayerCondition19467; восстановление только двери нарушит цепочку."
+      ],
+      "source_additional_fields": {
+        "AIName": "'SmartGameObjectAI'",
+        "control_entry": "245234"
+      }
+    },
+    {
+      "entry": 245347,
+      "type": 5,
+      "blockers": [
+        "visual_storage_and_lifecycle_translation"
+      ],
+      "previous_dependency_review": [
+        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
+      ],
+      "source_additional_fields": {
+        "SpellVisualID": "8742"
+      }
+    },
+    {
+      "entry": 246459,
+      "type": 6,
+      "blockers": [
+        "visual_storage_and_lifecycle_translation"
+      ],
+      "previous_dependency_review": [
+        "Проверить заклинание ловушки, её радиус/перезарядку и внешние клиентские зависимости.",
+        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его.",
+        "PlayerCondition 18177 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+      ],
+      "source_additional_fields": {
+        "SpellVisualID": "184"
+      }
+    },
+    {
+      "entry": 246536,
+      "type": 0,
+      "blockers": [
+        "external_dependency_chain_review"
+      ],
+      "previous_dependency_review": [
+        "Требуется проверка клиентских записей Lock/PlayerCondition/BroadcastText на развёрнутом сервере.",
+        "PlayerCondition 18177 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+      ],
+      "source_additional_fields": {}
+    },
+    {
+      "entry": 246537,
+      "type": 22,
+      "blockers": [
+        "visual_storage_and_lifecycle_translation"
+      ],
+      "previous_dependency_review": [
+        "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
+        "PlayerCondition 18177 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+      ],
+      "source_additional_fields": {
+        "WorldEffectID": "2437"
+      }
+    },
+    {
+      "entry": 247227,
+      "type": 5,
+      "blockers": [
+        "visual_storage_and_lifecycle_translation"
+      ],
+      "previous_dependency_review": [
+        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
+      ],
+      "source_additional_fields": {
+        "SpellVisualID": "53572"
+      }
+    },
+    {
+      "entry": 247321,
+      "type": 9,
+      "blockers": [
+        "external_dependency_chain_review"
+      ],
+      "previous_dependency_review": [
+        "Страница 5243 отсутствует и в исходном Legion SQL; требуется достоверный источник текста."
+      ],
+      "source_additional_fields": {}
+    },
+    {
+      "entry": 249027,
+      "type": 3,
+      "blockers": [
+        "external_dependency_chain_review"
+      ],
+      "previous_dependency_review": [
+        "Лут 249027 найден в источнике, но перед импортом нужны Lock/PlayerCondition/Item и корректный контекст получения предмета.",
+        "PlayerCondition 23645 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+      ],
+      "source_additional_fields": {}
+    },
+    {
+      "entry": 250899,
+      "type": 45,
+      "blockers": [
+        "garrison_shipment_missing_native_use"
+      ],
+      "previous_dependency_review": [
+        "Обычные войска оплота, не удалённые боты. Запись CharShipmentContainer есть в клиенте, но требуется проверить полный путь взаимодействия GO type45 с заказами в ядре."
+      ],
+      "source_additional_fields": {}
+    },
+    {
+      "entry": 250908,
+      "type": 45,
+      "blockers": [
+        "garrison_shipment_missing_native_use"
+      ],
+      "previous_dependency_review": [
+        "Обычные войска оплота, не удалённые боты. Запись CharShipmentContainer есть в клиенте, но требуется проверить полный путь взаимодействия GO type45 с заказами в ядре."
+      ],
+      "source_additional_fields": {}
+    },
+    {
+      "entry": 251591,
+      "type": 0,
+      "blockers": [
+        "visual_storage_and_lifecycle_translation",
+        "complete_smartai_chain"
+      ],
+      "previous_dependency_review": [
+        "Требуется проверка клиентских записей Lock/PlayerCondition/BroadcastText на развёрнутом сервере.",
+        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его.",
+        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится."
+      ],
+      "source_additional_fields": {
+        "SpellVisualID": "58002",
+        "AIName": "'SmartGameObjectAI'"
+      }
+    },
+    {
+      "entry": 252018,
+      "type": 22,
+      "blockers": [
+        "complete_smartai_chain"
+      ],
+      "previous_dependency_review": [
+        "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
+        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
+        "PlayerCondition 41852 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+      ],
+      "source_additional_fields": {
+        "AIName": "'SmartGameObjectAI'"
+      }
+    },
+    {
+      "entry": 252981,
+      "type": 22,
+      "blockers": [
+        "complete_smartai_chain"
+      ],
+      "previous_dependency_review": [
+        "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
+        "Spell=0: найти реальную цепочку обработки; не подставлять выдуманное заклинание.",
+        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
+        "PlayerCondition 44383 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+      ],
+      "source_additional_fields": {
+        "AIName": "'SmartGameObjectAI'"
+      }
+    },
+    {
+      "entry": 254253,
+      "type": 10,
+      "blockers": [
+        "complete_smartai_chain"
+      ],
+      "previous_dependency_review": [
+        "Проверить замок и исходный сценарий использования, не превращать GOOBER в простой декор.",
+        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
+        "Исходный SmartScript action205 с параметрами92/54147 и комментарием Complete Scenario Criteria несовместим с native action205 SET_OVERRIDE_ZONE_LIGHT; в GO обработчик не выполняет действие, поскольку требует me (NPC). Нельзя импортировать номер действия без проверки исходного enum и перевода сценарной семантики."
+      ],
+      "source_additional_fields": {
+        "AIName": "'SmartGameObjectAI'"
+      }
+    },
+    {
+      "entry": 266767,
+      "type": 22,
+      "blockers": [
+        "external_dependency_chain_review"
+      ],
+      "previous_dependency_review": [
+        "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
+        "Spell232169 использует TELEPORT_TO_LFG227 и dungeon1422; не подменять обычным TELEPORT_UNITS252 и фиксированным spell_target_position."
+      ],
+      "source_additional_fields": {}
+    },
+    {
+      "entry": 269053,
+      "type": 5,
+      "blockers": [
+        "unknown_source_field"
+      ],
+      "previous_dependency_review": [
+        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
+      ],
+      "source_additional_fields": {
+        "unkInt32": "100"
+      }
+    },
+    {
+      "entry": 269055,
+      "type": 5,
+      "blockers": [
+        "unknown_source_field"
+      ],
+      "previous_dependency_review": [
+        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
+      ],
+      "source_additional_fields": {
+        "unkInt32": "100"
+      }
+    }
+  ],
+  "visual_lifecycle_evidence": {
+    "source_Create": "Initialize before-completion visuals; StateWorldEffectID and StateSpellVisualID only when visualQuestID=0",
+    "source_SetGoState": "READY restores SpellVisualID/state world effect; other states clear SpellVisualID and state world effect, retain state spell visual",
+    "source_BuildValuesUpdate": "State visuals may be selected per recipient by visualQuestID",
+    "native_fields_present": [
+      "GAMEOBJECT_SPELL_VISUAL_ID",
+      "GAMEOBJECT_STATE_SPELL_VISUAL_ID",
+      "GAMEOBJECT_STATE_WORLD_EFFECT_ID"
+    ],
+    "decision": "Existing client fields do not supply SQL storage or source lifecycle. Importing visuals solely as WorldEffectID addon is not equivalent."
+  },
+  "assurance": "No templates/spawns added for these18; dependencies remain unresolved. Existing pending review retained; no unsafe source-field aliasing."
+}
