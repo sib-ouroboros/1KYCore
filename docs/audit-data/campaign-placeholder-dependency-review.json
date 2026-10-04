@@ -2927,7 +2927,7 @@
         "BroadcastText": 35196
       },
       "missing_client_references": {},
-      "review_status": "unsupported_source_field",
+      "review_status": "restored_native_static_visuals",
       "client_references_present": {
         "GameObjectDisplayInfo": 32278,
         "Lock": 2693
@@ -2938,7 +2938,7 @@
         "StateWorldEffectID": "5424",
         "SpellStateVisualID": "8743"
       },
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {}
     },
     {

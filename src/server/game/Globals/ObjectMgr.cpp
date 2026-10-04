@@ -7468,7 +7468,16 @@ void ObjectMgr::LoadGameObjectTemplateAddons()
     uint32 oldMSTime = getMSTime();
 
     //                                                0       1       2      3        4        5
-    QueryResult result = WorldDatabase.Query("SELECT entry, faction, flags, mingold, maxgold, WorldEffectID FROM gameobject_template_addon");
+    QueryResult visualColumns = WorldDatabase.Query("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='gameobject_template_addon' AND COLUMN_NAME IN ('SpellVisualID','SpellStateVisualID','StateWorldEffectID') AND DATA_TYPE='int' AND COLUMN_TYPE LIKE '%unsigned' AND IS_NULLABLE='NO' AND (COLUMN_DEFAULT <=> '0') AND EXTRA=''");
+    uint32 visualColumnCount = visualColumns ? visualColumns->Fetch()[0].GetUInt32() : 0;
+    bool hasVisualFields = visualColumnCount == 3;
+    if (visualColumnCount && !hasVisualFields)
+        TC_LOG_ERROR("sql.sql", "Incomplete gameobject visual addon schema; loading legacy addon fields only. Apply world update 2026_10_05_03.");
+
+    // Legacy databases still load faction, flags and loot unchanged until updated.
+    QueryResult result = WorldDatabase.Query(hasVisualFields
+        ? "SELECT entry, faction, flags, mingold, maxgold, WorldEffectID, SpellVisualID, SpellStateVisualID, StateWorldEffectID FROM gameobject_template_addon"
+        : "SELECT entry, faction, flags, mingold, maxgold, WorldEffectID FROM gameobject_template_addon");
 
     if (!result)
     {
@@ -7496,6 +7505,9 @@ void ObjectMgr::LoadGameObjectTemplateAddons()
         gameObjectAddon.mingold       = fields[3].GetUInt32();
         gameObjectAddon.maxgold       = fields[4].GetUInt32();
         gameObjectAddon.WorldEffectID = fields[5].GetUInt32();
+        gameObjectAddon.SpellVisualID = hasVisualFields ? fields[6].GetUInt32() : 0;
+        gameObjectAddon.SpellStateVisualID = hasVisualFields ? fields[7].GetUInt32() : 0;
+        gameObjectAddon.StateWorldEffectID = hasVisualFields ? fields[8].GetUInt32() : 0;
 
         // checks
         if (gameObjectAddon.faction && !sFactionTemplateStore.LookupEntry(gameObjectAddon.faction))
@@ -7518,6 +7530,12 @@ void ObjectMgr::LoadGameObjectTemplateAddons()
         {
             TC_LOG_ERROR("sql.sql", "GameObject (Entry: %u) has invalid WorldEffectID (%u) defined in `gameobject_template_addon`, set to 0.", entry, gameObjectAddon.WorldEffectID);
             gameObjectAddon.WorldEffectID = 0;
+        }
+
+        if (gameObjectAddon.StateWorldEffectID && !sWorldEffectStore.LookupEntry(gameObjectAddon.StateWorldEffectID))
+        {
+            TC_LOG_ERROR("sql.sql", "GameObject (Entry: %u) has invalid StateWorldEffectID (%u) in `gameobject_template_addon`, set to 0.", entry, gameObjectAddon.StateWorldEffectID);
+            gameObjectAddon.StateWorldEffectID = 0;
         }
 
         ++count;

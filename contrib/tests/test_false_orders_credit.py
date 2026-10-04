@@ -58,10 +58,14 @@ int main(){try {
  p.KillCreditGO(267492,{});check(p.credits==2,"repeat is capped");
  p.KillCreditGO(268458,{});check(p.credits==4 && p.completed==2,"second orders complete both quests");
  p.KillCreditGO(268458,{});check(p.credits==4,"completed quest is unchanged");
+ manager.quests.emplace(45629,Quest{45629,true,{{2,267180,4,2,45629}}});
+ Player bombs;bombs.slots[0]=45629;bombs.slots[1]=0;bombs.m_QuestStatus[45629]={};
+ for(uint32 n=1;n<=4;++n){bombs.KillCreditGO(267180,{});check(bombs.credits==n && bombs.progress[std::make_pair(45629U,2U)]==n,"four credits for Fel FireBomb objective");check(bombs.completed==(n==4?1U:0U),"bomb quest completes only at four");}
+ bombs.KillCreditGO(267180,{});check(bombs.credits==4 && bombs.completed==1,"bomb repeat after completion capped");
  Player inactive;inactive.m_QuestStatus[45835].Status=0;inactive.m_QuestStatus[46324].Status=0;inactive.KillCreditGO(267492,{});check(inactive.credits==0,"no active quest");
  Player empty;empty.slots[0]=empty.slots[1]=0;empty.KillCreditGO(267492,{});check(empty.credits==0,"empty quest log");
  Player missing;missing.slots[0]=missing.slots[1]=999999;missing.KillCreditGO(267492,{});check(missing.credits==0,"missing quest template");
- std::cout<<"PASS: actual KillCreditGO, both False Orders entries, simultaneous quests, completion, repeats and inactive quests\n";
+ std::cout<<"PASS: actual KillCreditGO, both False Orders entries, simultaneous quests, four Fel FireBomb uses, completion, repeats and inactive quests\n";
  }catch(std::exception const& e){std::cerr<<e.what()<<'\n';return 1;}}
 '''
     with tempfile.TemporaryDirectory() as directory:

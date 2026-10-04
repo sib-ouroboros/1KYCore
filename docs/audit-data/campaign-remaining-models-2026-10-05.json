@@ -1,11 +1,12 @@
 {
-  "remaining_count": 53,
-  "restored_count": 37,
+  "remaining_count": 52,
+  "restored_count": 38,
   "overlapping_blocker_counts": {
     "script_chain_not_translated": 16,
     "missing_native_client_reference": 19,
-    "unsupported_source_template_fields": 10,
+    "static_visual_source_chain_not_restored": 5,
     "loot_and_quest_item_dependencies": 11,
+    "unsupported_source_template_fields": 4,
     "no_native_garrison_shipment_use_handler": 2,
     "native_spell_or_external_dependency_review": 3
   },
@@ -83,7 +84,7 @@
       "entry": 246148,
       "type": 10,
       "blockers": [
-        "unsupported_source_template_fields",
+        "static_visual_source_chain_not_restored",
         "script_chain_not_translated"
       ],
       "source_data": {
@@ -243,7 +244,7 @@
       "entry": 250295,
       "type": 10,
       "blockers": [
-        "unsupported_source_template_fields"
+        "static_visual_source_chain_not_restored"
       ],
       "source_data": {
         "Data2": "51128",
@@ -261,7 +262,7 @@
       "entry": 250364,
       "type": 10,
       "blockers": [
-        "unsupported_source_template_fields"
+        "static_visual_source_chain_not_restored"
       ],
       "source_data": {
         "Data2": "51140",
@@ -279,7 +280,7 @@
       "entry": 250367,
       "type": 10,
       "blockers": [
-        "unsupported_source_template_fields"
+        "static_visual_source_chain_not_restored"
       ],
       "source_data": {
         "Data2": "51142",
@@ -640,24 +641,6 @@
       "unsupported_source_fields": {}
     },
     {
-      "entry": 267180,
-      "type": 10,
-      "blockers": [
-        "unsupported_source_template_fields"
-      ],
-      "source_data": {
-        "Data0": "2693",
-        "Data14": "35196",
-        "Data20": "1",
-        "Data23": "1"
-      },
-      "missing_native_client_references": {},
-      "unsupported_source_fields": {
-        "StateWorldEffectID": "5424",
-        "SpellStateVisualID": "8743"
-      }
-    },
-    {
       "entry": 267222,
       "type": 10,
       "blockers": [
@@ -802,7 +785,7 @@
       "entry": 268448,
       "type": 3,
       "blockers": [
-        "unsupported_source_template_fields"
+        "static_visual_source_chain_not_restored"
       ],
       "source_data": {
         "Data0": "1691",
@@ -1018,5 +1001,14 @@
       }
     },
     "decision": "Deferred: native spell presence is insufficient.233399 has DUMMY effect;236018 has DUMMY and SEND_EVENT56752;237385 triggers230493. Need original handlers and downstream dependencies before claiming restored gameplay."
+  },
+  "static_visual_backend": {
+    "fields": [
+      "SpellVisualID",
+      "SpellStateVisualID",
+      "StateWorldEffectID"
+    ],
+    "source_quest_dependent_visuals_supported": false,
+    "restoration": "campaign-native-visual-restoration.json"
   }
 }

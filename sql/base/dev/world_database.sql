@@ -1486,6 +1486,9 @@ CREATE TABLE `gameobject_template_addon` (
   `mingold` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `maxgold` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `WorldEffectID` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `SpellVisualID` int(10) unsigned NOT NULL DEFAULT '0',
+  `SpellStateVisualID` int(10) unsigned NOT NULL DEFAULT '0',
+  `StateWorldEffectID` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`entry`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

@@ -12,6 +12,8 @@ import subprocess
 import tempfile
 import urllib.request
 
+from test_campaign_visual_migration import test_visual_migration
+
 ROOT = Path(__file__).resolve().parents[2]
 DB = 'test_1kycore_sylvania_release'
 ASSET = '1kycore_world_20260926_no_mercenaries.sql.gz'
@@ -808,6 +810,7 @@ def main():
     parser.add_argument('--conversation-chains-only', action='store_true', help='Run multi-line conversation chain and actor-index checks.')
     parser.add_argument('--simple-conversations-only', action='store_true', help='Run terminal conversation dependency and publication checks.')
     parser.add_argument('--council-books-only', action='store_true', help='Run page-chain and quest-credit dependency checks for two source books.')
+    parser.add_argument('--native-visuals-only', action='store_true', help='Test optional GO visual schema and four restorations.')
     args = parser.parse_args()
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
         raise SystemExit('Requires MYSQL_DISPOSABLE_TEST_SERVER=1; never use a production server.')
@@ -839,6 +842,11 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.native_visuals_only:
+            sql(migration)
+            test_visual_migration(sql,checksum)
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.conversation_chains_only:
             sql(migration)
             tables = sql('SHOW TABLES;').stdout.splitlines()
@@ -998,6 +1006,7 @@ def main():
         sql(command)
         assert checksum(['spell_script_names']) == complete, 'Quest binding retry is not idempotent'
         print('PASS: Gilneas command binding first/repeat import preserves other scripts and all other tables', flush=True)
+        test_visual_migration(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)
 
 

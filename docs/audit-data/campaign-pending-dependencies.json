@@ -1,21 +1,8 @@
 {
   "source_commit": "a6145c22e9ad6ac69690d4a2f7794bae4e1caf95",
-  "remaining_templates": 18,
-  "remaining_spawns": 115,
+  "remaining_templates": 15,
+  "remaining_spawns": 105,
   "entries": [
-    {
-      "entry": 245100,
-      "type": 5,
-      "source_name": "'Cage bottom'",
-      "source_spawns": 3,
-      "references": {},
-      "additional_source_fields": {
-        "SpellVisualID": "8742"
-      },
-      "required_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
-      ]
-    },
     {
       "entry": 245233,
       "type": 0,
@@ -29,19 +16,6 @@
       "required_review": [
         "Требуется исходный AI и все связанные сценарии. Для 245233 найден SmartScript event38 SetData(1,1) -> action9 ACTIVATE_GOBJECT self; в release его нет, отправитель найден: GO 245234 event70 state2 -> SetData(1,1), но его release-шаблон — заготовка с type=0/displayId=0; исходный GOOBER использует Lock1691, BroadcastText33516, PlayerCondition19467.",
         "У управляющего GO245234 отсутствует клиентский PlayerCondition19467; восстановление только двери нарушит цепочку."
-      ]
-    },
-    {
-      "entry": 245347,
-      "type": 5,
-      "source_name": "'Cell Walls'",
-      "source_spawns": 6,
-      "references": {},
-      "additional_source_fields": {
-        "SpellVisualID": "8742"
-      },
-      "required_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
       ]
     },
     {
@@ -93,19 +67,6 @@
       "required_review": [
         "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
         "PlayerCondition 18177 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
-      ]
-    },
-    {
-      "entry": 247227,
-      "type": 5,
-      "source_name": "'Base'",
-      "source_spawns": 1,
-      "references": {},
-      "additional_source_fields": {
-        "SpellVisualID": "53572"
-      },
-      "required_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
       ]
     },
     {
@@ -295,5 +256,6 @@
       "44383": false,
       "40074": true
     }
-  }
+  },
+  "static_visual_backend": "Optional SpellVisualID/SpellStateVisualID/StateWorldEffectID fields now supported; remaining source chains and quest-dependent visuals still require review."
 }

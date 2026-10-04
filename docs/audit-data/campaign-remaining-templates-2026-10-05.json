@@ -1,28 +1,15 @@
 {
-  "count": 18,
+  "count": 15,
   "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
   "source_GameObject_cpp_sha256": "7f685f4c98effc4df3cc31b5aba5a172d47dcc2e96d2738e5928832d97cc5600",
   "overlapping_blocker_counts": {
-    "visual_storage_and_lifecycle_translation": 6,
     "complete_smartai_chain": 5,
+    "visual_dependencies_not_restored": 3,
     "external_dependency_chain_review": 4,
     "garrison_shipment_missing_native_use": 2,
     "unknown_source_field": 2
   },
   "rows": [
-    {
-      "entry": 245100,
-      "type": 5,
-      "blockers": [
-        "visual_storage_and_lifecycle_translation"
-      ],
-      "previous_dependency_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
-      ],
-      "source_additional_fields": {
-        "SpellVisualID": "8742"
-      }
-    },
     {
       "entry": 245233,
       "type": 0,
@@ -39,23 +26,10 @@
       }
     },
     {
-      "entry": 245347,
-      "type": 5,
-      "blockers": [
-        "visual_storage_and_lifecycle_translation"
-      ],
-      "previous_dependency_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
-      ],
-      "source_additional_fields": {
-        "SpellVisualID": "8742"
-      }
-    },
-    {
       "entry": 246459,
       "type": 6,
       "blockers": [
-        "visual_storage_and_lifecycle_translation"
+        "visual_dependencies_not_restored"
       ],
       "previous_dependency_review": [
         "Проверить заклинание ловушки, её радиус/перезарядку и внешние клиентские зависимости.",
@@ -82,7 +56,7 @@
       "entry": 246537,
       "type": 22,
       "blockers": [
-        "visual_storage_and_lifecycle_translation"
+        "visual_dependencies_not_restored"
       ],
       "previous_dependency_review": [
         "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
@@ -90,19 +64,6 @@
       ],
       "source_additional_fields": {
         "WorldEffectID": "2437"
-      }
-    },
-    {
-      "entry": 247227,
-      "type": 5,
-      "blockers": [
-        "visual_storage_and_lifecycle_translation"
-      ],
-      "previous_dependency_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
-      ],
-      "source_additional_fields": {
-        "SpellVisualID": "53572"
       }
     },
     {
@@ -154,7 +115,7 @@
       "entry": 251591,
       "type": 0,
       "blockers": [
-        "visual_storage_and_lifecycle_translation",
+        "visual_dependencies_not_restored",
         "complete_smartai_chain"
       ],
       "previous_dependency_review": [
@@ -261,7 +222,7 @@
       "GAMEOBJECT_STATE_SPELL_VISUAL_ID",
       "GAMEOBJECT_STATE_WORLD_EFFECT_ID"
     ],
-    "decision": "Existing client fields do not supply SQL storage or source lifecycle. Importing visuals solely as WorldEffectID addon is not equivalent."
+    "decision": "Static non-quest visuals now have optional addon storage and native lifecycle. These remaining templates still require other dependencies; per-player visualQuestID behavior has not been ported."
   },
   "assurance": "No templates/spawns added for these18; dependencies remain unresolved. Existing pending review retained; no unsafe source-field aliasing."
 }

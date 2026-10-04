@@ -351,6 +351,7 @@ class TC_GAME_API GameObject : public WorldObject, public GridObject<GameObject>
         ObjectGuid::LowType m_spawnId;                               ///< For new or temporary gameobjects is 0 for saved it is lowguid
         GameObjectTemplate const* m_goInfo;
         GameObjectTemplateAddon const* m_goTemplateAddon;
+        void ApplyTemplateVisuals(bool initial, GOState state);
         GameObjectData const* m_goData;
         GameObjectValue m_goValue;
 

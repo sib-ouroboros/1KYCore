@@ -298,6 +298,7 @@ bool GameObject::Create(uint32 entry, Map* map, Position const& pos, QuaternionD
     m_prevGoState = goState;
     SetGoState(goState);
     SetGoArtKit(artKit);
+    ApplyTemplateVisuals(true, goState);
 
     switch (goInfo->type)
     {
@@ -2378,6 +2379,24 @@ void GameObject::SetGoState(GOState state)
 
         EnableCollision(collision);
     }
+    ApplyTemplateVisuals(false, state);
+}
+
+// Initial visuals are independent of spawn state, matching the source Create path.
+// State transitions clear the ordinary visual and world effect on activation;
+// state spell visuals remain set. Zero addon values leave script-owned fields alone.
+void GameObject::ApplyTemplateVisuals(bool initial, GOState state)
+{
+    if (!m_goTemplateAddon)
+        return;
+
+    bool ready = initial || state == GO_STATE_READY;
+    if (m_goTemplateAddon->SpellVisualID)
+        SetUInt32Value(GAMEOBJECT_SPELL_VISUAL_ID, ready ? m_goTemplateAddon->SpellVisualID : 0);
+    if (m_goTemplateAddon->SpellStateVisualID)
+        SetUInt32Value(GAMEOBJECT_STATE_SPELL_VISUAL_ID, m_goTemplateAddon->SpellStateVisualID);
+    if (m_goTemplateAddon->StateWorldEffectID)
+        SetUInt32Value(GAMEOBJECT_STATE_WORLD_EFFECT_ID, ready ? m_goTemplateAddon->StateWorldEffectID : 0);
 }
 
 uint32 GameObject::GetTransportPeriod() const
