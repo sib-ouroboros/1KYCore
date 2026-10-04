@@ -429,6 +429,25 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         failure = sql(restore,ok=False)
         assert '_1kycore_model_guard' in failure.stderr and 'Duplicate entry' in failure.stderr, failure.stderr
         assert checksum(tables) == before, 'GOOBER conflict changed permanent data'
+    # Restoring native interactions must not silently activate administrator scripts.
+    if registry.get('protected_spells'):
+        spell = registry['protected_spells'][0]
+        spawn_guid = registry['protected_spawn_guids'][0]
+        overrides = [
+            (f"INSERT INTO smart_scripts(entryorguid,source_type,id,event_type,action_type,target_type,comment) VALUES ({entry},1,99,64,1,1,'test native override');",
+             f'DELETE FROM smart_scripts WHERE entryorguid={entry} AND source_type=1 AND id=99;'),
+            (f"INSERT INTO smart_scripts(entryorguid,source_type,id,event_type,action_type,target_type,comment) VALUES ({-spawn_guid},1,99,64,1,1,'test native override');",
+             f'DELETE FROM smart_scripts WHERE entryorguid={-spawn_guid} AND source_type=1 AND id=99;'),
+            (f"INSERT INTO spell_script_names(spell_id,ScriptName) VALUES ({spell},'test_native_interaction');",
+             f"DELETE FROM spell_script_names WHERE spell_id={spell} AND ScriptName='test_native_interaction';"),
+            (f'INSERT INTO conditions(SourceTypeOrReferenceId,SourceGroup,SourceEntry,ConditionTypeOrReference,ConditionValue1) VALUES (13,1,{spell},1,6948);',
+             f'DELETE FROM conditions WHERE SourceTypeOrReferenceId=13 AND SourceGroup=1 AND SourceEntry={spell} AND ConditionValue1=6948;')]
+        for addition, removal in overrides:
+            sql(addition)
+            try:
+                rejection()
+            finally:
+                sql(removal)
     pages = registry.get('pages', [])
     page_ids = ','.join(p['ID'] for p in pages)
     if pages:
@@ -736,6 +755,37 @@ def test_simple_conversations(tables, restore, registry):
     assert checksum(protected_tables) == protected, 'Conversation migration changed NPCs, quests, spawns or other tables'
     print(f"PASS: {len(registry['entries'])} complete conversation chains / exact actors and lines / all content conflicts / repeated and interrupted import / shared provenance", flush=True)
 
+def test_nearest_conversations():
+    registry = json.loads((ROOT/'docs/audit-data/campaign-nearest-conversation-restoration.json').read_text('utf8'))
+    sql_text = (ROOT/'sql/updates/world/2026_10_05_01_world_campaign_nearest_conversations.sql').read_text('utf8')
+    tables=sql('SHOW TABLES;').stdout.splitlines();owned=list(registry['rows']);before=checksum(tables)
+    ids={t:','.join(x['Id'] for x in rows) for t,rows in registry['rows'].items()}
+    assert all(sql(f'SELECT COUNT(*) FROM {t} WHERE Id IN ({keys});').stdout.strip()=='0' for t,keys in ids.items()),'Already-existing line requires separate ownership review'
+    def clean():
+     for t in reversed(owned):sql(f'DELETE FROM {t} WHERE Id IN ({ids[t]});')
+    try:
+     protected=checksum([t for t in tables if t not in owned]);sql(sql_text)
+     complete=checksum(tables);canonical=checksum(owned);sql(sql_text);assert checksum(tables)==complete
+     assert checksum([t for t in tables if t not in owned])==protected
+     print('PASS: native nearest conversations first/repeat and unchanged unrelated tables',flush=True)
+     # Existing provenance survives, but content conflicts must stop before writes.
+     cid=registry['entries'][0];sql(f'UPDATE conversation_template SET VerifiedBuild=12345 WHERE Id={cid};');compatible=checksum(owned);sql(sql_text);assert checksum(owned)==compatible
+     for table,field,value in [('conversation_template','ScriptName',"'custom'"),('conversation_template','LastLineEndTime','1'),('conversation_line_template','ActorIdx','99'),('conversation_line_template','Flags','1')]:
+      row=registry['rows'][table][0];id=row['Id'];sql(f'UPDATE {table} SET {field}={value} WHERE Id={id};');conflict=checksum(owned);result=sql(sql_text,ok=False);assert '_1kycore_nearest_guard' in result.stderr;assert checksum(owned)==conflict;sql(f'UPDATE {table} SET {field}={row[field]} WHERE Id={id};')
+     first_line=registry['rows']['conversation_line_template'][0]
+     sql('DELETE FROM conversation_line_template WHERE Id='+first_line['Id']+';');conflict=checksum(owned);sql(sql_text,ok=False);assert checksum(owned)==conflict
+     sql('INSERT INTO conversation_line_template ('+','.join(first_line)+') VALUES ('+','.join(first_line.values())+');')
+     clean();split=sql_text.index('INSERT INTO `conversation_template` (`Id`')
+     sql(sql_text[:split]);sql(sql_text);assert checksum(owned)==canonical
+     sql(f'INSERT INTO conversation_actors(ConversationId,ConversationActorGuid,Idx) VALUES ({cid},1,0);')
+     try:
+      conflict=checksum(owned+['conversation_actors']);sql(sql_text,ok=False);assert checksum(owned+['conversation_actors'])==conflict
+     finally:sql(f'DELETE FROM conversation_actors WHERE ConversationId={cid};')
+     print('PASS: content/provenance, missing lines, unexpected actor bindings, interrupted dependency publication',flush=True)
+
+    finally:
+     clean();assert checksum(tables)==before;print('Restored scratch baseline',flush=True)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
@@ -874,6 +924,12 @@ def main():
         sixth = (ROOT / 'sql/updates/world/2026_10_02_00_world_campaign_doors_book.sql').read_text('utf8')
         sixth_registry = json.loads((ROOT / 'docs/audit-data/campaign-doors-book-restoration.json').read_text('utf8'))
         test_generic_restoration(sixth, sixth_registry, tables, 'five doors / one book / 10 spawns / page5121')
+
+        native_interactions = (ROOT / 'sql/updates/world/2026_10_05_00_world_campaign_native_interactions.sql').read_text('utf8')
+        interaction_registry = json.loads((ROOT / 'docs/audit-data/campaign-native-interactions-restoration.json').read_text('utf8'))
+        test_simple_goober_models(tables,native_interactions,interaction_registry,'native portal and brew interactions / protected credit dependencies')
+
+        test_nearest_conversations()
 
         test_placeholder_models(tables)
         test_simple_goober_models(tables)

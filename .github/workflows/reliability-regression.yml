@@ -4,6 +4,9 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/server/scripts/World/conversation_scripts.cpp
+      - contrib/tests/test_campaign_nearest_actors.py
+      - docs/audit-data/campaign-nearest-conversation-restoration.json
       - src/server/game/Movement/PathGenerator.*
       - contrib/tests/test_elevated_surface_pathing.py
       - src/tools/vmap4_extractor/model.cpp
@@ -97,6 +100,8 @@ jobs:
           python-version: '3.12'
       - name: Test elevated creature paths with address and undefined behavior sanitizers
         run: python contrib/tests/test_elevated_surface_pathing.py
+      - name: Test source-compatible nearest conversation actors
+        run: python contrib/tests/test_campaign_nearest_actors.py
       - name: Test real CMake revision generation
         run: python contrib/tests/test_revision_metadata.py
       - name: Test tool protocol with address and undefined behavior sanitizers

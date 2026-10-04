@@ -1,0 +1,3177 @@
+{
+  "entries": [
+    1821,
+    1823,
+    1832,
+    2017,
+    2023,
+    2211,
+    2300,
+    2381,
+    2937,
+    2938,
+    2939,
+    2940,
+    2941,
+    2942,
+    2943,
+    2944,
+    3187,
+    3572,
+    3575,
+    3597,
+    3642,
+    3771,
+    3772,
+    3786,
+    3787,
+    3788,
+    3791,
+    3792,
+    3793,
+    3794,
+    3795,
+    3796,
+    4110,
+    4593,
+    4597
+  ],
+  "rows": {
+    "conversation_line_template": [
+      {
+        "Id": "3875",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3882",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3893",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4261",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4268",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4659",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4853",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "5051",
+        "StartTime": "0",
+        "UiCameraID": "102",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6177",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6178",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6179",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6180",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6181",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6182",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6183",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6184",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6721",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "7987",
+        "StartTime": "0",
+        "UiCameraID": "138",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "7990",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8056",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8057",
+        "StartTime": "1958",
+        "UiCameraID": "0",
+        "ActorIdx": "1",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8207",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8394",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8395",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8438",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8439",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8440",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8460",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8451",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8449",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8458",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8459",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8450",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "9423",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "9424",
+        "StartTime": "4430",
+        "UiCameraID": "0",
+        "ActorIdx": "1",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "9425",
+        "StartTime": "15653",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "9761",
+        "StartTime": "19006",
+        "UiCameraID": "0",
+        "ActorIdx": "1",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "10249",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "10250",
+        "StartTime": "3008",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "10259",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_template": [
+      {
+        "Id": "1821",
+        "FirstLineId": "3875",
+        "LastLineEndTime": "12750",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "1823",
+        "FirstLineId": "3882",
+        "LastLineEndTime": "9600",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "1832",
+        "FirstLineId": "3893",
+        "LastLineEndTime": "8500",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2017",
+        "FirstLineId": "4261",
+        "LastLineEndTime": "8263",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2023",
+        "FirstLineId": "4268",
+        "LastLineEndTime": "11892",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2211",
+        "FirstLineId": "4659",
+        "LastLineEndTime": "13420",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2300",
+        "FirstLineId": "4853",
+        "LastLineEndTime": "11650",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2381",
+        "FirstLineId": "5051",
+        "LastLineEndTime": "7250",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2937",
+        "FirstLineId": "6177",
+        "LastLineEndTime": "11009",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2938",
+        "FirstLineId": "6178",
+        "LastLineEndTime": "13016",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2939",
+        "FirstLineId": "6179",
+        "LastLineEndTime": "10804",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2940",
+        "FirstLineId": "6180",
+        "LastLineEndTime": "10813",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2941",
+        "FirstLineId": "6181",
+        "LastLineEndTime": "10306",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2942",
+        "FirstLineId": "6182",
+        "LastLineEndTime": "12038",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2943",
+        "FirstLineId": "6183",
+        "LastLineEndTime": "10723",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2944",
+        "FirstLineId": "6184",
+        "LastLineEndTime": "12734",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3187",
+        "FirstLineId": "6721",
+        "LastLineEndTime": "11466",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3572",
+        "FirstLineId": "7987",
+        "LastLineEndTime": "7500",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3575",
+        "FirstLineId": "7990",
+        "LastLineEndTime": "8400",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3597",
+        "FirstLineId": "8056",
+        "LastLineEndTime": "8916",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3642",
+        "FirstLineId": "8207",
+        "LastLineEndTime": "10654",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3771",
+        "FirstLineId": "8394",
+        "LastLineEndTime": "8074",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3772",
+        "FirstLineId": "8395",
+        "LastLineEndTime": "8469",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3786",
+        "FirstLineId": "8438",
+        "LastLineEndTime": "8337",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3787",
+        "FirstLineId": "8439",
+        "LastLineEndTime": "8965",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3788",
+        "FirstLineId": "8440",
+        "LastLineEndTime": "10092",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3791",
+        "FirstLineId": "8460",
+        "LastLineEndTime": "9652",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3792",
+        "FirstLineId": "8451",
+        "LastLineEndTime": "8866",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3793",
+        "FirstLineId": "8449",
+        "LastLineEndTime": "11970",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3794",
+        "FirstLineId": "8458",
+        "LastLineEndTime": "8847",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3795",
+        "FirstLineId": "8459",
+        "LastLineEndTime": "12677",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3796",
+        "FirstLineId": "8450",
+        "LastLineEndTime": "9210",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4110",
+        "FirstLineId": "9423",
+        "LastLineEndTime": "59246",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4593",
+        "FirstLineId": "10249",
+        "LastLineEndTime": "19023",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4597",
+        "FirstLineId": "10259",
+        "LastLineEndTime": "9693",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "ConversationId": 1821,
+      "Idx": 0,
+      "CreatureEntry": 98102
+    },
+    {
+      "ConversationId": 1823,
+      "Idx": 0,
+      "CreatureEntry": 98102
+    },
+    {
+      "ConversationId": 1832,
+      "Idx": 0,
+      "CreatureEntry": 105333
+    },
+    {
+      "ConversationId": 2017,
+      "Idx": 0,
+      "CreatureEntry": 106001
+    },
+    {
+      "ConversationId": 2023,
+      "Idx": 0,
+      "CreatureEntry": 106001
+    },
+    {
+      "ConversationId": 2211,
+      "Idx": 0,
+      "CreatureEntry": 42465
+    },
+    {
+      "ConversationId": 2300,
+      "Idx": 0,
+      "CreatureEntry": 94138
+    },
+    {
+      "ConversationId": 2381,
+      "Idx": 0,
+      "CreatureEntry": 107979
+    },
+    {
+      "ConversationId": 2937,
+      "Idx": 0,
+      "CreatureEntry": 98008
+    },
+    {
+      "ConversationId": 2938,
+      "Idx": 0,
+      "CreatureEntry": 103832
+    },
+    {
+      "ConversationId": 2939,
+      "Idx": 0,
+      "CreatureEntry": 103778
+    },
+    {
+      "ConversationId": 2940,
+      "Idx": 0,
+      "CreatureEntry": 98013
+    },
+    {
+      "ConversationId": 2941,
+      "Idx": 0,
+      "CreatureEntry": 106091
+    },
+    {
+      "ConversationId": 2942,
+      "Idx": 0,
+      "CreatureEntry": 106093
+    },
+    {
+      "ConversationId": 2943,
+      "Idx": 0,
+      "CreatureEntry": 107025
+    },
+    {
+      "ConversationId": 2944,
+      "Idx": 0,
+      "CreatureEntry": 104329
+    },
+    {
+      "ConversationId": 3187,
+      "Idx": 0,
+      "CreatureEntry": 107806
+    },
+    {
+      "ConversationId": 3572,
+      "Idx": 0,
+      "CreatureEntry": 112959
+    },
+    {
+      "ConversationId": 3575,
+      "Idx": 0,
+      "CreatureEntry": 102594
+    },
+    {
+      "ConversationId": 3597,
+      "Idx": 0,
+      "CreatureEntry": 113299
+    },
+    {
+      "ConversationId": 3597,
+      "Idx": 1,
+      "CreatureEntry": 109102
+    },
+    {
+      "ConversationId": 3642,
+      "Idx": 0,
+      "CreatureEntry": 99997
+    },
+    {
+      "ConversationId": 3771,
+      "Idx": 0,
+      "CreatureEntry": 113419
+    },
+    {
+      "ConversationId": 3772,
+      "Idx": 0,
+      "CreatureEntry": 93453
+    },
+    {
+      "ConversationId": 3786,
+      "Idx": 0,
+      "CreatureEntry": 113481
+    },
+    {
+      "ConversationId": 3787,
+      "Idx": 0,
+      "CreatureEntry": 108975
+    },
+    {
+      "ConversationId": 3788,
+      "Idx": 0,
+      "CreatureEntry": 93555
+    },
+    {
+      "ConversationId": 3791,
+      "Idx": 0,
+      "CreatureEntry": 106521
+    },
+    {
+      "ConversationId": 3792,
+      "Idx": 0,
+      "CreatureEntry": 106519
+    },
+    {
+      "ConversationId": 3793,
+      "Idx": 0,
+      "CreatureEntry": 106524
+    },
+    {
+      "ConversationId": 3794,
+      "Idx": 0,
+      "CreatureEntry": 106518
+    },
+    {
+      "ConversationId": 3795,
+      "Idx": 0,
+      "CreatureEntry": 106649
+    },
+    {
+      "ConversationId": 3796,
+      "Idx": 0,
+      "CreatureEntry": 106517
+    },
+    {
+      "ConversationId": 4110,
+      "Idx": 0,
+      "CreatureEntry": 116448
+    },
+    {
+      "ConversationId": 4110,
+      "Idx": 1,
+      "CreatureEntry": 116414
+    },
+    {
+      "ConversationId": 4593,
+      "Idx": 0,
+      "CreatureEntry": 115883
+    },
+    {
+      "ConversationId": 4597,
+      "Idx": 0,
+      "CreatureEntry": 116880
+    }
+  ],
+  "source": [
+    {
+      "id": 1821,
+      "lines": [
+        {
+          "entry": "1821",
+          "id": "3875",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 108124,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "1821",
+          "id": "0",
+          "creatureId": "98102",
+          "creatureGuid": "16311261",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "7750"
+        }
+      ],
+      "end": 12750,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "1821",
+            "id": "0",
+            "creatureId": "98102",
+            "creatureGuid": "16311261",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "7750"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 1823,
+      "lines": [
+        {
+          "entry": "1823",
+          "id": "3882",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 108143,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "1823",
+          "id": "0",
+          "creatureId": "98102",
+          "creatureGuid": "7922655",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "4600"
+        }
+      ],
+      "end": 9600,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "1823",
+            "id": "0",
+            "creatureId": "98102",
+            "creatureGuid": "7922655",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "4600"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 1832,
+      "lines": [
+        {
+          "entry": "1832",
+          "id": "3893",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 108185,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "1832",
+          "id": "0",
+          "creatureId": "105333",
+          "creatureGuid": "7762369",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3500"
+        }
+      ],
+      "end": 8500,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "1832",
+            "id": "0",
+            "creatureId": "105333",
+            "creatureGuid": "7762369",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3500"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2017,
+      "lines": [
+        {
+          "entry": "2017",
+          "id": "4261",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 109215,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 0,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2017",
+          "id": "0",
+          "creatureId": "106001",
+          "creatureGuid": "3272596",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3263"
+        }
+      ],
+      "end": 8263,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2017",
+            "id": "0",
+            "creatureId": "106001",
+            "creatureGuid": "3272596",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3263"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2023,
+      "lines": [
+        {
+          "entry": "2023",
+          "id": "4268",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 109226,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 2000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2023",
+          "id": "0",
+          "creatureId": "106001",
+          "creatureGuid": "3273743",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "6892"
+        }
+      ],
+      "end": 11892,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2023",
+            "id": "0",
+            "creatureId": "106001",
+            "creatureGuid": "3273743",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "6892"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2211,
+      "lines": [
+        {
+          "entry": "2211",
+          "id": "4659",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 111117,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 2000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2211",
+          "id": "0",
+          "creatureId": "42465",
+          "creatureGuid": "2954364",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "8420"
+        }
+      ],
+      "end": 13420,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2211",
+            "id": "0",
+            "creatureId": "42465",
+            "creatureGuid": "2954364",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "8420"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2300,
+      "lines": [
+        {
+          "entry": "2300",
+          "id": "4853",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 112463,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2300",
+          "id": "0",
+          "creatureId": "94138",
+          "creatureGuid": "4495651",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "6650"
+        }
+      ],
+      "end": 11650,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2300",
+            "id": "0",
+            "creatureId": "94138",
+            "creatureGuid": "4495651",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "6650"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2381,
+      "lines": [
+        {
+          "entry": "2381",
+          "id": "5051",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "102",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 113176,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2381",
+          "id": "0",
+          "creatureId": "107979",
+          "creatureGuid": "4605658",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "2250"
+        }
+      ],
+      "end": 7250,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2381",
+            "id": "0",
+            "creatureId": "107979",
+            "creatureGuid": "4605658",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "2250"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2937,
+      "lines": [
+        {
+          "entry": "2937",
+          "id": "6177",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 117120,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2937",
+          "id": "0",
+          "creatureId": "98008",
+          "creatureGuid": "40523",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "6009"
+        }
+      ],
+      "end": 11009,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2937",
+            "id": "0",
+            "creatureId": "98008",
+            "creatureGuid": "40523",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "6009"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2938,
+      "lines": [
+        {
+          "entry": "2938",
+          "id": "6178",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 117118,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2938",
+          "id": "0",
+          "creatureId": "103832",
+          "creatureGuid": "9239620",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "8016"
+        }
+      ],
+      "end": 13016,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2938",
+            "id": "0",
+            "creatureId": "103832",
+            "creatureGuid": "9239620",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "8016"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2939,
+      "lines": [
+        {
+          "entry": "2939",
+          "id": "6179",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 117129,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2939",
+          "id": "0",
+          "creatureId": "103778",
+          "creatureGuid": "3537218",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "5804"
+        }
+      ],
+      "end": 10804,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2939",
+            "id": "0",
+            "creatureId": "103778",
+            "creatureGuid": "3537218",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "5804"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2940,
+      "lines": [
+        {
+          "entry": "2940",
+          "id": "6180",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 117125,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2940",
+          "id": "0",
+          "creatureId": "98013",
+          "creatureGuid": "3537217",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "5813"
+        }
+      ],
+      "end": 10813,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2940",
+            "id": "0",
+            "creatureId": "98013",
+            "creatureGuid": "3537217",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "5813"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2941,
+      "lines": [
+        {
+          "entry": "2941",
+          "id": "6181",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 117121,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2941",
+          "id": "0",
+          "creatureId": "106091",
+          "creatureGuid": "3868823",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "5306"
+        }
+      ],
+      "end": 10306,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2941",
+            "id": "0",
+            "creatureId": "106091",
+            "creatureGuid": "3868823",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "5306"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2942,
+      "lines": [
+        {
+          "entry": "2942",
+          "id": "6182",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 117124,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2942",
+          "id": "0",
+          "creatureId": "106093",
+          "creatureGuid": "3868820",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "7038"
+        }
+      ],
+      "end": 12038,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2942",
+            "id": "0",
+            "creatureId": "106093",
+            "creatureGuid": "3868820",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "7038"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2943,
+      "lines": [
+        {
+          "entry": "2943",
+          "id": "6183",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 117119,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2943",
+          "id": "0",
+          "creatureId": "107025",
+          "creatureGuid": "4992490",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "5723"
+        }
+      ],
+      "end": 10723,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2943",
+            "id": "0",
+            "creatureId": "107025",
+            "creatureGuid": "4992490",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "5723"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 2944,
+      "lines": [
+        {
+          "entry": "2944",
+          "id": "6184",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 117122,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "2944",
+          "id": "0",
+          "creatureId": "104329",
+          "creatureGuid": "4992494",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "7734"
+        }
+      ],
+      "end": 12734,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "2944",
+            "id": "0",
+            "creatureId": "104329",
+            "creatureGuid": "4992494",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "7734"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3187,
+      "lines": [
+        {
+          "entry": "3187",
+          "id": "6721",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 119912,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 0,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3187",
+          "id": "0",
+          "creatureId": "107806",
+          "creatureGuid": "1876813",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "6466"
+        }
+      ],
+      "end": 11466,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3187",
+            "id": "0",
+            "creatureId": "107806",
+            "creatureGuid": "1876813",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "6466"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3572,
+      "lines": [
+        {
+          "entry": "3572",
+          "id": "7987",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "138",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 121678,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 0,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3572",
+          "id": "0",
+          "creatureId": "112959",
+          "creatureGuid": "6633166",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "2500"
+        }
+      ],
+      "end": 7500,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3572",
+            "id": "0",
+            "creatureId": "112959",
+            "creatureGuid": "6633166",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "2500"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3575,
+      "lines": [
+        {
+          "entry": "3575",
+          "id": "7990",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 122034,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3575",
+          "id": "0",
+          "creatureId": "102594",
+          "creatureGuid": "8124695",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3400"
+        }
+      ],
+      "end": 8400,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3575",
+            "id": "0",
+            "creatureId": "102594",
+            "creatureGuid": "8124695",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3400"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3597,
+      "lines": [
+        {
+          "entry": "3597",
+          "id": "8056",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "3597",
+          "id": "8057",
+          "idx": "1",
+          "textId": "1958",
+          "unk1": "0",
+          "unk2": "1"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120617,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 8057,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 120617,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3597",
+          "id": "0",
+          "creatureId": "113299",
+          "creatureGuid": "351581",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "1958"
+        },
+        {
+          "entry": "3597",
+          "id": "1",
+          "creatureId": "109102",
+          "creatureGuid": "8574971",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "1958"
+        }
+      ],
+      "end": 8916,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3597",
+            "id": "0",
+            "creatureId": "113299",
+            "creatureGuid": "351581",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "1958"
+          },
+          "present": true,
+          "entry_matches": false,
+          "spawn": {
+            "guid": "351581",
+            "id": "26692",
+            "map": "575",
+            "zoneId": "1196",
+            "areaId": "1196",
+            "spawnDifficulties": "'1,2'",
+            "phaseUseFlags": "0",
+            "PhaseId": "0",
+            "PhaseGroup": "0",
+            "terrainSwapMap": "-1",
+            "modelid": "25241",
+            "equipment_id": "0",
+            "position_x": "487.575",
+            "position_y": "-484.908",
+            "position_z": "104.905",
+            "orientation": "4.67748",
+            "spawntimesecs": "7200",
+            "spawndist": "0",
+            "currentwaypoint": "0",
+            "curhealth": "18900",
+            "curmana": "0",
+            "MovementType": "0",
+            "npcflag": "0",
+            "unit_flags": "0",
+            "unit_flags2": "0",
+            "unit_flags3": "0",
+            "dynamicflags": "0",
+            "ScriptName": "''",
+            "movementmode": "0",
+            "VerifiedBuild": "0"
+          },
+          "origin": "release"
+        },
+        {
+          "source_actor": {
+            "entry": "3597",
+            "id": "1",
+            "creatureId": "109102",
+            "creatureGuid": "8574971",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "1958"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3642,
+      "lines": [
+        {
+          "entry": "3642",
+          "id": "8207",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120618,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 500,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3642",
+          "id": "0",
+          "creatureId": "99997",
+          "creatureGuid": "17360299",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "5654"
+        }
+      ],
+      "end": 10654,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3642",
+            "id": "0",
+            "creatureId": "99997",
+            "creatureGuid": "17360299",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "5654"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3771,
+      "lines": [
+        {
+          "entry": "3771",
+          "id": "8394",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120961,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3771",
+          "id": "0",
+          "creatureId": "113419",
+          "creatureGuid": "1878432",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3074"
+        }
+      ],
+      "end": 8074,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3771",
+            "id": "0",
+            "creatureId": "113419",
+            "creatureGuid": "1878432",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3074"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3772,
+      "lines": [
+        {
+          "entry": "3772",
+          "id": "8395",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120967,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3772",
+          "id": "0",
+          "creatureId": "93453",
+          "creatureGuid": "1878432",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3469"
+        }
+      ],
+      "end": 8469,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3772",
+            "id": "0",
+            "creatureId": "93453",
+            "creatureGuid": "1878432",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3469"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3786,
+      "lines": [
+        {
+          "entry": "3786",
+          "id": "8438",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120973,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3786",
+          "id": "0",
+          "creatureId": "113481",
+          "creatureGuid": "2739410",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3337"
+        }
+      ],
+      "end": 8337,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3786",
+            "id": "0",
+            "creatureId": "113481",
+            "creatureGuid": "2739410",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3337"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3787,
+      "lines": [
+        {
+          "entry": "3787",
+          "id": "8439",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120981,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3787",
+          "id": "0",
+          "creatureId": "108975",
+          "creatureGuid": "2960264",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3965"
+        }
+      ],
+      "end": 8965,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3787",
+            "id": "0",
+            "creatureId": "108975",
+            "creatureGuid": "2960264",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3965"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3788,
+      "lines": [
+        {
+          "entry": "3788",
+          "id": "8440",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120985,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3788",
+          "id": "0",
+          "creatureId": "93555",
+          "creatureGuid": "2960264",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "5092"
+        }
+      ],
+      "end": 10092,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3788",
+            "id": "0",
+            "creatureId": "93555",
+            "creatureGuid": "2960264",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "5092"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3791,
+      "lines": [
+        {
+          "entry": "3791",
+          "id": "8460",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120856,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3791",
+          "id": "0",
+          "creatureId": "106521",
+          "creatureGuid": "2357862",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "4652"
+        }
+      ],
+      "end": 9652,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3791",
+            "id": "0",
+            "creatureId": "106521",
+            "creatureGuid": "2357862",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "4652"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3792,
+      "lines": [
+        {
+          "entry": "3792",
+          "id": "8451",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 111453,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3792",
+          "id": "0",
+          "creatureId": "106519",
+          "creatureGuid": "2357862",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3866"
+        }
+      ],
+      "end": 8866,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3792",
+            "id": "0",
+            "creatureId": "106519",
+            "creatureGuid": "2357862",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3866"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3793,
+      "lines": [
+        {
+          "entry": "3793",
+          "id": "8449",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120842,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3793",
+          "id": "0",
+          "creatureId": "106524",
+          "creatureGuid": "2961750",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "6970"
+        }
+      ],
+      "end": 11970,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3793",
+            "id": "0",
+            "creatureId": "106524",
+            "creatureGuid": "2961750",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "6970"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3794,
+      "lines": [
+        {
+          "entry": "3794",
+          "id": "8458",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120882,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3794",
+          "id": "0",
+          "creatureId": "106518",
+          "creatureGuid": "2961750",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3847"
+        }
+      ],
+      "end": 8847,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3794",
+            "id": "0",
+            "creatureId": "106518",
+            "creatureGuid": "2961750",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "3847"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3795,
+      "lines": [
+        {
+          "entry": "3795",
+          "id": "8459",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 120896,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3795",
+          "id": "0",
+          "creatureId": "106649",
+          "creatureGuid": "3567780",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "7677"
+        }
+      ],
+      "end": 12677,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3795",
+            "id": "0",
+            "creatureId": "106649",
+            "creatureGuid": "3567780",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "7677"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 3796,
+      "lines": [
+        {
+          "entry": "3796",
+          "id": "8450",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 111425,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3796",
+          "id": "0",
+          "creatureId": "106517",
+          "creatureGuid": "3567780",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "4210"
+        }
+      ],
+      "end": 9210,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "3796",
+            "id": "0",
+            "creatureId": "106517",
+            "creatureGuid": "3567780",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "4210"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 4110,
+      "lines": [
+        {
+          "entry": "4110",
+          "id": "9423",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "4110",
+          "id": "9424",
+          "idx": "1",
+          "textId": "4430",
+          "unk1": "0",
+          "unk2": "1"
+        },
+        {
+          "entry": "4110",
+          "id": "9425",
+          "idx": "2",
+          "textId": "15653",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "4110",
+          "id": "9761",
+          "idx": "3",
+          "textId": "19006",
+          "unk1": "0",
+          "unk2": "1"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 125284,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 9424,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 125285,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 9425,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 125286,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 9761,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 126160,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "4110",
+          "id": "0",
+          "creatureId": "116448",
+          "creatureGuid": "3039079",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "27123"
+        },
+        {
+          "entry": "4110",
+          "id": "1",
+          "creatureId": "116414",
+          "creatureGuid": "3039080",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "27123"
+        }
+      ],
+      "end": 59246,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "4110",
+            "id": "0",
+            "creatureId": "116448",
+            "creatureGuid": "3039079",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "27123"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        },
+        {
+          "source_actor": {
+            "entry": "4110",
+            "id": "1",
+            "creatureId": "116414",
+            "creatureGuid": "3039080",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "27123"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 4593,
+      "lines": [
+        {
+          "entry": "4593",
+          "id": "10249",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "4593",
+          "id": "10250",
+          "idx": "1",
+          "textId": "3008",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 126784,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 10250,
+          "AnimKitID": 0,
+          "SpeechType": 1,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 127158,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 1,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "4593",
+          "id": "0",
+          "creatureId": "115883",
+          "creatureGuid": "2848210",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "14023"
+        }
+      ],
+      "end": 19023,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "4593",
+            "id": "0",
+            "creatureId": "115883",
+            "creatureGuid": "2848210",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "14023"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    },
+    {
+      "id": 4597,
+      "lines": [
+        {
+          "entry": "4597",
+          "id": "10259",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 128205,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "4597",
+          "id": "0",
+          "creatureId": "116880",
+          "creatureGuid": "7791479",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "4693"
+        }
+      ],
+      "end": 9693,
+      "links_match": true,
+      "timing_valid": true,
+      "packet_flags_valid": true,
+      "ordered": true,
+      "spawn_matches": [
+        {
+          "source_actor": {
+            "entry": "4597",
+            "id": "0",
+            "creatureId": "116880",
+            "creatureGuid": "7791479",
+            "unk1": "0",
+            "unk2": "0",
+            "duration": "4693"
+          },
+          "present": false,
+          "entry_matches": false,
+          "spawn": null,
+          "origin": "missing"
+        }
+      ],
+      "guid_candidate_diagnostic": false,
+      "candidate": true
+    }
+  ],
+  "client_validation": {
+    "UiCamera": {
+      "file": "UiCamera.db2",
+      "sha256": "6cb64ffd7d647d45e1bb8e8f849a0f9f80c7a441db9f1cecddedd2aa97d96c4d",
+      "layout_hash": "0xca6c98d4",
+      "record_count": 1060,
+      "copy_rows": 0,
+      "identity_count": 1060,
+      "format": "WDC1",
+      "locale": "enUS",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "AnimKit": {
+      "file": "AnimKit.db2",
+      "sha256": "b3b895f30bee3ced65a107c638eead9931fdf5c4f1efe1da73d328fc99faa5f1",
+      "layout_hash": "0x81d6d250",
+      "record_count": 483,
+      "copy_rows": 11799,
+      "identity_count": 12282,
+      "format": "WDC1",
+      "locale": "enUS",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    }
+  },
+  "client_line_file_sha256": "ef9a39edeef5f58aebd0741839291a1a4e4ab745be881c3e155b9767c5ba7039",
+  "required_creatures": [
+    42465,
+    93453,
+    93555,
+    94138,
+    98008,
+    98013,
+    98102,
+    99997,
+    102594,
+    103778,
+    103832,
+    104329,
+    105333,
+    106001,
+    106091,
+    106093,
+    106517,
+    106518,
+    106519,
+    106521,
+    106524,
+    106649,
+    107025,
+    107806,
+    107979,
+    108975,
+    109102,
+    112959,
+    113299,
+    113419,
+    113481,
+    115883,
+    116414,
+    116448,
+    116880
+  ],
+  "assurance": "Original FindNearestCreature semantics preserved; unused creatureGuid is not a spawn dependency. Source duration, line chain and packed fields retained; native TTL remains end+10s. Client playtest pending.",
+  "source_conversation_cpp_sha256": "8a86a8b9d1f8ec655c68b64001d2438cb606651421a5c6ad012b1844b6aa8863",
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "mysql_test": {
+    "mysql": "8.0.45",
+    "conversations": 35,
+    "lines": 40,
+    "untouched_tables": 246,
+    "sql_sha256": "d1c1ad3430759a4ffc2f15198632ebc651aeb9302af39257af5d6b729ff79783",
+    "client_playtest": "not performed"
+  },
+  "sql_sha256": "d1c1ad3430759a4ffc2f15198632ebc651aeb9302af39257af5d6b729ff79783"
+}

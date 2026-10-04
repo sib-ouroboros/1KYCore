@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Compare actual native packed structures with the original conversation packets."""
+import argparse
 import json
 import os
 from pathlib import Path
@@ -20,6 +21,9 @@ def declaration(text, name):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--no-sanitizers', action='store_true', help='For compilers without sanitizer runtimes.')
+    args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
     registry = json.loads((root/'docs/audit-data/campaign-simple-conversation-restoration.json').read_text('utf8'))
     store = (root/'src/server/game/Globals/ConversationDataStore.h').read_text('utf8')
@@ -50,6 +54,14 @@ def main():
             if (std::memcmp(&actor,expectedActor,24) || std::memcmp(&line,expectedLine,16)) return 1;
         }''' % (actor['Id'],actor['CreatureId'],actor['CreatureModelId'],line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],array(actor_packet),array(line_packet)))
     assert len(cases) == 22
+    nearest = json.loads((root/'docs/audit-data/campaign-nearest-conversation-restoration.json').read_text('utf8'))
+    nearest_lines = {int(row['Id']):row for row in nearest['rows']['conversation_line_template']}
+    for candidate in nearest['source']:
+        for old_line in candidate['lines']:
+            line = nearest_lines[int(old_line['id'])]
+            packet = struct.pack('<4I', *(int(old_line[key]) for key in ('id','textId','unk1','unk2')))
+            cases.append('{ ConversationLineTemplate line = {%s,%s,%s,%s,%s,0}; unsigned char expected[16] = %s; if (std::memcmp(&line,expected,16)) return 1; }' % (line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],array(packet)))
+    assert len(cases) == 62
     harness = '''#include <cstdint>
 #include <cstddef>
 #include <cstring>
@@ -68,13 +80,14 @@ static_assert(offsetof(ConversationLineTemplate,Flags)==13);
 static_assert(offsetof(ConversationLineTemplate,Padding)==14);
 int main() {
 '''+ '\n'.join(cases)+'''
-std::cout << "PASS: twenty-two original actor/line packets match actual native packed structures byte for byte\\n";
+std::cout << "PASS: sixty-two original line packets and twenty-two actor packets match actual native packed structures byte for byte\\n";
 }
 '''
     with tempfile.TemporaryDirectory() as tmp:
         cpp, exe = Path(tmp)/'conversation.cpp', Path(tmp)/'conversation'
         cpp.write_text(harness,encoding='utf8')
-        subprocess.run([os.environ.get('CXX','c++'),'-std=c++17','-Wall','-Wextra','-Werror','-fsanitize=address,undefined','-fno-sanitize-recover=all','-g',str(cpp),'-o',str(exe)],check=True)
+        flags = [] if args.no_sanitizers else ['-fsanitize=address,undefined','-fno-sanitize-recover=all']
+        subprocess.run([os.environ.get('CXX','c++'),'-std=c++17','-Wall','-Wextra','-Werror',*flags,'-g',str(cpp),'-o',str(exe)],check=True)
         subprocess.run([str(exe)],check=True)
 
 
