@@ -349,7 +349,7 @@ def test_placeholder_models(tables):
     def insert_row(row):
         sql('INSERT INTO gameobject_template ('+','.join('`'+k+'`' for k in row)+') VALUES ('+','.join(row.values())+');')
     def assert_rows(rows):
-        predicates = ['('+' AND '.join('BINARY `'+k+'` <=> BINARY '+v if k in ('name','IconName','castBarCaption','unk1','AIName','ScriptName') else f'ABS(`size`-({v}))<=ABS({v})*0.0000001' if k=='size' else '`'+k+'` <=> '+v for k,v in row.items())+')' for row in rows]
+        predicates = ['('+' AND '.join('BINARY `'+k+'` <=> BINARY '+v if k in ('name','IconName','castBarCaption','unk1','AIName','ScriptName','Text') else f'ABS(`size`-({v}))<=ABS({v})*0.0000001' if k=='size' else '`'+k+'` <=> '+v for k,v in row.items())+')' for row in rows]
         assert sql('SELECT COUNT(*) FROM gameobject_template WHERE '+' OR '.join(predicates)+';').stdout.strip() == str(len(rows)), 'Placeholder/source template fields differ'
     assert_rows(registry['baseline'])
     assert sql(f'SELECT COUNT(*) FROM gameobject_template_addon WHERE entry IN ({entries});').stdout.strip() == '0'
@@ -416,7 +416,7 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
     def insert_row(table,row):
         sql('INSERT INTO '+table+' ('+','.join('`'+k+'`' for k in row)+') VALUES ('+','.join(row.values())+');')
     def assert_rows(table,rows):
-        predicates = ['('+' AND '.join('BINARY `'+k+'` <=> BINARY '+v if k in ('name','IconName','castBarCaption','unk1','AIName','ScriptName') else f'ABS(`size`-({v}))<=ABS({v})*0.0000001' if k=='size' else '`'+k+'` <=> '+v for k,v in row.items())+')' for row in rows]
+        predicates = ['('+' AND '.join('BINARY `'+k+'` <=> BINARY '+v if k in ('name','IconName','castBarCaption','unk1','AIName','ScriptName','Text') else f'ABS(`size`-({v}))<=ABS({v})*0.0000001' if k=='size' else '`'+k+'` <=> '+v for k,v in row.items())+')' for row in rows]
         assert sql('SELECT COUNT(*) FROM '+table+' WHERE '+' OR '.join(predicates)+';').stdout.strip() == str(len(rows))
     assert_rows('gameobject_template',registry['baseline'])
     baseline_addons = registry.get('baseline_addons', [])
@@ -429,6 +429,38 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         failure = sql(restore,ok=False)
         assert '_1kycore_model_guard' in failure.stderr and 'Duplicate entry' in failure.stderr, failure.stderr
         assert checksum(tables) == before, 'GOOBER conflict changed permanent data'
+    pages = registry.get('pages', [])
+    page_ids = ','.join(p['ID'] for p in pages)
+    if pages:
+        assert sql(f'SELECT COUNT(*) FROM page_text WHERE ID IN ({page_ids});').stdout.strip() == '0'
+        assert sql(f'SELECT COUNT(*) FROM page_text_locale WHERE ID IN ({page_ids});').stdout.strip() == '0'
+        unrelated_pages = sql(f'SELECT * FROM page_text WHERE ID NOT IN ({page_ids}) ORDER BY ID;').stdout
+        for page in pages:
+            page_id = page['ID']
+            sql(f"INSERT INTO page_text_locale(ID,locale,Text) VALUES ({page_id},'ruRU','orphan custom translation');")
+            rejection()
+            sql(f'DELETE FROM page_text_locale WHERE ID={page_id};')
+            insert_row('page_text',page)
+            page_assignments = ','.join('`'+k+'`='+v for k,v in page.items() if k != 'ID')
+            alterations = ["Text='custom page'", 'Text=NULL', f"NextPageID={page_id}", 'PlayerConditionID=1', f"Flags={int(page['Flags'])^1}", 'VerifiedBuild=0']
+            for alteration in alterations:
+                sql(f'UPDATE page_text SET {alteration} WHERE ID={page_id};')
+                rejection()
+                sql(f'UPDATE page_text SET {page_assignments} WHERE ID={page_id};')
+            sql(f'DELETE FROM page_text WHERE ID={page_id};')
+        # A matching source page with an administrator translation must survive.
+        insert_row('page_text',pages[0])
+        sql(f"INSERT INTO page_text_locale(ID,locale,Text) VALUES ({pages[0]['ID']},'ruRU','preserved custom translation');")
+        preserved_locales = sql('SELECT * FROM page_text_locale ORDER BY ID,locale;').stdout
+        sql(f"INSERT INTO smart_scripts(entryorguid,source_type,id,event_type,action_type,target_type,comment) VALUES ({entry},1,99,64,1,1,'custom book action');")
+        rejection()
+        sql(f'DELETE FROM smart_scripts WHERE entryorguid={entry} AND source_type=1 AND id=99;')
+        sql('INSERT INTO conditions(SourceTypeOrReferenceId,SourceGroup,SourceEntry,ConditionTypeOrReference,ConditionValue1) VALUES (13,1,218330,1,6948);')
+        rejection()
+        sql('DELETE FROM conditions WHERE SourceTypeOrReferenceId=13 AND SourceEntry=218330;')
+        sql("INSERT INTO spell_script_names(spell_id,ScriptName) VALUES (218330,'custom_book_credit');")
+        rejection()
+        sql("DELETE FROM spell_script_names WHERE spell_id=218330 AND ScriptName='custom_book_credit';")
     if baseline_addons:
         legacy = baseline_addons[0]
         for field in ('faction','flags','mingold','maxgold','WorldEffectID'):
@@ -513,7 +545,7 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
     rejection()
     sql(f'DELETE FROM gameobject_questitem WHERE GameObjectEntry={entry};')
     original_addon = sql(f'SELECT * FROM gameobject_template_addon WHERE entry={entry};').stdout
-    mutable = ('gameobject_template','gameobject_template_addon') + (('spell_target_position',) if destinations else ()) + (('gameobject_loot_template','gameobject_questitem') if expected_loot else ())
+    mutable = ('gameobject_template','gameobject_template_addon') + (('page_text',) if pages else ()) + (('spell_target_position',) if destinations else ()) + (('gameobject_loot_template','gameobject_questitem') if expected_loot else ())
     protected_tables = [t for t in tables if t not in mutable]
     protected = checksum(protected_tables)
     unrelated_templates = sql(f'SELECT * FROM gameobject_template WHERE entry NOT IN ({entries}) ORDER BY entry;').stdout
@@ -521,6 +553,11 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
     sql(restore)
     assert_rows('gameobject_template',registry['templates'])
     assert_rows('gameobject_template_addon',registry['addons'])
+    if pages:
+        assert_rows('page_text',pages)
+        assert sql(f'SELECT * FROM page_text WHERE ID NOT IN ({page_ids}) ORDER BY ID;').stdout == unrelated_pages
+        assert sql('SELECT * FROM page_text_locale ORDER BY ID,locale;').stdout == preserved_locales
+
     if expected_loot:
         assert_rows('gameobject_loot_template',expected_loot)
         assert_rows('gameobject_questitem',expected_items)
@@ -554,6 +591,11 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         sql(f'DELETE FROM gameobject_loot_template WHERE Entry={entry};')
         rejection()
         insert_row('gameobject_loot_template',probe)
+    if pages:
+        for page in pages:
+            sql(f"DELETE FROM page_text WHERE ID={page['ID']};")
+            rejection()  # do not silently repair a damaged native page dependency
+            insert_row('page_text',page)
     for row in registry['baseline'][1:]:
         sql(f"UPDATE gameobject_template SET {assignments(row)} WHERE entry={row['entry']};")
     sql(restore)
@@ -566,6 +608,20 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
     assert_rows('gameobject_template_addon',registry['addons'])
     sql(restore)
     assert checksum(tables) == complete, 'Addon-only GOOBER interruption retry differs'
+    if pages:
+        for row in registry['baseline']:
+            sql(f"UPDATE gameobject_template SET {assignments(row)} WHERE entry={row['entry']};")
+        sql(f'DELETE FROM page_text_locale WHERE ID IN ({page_ids});')
+        sql(f'DELETE FROM page_text WHERE ID IN ({page_ids});')
+        sql(f'DELETE FROM gameobject_template_addon WHERE entry IN ({entries});')
+        protected = checksum([t for t in tables if t != 'page_text'])
+        sql(restore[:restore.index('-- Install missing source addons first')])
+        assert_rows('page_text',pages)
+        assert_rows('gameobject_template',registry['baseline'])
+        assert checksum([t for t in tables if t != 'page_text']) == protected
+        sql(f"INSERT INTO page_text_locale(ID,locale,Text) VALUES ({pages[0]['ID']},'ruRU','preserved custom translation');")
+        sql(restore)
+        assert checksum(tables) == complete, 'Page-only GOOBER interruption retry differs'
     if expected_loot:
         # Interrupt after addon / item-hint writes, before loot and native templates.
         for row in registry['baseline']:
@@ -602,6 +658,7 @@ def main():
     parser.add_argument('--wildcard-loot-only', action='store_true', help='Run source wildcard loot translation against the real release.')
     parser.add_argument('--source-loot-only', action='store_true', help='Run the complete source loot object group against the real release.')
     parser.add_argument('--native-goobers-only', action='store_true', help='Run all seven native GOOBER dependency and retry checks against the real release.')
+    parser.add_argument('--council-books-only', action='store_true', help='Run page-chain and quest-credit dependency checks for two source books.')
     args = parser.parse_args()
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
         raise SystemExit('Requires MYSQL_DISPOSABLE_TEST_SERVER=1; never use a production server.')
@@ -633,6 +690,14 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.council_books_only:
+            sql(migration)
+            tables = sql('SHOW TABLES;').stdout.splitlines()
+            restore = (ROOT / 'sql/updates/world/2026_10_04_00_world_campaign_council_books.sql').read_text('utf8')
+            registry = json.loads((ROOT / 'docs/audit-data/campaign-council-books-restoration.json').read_text('utf8'))
+            test_simple_goober_models(tables,restore,registry,'two council books / two exact terminal pages / quest-credit dependencies')
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.native_goobers_only:
             sql(migration)
             tables = sql('SHOW TABLES;').stdout.splitlines()
@@ -726,6 +791,10 @@ def main():
         wildcard_loot = (ROOT / 'sql/updates/world/2026_10_03_01_world_campaign_wildcard_loot_objects.sql').read_text('utf8')
         wildcard_registry = json.loads((ROOT / 'docs/audit-data/campaign-wildcard-loot-restoration.json').read_text('utf8'))
         test_simple_goober_models(tables,wildcard_loot,wildcard_registry,'two wildcard loot objects / all native modes / preserved group and quest loot')
+
+        council_books = (ROOT / 'sql/updates/world/2026_10_04_00_world_campaign_council_books.sql').read_text('utf8')
+        council_registry = json.loads((ROOT / 'docs/audit-data/campaign-council-books-restoration.json').read_text('utf8'))
+        test_simple_goober_models(tables,council_books,council_registry,'two council books / two exact terminal pages / quest-credit dependencies')
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)

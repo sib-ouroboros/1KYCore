@@ -1640,7 +1640,7 @@
         "PageText": 5313
       },
       "missing_client_references": {},
-      "review_status": "requires_dependency_review",
+      "review_status": "restored_source_books",
       "client_references_present": {
         "GameObjectDisplayInfo": 15139,
         "Spell": 218330
@@ -1648,8 +1648,15 @@
       "source_smart_references": [],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
-      "additional_table_dependencies": {}
+      "remaining_candidate": false,
+      "additional_table_dependencies": {
+        "page_text": 5313,
+        "quest_objective": 285059,
+        "quest": 43100,
+        "credit_creature": 109693,
+        "spell": 218330
+      },
+      "restoration_sql": "sql/updates/world/2026_10_04_00_world_campaign_council_books.sql"
     },
     {
       "entry": 251697,
@@ -1756,7 +1763,7 @@
         "PageText": 5315
       },
       "missing_client_references": {},
-      "review_status": "requires_dependency_review",
+      "review_status": "restored_source_books",
       "client_references_present": {
         "GameObjectDisplayInfo": 25779,
         "Spell": 218330
@@ -1764,8 +1771,15 @@
       "source_smart_references": [],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
-      "additional_table_dependencies": {}
+      "remaining_candidate": false,
+      "additional_table_dependencies": {
+        "page_text": 5315,
+        "quest_objective": 285059,
+        "quest": 43100,
+        "credit_creature": 109693,
+        "spell": 218330
+      },
+      "restoration_sql": "sql/updates/world/2026_10_04_00_world_campaign_council_books.sql"
     },
     {
       "entry": 252017,
@@ -4285,15 +4299,15 @@
       "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
     }
   },
-  "pending_candidates": 59,
+  "pending_candidates": 57,
   "review_counts": {
     "requires_script_chain": 9,
     "missing_client_reference": 18,
     "requires_quest_items_and_loot": 11,
     "unsupported_source_field": 10,
-    "requires_dependency_review": 11
+    "requires_dependency_review": 9
   },
-  "scope": "Original 73-candidate dependency snapshot: 7 GOOBER + 5 source-loot + 2 wildcard-loot objects restored; 59 remain.",
+  "scope": "Original 73-candidate dependency snapshot: 7 GOOBER + 5 source-loot + 2 wildcard-loot + 2 source books restored; 57 remain.",
   "assurance": "Base DB2 ID presence; hotfix data may add records. PlayerCondition release hotfix table is empty. QuestItem fields map to gameobject_questitem and are dependency work, not unsupported schema fields.",
   "missing_spell_hotfix_review": {
     "basis": "Clean release hotfix spell table",
