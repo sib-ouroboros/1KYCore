@@ -134,3 +134,5 @@ jobs:
         run: python contrib/tests/test_blackhand_blaze_owner.py
       - name: Test original conversation packets against actual native packed structures
         run: python contrib/tests/test_conversation_packet_layout.py
+      - name: Test bundled JSON array separator parsing with sanitizers
+        run: python contrib/tests/test_json_array_delimiters.py

@@ -11,25 +11,27 @@
     741,
     742,
     743,
+    1766,
+    1769,
     1785,
     2138,
     2256,
+    2775,
     3047,
     3048,
     3049,
     3050,
     3051,
     3052,
-    3159
+    3159,
+    3565
   ],
-  "unresolved_template_count": 84,
+  "unresolved_template_count": 80,
   "unresolved_ids": [
     738,
     1416,
     1477,
     1667,
-    1766,
-    1769,
     1821,
     1823,
     1832,
@@ -47,7 +49,6 @@
     2381,
     2434,
     2666,
-    2775,
     2778,
     2869,
     2870,
@@ -71,7 +72,6 @@
     3260,
     3524,
     3525,
-    3565,
     3572,
     3574,
     3575,
@@ -1390,5 +1390,6 @@
     "decision": "Defer: native template/actors/line chain and trustworthy end time required; do not copy opaque fields or infer last duration."
   },
   "assurance": "Template presence and source action semantics only. Presence does not prove actor/line/DB2 completeness; custom/live DB changes not inspected. No conversations or original NPC SmartAI deleted.",
-  "restoration_registry": "campaign-simple-conversation-restoration.json"
+  "restoration_registry": "campaign-simple-conversation-restoration.json",
+  "chain_restoration_registry": "campaign-conversation-chain-restoration.json"
 }

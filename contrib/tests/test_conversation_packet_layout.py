@@ -28,9 +28,14 @@ def main():
     cases = []
     actors = {int(row['Id']):row for row in registry['rows']['conversation_actor_template']}
     lines = {int(row['Id']):row for row in registry['rows']['conversation_line_template']}
-    for candidate in registry['source']:
-        old_actor = candidate['source_actors'][0]
-        old_line = candidate['source_line']
+    chain_registry = json.loads((root/'docs/audit-data/campaign-conversation-chain-restoration.json').read_text('utf8'))
+    actors.update({int(row['Id']):row for row in chain_registry['rows']['conversation_actor_template']})
+    lines.update({int(row['Id']):row for row in chain_registry['rows']['conversation_line_template']})
+    source_pairs = [(candidate['source_actors'][0],candidate['source_line']) for candidate in registry['source']]
+    for candidate in chain_registry['source']:
+        indexed = {int(actor['id']):actor for actor in candidate['actors']}
+        source_pairs.extend((indexed[int(line['unk2'])],line) for line in candidate['lines'])
+    for old_actor,old_line in source_pairs:
         actor = actors[int(old_actor['actorId'])]
         line = lines[int(old_line['id'])]
         actor_packet = struct.pack('<6I', *(int(old_actor[key]) for key in ('actorId','creatureId','displayId','unk1','unk2','unk3')))
@@ -44,7 +49,7 @@ def main():
             unsigned char expectedActor[24] = %s, expectedLine[16] = %s;
             if (std::memcmp(&actor,expectedActor,24) || std::memcmp(&line,expectedLine,16)) return 1;
         }''' % (actor['Id'],actor['CreatureId'],actor['CreatureModelId'],line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],array(actor_packet),array(line_packet)))
-    assert len(cases) == 13
+    assert len(cases) == 22
     harness = '''#include <cstdint>
 #include <cstddef>
 #include <cstring>
@@ -63,7 +68,7 @@ static_assert(offsetof(ConversationLineTemplate,Flags)==13);
 static_assert(offsetof(ConversationLineTemplate,Padding)==14);
 int main() {
 '''+ '\n'.join(cases)+'''
-std::cout << "PASS: thirteen original actor/line packets match actual native packed structures byte for byte\\n";
+std::cout << "PASS: twenty-two original actor/line packets match actual native packed structures byte for byte\\n";
 }
 '''
     with tempfile.TemporaryDirectory() as tmp:

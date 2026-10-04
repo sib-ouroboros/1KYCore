@@ -705,10 +705,10 @@ def test_simple_conversations(tables, restore, registry):
     assert checksum(owned) == canonical, 'Conversation retry changed content'
     # An already published conversation with missing native dependencies is a conflict.
     for table in ('conversation_line_template','conversation_actors','conversation_actor_template'):
-        row = rows[table][0]
-        sql(f"DELETE FROM `{table}` WHERE {predicate(table,row)};")
-        reject()
-        sql(insert(table,row))
+        for row in rows[table]:
+            sql(f"DELETE FROM `{table}` WHERE {predicate(table,row)};")
+            reject()
+            sql(insert(table,row))
     # Actual migration prefixes: shared templates, lines, then bindings; publish last.
     for next_table in owned[1:]:
         clear()
@@ -718,7 +718,8 @@ def test_simple_conversations(tables, restore, registry):
     # A fully published prefix and unfinished remaining conversations can also resume.
     clear()
     for table in owned:
-        sql(insert(table,rows[table][0]))
+        for row in (rows[table][:1] if table == 'conversation_template' else rows[table]):
+            sql(insert(table,row))
     sql(restore); verify()
     assert checksum(owned) == canonical
     # Keep compatible administrator build provenance, including shared actor templates.
@@ -726,13 +727,14 @@ def test_simple_conversations(tables, restore, registry):
         row = rows[table][0]
         sql(f"UPDATE `{table}` SET VerifiedBuild=12345 WHERE {predicate(table,row)};")
     shared = rows['conversation_actor_template'][0]['Id']
-    assert sql('SELECT COUNT(*) FROM conversation_actors WHERE ConversationId=4290000010;').stdout.strip() == '0'
-    sql(f'INSERT INTO conversation_actors (ConversationId,ConversationActorId,Idx,VerifiedBuild) VALUES (4290000010,{shared},0,54321);')
+    unrelated_id = 4290000000 + registry['entries'][0]
+    assert sql(f'SELECT COUNT(*) FROM conversation_actors WHERE ConversationId={unrelated_id};').stdout.strip() == '0'
+    sql(f'INSERT INTO conversation_actors (ConversationId,ConversationActorId,Idx,VerifiedBuild) VALUES ({unrelated_id},{shared},0,54321);')
     compatible = checksum(owned)
     sql(restore); verify()
     assert checksum(owned) == compatible, 'Matching provenance or unrelated shared actor binding changed'
     assert checksum(protected_tables) == protected, 'Conversation migration changed NPCs, quests, spawns or other tables'
-    print('PASS: thirteen terminal conversations / exact actors and lines / all content conflicts / repeated and interrupted import / shared provenance', flush=True)
+    print(f"PASS: {len(registry['entries'])} complete conversation chains / exact actors and lines / all content conflicts / repeated and interrupted import / shared provenance", flush=True)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -740,6 +742,7 @@ def main():
     parser.add_argument('--wildcard-loot-only', action='store_true', help='Run source wildcard loot translation against the real release.')
     parser.add_argument('--source-loot-only', action='store_true', help='Run the complete source loot object group against the real release.')
     parser.add_argument('--native-goobers-only', action='store_true', help='Run all seven native GOOBER dependency and retry checks against the real release.')
+    parser.add_argument('--conversation-chains-only', action='store_true', help='Run multi-line conversation chain and actor-index checks.')
     parser.add_argument('--simple-conversations-only', action='store_true', help='Run terminal conversation dependency and publication checks.')
     parser.add_argument('--council-books-only', action='store_true', help='Run page-chain and quest-credit dependency checks for two source books.')
     args = parser.parse_args()
@@ -773,6 +776,14 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.conversation_chains_only:
+            sql(migration)
+            tables = sql('SHOW TABLES;').stdout.splitlines()
+            restore = (ROOT / 'sql/updates/world/2026_10_04_02_world_campaign_conversation_chains.sql').read_text('utf8')
+            registry = json.loads((ROOT / 'docs/audit-data/campaign-conversation-chain-restoration.json').read_text('utf8'))
+            test_simple_conversations(tables,restore,registry)
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.simple_conversations_only:
             sql(migration)
             tables = sql('SHOW TABLES;').stdout.splitlines()
@@ -890,6 +901,10 @@ def main():
         conversations = (ROOT / 'sql/updates/world/2026_10_04_01_world_campaign_simple_conversations.sql').read_text('utf8')
         conversation_registry = json.loads((ROOT / 'docs/audit-data/campaign-simple-conversation-restoration.json').read_text('utf8'))
         test_simple_conversations(tables,conversations,conversation_registry)
+
+        chains = (ROOT / 'sql/updates/world/2026_10_04_02_world_campaign_conversation_chains.sql').read_text('utf8')
+        chain_registry = json.loads((ROOT / 'docs/audit-data/campaign-conversation-chain-restoration.json').read_text('utf8'))
+        test_simple_conversations(tables,chains,chain_registry)
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)
