@@ -1,0 +1,3680 @@
+{
+  "format": 1,
+  "packages": [
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/choices-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_choices-001.apply.sql",
+      "bytes": 4839,
+      "sha256": "82dae5d8f5594b360d44e6c4f0f84fedf336179046cf9068487a1dba6abbfc71",
+      "updater_sha1": "240302f3ee6d2ee69a8411450578aaa84dfdd389"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/gossip-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_gossip-001.apply.sql",
+      "bytes": 10786,
+      "sha256": "5db6d79feb9c3588eb102916458dac950e2b54b31222d71a46fe9d130aa920ec",
+      "updater_sha1": "b501c724bc3f08be85d6f2662427d4177fd67fd1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/npcs-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_npcs-001.apply.sql",
+      "bytes": 292596,
+      "sha256": "3bb679afa5041fa470ced7402bc5806b513d8226eb412d7d5222d8972481a5f5",
+      "updater_sha1": "b42783f7d9c73def02675dbf12053fef58de6798"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/npcs-002.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_npcs-002.apply.sql",
+      "bytes": 217795,
+      "sha256": "2608d6e9b794307583b93ebb1017579b9104e6214ca2454b303b945f9ca76949",
+      "updater_sha1": "2f0d538323e83bc7f6841805b51efaa334365d41"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objectives-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objectives-001.apply.sql",
+      "bytes": 360580,
+      "sha256": "9d0c62cfa8d84005d83762b27ae705b4cf704686d9be8d41f7c310741d7846d1",
+      "updater_sha1": "84db781daba61771ee268e82ac0785cde39d46c0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objectives-002.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objectives-002.apply.sql",
+      "bytes": 360922,
+      "sha256": "828e4318e93dc6ca4e9fdc58bff8a656fa8ab2214a0335753e7925cb5e61633a",
+      "updater_sha1": "e569143030c0c4180e33d50c5865bc5efef2cbea"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objectives-003.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objectives-003.apply.sql",
+      "bytes": 168208,
+      "sha256": "cfa86a01279f53ef6a2639038c7a4073d10dea1c0ad044a16ca1eee06f1f83ee",
+      "updater_sha1": "12c8f43fb69451c6ca60f9644cf1293099909b78"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-001.apply.sql",
+      "bytes": 253463,
+      "sha256": "4151b0029db749a4dc1c7931a7c7e8451446008c4cc155d8551e1035883c4033",
+      "updater_sha1": "3b6fd947554543f66e0176038ebdedd6c04e7891"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-002.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-002.apply.sql",
+      "bytes": 257539,
+      "sha256": "10b37fcd4500348260ce8e02cbdf75706c4b01bc56d6b68b14f23a3bf7391470",
+      "updater_sha1": "cbe2088cd547d795b2dffb858742a0769dd9cabc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-003.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-003.apply.sql",
+      "bytes": 257931,
+      "sha256": "0f4572aadb82c3c3e93bbfda818fccc013ccc1ff5857c0163e722020840373b2",
+      "updater_sha1": "8f4f6bb18429ec6a049c8cea892caace5af58913"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-004.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-004.apply.sql",
+      "bytes": 259849,
+      "sha256": "8b5781454720277f0cd8787fe3c3b8583728ea0ae8a850c304c868723939e196",
+      "updater_sha1": "dc9497bda77a77b3c42e9002801173e4abb6572a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-005.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-005.apply.sql",
+      "bytes": 257319,
+      "sha256": "a334844a015186cc4fc2b271a1ad63acaceaeb8890ea4b00f3a349be31ecfcdb",
+      "updater_sha1": "92d7308ae12bb4342a0a1157c382b1e554216ff5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-006.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-006.apply.sql",
+      "bytes": 264003,
+      "sha256": "b27de5b2b0b28767b4c97c2513889fae8da49494fe87753f731e1e0f1c128812",
+      "updater_sha1": "7f768b9ffc8608723aa79a505209a0ca503c9e70"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-007.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-007.apply.sql",
+      "bytes": 261915,
+      "sha256": "47d6d4c047236bffff31ead69640aa0fe09d1477eed4f534e8fc7e9fb8bf39ba",
+      "updater_sha1": "dc5c23d8e18d73009a2c6d9d0f53e08c05e123c8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-008.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-008.apply.sql",
+      "bytes": 260437,
+      "sha256": "b9fdd49dc30c949e751b91d6f9b9e6b73f39692d31d03953319fc6bdb335073a",
+      "updater_sha1": "6699c3a91a6f5d1b5d618c0610336886fcec20f2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-009.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-009.apply.sql",
+      "bytes": 257117,
+      "sha256": "02b338a21e3d67f9f0e034ebe8d4532e07fcaf6eae6509434e44a4eb98acdef2",
+      "updater_sha1": "d44dcbf056f3a9e3e7d0cee4dc1441cdbf0d6ac6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-010.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-010.apply.sql",
+      "bytes": 261315,
+      "sha256": "135f34d99a8524294957f96b5622d295ce9ab6dba2d5a64870f9a416f60fa2de",
+      "updater_sha1": "79bc36c99b9eadcf1138e006edabba0b3aac1bd0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-011.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-011.apply.sql",
+      "bytes": 283071,
+      "sha256": "7f73df1011a84b358989e3c90c4ab53901c0107a48150a99447c033002606552",
+      "updater_sha1": "fb8684cb8d3651a9dc766993d720e2b4bc723c16"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-012.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-012.apply.sql",
+      "bytes": 282053,
+      "sha256": "f3fc4b86af575178d24aa58d593658b24c990b1ccb69a1579d98b3bcb69a95f0",
+      "updater_sha1": "a7bbd75e9b0aad9294bcc1be02ffcf7f89102a2f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-013.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-013.apply.sql",
+      "bytes": 275343,
+      "sha256": "4e54835fdebb5220aa5b98b1ea38be0d8b3560d8fde86a742c726b6e6196af84",
+      "updater_sha1": "0ee385a012ac5496ec3096df1fe742f33d0f3090"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-014.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-014.apply.sql",
+      "bytes": 261307,
+      "sha256": "23654dd670b2f218d6d402d131d5785e849b511a2ed6168d82be4990cbc56ae0",
+      "updater_sha1": "15c5170b87ef6c64365e8bcd9dcbf8f93821afae"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-015.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-015.apply.sql",
+      "bytes": 261885,
+      "sha256": "cc6449a85fb3710c1cfd07d7f51d1fda782c334d3a97f4d0980b1943ffebe116",
+      "updater_sha1": "c001ed0cd1a8879c3cd1447131f3b606fb3dd25c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-016.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-016.apply.sql",
+      "bytes": 256415,
+      "sha256": "2051011392fefabb80eb30f052dfadb939fe90195b30a289797a4a7526ee4eb2",
+      "updater_sha1": "c8eb943d9769b2af436753ab2631dcc572382f16"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-017.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-017.apply.sql",
+      "bytes": 261111,
+      "sha256": "b21e7d9e361dc58a5bb1d315c448903af9d792a437445123ffc85f0fe2cb6997",
+      "updater_sha1": "64f3bc61e8901dbcf15f5469ee01eca08509022f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-018.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-018.apply.sql",
+      "bytes": 291329,
+      "sha256": "e1f8707ebf8d04003094d7df88486e940ba876521fbbeb3009efd5b23add127c",
+      "updater_sha1": "5b12db6f7ad58f9d5a719a7cbeed89c9866dd25b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-019.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-019.apply.sql",
+      "bytes": 270907,
+      "sha256": "0655fbf2565796eadb871f192d7ab32f109e54d3412397fde47c020e06f13bcf",
+      "updater_sha1": "24b4be5ef0008494c7673cea1eb5f56e2e6babb8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-020.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-020.apply.sql",
+      "bytes": 268609,
+      "sha256": "a05a8c5bb8d25b18d751c33dc7b1c74394313a7fc8aa932708f24f023f02ec55",
+      "updater_sha1": "00ba99c15a632e9970e226e168ce61b9db74a494"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-021.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-021.apply.sql",
+      "bytes": 293243,
+      "sha256": "206c8017b1b3edb345001a13cc7171035a862a9586ab204630f7db322e1ddae1",
+      "updater_sha1": "53ebe8da2d41921fe66de2d7c8cdea715d6ff878"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-022.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-022.apply.sql",
+      "bytes": 259735,
+      "sha256": "d89867100ab13163d585d8254cce24e05cdc414ad7de92d19c5e65470cf32be7",
+      "updater_sha1": "5575131c282a4ea2ad67319fdafe5ad0deda5808"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-023.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-023.apply.sql",
+      "bytes": 274995,
+      "sha256": "f8a058ff840c1cec2edd0c02f57fe40a88c453b1016194085635b7dce31e8db8",
+      "updater_sha1": "42fcf27385bed1d4e61895ceec06652b8b372dc0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-024.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-024.apply.sql",
+      "bytes": 314033,
+      "sha256": "20bb271aaeea4960c965cf5d69ba114dc1f575233d75d45807504bd3e0a1b5ad",
+      "updater_sha1": "16a3d76a4d60aea7e63dab475444f64ef1fed8d0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-025.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-025.apply.sql",
+      "bytes": 293449,
+      "sha256": "e965d6357850ddf5c5edcfa6d5200e3a3529d0c45a62ad8ac6713909e9952d79",
+      "updater_sha1": "c76071d4bc07de2fbdcc77b36a719952190c39b0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-026.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-026.apply.sql",
+      "bytes": 290959,
+      "sha256": "cdc74e6eccc9320267442285a1630299e2a2483201f2b18f4c5dba2cd56a7a6b",
+      "updater_sha1": "14ad8f7bc752ef11cd15d886eff21583e04bfb39"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-027.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-027.apply.sql",
+      "bytes": 265883,
+      "sha256": "aea573dda8a3f6b4a6688455406d75e216316bdf6c964d78977e526d589cfd0c",
+      "updater_sha1": "30e5733964665476988b94b3697b9be1c2a3dc23"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-028.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-028.apply.sql",
+      "bytes": 272989,
+      "sha256": "62f709c282bf918cf035d7bd7e398c07bb5b3068d81a1a2b41116110e9110cee",
+      "updater_sha1": "3d49c1d538c0eae6a003a55e0b9a553fca02fc1b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-029.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-029.apply.sql",
+      "bytes": 251197,
+      "sha256": "91ae7a9d62475c6d2f494099f0f6d5385a3c759dd17eaa7c9d5cb1d88335cef5",
+      "updater_sha1": "11d2e318fc968f22e222b7476f9ed70e2cd67900"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-030.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-030.apply.sql",
+      "bytes": 273487,
+      "sha256": "e9f00bc730a3b3cd7d5ba8a3f0d1566d10a7ab601a4fb7d247d9242442b91605",
+      "updater_sha1": "858df877ace4d9833d8cce44764cb596973db904"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-031.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-031.apply.sql",
+      "bytes": 280265,
+      "sha256": "cd557e0182ad567c7fe0eae5aee654f739f99a961b6bd40fc2cfc3f95cd17be8",
+      "updater_sha1": "4a8ac0adbe866cb8cd2c6a424bf3317fd0be6361"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-032.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-032.apply.sql",
+      "bytes": 245163,
+      "sha256": "9e484e9d55444d0026da785bac51a83ae2cd28aedd74bff31e7aa21934496a6a",
+      "updater_sha1": "9b1dadaa36983ffe9d39f38994cec87c472185cd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-033.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-033.apply.sql",
+      "bytes": 244591,
+      "sha256": "fb7a0891e2cad23c8adefe1f637c881b7186d7e144c02650e7f6bf7131280ad2",
+      "updater_sha1": "6069442321ecf6daa02ac2ad8aad8503702c4b8d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-034.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-034.apply.sql",
+      "bytes": 257373,
+      "sha256": "94880cbab6819caf0dcd9a62299d96ddf3d90e7d0b41d5bb4e1f8beec6dc06fc",
+      "updater_sha1": "429791b50ee948e2fb716cf8487dbe9fef311834"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-035.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-035.apply.sql",
+      "bytes": 264723,
+      "sha256": "37170ea027860cf3f3e61d9dd6c482167f2093eae26ca88097a24beeb26d27c7",
+      "updater_sha1": "5b7ca87501c2ff17a23185121ea0c41ee7ca13c5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-036.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-036.apply.sql",
+      "bytes": 287151,
+      "sha256": "8a9933b015f718882b202ce0372cf7d3b600450ef776627ffddda78ef6e22e55",
+      "updater_sha1": "698bc82a9277efaf80a1cf9526b546218b2ee366"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-037.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-037.apply.sql",
+      "bytes": 264013,
+      "sha256": "93d67d3c959cbe2fa48a2c58c2f28c28a2cca4626e6bbd6707b82af131d3ecc1",
+      "updater_sha1": "bf4cb715a57b3347c5259da64a7093ef8e5f5e27"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-038.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-038.apply.sql",
+      "bytes": 250727,
+      "sha256": "b4a7029da84224d0bbecffa4f86bd569cf54e16a4534d36a39a8883e1f3d9027",
+      "updater_sha1": "7c5afdb01322d2d70f294f9e10e0161e444698f8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-039.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-039.apply.sql",
+      "bytes": 263001,
+      "sha256": "096bcceca5fcec49c30d3cc90560073e1e4b700376a581c6cf0795810188242a",
+      "updater_sha1": "857de4fc61475c84e23174db808f94d9583a2dda"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-040.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-040.apply.sql",
+      "bytes": 264251,
+      "sha256": "dff866504d3adc356161deca1b3b52b4976acd4a0442b501b479f2fff3f797b1",
+      "updater_sha1": "86cbc22b0e0b51c5c843c60d9509f5facba90770"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-041.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-041.apply.sql",
+      "bytes": 297099,
+      "sha256": "f77388869ed055cafbf5b5ae39fe7413655db788003c60a53e22fa91ad9450a6",
+      "updater_sha1": "19cccedec525e6f6096169d71b562c98babca6cb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-042.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-042.apply.sql",
+      "bytes": 260163,
+      "sha256": "07e1b61e7e81331d5692caa9cd48e08618df9b03b35356a22317ffce1a45ba0c",
+      "updater_sha1": "7fb816a7206ed99977eb0b15301b8505267d8eca"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-043.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-043.apply.sql",
+      "bytes": 278961,
+      "sha256": "1ef14974064b6b203bbea82fbd4b0606201f2e78cb2b7e6c5c12845600d28300",
+      "updater_sha1": "b6598b637bc65ee409b6a541699f5c6ed9fa8bed"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-044.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-044.apply.sql",
+      "bytes": 275913,
+      "sha256": "c20c1c421f8fc6d4e8e804795a73d534538323de50f746cdb36397a67448fc80",
+      "updater_sha1": "3bdf662858ffddbee8eb0d5f9ffd9d67cb46aebf"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-045.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-045.apply.sql",
+      "bytes": 268411,
+      "sha256": "91ab4817afdae363a7ec2274b38776f277e63cd7c1c0d884859ae8fabbbae2c4",
+      "updater_sha1": "a480dabb3f31889833b11e0eec4b40e12cecb00e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-046.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-046.apply.sql",
+      "bytes": 250839,
+      "sha256": "e59dc52365f646d5218cc3031a49056d44ad23c9735d2a9ead66ffdb87177311",
+      "updater_sha1": "6f55540d0a9c2a6decda30e594bbba4a78e4c07d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-047.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-047.apply.sql",
+      "bytes": 274941,
+      "sha256": "a379a4f0745f8ebd08f7be1c5393f0538a4553e83b411ac1d29d1a0713a9e252",
+      "updater_sha1": "2adbc6a8fce15836b9b429abe31374f2b6e4709e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-048.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-048.apply.sql",
+      "bytes": 283365,
+      "sha256": "7118906977282673221fe1707ee42f6ffac31e04eb4467f8659f19a53a5f85c4",
+      "updater_sha1": "0b48464fe3355838bf483688430b948e71afc82e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-049.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-049.apply.sql",
+      "bytes": 273661,
+      "sha256": "d91150153c1ce3f0666cc314cb6a8d7148280da85e6b63f058c4f82b0b06fbd7",
+      "updater_sha1": "de02dd0841f108d1717e1d6be776a58ed0dd695e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-050.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-050.apply.sql",
+      "bytes": 258351,
+      "sha256": "3fe7393293a30d08f6ddb32ac5633551eaa30929a3781b351f1865ed032e20af",
+      "updater_sha1": "b63914a2c0072413ac7babc59cc0e3d01c8a57cc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-051.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-051.apply.sql",
+      "bytes": 253793,
+      "sha256": "a85f06d1c95a48c090821853161d9b0c2db95d981df7f54443a39e9b52d60469",
+      "updater_sha1": "0ae9c8920a7c052f3b1f1fe3056838b8b5af26fc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-052.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-052.apply.sql",
+      "bytes": 261451,
+      "sha256": "9f68acf99a1f2ecb10b8de1568c847643e21bbdf623f58dfe96a0455b3b2643c",
+      "updater_sha1": "f19b0a20908ac764263a5f2f1d374f6d6a041d01"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-053.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-053.apply.sql",
+      "bytes": 314831,
+      "sha256": "faab0a5fa04a0303badb945610d96b15661514128e28955bfb0576c8edb3ab6a",
+      "updater_sha1": "e0b5c7e9e7c70141db753d168c11619a61759e68"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-054.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-054.apply.sql",
+      "bytes": 284455,
+      "sha256": "4d294cf0fb30bca5a2fcf7d46f85553f316ab2739462b98e41f792dabe7dc2ac",
+      "updater_sha1": "9669fb32889643fe47a805a1b67e008755a6627a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-055.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-055.apply.sql",
+      "bytes": 275555,
+      "sha256": "65153c36683edafe955b78e9435116579675bedfd42118c7a47cb2b9f9e224d3",
+      "updater_sha1": "afca7a53811c8a068e3dbff07d813a29aef24206"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-056.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-056.apply.sql",
+      "bytes": 285399,
+      "sha256": "7181ae4bcbb996d4f18be2525bcf44f81ff5657d546aa4d0e45121b7492dc699",
+      "updater_sha1": "baace7e3bd28cbe6a52c7e4e2f1d22e06e5485b6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-057.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-057.apply.sql",
+      "bytes": 286445,
+      "sha256": "84d3f7fded19873bdfb76d379662b7b234fc7b34810e068e22aa0fb56c5ec895",
+      "updater_sha1": "0bd03bfbebcfdf2de299aca10d74a0bcd3cb9b63"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-058.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-058.apply.sql",
+      "bytes": 279009,
+      "sha256": "0b54cf053aa9dc182d1c4167d769205811832d2bcad6dcd15c2f69f207c80cd5",
+      "updater_sha1": "49ef5b8a34b95db16f16cf27add70e40d5b69cff"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-059.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-059.apply.sql",
+      "bytes": 271215,
+      "sha256": "3652f39c7052ccc001ec0f454b547cc5954b81cdbd3fff4915e54f4ac4628f9c",
+      "updater_sha1": "4c702c463eb107c8459043b970e0826236c2f3ff"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-060.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-060.apply.sql",
+      "bytes": 299369,
+      "sha256": "7a220cc8d1e2bb6637100d8b5c96402890783a04d6e91038a781a579ed27e5f4",
+      "updater_sha1": "0266b612c1026b808b82a03f619e0105f2b1de3d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-061.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-061.apply.sql",
+      "bytes": 277653,
+      "sha256": "f3e23edae30a3d9e0ff06e2365210c733faba056a558a0d6ac3e9a5f793eea60",
+      "updater_sha1": "a2db641a17f2a3d0a146b754e376fc7cfe57cc4c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-062.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-062.apply.sql",
+      "bytes": 276557,
+      "sha256": "7c238bf4747b6120a7481352ccec64a91df7eea1cb8a9afac99b94c91d24295b",
+      "updater_sha1": "4f2ccae21af0a6623593158d63f03c557197aa29"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-063.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-063.apply.sql",
+      "bytes": 281875,
+      "sha256": "6a7a854de5c0850ad07ace023f38a542bf113eee9683563b59a3299e70e87598",
+      "updater_sha1": "271e6ec2196c9770e8badbc1b2d15fa6fb017aef"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-064.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-064.apply.sql",
+      "bytes": 275667,
+      "sha256": "6cc4d0f81f2449a53dba4c002eee0099119d63ede4c504d90df5143ab8328eab",
+      "updater_sha1": "45040b65f0910f1688876d592752378b76d26d3c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-065.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-065.apply.sql",
+      "bytes": 269111,
+      "sha256": "ffb7ffc26d3ebefe26c2cff3f1b478c6c9c5dfe2d3bcc08eedebf89696e7b65d",
+      "updater_sha1": "452d371de9b21e95f155794fa7aacded478bbb21"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-066.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-066.apply.sql",
+      "bytes": 263933,
+      "sha256": "0b5ae39279ed4614546ff4a8cfb7ede4dc43f270a0a29ac495241085223f76f6",
+      "updater_sha1": "7d99fc8f8a380e5a74a2564bd3c27b7bd2c39cfe"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-067.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-067.apply.sql",
+      "bytes": 263949,
+      "sha256": "64d9aafb8be2c4c54174e6545a34d054d6bd03704566f24aced3f2623e493b31",
+      "updater_sha1": "f4645d1b865ccc7c831dfb0f8c2ed7dca6b29eb0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-068.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-068.apply.sql",
+      "bytes": 268725,
+      "sha256": "6ef6df1ed5b3f3c80a0f2d3fca58903264bd6ba860276f8bea7c3eaae4f0d2e8",
+      "updater_sha1": "bd8f4fdcc9843076df758b597edeae043c412879"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-069.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-069.apply.sql",
+      "bytes": 253373,
+      "sha256": "70f7d45e32c7d5cd30ce8ad3f1f50a196fa1478916cb1bfe9744a75e742a4242",
+      "updater_sha1": "1b007c4b501d9b40c2682c32ccb6f576e71d05be"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-070.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-070.apply.sql",
+      "bytes": 278075,
+      "sha256": "ad9dfc3ad46c4fb683b116cc40be1a8f2d023b1c35f3d7281ebe91d36c9069d6",
+      "updater_sha1": "62321e393ea81903fa2010966f8484131b45d18c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-071.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-071.apply.sql",
+      "bytes": 259031,
+      "sha256": "ca20ad6dc52c0d13f4de400c0b6f730bafe97ef1afd06ca09060c545cb04a781",
+      "updater_sha1": "50a14354290b186e3a16d582ac83014b4a3f2595"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-072.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-072.apply.sql",
+      "bytes": 249451,
+      "sha256": "ca97f47194c2eefdc6903fd9f5577decd8210a42f88a5af39592adfdf126b5e5",
+      "updater_sha1": "3033232a7108a84c33aeffb5c3893e75aa883fbb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-073.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-073.apply.sql",
+      "bytes": 260155,
+      "sha256": "cc1d0f5da41a2b5ea61097469ced5e019f204238c865a79ea88e906fc2b4abaf",
+      "updater_sha1": "7f4a2d54dd900a9e3114e95dead1beb2c94530ed"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-074.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-074.apply.sql",
+      "bytes": 260561,
+      "sha256": "5fa896f8b580f61b73d303004f0f90e192394ec913eb911196ddc82046da2a1d",
+      "updater_sha1": "ad233e979a37494d638213b632c8e39dfdbc9b1f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-075.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-075.apply.sql",
+      "bytes": 260135,
+      "sha256": "51ee78c2663606aa7fa54e40465bcde3f56fea0327b0bf15832c155555e7cc34",
+      "updater_sha1": "b4d8a8f962ecddff30523999a155985abc07fc6c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-076.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-076.apply.sql",
+      "bytes": 255087,
+      "sha256": "1b9188a8ef9d9e454bf9dbd383e73011760b7553380a0fdef0a484d3036be373",
+      "updater_sha1": "fa2581b2e700f83d4d567ed877ed176fcb147759"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-077.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-077.apply.sql",
+      "bytes": 254307,
+      "sha256": "86dfb868fcac268b447e67b235af705aae42f6a94e17b1709b65d53379ad9da9",
+      "updater_sha1": "0021ba7e619806a3016655168f56ab9f792fa8ae"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-078.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-078.apply.sql",
+      "bytes": 266429,
+      "sha256": "05efff4c87c1cf4ff797e1d4e856b7b9e738fc29cf254d16215e77b6b07e5b40",
+      "updater_sha1": "f2785b906a2d336b1e93015e553fc3a7fa34863a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-079.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-079.apply.sql",
+      "bytes": 253921,
+      "sha256": "d20a7e37cc80d5c9e18f56beeaf6db0d13132179b5526a07121c9473f927361b",
+      "updater_sha1": "1815d19b1231c03bd621fb9c033d448779c13624"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-080.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-080.apply.sql",
+      "bytes": 249983,
+      "sha256": "aa26f35b712d5a0f5b06fd84caa75644162573cd4cf0c400f8cb957cd5d0afaf",
+      "updater_sha1": "d6491c853292ce97846892861c5e9b8dbe82754d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-081.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-081.apply.sql",
+      "bytes": 255003,
+      "sha256": "52ba7802dac00c9981c5c56c67cda6d07d26549c2a0c1c4fece2aa6da722f851",
+      "updater_sha1": "f3f7ebf7a9a2e3d207122c0205d32630d00e3db0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-082.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-082.apply.sql",
+      "bytes": 239003,
+      "sha256": "9e141c4a89825fd99ed6594b8c21e86045f5861a6c46b8e6a9b15f6d969ce4a3",
+      "updater_sha1": "b0a2e66ad6941b458a09b54950d9080147389492"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-083.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-083.apply.sql",
+      "bytes": 245133,
+      "sha256": "0d44f1361b6a258e7827a3c69658146491b0a4902e54b593d5bd2b108a54c0be",
+      "updater_sha1": "3a29280d264350a640ebb5362cb9fd615f9b43ec"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-084.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-084.apply.sql",
+      "bytes": 262711,
+      "sha256": "67f13ab4a849275a5b45f1552acf4b58d931d52d385251cbb62bf4e4627eb1a9",
+      "updater_sha1": "56442f9463258f7e38e7447eafa6b46456438894"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-085.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-085.apply.sql",
+      "bytes": 261601,
+      "sha256": "cd5e2b1e24a623224f4d282a3247c829fba5343b5726e0becd4a8abb1b867407",
+      "updater_sha1": "bbfccce724fe7366eb66bb9636f9930287881079"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-086.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-086.apply.sql",
+      "bytes": 258491,
+      "sha256": "89a6565123e46c41f21e420a83201aacd7f442ea47348796c0f3d3337b74e132",
+      "updater_sha1": "47a384ecd6b73abaab69ea4e8ba8a4324e6c96c3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-087.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-087.apply.sql",
+      "bytes": 270341,
+      "sha256": "8d1f3e4af248d7227c8c4e492ec96d43f6d2a5ea660065c5948c656c85dfe5e3",
+      "updater_sha1": "7d7f4649e27ba2de31237ab74a42992e3849e748"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-088.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-088.apply.sql",
+      "bytes": 263445,
+      "sha256": "a1a94ef64465f618de8f0c0841a06eea222e1a8bb8b9976db727b58510858eb2",
+      "updater_sha1": "cfeed77f5f431270decc63ccea64370b1388824a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-089.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-089.apply.sql",
+      "bytes": 250709,
+      "sha256": "1e8aab833c65076bbc6530c92a68e49c35ab027cb6ccb88177dd39f28825d0f5",
+      "updater_sha1": "86215932ab906d70fa640cddfe30922a8d951e04"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-090.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-090.apply.sql",
+      "bytes": 251569,
+      "sha256": "ab3c480049554f2f738a24843fcbc5aa78acc87058d29f1ed6829895c1313fb5",
+      "updater_sha1": "0209e7b7fcc5ef7fd7f398c44e1eaa60534b2b42"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-091.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-091.apply.sql",
+      "bytes": 254687,
+      "sha256": "8b8c016413fc07df4d84a71966d31c50292e5b4c689f406ce27e896f9c03a41b",
+      "updater_sha1": "2f06e2b551ded1ee5118fa78d239d9cc8f892dd6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-092.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-092.apply.sql",
+      "bytes": 253943,
+      "sha256": "0eddac678eb0e8f1f0f97c55d20dc3811bae16a26bb9b054c7359153fcbb0b8f",
+      "updater_sha1": "8d725b8aa46cb54116dd76204a3c5e14595f0da0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-093.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-093.apply.sql",
+      "bytes": 250943,
+      "sha256": "e2f401b5cfbed58ecf55013ef9b64e0000447c8fedf0f9caf58ec60dfca817e9",
+      "updater_sha1": "49cc992e2918db3e08ca6c8b54481ee83e83fab5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-094.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-094.apply.sql",
+      "bytes": 253263,
+      "sha256": "2980a9adbdc23bbfb632d9398e202c6df21d7c96732f2e8b93984e9f2996ea87",
+      "updater_sha1": "dbade1740e34deeba1fb2cbec3bdd045a53ba41e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-095.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-095.apply.sql",
+      "bytes": 255773,
+      "sha256": "23dfee62cefd063233d41696f0b8e02c7185dd11e582734e47f34826732d8349",
+      "updater_sha1": "76146e105ffc310e9b076e00a166e6cadf559c5e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-096.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-096.apply.sql",
+      "bytes": 252029,
+      "sha256": "5df347a66d60713b586142d7cca07252cf922dd3a33ed8d4902c909fbcce091b",
+      "updater_sha1": "d24e7c460779395441eb561bf7ae3f8c3f7e63e8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-097.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-097.apply.sql",
+      "bytes": 250891,
+      "sha256": "fbc04341e2d6874a01808a69798dcb6e800ee7697078815cbf9a86cad60cdebd",
+      "updater_sha1": "94fc22ca93ef7860548e98034fee7f2de1f0c3b6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-098.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-098.apply.sql",
+      "bytes": 250317,
+      "sha256": "a0de2e35eaf2b24f9d69747cf8ddb917a905e1dc0c15e834873e82059f6a645c",
+      "updater_sha1": "697033a7c4b9a2cba8f4ea8bb4abb0ea64fc319e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-099.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-099.apply.sql",
+      "bytes": 245279,
+      "sha256": "e196b7f69e7bf7a427366b13bf3e922fb6f9b135e0233a476552ebb3d2380e16",
+      "updater_sha1": "88e7a99747c38866c3d494dd629868a3c62c58a0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-100.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-100.apply.sql",
+      "bytes": 244483,
+      "sha256": "f669c6273b68e40c1b28bd2e084dc211bff1d922e2d76dc9c20927a5e09b4e45",
+      "updater_sha1": "1191f35f17e8c23b683bd4abe0fcb48291b5c6e7"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-101.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-101.apply.sql",
+      "bytes": 242443,
+      "sha256": "ebbb10ad74725d6450afaa8adbce371b3ed1177180fd8ad38e2865e6f6597486",
+      "updater_sha1": "6646ac4575dc3da7f847dc2798fd187098a341ef"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-102.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-102.apply.sql",
+      "bytes": 241971,
+      "sha256": "a92e1a92a8ad45b3b13ca8b0816b1a1ca10b3910b03080decacd0a6e75c2a5c1",
+      "updater_sha1": "39b43626b14d2ed6ecdf71133b0bce70f3ad6d22"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-103.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-103.apply.sql",
+      "bytes": 245613,
+      "sha256": "311527323954467b587e2856185a0108657ed7a2d03664869b3b0d39058ed6af",
+      "updater_sha1": "a68143424dbc05752145b3c8e0b4f3f2e4fe0463"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-104.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-104.apply.sql",
+      "bytes": 252497,
+      "sha256": "8e8937ef2a074ee6e6e53ba2d18b56d4d45c44b2baee2e27d320f3b1739d500d",
+      "updater_sha1": "0be6ac8e816e9a2ee6ffe4ec9f4742f895f4312f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-105.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-105.apply.sql",
+      "bytes": 277649,
+      "sha256": "fc4e4f87a29437ea188be39072a63a68d72a7dc268fa030d88a0d1288a5bb125",
+      "updater_sha1": "fa2c3ba047862ff6c3d95c32b1e0845bea9f1ec6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-106.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-106.apply.sql",
+      "bytes": 251879,
+      "sha256": "a4a9a802a583ce12483f38db1d4ee118c22070ce2c19bd945167c0d2c50ccf7c",
+      "updater_sha1": "f493ec1a1d1850a94281945bee3346b663b344da"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-107.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-107.apply.sql",
+      "bytes": 255363,
+      "sha256": "09c98b725960eebc5fbb05975ce1f396fd86ea3e4781986425d7f58f1c867633",
+      "updater_sha1": "33bbe46443d1249ed6c781811d8df413e20933e0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-108.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-108.apply.sql",
+      "bytes": 253711,
+      "sha256": "135646224d2ebeb52dc29d0707c922e78f4b46b6c877385e974ff5683653de6c",
+      "updater_sha1": "6ddf881fa46e1ba51f2308d30457175e76eb1807"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-109.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-109.apply.sql",
+      "bytes": 252151,
+      "sha256": "8f836890d97b8a2b91f5284c517257de886db908b5cf0d8eaffd0177a13f62f8",
+      "updater_sha1": "5da6b07ad4ba4ad73cc3c58e3b7caf028a0c72b4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-110.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-110.apply.sql",
+      "bytes": 260379,
+      "sha256": "e17109b696f8b00ec69c8916a8acfcb8f9926a317f84f841d6858aafe6a9c904",
+      "updater_sha1": "975ce193403a41853a3bfe2e9854134400e4f2c9"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-111.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-111.apply.sql",
+      "bytes": 257523,
+      "sha256": "e2fdc4855154424335ed3b55b91eb6983f1fca21082831bb502c643bc4147dc6",
+      "updater_sha1": "c5e87d3e9324e4af4a5695af2b09bd905d9ec184"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-112.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-112.apply.sql",
+      "bytes": 258355,
+      "sha256": "56ecc5bc4979037d93131448c03507e0cfae457e7a7951f4c777f5136f7d8024",
+      "updater_sha1": "cdbb510a8db3fae4b03eabe6d4245697ecb2ab22"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-113.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-113.apply.sql",
+      "bytes": 242381,
+      "sha256": "d3e69128c31accafd29db866c5624e5ebf605a92d43f2e76cf17c8e17a59d597",
+      "updater_sha1": "467e8ac23175a8c5d9ffdfb481b727858fcba892"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-114.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-114.apply.sql",
+      "bytes": 240959,
+      "sha256": "1a0ab9343cd03e0caddee7b3a657b5fc8c0697090daf50c78b7f2b92c72e842b",
+      "updater_sha1": "f7f0bb843370146604e4b2eba79d8b2c0a5049c7"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-115.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-115.apply.sql",
+      "bytes": 259795,
+      "sha256": "6b9255dfa861cd6b7a47070b1eb4c459084fc99e09d9cf221bef7b36ba592ab1",
+      "updater_sha1": "359f492d8b1e548547c87565562074fd5bfa3f5b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-116.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-116.apply.sql",
+      "bytes": 254181,
+      "sha256": "9d6549499c996927ff0c98ba043dbbebe76945ff55deac785f36c0911f3506bf",
+      "updater_sha1": "ac3ad9a4678f06d6e8ea81f63fee628a286804f5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-117.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-117.apply.sql",
+      "bytes": 257451,
+      "sha256": "3cc60ad64cbfd9815fd83d95e23df83f0e1c74b64a75f93f1f8ce65ff6f59177",
+      "updater_sha1": "7808346b5bce8ec370346db09e9f224a60d0de6a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-118.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-118.apply.sql",
+      "bytes": 244205,
+      "sha256": "4354e2195628ff0a2ee02f801c9331064ed6746c42d7bb9af611dadf7264e5d5",
+      "updater_sha1": "c08cf7f8f67ea7cbd9d2d5ed1552b161ca1da3dd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-119.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-119.apply.sql",
+      "bytes": 251349,
+      "sha256": "ee4d304c13b6a85c49996bcad2ae93de688a8ae99433f84e908e17fe5863cf42",
+      "updater_sha1": "030fd161ab7a6e3ea5661fb24af4cc1d6b2a9a43"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-120.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-120.apply.sql",
+      "bytes": 242957,
+      "sha256": "7bc96ac7126a9fde4f0403d15f540cc3c9450f2eefc5ad3820d52389ba4c690c",
+      "updater_sha1": "7d8a68403544678ec887a0cb6462e84193b2a6d4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-121.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-121.apply.sql",
+      "bytes": 240447,
+      "sha256": "653bc800a3fbc2f4123fa799a5d9b793df1165de64f1473fc4ab441f57e6bfd3",
+      "updater_sha1": "2be55f6e300bf5262ea150587e6a9899d00fbcf6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-122.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-122.apply.sql",
+      "bytes": 240575,
+      "sha256": "c7bcff9b7cf8cb22c98052472915374eb1af6ec8406275fcbdd3e6b99a38eb04",
+      "updater_sha1": "81ff80b682c1a75a70e29d78c23a33041b53c6f9"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-123.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-123.apply.sql",
+      "bytes": 240031,
+      "sha256": "434a9c995a2a7aeed8adc314cbecbd68952a2cc0246b517f0dcc563e4fbcffe1",
+      "updater_sha1": "e33e36d59229fc6d5d929ab7440fe769f53b09ab"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-124.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-124.apply.sql",
+      "bytes": 243401,
+      "sha256": "367925db1a1f13003aed23ca7667638d092e9228b4c92eb74176d89203d3405a",
+      "updater_sha1": "bf968e7adfb0c6fb4b2416954d02767aac0fdcbc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-125.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-125.apply.sql",
+      "bytes": 241727,
+      "sha256": "1e5e808d9cb8a00662e418e062f3a1fdac7997920a7fec3926896c747a9ddac4",
+      "updater_sha1": "f59450c2c58a299715735cfb01e75c44da3560e0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-126.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-126.apply.sql",
+      "bytes": 255935,
+      "sha256": "a39c9a8ed1c60a93c6160052fa10186c90c28f49dd815fdf427a694a039f11af",
+      "updater_sha1": "90b3341d0baf9234bbe6974350b1964be141b238"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-127.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-127.apply.sql",
+      "bytes": 266141,
+      "sha256": "1683e0c0ec11903de1c7a0c00e50a870a5bc3130cfc2b57d23135296d357d62b",
+      "updater_sha1": "6491021135374c947f5704b8df7b73a843c5f5f8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-128.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-128.apply.sql",
+      "bytes": 277623,
+      "sha256": "4494ca16d2890eb33aed16621a2bb4cf165e9b7207a02d4e46a9117978e04647",
+      "updater_sha1": "c4301adbe8d5e98b331cbfd095784401da921993"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-129.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-129.apply.sql",
+      "bytes": 279927,
+      "sha256": "6e8c61fa19eb818ffd4b6a32d8622bd6f77f8cd0d5bd213a01c01d974ee5431e",
+      "updater_sha1": "47d8863ca7b2d2ab51386d57da32fd12753abd59"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-130.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-130.apply.sql",
+      "bytes": 249039,
+      "sha256": "291a89c1f7430c72fbe662f0a366b21fac560b111a39429585083cc4c8dc5b28",
+      "updater_sha1": "038cd475f20bb6ac2c25a3459713941e464f00d3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-131.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-131.apply.sql",
+      "bytes": 239327,
+      "sha256": "3f7b63d9d1c0d5863b12ead80147fe5d709b411e10a0ad1f4085d7258cf06a15",
+      "updater_sha1": "3dbcdf98627305dc26018bcb3de5a240d1d481fd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-132.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-132.apply.sql",
+      "bytes": 268253,
+      "sha256": "c7d820b7c1124a89947b51108e4b4f892aae224f7fedcabe34c554c9dafe0455",
+      "updater_sha1": "c9d2a022cf2f7d57c917b7be102f8ea2d0d87ad8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-133.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-133.apply.sql",
+      "bytes": 258795,
+      "sha256": "c50525a021f1ccab5b9170e7530c82cd3b95d8b15395fb2b2184dc68244b959f",
+      "updater_sha1": "f02bd4b0f2043ab17527259ca1e3864b93507ea5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-134.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-134.apply.sql",
+      "bytes": 244937,
+      "sha256": "9835e51c5a09210162f834c5e9354839da31e6757e1103de36e56908a6f63ae0",
+      "updater_sha1": "7255ae6d6fe2af85155f2337f4f85e3fe1c6d5d4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-135.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-135.apply.sql",
+      "bytes": 250789,
+      "sha256": "57bfb94cedf1752bb8f7cb1c2a1d19bd01fedc4016956e55efc2a114403f95b5",
+      "updater_sha1": "1d4799260d64f708977c8a26bc457a465d9fbeb1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-136.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-136.apply.sql",
+      "bytes": 255903,
+      "sha256": "db90b7c415563b23837e85f6246af025e79c85c7815f18615b1851982bf9f3a4",
+      "updater_sha1": "625e5f171140a1f685300373af31cccdc03c86da"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-137.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-137.apply.sql",
+      "bytes": 256921,
+      "sha256": "9afe31c58a760164caa8ade83d2d4f634383efb6d519522a85cf55b06e1daa51",
+      "updater_sha1": "11dc309ca1980eaeaa21ffbcb6b17a7416a6af3b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-138.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-138.apply.sql",
+      "bytes": 258335,
+      "sha256": "15c5aec3b78f07d8c6f1acefbf8fc826708bb573c75b6b357621eb8f2502fd0c",
+      "updater_sha1": "476be9ef157c73c5dca21635965154c1fee601f1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/objects-139.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_objects-139.apply.sql",
+      "bytes": 171753,
+      "sha256": "717a53261242392d989052a8518ece5e92c5150582bf9890d5f8d18b8fb505b3",
+      "updater_sha1": "df3313c484e28daa5dd10043d42a499000d6a81e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/pages-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_pages-001.apply.sql",
+      "bytes": 1162217,
+      "sha256": "18ab6654fa8bb94982fe318f2e2c45b6c547f1ba21a62b75d53800ba52ebfa76",
+      "updater_sha1": "d712488ad8e9fb718d62ae4af89add133fcbcff7"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/pages-002.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_pages-002.apply.sql",
+      "bytes": 901841,
+      "sha256": "f316f420258d5b51d6b8b1d38f51252bc5c9a6bbe92747ce9a81bd50cfe78892",
+      "updater_sha1": "768681ac5062fe61216366243a321adca0c1ed0d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/pages-003.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_pages-003.apply.sql",
+      "bytes": 853135,
+      "sha256": "18cca43419aa0c16265e1e219388c123bbdcef11ce140c77f1a8eae93cc4336e",
+      "updater_sha1": "f66f0407a67ef598ecbdf0bd8c1ad8abe7a3c112"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/pages-004.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_pages-004.apply.sql",
+      "bytes": 941319,
+      "sha256": "19ee5df7586194802b2cd72586d2c462e5b1d86c83dc4084fdab2eb17a0445ad",
+      "updater_sha1": "41cd1cfaecd247802b15ed59086ecea9f5e0c87c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/pages-005.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_pages-005.apply.sql",
+      "bytes": 1012815,
+      "sha256": "ff7c1d7f5bd8d983bac47aaaeb464e7f2f0be9ee84fa9837c82e90d073e62bd5",
+      "updater_sha1": "9197ef2947e7c93dc7f652c395b539c77d903c47"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-001.apply.sql",
+      "bytes": 1367913,
+      "sha256": "c3f71fec6978c11cd7d51f878f1036ad26a4b9b2895231b1f9599843a84d1c45",
+      "updater_sha1": "a59b79d354dc5800a8cf8d7864f9755a0f96e099"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-002.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-002.apply.sql",
+      "bytes": 1017618,
+      "sha256": "41e4f8ddde298099dee79816d310452493e3ea60b2dccc879fe8175748d35ace",
+      "updater_sha1": "e8a1a5923ffd9607f2dfc49e9e4342364d4f101a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-003.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-003.apply.sql",
+      "bytes": 775458,
+      "sha256": "2b8308d453446edb2dae657dac9197a6bb4a779b6c3f9b389a6594eb3590c57f",
+      "updater_sha1": "949fc673d9a172db029d532d1b9309e745e1b73a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-004.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-004.apply.sql",
+      "bytes": 1073339,
+      "sha256": "abf989bd2c19a0896518092ec69fc4be50764e71e16a76cafc203b4260bc08de",
+      "updater_sha1": "5c6d5d78f73208030f572f7f7809734455e8334d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-005.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-005.apply.sql",
+      "bytes": 1248572,
+      "sha256": "896f3d46b04bfceec7fc709e866aeacaea7d6d40c8a40fac76d9cd2db97ad3a7",
+      "updater_sha1": "8ec75e77602b615a21b9a172e71d14ff8ef91e5e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-006.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-006.apply.sql",
+      "bytes": 1235055,
+      "sha256": "772b48f67834b0eaf46cf42cb77e3ab75f8f80a76e2cc9a5c7e8434511012772",
+      "updater_sha1": "3c6b5e3ce58106d7958b92a4930597178fb5d2df"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-007.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-007.apply.sql",
+      "bytes": 1000453,
+      "sha256": "4e80ecda903ce584b57f80f5304ec0339e0253c1b0210a2657b85b592326a83b",
+      "updater_sha1": "2ecff909ccba0636c927b8057679a09579597a21"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-008.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-008.apply.sql",
+      "bytes": 1335728,
+      "sha256": "705d6c125e9dadbce44dedb35f6027ee59d81d9288928b79f216a3d010afb02d",
+      "updater_sha1": "5833cc8ba096cdfc5d658f7b1aa8baf1e99fa044"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-009.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-009.apply.sql",
+      "bytes": 1279337,
+      "sha256": "bf098f7b76e3735eca495dbe928ff919dd786c371237a7b6c7ab6b3905d99347",
+      "updater_sha1": "a80b577907a578c05387a54ff5fe6265fdcc32d4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-010.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-010.apply.sql",
+      "bytes": 1243094,
+      "sha256": "80b7bdde0153200ea287affbb2a0b8ac868d4e914a9ec6dc77d2de20064b964e",
+      "updater_sha1": "816ed58d335e0c16f8aca9bb40c1361d9ba85cc3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-011.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-011.apply.sql",
+      "bytes": 1049416,
+      "sha256": "678fd145a9f914f38e73b44506d34ce0153a189cb8b06804a0bd4b9fa88b31bc",
+      "updater_sha1": "b320e2cef282b87632bdc0805f97f92ff6e432d3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-012.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-012.apply.sql",
+      "bytes": 769838,
+      "sha256": "2186b9cb1034a0b80f03b435e5e36db18be48a361a444618e8b28c550e14b1b8",
+      "updater_sha1": "88a111b9e839a49516a6580a2bd9f6c93756bb99"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-013.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-013.apply.sql",
+      "bytes": 1171792,
+      "sha256": "c95bb77cba0481378cfe85beee20a14998eb7b6677481cee2583143ea2f36643",
+      "updater_sha1": "b70e0aa056377b709a76b06e25a4a60b4f746fde"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-014.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-014.apply.sql",
+      "bytes": 757591,
+      "sha256": "8c050661051fcd246aeeb0ab4d0093d5b7de6cfc5ebc3a61e5d8f1e3afdd4efc",
+      "updater_sha1": "17af957f64979baf316ed99739bfefbf5c4c8733"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-015.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-015.apply.sql",
+      "bytes": 934745,
+      "sha256": "1a19d8832be37c29560dcb73e506cd29d7337c27a5de66921c0a7120a13c324c",
+      "updater_sha1": "8d09ebf8c5e14ca3421cb96b66b58bf500c34196"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-016.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-016.apply.sql",
+      "bytes": 780413,
+      "sha256": "ddd3744db6816b0d52f1657140a1b1918f11259af3da327a35fedcc1f4a3d9c2",
+      "updater_sha1": "5227d169eea058d4badc8d95cdca42e5b8d9d1ef"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-017.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-017.apply.sql",
+      "bytes": 1080524,
+      "sha256": "0901776dd349418f820b962d69eed6fa3918b35cf0675a61183af7ad6329e476",
+      "updater_sha1": "a2a0e9825c0f329b2fd2d25083e66ab297f1d717"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-018.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-018.apply.sql",
+      "bytes": 1208606,
+      "sha256": "da27f491b14dfa9d71ef4425bacf6a39f47a843831bf312b650d79e7c7e46b88",
+      "updater_sha1": "8852ccd39cf4d793efd20d6f9cfb1cbaefee75a8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-019.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-019.apply.sql",
+      "bytes": 1237516,
+      "sha256": "19a6bbcb02364d4e18b26aedf45b729158fa24876c32854be5df54459188c4e0",
+      "updater_sha1": "9c02cbdf388de307046df2ad5eb6defea5264601"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-020.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-020.apply.sql",
+      "bytes": 1353750,
+      "sha256": "cf4f46931ffb74937a8f56b6f05525dea6c13deffe9ff61d6076ba4fd6b17a7e",
+      "updater_sha1": "3e02923a8709d2766d1275bea8026823beb37388"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-021.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-021.apply.sql",
+      "bytes": 1380506,
+      "sha256": "740deaf79cfc5335d03b694064ada95c7309307ab3657a016cb27784576369e9",
+      "updater_sha1": "593a66a30e034a916d34e37cea070bc608733d57"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-022.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-022.apply.sql",
+      "bytes": 910849,
+      "sha256": "2763acfcf8a7625c37c5f1db32481bff4aa80354970ff82aa752e69da259d264",
+      "updater_sha1": "bbc000ef857885caf70c54bd824a2dd962067bfc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-023.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-023.apply.sql",
+      "bytes": 1233320,
+      "sha256": "6b4aaa851b9ffcbc0aa25cca091c8f1f13aa9c7a7f932b19f5dcd762d92a1747",
+      "updater_sha1": "661e3e03d54bbc8d4d10d31e1a63abf3361146af"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-024.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-024.apply.sql",
+      "bytes": 1194628,
+      "sha256": "ce3392d81064c59b882e0ce9249c888fe6d091685e99595caf988e35324cb717",
+      "updater_sha1": "88875e3eab200f9c22daa34ae29352b260fa6f63"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/quests-025.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_quests-025.apply.sql",
+      "bytes": 795568,
+      "sha256": "eca192836e9648e50d042035da8b3cff886217e2635a7c6ef06420154d8f3eec",
+      "updater_sha1": "c31549d3b31e1cb518710bb6e7d38f4e0ce4cdbe"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/requests-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_requests-001.apply.sql",
+      "bytes": 353438,
+      "sha256": "3caef0105adce37431bb25f4445b8de740f1f45f4f30383975415c09c4dfda80",
+      "updater_sha1": "a0ed195c47acc1c4704ff4c9ad8ea238522e29ff"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/requests-002.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_requests-002.apply.sql",
+      "bytes": 214858,
+      "sha256": "5939f6e96510af53e8372e1909b5ef600afe4144af2ad4d9ca68d9038cd4e93e",
+      "updater_sha1": "cc8b3146bc9017f36f4b6d78c204e44b236963ee"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/responses-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_responses-001.apply.sql",
+      "bytes": 28020,
+      "sha256": "e330fbc627ffe619fcbfaa48cc36fb57b43458bcdbc0981d58b23c1f8fdee62f",
+      "updater_sha1": "0d337157db873489ac60b4113f358b9947b1972c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/rewards-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_rewards-001.apply.sql",
+      "bytes": 424085,
+      "sha256": "b47f366e5112a10c85994fd0200cabb2ffbde09b62dbbbc3ffcfba228c6d4af7",
+      "updater_sha1": "81dcde3dd0a583a4b9ac0b945589fd72ab99328a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/rewards-002.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_rewards-002.apply.sql",
+      "bytes": 475099,
+      "sha256": "da1390b0bb4cd2e205919fb0eed27abd6e7827e9e038a7ccea18677b79cd9fa4",
+      "updater_sha1": "16de58b8c12f5baa34f27a863263bcbf74699def"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/rewards-003.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_rewards-003.apply.sql",
+      "bytes": 473467,
+      "sha256": "58e1d799ec777c9e8846677507fb077a974637281535fb86e8c4b26a3d7422ce",
+      "updater_sha1": "b7edcc43f857295f89a1d886cdcd0ec034027624"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/rewards-004.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_rewards-004.apply.sql",
+      "bytes": 21703,
+      "sha256": "6e83783c5d12591df16df7c9b814e74abb4d4fa83a78a3d76db481d047bd8652",
+      "updater_sha1": "47d0946cb4d32f0f2ca8bd58cce62b4ac714eb2f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/world/server_strings-001.apply.sql.gz",
+      "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_server_strings-001.apply.sql",
+      "bytes": 230368,
+      "sha256": "aad681ee0148da8f018ed3a139115f0bd4e2030970ae8d6f63b255b48f80e53a",
+      "updater_sha1": "53818209dc89ed3cdf5aea0f0b1e35d72d90bef8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-001.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-001.apply.sql",
+      "bytes": 402561,
+      "sha256": "edcc5215fe57dc2375b890cfc66dacc95edc5445c984125fc590a7c478890558",
+      "updater_sha1": "f166f350c056f86a2ae75cef1f23cb71e12b1192"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-002.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-002.apply.sql",
+      "bytes": 357319,
+      "sha256": "6913dc8524ed139f14bd4a0ae0c553d3cdbdc0549fa9404b6921aeee81998285",
+      "updater_sha1": "7bff4220bfd0e3de7d3876c3d06943110053d8a0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-003.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-003.apply.sql",
+      "bytes": 369483,
+      "sha256": "f0b11330e8fe2b7660bc01d5a0107777806de416d9c620d920e1890403af0fb2",
+      "updater_sha1": "9b56224bca530a3c19cc07b37a7e28b515e5c71b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-004.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-004.apply.sql",
+      "bytes": 317211,
+      "sha256": "50912e456f617b3f33a05b4a35f75a8fb444b6ef06336be4c5517f101a8719e9",
+      "updater_sha1": "5a77db042bdb1ea2f78f31340d8b896a28abdf35"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-005.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-005.apply.sql",
+      "bytes": 371957,
+      "sha256": "64113e211912ee860dba8389c924ce6d6cb3575413eb037901d28afb2e0f8880",
+      "updater_sha1": "1f2e24202100dd1d6b4ac206bb3dd71686a4bcb7"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-006.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-006.apply.sql",
+      "bytes": 384383,
+      "sha256": "f632851f5968dba58b0fc13b517842efd85d1bf4ead8e5edb1f6614c87dd49a8",
+      "updater_sha1": "17e6f4437010698b7d57331f4b71afcfe435ce37"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-007.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-007.apply.sql",
+      "bytes": 352023,
+      "sha256": "26a4ec0f63fbde4bc927d5c19cb16617a6fda42fa42c74edf0ea3bad7edd2558",
+      "updater_sha1": "170907de7ee0e015eeb148822bb608f9676f1e87"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-008.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-008.apply.sql",
+      "bytes": 335261,
+      "sha256": "90757403ce332a609c2d576a5cc797d282fa6a80a9c05d188306e6b10de7263b",
+      "updater_sha1": "3483df7a7b9a261ee461db22cd2f7d441ca81ca1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-009.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-009.apply.sql",
+      "bytes": 365295,
+      "sha256": "25a54ff03e321fb80e5451c5c5cb1a5d29010fd18d4fc5d6bca8e57094c7f44b",
+      "updater_sha1": "14c11fc57e5a4085f87417a555f446ff4ec07849"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-010.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-010.apply.sql",
+      "bytes": 362541,
+      "sha256": "664f526fd622a3c363abaf82588ccc35923c8c0f2c94aa897e97294061fd90a8",
+      "updater_sha1": "7ab8b723517b91291e006cd4196560c314853920"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-011.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-011.apply.sql",
+      "bytes": 347547,
+      "sha256": "c700148bd93080a18b48196f794fd4481577c1c199230d836b30da28f4853691",
+      "updater_sha1": "78324b0ba3bcaaaf0ffd96a4087ffe6027d12599"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-012.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-012.apply.sql",
+      "bytes": 300093,
+      "sha256": "46b063bd0dce40747e88dd442c66cc3beba6d7e92739ffb4e16858f4baac0675",
+      "updater_sha1": "be136002bc0b9d1ae2095399227558ebc6193695"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-013.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-013.apply.sql",
+      "bytes": 363691,
+      "sha256": "1e6a2e607bb47baac7e79d700d656e5e707e4adfcc39d10282d4aa958e469e1c",
+      "updater_sha1": "0ef82b65e50da03670d415faf9f3955f0ffb64b1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-014.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-014.apply.sql",
+      "bytes": 371829,
+      "sha256": "cae2dee21bdd403d8794965923ec661b9626e893544619b22b043508f007db4a",
+      "updater_sha1": "ea0f3293f2088a420bef550c7f9a754b84a56b28"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-015.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-015.apply.sql",
+      "bytes": 385707,
+      "sha256": "920918a753292573e16ae0c1b33dede04075bbaff9d8ad5b7c2c903b9c6ddb96",
+      "updater_sha1": "1f2cf28758f95d8e9739e4f5b460e30d30fd831e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-016.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-016.apply.sql",
+      "bytes": 372945,
+      "sha256": "f5fdf47d9040cc05533838ef2eb217374861e903c1e3565cbc1fabe638f49259",
+      "updater_sha1": "9780a01e7e5b3b5e2d9948862daf13a729680c38"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-017.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-017.apply.sql",
+      "bytes": 383173,
+      "sha256": "342fde6b5d7f2683d9a4bf0af422cefc2a0f27ba80750d88374879b83507d4cc",
+      "updater_sha1": "21acf7e6f6e31b2cbaaab5f874c90b493654a70b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-018.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-018.apply.sql",
+      "bytes": 319541,
+      "sha256": "ee4e5dbf05e160cfd27730b511834fa6701aa0ea668b09972b3f9565d3417450",
+      "updater_sha1": "5a4050f501c2b6cf546a788a088514769325bb91"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-019.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-019.apply.sql",
+      "bytes": 380609,
+      "sha256": "d7d9d2e865b429fcc53c9b801e4ec160bfb5694a1fa88cf2aecb6b6e77b897af",
+      "updater_sha1": "7cddc26cc47ea5d798603de8e3a3925879c75c80"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-020.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-020.apply.sql",
+      "bytes": 292069,
+      "sha256": "6bb4bc81ff054c79c8852e6a352ce1d675526f08dfc8ef3f825fca7670be57c1",
+      "updater_sha1": "f60280c5b14a5f006a768e21a5b31c0319b52bfd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-021.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-021.apply.sql",
+      "bytes": 294455,
+      "sha256": "8c16abb4f4a543828989baa5eef5bb46bb8270d608fe6815dd9221b382ba0ab7",
+      "updater_sha1": "869f690814883cc6aa968db56d01e9425ebd5414"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-022.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-022.apply.sql",
+      "bytes": 334411,
+      "sha256": "f7ed151d4ec4f51947926b77feb7f1f08cb89c2ce4eb7415b859d935cbb52d0c",
+      "updater_sha1": "1107783c94282187f7c6b497ced5bcdcd4a4e5ee"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-023.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-023.apply.sql",
+      "bytes": 329758,
+      "sha256": "cda005435761422b8d41d148e14dbea2cef4adf93dd93dc9e3ac1b6a13b332ec",
+      "updater_sha1": "8a61bc949bc995ddddbb4b5d48f5b9981426b721"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-024.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-024.apply.sql",
+      "bytes": 336903,
+      "sha256": "21c488a0705f746fdf409880a7d6651a10d93cea51d9dbbc0c3aae9426fd1785",
+      "updater_sha1": "fd605eba31d8f4d5d5a868473b3204329f7486c5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-025.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-025.apply.sql",
+      "bytes": 340575,
+      "sha256": "eb24db596215fa69f7f1aff1fad936b2a0e24e538564ea0a95755aac6100aa48",
+      "updater_sha1": "4bc36e330e6c7f41a27ac415a66a47b5e8887da2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-026.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-026.apply.sql",
+      "bytes": 331525,
+      "sha256": "ef3e70b9500d818d81dee6bd83b216954db8e99cd8fb4695a023bb6cb951f01d",
+      "updater_sha1": "d25b6ba7892e02a3f5477c12a02850a141a07391"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-027.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-027.apply.sql",
+      "bytes": 291013,
+      "sha256": "17a2ea599e3c77b2442b7379207e052ae93f691a1d11ab7e9987d2cba4b453a8",
+      "updater_sha1": "a80354c2acaaba49e53ef651bfee4db2a6496692"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-028.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-028.apply.sql",
+      "bytes": 320533,
+      "sha256": "59d1270aa5d906ab4d8fbc1d3e2cf377df620e68225e997c497953738912a2ef",
+      "updater_sha1": "01394558e500049a59e2b3e3c8f3b4bdf27cdd67"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-029.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-029.apply.sql",
+      "bytes": 349083,
+      "sha256": "3ac5dcf46c5c1a2e8ed6b8b53a49cf52a5384864e98b0d02e04426eef682389a",
+      "updater_sha1": "4fc0558f1b654107f28b2cbec763036019bbfa19"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-030.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-030.apply.sql",
+      "bytes": 408827,
+      "sha256": "37817fa5cf6d791d8117ccd12e5948d559acad5508e09b8dd2388a1e574a4888",
+      "updater_sha1": "49ce59cbde03c2b6beb890daa1d18e5c093ed6c1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-031.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-031.apply.sql",
+      "bytes": 436471,
+      "sha256": "224b25dda2062175bbc37016f1a0b0a48e12b0029ad87fda0b456968ce1c1f9f",
+      "updater_sha1": "bb2d40aa6c8e15d6eff00be4cc611775ff121f06"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-032.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-032.apply.sql",
+      "bytes": 330337,
+      "sha256": "986cb8b6aeeb23aadc31377914d4e978f9039938e8cc88d7b467dfb8f1775182",
+      "updater_sha1": "33bb55387d00d6247383a47e3b9d576c42541b85"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-033.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-033.apply.sql",
+      "bytes": 316233,
+      "sha256": "7ad234cb2dccdb361e14226a94fc7a19b496d77569384158589e0583d24143e7",
+      "updater_sha1": "7d72f1b1251a5d0a779fb8d11d9fffb498b705cb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-034.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-034.apply.sql",
+      "bytes": 354949,
+      "sha256": "47edaebc929fb3e1db5c6c525ca0d209d3b1fca9c218714655e51992efb555ac",
+      "updater_sha1": "d361a48019f432c229a2e4517e923a043d4ad549"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-035.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-035.apply.sql",
+      "bytes": 333447,
+      "sha256": "deaf6e030026efddcc38524f06a2ca44920c4161e336c2c81ec5830940609748",
+      "updater_sha1": "aefcb4c214b94b8cfc20e59f729ec3f3254298d3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-036.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-036.apply.sql",
+      "bytes": 368991,
+      "sha256": "e944c982dd5a6841e2907627a8efbc6bedb39d693d6f8ec7d004d44749670758",
+      "updater_sha1": "757985e1c9d41408152e5f42fb81b98cf20b8438"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-037.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-037.apply.sql",
+      "bytes": 360645,
+      "sha256": "391e4f92bb7ff1cd1a14a8f24bf75c69e7a79dd8ba2a4e07b1d106391b3aaa24",
+      "updater_sha1": "611def49fe3d9f6300208a613a9d738650148d27"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-038.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-038.apply.sql",
+      "bytes": 368627,
+      "sha256": "ea5a2a463cc115b56c0d035053de76cb4ef5fdb84348482fd3f182ba32a2fd8f",
+      "updater_sha1": "4343deb29bca7603981b13b4fc6db9096c1a7f8e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-039.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-039.apply.sql",
+      "bytes": 328325,
+      "sha256": "7bc8db30aeafa8ae1181156305a4f24da9827e5b669732ec118ab1fa8a9f9158",
+      "updater_sha1": "3c7c707ac45c3879eb3e4d75a3a080849081d799"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-040.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-040.apply.sql",
+      "bytes": 362623,
+      "sha256": "7ab0225bc479b0559f25a97248f88dae5ccf2ea37863955db25a6f7f614353a4",
+      "updater_sha1": "ebddc97f28d2cfad9bb0cdd14d57b8dc9c133490"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-041.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-041.apply.sql",
+      "bytes": 378319,
+      "sha256": "b3e484c77d232810af1346c38d08e798a2436a44ec0e087fd0e824a4fea7b2c1",
+      "updater_sha1": "b331dfe649e9688a76125f3786d8e4a290738d0f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-042.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-042.apply.sql",
+      "bytes": 370003,
+      "sha256": "cd3442b3bf3a21a03605eeb8714d23d08ac81ff326984d3943ade09057f10905",
+      "updater_sha1": "6138aad61c5d20e636aba68e8843ef58ab34c9a5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-043.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-043.apply.sql",
+      "bytes": 384133,
+      "sha256": "2e30d1449d24e30febe7a12aaba250d540044486060a3d2b3035e6112947fc48",
+      "updater_sha1": "2d1d5bb823d510dc981c18e4141a004eae8fd97a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-044.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-044.apply.sql",
+      "bytes": 341161,
+      "sha256": "81cba5fec2acaa49ca49591125bd107157461cfd28e6f04e86aac66dbba86d0f",
+      "updater_sha1": "71259945cfcaedec1c1cc7bf91a627a4388dd661"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-045.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-045.apply.sql",
+      "bytes": 341207,
+      "sha256": "a0d864fa4cf67fc6fef8c6fc42b1b75a989e785f36c3387eab74dc914f330a32",
+      "updater_sha1": "cbf375f324faa7dca2e3716bd7563798aff647fa"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-046.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-046.apply.sql",
+      "bytes": 335831,
+      "sha256": "7244a059553e7f73d4ac3ffc3f9d1adc969c85470a38894b2a1d0f02dae436a9",
+      "updater_sha1": "3ef8f5895207fab0d4564ac22d4d10014b8dac32"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-047.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-047.apply.sql",
+      "bytes": 360563,
+      "sha256": "eb28d973f93a348cc143d870d30b29423fdbec2d75ae2d22d6a6b286b0724865",
+      "updater_sha1": "a87b2e260922bfff18a8b35a54b8415f037afc86"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-048.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-048.apply.sql",
+      "bytes": 324363,
+      "sha256": "0839fb3ff1698a7466c2e5e889e864d7119c1d0f80ada2184ea56466b03b17a9",
+      "updater_sha1": "fa7fad386b94b2dbc7a4e1992f2f6f16468c3b1e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-049.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-049.apply.sql",
+      "bytes": 328165,
+      "sha256": "e2a3ee634f7ceee911f69482cb31e6f9a45a5e92f23b814481f0693d596446a3",
+      "updater_sha1": "08cccbc818211289c3ac4a55cbb16b3098440e87"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-050.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-050.apply.sql",
+      "bytes": 386393,
+      "sha256": "d9d1d0db503936af4537ee5bb77774b70ff9f93665c5f0de47e7ef86e1ad2ef8",
+      "updater_sha1": "d73684cfd52a5fc199347da16c91c6c17f8a1498"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-051.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-051.apply.sql",
+      "bytes": 376437,
+      "sha256": "9bebdb28cb8070fa7d917c832d725c3758d4d9b2d5f86a869bf7816082df8968",
+      "updater_sha1": "2703535cfe7f206205cb42d7ff11b5ac1e258697"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-052.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-052.apply.sql",
+      "bytes": 315897,
+      "sha256": "0c64edf2037bc1e32b97d4528245d240c67c244c03707901f2aa1122f245f273",
+      "updater_sha1": "259e5501b4fc5f6c0d781b15a6a68ed04fbbaea0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-053.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-053.apply.sql",
+      "bytes": 376081,
+      "sha256": "992c51d34c040e3ceb09088ab8ebd21f844153a275b479b2ad29c895ace5ad81",
+      "updater_sha1": "ddc43fb6d19334c1c66c88cbc54ebbd22410a2f9"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-054.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-054.apply.sql",
+      "bytes": 353643,
+      "sha256": "deab8c377724f785bd02961b82b64f6206c128d7e0bec2771c43558ba4470afc",
+      "updater_sha1": "4a36c06942a6318d23888684d518d15951bf3b20"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-055.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-055.apply.sql",
+      "bytes": 356085,
+      "sha256": "8796435e9dabe9aabc5268d4fcafb6d1580eee59944bd8624375179a07fa5e63",
+      "updater_sha1": "53a314e452ba80cf5ee46d32e19e62cf42c5bfe8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-056.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-056.apply.sql",
+      "bytes": 355095,
+      "sha256": "d15c3a662b5aece3386641a2f1ae6f3e0fdbfc5a692b2ea1efdfecb4fcb872a9",
+      "updater_sha1": "417fd96e394c738f72f6d676e9f01a261e58ba63"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-057.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-057.apply.sql",
+      "bytes": 411975,
+      "sha256": "a0f760270c65b08acb0cfbd571cbbea4b6771a45c443d479c09f4cd4bbe01019",
+      "updater_sha1": "17ce7a805670783e75758963751503d2886cfd13"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-058.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-058.apply.sql",
+      "bytes": 402445,
+      "sha256": "b473c0f644b3833fefd36b4e25ef6cc3f5bab9617e996d01ad81c6dfea563cbe",
+      "updater_sha1": "26251ae441ef5ab1991055efbd65b0a67eecd8f8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-059.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-059.apply.sql",
+      "bytes": 387367,
+      "sha256": "0b13b46df53692aca1f8f948ede1bf56a95c197901f58a18248b7bdcc56dee12",
+      "updater_sha1": "bead32440198cb66dbffb422663884d884b0314f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-060.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-060.apply.sql",
+      "bytes": 377247,
+      "sha256": "4ddd690aad3e5cc4461f2409227665c94db156b731799d09f627907a7e0d41af",
+      "updater_sha1": "cc2745968b6f5c158cada66ab7937c36933d6592"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-061.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-061.apply.sql",
+      "bytes": 372989,
+      "sha256": "9c37ec768a03659a41cf873198aa65606a241121ae2c4d35cf35f4fc9fc0dad9",
+      "updater_sha1": "458f0ed11177fa3e67ba586c6e1b2732b0c8fda3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-062.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-062.apply.sql",
+      "bytes": 340879,
+      "sha256": "b0171a30217fbde483f37d5cf83e7ec322fa9eb3d9089c6fcfd8ce30a25bba2e",
+      "updater_sha1": "bc0712c06771cd45f09fccc8eeab5271a141f870"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-063.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-063.apply.sql",
+      "bytes": 322299,
+      "sha256": "404b3299ffef01974abf849eb5783f86053faf3923c2cdb40683281b11341314",
+      "updater_sha1": "71e95a3cec1ee50ee22de0431b6b74bb5008d662"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-064.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-064.apply.sql",
+      "bytes": 318773,
+      "sha256": "1bb390834b8fc45c323349d4a2ed696023ffe38412d38fb4c1f6c0be73b83dd8",
+      "updater_sha1": "93094aaffa71eab81abaf40cfafb31f92f9ef2ce"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-065.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-065.apply.sql",
+      "bytes": 315889,
+      "sha256": "5f7b2f6d65ca415c1cf3ffa499f68eb1c7c6ff7775c1191ffbb9ac0721f661b7",
+      "updater_sha1": "6756bd2f798487de2d581cbf70d3a2865466689e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-066.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-066.apply.sql",
+      "bytes": 304617,
+      "sha256": "1ffe0026b90922f3b3d4c353b4b732d087fcab47d05c7c43f85c83f537bdf44c",
+      "updater_sha1": "27cdb493929a60a1274b4bcaabd49d8996b97f84"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-067.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-067.apply.sql",
+      "bytes": 315451,
+      "sha256": "328e7b7e77b01f1f1211f058131c9e288ca1a17c669a694165df31bb8430488f",
+      "updater_sha1": "d3761b6727492e68489fc7506712b38efb7abb2d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-068.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-068.apply.sql",
+      "bytes": 351555,
+      "sha256": "b6b16df644e21bab35f408fa1bab0e9339a591b2fc53906a3e63d51be843e062",
+      "updater_sha1": "29d7517058ce78be3f54658b7ab83ef52b46f3d3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-069.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-069.apply.sql",
+      "bytes": 423601,
+      "sha256": "379dc9c8cf417f5ea807e2069cead853b3cf790cb35eb3fedc8cc99331f40b68",
+      "updater_sha1": "911218c87898cd1d5135dd71471b6162b4aaac20"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-070.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-070.apply.sql",
+      "bytes": 379905,
+      "sha256": "4935d662340f5d49a8855407cd10b0b67746ef215c7987ba75d16828e467c057",
+      "updater_sha1": "fc5727eeedd960c608522df1c29393a8faaa4421"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-071.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-071.apply.sql",
+      "bytes": 382451,
+      "sha256": "bd54daa78212a883d59ca04e13c407f7802dafbcc979b5bd0ccc14e1a34fb920",
+      "updater_sha1": "3d53b8ee71a1676a38b68dec92940598a03414f3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-072.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-072.apply.sql",
+      "bytes": 398689,
+      "sha256": "8738d401322e0968ac3f88f1f368187a287bfb98b4a725cd1701320703d24990",
+      "updater_sha1": "0466ab37ccfbbac6c9e4947116c9bd7655fcb602"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-073.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-073.apply.sql",
+      "bytes": 313645,
+      "sha256": "a2416a455f92f47920bef60583e1ad3433aab6786f8a9eaae97a6fd59f3a8d9a",
+      "updater_sha1": "c00a62c1499b12db1ab257ddcfa72cb9a41d8396"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-074.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-074.apply.sql",
+      "bytes": 328873,
+      "sha256": "4b7599b7d2dbfe6da220a1ae4b941fe94f1f602beb94802d8eb5aa9f8dad60cb",
+      "updater_sha1": "d15ceb89c9ddaeb2ba51bac69283f336783b77b1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-075.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-075.apply.sql",
+      "bytes": 400061,
+      "sha256": "23df4af4d67cd2812f9e44c5bfd41cc8cc21a430ef3626334d150414a46765b9",
+      "updater_sha1": "6364762ef29de3bd8b1fef2f2bb3e9957e0793e1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-076.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-076.apply.sql",
+      "bytes": 333435,
+      "sha256": "b93c557ae543b205b26f90dc56a39118dac2e8ec1394dbd167df06d7f10f5a04",
+      "updater_sha1": "39133cabe363dda5f9968508e4a2eec6586718c9"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-077.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-077.apply.sql",
+      "bytes": 353133,
+      "sha256": "c32209a72b665be375285d1a737082d4f17038a708638484c86a420e3fa8f29d",
+      "updater_sha1": "f2766588297173a7d5ecbbf0c6b627b7abb2d226"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-078.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-078.apply.sql",
+      "bytes": 361993,
+      "sha256": "efb740d2161046dc328d551324a45830ff223f5232a4483c8f0cb11fe03b17ff",
+      "updater_sha1": "1c55723a2e6582a33b8d41b06338fb8a92c98e27"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-079.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-079.apply.sql",
+      "bytes": 384376,
+      "sha256": "5b4f8f2277364500c238f49d54e6507ce9f4bcb041ce00b0acde094f603d9f57",
+      "updater_sha1": "67295049a48da3e08e2a1a67cc630b6ec388ca62"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-080.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-080.apply.sql",
+      "bytes": 353401,
+      "sha256": "f2112615e54082b4e90e67f3ccb7b4a705609329e844f8a4ed6be17129e06d9c",
+      "updater_sha1": "eab67ac79c6880fb83dc259980635e1b5222e58f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-081.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-081.apply.sql",
+      "bytes": 382371,
+      "sha256": "9632d95d8a413a9d4e884fc473185f2a10d4fcd5ec9e04a400c3787dfdc62a0a",
+      "updater_sha1": "81111271f265cce1aa1f61f68eaec6530dfa881f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-082.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-082.apply.sql",
+      "bytes": 364487,
+      "sha256": "aeb2109eb82280f4e7147fd7b5204fe3c82881ed99c044e666fb5b4ed1e277b3",
+      "updater_sha1": "88192dc2294ce68c62244ecd056e979d54abbb9b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-083.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-083.apply.sql",
+      "bytes": 352537,
+      "sha256": "d873ba63be62fccddafb1e7820f1b146ea0ee1ed5aec076d0db5d1c56a3a3e9a",
+      "updater_sha1": "cf03854da948f3a635f25b5f3f44cb12ba7d7c50"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-084.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-084.apply.sql",
+      "bytes": 331919,
+      "sha256": "7cbb1528f1858f7b6fb7244b8a9e4f9d4584a8d009731e3d9be51c2891fb002d",
+      "updater_sha1": "5daa8766663f240231d8b81c226fc3c19a1a5710"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-085.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-085.apply.sql",
+      "bytes": 392897,
+      "sha256": "a02abac2f121824b3049c53af9392578c5e766175b72390dff6e63cf897a882b",
+      "updater_sha1": "7d9d46b7e8c309315b2ace51762af69d47afaf1c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-086.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-086.apply.sql",
+      "bytes": 337583,
+      "sha256": "5d2e18cbb3c0320316435bca3b12d138ea7c58d422c8c39717f5106bfd734c31",
+      "updater_sha1": "efbac9fc2d23ff6d2ec8621b6083ef439b315ed0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-087.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-087.apply.sql",
+      "bytes": 364045,
+      "sha256": "917a196df471591025f763409686579164cb733071dff7f7674d22f93f7e935f",
+      "updater_sha1": "10ac93b77ff8b433762be9ef654a29b1cd12dbd8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-088.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-088.apply.sql",
+      "bytes": 331687,
+      "sha256": "303b0f690a1d8e52a9390f42aefecc12157c11dab6727323fff8605587967891",
+      "updater_sha1": "310c81e59adc32947a0f66cd024c55eb3decf2f1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-089.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-089.apply.sql",
+      "bytes": 323683,
+      "sha256": "771e36871e07a156051d2a5a622ad1b6d6fc947edd711eb9b09fa489e17ad93d",
+      "updater_sha1": "eb0d1fb5ec5f32e73c66e534a251e9c357aa41e5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-090.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-090.apply.sql",
+      "bytes": 335435,
+      "sha256": "e02afc15ca8760b67546c918a1f6dc22fd52bc95051c56b1ef8a57d0f204b754",
+      "updater_sha1": "0a910ac4e064e829fbc134edd1ff655e9c775e00"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-091.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-091.apply.sql",
+      "bytes": 314253,
+      "sha256": "25cd5d83c4977d77d4faf6ec57808b4fd142fc91d67abec46574eacc46be4972",
+      "updater_sha1": "2435a716b78dc2b6543ecd2d4411bb55447f6f8f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-092.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-092.apply.sql",
+      "bytes": 348989,
+      "sha256": "661afaa9849ff3521c4ca0ec73d95300c2ce0aea7e30ec0db6785b53be6c64cb",
+      "updater_sha1": "3a612127e5684b50f5daa84fe110087b77aa8af3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-093.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-093.apply.sql",
+      "bytes": 348291,
+      "sha256": "e3f2c02ad64b108859c23f8c20664eceab9e884f2deb60c2b69fc4bda99a94dd",
+      "updater_sha1": "6310edcc551d3eaac35c0ad339aba9e58d2721c8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-094.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-094.apply.sql",
+      "bytes": 439615,
+      "sha256": "2fb003c6c88dc7587d140ee68e3b841b9670489898c3d76a7cbe8057177528d9",
+      "updater_sha1": "9f793147d004c9e40a80ca7c048238009f10a7bb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-095.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-095.apply.sql",
+      "bytes": 338973,
+      "sha256": "df678cd87141e6fb9f12ae5dbb6d163af89a8b75975a10b90a0b772cf1936461",
+      "updater_sha1": "f7178cb2a1b888ec65e00b3fa741fd5a7e368bb8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-096.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-096.apply.sql",
+      "bytes": 449871,
+      "sha256": "481cc97f4f48e45bc1131b8fcabf094db78d32364b0bb3c780a0d1cc18500588",
+      "updater_sha1": "2bf9622d7cbff1ab84ba747cdb22376daad6bb59"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-097.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-097.apply.sql",
+      "bytes": 380559,
+      "sha256": "0f09a89dfd39229f23d1a9ccfa9b888597c099adec61b48ef9efe223234e6061",
+      "updater_sha1": "72c9011f026df3da080491e616379a5ecdc26e0f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-098.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-098.apply.sql",
+      "bytes": 272273,
+      "sha256": "f15b83e9cad8aeb7d3311f0246237d73450e6ce945a5c3dca177e32d34721325",
+      "updater_sha1": "270bcbe1319f1ccc753c6d4893f1f9a697b13a5f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-099.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-099.apply.sql",
+      "bytes": 352875,
+      "sha256": "576ccc3b41a7cc2edfe4ea58d021c19d9b2c6da45ba55f7ce98a884268abbe9f",
+      "updater_sha1": "96dde6db352a0efdafde5ee92e4940833f0a7a09"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-100.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-100.apply.sql",
+      "bytes": 503535,
+      "sha256": "1d3be84ca70947320c519fb05beaeeb8a24e6966424fea2c214a536d78fd6cc0",
+      "updater_sha1": "8b6ae270d2a5d4cc7e851ef2299f4e9b60428a49"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-101.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-101.apply.sql",
+      "bytes": 388675,
+      "sha256": "a207d3a12a04a2ca728aeb2bba7b1df3303a5e3bd7e9b0953001289b74d62850",
+      "updater_sha1": "018f03256f8f9172562def492e54858222270c9f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-102.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-102.apply.sql",
+      "bytes": 359479,
+      "sha256": "8d8397dde7c8edd6dc8ddb9e9408260e8e2ae6479972b9e178581d6cc0f24086",
+      "updater_sha1": "480715f0f1ff8a9b139755e598d41ac2c9cf91ac"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-103.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-103.apply.sql",
+      "bytes": 277757,
+      "sha256": "245729039680554afc283506862fac8078a094a02393abf5d91ea5cb75e172e8",
+      "updater_sha1": "3d89ce74b6281ae06cb7b534f6711133401ae811"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-104.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-104.apply.sql",
+      "bytes": 261985,
+      "sha256": "e07144b3e11a147695c16e85dc7a925e2787417aad1b36073fccf6741ceceede",
+      "updater_sha1": "6de9acb56a886859c36a818ba5680b47fda37a4d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-105.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-105.apply.sql",
+      "bytes": 261699,
+      "sha256": "2eefb589b06c59f8b66f57aca168acf1cc0b1502632e5647f226b6892df348a7",
+      "updater_sha1": "98e5d2a1ff1f831f2d90b26965db97762e796610"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-106.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-106.apply.sql",
+      "bytes": 418837,
+      "sha256": "36941aba618ede869d4ac74ec399fc9232b25c96a4bf8576d99aac8cdea2cf55",
+      "updater_sha1": "4e95ea9f1fcfde7945b0fc3094f01a45d552ca60"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-107.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-107.apply.sql",
+      "bytes": 338737,
+      "sha256": "70e842bd078676b31814f78f6b3612f39bdbddd5beb310b0fbf4d82511757c39",
+      "updater_sha1": "12a53331b7bbe4769ed75d51bb6aad210d3079f2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-108.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-108.apply.sql",
+      "bytes": 364737,
+      "sha256": "e448e5ee2dd3e2a7a8be03599c4fbf19ca8bb46b5b06981377ef0dfaf7a1402d",
+      "updater_sha1": "90ea2e7049f21763080534d2cd48eacbf8f30b79"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-109.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-109.apply.sql",
+      "bytes": 325155,
+      "sha256": "c8459bb1a71cdfc604110f9987975da566a2bca0341a7a66135c20cb4611215f",
+      "updater_sha1": "a9fb29c381b58f95e579a1d442a63c6c3489ed97"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-110.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-110.apply.sql",
+      "bytes": 340585,
+      "sha256": "85ca8bb35e6753f1957163fc1c43de653055bbac2d104d8f336c4cdb0d8f06fe",
+      "updater_sha1": "a8ab7d287fed21f2e1d4dd85c53998632031924f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-111.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-111.apply.sql",
+      "bytes": 327757,
+      "sha256": "69cb607769e482e4c650bcc2af7c054774a5d4a453c0152f3a2cdcfe9a4dc7bd",
+      "updater_sha1": "c7672f0842fa4d5f9f2bc96247a0b1132cfabab0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-112.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-112.apply.sql",
+      "bytes": 322880,
+      "sha256": "a6614fb8f66858bca9443d1ddfb8ce40a1f1ca6bc9349396f94d9dc52c1a77aa",
+      "updater_sha1": "6832e4ff82fe5925614b05e2f2c8d3dd60abce8e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-113.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-113.apply.sql",
+      "bytes": 314783,
+      "sha256": "968e5e3e078682711390eb43e16570b0b8fdb6b718ef4040e1aea25970c42138",
+      "updater_sha1": "b1bf906eaa60b3bd032fd16664de9dcfac20da77"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-114.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-114.apply.sql",
+      "bytes": 306479,
+      "sha256": "e69e50a5525a5e9f71d9d6bd693a15989028f926f1def157bf6223b92697ab2d",
+      "updater_sha1": "073a67e88495e98b4e2f05ec8e498bdb4c342c75"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-115.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-115.apply.sql",
+      "bytes": 319527,
+      "sha256": "2bb043e5f473a446ff56a810f256af09a42fa03be62664fa567eb4735fdbe2b9",
+      "updater_sha1": "898384fb1d9520b2ec285e85ac794eca645884a1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-116.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-116.apply.sql",
+      "bytes": 338781,
+      "sha256": "0ca6885e2e87849d6152372e463b6f16ddf91cdc24b18bbf20dcd26c8fdfdfce",
+      "updater_sha1": "fb5a6b6f7b702e5400cc43ad8a80795fa8d1b3f4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-117.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-117.apply.sql",
+      "bytes": 352279,
+      "sha256": "2fb61cb507675c124fb53c276d4c5dd151477ed3abcb8b03c39283d7d0b147f1",
+      "updater_sha1": "847cd87b743f5fe33fca4f98b804bf678c1bb814"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-118.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-118.apply.sql",
+      "bytes": 297917,
+      "sha256": "ef4603b1f33873a42784258bd5c1d11532e811a9937cfbfa43eb1d8d7fda39ab",
+      "updater_sha1": "a6264f855ff5a21de6c827f4b27f499ff21dd84d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-119.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-119.apply.sql",
+      "bytes": 345523,
+      "sha256": "185b4c2c79b7ade11cf472fa82f3ba8984d11b3f8a14ecb30aae78d5c72e7bc3",
+      "updater_sha1": "f5de9b80d2c269051804c54e09d3777de37af261"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-120.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-120.apply.sql",
+      "bytes": 355901,
+      "sha256": "f2c772180f707662d4a04d354d4a6361504ecec55024e9f047fcd15eb8c1bfb9",
+      "updater_sha1": "27ec36f3f85ff6f7851d6eb10b475bfba12881af"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-121.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-121.apply.sql",
+      "bytes": 386641,
+      "sha256": "ea05a18444885138da987cb051511d000848c21a986aa13d5361c2bdceed59a5",
+      "updater_sha1": "816ba3701c06dfb2496eca5f6242d3bca46b29bb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-122.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-122.apply.sql",
+      "bytes": 288291,
+      "sha256": "6b172333b35516447cb95a0d7cec3670326d98a460ee66430c9c6cdd27ab73d7",
+      "updater_sha1": "e1c080e59617ef855d1ccfd46f33ebc17d35249d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-123.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-123.apply.sql",
+      "bytes": 351037,
+      "sha256": "92397e1b88830e86a20cc952a1b2000ed7bcd5bdd9bfcc836df50a991701321e",
+      "updater_sha1": "51274927f695fd7b166215546816db13393d90be"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-124.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-124.apply.sql",
+      "bytes": 394607,
+      "sha256": "1b4cab94dc6bf9e26ed978e608267390bee15c631474a241c411f5b19ccee376",
+      "updater_sha1": "caade7ece1fad138afbb17cee2eddbf3d1face89"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-125.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-125.apply.sql",
+      "bytes": 359817,
+      "sha256": "1709c4a9022b23b1ca79affe22f07fa31514996abf331e431a88878bdb9c912c",
+      "updater_sha1": "887fd89c4ef8c3b1343919c6f9908cb333b7ab68"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-126.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-126.apply.sql",
+      "bytes": 378281,
+      "sha256": "1368375fb93e5f343a5251947c08b44b3463c84ca084b663761ef480356a4edd",
+      "updater_sha1": "3650d2b6c296a4e5aaa8eb22c2cae44a5e2272ae"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-127.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-127.apply.sql",
+      "bytes": 344935,
+      "sha256": "fcb2ee4d5ba89b0bd185e22dcff403d92dbc4d4a313bc5fbff4dfcde33505ea3",
+      "updater_sha1": "204d2104782d1a337206ee62cac34e1dd2bd2917"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-128.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-128.apply.sql",
+      "bytes": 331629,
+      "sha256": "167ea60441828d9f963d2440355de540fc465e164f4ce06d1cb4c0f3b2cfd092",
+      "updater_sha1": "7dc10513ac422aa24a303fd652a34a22bab19a3d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-129.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-129.apply.sql",
+      "bytes": 382153,
+      "sha256": "349ccff9a35f8af2317590f8349c3237fd5d9616e886cfbc4b9cb90fef0783ea",
+      "updater_sha1": "773d3eb2e9c0b92e5e42b8f77a40ea40203be15e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-130.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-130.apply.sql",
+      "bytes": 341067,
+      "sha256": "fd12239b6863b31fd1b8a0727845c1cf657b3b0aba6bc3e51749f733e6c74ec8",
+      "updater_sha1": "5061fe0b1656090353a7c08b2f6583a4576fd15c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-131.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-131.apply.sql",
+      "bytes": 336859,
+      "sha256": "9fb1e27d1f26a242959738e7c48ad586803542e28e4d4e80c5dfe4c0c5fd39ad",
+      "updater_sha1": "5da8771d1928885d15367dd3fafea8b75d8465a4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-132.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-132.apply.sql",
+      "bytes": 364949,
+      "sha256": "1c263a2ef3a51b159b61d565908b5a2a105508e2ef286ecfd384679fdcddfb96",
+      "updater_sha1": "d44b2e8e17c306e6e9420252b2c1862edeb80ee2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-133.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-133.apply.sql",
+      "bytes": 383893,
+      "sha256": "c0011170588f3b6300d826d04db783e83913d221f765257c9ad3b7884bc631ed",
+      "updater_sha1": "5a161ff65d78fe936e12c433b7457cfc717a9299"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-134.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-134.apply.sql",
+      "bytes": 324939,
+      "sha256": "81f88719c2590363066d6d289af0f2699a35d53c5ac6bd17fbde3402da305719",
+      "updater_sha1": "72e2dec428da501e6ec38cc1968b8f1ed21ac3e5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-135.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-135.apply.sql",
+      "bytes": 429511,
+      "sha256": "5c0edb3c0a70ba47bf46aed85f31754ad62838fa4f39bf954723a2f00c47b0ab",
+      "updater_sha1": "d84d0a01efc68929a22e7632d7bc96342405ba31"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-136.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-136.apply.sql",
+      "bytes": 360139,
+      "sha256": "ced49b0ff0b4cec148dc6da984f120227a8a4a4c077cef0b963444c81d247aa5",
+      "updater_sha1": "aee41cd2f4a25fc5abd9a77c47899569728ccec6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-137.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-137.apply.sql",
+      "bytes": 350721,
+      "sha256": "e28998d417e984b3f5797b99448d80960d9431876844a6bb3e9e8cc76ac6e041",
+      "updater_sha1": "c9dbc668bb01a02832e65158555db2f6f2ee323d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-138.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-138.apply.sql",
+      "bytes": 374045,
+      "sha256": "d5a01e14505cb2ae9c73f588c8f256f8d2b3ae6230df9c576af63755ef760180",
+      "updater_sha1": "936cd8d79987be6c237ba745e6829ae391cfbd1d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-139.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-139.apply.sql",
+      "bytes": 375493,
+      "sha256": "cdfe312b034f8459d763184752b9a2dd90fa63565ab80f687d3eafa52394f240",
+      "updater_sha1": "d32e534d730395c595e538b2f19d3f820d931fdf"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-140.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-140.apply.sql",
+      "bytes": 389947,
+      "sha256": "92bdb492b4a66c66a5b74451cf70f2796891ccd0a0f50517e72a52d29cca916a",
+      "updater_sha1": "ad3cf4b35278f251dbd8c6a8b52599aadb1ce96a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-141.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-141.apply.sql",
+      "bytes": 376085,
+      "sha256": "ed4d667d90813009e70e39ddd1b59450d53f3729bc3291bd4c8610458d7994db",
+      "updater_sha1": "75d6d96c7381aaeb25ca7edbedd1c2d199fdfd1b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-142.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-142.apply.sql",
+      "bytes": 416445,
+      "sha256": "063eca72263d4decc9b225ef8cb1b3df2157aa255f7fbc106f5c6c51ea698999",
+      "updater_sha1": "00801711b3835612b8fbf3b61db2977a3b4fb78c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-143.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-143.apply.sql",
+      "bytes": 354314,
+      "sha256": "495f8e238afc28161db848d5e997af4c2e85c969a1f19832ac482010b4e079db",
+      "updater_sha1": "c17abb8e20b7f2877c5a621918d0ab4500c5014c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-144.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-144.apply.sql",
+      "bytes": 279570,
+      "sha256": "779bc2cf0af0b996bef2561a4c67a7fcd1f23a25c5002f8ed9828d23b6c7b328",
+      "updater_sha1": "2f9a146f4f3f3f999ed9d13df4789918a91149dd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-145.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-145.apply.sql",
+      "bytes": 388693,
+      "sha256": "5dd386613d00ecfc694df6128301d53653a7686f7e58cc28717a3471e9650564",
+      "updater_sha1": "b5f06e139fc6528dd144b63e466cc64c9ac1ec46"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-146.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-146.apply.sql",
+      "bytes": 325195,
+      "sha256": "66f9dcb0b0ec5998bf3872ca1fdc8b3231e22548a3eea4ed9a59a4dffd0939c7",
+      "updater_sha1": "7850099304bb61847d20850e8b78d889a7551ad8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-147.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-147.apply.sql",
+      "bytes": 330533,
+      "sha256": "fc02a1b06181f5e45742529fb7cd065f8534c62bb3107a81fd6eac4e28494509",
+      "updater_sha1": "45c8e61ecd0762c9473b2ec05495997655adefda"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-148.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-148.apply.sql",
+      "bytes": 350163,
+      "sha256": "4dce05cca8b1afdcc24ef68ab6a2605bf689c11b08bb80b61b60082bddc4818e",
+      "updater_sha1": "6ad0783a9963ee30a08e9afeea8fcc3eef7bef18"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-149.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-149.apply.sql",
+      "bytes": 334601,
+      "sha256": "883605e4752ae6e74023bafc3a0751904c1b460eb9f36772deef7e8a2834dad4",
+      "updater_sha1": "a9b4d5055d0a7b9d74d94ae1970acf6a2ce28892"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-150.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-150.apply.sql",
+      "bytes": 308009,
+      "sha256": "11e40208e8830c715ad55ea8a9fd6c601a6ccde6bbd42fb8c0be5399b525f5eb",
+      "updater_sha1": "550a8a2649606a6020193bd4a973db6305f3c464"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-151.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-151.apply.sql",
+      "bytes": 257375,
+      "sha256": "182f6c1929777824cbdb8aac93624f1e68a5c311efabdb3f48e34b0e1988d1ea",
+      "updater_sha1": "914d1ef4faa8b5fb86230930633b21158318e376"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-152.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-152.apply.sql",
+      "bytes": 256465,
+      "sha256": "fc8d8cf06c46bfcf40ef7f36399a8e39c5e1fdfc518ff8e2440607f11e1ff12c",
+      "updater_sha1": "09e88fef3023ca5a117f70bb94b0616888f31571"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-153.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-153.apply.sql",
+      "bytes": 322939,
+      "sha256": "09948ffd580e7010eacd8eea42a287f9d2a33795118c1f20bfdbff8349ad87bf",
+      "updater_sha1": "23a9bde2c9864e8d33d58cf288d01e0cd09de6a2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-154.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-154.apply.sql",
+      "bytes": 343577,
+      "sha256": "70911d0a7384ca49e991ea55f10aa20a863c811745b9dc9bd7a1816863d683c3",
+      "updater_sha1": "0f66c9de75a66b50c2605d7d8b047cdf1951496a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-155.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-155.apply.sql",
+      "bytes": 331845,
+      "sha256": "d9fe804460f2c7b2aed12ca0b73dec0b69e8710453439b3151b034a6609928c3",
+      "updater_sha1": "e0eb0e4c617ceefc9fb38dedd4dba83e9b201f13"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-156.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-156.apply.sql",
+      "bytes": 321405,
+      "sha256": "088b9b75a2eb415a1e103de35a7e2dbfcc97acdbd32a3e81a20f1076adc63aef",
+      "updater_sha1": "c1e9c1fb424161cb30f76c0b6af6222d7d7fbcec"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-157.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-157.apply.sql",
+      "bytes": 318795,
+      "sha256": "f81acd32c48294f224ec4e8203957c72f4a0cf2f36517def608c023a99008389",
+      "updater_sha1": "c7e9ceb1a25130ab4093205e10af1c3b0a6ce9c6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-158.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-158.apply.sql",
+      "bytes": 313015,
+      "sha256": "946d96d848e9796f038b80773c9b8416203740d76bff49b6baa6bafcd0cfb9bf",
+      "updater_sha1": "effd7baa76c3fa35e20e4d967f92dcefe65ae780"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-159.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-159.apply.sql",
+      "bytes": 334333,
+      "sha256": "e45a5da3920bc4a33b24ba4f4c554e8bd80edbbc3530c4d725d22540fcd6c868",
+      "updater_sha1": "9ace54002135bb6be992f3260817de3859bfc6a6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-160.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-160.apply.sql",
+      "bytes": 344777,
+      "sha256": "c5530a0f2f29e9a7a0f9d53c0ba9ad7d6206c4ae1fdbe653a4741ee7322394d5",
+      "updater_sha1": "7645c9f25b29ab8810c682e7b3ec9ecd62e36492"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-161.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-161.apply.sql",
+      "bytes": 333991,
+      "sha256": "f13c384e77ab1fb4a3f935fffd8fe8f335a05e0fd7d08be26994b640c36541ff",
+      "updater_sha1": "4bcd38bb4f7e9dc971985eae05df59880eefe205"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-162.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-162.apply.sql",
+      "bytes": 331773,
+      "sha256": "da6508b2d3c0d93e4c6802f0144e0ba40ce896734e8abde8454e99beeb98b54c",
+      "updater_sha1": "35da967b9b77574f301efc28585f309c0320369d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-163.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-163.apply.sql",
+      "bytes": 370639,
+      "sha256": "a6765eb72f66bb7860c848efa31f3e94e0fb588d21dcacd34271f23c3a3ceba3",
+      "updater_sha1": "435cc97b3ff6a92ef5c060b8ec6c142cd912fa28"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-164.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-164.apply.sql",
+      "bytes": 396465,
+      "sha256": "cbfef1abaf89953af4218ba4cc5189e6705fea4f4615e4b90b2cdad41c697581",
+      "updater_sha1": "eca4bd0f1a902053686fd08ceb143ed79f47dd40"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-165.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-165.apply.sql",
+      "bytes": 299189,
+      "sha256": "ef5a9b98557890724d14252476485ece3a2ed8396dac6758c4f705c91c07d8e9",
+      "updater_sha1": "eb35f6d8f2b3f43871ec38ace9e06ff0e319614f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-166.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-166.apply.sql",
+      "bytes": 364287,
+      "sha256": "041decbc389eaf4aa02969727b8625237744086d91cfa7276d502d2b5d1ad475",
+      "updater_sha1": "be6ddfef69e448f34f8ee909b850ef13a7098400"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-167.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-167.apply.sql",
+      "bytes": 365353,
+      "sha256": "21a66e5fa9f22afd19a78fd2c6ba82d8f65bd436ac6ba2cd248fb087eaaf6aaf",
+      "updater_sha1": "a608a77feeaca420323f6e0b1183a3027f62aca1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-168.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-168.apply.sql",
+      "bytes": 370679,
+      "sha256": "c539b4f33948f79e6dbedc82aa70f6a6dc994e84c4c7c21eccec0047aca4fd66",
+      "updater_sha1": "70dd0fadd28bd7ed15d4b6fac56ed06ebd68995a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-169.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-169.apply.sql",
+      "bytes": 343013,
+      "sha256": "94babdb956883370976ec2fbb295a01cd10e5d16fdbd336c5a5692b28c9672d1",
+      "updater_sha1": "ccaeb3bb85747c739831018695321636bf748ad0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-170.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-170.apply.sql",
+      "bytes": 392929,
+      "sha256": "9e207349325d942e3642100c07965d6f85d2eb810a504c141b03618c1bd6ddc6",
+      "updater_sha1": "59ed2d6278a3639359343ecda160772362a41748"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-171.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-171.apply.sql",
+      "bytes": 429899,
+      "sha256": "694f447c2599906ff54f197be96f622afcee56e0bd6c3a756a5f07b64d1149a4",
+      "updater_sha1": "a1ee80b9f3243ceb9ce45499ea6f33a302db0024"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-172.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-172.apply.sql",
+      "bytes": 339513,
+      "sha256": "9c3614d4ad90e0a363fe2a8f43c776948d95288fe004ad5ce018687933575905",
+      "updater_sha1": "95b03e7d1b8e5f3be06aa78133b453a84b2dde50"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-173.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-173.apply.sql",
+      "bytes": 351341,
+      "sha256": "8f6ecf24169f4650478c53da6b6986d564a0ace553a8931949beedaf2b9ddce0",
+      "updater_sha1": "8146c0da6e226fef15642fb2ad83300ff55d95b0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-174.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-174.apply.sql",
+      "bytes": 394605,
+      "sha256": "8e425538075e23c40744a5b56a355116d49a76f6349aa230cc12ebafd49e4449",
+      "updater_sha1": "1903941fea6c39c13cd6721f0d73f1106b8fada7"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-175.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-175.apply.sql",
+      "bytes": 354369,
+      "sha256": "64d002895da3cfc0a622e0b4ae10227226382c0e64666e7964d1a9e388404766",
+      "updater_sha1": "61d188f7523ed30881cdc4f2e1788c43f88c9695"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-176.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-176.apply.sql",
+      "bytes": 359471,
+      "sha256": "725426783c741f9edcd663542272caf10382d17cdd5162c8d377de63997be0ba",
+      "updater_sha1": "77530be2c86d356e1ee1d9196649183e2508a7af"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-177.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-177.apply.sql",
+      "bytes": 427099,
+      "sha256": "53dd7af838bd3835fe776a0c3d551755280d5ac0b03a6d882d9945f38e7517cd",
+      "updater_sha1": "253436a7b0d3b9fef17fff9dc91e32509ccff9ac"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-178.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-178.apply.sql",
+      "bytes": 336635,
+      "sha256": "f01681336125c954e5e4137b411051cafc07f4016bed2e110b8366e2edeed80e",
+      "updater_sha1": "1830541c74167c64f2a5bca654a003ec06a1943d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-179.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-179.apply.sql",
+      "bytes": 324321,
+      "sha256": "f325b36d254908e32633933304f840cbad556da6ce1224395ec2ec5a1618086f",
+      "updater_sha1": "f149f604bceaf43edbb79d3bd466468400836e89"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-180.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-180.apply.sql",
+      "bytes": 343635,
+      "sha256": "947af468e917edc6137a4254eafd09168c501ad7c4b3ca3f652318901af02326",
+      "updater_sha1": "7aa6711253fced3d6a31f830b488f78e4d01001b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-181.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-181.apply.sql",
+      "bytes": 410343,
+      "sha256": "257a2694a7f825c63f1fe46e8b3c7a03ebf9fcc83133ec8d2f0502efdcc35f3d",
+      "updater_sha1": "bbaf7eccec3fc9dbb65a8e73c44d43d9bee2852d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-182.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-182.apply.sql",
+      "bytes": 283471,
+      "sha256": "bbd94e2f66fb05db307b30fa3c45da8bfc106da55fadbb7c1f06b473569bedc0",
+      "updater_sha1": "1e8f224a77518bb939a578c0e3ec7c40b0ee1462"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-183.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-183.apply.sql",
+      "bytes": 315911,
+      "sha256": "e8c67f648942eaedfc57dd57a5e4a87f4c0a0b5bc0bcf6b7294fdff51c05ce07",
+      "updater_sha1": "797560027ba5802c5a13e69c7916701495a687cb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-184.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-184.apply.sql",
+      "bytes": 305753,
+      "sha256": "a55f87add1800e303c88abaaab4df6b3ed96fe1a98ee44d24d169d49a516dd62",
+      "updater_sha1": "ae03966ee4b89ac344d1986f425d1fd7443b99d1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-185.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-185.apply.sql",
+      "bytes": 380635,
+      "sha256": "923aa8401c99c64a536f7a8a582b4916c77381320b2b9ce21ac6bd5eac4bc658",
+      "updater_sha1": "9f257020c08772e0faf93fe6212871820dd1a3b1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-186.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-186.apply.sql",
+      "bytes": 279023,
+      "sha256": "a37b018c7a88b53b03e13a28566e7a128021e1edf1e86dcb0650db28c8aa8c09",
+      "updater_sha1": "596d8d1a3b6d04dcc99a1bbf867409538a7c5e72"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-187.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-187.apply.sql",
+      "bytes": 372547,
+      "sha256": "50b479a8905a28550cf4db58c5b610bd71a058a461be88f3988a34e1fa8778ac",
+      "updater_sha1": "df35503926b646c228e62a9260f51de461b14546"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-188.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-188.apply.sql",
+      "bytes": 382958,
+      "sha256": "1ed2c2bf84151963e18041aa08032cdd7655bdc5a3c4b7c5c6e3d2fed623c421",
+      "updater_sha1": "1c85feb26fbb09df8ee3637f8e67e080b804355e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-189.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-189.apply.sql",
+      "bytes": 462625,
+      "sha256": "77246183ae8817cd8db7b07a99cee9acd127f29d3b9b3d021dd94e87d5471946",
+      "updater_sha1": "bfe44a446cb009bb0741a52224a50bfa6fc40368"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-190.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-190.apply.sql",
+      "bytes": 392065,
+      "sha256": "e89fb617d72db96b8a4730534ebc57469f57df630ae5426265d654f312d90a17",
+      "updater_sha1": "240cad4c77d20fcd25a62b4c0b3e5f189b5917cd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-191.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-191.apply.sql",
+      "bytes": 423309,
+      "sha256": "439d91d610ee33600191b45e63a0aee2c45cf78c41beda476402ede238c33010",
+      "updater_sha1": "b7a2ed05d2ba01a0c66df35d584e21e44e2e0702"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-192.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-192.apply.sql",
+      "bytes": 310139,
+      "sha256": "37e86f60bda9182f5196671b497c95f608a04bb5768e2ef3fdf7ee769db59825",
+      "updater_sha1": "442f02bc86768083988ceab406cf22bc98fb2b40"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-193.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-193.apply.sql",
+      "bytes": 346271,
+      "sha256": "910c0a42526c89c514d6cadd607d2cd005141b69de0f98b814dee23ce9218e86",
+      "updater_sha1": "cbe06957c9fed422327bd19c09551cb8b506b40e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-194.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-194.apply.sql",
+      "bytes": 398257,
+      "sha256": "aaf39c73665e3503792ce769f72c14afeff7213ddaf6b47904819bb04e17bb9d",
+      "updater_sha1": "a82c1fdad14de155ca909a62c25e878b099d5f2e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-195.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-195.apply.sql",
+      "bytes": 379027,
+      "sha256": "8b814098889e60a3ce2ab30cc87bea56b5666edcf5b466e2ebb4f45d65d49c9a",
+      "updater_sha1": "5accd0a0686193db377403d22f7bd3c6e297f6e7"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-196.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-196.apply.sql",
+      "bytes": 394949,
+      "sha256": "75d25126c874c4c361b6f986abd34c7992e7b0c804042839b3bf8682f30d2dfb",
+      "updater_sha1": "5f9d5037cfee574f40dc4d0e18aaf94292100670"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-197.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-197.apply.sql",
+      "bytes": 398443,
+      "sha256": "ea5046705f0892385836f859ae80500fc41d0d721f2a74dbf7c6f39bb5c0b90d",
+      "updater_sha1": "6d0a1c0c7510d56cb8a80194f8825a44703deb37"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-198.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-198.apply.sql",
+      "bytes": 360833,
+      "sha256": "9962a8c5a6841419de95e8a9e0856156158b59d26b0a481831f97acac7230ec2",
+      "updater_sha1": "0b95693b9c7b37b96f362728b6cee5f006ce7de9"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-199.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-199.apply.sql",
+      "bytes": 410785,
+      "sha256": "3eefc733b69d6d4345d4ea34180dbc475d57dc90d5d71edf4af51770fcfd1dd5",
+      "updater_sha1": "d7ceb118eecb162f6d93bd97181c6f7dd1a259fc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-200.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-200.apply.sql",
+      "bytes": 384507,
+      "sha256": "d03d7bca72e2c5ab9240f11475adb536b588639186fd40793bea9156365b73b4",
+      "updater_sha1": "a531a36b8a3790df204c94f03873c613e47fbbc3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-201.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-201.apply.sql",
+      "bytes": 369955,
+      "sha256": "d0f3c97c4661e56ca4d51ab7a5501a5072431b9bf8b5cfb10f95e398f498364e",
+      "updater_sha1": "3fbc27225f9a2c6a2376a21fe7ba137a0d576cee"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-202.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-202.apply.sql",
+      "bytes": 369043,
+      "sha256": "db330f2f5859c7c3a05c14f6faab250e881ba9a474a03ce24c3f782170966509",
+      "updater_sha1": "e8f8fd810d241dc87cc763d8731e1f58f7d499cc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-203.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-203.apply.sql",
+      "bytes": 359711,
+      "sha256": "97c317003c8537da18e75a111e00163f664cf9b0c9fbfd07aac37c375039fbdd",
+      "updater_sha1": "d6b7c88b2dfb9dc45ea93feac1b870bbd8ade75f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-204.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-204.apply.sql",
+      "bytes": 421861,
+      "sha256": "2ce0aa43baa89182637c4900de7a59ef731e052dee5764ab40002ea085f4223d",
+      "updater_sha1": "99ff321a184dea173ad4ec8c9b5f2d5c55bd280d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-205.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-205.apply.sql",
+      "bytes": 378039,
+      "sha256": "9ce77f828508553835f65e18577ba7d133c5b7e139ae6d7c9ae884ed82ec9c40",
+      "updater_sha1": "f0ab0b22f43e3ba796a61365902541292f8583d5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-206.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-206.apply.sql",
+      "bytes": 373393,
+      "sha256": "b52447030fe93662d8bbdd5533c5f4d7f8776751d68495ba482afc760dd3c673",
+      "updater_sha1": "444f4d4023325796222c1123bd67e217e9797629"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-207.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-207.apply.sql",
+      "bytes": 351289,
+      "sha256": "fb7e36588730f4c4bfdb2ff3383efaa0168241ce38133b2c1fad5005e9466746",
+      "updater_sha1": "aaee0f537fdb0212429b47d56ba21ed50fe86f01"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-208.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-208.apply.sql",
+      "bytes": 315295,
+      "sha256": "cd2febceb8ecaf72d2676edfba6d7cdca1970730c8182b783c46d58fbf6bfed5",
+      "updater_sha1": "8924c5983b73ff6f12a1c9f12f26a34c1d416a4e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-209.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-209.apply.sql",
+      "bytes": 286317,
+      "sha256": "7da0d48fabaedf234ead2c9309ff95139757dde5072cfbd3b702e9f021564b2c",
+      "updater_sha1": "f44740cf8037cc23460ec4042843a8eea07e7c74"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-210.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-210.apply.sql",
+      "bytes": 370807,
+      "sha256": "7fff439826efa2c75195659ae469fd0bd7bef568d1f44d3bf390ca2fdb604efe",
+      "updater_sha1": "0224373db9c81b6e1a2f9504bec37a1646cb5f55"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-211.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-211.apply.sql",
+      "bytes": 315457,
+      "sha256": "92014ccb6fcd438f2295e81424ad330097ecb2a27dce53043842ea4c0067f88d",
+      "updater_sha1": "3510bbe4c44d8e6866b8bb7ff25a45ffc0d3d2ed"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-212.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-212.apply.sql",
+      "bytes": 372263,
+      "sha256": "24b64193580487fa993a688d8c6508f9ea12c4efca7513d2a0492b97d9a90f3c",
+      "updater_sha1": "9c4bbd57a0ac9ef8dd742c9d18e3497e3323fedc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-213.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-213.apply.sql",
+      "bytes": 426231,
+      "sha256": "60e08437dd079f7ac1970cf991057893b24cc96048e743e5d94e04a01fdae50a",
+      "updater_sha1": "ecb8149ee4e4126c7c93bb650d0a48cfbda1bc76"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-214.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-214.apply.sql",
+      "bytes": 344092,
+      "sha256": "179de3d7ec5c24c18cd9c8d71841cfcf63f8398638ca7b29797effd7a8a0b690",
+      "updater_sha1": "7acd4e8f75c4915d84d9f792b7277b7b16d4704d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-215.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-215.apply.sql",
+      "bytes": 340057,
+      "sha256": "e02afa4c780306c4c716fa1e813fc42e3a34f6b7cc6a45b57622e93e8e5bdc68",
+      "updater_sha1": "dd37215e42f19f5fcd15bfe436047a40bf9e14be"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-216.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-216.apply.sql",
+      "bytes": 326987,
+      "sha256": "fd1df767e5392f7ce159274570f9474dd082c9dc98beb2d713f7bee9f1901618",
+      "updater_sha1": "5424ac170549dd78beb53cf516ddcb2f4010f6ae"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-217.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-217.apply.sql",
+      "bytes": 347393,
+      "sha256": "0c9bf76cebe443c69ce1fd9f9cb9c6280e62728b881a5684bb4b943f4220996a",
+      "updater_sha1": "df05bb53b84021618b204e951e6891dcb7a9703d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-218.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-218.apply.sql",
+      "bytes": 379351,
+      "sha256": "68a6833710766cdb44d70bd00ae85348e9c23ad34944eea508e8d1f2b7ca74d1",
+      "updater_sha1": "aaeda864e3624bad57621f46a49390da6324b44b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-219.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-219.apply.sql",
+      "bytes": 389107,
+      "sha256": "b2d42268d4262412a397f193f5919e0e2889c30b81bafe76cc36c50306b46a72",
+      "updater_sha1": "5ba110dffa31f55c3750487bd6ac661d36b882a8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-220.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-220.apply.sql",
+      "bytes": 382079,
+      "sha256": "59100a8b3799c9e82dbe41be92f9fd33c0e0de2c90dbbbf3d8992edda31ba447",
+      "updater_sha1": "043cbac2349eef64745e23981c02b2b922baa96b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-221.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-221.apply.sql",
+      "bytes": 356977,
+      "sha256": "34c04ed087db0d1a3c4254d67089e25d3d2dedbb5bd3ce657f5fade5c5692656",
+      "updater_sha1": "381d1f035f901bc5266aa94c9db0f6e917d3067e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-222.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-222.apply.sql",
+      "bytes": 425769,
+      "sha256": "43d7508fc37bc7b70a2b791f4d6da301f13b6832289f84aede297f77f502e4df",
+      "updater_sha1": "4d819ee021f4555b1109b19e03eb50d5527650b3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-223.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-223.apply.sql",
+      "bytes": 349415,
+      "sha256": "798fb17ddbe755bb4bdbebbfccebcef988e15286782645fd8a0dd02e83e59374",
+      "updater_sha1": "f3ddcaaba9bfca8b3d11b3e74c0dbdb6c87adab4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-224.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-224.apply.sql",
+      "bytes": 361345,
+      "sha256": "437622a63ebe72e68adcced514f7de7f9de77fcd8b1f24f9bd6a1a8bc032a62f",
+      "updater_sha1": "5c3aff42f2ee8ce61fedc8b8d5213303ac410819"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-225.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-225.apply.sql",
+      "bytes": 348029,
+      "sha256": "a1945dec0bcd22c326b747628e111352a9df68b68023e94913c8423791209e42",
+      "updater_sha1": "ccb54a635f232f5147b7941d709163c07bc83a08"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-226.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-226.apply.sql",
+      "bytes": 335111,
+      "sha256": "199ce5b627c2570bd1fd8e86802e054d18c7f62a3ae3f3ca85e0a222e0dbbb40",
+      "updater_sha1": "52ed075cfdb86a426dc27449b2ce0da42ebdbe95"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-227.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-227.apply.sql",
+      "bytes": 332133,
+      "sha256": "142fea69877f95a5aa0e7e5d13ed464a7b0015a63c4f77a79fb93cce3dc79b85",
+      "updater_sha1": "78aa6aa977a3f4a3bba45e012f107b1f08e86708"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-228.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-228.apply.sql",
+      "bytes": 337367,
+      "sha256": "fd49eb3dc0ac3f023f95f11691910960cb82564aa1e10a28f7654d90d134c5c3",
+      "updater_sha1": "1e1a41cb40c1e3da4d6ff02894935cd6cab30c7a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-229.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-229.apply.sql",
+      "bytes": 398669,
+      "sha256": "7b62f38ef23c37e7ef7c84a19e10b5f410a28edcb1a84cd539c86349b37524b5",
+      "updater_sha1": "89ca128937a11c3e75351cbcd5ca77c54aa25680"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-230.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-230.apply.sql",
+      "bytes": 383559,
+      "sha256": "49c6d35302e6622f6beca4fd83e3f925a52d42c1237fb7ae63c9f13eb1c02e46",
+      "updater_sha1": "f49e528947fe9d90012cda133ab1c922d48d06f5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-231.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-231.apply.sql",
+      "bytes": 363973,
+      "sha256": "fead5ba3162211e8d2be3d3d064a5f7c07e641106bfbc90c3810a94bb87211f0",
+      "updater_sha1": "2d794a4250920de2b29af3914accd48b124a6b11"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-232.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-232.apply.sql",
+      "bytes": 311141,
+      "sha256": "db8275b164eb250ec1db8cc6a0a0cce622c79c89047cf084756d8479628e99e2",
+      "updater_sha1": "b1f40aff9daa1030d9c8c8678e84814c1cc10db2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-233.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-233.apply.sql",
+      "bytes": 362779,
+      "sha256": "0f30585a1d964f42a96d874c100b857f2ecb66e1c95578de7d3095f34f92a908",
+      "updater_sha1": "a87ca1b28d03f55fb18ced69c8347c069be7c051"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-234.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-234.apply.sql",
+      "bytes": 361871,
+      "sha256": "7083ef4392b2a09afcf9029fc237618edb2e7987c61d3bc7965f174a4652a9cb",
+      "updater_sha1": "0ca2eedce88985eec705bf22fe02f8df25c2cddb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-235.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-235.apply.sql",
+      "bytes": 337217,
+      "sha256": "6a4e8e6102900348baf2fbffda1dbb7c2412952e9c5e3059ce20bc5c6593260a",
+      "updater_sha1": "f0aff20d4f7518f651353452624fcb525b35b7f2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-236.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-236.apply.sql",
+      "bytes": 339125,
+      "sha256": "32c1abb88d50fc8773dc2c3bc5c953823d31c1289aa4e79657457053d62f3d78",
+      "updater_sha1": "e5b5b60ca00237039accc8da0f40cbddccf1a3d9"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-237.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-237.apply.sql",
+      "bytes": 373747,
+      "sha256": "776e6ab38ca3ebafa8963a9f0931c1a3950917236947abca58cda7fbd6829763",
+      "updater_sha1": "56ec6af4f4858e5047b509e423525866e7d4bac9"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-238.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-238.apply.sql",
+      "bytes": 385645,
+      "sha256": "d3b7287b38a1355cf11b8738d376cc4d33c3317ba944bfa6979b3573574e971d",
+      "updater_sha1": "1d71b4316f403c3869d59f4f3eccca8dc6e69051"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-239.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-239.apply.sql",
+      "bytes": 308355,
+      "sha256": "d637f611ec9ef766d9d56f648f80ad79f4c49817efb9043e7ce27c231cb9624e",
+      "updater_sha1": "960d92bbcb0fa0822027eb481faaceabb6534ecc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-240.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-240.apply.sql",
+      "bytes": 326239,
+      "sha256": "0b209d00d1ec2cdcda1f635089986b8b6534a5a8c8f1a17335817df78bb59057",
+      "updater_sha1": "94035ab5295661866a74a090175102545a176fef"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-241.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-241.apply.sql",
+      "bytes": 390727,
+      "sha256": "f587f0b629c8bdd218f900e65667d2f33b5de8b8a299c91be297ed478cb0639c",
+      "updater_sha1": "31597315735d31ccbc4d66649a0621517befa085"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-242.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-242.apply.sql",
+      "bytes": 265921,
+      "sha256": "8b54599108a4b7b2788eccbd8cfe6f0536bb55d301c8e87fdd2d1a79f71dd75d",
+      "updater_sha1": "74b82591eee5e5d9fa83b1202ca324fcfef190c0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-243.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-243.apply.sql",
+      "bytes": 322123,
+      "sha256": "2ee0a3b96d9de78b205572816c2c43fdd47295f5366998512853698a584d9793",
+      "updater_sha1": "63aa656b7b163ce6df1d8867b7980530ddb046d5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-244.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-244.apply.sql",
+      "bytes": 385979,
+      "sha256": "a86732b9efa762fe74699a7f0b0a1c13723ddcdbd12a6f2d0710d3f608e9dd0c",
+      "updater_sha1": "5cc6d43909e2b63b1688745d684e3af201332b4b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-245.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-245.apply.sql",
+      "bytes": 265929,
+      "sha256": "0e6d3908b6192cd8d72de223e80719c6b4b7ece76474f5c76ffbb1eb06b64eaa",
+      "updater_sha1": "8815dc56c9ac5e7b5b9d2c3d8e436a3a74f94b6f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-246.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-246.apply.sql",
+      "bytes": 361501,
+      "sha256": "531cdb61837e0cb5d19cf550d24cff4e1794797304478c14892cbe87323d7daa",
+      "updater_sha1": "2fbf4e60b487bc9405f346fc72a982e56b8dd55f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-247.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-247.apply.sql",
+      "bytes": 313227,
+      "sha256": "13dbdd2da563eb5bf1c7f2a806fdf3d90d29b2d42ba0f200172382f213acbdb8",
+      "updater_sha1": "b2a89b6ef9876364cd96e3c712577fa379520807"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-248.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-248.apply.sql",
+      "bytes": 376807,
+      "sha256": "549f989588d1a2a05664b9b4cdce849e261d8245425b6f8bddd777366e7ef667",
+      "updater_sha1": "1fcce1039daeeaf80670b16b147c2f7641ca634d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-249.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-249.apply.sql",
+      "bytes": 388421,
+      "sha256": "b1e162e70ae79336437ff080c2dd47598b09afc259c51aca0c7f3d65562ff8dd",
+      "updater_sha1": "8fcf5eae17fe4d3141da19608abe0e8ba33f7cba"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-250.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-250.apply.sql",
+      "bytes": 318443,
+      "sha256": "9e57542f4c12817975c2d70378b0d9ccee9393769a39a52077a317fbb2e140ff",
+      "updater_sha1": "7c025bda2b45b9768ce4ad29a060eb03ddd677e4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-251.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-251.apply.sql",
+      "bytes": 355467,
+      "sha256": "015b5dba021d13ad5afcc870738f6cd07aafe8ca31aae9a1c273ef0e84d4b6b9",
+      "updater_sha1": "6e35a5b700feb829b89438f8390be6a5629e68ce"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-252.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-252.apply.sql",
+      "bytes": 298005,
+      "sha256": "bc268a262810b90aa537e9e71255e003d0ff43044575176690388146b5a50c24",
+      "updater_sha1": "732d337ff79e8dcfc7ce9eb46653fc0e79fcd1b0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-253.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-253.apply.sql",
+      "bytes": 342183,
+      "sha256": "02ae7ebf5cfdc9f6ed463fd0b67b1d363adc8471446190acf148b5c0fedbdecd",
+      "updater_sha1": "c66c9167b54d0e425f31021059658045add9636e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-254.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-254.apply.sql",
+      "bytes": 313905,
+      "sha256": "627b0c3c0a7f25a4b5c6b06e668f7b7d638ec6923a1f88b6943856e1af15beed",
+      "updater_sha1": "f21c6792d7232ceff8780eb55775f08b9ce3ac15"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-255.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-255.apply.sql",
+      "bytes": 340251,
+      "sha256": "9b9d004cb03e49bebc6ecc1f35f34bb79ca4667357d84cbe323d6ca0bffb3130",
+      "updater_sha1": "2cd89f53f3190c627176e2f728011b01c624e7ce"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-256.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-256.apply.sql",
+      "bytes": 398791,
+      "sha256": "95fcde98e4e431e08e62a1b536db6a0a1c86bfec8312d12e58a1eaa21b24491c",
+      "updater_sha1": "e559a50108d70fe4a5240d21b63c5dbbec4b80ef"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-257.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-257.apply.sql",
+      "bytes": 482187,
+      "sha256": "f33b898dec6b90cee4ce67f2875cfa61ef6c2a116df6655f6ae175c5ef3c2229",
+      "updater_sha1": "89b1c4ea70147a7a16ac7f3de55d68cd5ced170d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-258.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-258.apply.sql",
+      "bytes": 480317,
+      "sha256": "c64ada6c31c200116f330625df4b243e11f7d49d269408a64c7a93ac1dc629bb",
+      "updater_sha1": "fc77118b45c55da778daea3a2116c459a78e9cd2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-259.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-259.apply.sql",
+      "bytes": 409209,
+      "sha256": "cbc65ec67fe144bdc80379dc0194f9b67ecfe5fdbf33965cfb13fafe1539dd3d",
+      "updater_sha1": "e721a6dcc310cf37aef40ae7be73d15197e9bbee"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-260.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-260.apply.sql",
+      "bytes": 483979,
+      "sha256": "369745824be9a79e059bd29a5909028ec1f5df19fd3c29b2f656bdd092cf1d83",
+      "updater_sha1": "85e248def0d26610744fc91c3fe41b2b949e672d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-261.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-261.apply.sql",
+      "bytes": 337763,
+      "sha256": "bf1a66e8dc567471c890067cf62c035c2c01c20b40c68f9bf2cc50485269234c",
+      "updater_sha1": "68c10449c7456d815e8388ee7fba1e36e3e33f75"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-262.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-262.apply.sql",
+      "bytes": 345621,
+      "sha256": "69d8a2b5f512f048659247c29b6a4e8bc17ec083f605298c4c71aef009ffb8e1",
+      "updater_sha1": "6556c837af16fefb3b6b3471b4857635775c1f62"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-263.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-263.apply.sql",
+      "bytes": 338293,
+      "sha256": "7deca9310c51fda64f659fd6587b213b5d24a8b1cdd1132eaf957f47a102efb4",
+      "updater_sha1": "0714e3c25cd66deab7b23976d733682c772c19f6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-264.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-264.apply.sql",
+      "bytes": 384941,
+      "sha256": "d12d26004920cb5b5f2d8ba933725dd72065dc6fd3124f0a304366c03b897aa8",
+      "updater_sha1": "e7285071dd463e8f0856eb26afa4b31ed8344345"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-265.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-265.apply.sql",
+      "bytes": 370801,
+      "sha256": "2e8582a7cc54e9be1502ee35a8d3ff07945738a49f86c07dfe5753f27fe291f8",
+      "updater_sha1": "7276d1d2bc23132169fbf036e45466925fd8b686"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-266.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-266.apply.sql",
+      "bytes": 460197,
+      "sha256": "58f1011afe7738a9f54f3925d23ea3a19ebd3dcb3c1382b2585899e8efd6edb2",
+      "updater_sha1": "0f19718ac34fac2121f0741ce86d164d4347d4b6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-267.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-267.apply.sql",
+      "bytes": 445611,
+      "sha256": "4817ace321f16b41e4f0b780a5dc5ed7d9beef534001413d77e0b046f3af88aa",
+      "updater_sha1": "41c0e03d52b5ee5494beacd9eedb10f39a9b7e19"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-268.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-268.apply.sql",
+      "bytes": 407847,
+      "sha256": "1d52636cbe9b3d06962b5f1bf0572cbd028b78c1e105a71fb7411deb41c229fd",
+      "updater_sha1": "6619291d31e3513ca5ea29cbcabfcb3a5ea37bee"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-269.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-269.apply.sql",
+      "bytes": 409885,
+      "sha256": "a280b7309f5e790d640eb1b3416bd88b7a1ce30348ada556a2bd70fb1283f630",
+      "updater_sha1": "22fa7901816f90301488766b3b8864eadc02cf9a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-270.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-270.apply.sql",
+      "bytes": 292249,
+      "sha256": "146d1b4f722ceaaf06af969230568d57b881a5d9f8f79263faadcbdcb6c4b2e1",
+      "updater_sha1": "02ec82f078dd374e9b58b820ed9597fcd8e679ed"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-271.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-271.apply.sql",
+      "bytes": 301111,
+      "sha256": "5345f7dfaaaeb9ad5e2c90b8feafbc98db0cd5c09b1e4c7a9c8b040fdfddf34a",
+      "updater_sha1": "8ec1b8a9f0e9a1d8d307498f64aa073a4e20c464"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-272.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-272.apply.sql",
+      "bytes": 324953,
+      "sha256": "9ddd2992df92646658e59d70e7c1374623046d95e53821bfc3a916db78ffbbd2",
+      "updater_sha1": "1d0b38f30ec5fb6b014bff45e11ee53c1bd1c807"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-273.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-273.apply.sql",
+      "bytes": 367061,
+      "sha256": "531fcb1e61f5e318bebf0c497b16677d50a4df0a99506258a15a518bf4fc84da",
+      "updater_sha1": "69ca6fb3b3499de2cdecf159cc11341ce61c181b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-274.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-274.apply.sql",
+      "bytes": 423093,
+      "sha256": "1c1a7997d9883f9098f755ca2b9413179f0bfc29dde77db590a3473fc85e57a6",
+      "updater_sha1": "c13f669c06028b255de0216ecb5fe4ec10430a09"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-275.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-275.apply.sql",
+      "bytes": 366503,
+      "sha256": "98852a68d6af2e9af80b5541dd1ecfb6280535026d27b6a0aeddd890c1a736e8",
+      "updater_sha1": "bbb2a31eabfbace74f6d9cea93fd6d28bd593093"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-276.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-276.apply.sql",
+      "bytes": 534566,
+      "sha256": "a148e612fb4a2d11a0b8380cf16eb8d6ecc84e515d271c6b5b2638578661bfc0",
+      "updater_sha1": "e8e1b9c6202cb3fef7d55edd4daa4d505add1dd5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-277.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-277.apply.sql",
+      "bytes": 346299,
+      "sha256": "450a20c2f2907a0abef024c25a68e63065626101c03b0f10b34d7eaaa9837f78",
+      "updater_sha1": "6c9a3e267c41542793260442ec0a19cf5cb6e5f0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-278.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-278.apply.sql",
+      "bytes": 310985,
+      "sha256": "294aac3228f42338ff47a66a81d3f1deaecb16bdd3813a4fd319b268bba2a57d",
+      "updater_sha1": "11d9bccc73207d8b9ba427caf12f2c79841a7aeb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-279.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-279.apply.sql",
+      "bytes": 357969,
+      "sha256": "e36770fa2eecf98d5660bd493400e3c90bb03c40c544185163c7d534e514cde6",
+      "updater_sha1": "b1d079e4ef633011a4e94b5491940af2de54259d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-280.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-280.apply.sql",
+      "bytes": 336453,
+      "sha256": "f2c2a8ddebaf13a426b99ae27b5955a22d25463f9809053457da2f2c9cfffb33",
+      "updater_sha1": "658ca75b8efd996eaead4355b2264ea578c9ee93"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-281.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-281.apply.sql",
+      "bytes": 361369,
+      "sha256": "c4171ad12b2ae108994dd13889a4d27a7b5d7c19e194915adac186920ca3df20",
+      "updater_sha1": "b4320248c998abc0693e3347c53a1fdb882ed2dd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-282.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-282.apply.sql",
+      "bytes": 387501,
+      "sha256": "9aeb733681ad5e3f8837d5e57e3670485f1ea9a73e56143938698f577e210a94",
+      "updater_sha1": "29cf0aad934ef6f78b57088ec3334cf1affe3cb1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-283.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-283.apply.sql",
+      "bytes": 302509,
+      "sha256": "b75c86a4362d00257eb9cceb07e63d452ea8f71b4c76783dfc536a8c2294fcf6",
+      "updater_sha1": "60f6bb502d691ff58c8288ea688476e7e218b557"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-284.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-284.apply.sql",
+      "bytes": 348619,
+      "sha256": "4964f4d8052fc098ff0ef1577c3cad48a16c566e9b8f5088e5f34e941a10d5eb",
+      "updater_sha1": "4af4ec5ebb5a550148988dde10e74dfb0ab9dd89"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-285.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-285.apply.sql",
+      "bytes": 376937,
+      "sha256": "29dde77fa86ca1de0d22dd6609e689728f2f7f777652f4e341d61b6b748b4c64",
+      "updater_sha1": "2b6258e5c0017bc271f91364361b886fe0a1b089"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-286.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-286.apply.sql",
+      "bytes": 360613,
+      "sha256": "d5dd74995decd2294132ac8a538806aca502ab9f87f7c6fd9502462f9bbff009",
+      "updater_sha1": "c2cca3dcd34118e7112233b205d76fafabadd5b3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-287.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-287.apply.sql",
+      "bytes": 343661,
+      "sha256": "2278a045d37180ececea453d1f7b19430cc59cb94f7b803e8f2f94ddd9a654ea",
+      "updater_sha1": "70c628595608a6503dce0e941c4bbd985e94b2d4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-288.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-288.apply.sql",
+      "bytes": 353759,
+      "sha256": "1f43a8d80b68b2f6349614b197a683d0e1aa88ee32b617573c87a4de2eb0e925",
+      "updater_sha1": "b4108d69376a72c7a52b9c3e176c11c37bc74b1f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-289.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-289.apply.sql",
+      "bytes": 383743,
+      "sha256": "a6034737de8b145a1aaf0428d97e8a815dc24e6cd7f7d163fc7de7b530cbf87a",
+      "updater_sha1": "906141255e1e3448b1ac75b8e33d9ce222ac5c95"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-290.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-290.apply.sql",
+      "bytes": 371389,
+      "sha256": "4c3e886a8743ee1244491c6eaf145f45c37bc8198c874cdbdcf6d5a3a45b9b3a",
+      "updater_sha1": "50fe0b736450a94d19cccdb7fd1bb61b52b9f548"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-291.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-291.apply.sql",
+      "bytes": 389691,
+      "sha256": "1e2d9c0b3b6e38da8b7b9f3ad1e2aee14e78e56f09c31e0f801824cd9bb2007e",
+      "updater_sha1": "91d11c7204f67bef3313d904b757ff01ff5927a9"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-292.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-292.apply.sql",
+      "bytes": 355269,
+      "sha256": "b85eb93e033b662a13c28a8bbe2a2a21fcabdcb5f3f21e061c6b8e6ad9b542cd",
+      "updater_sha1": "574b2ca89065f3e653638b44bf69f23c72774302"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-293.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-293.apply.sql",
+      "bytes": 400627,
+      "sha256": "5208bda197c025c7250b87f9a382a9fbd9a2fd7715575384b5cdc6798ab45bce",
+      "updater_sha1": "6c373d442b9f5f0a48f208033492a4f7f80219a6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-294.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-294.apply.sql",
+      "bytes": 353565,
+      "sha256": "cdee7da7098e440cfb9b0b689cd21dcaea90a487619e06dfe4fb2f148c2526f5",
+      "updater_sha1": "5ca361b0b8aa648cb4fcf4f80adb57134801fac3"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-295.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-295.apply.sql",
+      "bytes": 365085,
+      "sha256": "3f608dd51fe7a2204941847b2e7b4d435506004df4b402c2f3b85411ff268446",
+      "updater_sha1": "ed4a9effec4e5229e42006e43f9e188b6b2ff76c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-296.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-296.apply.sql",
+      "bytes": 357373,
+      "sha256": "237ee2dcaf7f864dbf6f7764fd0de8500adb0bf2ec3cb4f32c4abc18fad2332a",
+      "updater_sha1": "3932005a9fa985d698c3e043a0bca09efd70f0a4"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-297.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-297.apply.sql",
+      "bytes": 340557,
+      "sha256": "c396b2639aab346d24735446d202d971367a07dfe8796985041e3f24d8dc1cf6",
+      "updater_sha1": "0c52b20387166c32ac3628f61096bde73fb77d9e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-298.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-298.apply.sql",
+      "bytes": 352410,
+      "sha256": "4ad8a227b6e37aeb558288e685e3a7820efc3b68c99effc0a6eeadff5cf61646",
+      "updater_sha1": "f51c0073b84d8922ef9722b26fcf73d3382da873"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-299.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-299.apply.sql",
+      "bytes": 308457,
+      "sha256": "990b44f14e6a4bbb1d0ceb521538aa8885d7d41e33ad1492446bb9ebac93d226",
+      "updater_sha1": "aa1ea64fb2fb8309d54fff33daec236fbaecd0eb"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-300.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-300.apply.sql",
+      "bytes": 302309,
+      "sha256": "54f7250caad00476b10bd5479df866189101e46149f1bda5ef9ecb3408766884",
+      "updater_sha1": "7dc4ef58ecc065d0127e8c6cbb73b34a13981532"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-301.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-301.apply.sql",
+      "bytes": 315845,
+      "sha256": "27547de066e58e175ae3c6a203e31104a9e1cc0fd4130945b3e31adb389b5557",
+      "updater_sha1": "02469900427da73709ea8ef47d6c40d2e75066e6"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-302.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-302.apply.sql",
+      "bytes": 378139,
+      "sha256": "68042133a8e20ca6c104496be18e4ed78564eddd8ee1f4b049981afbbe6fbfa6",
+      "updater_sha1": "9ee767af87483bc84275d8ebfc3f56afd52387f8"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-303.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-303.apply.sql",
+      "bytes": 435905,
+      "sha256": "5cdca64e04e066caf48f81b8d5c86eacf5488aa9b973675ef0c7973daa511f1d",
+      "updater_sha1": "781902b245a90e2141c5d90c778da0f7a84a4def"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-304.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-304.apply.sql",
+      "bytes": 341897,
+      "sha256": "5bba24674d5a4bd0e24d2336071fa7b0e124f3e98a8e0250d866923a26463bc3",
+      "updater_sha1": "1737be49d8e110ea56f984bfcf22e277ad55f84d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-305.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-305.apply.sql",
+      "bytes": 351737,
+      "sha256": "6a8b8c8ca3eaf8658940a4581bc0f407a1381f1dacec781fa18809bae1234eca",
+      "updater_sha1": "295eb767f343556280acf68ac241714a976e5ce1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-306.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-306.apply.sql",
+      "bytes": 395455,
+      "sha256": "fb553af9c25acd90c561acb769e89ea9260782d35103ab6d2e3a4c5d5c26097a",
+      "updater_sha1": "7e227f17b0258451dd4c80c824bc1cf1804838c7"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-307.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-307.apply.sql",
+      "bytes": 319531,
+      "sha256": "179568d03073fe4750a8b1afe8db225b916c3569a7e79c0c4bd30eacf9baec91",
+      "updater_sha1": "2f24d31a8fa4a5fe11c4b31366ed06577b530539"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-308.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-308.apply.sql",
+      "bytes": 367507,
+      "sha256": "e5e70bc02bcedaa117d361196025a6d87fa297ade55e3a9e64b56cd0bfe57c93",
+      "updater_sha1": "a8c4c0c9707fb54be546640d96870f078fcd6487"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-309.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-309.apply.sql",
+      "bytes": 370477,
+      "sha256": "282df091fda0f5358675d34b14996d6bb561f5bbce119be9e06ba98bdddbc445",
+      "updater_sha1": "f6c9c726e7a0649bdf891b11d68d65f558edb861"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-310.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-310.apply.sql",
+      "bytes": 336765,
+      "sha256": "2abce453b334212007369c30d09a2ba36ee15b5f1259cc3797cdfdf17d8678b3",
+      "updater_sha1": "491855e42e27f077322193f499cbcd48c2e5a5af"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-311.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-311.apply.sql",
+      "bytes": 371797,
+      "sha256": "ba1a37d84038cd5ed29b78c742e830e5a3480770973f322ae1c351dd2451e390",
+      "updater_sha1": "00c9e2f86a8751207d611955a7d465f46d412e95"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-312.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-312.apply.sql",
+      "bytes": 346133,
+      "sha256": "df4e4b610fcdc28db6f911f5236dc10f09885fb86683c6effddaea21a22c1cff",
+      "updater_sha1": "0f2ced2b99389d100d98c23de61dc47eabfe398a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-313.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-313.apply.sql",
+      "bytes": 360059,
+      "sha256": "00f14c7febec67e2d527160c5bc6bc7c8c94797972fa5120bf49e20ead6179ee",
+      "updater_sha1": "2b7b661472603741deeb17889b64e5528872776f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-314.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-314.apply.sql",
+      "bytes": 335387,
+      "sha256": "9034da1b177cc54e5e23d95b86ad01d445148676c22466dc9447786f2caba069",
+      "updater_sha1": "f72b35f1b08aae2212d40c24351751898c4902d5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-315.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-315.apply.sql",
+      "bytes": 387671,
+      "sha256": "fdde6f765a65301e1331b1c3f919f7cd9b9dc53eb0c468605a89ebe682d64307",
+      "updater_sha1": "59dac8f0667452649768344274e4f12e0002a299"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-316.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-316.apply.sql",
+      "bytes": 390453,
+      "sha256": "546b55a4ec2c65a6b36c785d22255c153c270a1795bf710754c298e2feb9a00b",
+      "updater_sha1": "513d9bb5abf0a75b875202009a356a9d31b2badd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-317.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-317.apply.sql",
+      "bytes": 359163,
+      "sha256": "647c5bb9d5cd970d81f13c7bf10df823d99e5bac606a0607017eba84d04c0c0c",
+      "updater_sha1": "ac51f5354240e793f8256fd7f9c47663f2c9472b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-318.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-318.apply.sql",
+      "bytes": 378227,
+      "sha256": "4ebbe5ed29d5775c8a50c9de2846cf9b6d8f91d5cff274546eedc0f4a2e086da",
+      "updater_sha1": "f44ca73806a7fe00de69b3d9094cd8211d633f81"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-319.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-319.apply.sql",
+      "bytes": 351261,
+      "sha256": "a11b14b41d61aa840fbd552a36eb673dedd4748bf51b9132ebaea875d4ceed44",
+      "updater_sha1": "055f5528ae69aa148dc2e79162f54062aad15f30"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-320.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-320.apply.sql",
+      "bytes": 310617,
+      "sha256": "8e97bb99de5791020341950a1d298ce252ff165dd5edd76c23c38049df5f6735",
+      "updater_sha1": "66bd9ef3b7fbc46fd0d4f62d81de01b37e18081a"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-321.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-321.apply.sql",
+      "bytes": 289447,
+      "sha256": "1c7f3d96c92c3725fd32cf967942adf64e63eadfa978e67c637f1cdaf74a13e7",
+      "updater_sha1": "ed3093b661c62e7559122a4bd2c6299fa3b2b20d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-322.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-322.apply.sql",
+      "bytes": 341157,
+      "sha256": "3351c1a9b5bb24f49f8202bc07331e4ff7a50c00d23779e114b1bb80f86933f1",
+      "updater_sha1": "6c7c5f361f77a02f8a6c868723a64b740674c131"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-323.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-323.apply.sql",
+      "bytes": 263795,
+      "sha256": "a2638e3de5bb07170994a4cac80248cf9ec0d0c8e8c074b9d89fa7c4e405bff8",
+      "updater_sha1": "45ca7cdf7966e4c1735887bb7452e766903253dd"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-324.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-324.apply.sql",
+      "bytes": 286641,
+      "sha256": "c97a44b246156e26d8a5631790181b287c7d7e961d9c40472765cf32b8ac50df",
+      "updater_sha1": "0b57fadf2f886f12fe14e96bec1c56962ed2f93e"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-325.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-325.apply.sql",
+      "bytes": 347945,
+      "sha256": "c0d32863aab5240c7e9d37179d2fabd5b4397869c34396f0135d8689caad1baa",
+      "updater_sha1": "1cc1875b2fd3bd0fab9a626906559d0315aff493"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-326.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-326.apply.sql",
+      "bytes": 323565,
+      "sha256": "17853c19c0f873ae191bd3267e8f13c6ac842e05f92053e114c7f4308984213e",
+      "updater_sha1": "921dd9346b2819f98bc7a5fd2bce5a0cb4dd5f47"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-327.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-327.apply.sql",
+      "bytes": 317931,
+      "sha256": "b06d357f4a46f9e76c2034dae79e23e5e5d52f98adb0426a6fbc1f94444a00c2",
+      "updater_sha1": "ae0c57d8f8f4fa532c5dcc38370a24e2ab03930f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-328.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-328.apply.sql",
+      "bytes": 368331,
+      "sha256": "7c0c747e748d71d773f12423449540178a8f8d1b29653a2b1cb0d31cb86e8cf9",
+      "updater_sha1": "c54a01636936f98d4577b257777f072ee7f4d2b5"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-329.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-329.apply.sql",
+      "bytes": 350011,
+      "sha256": "f707844288254a795044ec10440e2d99aa34f907fdb420ea187b482ec3f1d1de",
+      "updater_sha1": "746b2303ef87e2369a81df94fb80853d2fa04e80"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-330.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-330.apply.sql",
+      "bytes": 452009,
+      "sha256": "a08a93bf8befce9c6d975f702c913650a91e8e4ff6f2859d460460ba20d12b52",
+      "updater_sha1": "d8359bb43365697533b36c8dd2bb47e6d12095dc"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-331.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-331.apply.sql",
+      "bytes": 378035,
+      "sha256": "a43da69e4baa72e71e3c94933832c7b54c7adaeadd81d30a4deb464b07c5081c",
+      "updater_sha1": "9ce343f81c9e00f643d1f65dc8bb03fe677a84c1"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-332.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-332.apply.sql",
+      "bytes": 351627,
+      "sha256": "0c9c7eccf2ce0e3a533b4c8d0eda93882091b5b65c3009ca74c55d5eb939f008",
+      "updater_sha1": "ae2baa589ffa4fe9cecbf5083b99ca52017a259c"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-333.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-333.apply.sql",
+      "bytes": 311563,
+      "sha256": "0aea2dd909a2a74e89202e000ec6fbed5b9903c2e6605f15fd4f0c9eec0d5076",
+      "updater_sha1": "0a42e0fb19b068c77a1d2c6762c35996c44de113"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-334.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-334.apply.sql",
+      "bytes": 286751,
+      "sha256": "7e2ba5e4b36e3c0fa508159ddffb27d895e291c4d7049332d0bcf2d9c46b4eee",
+      "updater_sha1": "4ef1b7edb937f53890179501721995482e36ed01"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-335.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-335.apply.sql",
+      "bytes": 364543,
+      "sha256": "b2a84373e5cff8e07cfd4b3a30e209db6f795a3cb6a291f6aef888ae8e57f314",
+      "updater_sha1": "b215fba63724a7cf08e35038274e16ed5d71993d"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-336.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-336.apply.sql",
+      "bytes": 372405,
+      "sha256": "187bbec0b83c4cc6525be1502f1e4e1e80b3e681fd9d2bdf41ef20658fc5ec14",
+      "updater_sha1": "6fa6a5cd44582e33b711c3f33498cc16248f427f"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-337.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-337.apply.sql",
+      "bytes": 364995,
+      "sha256": "386beb87aa34a69025d502d206c0bd1232ae9d35a802ff9d79a0d4f6ab55345f",
+      "updater_sha1": "7ba03b3f69dbb886b5a43f0a94b8e13d156b7117"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-338.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-338.apply.sql",
+      "bytes": 357091,
+      "sha256": "7462dc9f9f443bd778ad628cdf7ebd1bad307b4ffbd252fa2152c2513094176b",
+      "updater_sha1": "56ed597f997ed4c0e03aa62b2949d1d934eee8c2"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-339.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-339.apply.sql",
+      "bytes": 396453,
+      "sha256": "2409795739d377efe5245f7660ac81527d76e75e9fee710372c8e22775fba386",
+      "updater_sha1": "2bc66580da6e7e2582ee7148c7819ea224301e7b"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-340.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-340.apply.sql",
+      "bytes": 337743,
+      "sha256": "066d9e74282dd8612a520309f1a313521acaccfa40d1cdf9dbcf6aebd6c4fef8",
+      "updater_sha1": "09e7c01e374b7db1995a5d231b2c98b04dac20b0"
+    },
+    {
+      "source": "sql/optional/ruRU/2026-10-04/hotfix/broadcast-341.apply.sql.gz",
+      "file": "sql/updates/hotfixes/ruRU/zz_2026_10_04_ruRU_hotfix_broadcast-341.apply.sql",
+      "bytes": 29475,
+      "sha256": "83a6654218eec21e4a240b5495c4d10ab4f3885501f0dd9f92447adac7c9ff63",
+      "updater_sha1": "37b32cf8773e1ead5ae1f5ee0df0aa358fb38670"
+    }
+  ]
+}
