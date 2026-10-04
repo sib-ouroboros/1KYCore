@@ -1,0 +1,26 @@
+[
+  {
+    "assurance": "layout/header and ID presence only; no text/voice export",
+    "bytes": 362863,
+    "contains_27602": false,
+    "core_layout_validated": true,
+    "identity_count": 3894,
+    "layout_hash": "0x51bf0c33",
+    "locale": "enUS",
+    "relative_file": "enUS/BroadcastText.db2",
+    "sha256": "d50a56f4fb049dc0a4fb585f3c8ce5ca05819b3e95ca9b4d8cac03e1af548d59",
+    "signature": "WDC1"
+  },
+  {
+    "assurance": "layout/header and ID presence only; no text/voice export",
+    "bytes": 503646,
+    "contains_27602": false,
+    "core_layout_validated": true,
+    "identity_count": 3894,
+    "layout_hash": "0x51bf0c33",
+    "locale": "ruRU",
+    "relative_file": "ruRU/BroadcastText.db2",
+    "sha256": "d6bb63597efea972ab118f27d9ed4d4ac4efc9d786852bd3ec5fd288e4089fa2",
+    "signature": "WDC1"
+  }
+]

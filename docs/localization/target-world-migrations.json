@@ -1,0 +1,98 @@
+[
+  {
+    "file": "2026_09_27_00_world.sql",
+    "sha256": "c3a8ce10ee42ef50a6ad60adeda5b1215e69dfdeef896ba5dccc120c2b6f9a37"
+  },
+  {
+    "file": "2026_09_27_01_world.sql",
+    "sha256": "a92608032e81941ed810cdb92210f5b171e77ab39c791412472f3c0cc7613fc0"
+  },
+  {
+    "file": "2026_09_27_02_world.sql",
+    "sha256": "cf2b9b410d6529e3a8f7f04cffc42889adf75c89a9537670ac268574edf9ce03"
+  },
+  {
+    "file": "2026_09_27_03_world_traductions_fr_quetes.sql",
+    "sha256": "7fb5241adb1161aa4a81a057dd8ed1ecc313f43d2c0c7203142aeaa0537880df"
+  },
+  {
+    "file": "2026_09_28_00_world_1kycore_scenario_artifact.sql",
+    "sha256": "e44e9732e81ca06b6c39326113a238beeb02c1bdd2b3352b5e3f021776157692"
+  },
+  {
+    "file": "2026_09_29_00_world_remove_bot_tables.sql",
+    "sha256": "9e8ff37e917e35db3be14d29b9364367b367f906ff724f657dd339bc659d8305"
+  },
+  {
+    "file": "2026_09_30_00_world_sylvania_content.sql",
+    "sha256": "c1ba2549650cf746fdb4fa2accd47970ac60da5897518fd9ca1338d2f97b8fe3"
+  },
+  {
+    "file": "2026_10_01_00_world_campaign_generic_objects.sql",
+    "sha256": "c0868fda419a7b450c08885feb758655bdd7bf2f28888ff86a6edce671b337d2"
+  },
+  {
+    "file": "2026_10_01_01_world_gilneas_attack_lurker.sql",
+    "sha256": "232c6db2db023f87f1b080c43f4e278b02724b8f713a22ccaecea5e02e9584f2"
+  },
+  {
+    "file": "2026_10_01_02_world_campaign_generic_objects.sql",
+    "sha256": "f644416d5ba527db24669cc454e2ffc413242061c4676b91a7b5595a8ac1c5ed"
+  },
+  {
+    "file": "2026_10_01_03_world_campaign_chairs_visibility.sql",
+    "sha256": "0e85ce9048f0458d0af24dc1c2f4d92bc12ae9332841059df4dd0c74a1a2b287"
+  },
+  {
+    "file": "2026_10_01_04_world_campaign_generic_addons.sql",
+    "sha256": "ed5ee8f1e6221abd50e9aaadb848c4659e2222386d88ce8ab41a6c144c1510ac"
+  },
+  {
+    "file": "2026_10_01_05_world_campaign_visibility_phaseable.sql",
+    "sha256": "7224482415a3059837f6a3ce84d0d3958f890b45a567a4f2d59ed9a5990bc7df"
+  },
+  {
+    "file": "2026_10_02_00_world_campaign_doors_book.sql",
+    "sha256": "dcb5ca6a7de84b3483a84549542a5c3bf243eae6de8cdbe79171733cb5e35046"
+  },
+  {
+    "file": "2026_10_02_01_world_campaign_placeholder_models.sql",
+    "sha256": "f7b537666e4e01fabb6763e2e3012255f796b25f8e3a45377a8050bc59bbbb36"
+  },
+  {
+    "file": "2026_10_02_02_world_campaign_simple_goober_models.sql",
+    "sha256": "a8d2af19e34373d735f8d7b23ae176cf484be6cdfc7ca937f05fb66ed5a5f05c"
+  },
+  {
+    "file": "2026_10_02_03_world_campaign_client_validated_objects.sql",
+    "sha256": "9980419d8605208e7eccbc5175e2616932e101678fee9d9988deb6dbb6fa6600"
+  },
+  {
+    "file": "2026_10_02_04_world_campaign_native_goobers.sql",
+    "sha256": "93efdbe44a8d239875079bc0a16526ff53aa67ed3391f71bbd0a13fe979d8348"
+  },
+  {
+    "file": "2026_10_02_05_world_campaign_smart_wall.sql",
+    "sha256": "18c4729639e08b9e54fd337273204e20b832a5ae04839414898e345c500d174d"
+  },
+  {
+    "file": "2026_10_03_00_world_campaign_source_loot_objects.sql",
+    "sha256": "29734c13cc9f5d8113adf2b09e2fbbd6aa0e006cb1ca14b44bd6cd5543143b36"
+  },
+  {
+    "file": "2026_10_03_01_world_campaign_wildcard_loot_objects.sql",
+    "sha256": "928c17b6a4ac4592f33146b31352247e9942e8222467450070febb6f1fe6a73d"
+  },
+  {
+    "file": "2026_10_04_00_world_campaign_council_books.sql",
+    "sha256": "5cdd3cdca6bc2afabed06271588d0fcbe5f1d35ca5f60d40a2a6b306ba280db4"
+  },
+  {
+    "file": "2026_10_04_01_world_campaign_simple_conversations.sql",
+    "sha256": "4b9c6aedf453a1b1405a41420a12a3b66b2308a45df450f5a694ef0baee7abf9"
+  },
+  {
+    "file": "2026_10_04_02_world_campaign_conversation_chains.sql",
+    "sha256": "a3ccb8f7b5f2ff42138af41d219294ec04b16a83b4c9acaf661728654d5d16c7"
+  }
+]

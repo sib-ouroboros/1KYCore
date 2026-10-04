@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-04",
+  "donor_hotfix": {
+    "provenance": "Same repository/release/license facts as donor_world; independently parsed and English Text/Text1 verified.",
+    "sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+    "url": "https://github.com/Legion-Pandaria-Preservation-Project/LegionCore-7.3.5V2/releases/download/new_release/Legends_hotfixes_26124_2024_09_24.sql"
+  },
+  "donor_world": {
+    "file_build_label": 26124,
+    "inspected_core_commit": "6c41d0faa23474bf9e76a4811b144d43e9545bab",
+    "license_url": "https://raw.githubusercontent.com/Legion-Pandaria-Preservation-Project/LegionCore-7.3.5V2/V2/COPYING",
+    "mode": "Read-only parsing; never executed donor SQL",
+    "release_server": "MySQL 5.7.44",
+    "repository_license": "GPL-2.0; COPYING",
+    "sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+    "sql_asset_license": "No asset-specific license declaration found in dump header; repository license does not separately establish ownership of all game texts.",
+    "url": "https://github.com/Legion-Pandaria-Preservation-Project/LegionCore-7.3.5V2/releases/download/new_release/Legends_WORLD_DB_26124_2024_09_24.sql"
+  },
+  "generation": {
+    "existing_VerifiedBuild": "unchanged",
+    "new_locale_row_VerifiedBuild": 0,
+    "parser": "tools/localization/sql_dump.py",
+    "rules": "tools/localization/rules.py and gossip.py",
+    "source_code_sha256": {
+      "audit_client.py": "13d19e62ccdbf0e66908d799f5a697c582bd6af2baf56b13e0dc6144f4eaaf86",
+      "audit_cpp.py": "65c9f021cf5ca5d740178a6d05fdee3bfffce2f87e38c9a65544a9655110423b",
+      "bundle.py": "c282c8dd732541d33b8ce5ab3f904441a1bb528f42748253048c4feaf8915a78",
+      "gossip.py": "74a993e84fa4baffc5c83b5de2ad7d26e0fdacbce35233802f1e786a91dab215",
+      "localize.py": "4fde7416b280060380c1439e5c1e63ce9dc4c60ff221c0afe3ee9fe3d6e52af5",
+      "rules.py": "44fea7a753f6c0b1e2119aaaf7a6a8881a5d72758cd28793387049bad4398700",
+      "sql_dump.py": "58f9e888eefe78f0115b78c7696d02600e06cc13a5f7d6d1cac7fa8785cd4b65",
+      "test_argus_locale.py": "df14cb033ec7494eec39d5688aeae7a8352a2a0edf2dd824ebeb0d8dc94293c8",
+      "test_bundle.py": "d9221be97d5b1395b55ee3249d7c52e6bffd2c34c3bdb583a17200ae4d7596d2",
+      "test_gossip.py": "6fcecda62b146b65f62b6c079ca298f8da87041064de7a0b59178067ad6c4b9b",
+      "test_localization.py": "25ec1b7d067dd20bb03fe51c7e789391e72ee622e7cc0091adabab8c9a32ed0a",
+      "test_mysql_guards.py": "095b355d0e8e903229c3a95bacc49e520d8dc7b2287182c4cdc08f92cde383ed",
+      "test_mysql_packages.py": "e54b560aba84d12991a826ad3eef2331e83dc5940bb1d2dbb2f4239c177e4b20",
+      "test_packet_lengths.py": "a049da35a35a5618358fb0d83a7b0d153f273362b815374cbe35b3aa4bf1cedc",
+      "text_checks.py": "8bbd22ddfc943d87b1efb9d4ffe19b871f60d828992e9b2dc1ff020269a4dfa0"
+    },
+    "statement": "VerifiedBuild is not evidence of client/game testing; actual provenance is in package manifests."
+  },
+  "start_commit": "567027437455e56d8d055a56a064b462921b49c8",
+  "target_branch": "development/character-tools",
+  "target_hotfix": {
+    "applied_branch_migrations": "target-hotfix-migrations.json",
+    "compressed_sha256": "2cd069bf5ca5d7cd8b78736bd9618c3a507c711387a973e1a2ce3fd59f81f425",
+    "scope_note": "Only additional frFR rows in current branch migration; ruRU/base comparison unchanged; tested against migrated DB including frFR.",
+    "url": "https://github.com/sib-ouroboros/1KYCore/releases/download/db-sylvania-20260926-no-mercenaries-r1/1kycore_hotfixes_20260926_no_mercenaries.sql.gz"
+  },
+  "target_poi_snapshot_sha256": "adc0caaeb6dcad43f5a9976966666d90db98f58b28485e1860992a8501eefe87",
+  "target_world": {
+    "applied_branch_migrations": "target-world-migrations.json",
+    "compressed_sha256": "b311837633e148df178045fd448cbaeb7e40d10b97690377866ce4560f68bac7",
+    "current_text_snapshot_sha256": "b2c2335576711f649471f2e675d421907eab4fab95f57831a2b4d707e74528ea",
+    "migration_import_transcoding": [],
+    "release_server": "MariaDB 11.4.7",
+    "schema_charset": "utf8mb3",
+    "url": "https://github.com/sib-ouroboros/1KYCore/releases/download/db-sylvania-20260926-no-mercenaries-r1/1kycore_world_20260926_no_mercenaries.sql.gz"
+  },
+  "working_branch": "feature/ruRU-localization"
+}

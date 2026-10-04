@@ -1,0 +1,3098 @@
+{
+  "counts": [
+    {
+      "category": "choices",
+      "fields_or_absent_rows": 26,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "choices",
+      "fields_or_absent_rows": 2,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "choices",
+      "fields_or_absent_rows": 3,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "choices",
+      "fields_or_absent_rows": 13,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "gossip",
+      "fields_or_absent_rows": 1744,
+      "reason": "no target base option",
+      "status": "entity_absent"
+    },
+    {
+      "category": "gossip",
+      "fields_or_absent_rows": 18,
+      "reason": "preserve existing nonempty text",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "gossip",
+      "fields_or_absent_rows": 2084,
+      "reason": "missing corresponding donor locale/base",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "gossip",
+      "fields_or_absent_rows": 13,
+      "reason": "BroadcastText priority; separate hotfix route",
+      "status": "manual_review"
+    },
+    {
+      "category": "gossip",
+      "fields_or_absent_rows": 155,
+      "reason": "ambiguous/missing owner, locale or transition",
+      "status": "manual_review"
+    },
+    {
+      "category": "gossip",
+      "fields_or_absent_rows": 5623,
+      "reason": "native PK already belongs to another locale; preserve it",
+      "status": "manual_review"
+    },
+    {
+      "category": "npcs",
+      "fields_or_absent_rows": 487,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "npcs",
+      "fields_or_absent_rows": 110636,
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "npcs",
+      "fields_or_absent_rows": 8016,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "npcs",
+      "fields_or_absent_rows": 9,
+      "reason": "Russian text not confirmed",
+      "status": "invalid_source"
+    },
+    {
+      "category": "npcs",
+      "fields_or_absent_rows": 7259,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "npcs",
+      "fields_or_absent_rows": 1985,
+      "reason": "empty donor text",
+      "status": "invalid_source"
+    },
+    {
+      "category": "npcs",
+      "fields_or_absent_rows": 878,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "npcs",
+      "fields_or_absent_rows": 1,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "manual_review"
+    },
+    {
+      "category": "objectives",
+      "fields_or_absent_rows": 341,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "objectives",
+      "fields_or_absent_rows": 10342,
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "objectives",
+      "fields_or_absent_rows": 323,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "objectives",
+      "fields_or_absent_rows": 58,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "objectives",
+      "fields_or_absent_rows": 728,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "objectives",
+      "fields_or_absent_rows": 11,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "manual_review"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 3215,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 16670,
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 3337,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 815,
+      "reason": "Russian text not confirmed",
+      "status": "invalid_source"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 3437,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 729,
+      "reason": "empty donor text",
+      "status": "invalid_source"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 4,
+      "reason": "possible truncated sentence",
+      "status": "invalid_source"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 9789,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "objects",
+      "fields_or_absent_rows": 271,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "manual_review"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 130,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 1,
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 658,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 2,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 80,
+      "reason": "game substitutions differ in gender branch",
+      "status": "invalid_source"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 12,
+      "reason": "possible truncated sentence",
+      "status": "invalid_source"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 2,
+      "reason": "unknown game substitution",
+      "status": "invalid_source"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 20,
+      "reason": "unsupported gender structure",
+      "status": "invalid_source"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 1210,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "pages",
+      "fields_or_absent_rows": 6,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "manual_review"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 1050,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 57344,
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 7510,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 27,
+      "reason": "Russian text not confirmed",
+      "status": "invalid_source"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 1122,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 23,
+      "reason": "empty donor text",
+      "status": "invalid_source"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 129,
+      "reason": "game substitutions differ in gender branch",
+      "status": "invalid_source"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 2,
+      "reason": "placeholder text",
+      "status": "invalid_source"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 41,
+      "reason": "possible truncated sentence",
+      "status": "invalid_source"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 6,
+      "reason": "unknown game substitution",
+      "status": "invalid_source"
+    },
+    {
+      "category": "quests",
+      "fields_or_absent_rows": 4455,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "requests",
+      "fields_or_absent_rows": 2508,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "requests",
+      "fields_or_absent_rows": 51,
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "requests",
+      "fields_or_absent_rows": 2923,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "requests",
+      "fields_or_absent_rows": 850,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "requests",
+      "fields_or_absent_rows": 8,
+      "reason": "game substitutions differ in gender branch",
+      "status": "invalid_source"
+    },
+    {
+      "category": "requests",
+      "fields_or_absent_rows": 3248,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "responses",
+      "fields_or_absent_rows": 86,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "responses",
+      "fields_or_absent_rows": 112,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "responses",
+      "fields_or_absent_rows": 3,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "responses",
+      "fields_or_absent_rows": 45,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "responses",
+      "fields_or_absent_rows": 177,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "manual_review"
+    },
+    {
+      "category": "rewards",
+      "fields_or_absent_rows": 9135,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "rewards",
+      "fields_or_absent_rows": 109,
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "rewards",
+      "fields_or_absent_rows": 1252,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "rewards",
+      "fields_or_absent_rows": 1107,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "rewards",
+      "fields_or_absent_rows": 43,
+      "reason": "game substitutions differ in gender branch",
+      "status": "invalid_source"
+    },
+    {
+      "category": "rewards",
+      "fields_or_absent_rows": 4,
+      "reason": "possible truncated sentence",
+      "status": "invalid_source"
+    },
+    {
+      "category": "rewards",
+      "fields_or_absent_rows": 9248,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "server_strings",
+      "fields_or_absent_rows": 394,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "server_strings",
+      "fields_or_absent_rows": 160,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "server_strings",
+      "fields_or_absent_rows": 541,
+      "reason": "empty donor text",
+      "status": "invalid_source"
+    },
+    {
+      "category": "server_strings",
+      "fields_or_absent_rows": 1,
+      "reason": "possible truncated sentence",
+      "status": "invalid_source"
+    },
+    {
+      "category": "server_strings",
+      "fields_or_absent_rows": 2,
+      "reason": "unbalanced color marker",
+      "status": "invalid_source"
+    },
+    {
+      "category": "server_strings",
+      "fields_or_absent_rows": 274,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    }
+  ],
+  "samples": [
+    {
+      "category": "quests",
+      "current": "Задание Канретада",
+      "current_hash": "9adb690131d1e3b9cf1d805c351ba5ec8d7a0f8c22f55ee7191220a35f108e0e",
+      "donor_english": "Kanrethad's Quest",
+      "english": "Kanrethad's Quest",
+      "field": "LogTitle",
+      "key": [
+        "1"
+      ],
+      "proposal": "Задание Канретада",
+      "proposal_hash": "9adb690131d1e3b9cf1d805c351ba5ec8d7a0f8c22f55ee7191220a35f108e0e",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": "Поговорите с Канретадом, чтобы восстановить ваши таланты, оружие и средство передвижения.",
+      "current_hash": "3873cf6637f693088b77a6515d273292d7bae18da7d3c69b6a85454d0c14d7db",
+      "donor_english": "Speak to Kanrethad to restore your talents, weapon and mount.",
+      "english": "Speak to Kanrethad to restore your talents, weapon and mount.",
+      "field": "LogDescription",
+      "key": [
+        "1"
+      ],
+      "proposal": "Поговорите с Канретадом, чтобы восстановить ваши таланты, оружие и средство передвижения.",
+      "proposal_hash": "3873cf6637f693088b77a6515d273292d7bae18da7d3c69b6a85454d0c14d7db",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "The Firewing Point Project",
+      "english": "The Firewing Point Project",
+      "field": "LogTitle",
+      "key": [
+        "10014"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Steal the four Mana Bomb Code Sheets and deliver them to Lieutenant Meridian at the Allerian Post in Terokkar Forest.",
+      "english": "Steal the four Mana Bomb Code Sheets and deliver them to Lieutenant Meridian at the Allerian Post in Terokkar Forest.",
+      "field": "LogDescription",
+      "key": [
+        "10014"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Two weeks ago, our scouts reported a heavily armed Alliance force under the command of Field Commander Romus departing Nethergarde Keep. With so many soldiers and supplies, along with such a distinguished commander, they can only have one goal: Outland.$B$BThe warchief sent an advance force through the portal, but if the Alliance believes there is a need for that many troops, perhaps we'd be wise to send our own reinforcements.$B$BJourney through the Dark Portal and report to Nazgrel at Thrallmar.",
+      "english": "Two weeks ago, our scouts reported a heavily armed Alliance force under the command of Field Commander Romus departing Nethergarde Keep. With so many soldiers and supplies, along with such a distinguished commander, they can only have one goal: Outland.$B$BThe warchief sent an advance force through the portal, but if the Alliance believes there is a need for that many troops, perhaps we'd be wise to send our own reinforcements.$B$BJourney through the Dark Portal and report to Nazgrel at Thrallmar.",
+      "field": "QuestDescription",
+      "key": [
+        "10046"
+      ],
+      "proposal": "Две недели назад наши разведчики доложили о выступлении из Крепости Стражей Пустоты хорошо вооруженных сил Альянса под командованием боевого командира Ромуса. Если они отрядили столько солдат и ресурсов под управлением такого выдающегося командира, то цель может быть только одна – Запределье.$B$BВождь послал передовые отряды через портал, но если Альянс считает нужным отправить такое большое войско, возможно и нам лучше было бы послать подкрепление. Отправляйся через Темный портал и доложи Назгрелу в Траллмаре.",
+      "proposal_hash": "8e5b4904bef6955a462b611ef7820f6a8dcaa4b1c76240095bb7768fecf37161",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "A dwarven warrior known as Yorus Barleybrew has issued a challenge to all skilled Alliance warriors.$B$BHe waits at the Lakeshire Inn, in a place known as the Redridge Mountains in the Eastern Kingdoms.  The journey will be long, but it'll be worth it for you to test yourself, $n.",
+      "english": "A dwarven warrior known as Yorus Barleybrew has issued a challenge to all skilled Alliance warriors.$B$BHe waits at the Lakeshire Inn, in a place known as the Redridge Mountains in the Eastern Kingdoms.  The journey will be long, but it'll be worth it for you to test yourself, $n.",
+      "field": "QuestDescription",
+      "key": [
+        "10371"
+      ],
+      "proposal": "Воин-дворф по имени Йорус Ячменовар бросил вызов всем воинам Альянса.$B$bОн ждет в таверне Приозерья, что в Красногорье в Восточных королевствах. Путь предстоит долгий, но возможность испытать свои силы стоит того.",
+      "proposal_hash": "45d54a5e27512c6c315256025506be9299c8c5ca44bcddd2227da5e67a705505",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "<TXT>",
+      "english": "<TXT>",
+      "field": "LogTitle",
+      "key": [
+        "10402"
+      ],
+      "proposal": "<TXT>",
+      "proposal_hash": "40a421d37f822e7d46ab3af18fea488e2af2dac06281ad465bad441d4c0b78c1",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "DON'T USE [PH] Fel Orc 1",
+      "english": "DON'T USE [PH] Fel Orc 1",
+      "field": "LogTitle",
+      "key": [
+        "10452"
+      ],
+      "proposal": "DON'T USE [PH] Fel Orc 1",
+      "proposal_hash": "4a63c1279264dc5108eeb340f7dbd61ebe6fcfc73bb090e7f26c5f7ab111dc54",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "",
+      "english": "Testing this.",
+      "field": "QuestCompletionLog",
+      "key": [
+        "10452"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Promises, Promises...",
+      "english": "Promises, Promises...",
+      "field": "LogTitle",
+      "key": [
+        "11132"
+      ],
+      "proposal": "Все обещаешь и обещаешь",
+      "proposal_hash": "56e97ce6f08f0d396c858a836f8a1e1e1a8079541d5d335fe1035ba4a75547b2",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": "",
+      "current_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "donor_english": "",
+      "english": " ",
+      "field": "AreaDescription",
+      "key": [
+        "11402"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "UNUSED Save Brewfest!",
+      "english": "UNUSED Save Brewfest!",
+      "field": "LogTitle",
+      "key": [
+        "12313"
+      ],
+      "proposal": "Confirmed Save Brewfest!",
+      "proposal_hash": "31e4577a3f20bcc1fc208c92cd04073dc47e38c5571259a1c0a759ff7def6918",
+      "reason": "Russian text not confirmed",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Welcome to the Wrath of the Lich King Friends and Family Alpha.  Use the portals next to me to begin your journey into Northrend.$B$BYou can choose to report to the Alliance recruiter in Valiance Keep in Borean Tundra or you can go to Valgarde in Howling Fjord.",
+      "english": "Welcome to the Wrath of the Lich King Friends and Family Alpha.  Use the portals next to me to begin your journey into Northrend.$B$BYou can choose to report to the Alliance recruiter in Valiance Keep in Borean Tundra or you can go to Valgarde in Howling Fjord.",
+      "field": "QuestDescription",
+      "key": [
+        "12479"
+      ],
+      "proposal": "Welcome to the Wrath of the Lich King Friends and Family Alpha. Use the portals next to me to begin your journey into Northrend.$B$BYou can choose to report to the Alliance recruiter in Valiance Keep in Borean Tundra or you can go to Valgarde in Howling Fjord.",
+      "proposal_hash": "0cc2a5da61e2771251385b221e1f5bc6abc28b5aaa53a227a11564188c3ccccd",
+      "reason": "Russian text not confirmed",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Kagoro has revealed that the centaur hoofprints belong to some chumps in Mauradon.",
+      "english": "Kagoro has revealed that the centaur hoofprints belong to some chumps in Mauradon.",
+      "field": "QuestDescription",
+      "key": [
+        "1277"
+      ],
+      "proposal": "Kагоро выяснил, что эти следы кентавров принадлежат нескольким идиотам из Мародона",
+      "proposal_hash": "3893c7b44bd3ead2d081fca7f7837a28ab4cd2942f3985842651e407ae20cb8e",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "[PLACEHOLDER] Use mini-plane to kamakazi on the gnoll leader.",
+      "english": "[PLACEHOLDER] Use mini-plane to kamakazi on the gnoll leader.",
+      "field": "LogDescription",
+      "key": [
+        "12825"
+      ],
+      "proposal": "[PLACEHOLDER] Используйте мини-самолет с камикадзе на вождя гноллов.",
+      "proposal_hash": "48d5b8048f3c26923b16023993ab4d903cbdaaa2d8e6452ff6a98619104af59b",
+      "reason": "placeholder text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "[PLACEHOLDER] Report to Tore",
+      "english": "[PLACEHOLDER] Report to Tore",
+      "field": "LogDescription",
+      "key": [
+        "12837"
+      ],
+      "proposal": "[PLACEHOLDER] Явиться к Тор.",
+      "proposal_hash": "ef82acd9a4f70da340eaf1f18ca252c283317ab7e273c63d34eeabecce385d4d",
+      "reason": "placeholder text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Return to Alamar Grimm at Coldridge Pass in Dun Morogh.",
+      "english": "Return to Alamar Grimm at Coldridge Pass in Dun Morogh.",
+      "field": "QuestCompletionLog",
+      "key": [
+        "1599"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "empty donor text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Return to Gazin Tenorm in Stormwind City.",
+      "english": "Return to Gazin Tenorm in Stormwind City.",
+      "field": "QuestCompletionLog",
+      "key": [
+        "1787"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "empty donor text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Giving the lifeless form of Vazruden the Herald the once-over, you discover a rolled letter, its seal yet unbroken.  An elaborate \"I\" is pressed within the blood-red ink.  Cracking the note open, the message that you read is most disturbing.$B$Advance Scout Chadwick will definitely want to take a look at this!",
+      "english": "Giving the lifeless form of Vazruden the Herald the once-over, you discover a rolled letter, its seal yet unbroken.  An elaborate \"I\" is pressed within the blood-red ink.  Cracking the note open, the message that you read is most disturbing.$B$Advance Scout Chadwick will definitely want to take a look at this!",
+      "field": "QuestDescription",
+      "key": [
+        "29532"
+      ],
+      "proposal": "Быстро осмотрев безжизненного Вазрудена Глашатая, вы обнаруживаете свернутое письмо с уцелевшей печатью. На печати красной тушью оттиснута причудливо нарисованная буква \"И\". Взломав печать, вы с волнением заглядываете в письмо.$B$BПоложительно, его должен прочесть главный разведчик Чадвик!",
+      "proposal_hash": "3e78404ca913151ccc2a3ede4d55c7949a1cff679fc181ed640386c2545840c1",
+      "reason": "unknown game substitution",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Dear $p,$b$bWe have received your research on the grummles and believe we have a solid idea of their etimology and history.$b$bIf you visit us at the Seat of Knowledge in Vale of Eternal Blossoms we can add this contribution to your personal collection.$b$bThank you for your diligence!$b$bSincerely,$b$bLorewalker Cho",
+      "english": "Dear $p,$b$bWe have received your research on the grummles and believe we have a solid idea of their etimology and history.$b$bIf you visit us at the Seat of Knowledge in Vale of Eternal Blossoms we can add this contribution to your personal collection.$b$bThank you for your diligence!$b$bSincerely,$b$bLorewalker Cho",
+      "field": "QuestDescription",
+      "key": [
+        "31017"
+      ],
+      "proposal": "$gДорогой:Дорогая; $n!$b$bМы получили твою работу по груммелям. Она позволяет составить точное представление об их происхождении и истории.$b$bЕсли ты посетишь Обитель Мудрости в Вечноцветущем доле, мы сможем внести эту работу в твою личную коллекцию.$b$bБлагодарим за приложенные усилия!$b$bС уважением,$b$bХранитель истории Чо",
+      "proposal_hash": "7ad530450b1a6e55759678af8503b1f8da1ee1db730b370843d052825e6d1fc1",
+      "reason": "unknown game substitution",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "31247"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "32534"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "He was a good goblin, young Scrimshank. Let's hope that his demise was not in vain by what he was able to record with his surveying equipment.$B$BIt seems as though we have quite the situation on our hands here with these bugs. They're way too cunning for their own good, and the research we've done so far is shaping up to indicate that they might even be under the controlling influence of a third party! If this is the case, then it bodes ill for not only Gadgetzan, but the whole desert!",
+      "english": "He was a good goblin, young Scrimshank.  Let's hope that his demise was not in vain by what he was able to record with his surveying equipment.$B$BIt seems as though we have quite the situation on our hands here with these bugs.  They're way too cunning for their own good, and the research we've done so far is shaping up to indicate that they might even be under the controlling influence of a third party!  If this is the case, then it bodes ill for not only Gadgetzan, but the whole desert!",
+      "field": "RewardText",
+      "key": [
+        "10"
+      ],
+      "proposal": "He was a good goblin, young Scrimshank. Let's hope that his demise was not in vain by what he was able to record with his surveying equipment.$B$BIt seems as though we have quite the situation on our hands here with these bugs. They're way too cunning for their own good, and the research we've done so far is shaping up to indicate that they might even be under the controlling influence of a third party! If this is the case, then it bodes ill for not only Gadgetzan, but the whole desert!",
+      "proposal_hash": "92c2e931f59c9046d11a88e35b57acc507c5256543588e908ec9973ec82a587f",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Thanks to you. Thanks to the shamans.$B$BCorruption ebbs but life continues to wane. Up to shamans to protect life.",
+      "english": "Thanks to you. Thanks to the shamans.$B$BCorruption ebbs but life continues to wane. Up to shamans to protect life.",
+      "field": "RewardText",
+      "key": [
+        "100"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Greetings, $C.$B$BI am pleased to see the likes of you taking an interest in the well being of nature; tales of your mighty deeds precede you, and you are welcomed here. Seeing you before me instills the feeling of confidence that the Cenarion Circle will get the proper aid it needs.$B$BOur connection with the Cenarion Circle in Moonglade transcends racial and political divides. Remember this as you work on behalf of the Circle, and you will do well.",
+      "english": "Greetings, $C.$b$bI am pleased to see the likes of you taking an interest in the well being of nature; tales of your mighty deeds precede you, and you are welcomed here. Seeing you before me instills the feeling of confidence that the Cenarion Circle will get the proper aid it needs.$b$bOur connection with the Cenarion Circle in Moonglade transcends racial and political divides. Remember this as you work on behalf of the Circle, and you will do well.",
+      "field": "RewardText",
+      "key": [
+        "1000"
+      ],
+      "proposal": "Greetings, $C.$B$BI am pleased to see the likes of you taking an interest in the well being of nature; tales of your mighty deeds precede you, and you are welcomed here. Seeing you before me instills the feeling of confidence that the Cenarion Circle will get the proper aid it needs.$B$BOur connection with the Cenarion Circle in Moonglade transcends racial and political divides. Remember this as you work on behalf of the Circle, and you will do well.",
+      "proposal_hash": "dd0bd8278fc934090655c5c142630e511f232ce9ec5a636e6e4482db5aaa3109",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "The Buzzbox hums to life soon after you place the Thresher Eyes inside. There is a moment of static before you hear a familiar tiny voice call out.$B$B\"Crawler wine is the best...\" *hic*$B$B\"What? Oh, you fixed it already? Wow, you're a fasht one. Sho, would ya like to fix another?\"$B$BYou believe you hear a liquid being poured into a cup, followed by loud gulping sounds.",
+      "english": "The Buzzbox hums to life soon after you place the Thresher Eyes inside. There is a moment of static before you hear a familiar tiny voice call out.$B$B\"Crawler wine is the best...\" *hic*$B$B\"What? Oh, you fixed it already? Wow, you're a fasht one. Sho, would ya like to fix another?\"$B$BYou believe you hear a liquid being poured into a cup, followed by loud gulping sounds.",
+      "field": "RewardText",
+      "key": [
+        "1001"
+      ],
+      "proposal": "The Buzzbox hums to life soon after you place the Thresher Eyes inside. There is a moment of static before you hear a familiar tiny voice call out.$B$B\"Crawler wine is the best...\" *hic*$B$B\"What? Oh, you fixed it already? Wow, you're a fasht one. Sho, would ya like to fix another?\"$B$BYou believe you hear a liquid being poured into a cup, followed by loud gulping sounds.",
+      "proposal_hash": "8bda59064f7190d24e0d0e80101a5988d35315c78e08cbda0e7da0f125edb07d",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Good work!$B$BLet me have a look at those code sheets.  I've got an idea and it might just be crazy enough to work!",
+      "english": "Good work!$B$BLet me have a look at those code sheets.  I've got an idea and it might just be crazy enough to work!",
+      "field": "RewardText",
+      "key": [
+        "10015"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "What makes you think I wish to be pestered by the likes of you, $C? Wait - let me stop the important duties I attend to on a daily basis so I can help you locate a doodad somewhere. By all means, the welfare of Darnassus - nay, all of Teldrassil - should come second to the acquisition of a bauble for your collection.$B$BThe fools in Moonglade waste my time with their call for assistance, and now I must endure this?",
+      "english": "What makes you think I wish to be pestered by the likes of you, $C? Wait - let me stop the important duties I attend to on a daily basis so I can help you locate a doodad somewhere. By all means, the welfare of Darnassus - nay, all of Teldrassil - should come second to the acquisition of a bauble for your collection.$B$BThe fools in Moonglade waste my time with their call for assistance, and now I must endure this?",
+      "field": "RewardText",
+      "key": [
+        "1015"
+      ],
+      "proposal": "What makes you think I wish to be pestered by the likes of you, $C? Wait - let me stop the important duties I attend to on a daily basis so I can help you locate a doodad somewhere. By all means, the welfare of Darnassus - nay, all of Teldrassil - should come second to the acquisition of a bauble for your collection.$B$BThe fools in Moonglade waste my time with their call for assistance, and now I must endure this?",
+      "proposal_hash": "bc00b4ebddd3ebf39d5d357b87fc9648c95ea19785d02c3236bbcee567be1c99",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": "Я более не принадлежу к этому миру и вынужден признать свое поражение. Мир изменился навеки, ничто уже не будет прежним.$B$BОставь подвеску здесь, со мной, $n. Может быть, в один прекрасный день, когда эльфы исчезнут, на этом самом месте прорастет новое дерево – среди сгоревшего леса и остовов мертвых древней.",
+      "current_hash": "35aab5d9c71bd657b066800d70d4d60b365879e46737130301b7a5758e6352b5",
+      "donor_english": "Ya no pertenezco a este mundo y tengo que admitir la derrota. La tierra ha cambiado para siempre; nada volverá a ser lo que fue. $B$BDéjame el colgante, $N. Puede que un día, mucho después de que los elfos se hayan ido, crezca un árbol aquí, en este bosque calcinado lleno de carcasas de antárboles muertos.",
+      "english": "I no longer belong to this world and must admit defeat.  The land has forever changed and nothing will ever be the same.Leave the pendant here with me, maybe one day, long after the elves are gone, a new tree will grow on this very spot - amongst a burnt forest and the husks of dead treants. ",
+      "field": "RewardText",
+      "key": [
+        "10166"
+      ],
+      "proposal": "Я более не принадлежу к этому миру и вынужден признать свое поражение. Мир изменился навеки, ничто уже не будет прежним.$B$BОставь подвеску здесь, со мной, Дзйрт. Может быть, в один прекрасный день, когда эльфы исчезнут, на этом самом месте прорастет новое дерево – среди сгоревшего леса и остовов мертвых древней.",
+      "proposal_hash": "2a00054e42a267c4425e27d825b47291d1d93487830be77c7cc8a12ad939065e",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": "Детям нравится наблюдать за героями в деле. Надеюсь, что однажды эти сиротки станут сильными воителями Орды и погибнут в славной битве!$B$BАх, у меня все в глазах плывет от одной мысли о столь блистательной кончине...",
+      "current_hash": "04d8c6f4b4bb8cbff0c6bcca8e9dccd52319f2397f96da2a8d888c11c320b5c4",
+      "donor_english": "A los niños les encanta ver a los héroes en acción. Espero que un día alguno de estos huérfanos se convierta en un fuerte miembro de la Horda y muera en la gloriosa batalla.$B$BAh... los pensamientos de tan magnífico destino hacen que se me nublen los ojos...",
+      "english": "The children love to watch heroes at their work.  It is my hope that, one day, each of these orphans will grow into a strong member of the Horde, and ultimately die in glorious battle!$B$BAh, thoughts of such a fine fate brings mist to my eyes...",
+      "field": "RewardText",
+      "key": [
+        "11357"
+      ],
+      "proposal": "Детям нравится наблюдать за героями в деле. Надеюсь, что однажды эти сиротки станут сильными воителями Орды и погибнут в славной битве!$B$BАх, у меня все в глазах плывет от одной мысли о столь блистательной кончине...",
+      "proposal_hash": "04d8c6f4b4bb8cbff0c6bcca8e9dccd52319f2397f96da2a8d888c11c320b5c4",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "You truly are a generous person and a worthy ally. From now on you shall be known as $n of the Shattered Sun and all who fought here will know of your deeds!",
+      "english": "You truly are a generous person and a worthy ally. From now on you shall be known as $n of the Shattered Sun and all who fought here will know of your deeds!",
+      "field": "RewardText",
+      "key": [
+        "11549"
+      ],
+      "proposal": "У вас благородная душа, и вы – достойный союзник. Отныне вас будут называть Дельфиэль из Расколотого Солнца, и все, кто здесь сражается, узнают о ваших деяниях!",
+      "proposal_hash": "681ca34ca1e3467aaa58413325cfa1584f43054f7be56606877882ff9c459cea",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Thank you for your help, $n. No contribution to the war effort is too small. Our men are going to need every advantage they can get in this battle.",
+      "english": "Thank you for your help, $n. No contribution to the war effort is too small. Our men are going to need every advantage they can get in this battle.",
+      "field": "RewardText",
+      "key": [
+        "11875"
+      ],
+      "proposal": "Благодарю за помощь, Шушуль. Любая помощь в час войны бесценна. Наши воины не должны упускать ни единого преимущества в этой войне.",
+      "proposal_hash": "d9a2de6d3c8e7e49c993cbb62ebecdb6643fb8282ad769cea2a10c2dd6e4c50d",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "We definitely don't want another sundering, friend. I'll do all that I can to help you on your mission.",
+      "english": "We definitely don't want another sundering, friend. I'll do all that I can to help you on your mission.",
+      "field": "RewardText",
+      "key": [
+        "12439"
+      ],
+      "proposal": "Нет, друг, еще одного Раскола нам не надо! Я сделаю все, что в моих силах, чтобы помочь тебе в твоей миссии…",
+      "proposal_hash": "526c1899a4acf547b4b009efba46271f8f64cf3cb6f8654e260456f58b51b3cc",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Alumeth has suffered a sound defeat, but I sense that his spirit still lingers...",
+      "english": "Alumeth has suffered a sound defeat, but I sense that his spirit still lingers...",
+      "field": "RewardText",
+      "key": [
+        "13350"
+      ],
+      "proposal": "Алумет потерпел сокрушительное поражение, но дух его еще здесь, я чувствую это…",
+      "proposal_hash": "3a8e777e04cfe3aa389cc0fd1224acab305765afd427d67fb5ac4c37adaa70b9",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "11997"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "rewards",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "12103"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "quest_offer_reward_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Well, what news do you have? You look like you've been in quite the fight... is Scrimshank alive?",
+      "english": "Well, what news do you have?  You look like you've been in quite the fight... is Scrimshank alive?",
+      "field": "CompletionText",
+      "key": [
+        "10"
+      ],
+      "proposal": "Well, what news do you have? You look like you've been in quite the fight... is Scrimshank alive?",
+      "proposal_hash": "917bd9ab94e47d448cf1f9cb8c235e91f5196b6c1b136ebffa96365e84b546ae",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "I was about to send a message back to Rokag recommending an attack, but I see that won't be necessary.",
+      "english": "I was about to send a message back to Rokag recommending an attack, but I see that won't be necessary.",
+      "field": "CompletionText",
+      "key": [
+        "10000"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Evita a los sobrestantes a toda costa. No puedes permitir que te vean. El resultado podría ser desastroso...",
+      "english": "Avoid the overseers at all costs. They must not be let on to your presence. The results could be disastrous! ",
+      "field": "CompletionText",
+      "key": [
+        "10001"
+      ],
+      "proposal": "Любым способом избегай встречи с надзирателями. Они не должны тебя заметить. Иначе может случиться беда!",
+      "proposal_hash": "aa9d80d2e029dbd1f14ff931190fff2d8ff71aaa161ee26155a8f1d217726280",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "The activity in the camp continues to escalate. Have you carried out your mission?",
+      "english": "The activity in the camp continues to escalate. Have you carried out your mission?",
+      "field": "CompletionText",
+      "key": [
+        "10002"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "The machine's hatch is open and it seems to wait expectantly for 3 Thresher Eyes to be placed inside.",
+      "english": "The machine's hatch is open and it seems to wait expectantly for 3 Thresher Eyes to be placed inside.",
+      "field": "CompletionText",
+      "key": [
+        "1001"
+      ],
+      "proposal": "The machine's hatch is open and it seems to wait expectantly for 3 Thresher Eyes to be placed inside.",
+      "proposal_hash": "2c93d5fe33afd613477c30469fe513a61a129f5435607dab8e39510653a95581",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Though you have yet to place the 6 Moonstalker Fangs inside, you believe you hear the sounds of static and incoherent gnome ramblings coming from within. Could someone else have fixed the machine already?",
+      "english": "Though you have yet to place the 6 Moonstalker Fangs inside, you believe you hear the sounds of static and incoherent gnome ramblings coming from within. Could someone else have fixed the machine already?",
+      "field": "CompletionText",
+      "key": [
+        "1002"
+      ],
+      "proposal": "Though you have yet to place the 6 Moonstalker Fangs inside, you believe you hear the sounds of static and incoherent gnome ramblings coming from within. Could someone else have fixed the machine already?",
+      "proposal_hash": "da16c4d95ce41fae74b9fe0804a629c47fe4aac1672799823e5267c4c9382764",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": "Ты $gвернулся:вернулась;, $n! $gСделал:Сделала; ли ты то, о чем я просила?",
+      "current_hash": "e20f4dfe3f2e49e105502e3bcd8ff804656a443a70221eb84a8d045079a6b146",
+      "donor_english": "Has regresado, $N. ¿No has hecho ya bastante?",
+      "english": "You've returned, $N.  Haven't you done enough?",
+      "field": "CompletionText",
+      "key": [
+        "10166"
+      ],
+      "proposal": "Ты вернулся, Дзйрт! Сделал ли ты то, о чем я просил?",
+      "proposal_hash": "b8578f07cf0fc054e36dd48b57f4b200c30fb0c705f902f3b98c398cd46cd8b9",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "$C, you are back so soon? Do you have the poison?",
+      "english": "$C, you are back so soon? Do you have the poison?",
+      "field": "CompletionText",
+      "key": [
+        "10749"
+      ],
+      "proposal": "Друид, ты так быстро вернулся? Яд при тебе?",
+      "proposal_hash": "04d7e9378287f7573937fcc7081aa17bd30ea5b6a893c7691ecc9ffeb9f5609f",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": "Пламенный привет тебе, почтенный $c. Добро пожаловать на священную землю праздника Огненного солнцеворота.",
+      "current_hash": "be2649b495658a5b7306c1e2b4b0a213cffe1651afe1a98cd8475513f11df271",
+      "donor_english": "Fogosos saludos, honrado $C. Recibe mi más sincera bienvenida a este suelo sagrado del Festival de Fuego del Solsticio de Verano.",
+      "english": "A fiery salutations to you, honored $c.  Welcome to this hallowed ground of the Midsummer Fire Festival.",
+      "field": "CompletionText",
+      "key": [
+        "11966"
+      ],
+      "proposal": "Пламенный привет тебе, почтенный $C. Добро пожаловать на священную землю праздника Огненного солнцеворота.",
+      "proposal_hash": "7c5f8eb274c3c6d71106aed6ccdbb266beda8535309e83ec736f6854617300a5",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "You got some of that element 115, $n?",
+      "english": "You got some of that element 115, $n?",
+      "field": "CompletionText",
+      "key": [
+        "12433"
+      ],
+      "proposal": "Ты несешь мне элемент 115, Липси?",
+      "proposal_hash": "594ca1eccc36bb546b5a57730610bb2d7ed288dce464805d22298e755e0938ec",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "10248"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "requests",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "11479"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "quest_request_items_locale"
+    },
+    {
+      "category": "objectives",
+      "current": "Отведите Мину Грязный Коготь домой к отцу",
+      "current_hash": "4cd9c38a6114d21bd93a0b54c3815bbf736238426e036255f642a88b0992eb83",
+      "donor_english": "Bring Mina Mudclaw home to her father",
+      "english": "Bring Mina Mudclaw home to her father",
+      "field": "Description",
+      "key": [
+        "251604"
+      ],
+      "proposal": "Отведите Мину Грязный Коготь домой к отцу",
+      "proposal_hash": "4cd9c38a6114d21bd93a0b54c3815bbf736238426e036255f642a88b0992eb83",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": "Воришек прихлопнуто",
+      "current_hash": "e978db3fb2db0a3ccccbbce1cdc8d851abfe8480ff4946f62fb015f933abd2a4",
+      "donor_english": "Thieving plucker smashed",
+      "english": "Thieving plucker smashed",
+      "field": "Description",
+      "key": [
+        "251605"
+      ],
+      "proposal": "Воришек прихлопнуто",
+      "proposal_hash": "e978db3fb2db0a3ccccbbce1cdc8d851abfe8480ff4946f62fb015f933abd2a4",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Harrison is thinking...",
+      "english": "Harrison is thinking...",
+      "field": "Description",
+      "key": [
+        "251677"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Speak to Farmer Yoon",
+      "english": "Speak to Farmer Yoon",
+      "field": "Description",
+      "key": [
+        "251698"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Confused Murloc saved",
+      "field": "Description",
+      "key": [
+        "252157"
+      ],
+      "proposal": "Растерянных мурлоков спасено",
+      "proposal_hash": "1676fbf2ec101d7f679b34fd2e401550a491a9399a3c7412c97e6575c4de2c78",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Transport Rokko across the lagoon",
+      "field": "Description",
+      "key": [
+        "252809"
+      ],
+      "proposal": "Енотик переправлен через лагуну",
+      "proposal_hash": "756f5eabe45276f0dd44a0305bf700acd9d852706785c5f5294db99ae0fd91fe",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": "Filthy Kobolds Removed",
+      "current_hash": "814938957ee748a583e78e2831d80e12f7138c622a6c14812f5bacc1f9d85280",
+      "donor_english": "Filthy Kobolds Removed",
+      "english": "Filthy Kobolds Removed",
+      "field": "Description",
+      "key": [
+        "253533"
+      ],
+      "proposal": "Filthy Kobolds Removed",
+      "proposal_hash": "814938957ee748a583e78e2831d80e12f7138c622a6c14812f5bacc1f9d85280",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": "Azsh'ir Perimeter Alarm destroyed",
+      "current_hash": "2f65d9bd5a9f14f2c9cc87d2407c494f15621cf46dc1a13681899ead5a4898f3",
+      "donor_english": "Azsh'ir Perimeter Alarm destroyed",
+      "english": "Azsh'ir Perimeter Alarm destroyed",
+      "field": "Description",
+      "key": [
+        "265507"
+      ],
+      "proposal": "Azsh'ir Perimeter Alarm destroyed",
+      "proposal_hash": "2f65d9bd5a9f14f2c9cc87d2407c494f15621cf46dc1a13681899ead5a4898f3",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Emblem of Fire activated",
+      "field": "Description",
+      "key": [
+        "270952"
+      ],
+      "proposal": "Активировано эмблем огня",
+      "proposal_hash": "dab85ced99256a5a4861fb01f2b0e9fbda4734fe9048262a309751fd89423571",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Pillaging supplies stolen",
+      "field": "Description",
+      "key": [
+        "271685"
+      ],
+      "proposal": "Украдено награбленных трофеев",
+      "proposal_hash": "40ee5b0a924692a049b65f5146e72762aca01246bfbe1b993b7285d44554c00f",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "0"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "objectives",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "135100"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "quest_objectives_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Just as I was about to question Ajeck's lack of interest in the day's hunting strategy, she reached for her quiver, drew an arrow and unleashed a shot right towards poor Barnil.  But it was not Barnil that Ajeck was shooting at.  For when Barnil stepped aside, mouth agape, a large river crocilisk floated to the surface with Ajeck's arrow perfectly placed between his two large eyes.\n\r",
+      "english": "Just as I was about to question Ajeck's lack of interest in the day's hunting strategy, she reached for her quiver, drew an arrow and unleashed a shot right towards poor Barnil.  But it was not Barnil that Ajeck was shooting at.  For when Barnil stepped aside, mouth agape, a large river crocilisk floated to the surface with Ajeck's arrow perfectly placed between his two large eyes.",
+      "field": "Text",
+      "key": [
+        "100"
+      ],
+      "proposal": "Когда я уже собирался спросить, почему Ажек не участвует в обсуждении плана сегодняшней охоты, она выхватила стрелу из колчана, натянула тетиву и выстрелила в бедного Барнила. Однако стрела пролетела мимо. Разинув рот, Барнил наблюдал за тем, как возле него на поверхность реки всплыл огромный кроколиск, а между глаз у него торчала стрела Ажек.",
+      "proposal_hash": "6e7f05250a770f0c56f3ebfb62a558a55534f4283c94821ca37bfcb4f546ba03",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Just as I was about to question Ajeck's lack of interest in the day's hunting strategy, she reached for her quiver, drew an arrow and unleashed a shot right towards poor Barnil.  But it was not Barnil that Ajeck was shooting at.  For when Barnil stepped aside, mouth agape, a large river crocilisk floated to the surface with Ajeck's arrow perfectly placed between his two large eyes. ",
+      "english": "Just as I was about to question Ajeck's lack of interest in the day's hunting strategy, she reached for her quiver, drew an arrow and unleashed a shot right towards poor Barnil.  But it was not Barnil that Ajeck was shooting at.  For when Barnil stepped aside, mouth agape, a large river crocilisk floated to the surface with Ajeck's arrow perfectly placed between his two large eyes. ",
+      "field": "Text",
+      "key": [
+        "101"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "The bearer of this certificate is entitled to the respect and regard that any first rate pilferer and thief deserves. ",
+      "english": "The bearer of this certificate is entitled to the respect and regard that any first rate pilferer and thief deserves. ",
+      "field": "Text",
+      "key": [
+        "1010"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "I have found a method to enter the Chamber of Khaz'mul!\n\r\n\rTake the Medallion of Gni'kiv from my chest.\n\r\n\rDefeat the trogg Revelosh in the chamber before the map room and retrieve the Shaft of Tsol.\n\r\n\rJoin the medallion and the shaft into the Staff of Prehistoria.\n\r\n\rUse the staff in the map room to unlock the door to the Chamber of Khaz'mul.\n\r\n\rDo these things, and the chamber will be yours!\n\r-Baelog",
+      "english": "I have found a method to enter the Chamber of Khaz'mul!$B$BTake the Medallion of Gni'kiv from my chest.$B$BDefeat the trogg Revelosh in the chamber before the map room and retrieve the Shaft of Tsol.$B$BJoin the medallion and the shaft into the Staff of Prehistoria.$B$BUse the staff in the map room to unlock the door to the Chamber of Khaz'mul.$B$BDo these things, and the chamber will be yours!$B-Baelog",
+      "field": "Text",
+      "key": [
+        "1011"
+      ],
+      "proposal": "Я нашел способ проникнуть в Чертог Хаз'Мула!\r\n\r\nВозьми медальон Вогникив из моего сундука.\r\n\r\nПобеди трогга Ревлоша в зале перед комнатой с картой и забери у него стержень Хыннещихоп.\r\n\r\nСоедини медальон и стержень – и получишь посох Древнейшей Истории.\r\n\r\nИспользуй посох в комнате с картой, чтобы открыть двери, ведущие в чертог Хаз'Мула.\r\n\r\nСделай это, и комната будет принадлежать нам!\r\n-Бейлог",
+      "proposal_hash": "65a80f20ee59a83e4052a5e1aa54a064f6440ae6553ef41626bc35c54e869d87",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "These months have given me time to ponder, to shuffle loose my old beliefs and bigotries. Alliance? Horde? Good? Evil? The meanings of these words, once so clear, now blur as my eyes gaze across the boundless sea.$B$BI now know what matters. The bananas are after me.$B$BPerched high in their tree, they eye me with cool malevolence. And the last one I tried to eat nearly gagged me! I could almost hear it scream as I smashed it, half bitten, on sea rocks.$B$BIt's war, and I will win it.",
+      "english": "These months have given me time to ponder, to shuffle loose my old beliefs and bigotries. Alliance? Horde? Good? Evil? The meanings of these words, once so clear, now blur as my eyes gaze across the boundless sea.$B$BI now know what matters. The bananas are after me.$B$BPerched high in their tree, they eye me with cool malevolence. And the last one I tried to eat nearly gagged me! I could almost hear it scream as I smashed it, half bitten, on sea rocks.$B$BIt's war, and I will win it.",
+      "field": "Text",
+      "key": [
+        "1251"
+      ],
+      "proposal": "В эти месяцы у меня было достаточно времени для раздумий о моих старых верованиях и фанатизме. Альянс? Орда? Добро? Зло? Значение этих слов, когда-то таких простых, теперь расплывалось перед моим взором, устремленным на бескрайнее море.\r\n\r\nТеперь я знаю, в чем причина. Эти бананы следят за мной. Сидят высоко и недоброжелательно следят за мной своими глазками. И когда последний раз я пытался съесть один из них, он чуть не задушил меня! Я почти слышал его крик, когда я размазал его, наполовину откушенного, по камням.\r\n\r\nЭто – война, и я ее выиграю.",
+      "proposal_hash": "d8a6838a68b1d343d93544897894601711813e7168f3bc135d3a44dddb33c601",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "The Engineering Disciplines$B$BWhile it is arguable which race first devised the science of engineering on Azeroth, there is little argument as to which races are the main proponents of it in modern times: the gnomes and the goblins.  Their dedication to engineering as a collective whole has not only fueled fantastic inventions in what is arguably a magical Age of Invention, but it also fueled their intense racial rivalry.  Nowhere is this more evident than in their divergent disciplines. ",
+      "english": "The Engineering Disciplines$B$BWhile it is arguable which race first devised the science of engineering on Azeroth, there is little argument as to which races are the main proponents of it in modern times: the gnomes and the goblins.  Their dedication to engineering as a collective whole has not only fueled fantastic inventions in what is arguably a magical Age of Invention, but it also fueled their intense racial rivalry.  Nowhere is this more evident than in their divergent disciplines. ",
+      "field": "Text",
+      "key": [
+        "1271"
+      ],
+      "proposal": "Инженерные дисцпилины\r\n\r\nНесмотря на то что вопрос о том, какая раса первой в Азероте додумалась до инженерного дела, является спорным, бесспорен тот факт, что лишь две расы преуспели в ней в настоящее время: гномы и гоблины. Их преданность инженерному делу не только вдохновила их на фантастические изобретения в смутный магический Век Изобретений, но и, как результат, породила интенсивную конкуренцию между расами. Нигде она столь очевидно не проявлялась, как на путях развития их науки.",
+      "proposal_hash": "7443016e88509499684a50679e004311daf971929cfc481da48fe5985a9bcc94",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "01001101 01100101 01110011 01110011 01100001 01100111 01100101 00100000 01110100 01101111 00100000 01000011 01100001 01110011 01110100 01110000 01101001 01110000 01100101 00111010 00100000 01111001 01101111 01110101 01110010 00100000 01101100 01100001 01110101 01101110 01100100 01110010 01111001 00100111 01110011 00100000 01110010 01100101 01100001 01100100 01111001 00100000 01100110 01101111 01110010 00100000 01110000 01101001 01100011 01101011 01110101 01110000 00101110",
+      "english": "01001101 01100101 01110011 01110011 01100001 01100111 01100101 00100000 01110100 01101111 00100000 01000011 01100001 01110011 01110100 01110000 01101001 01110000 01100101 00111010 00100000 01111001 01101111 01110101 01110010 00100000 01101100 01100001 01110101 01101110 01100100 01110010 01111001 00100111 01110011 00100000 01110010 01100101 01100001 01100100 01111001 00100000 01100110 01101111 01110010 00100000 01110000 01101001 01100011 01101011 01110101 01110000 00101110",
+      "field": "Text",
+      "key": [
+        "1331"
+      ],
+      "proposal": "01001101 01100101 01110011 01110011 01100001 01100111 01100101 00100000 01110100 01101111 00100000 01000011 01100001 01110011 01110100 01110000 01101001 01110000 01100101 00111010 00100000 01111001 01101111 01110101 01110010 00100000 01101100 01100001 01110101 01101110 01100100 01110010 01111001 00100111 01110011 00100000 01110010 01100101 01100001 01100100 01111001 00100000 01100110 01101111 01110010 00100000 01110000 01101001 01100011 01101011 01110101 01110000 00101110",
+      "proposal_hash": "853dd4926a157bf30c5792b7b8ee36e01c7644634a4f87b031a69b5ec1e8b279",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Solomon,$B$BThe carrier of this decree has been granted official status as an acting deputy of Stormwind. You may use $g him:her\n\r",
+      "english": "Solomon,$B$BThe carrier of this decree has been granted official status as an acting deputy of Stormwind. You may use $g him:her\n\r",
+      "field": "Text",
+      "key": [
+        "1471"
+      ],
+      "proposal": "Соломон!\r\n\r\nПредъявителю данного приказа дарован официальный статус действующего представителя Штормграда. Вы можете воспользоваться <его/ее> помощью в поисках доказательства участия черных драконов в делах орков Черной Горы. В случае если подобное доказательство будет обнаружено, данный представитель должен будет вернуться с вышеуказанным доказательством ко мне в Штормград, и тогда я издам приказ об отправке необходимой военной помощи в Приозерье.\r\n\r\nС наилучшими пожеланиями,\r\n\r\n\r\n\r\nВерховный лорд Болвар Фордрагон",
+      "proposal_hash": "209f388147cfc6fbef571399346bfc413740cce4e9d23c92377c7d09a4a54e88",
+      "reason": "unsupported gender structure",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Thus empowered, the Five Aspects were charged with the world's defense in the Titans' absence. With the dragons prepared to safeguard their creation, the Titans left Azeroth behind forever. Unfortunately it was only a matter of time before Sargeras learned of the newborn world's existence.... ",
+      "english": "Thus empowered, the Five Aspects were charged with the world's defense in the Titans' absence. With the dragons prepared to safeguard their creation, the Titans left Azeroth behind forever. Unfortunately it was only a matter of time before Sargeras learned of the newborn world's existence.... ",
+      "field": "Text",
+      "key": [
+        "1802"
+      ],
+      "proposal": "Получив могущество, пять Аспектов были уполномочены охранять мир в отсутствие титанов. Оставив драконов, готовых защищать их творение, титаны покинули Азерот навеки. К сожалению, Саргерас очень быстро узнал о существовании нового мира…",
+      "proposal_hash": "4b56c894df65c913c0d8124cf6fe0c1aef2574f031fdb11820aa47a405a37e7f",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Left to rule his kingdom unopposed, the Lich King began preparing for his true mission in the world. Reaching out into the human lands with his vast consciousness, the Lich King called out to any dark soul that would listen.... ",
+      "english": "Left to rule his kingdom unopposed, the Lich King began preparing for his true mission in the world. Reaching out into the human lands with his vast consciousness, the Lich King called out to any dark soul that would listen.... ",
+      "field": "Text",
+      "key": [
+        "2043"
+      ],
+      "proposal": "Избавившись от всех противников, Король-лич мог, наконец, приступить к выполнению своей истинной миссии в этом мире. Он устремил свои помыслы к землям людей, выискивая тех, в чьих душах скрывалась тьма, тех, кто слышал его зловещий зов…",
+      "proposal_hash": "e8e5700bfad9dd898adce99749ad32004bbc29c2c0bca43be47c9b2011773789",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Throm-Ka, warrior. I won't fawn over your deeds of strength and valor. They're old news. Killed any humans lately? Not many, I wager. You're slowing down. Getting soft without a challenge.\r\n\r\nI need another pair of hands, and no matter what your toadies say, you need the training I can give you. Whenever you get that through your thick skull, I'll be waiting under the canopy just outside the Den.\r\n\r\n-Frang, Warrior Trainer",
+      "english": "Throm-Ka, warrior. I won't fawn over your deeds of strength and valor. They're old news. Killed any humans lately? Not many, I wager. You're slowing down. Getting soft without a challenge.\r\n\r\nI need another pair of hands, and no matter what your toadies say, you need the training I can give you. Whenever you get that through your thick skull, I'll be waiting under the canopy just outside the Den.\r\n\r\n-Frang, Warrior Trainer",
+      "field": "Text",
+      "key": [
+        "2131"
+      ],
+      "proposal": "Тром-ка, воин. Меня не интересуют твои подвиги – это все дела прошлого. Когда ты последний раз $gубивал:убивала, человека? Наверняка давно. Ты теряешь хватку без дела.$b$bМне $gнужен напарник:нужна напарница,. А взамен я дам тебе то, что тебе нужно, – полезную тренировку. Когда до тебя дойдет, что я дело говорю, – приходи. Я буду ждать тебя под навесом прямо возле Логова.$b$b-Франг, наставник воинов",
+      "proposal_hash": "6d045d8a8855d457e61893f53592894a705f7027be452d3130877ca1ca3936e0",
+      "reason": "unsupported gender structure",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "OoOoOoO OOoOOoo OOOoOoo OOoOooO OOoOOoO OOooooO Oooooo OooOOOO OOoOOOo OOoOOoo OOoOooO OOoOOOo OOooOoO Oooooo OooOOOo OOooooO OOOoooo OOooooO Oooooo OoOoOOo OOooooO OOoOOoo OOoOOoo OOooOoO OOOOooO Oooooo OooOoOO OOoOOOo OOoOooO OOooOOO OOoOooo OOOoOoo OOOooOO Oooooo OOoOOOO OOooOOo Oooooo OooooOO OOoOooo OOooooO OOoOOOO OOOooOO",
+      "english": "OoOoOoO OOoOOoo OOOoOoo OOoOooO OOoOOoO OOooooO Oooooo OooOOOO OOoOOOo OOoOOoo OOoOooO OOoOOOo OOooOoO Oooooo OooOOOo OOooooO OOOoooo OOooooO Oooooo OoOoOOo OOooooO OOoOOoo OOoOOoo OOooOoO OOOOooO Oooooo OooOoOO OOoOOOo OOoOooO OOooOOO OOoOooo OOOoOoo OOOooOO Oooooo OOoOOOO OOooOOo Oooooo OooooOO OOoOooo OOooooO OOoOOOO OOOooOO",
+      "field": "Text",
+      "key": [
+        "2411"
+      ],
+      "proposal": "OoOoOoO OOoOOoo OOOoOoo OOoOooO OOoOOoO OOooooO Oooooo OooOOOO OOoOOOo OOoOOoo OOoOooO OOoOOOo OOooOoO Oooooo OooOOOo OOooooO OOOoooo OOooooO Oooooo OoOoOOo OOooooO OOoOOoo OOoOOoo OOooOoO OOOOooO Oooooo OooOoOO OOoOOOo OOoOooO OOooOOO OOoOooo OOOoOoo OOOooOO Oooooo OOoOOOO OOooOOo Oooooo OooooOO OOoOooo OOooooO OOoOOOO OOOooOO",
+      "proposal_hash": "9919614e9503a315b13338bb1d2969312f601d3906ca92ecd75a6a5defbefee9",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "I hope my sigil finds you well, $c. I write to you because our people have need for those strong with the blade, the glaive, and all other weapons. So much has happened since our people have been reintroduced to the other races of Azeroth that we have an even greater need for protectors of all kinds.$B$BThis is where you come in. I would tell you more, but I feel it should be in person. Find me inside Aldrassil... on the lower levels.$B$B-Alyissia, Warrior Trainer ",
+      "english": "I hope my sigil finds you well, $c. I write to you because our people have need for those strong with the blade, the glaive, and all other weapons. So much has happened since our people have been reintroduced to the other races of Azeroth that we have an even greater need for protectors of all kinds.$B$BThis is where you come in. I would tell you more, but I feel it should be in person. Find me inside Aldrassil... on the lower levels.$B$B-Alyissia, Warrior Trainer ",
+      "field": "Text",
+      "key": [
+        "2444"
+      ],
+      "proposal": "Надеюсь, ты <получил/получила> мой знак, $s. Я пишу тебе, потому что нашему народу нужны мечники, копьеносцы и другие отважные воины. С тех пор как нам стало известно о других расах Азерота, мы еще больше нуждаемся в сильных защитниках.\r\n\r\nЭто твой путь. Твое призвание. Я расскажу тебе больше, но только при встрече с глазу на глаз. Ищи меня на нижнем уровне Альдрассила.\r\n\r\n-Алайссия, наставница воинов",
+      "proposal_hash": "5d2a4aa6fe2dc683a1ecb0285b3c716798456c795b45edd11c359610ef3fe366",
+      "reason": "unknown game substitution",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": "Вы нашли святилище! Осмотрев его, вы начинаете чувствовать присутствие таинственной силы, окутывающей остров. Вам становится не по себе…$B$BНа стене вы видите бронзовую табличку с надписью:$B$B\"Это святилище Дат'Ремара, дань уважения благороднейшему из эльфов. Пусть всякий, кто придет сюда, вспомнит о жертве, которую он принес в борьбе с Плетью, а также о его беззаветной преданности нашему народу. Процветание Кель'Таласа – его заслуга\".",
+      "current_hash": "a5eb5bcbd08c6de57965bed7f2ff0c03a7fae93221b4ac78c9158322ce218003",
+      "donor_english": "Вы нашли святилище! Осмотрев его, вы начинаете чувствовать присутствие таинственной силы, окутывающей остров. Вам становится не по себе…\nНа стене вы видите бронзовую табличку с надписью:\n\"Это святилище Дат'Ремара, дань уважения благороднейшему из эльфов. Пусть всякий, кто придет сюда, вспомнит о жертве, которую он принес в борьбе с Плетью, а также о его беззаветной преданности нашему народу. Процветание Кель'Таласа – его заслуга\".",
+      "english": "You have discovered the location of the shrine!  Upon further examination, you sense a stronger pulse of the strange power that has gripped the Isle.  You feel a bit uncomfortable standing by the shrine... and perhaps a little disturbed.\n\nThe bronze placard along the side of the shrine reads:\n\n\"Here stands the Shrine of Dath'Remar, a fitting tribute to a noble elf.  Let all who gaze on this monument remember his sacrifices for our people and his dedication to the cause of our continued survival.  All who prosper in Quel'Thalas do so thanks to him.\"",
+      "field": "Text",
+      "key": [
+        "2936"
+      ],
+      "proposal": "Вы нашли святилище! Осмотрев его, вы начинаете чувствовать присутствие таинственной силы, окутывающей остров. Вам становится не по себе…\nНа стене вы видите бронзовую табличку с надписью:\n\"Это святилище Дат'Ремара, дань уважения благороднейшему из эльфов. Пусть всякий, кто придет сюда, вспомнит о жертве, которую он принес в борьбе с Плетью, а также о его беззаветной преданности нашему народу. Процветание Кель'Таласа – его заслуга\".",
+      "proposal_hash": "59f6e51abdb4785c74180302d6aaa3b64b5bbcef23dcbb38885526fcecf242b0",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "We've been on the ocean for what seems like forever. I don't think anyone knows where we are.\n\nOur supplies are dwindling, and we used up half our water trying to run the pump for the makeshift desalinator. We tried throwing a few people overboard to gain speed, but we kept all their gold so it didn't help that much.\n\nIt was kinda fun, though.",
+      "field": "Text",
+      "key": [
+        "3607"
+      ],
+      "proposal": "Кажется, мы уже целую вечность в океане. Не думаю, что кто-нибудь знает, где мы находимся.\r\n\r\nНаши припасы заканчиваются, а половину воды пришлось потратить на самодельный опреснитель. Мы выкинули несколько человек за борт, чтобы увеличить скорость, но оставили все их золото, так что это мало помогло.\r\n\r\nНо все равно это было весело.",
+      "proposal_hash": "c9c817519bfddf474956ae8c04914d1b3161a53594081ad2916245f61b48e3c2",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "We've landed! Well, more like crashed. The boats tore themselves open overnight while the \"captain\" had a rag tied to the wheel.\n\nWe all woke up face-down in the sand on this mysterious desert beach! Nobody has any idea where we are, but we'll have to make do in this exotic and highly uncharted territory.\n\nDid I say we all woke up? That may have been an exaggeration.",
+      "field": "Text",
+      "key": [
+        "3701"
+      ],
+      "proposal": "Мы высадились на землю! Точнее, разбились о нее. Лодки ночью налетели на берег, пока \"капитан\" занимался ерундой.\r\n\r\nМы все проснулись, лежа лицом вниз на этом таинственном песчаном пляже! Никто и понятия не имеет, где мы, но нам придется выживать в этой экзотической местности, не отмеченной ни на одной карте.\r\n\r\nЯ сказал, что все мы проснулись? Ну, это было преувеличение.",
+      "proposal_hash": "f0d9a005878ed1d3bca2e9cd7b63a9071977bef6643b989e6a2cfff0d1c63153",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "$p,$b$bYour companions that survived the battle with the Sha of Doubt are now in the care of Binan Village, home to Pandaria's finest healers. It looks as though they shall recover their physical injuries.$b$bThe journey to Binan will take you up the Veiled Stair to the very doorstep of Kun-Lai Summit. I urge you to bring this missive to Mayor Bramblestaff in Binan Village. There, he can direct you to your companions.$b$bI look forward to our paths crossing again.$b$b-Lorewalker Cho",
+      "english": "$p,$b$bYour companions that survived the battle with the Sha of Doubt are now in the care of Binan Village, home to Pandaria's finest healers. It looks as though they shall recover their physical injuries.$b$bThe journey to Binan will take you up the Veiled Stair to the very doorstep of Kun-Lai Summit. I urge you to bring this missive to Mayor Bramblestaff in Binan Village. There, he can direct you to your companions.$b$bI look forward to our paths crossing again.$b$b-Lorewalker Cho",
+      "field": "Text",
+      "key": [
+        "4511"
+      ],
+      "proposal": "$p,$b$bтвои друзья выжили в сражении с Ша Сомнения, и за ними ухаживают лучшие пандарийские лекари из деревни Бинан. Похоже, они поправятся.$b$bПо дороге в Бинан тебе прийдется пройти по Сокрытой лестнице к вершине Кунь-Лай. Возьми это послание в Бинан, и отдай его в руки мэра Ежевичный Посох. У него и спросишь, где найти твоих друзей.$b$bНадеюсь, наши дороги еще пересекутся.$b$b-Хранитель истории Чо",
+      "proposal_hash": "135de3b46a6d24d4f2a5e3e78bf64a4d8f4124a0d58757e43d5e53cf05798b9c",
+      "reason": "unknown game substitution",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "264"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "pages",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "3048"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "page_text_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Waypoint (Only GM can see it)",
+      "english": "Waypoint (Only GM can see it)",
+      "field": "Name",
+      "key": [
+        "1"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Visual",
+      "english": "Visual",
+      "field": "Title",
+      "key": [
+        "1"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": "Графф Быстрохват",
+      "current_hash": "41f2392a28c2c5c6d9d6a107b95fe5be6e0e81bbe5889013ead95d0949384bab",
+      "donor_english": "Gruff Swiftbite",
+      "english": "Gruff Swiftbite",
+      "field": "Name",
+      "key": [
+        "100"
+      ],
+      "proposal": "Графф Быстрохват",
+      "proposal_hash": "41f2392a28c2c5c6d9d6a107b95fe5be6e0e81bbe5889013ead95d0949384bab",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": "Неубиваемый тестовый манекен",
+      "current_hash": "00ef90b9fb9011aceb416f2949bf391d1a19a472ba5cbce103aeeeeb7510c5ca",
+      "donor_english": "Unkillable Test Dummy",
+      "english": "Unkillable Test Dummy",
+      "field": "Name",
+      "key": [
+        "1000"
+      ],
+      "proposal": "Неубиваемый тестовый манекен",
+      "proposal_hash": "00ef90b9fb9011aceb416f2949bf391d1a19a472ba5cbce103aeeeeb7510c5ca",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Axe Throw Stalker",
+      "english": "Axe Throw Stalker",
+      "field": "Name",
+      "key": [
+        "100061"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "empty donor text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": "Kill Credit",
+      "current_hash": "ae507ae6757bde2714049cfec7b4e7321fe287ee5f9f3ab3eb8617113bc2d9dd",
+      "donor_english": "Kill Credit",
+      "english": "Kill Credit",
+      "field": "Name",
+      "key": [
+        "100064"
+      ],
+      "proposal": "Kill Credit",
+      "proposal_hash": "ae507ae6757bde2714049cfec7b4e7321fe287ee5f9f3ab3eb8617113bc2d9dd",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Kill Credit: Fly to Scenario",
+      "english": "Kill Credit: Fly to Scenario",
+      "field": "Name",
+      "key": [
+        "100111"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "empty donor text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": "Armageddon",
+      "current_hash": "c2e0a8fa6396dd7ac8149d8bdb0f3a450f470b9c939a604ed8ed43f91d54b9f4",
+      "donor_english": "Armageddon",
+      "english": "Armageddon",
+      "field": "Name",
+      "key": [
+        "100121"
+      ],
+      "proposal": "Armageddon",
+      "proposal_hash": "c2e0a8fa6396dd7ac8149d8bdb0f3a450f470b9c939a604ed8ed43f91d54b9f4",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Kicked Out of The Drift  Kill Credit",
+      "english": "Kicked Out of The Drift Kill Credit",
+      "field": "Name",
+      "key": [
+        "101687"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "",
+      "english": "Tol'vir Test - GBerger",
+      "field": "Name",
+      "key": [
+        "101960"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "SLG Generic MoP (Large AOI)",
+      "field": "Name",
+      "key": [
+        "268553"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "PattyMack - Test - BadGuy",
+      "english": "PattyMack - Test - BadGuy",
+      "field": "Name",
+      "key": [
+        "43811"
+      ],
+      "proposal": "PattyMack - BadGuy Test",
+      "proposal_hash": "313cfc6341b693d7ebb4255b1fd349e86e56347656cce0f485d0e1f9ffd96330",
+      "reason": "Russian text not confirmed",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "PattyMack - Test - Orgrimmar Wind Rider",
+      "english": "PattyMack - Test - Orgrimmar Wind Rider",
+      "field": "Name",
+      "key": [
+        "52817"
+      ],
+      "proposal": "PattyMack - Orgrimmar Wind Rider  Test",
+      "proposal_hash": "97e4ebdccadea50973f8c67bd0d08bf6bb81dfed5d40be6bc263490cf0ad8ba4",
+      "reason": "Russian text not confirmed",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "100033"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "npcs",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "100773"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "creature_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Quilboar Watering Hole",
+      "field": "name",
+      "key": [
+        "1"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": "Лесопилка Восточной долины",
+      "current_hash": "f0bfd45110651fc251594999cbc9e319c3c638ac1f01f5ae6493953e9df2b88f",
+      "donor_english": "Eastvale Logging Camp",
+      "english": "Eastvale Logging Camp",
+      "field": "name",
+      "key": [
+        "100"
+      ],
+      "proposal": "Лесопилка Восточной долины",
+      "proposal_hash": "f0bfd45110651fc251594999cbc9e319c3c638ac1f01f5ae6493953e9df2b88f",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Pont de glace",
+      "field": "name",
+      "key": [
+        "1000200"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": "Гадальная чаша",
+      "current_hash": "c94c6ca04b5b7fee66a1754b9c354bb29b7e42964dac3d6612fd219dd9f9e72c",
+      "donor_english": "Scrying Bowl",
+      "english": "Scrying Bowl",
+      "field": "name",
+      "key": [
+        "10076"
+      ],
+      "proposal": "Гадальная чаша",
+      "proposal_hash": "c94c6ca04b5b7fee66a1754b9c354bb29b7e42964dac3d6612fd219dd9f9e72c",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Andron's Ledger",
+      "english": "Andron's Ledger",
+      "field": "name",
+      "key": [
+        "103613"
+      ],
+      "proposal": "[Andron's Ledger]",
+      "proposal_hash": "4b05cf4f44cc5ba8f82b8b5138b30a672a64d18a76e6769135e9520b56055fc4",
+      "reason": "Russian text not confirmed",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Tin Vein",
+      "english": "Tin Vein",
+      "field": "name",
+      "key": [
+        "103709"
+      ],
+      "proposal": "[Tin Vein]",
+      "proposal_hash": "24a72ffacde30c9b0c4f5e8027938d0a82e055578362b227e3028273880c7a37",
+      "reason": "Russian text not confirmed",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Shipwreck Debris",
+      "field": "name",
+      "key": [
+        "11"
+      ],
+      "proposal": "Обломки кораблекрушения",
+      "proposal_hash": "ded98e6ba445dc3877b53272551f6ee64ec44a208a714813f22c86dd7e1cdb5e",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Rinjis Cage",
+      "english": "Rin'ji's Cage",
+      "field": "name",
+      "key": [
+        "142036"
+      ],
+      "proposal": "Клетка Рин'джи",
+      "proposal_hash": "724303939f5e630f424c2544dc8640db9d4403732393bef97c9c1dbc06a79cc5",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": "Doodad_G_HologramTrogg01",
+      "current_hash": "d13d1567516f7eab47c5bf4f2fd113a5de6e7d23be7c2c7e1ec8b82c5d0c95c3",
+      "donor_english": "Doodad_G_HologramTrogg01",
+      "english": "Doodad_G_HologramTrogg01",
+      "field": "name",
+      "key": [
+        "142488"
+      ],
+      "proposal": "Doodad_G_HologramTrogg01",
+      "proposal_hash": "d13d1567516f7eab47c5bf4f2fd113a5de6e7d23be7c2c7e1ec8b82c5d0c95c3",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Venom Bottle",
+      "english": "Venom Bottle",
+      "field": "name",
+      "key": [
+        "142708"
+      ],
+      "proposal": "Флакон с ядом",
+      "proposal_hash": "bbc3f437ae9939edb7dd62cfe5f7be535af5f29b60d2eaaad3fb46721aad937e",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": "Doodad_GeneralChairLoEnd02",
+      "current_hash": "a31a8d73068597c139588fc7d0dbd144f4d5a169fed9217225222e6e140aa37d",
+      "donor_english": "Doodad_GeneralChairLoEnd02",
+      "english": "Doodad_GeneralChairLoEnd02",
+      "field": "name",
+      "key": [
+        "147075"
+      ],
+      "proposal": "Doodad_GeneralChairLoEnd02",
+      "proposal_hash": "a31a8d73068597c139588fc7d0dbd144f4d5a169fed9217225222e6e140aa37d",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Artificial Extrapolator",
+      "field": "name",
+      "key": [
+        "156"
+      ],
+      "proposal": "Искусственный экстраполятор",
+      "proposal_hash": "d489ab2b9973daaff20e81978fd74e189266294dd0e1de880a566306eb18e959",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Doodad_InstancePortal_Purqq",
+      "english": "Doodad_InstancePortal_Purqq",
+      "field": "name",
+      "key": [
+        "184525"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "empty donor text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "All That Glitters Prospecting Co.",
+      "english": "All That Glitters Prospecting Co.",
+      "field": "name",
+      "key": [
+        "191695"
+      ],
+      "proposal": "Компания старателей",
+      "proposal_hash": "cb0502a5212d271cba20deb432dfabf871dbb963e49a9bf9f9a6c6838db8d23c",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Doodad_org_arena_gear02",
+      "english": "Doodad_org_arena_gear02",
+      "field": "name",
+      "key": [
+        "192393"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "empty donor text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "What Does 'The End of All Things' Mean for Me?",
+      "english": "What Does 'The End of All Things' Mean for Me?",
+      "field": "name",
+      "key": [
+        "202650"
+      ],
+      "proposal": "\"Конец всего сущего – правда и домыслы\"",
+      "proposal_hash": "7eae977e3382bf923f88cec2728e274fc2139808b0a099cde671a8521d4f6833",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "102414"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "objects",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "103629"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "gameobject_template_locale"
+    },
+    {
+      "category": "choices",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Which demon hunter specialization do you want to learn?",
+      "english": "Quelle arme devons-nous rechercher en priorité ?",
+      "field": "Question",
+      "key": [
+        "231"
+      ],
+      "proposal": "Какую специализацию охотника на демонов вы хотите освоить?",
+      "proposal_hash": "77ce8e197d193f845860d082fbe9679a93939d5a2726a590fdb3267f77ed45d2",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "playerchoice_locale"
+    },
+    {
+      "category": "choices",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Which follower will you choose?",
+      "english": "На какого соратника падет ваш выбор?",
+      "field": "Question",
+      "key": [
+        "234"
+      ],
+      "proposal": "На какого соратника падет ваш выбор?",
+      "proposal_hash": "633607fa90313a6ba55524b86bf112e71f8f964f1d799be04a495b9795ff8882",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "playerchoice_locale"
+    },
+    {
+      "category": "choices",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Я покажу, как можно огранить один из этих камней. Какой эскиз ты хочешь изучить?",
+      "english": "Я покажу, как можно огранить один из этих камней. Какой эскиз ты хочешь изучить?",
+      "field": "Question",
+      "key": [
+        "237"
+      ],
+      "proposal": "Я покажу, как можно огранить один из этих камней. Какой эскиз ты хочешь изучить?",
+      "proposal_hash": "8e3e06cc14481ab56a009e34a6d88792712619ea96c1d5fff45e13265e9405be",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "playerchoice_locale"
+    },
+    {
+      "category": "choices",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Какое кольцо вы хотите изготовить? От этого зависит тип самоцвета, который понадобится для работы.",
+      "english": "Какое кольцо вы хотите изготовить? От этого зависит тип самоцвета, который понадобится для работы.",
+      "field": "Question",
+      "key": [
+        "238"
+      ],
+      "proposal": "Какое кольцо вы хотите изготовить? От этого зависит тип самоцвета, который понадобится для работы.",
+      "proposal_hash": "16c96072edbdb8b45873958c74feae69c23cff9e61f0c16105339c66298a1273",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "playerchoice_locale"
+    },
+    {
+      "category": "choices",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "The Warchief needs you! Take a flyer.",
+      "field": "Question",
+      "key": [
+        "342"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "playerchoice_locale"
+    },
+    {
+      "category": "choices",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Король призывает тебя! Вылетай.",
+      "english": "The King needs you! Please take a flyer.",
+      "field": "Question",
+      "key": [
+        "352"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "playerchoice_locale"
+    },
+    {
+      "category": "choices",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "128"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "playerchoice_locale"
+    },
+    {
+      "category": "choices",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "164"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "playerchoice_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Havoc",
+      "english": "Dévastation",
+      "field": "Header",
+      "key": [
+        "231",
+        "478"
+      ],
+      "proposal": "Истребление",
+      "proposal_hash": "3934a281ec0e3c8b51a7c3a7c34a89ba144448b0c02ea7cca55a112b95f239da",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Destrucci?n",
+      "english": "Choisir",
+      "field": "Answer",
+      "key": [
+        "231",
+        "478"
+      ],
+      "proposal": "Истребление",
+      "proposal_hash": "3934a281ec0e3c8b51a7c3a7c34a89ba144448b0c02ea7cca55a112b95f239da",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Sacré",
+      "field": "Header",
+      "key": [
+        "235",
+        "460"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Choisir",
+      "field": "Answer",
+      "key": [
+        "235",
+        "460"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "CONFIRM_ARTIFACT_CHOICE",
+      "english": "CONFIRM_ARTIFACT_CHOICE",
+      "field": "Confirmation",
+      "key": [
+        "265",
+        "584"
+      ],
+      "proposal": "CONFIRM_ARTIFACT_CHOICE",
+      "proposal_hash": "3135fc8a27df005b9c393c84ac0dfea3aaf4dd56a49541b30a05f0a664166bb1",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "CONFIRM_ARTIFACT_CHOICE",
+      "english": "CONFIRM_ARTIFACT_CHOICE",
+      "field": "Confirmation",
+      "key": [
+        "265",
+        "585"
+      ],
+      "proposal": "CONFIRM_ARTIFACT_CHOICE",
+      "proposal_hash": "3135fc8a27df005b9c393c84ac0dfea3aaf4dd56a49541b30a05f0a664166bb1",
+      "reason": "donor is English copy",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Tanaan Jungle",
+      "field": "Header",
+      "key": [
+        "342",
+        "1013"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Enter the Dark Portal",
+      "field": "Answer",
+      "key": [
+        "342",
+        "1013"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "128",
+        "273"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "responses",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "128",
+        "274"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "playerchoice_response_locale"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "You should select a character or a creature.",
+      "english": "You should select a character or a creature.",
+      "field": "content_loc8",
+      "key": [
+        "1"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "empty donor text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Incorrect syntax.",
+      "english": "Incorrect syntax.",
+      "field": "content_loc8",
+      "key": [
+        "10"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "empty donor text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Account %s NOT deleted (probably sql file format was updated)",
+      "english": "The account %s was NOT deleted (the SQL file format was probably updated).",
+      "field": "content_loc8",
+      "key": [
+        "1002"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Account %s NOT deleted (unknown error)",
+      "english": "The account %s was NOT deleted (unknown error).",
+      "field": "content_loc8",
+      "key": [
+        "1003"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Account name must contain the @ symbol.",
+      "field": "content_loc8",
+      "key": [
+        "1029"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "You are attempting to create a battle.net account with wrong command, use .bnetaccount create",
+      "field": "content_loc8",
+      "key": [
+        "1030"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "|cffffff00[|c1f40af20GM Announce by|r |cffff0000%s|cffffff00]:|r %s|r",
+      "english": "|cffffff00[|c1f40af20GM Announce by|r |cffff0000%s|cffffff00]:|r %s|r",
+      "field": "content_loc8",
+      "key": [
+        "6615"
+      ],
+      "proposal": "|cffffff00[|c1f40af20Объявление от ГМа|r |cffff0000%s|cffffff00]:|r %s|r",
+      "proposal_hash": "a88a0dc793f03205a421e0cb0ac732a2bfa399fba43b2082ce6a4faad6b80313",
+      "reason": "unbalanced color marker",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "The battle for Warsong Gulch begins in 2 minutes.",
+      "english": "The battle for Warsong Gulch begins in 2 minutes.",
+      "field": "content_loc8",
+      "key": [
+        "753"
+      ],
+      "proposal": "Сражение в Ущелье Песни Войны начнется через 2 минуты",
+      "proposal_hash": "d5b886f757790d27cf138f8e0302580ee600c9bbb85b55bb98792374e6dc96ad",
+      "reason": "possible truncated sentence",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "|cffffff00[|c1f40af20Announce by|r |cffff0000%s|cffffff00]:|r %s|r",
+      "english": "|cffffff00[|c1f40af20Announce by|r |cffff0000%s|cffffff00]:|r %s|r",
+      "field": "content_loc8",
+      "key": [
+        "787"
+      ],
+      "proposal": "|cffffff00[|c1f40af20Объявление от|r |cffff0000%s|cffffff00]:|r %s|r",
+      "proposal_hash": "46e0c2d088d2eab4ff0db5a59104a2a355f4ce013675d89ea6070bed57d47974",
+      "reason": "unbalanced color marker",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "invalid_source",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "10001"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "trinity_string"
+    },
+    {
+      "category": "server_strings",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "10002"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "trinity_string"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "GOSSIP_OPTION_QUESTGIVER",
+      "english": "GOSSIP_OPTION_QUESTGIVER",
+      "field": "OptionText",
+      "key": [
+        "0",
+        "0"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing corresponding donor locale/base",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "I want to browse your goods",
+      "english": "I want to browse your goods",
+      "field": "OptionText",
+      "key": [
+        "0",
+        "1"
+      ],
+      "proposal": "Позвольте взглянуть на ваши товары.",
+      "proposal_hash": "15f5a53cb7643f28003c1ebf8f5829bae7e3c73cf1b3b0be3690a95064b77eed",
+      "reason": "native PK already belongs to another locale; preserve it",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "I want to join the Battle Ground",
+      "english": "I want to join the Battle Ground",
+      "field": "OptionText",
+      "key": [
+        "0",
+        "10"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing corresponding donor locale/base",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "I'd like to stable my pet here",
+      "english": "I'd like to stable my pet here",
+      "field": "OptionText",
+      "key": [
+        "0",
+        "12"
+      ],
+      "proposal": "Я хочу поставить питомца в это стойло.",
+      "proposal_hash": "95bbe7b1250439fdc704fbf436ba3eda30aedd2f9e5fe7a4c2722dd952d76619",
+      "reason": "native PK already belongs to another locale; preserve it",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Profession Trainer",
+      "english": "Profession Trainer",
+      "field": "OptionText",
+      "key": [
+        "10153",
+        "0"
+      ],
+      "proposal": "Учитель профессии",
+      "proposal_hash": "34554d9e603197f64f4a36e0f49ff76665ef291b0199d83b52eb85dd14b08390",
+      "reason": "ambiguous/missing owner, locale or transition",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Train me.",
+      "english": "Train me.",
+      "field": "OptionText",
+      "key": [
+        "10350",
+        "0"
+      ],
+      "proposal": "Обучи меня.",
+      "proposal_hash": "f6c183535d6b187196884c960c76fc75f10e51e6962380d3a549ed54ec3622b4",
+      "reason": "ambiguous/missing owner, locale or transition",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Who sent you!?",
+      "english": "Who sent you!?",
+      "field": "OptionText",
+      "key": [
+        "10521",
+        "0"
+      ],
+      "proposal": "Кто тебя послал?",
+      "proposal_hash": "3e3e50d72fbb0fe7e28b8b181471747eefb0455b500cd4328bf845bed72076dc",
+      "reason": "BroadcastText priority; separate hotfix route",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "<Punch him in the mouth.>",
+      "english": "<Punch him in the mouth.>",
+      "field": "OptionText",
+      "key": [
+        "10521",
+        "1"
+      ],
+      "proposal": "<Двинуть ему в челюсть.>",
+      "proposal_hash": "5a0331a4d899fde3ddbea3c0a03f6768fb73d950cdc72c3f03520d65484c36ad",
+      "reason": "BroadcastText priority; separate hotfix route",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": "Можно мне взглянуть на товар?",
+      "current_hash": "d6c4b11516bf17ace6965cec392e2031ed03f227c45037de466cfca1af2ce27a",
+      "donor_english": "Let me browse your goods.",
+      "english": "Let me browse your goods.",
+      "field": "OptionText",
+      "key": [
+        "10841",
+        "0"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "preserve existing nonempty text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": "Ларосс, мне нужно попросить тебя кое о чем удивительном. Мне нужно отрубить тебе голову, чтобы доказать свою преданность пиратам Кровавой завесы, чтобы они позволили мне проникнуть в их ряды я, надеюсь, раскрыть их истинные намерения. Ты нужен бабушке, Босси ... Теперь как никогда.",
+      "current_hash": "d1e76dac043850f95c207e6db45e52377a8ad200d0248dc0a6dfd5373ce08686",
+      "donor_english": "Bossy, I need to ask something great of you.  I need to cut off your head to prove my loyalty to the Bloodsail Buccaneers, so they will allow me to infiltrate their ranks and hopefully discover their true intentions.\n\nBooty Bay needs you, Bossy... now more than ever.\n\n",
+      "english": "Bossy, I need to ask something great of you.  I need to cut off your head to prove my loyalty to the Bloodsail Buccaneers, so they will allow me to infiltrate their ranks and hopefully discover their true intentions.\n\nBooty Bay needs you, Bossy... now more than ever.\n\n",
+      "field": "OptionText",
+      "key": [
+        "11741",
+        "0"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "preserve existing nonempty text",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "0",
+        "20"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base option",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "gossip_menu_option_locale"
+    },
+    {
+      "category": "gossip",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "1",
+        "1"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base option",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "gossip_menu_option_locale"
+    }
+  ],
+  "scope": "Two samples per category/status/reason. Reproduce complete JSON/CSV with localize.py. No silent deletion of candidates."
+}

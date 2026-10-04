@@ -1,0 +1,248 @@
+{
+  "known_gilneas_quests": [
+    {
+      "category": "quests",
+      "current": "Арсенал мятежного лорда",
+      "current_hash": "ae2d8343d771879e90322b9c50b97e9c439c4dc50360e3120c21d022aca00bbd",
+      "donor_english": "The Rebel Lord's Arsenal",
+      "english": "The Rebel Lord's Arsenal",
+      "field": "LogTitle",
+      "key": [
+        "14159"
+      ],
+      "proposal": "Арсенал мятежного лорда",
+      "proposal_hash": "ae2d8343d771879e90322b9c50b97e9c439c4dc50360e3120c21d022aca00bbd",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": "Поговорите с Джосайей Авери в Военном квартале Гилнеаса.",
+      "current_hash": "958f592f1b5ccf17886679bd49d98bc7bdf4b62d91fb56bf0d6670992ca5b447",
+      "donor_english": "Speak to Josiah Avery at the Military District in Gilneas City.",
+      "english": "Speak to Josiah Avery at the Military District in Gilneas City.",
+      "field": "LogDescription",
+      "key": [
+        "14159"
+      ],
+      "proposal": "Поговорите с Джосайей Авери в Военном квартале Гилнеаса.",
+      "proposal_hash": "958f592f1b5ccf17886679bd49d98bc7bdf4b62d91fb56bf0d6670992ca5b447",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": "Арсенал, о котором упомянул Краули – это подвал в здании, которое находится на западе от этого места.$B$BДа, меня тоже беспокоит, что находящееся там оружие было пронесено в город врагами, но сегодня оно может спасти жителей Гилнеаса.$B$BРазыщи Джосайю Авери и конфискуй арсенал мятежников. Пусть это оружие послужит благому делу.",
+      "current_hash": "3f69fd66ff64606ff885de181d22e42464bd432f1a19b1e1a179e526ab8fcafd",
+      "donor_english": "The arsenal Crowley speaks of is in the cellar of a building just west of here.$B$BIt is unnerving that artillery was smuggled inside the city by my enemies, yet it might end up saving Gilnean lives today.$B$BFind Josiah Avery and requisition the rebel artillery.  We will put the weapons to good use.",
+      "english": "The arsenal Crowley speaks of is in the cellar of a building just west of here.$B$BIt is unnerving that artillery was smuggled inside the city by my enemies, yet it might end up saving Gilnean lives today.$B$BFind Josiah Avery and requisition the rebel artillery.  We will put the weapons to good use.",
+      "field": "QuestDescription",
+      "key": [
+        "14159"
+      ],
+      "proposal": "Арсенал, о котором упомянул Краули – это подвал в здании, которое находится на западе от этого места.$B$BДа, меня тоже беспокоит, что находящееся там оружие было пронесено в город врагами, но сегодня оно может спасти жителей Гилнеаса.$B$BРазыщи Джосайю Авери и конфискуй арсенал мятежников. Пусть это оружие послужит благому делу.",
+      "proposal_hash": "3f69fd66ff64606ff885de181d22e42464bd432f1a19b1e1a179e526ab8fcafd",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": "Из тени",
+      "current_hash": "0744d23672fe53acf939c8ad226fcd9fd44267bfe93e52b15767dfc3e231dce8",
+      "donor_english": "From the Shadows",
+      "english": "From the Shadows",
+      "field": "LogTitle",
+      "key": [
+        "14204"
+      ],
+      "proposal": "Из тени",
+      "proposal_hash": "0744d23672fe53acf939c8ad226fcd9fd44267bfe93e52b15767dfc3e231dce8",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": "Убейте 6 скрытней из стаи Кровавых Клыков.",
+      "current_hash": "a8625157ca076c075b669de119a470152b0d931e26c8c07d836a9296d7c8565b",
+      "donor_english": "Defeat 6 Bloodfang Lurkers.",
+      "english": "Defeat 6 Bloodfang Lurkers.",
+      "field": "LogDescription",
+      "key": [
+        "14204"
+      ],
+      "proposal": "Убейте 6 скрытней из стаи Кровавых Клыков.",
+      "proposal_hash": "a8625157ca076c075b669de119a470152b0d931e26c8c07d836a9296d7c8565b",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": "Он стал одним из них, да? Как мы можем сражаться с врагом, который может сотворить подобное с каждым из нас?$B$BЗнаешь, для начала мы могли бы воспользоваться арсеналом моего отца.$B$BПлохо только, что повсюду на улицах скрываются воргены. Возьми одного из моих мастифов – они все обучены выслеживать этих тварей.$B$BНадо расчистить путь, иначе мы не сможем вытащить пушки на поверхность.",
+      "current_hash": "ed144645c2daafd941e5d71b95b2468ea176f8d885c9947ed1e15c5d137c85c6",
+      "donor_english": "He turned into one of them... didn't he?  How do we even begin to fight an enemy that can do this to us?$B$BMy father's arsenal's certainly a good start, I suppose.$B$BWorgen are hiding in the alleys ahead.  Take one of my mastiffs to find them more easily.$B$BWe're going to need to clear the way ahead if we're going to move these cannons above ground.",
+      "english": "He turned into one of them... didn't he?  How do we even begin to fight an enemy that can do this to us?$B$BMy father's arsenal's certainly a good start, I suppose.$B$BWorgen are hiding in the alleys ahead.  Take one of my mastiffs to find them more easily.$B$BWe're going to need to clear the way ahead if we're going to move these cannons above ground.",
+      "field": "QuestDescription",
+      "key": [
+        "14204"
+      ],
+      "proposal": "Он стал одним из них, да? Как мы можем сражаться с врагом, который может сотворить подобное с каждым из нас?$B$BЗнаешь, для начала мы могли бы воспользоваться арсеналом моего отца.$B$BПлохо только, что повсюду на улицах скрываются воргены. Возьми одного из моих мастифов – они все обучены выслеживать этих тварей.$B$BНадо расчистить путь, иначе мы не сможем вытащить пушки на поверхность.",
+      "proposal_hash": "ed144645c2daafd941e5d71b95b2468ea176f8d885c9947ed1e15c5d137c85c6",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    },
+    {
+      "category": "quests",
+      "current": "Последняя капля человечности",
+      "current_hash": "68b7c5e14f329d5a5d51f7f8ac00ce08f15a55e4251a8436ee3acb9b64e63689",
+      "donor_english": "Last Chance at Humanity",
+      "english": "Last Chance at Humanity",
+      "field": "LogTitle",
+      "key": [
+        "14375"
+      ],
+      "proposal": "Последняя капля человечности",
+      "proposal_hash": "68b7c5e14f329d5a5d51f7f8ac00ce08f15a55e4251a8436ee3acb9b64e63689",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "existing_translation_conflict",
+      "table": "quest_template_locale"
+    }
+  ],
+  "note": "IDs from actual analysis; no claim of reachable or passing quest chain.",
+  "samples": [
+    {
+      "category": "quests",
+      "english": "Lively Highmountain Salmon",
+      "field": "LogTitle",
+      "key": [
+        "41244"
+      ],
+      "ruRU": "Энергичный лосось Крутогорья",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "objectives",
+      "english": "Vale Roll Course Finished",
+      "field": "Description",
+      "key": [
+        "251951"
+      ],
+      "ruRU": "Пройден маршрут для катания",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "rewards",
+      "english": "Hello, $R.$B$BYou don't happen to be available for a recovery mission of some importance?",
+      "field": "RewardText",
+      "key": [
+        "10263"
+      ],
+      "ruRU": "Привет тебе, $R.$B$BНе возьмешься ли ты за довольно важную миссию по изъятию имущества?",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "requests",
+      "english": "You've returned. You wish to speak to me?",
+      "field": "CompletionText",
+      "key": [
+        "10468"
+      ],
+      "ruRU": "Ты вернулся. Тебе есть о чем рассказать?",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "pages",
+      "english": "<HTML>\n<BODY>\n<BR/>\n<BR/>\n<P>\nIn memory of my dear mentor, Horatio M. Montgomery, M.D. Healer, Teacher, Friend.\n</P>\n<BR/>\n<H1 align=\"center\">\n50 BTFT - 25 ATFT\n</H1>\n<BR/>\n<P>\n\"The world is full of the sick and weary. It is our job, as healers, NAY, as men and women of medicine, to cleanse them ALL of the 'itis.'\" \n</P>\n<BR/>\n<P>\n- H.M.M., M.D., PhD, JD, Grandmaster Farmer, Dancer Extraordinaire, Friend to the Animals\n</P>\n<BR/>\n</BODY>\n</HTML>",
+      "field": "Text",
+      "key": [
+        "1031"
+      ],
+      "ruRU": "<HTML>\r\n<BODY>\r\n<BR/>\r\n<BR/>\r\n<P>\r\nВ память о моем дорогом учителе, Горацио М. Монтгомери, докторе медицины, целителе, учителе, друге.\r\n</P>\r\n<BR/>\r\n<H1 align=\"center\">\r\n50 BTFT – 25 ATFT\r\n</H1>\r\n<BR/>\r\n<P>\r\n\"Мир полон боли и тягот. Наша задача как целителей, НЕТ – мужчин или женщин, отдавших себя медицине, очистить его от всех болезней.'\" \r\n</P>\r\n<BR/>\r\n<P>\r\n- Почетный работник медицины, доктор медицины, доктор философии, доктор юридических наук, Великий Фермер, Экстраординарный Танцор, Друг Животных\r\n</P>\r\n<BR/>\r\n</BODY>\r\n</HTML>",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "npcs",
+      "english": "Boss Emoter \"Lenny\"",
+      "field": "Name",
+      "key": [
+        "101511"
+      ],
+      "ruRU": "Эмоция босса: \"Ленни\"",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "objects",
+      "english": "Shaman Shrine",
+      "field": "name",
+      "key": [
+        "100028"
+      ],
+      "ruRU": "Шаманское святилище",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "choices",
+      "english": "Which weapon should we pursue first?",
+      "field": "Question",
+      "key": [
+        "265"
+      ],
+      "ruRU": "Поисками какого оружия нам следует заняться в первую очередь?",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "responses",
+      "english": "Arcane",
+      "field": "Header",
+      "key": [
+        "265",
+        "584"
+      ],
+      "ruRU": "Тайная магия",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "gossip",
+      "english": "I wish to unlearn my pet's skills",
+      "field": "OptionText",
+      "key": [
+        "0",
+        "15"
+      ],
+      "ruRU": "Я хочу, чтобы мой питомец забыл кое-какие навыки.",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "server_strings",
+      "english": "The battle for Strand of the Ancients begins in 2 minutes.",
+      "field": "content_loc8",
+      "key": [
+        "10056"
+      ],
+      "ruRU": "Битва начнется через 2 минуты.",
+      "status": "SQL verified; server/client pending"
+    },
+    {
+      "category": "broadcast",
+      "english": "I'm ready.",
+      "field": "Text_lang",
+      "key": [
+        "96430"
+      ],
+      "ruRU": "Можем идти.",
+      "status": "SQL verified; server/client pending"
+    }
+  ]
+}

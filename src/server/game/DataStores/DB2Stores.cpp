@@ -559,7 +559,9 @@ void DB2Manager::LoadStores(std::string const& dataPath, uint32 defaultLocale)
     std::string db2Path = dataPath + "dbc/";
 
     DB2StoreProblemList bad_db2_files;
-    uint32 availableDb2Locales = 0xFF;
+    // Include ruRU (8) and later locales only when their files are loaded.
+    uint32 availableDb2Locales = sConfigMgr->GetBoolDefault("DB2.Files.LoadAllLocales", true)
+        ? ((uint32(1) << TOTAL_LOCALES) - 1) & ~(uint32(1) << LOCALE_none) : (uint32(1) << defaultLocale);
 
 #define LOAD_DB2(store) LoadDB2(availableDb2Locales, bad_db2_files, _stores, &store, db2Path, defaultLocale, store)
 

@@ -1,0 +1,17 @@
+{
+  "accepted_fields": 0,
+  "classifications": {
+    "entity_absent": 740,
+    "insufficient_data": 776,
+    "manual_review": 18
+  },
+  "coverage": {
+    "pointers": {
+      "english_fields_in_current_db": 794,
+      "remaining_fields": 794
+    }
+  },
+  "packages": 0,
+  "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+  "target_sha256": "adc0caaeb6dcad43f5a9976966666d90db98f58b28485e1860992a8501eefe87"
+}

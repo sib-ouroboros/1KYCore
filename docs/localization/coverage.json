@@ -1,0 +1,139 @@
+{
+  "date": "2026-10-04",
+  "hotfix": {
+    "accepted_fields": 40091,
+    "classifications": {
+      "automatic": 40091,
+      "entity_absent": 6041,
+      "existing_translation_conflict": 108406,
+      "insufficient_data": 26,
+      "invalid_source": 1759,
+      "manual_review": 85
+    },
+    "coverage": {
+      "broadcast": {
+        "accepted_fields": 40091,
+        "empty_english_excluded": 96195,
+        "english_fields_in_current_db": 150367,
+        "existing_cyrillic": 108258,
+        "existing_nonempty_unreviewed": 148,
+        "remaining_fields": 1870
+      }
+    },
+    "packages": 341,
+    "scope": "Current DB fields, not proof of in-game accessibility/linguistic validation.",
+    "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+    "target_sha256": "2cd069bf5ca5d7cd8b78736bd9618c3a507c711387a973e1a2ce3fd59f81f425"
+  },
+  "meaning": "Counts of nonempty base text fields on current DB entities, not reachable content, translation quality or client UI coverage.",
+  "pointers": {
+    "accepted_fields": 0,
+    "classifications": {
+      "entity_absent": 740,
+      "insufficient_data": 776,
+      "manual_review": 18
+    },
+    "coverage": {
+      "pointers": {
+        "english_fields_in_current_db": 794,
+        "remaining_fields": 794
+      }
+    },
+    "packages": 0,
+    "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+    "target_sha256": "adc0caaeb6dcad43f5a9976966666d90db98f58b28485e1860992a8501eefe87"
+  },
+  "start_commit": "567027437455e56d8d055a56a064b462921b49c8",
+  "world": {
+    "accepted_fields": 22565,
+    "classifications": {
+      "automatic": 22565,
+      "entity_absent": 19116,
+      "existing_translation_conflict": 195171,
+      "insufficient_data": 26377,
+      "invalid_source": 18324,
+      "manual_review": 36145
+    },
+    "coverage": {
+      "choices": {
+        "accepted_fields": 1,
+        "english_fields_in_current_db": 19,
+        "remaining_fields": 18
+      },
+      "gossip": {
+        "accepted_fields": 2,
+        "empty_english_excluded": 7839,
+        "english_fields_in_current_db": 7895,
+        "existing_cyrillic": 18,
+        "remaining_fields": 7875
+      },
+      "npcs": {
+        "accepted_fields": 192,
+        "empty_english_excluded": 312952,
+        "english_fields_in_current_db": 128976,
+        "existing_cyrillic": 110063,
+        "existing_nonempty_unreviewed": 573,
+        "remaining_fields": 18148
+      },
+      "objectives": {
+        "accepted_fields": 246,
+        "empty_english_excluded": 16360,
+        "english_fields_in_current_db": 11708,
+        "existing_cyrillic": 10341,
+        "existing_nonempty_unreviewed": 1,
+        "remaining_fields": 1120
+      },
+      "objects": {
+        "accepted_fields": 14561,
+        "empty_english_excluded": 48939,
+        "english_fields_in_current_db": 49613,
+        "existing_cyrillic": 16657,
+        "existing_nonempty_unreviewed": 13,
+        "remaining_fields": 18382
+      },
+      "pages": {
+        "accepted_fields": 496,
+        "english_fields_in_current_db": 2487,
+        "existing_cyrillic": 1,
+        "remaining_fields": 1990
+      },
+      "quests": {
+        "accepted_fields": 6501,
+        "empty_english_excluded": 183957,
+        "english_fields_in_current_db": 77160,
+        "existing_cyrillic": 57262,
+        "existing_nonempty_unreviewed": 82,
+        "remaining_fields": 13315
+      },
+      "requests": {
+        "accepted_fields": 160,
+        "empty_english_excluded": 1582,
+        "english_fields_in_current_db": 7240,
+        "existing_cyrillic": 51,
+        "remaining_fields": 7029
+      },
+      "responses": {
+        "accepted_fields": 8,
+        "empty_english_excluded": 83,
+        "english_fields_in_current_db": 345,
+        "remaining_fields": 337
+      },
+      "rewards": {
+        "accepted_fields": 303,
+        "empty_english_excluded": 10,
+        "english_fields_in_current_db": 12066,
+        "existing_cyrillic": 109,
+        "remaining_fields": 11654
+      },
+      "server_strings": {
+        "accepted_fields": 95,
+        "english_fields_in_current_db": 1073,
+        "remaining_fields": 978
+      }
+    },
+    "packages": 184,
+    "scope": "Current DB fields, not proof of in-game accessibility/linguistic validation.",
+    "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+    "target_sha256": "b2c2335576711f649471f2e675d421907eab4fab95f57831a2b4d707e74528ea"
+  }
+}

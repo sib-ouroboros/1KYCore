@@ -1,0 +1,150 @@
+{
+  "counts": [
+    {
+      "category": "pointers",
+      "fields_or_absent_rows": 740,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "pointers",
+      "fields_or_absent_rows": 776,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "pointers",
+      "fields_or_absent_rows": 17,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    },
+    {
+      "category": "pointers",
+      "fields_or_absent_rows": 1,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "manual_review"
+    }
+  ],
+  "samples": [
+    {
+      "category": "pointers",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Thunderbrew Distillery",
+      "field": "Name",
+      "key": [
+        "10001"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "points_of_interest_locale"
+    },
+    {
+      "category": "pointers",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Shelby Stoneflint",
+      "field": "Name",
+      "key": [
+        "10002"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "insufficient_data",
+      "table": "points_of_interest_locale"
+    },
+    {
+      "category": "pointers",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Darnassus Inscription",
+      "english": "Stormwind Fishing",
+      "field": "Name",
+      "key": [
+        "107"
+      ],
+      "proposal": "Дарнасский начертатель",
+      "proposal_hash": "af14bebc3ae4bb9a24b21b7e86b5a1c6a02a4f8f9b7f6ad438730d36a04f5692",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "points_of_interest_locale"
+    },
+    {
+      "category": "pointers",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Darnassus Leatherworking Trainer",
+      "english": "Stormwind Enchanting",
+      "field": "Name",
+      "key": [
+        "108"
+      ],
+      "proposal": "Дарнасский учитель кожевничества",
+      "proposal_hash": "bf40725c2c61ab8a6222163d6a3182f062186d19ed36549560814c7b05bf25c0",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "points_of_interest_locale"
+    },
+    {
+      "category": "pointers",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": "Stormwind First Aid",
+      "field": "Name",
+      "key": [
+        "1427"
+      ],
+      "proposal": "Луносвет: дом гильдий",
+      "proposal_hash": "c8ae65ee8c648fbccaf80a310e9fcfcbffa45ca8db647c5d4b527fb5f98e64e1",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "manual_review",
+      "table": "points_of_interest_locale"
+    },
+    {
+      "category": "pointers",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "1"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "points_of_interest_locale"
+    },
+    {
+      "category": "pointers",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "10"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "fcb3cf94537a44d0b46a8edee5e73e5b2e93bdfe28d7441c7340d902a8379bee",
+      "status": "entity_absent",
+      "table": "points_of_interest_locale"
+    }
+  ],
+  "scope": "Two samples per category/status/reason. Reproduce complete JSON/CSV with localize.py. No silent deletion of candidates."
+}

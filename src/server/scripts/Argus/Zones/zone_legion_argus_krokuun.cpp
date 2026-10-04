@@ -17,6 +17,8 @@
 
 #include "ScriptMgr.h"
 #include "Player.h"
+#include "DB2Stores.h"
+#include "WorldSession.h"
 #include "SpellMgr.h"
 #include "ScriptedGossip.h"
 #include "ScriptedCreature.h"
@@ -72,7 +74,22 @@ class spell_garothi_obliterator_fiery_mortars : public SpellScript
     }
 };
 
-#define GOSSIP_VEREESA_READY "I'm ready."
+namespace
+{
+    // Existing BroadcastText 27602 contains both gender forms and enUS fallback.
+    std::string GetLocalizedArgusReadyText(Player* player)
+    {
+        if (BroadcastTextEntry const* text = sBroadcastTextStore.LookupEntry(27602))
+        {
+            char const* localized = DB2Manager::GetBroadcastTextValue(text,
+                player->GetSession()->GetSessionDbLocaleIndex(), player->getGender());
+            if (localized && localized[0])
+                return localized;
+        }
+
+        return "I'm ready.";
+    }
+}
 enum
 {
     QUEST_A_THE_HAND_OF_FATE = 47221,
@@ -519,7 +536,7 @@ public:
             {
                 //TC_LOG_ERROR("server.worldserver", "QUEST_INTO_THE_NIGHT OnGossipHello ");
                 ClearGossipMenuFor(player);
-                AddGossipItemFor(player, GOSSIP_ICON_CHAT, GOSSIP_VEREESA_READY, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
+                AddGossipItemFor(player, GOSSIP_ICON_CHAT, GetLocalizedArgusReadyText(player), GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
                 SendGossipMenuFor(player, NPC_TEXT_TO_ARGUS, creature->GetGUID());
             }
             else

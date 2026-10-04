@@ -1,0 +1,25 @@
+{
+  "accepted_fields": 40091,
+  "classifications": {
+    "automatic": 40091,
+    "entity_absent": 6041,
+    "existing_translation_conflict": 108406,
+    "insufficient_data": 26,
+    "invalid_source": 1759,
+    "manual_review": 85
+  },
+  "coverage": {
+    "broadcast": {
+      "accepted_fields": 40091,
+      "empty_english_excluded": 96195,
+      "english_fields_in_current_db": 150367,
+      "existing_cyrillic": 108258,
+      "existing_nonempty_unreviewed": 148,
+      "remaining_fields": 1870
+    }
+  },
+  "packages": 341,
+  "scope": "Current DB fields, not proof of in-game accessibility/linguistic validation.",
+  "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+  "target_sha256": "2cd069bf5ca5d7cd8b78736bd9618c3a507c711387a973e1a2ce3fd59f81f425"
+}

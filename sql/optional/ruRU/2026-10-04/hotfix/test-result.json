@@ -1,0 +1,16 @@
+{
+  "all_apply": "PASS",
+  "database": "ru_hotfix_target",
+  "exact_full_database_rollback": "PASS",
+  "fields": 40091,
+  "mysql_version": "8.0.45",
+  "only_allowlisted_fields_and_owned_rows": "PASS",
+  "other_locales_and_gameplay_tables": "PASS",
+  "packages": 341,
+  "partial_apply_retry": "PASS",
+  "repeat_apply": "PASS",
+  "repeat_rollback": "PASS",
+  "stale_apply": "PASS",
+  "stale_rollback": "PASS",
+  "tables_checked": 368
+}

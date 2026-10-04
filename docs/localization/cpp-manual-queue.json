@@ -1,0 +1,4093 @@
+[
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/game/AI/ScriptedAI/ScriptedGossip.cpp",
+    "line": 24,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/game/Battlegrounds/Zones/BattlegroundAB.cpp",
+    "line": 232,
+    "literals": [
+      "Only The Alliance can use that portal"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/game/Battlegrounds/Zones/BattlegroundAB.cpp",
+    "line": 238,
+    "literals": [
+      "Only The Horde can use that portal"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/game/Battlegrounds/Zones/BattlegroundAV.cpp",
+    "line": 548,
+    "literals": [
+      "Only The Alliance can use that portal"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/game/Battlegrounds/Zones/BattlegroundAV.cpp",
+    "line": 554,
+    "literals": [
+      "Only The Horde can use that portal"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/BrawlersGuild/BrawlersGuild.cpp",
+    "line": 114,
+    "literals": [
+      "Your rank very high! Now realeased only rank 1,2,3, 4, 5, 6, 7"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Chat/Chat.cpp",
+    "line": 567,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/game/Entities/Player/Player.cpp",
+    "line": 1275,
+    "literals": [
+      "Thank you for playing with MagicStormCore. Here is some money for your loyalty. :)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Entities/Player/Player.cpp",
+    "line": 6945,
+    "literals": [
+      "You have been awarded a token for slaying another player."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/game/Entities/Player/Player.cpp",
+    "line": 21003,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Entities/Player/Player.cpp",
+    "line": 21030,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Entities/Player/Player.cpp",
+    "line": 29167,
+    "literals": [
+      "You don't have any space in your bags."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Entities/Player/Player.cpp",
+    "line": 29192,
+    "literals": [
+      "You don't have any space in your bags."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Entities/Player/Player.cpp",
+    "line": 30202,
+    "literals": [
+      "Please come back later."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Globals/ObjectMgr.cpp",
+    "line": 9489,
+    "literals": [
+      "MaxCount != 0 (%u) but IncrTime == 0"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Globals/ObjectMgr.cpp",
+    "line": 9497,
+    "literals": [
+      "MaxCount == 0 but IncrTime<>= 0"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Handlers/CharacterHandler.cpp",
+    "line": 1035,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/game/Handlers/ChatHandler.cpp",
+    "line": 103,
+    "literals": [
+      "API chat configuration is no longer supported."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Handlers/LFGListHandler.cpp",
+    "line": 138,
+    "literals": [
+      "You can't join it while you in group!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/game/Instances/InstanceScript.cpp",
+    "line": 700,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddMenuItem",
+    "encoding": "cp1251",
+    "file": "src/server/game/Server/CustomTalkMenu.cpp",
+    "line": 78,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddMenuItem",
+    "encoding": "cp1251",
+    "file": "src/server/game/Server/CustomTalkMenu.cpp",
+    "line": 81,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Spells/SpellMgr.cpp",
+    "line": 106,
+    "literals": [
+      "The craft spell %u does not have a create item entry."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Spells/SpellMgr.cpp",
+    "line": 120,
+    "literals": [
+      "Craft spell %u has created a non-existing in DB item (Entry: %u) and then..."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Spells/SpellMgr.cpp",
+    "line": 138,
+    "literals": [
+      "Spell %u learn to broken spell %u, and then..."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/game/Spells/SpellMgr.cpp",
+    "line": 158,
+    "literals": [
+      "Craft spell %u refers a non-existing reagent in DB item (Entry: %u) and then..."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrawlersGuild/BrawlersGuild.cpp",
+    "line": 111,
+    "literals": [
+      "Your rank very high! Now realeased only rank 1,2,3, 4, 5, 6, 7"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/ClassHalls/class_hall_hunter.cpp",
+    "line": 207,
+    "literals": [
+      "J'aimerais revoir les armes que nous pourrions rechercher."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/ClassHalls/class_hall_hunter.cpp",
+    "line": 269,
+    "literals": [
+      "Je voudrais choisir une autre arme prodigieuse."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/CourtOfStars/court_of_stars.cpp",
+    "line": 144,
+    "literals": [
+      "Send a signal to Ly'leth Lunastre."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/DemonHunterZones/zone_mardum.cpp",
+    "line": 1023,
+    "literals": [
+      "Kayn, I'll show you what I've learned about demonic mysteries."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/DemonHunterZones/zone_mardum.cpp",
+    "line": 1121,
+    "literals": [
+      "Get Ready, Mannethrel. I'm going to fill you with the power of the Legion's secrets."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/KarazhanLegion/boss_opera_karazhan_legion.cpp",
+    "line": 307,
+    "literals": [
+      "I'm not a actor"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "Talk",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/KarazhanLegion/instance_karazhan_legion.cpp",
+    "line": 88,
+    "literals": [
+      "The strange chill of a dark presence winds through the air"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/KarazhanLegion/karazhan_legion.cpp",
+    "line": 31,
+    "literals": [
+      "Summon Nightbane"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/TrialOfValor/boss_odyn_tov.cpp",
+    "line": 161,
+    "literals": [
+      "I will fight her in your name, Odyn!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/Zones/zone_legion_azsuna.cpp",
+    "line": 411,
+    "literals": [
+      "Please, show me where the Tidestone lies."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/Zones/zone_legion_dalaran_legion.cpp",
+    "line": 639,
+    "literals": [
+      "Je suis pret a lancer l'assaut."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/Zones/zone_legion_valsharah.cpp",
+    "line": 45,
+    "literals": [
+      "I am ready to aid you, Malfurion."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/BrokenIsles/Zones/zone_legion_valsharah.cpp",
+    "line": 93,
+    "literals": [
+      "I am ready, Ysera. Let us find Malfurion!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_account.cpp",
+    "line": 304,
+    "literals": [
+      "IP2Location] No information"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_account.cpp",
+    "line": 548,
+    "literals": [
+      "Lowest level: No Email input required."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 134,
+    "literals": [
+      "character"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 224,
+    "literals": [
+      "account"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 227,
+    "literals": [
+      "character"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 230,
+    "literals": [
+      "ip"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 427,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 436,
+    "literals": [
+      " ==============================================================================="
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 440,
+    "literals": [
+      "-------------------------------------------------------------------------------"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 466,
+    "literals": [
+      "|%-15.15s|%02d-%02d-%02d %02d:%02d|   permanent  |%-15.15s|%-15.15s|"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 475,
+    "literals": [
+      "|%-15.15s|%02d-%02d-%02d %02d:%02d|%02d-%02d-%02d %02d:%02d|%-15.15s|%-15.15s|"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 486,
+    "literals": [
+      " ==============================================================================="
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 523,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 531,
+    "literals": [
+      " =============================================================================== "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 535,
+    "literals": [
+      "-------------------------------------------------------------------------------"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 555,
+    "literals": [
+      "|%-15.15s|%02d-%02d-%02d %02d:%02d|   permanent  |%-15.15s|%-15.15s|"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 564,
+    "literals": [
+      "|%-15.15s|%02d-%02d-%02d %02d:%02d|%02d-%02d-%02d %02d:%02d|%-15.15s|%-15.15s|"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 574,
+    "literals": [
+      " =============================================================================== "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 616,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 624,
+    "literals": [
+      " ==============================================================================="
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 628,
+    "literals": [
+      "-------------------------------------------------------------------------------"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 635,
+    "literals": [
+      "|%-15.15s|%02d-%02d-%02d %02d:%02d|   permanent  |%-15.15s|%-15.15s|"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 644,
+    "literals": [
+      "|%-15.15s|%02d-%02d-%02d %02d:%02d|%02d-%02d-%02d %02d:%02d|%-15.15s|%-15.15s|"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_ban.cpp",
+    "line": 652,
+    "literals": [
+      " ==============================================================================="
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_battlenet_account.cpp",
+    "line": 157,
+    "literals": [
+      "IP2Location] No information"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_battlenet_account.cpp",
+    "line": 486,
+    "literals": [
+      "----------------------------------------------------"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_battlenet_account.cpp",
+    "line": 488,
+    "literals": [
+      "----------------------------------------------------"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_battlenet_account.cpp",
+    "line": 492,
+    "literals": [
+      "| %10u | %-16.16s | %-16.16s |"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_battlenet_account.cpp",
+    "line": 494,
+    "literals": [
+      "----------------------------------------------------"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 72,
+    "literals": [
+      "Godmode is OFF. You can take damage."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 78,
+    "literals": [
+      "Godmode is ON. You won't take damage."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 98,
+    "literals": [
+      "CastTime Cheat is OFF. Your spells will have a casttime."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 104,
+    "literals": [
+      "CastTime Cheat is ON. Your spells won't have a casttime."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 124,
+    "literals": [
+      "Cooldown Cheat is OFF. You are on the global cooldown."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 130,
+    "literals": [
+      "Cooldown Cheat is ON. You are not on the global cooldown."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 150,
+    "literals": [
+      "Power Cheat is OFF. You need mana/rage/energy to use spells."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 156,
+    "literals": [
+      "Power Cheat is ON. You don't need mana/rage/energy to use spells."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 195,
+    "literals": [
+      "Waterwalking is OFF. You can't walk on water."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 202,
+    "literals": [
+      "Waterwalking is ON. You can walk on water."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 300,
+    "literals": [
+      "All spell cheats are OFF. You will take damage, your spells will have a casttime, a cooldown and a power cost."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_cheat.cpp",
+    "line": 306,
+    "literals": [
+      "All spell cheats are ON. You won't take damage, your spells won't have a casttime, a cooldown and a power cost."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 155,
+    "literals": [
+      "Waypoints for sequence %u, camera %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 159,
+    "literals": [
+      "%02u - %7ums [%s (%f degrees)]"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 162,
+    "literals": [
+      " waypoints dumped"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 414,
+    "literals": [
+      "0"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 527,
+    "literals": [
+      "Loot recipient for creature %s (%s, DB GUID %s) is %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 586,
+    "literals": [
+      "bag: 255 slot: %d %s owner: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 589,
+    "literals": [
+      "bag: 255 slot: %d %s owner: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 623,
+    "literals": [
+      "bag: %d slot: %d %s - state: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 626,
+    "literals": [
+      "The player's updatequeue is empty"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 644,
+    "literals": [
+      "Item with slot %d and %s has an incorrect slot value: %d"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 651,
+    "literals": [
+      "The item with slot %d %s does have non-matching owner guid %s and %s!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 658,
+    "literals": [
+      "The item with slot %d %s has a container (slot: %d, %s) but shouldn't!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 668,
+    "literals": [
+      "The item with slot %d and %s has its queuepos (%d) larger than the update queue size! "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 675,
+    "literals": [
+      "The item with slot %d and %s has its queuepos (%d) pointing to NULL in the queue!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 682,
+    "literals": [
+      "The item with slot %d and %s has a queuepos (%d) that points to another item in the queue (bag: %d, slot: %d, %s)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 689,
+    "literals": [
+      "The item with slot %d and %s is not in queue but should be (state: %d)!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 704,
+    "literals": [
+      "The item in bag %d and slot %d (%s) has an incorrect slot value: %d"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 711,
+    "literals": [
+      "The item in bag %d at slot %d and %s, the owner (%s) and the player (%s) don't match!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 719,
+    "literals": [
+      "The item in bag %d at slot %d %s has no container!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 726,
+    "literals": [
+      "The item in bag %d at slot %d %s has a different container(slot %d %s)!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 736,
+    "literals": [
+      "The item in bag %d at slot %d having %s has a queuepos (%d) larger than the update queue size! "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 743,
+    "literals": [
+      "The item in bag %d at slot %d having %s has a queuepos (%d) that points to NULL in the queue!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 750,
+    "literals": [
+      "The item in bag %d at slot %d having %s has a queuepos (%d) that points to another item in the queue (bag: %d, slot: %d, %s)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 757,
+    "literals": [
+      "The item in bag %d at slot %d having %s is not in queue but should be (state: %d)!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 773,
+    "literals": [
+      "queue(%zu): For the item %s, the owner (%s) and the player (%s) don't match!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 780,
+    "literals": [
+      "queue(%zu): For the item %s, the queuepos doesn't match it's position in the queue!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 792,
+    "literals": [
+      "queue(%zu): The bag(%d) and slot(%d) values for %s are incorrect, the player doesn't have any item at that position!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 799,
+    "literals": [
+      "queue(%zu): The bag(%d) and slot(%d) values for the %s are incorrect, %s is there instead!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 805,
+    "literals": [
+      "All OK!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 832,
+    "literals": [
+      "Threat list of %s (%s)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 839,
+    "literals": [
+      "   %u.   %s   (%s)  - threat %f"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 841,
+    "literals": [
+      "End of threat list."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 852,
+    "literals": [
+      "Hostil reference list of %s (%s)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 858,
+    "literals": [
+      "   %u.   %s   (%s, SpawnId: %s)  - threat %f",
+      "0"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 862,
+    "literals": [
+      "End of hostil reference list."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 881,
+    "literals": [
+      "Vehicle id set to %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 923,
+    "literals": [
+      "Unit %u entered vehicle %d"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1035,
+    "literals": [
+      "Item ",
+      ": value at %u is %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1106,
+    "literals": [
+      "Unit %s (%s) is %sin LoS",
+      "",
+      "not "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1396,
+    "literals": [
+      "Waypoint SQL written to SQL Developer log"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1417,
+    "literals": [
+      "Transport %s is %s",
+      "stopped",
+      "moving"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1418,
+    "literals": [
+      "Transport position: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1422,
+    "literals": [
+      "Transport %s %s",
+      "started",
+      "stopped"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1443,
+    "literals": [
+      "Cells loaded (mapId: %u)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1486,
+    "literals": [
+      "Target creature's PhaseId in DB: %d"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1488,
+    "literals": [
+      "Target creature's PhaseGroup in DB: %d"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1676,
+    "literals": [
+      "True"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_debug.cpp",
+    "line": 1678,
+    "literals": [
+      "False"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_disable.cpp",
+    "line": 197,
+    "literals": [
+      "This %s (Id: %u) is already disabled."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_disable.cpp",
+    "line": 209,
+    "literals": [
+      "Add Disabled %s (Id: %u) for reason %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_disable.cpp",
+    "line": 322,
+    "literals": [
+      "This %s (Id: %u) is not disabled."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_disable.cpp",
+    "line": 332,
+    "literals": [
+      "Remove Disabled %s (Id: %u)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gm.cpp",
+    "line": 147,
+    "literals": [
+      "========================"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gm.cpp",
+    "line": 157,
+    "literals": [
+      "|    %s GMLevel %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gm.cpp",
+    "line": 159,
+    "literals": [
+      "|%*s%s%*s|   %u  |",
+      " ",
+      " "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gm.cpp",
+    "line": 163,
+    "literals": [
+      "========================"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gm.cpp",
+    "line": 181,
+    "literals": [
+      "========================"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gm.cpp",
+    "line": 193,
+    "literals": [
+      "|    %s GMLevel %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gm.cpp",
+    "line": 195,
+    "literals": [
+      "|%*s%s%*s|   %u  |",
+      " ",
+      " "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gm.cpp",
+    "line": 197,
+    "literals": [
+      "========================"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gobject.cpp",
+    "line": 122,
+    "literals": [
+      "Object activated!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_gobject.cpp",
+    "line": 698,
+    "literals": [
+      "Set gobject type %d state %d"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_group.cpp",
+    "line": 129,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_group.cpp",
+    "line": 318,
+    "literals": [
+      "raid",
+      "party"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_instance.cpp",
+    "line": 95,
+    "literals": [
+      "yes",
+      "no",
+      "expired",
+      "yes",
+      "no",
+      "yes",
+      "no"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_instance.cpp",
+    "line": 114,
+    "literals": [
+      "yes",
+      "no",
+      "-",
+      "yes",
+      "no"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_instance.cpp",
+    "line": 160,
+    "literals": [
+      "yes",
+      "no",
+      "yes",
+      "no"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lfg.cpp",
+    "line": 129,
+    "literals": [
+      "%s is offline."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lookup.cpp",
+    "line": 502,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lookup.cpp",
+    "line": 504,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lookup.cpp",
+    "line": 805,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lookup.cpp",
+    "line": 807,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lookup.cpp",
+    "line": 1037,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lookup.cpp",
+    "line": 1040,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lookup.cpp",
+    "line": 1185,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_lookup.cpp",
+    "line": 1187,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_misc.cpp",
+    "line": 578,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_misc.cpp",
+    "line": 1869,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_misc.cpp",
+    "line": 2198,
+    "literals": [
+      "Player",
+      "Creature"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_misc.cpp",
+    "line": 2209,
+    "literals": [
+      "Empty"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_misc.cpp",
+    "line": 2794,
+    "literals": [
+      "%u: %s (self)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_misc.cpp",
+    "line": 2800,
+    "literals": [
+      "%u: %s (player: %s)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_misc.cpp",
+    "line": 2802,
+    "literals": [
+      "%u: %s (creature: %s)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_misc.cpp",
+    "line": 2805,
+    "literals": [
+      "%u: %s)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 68,
+    "literals": [
+      "NavMesh not loaded for current map."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 72,
+    "literals": [
+      "mmap path:"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 79,
+    "literals": [
+      "Invalid target/source selection."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 103,
+    "literals": [
+      "%s's path to %s:"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 104,
+    "literals": [
+      "Building: %s",
+      "StraightPath",
+      "Raycast",
+      "SmoothPath"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 105,
+    "literals": [
+      "Result: %s - Length: %zu - Type: %u",
+      "true",
+      "false"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 111,
+    "literals": [
+      "StartPosition     (%.3f, %.3f, %.3f)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 112,
+    "literals": [
+      "EndPosition       (%.3f, %.3f, %.3f)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 113,
+    "literals": [
+      "ActualEndPosition (%.3f, %.3f, %.3f)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 116,
+    "literals": [
+      "Enable GM mode to see the path points."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 126,
+    "literals": [
+      "mmap tileloc:"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 137,
+    "literals": [
+      "%04u%02i%02i.mmtile"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 138,
+    "literals": [
+      "gridloc [%i, %i]"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 146,
+    "literals": [
+      "NavMesh not loaded for current map."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 157,
+    "literals": [
+      "Calc   [%02i, %02i]"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 164,
+    "literals": [
+      "Dt     [??,??] (invalid poly, probably no tile loaded)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 169,
+    "literals": [
+      "Dt     [??, ??] (invalid poly, probably no tile loaded)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 178,
+    "literals": [
+      "Dt     [%02i,%02i]"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 183,
+    "literals": [
+      "Dt     [??,??] (no tile loaded)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 197,
+    "literals": [
+      "NavMesh not loaded for current map."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 201,
+    "literals": [
+      "mmap loadedtiles:"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 209,
+    "literals": [
+      "[%02i, %02i]"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 219,
+    "literals": [
+      "mmap stats:"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 220,
+    "literals": [
+      "  global mmap pathfinding is %sabled",
+      "en",
+      "dis"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 223,
+    "literals": [
+      " %u maps loaded with %u tiles overall"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 228,
+    "literals": [
+      "NavMesh not loaded for current map."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 254,
+    "literals": [
+      "Navmesh stats:"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 255,
+    "literals": [
+      " %u tiles loaded"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 256,
+    "literals": [
+      " %u BVTree nodes"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 257,
+    "literals": [
+      " %u polygons (%u vertices)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 258,
+    "literals": [
+      " %u triangles (%u vertices)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 259,
+    "literals": [
+      " %.2f MB of data (not including pointers)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 277,
+    "literals": [
+      "Found %zu Creatures."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 292,
+    "literals": [
+      "Generated %i paths in %i ms"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_mmaps.cpp",
+    "line": 295,
+    "literals": [
+      "No creatures in %f yard range."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_modify.cpp",
+    "line": 686,
+    "literals": [
+      "NOT IMPLEMENTED: %d honor NOT added."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 372,
+    "literals": [
+      "Phase %u enregistree sur ce spawn (vous etes dans les phases : %s). Sans elle la creature serait invisible a tout joueur de cette aire."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 805,
+    "literals": [
+      "GossipMenuId: %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 811,
+    "literals": [
+      "%s (0x%X)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 816,
+    "literals": [
+      "%s (0x%X)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 821,
+    "literals": [
+      "%s (0x%X)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 841,
+    "literals": [
+      "Motion type: |CFFFF0000%u|R"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 843,
+    "literals": [
+      "Motion type: |CFFFF0000%u|R"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 849,
+    "literals": [
+      "%s (0x%X)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 859,
+    "literals": [
+      "%s (0x%X)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 889,
+    "literals": [
+      "Rayon ramene de %.0f a %.0f : au-dela la recherche parcourt toute la table et sature la session."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 942,
+    "literals": [
+      "%u resultats supplementaires non affiches, plafond %u. Reduisez le rayon pour les voir."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 1693,
+    "literals": [
+      "Selected creature is already member of group "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 1722,
+    "literals": [
+      "Creature ",
+      " added to formation with leader "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 1745,
+    "literals": [
+      "Selected %s isn't in creature table"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 1752,
+    "literals": [
+      "Selected creature can't link with guid '",
+      "'"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 1757,
+    "literals": [
+      "LinkGUID '",
+      "' added to creature with DBTableGUID: '",
+      "'"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_npc.cpp",
+    "line": 1852,
+    "literals": [
+      "InhabitType updated in database, reboot needed"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_pet.cpp",
+    "line": 80,
+    "literals": [
+      "This creature cannot be tamed. Family id: 0 (CREATURE_FAMILY_NONE)."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_pet.cpp",
+    "line": 87,
+    "literals": [
+      "You already have a pet"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_pet.cpp",
+    "line": 97,
+    "literals": [
+      "Error 1"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_pet.cpp",
+    "line": 111,
+    "literals": [
+      "Error 2"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_pet.cpp",
+    "line": 158,
+    "literals": [
+      "Pet already has spell: %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_pet.cpp",
+    "line": 174,
+    "literals": [
+      "Pet has learned spell %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_pet.cpp",
+    "line": 196,
+    "literals": [
+      "Pet doesn't have that spell"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_rbac.cpp",
+    "line": 301,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_rbac.cpp",
+    "line": 314,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_rbac.cpp",
+    "line": 326,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_rbac.cpp",
+    "line": 350,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_rbac.cpp",
+    "line": 367,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_rbac.cpp",
+    "line": 369,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_reload.cpp",
+    "line": 269,
+    "literals": [
+      "DB scripts used currently, please attempt reload later."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_reload.cpp",
+    "line": 682,
+    "literals": [
+      "Warden system disabled by config - reloading warden_action skipped."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_reload.cpp",
+    "line": 902,
+    "literals": [
+      "DB scripts used currently, please attempt reload later."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_reload.cpp",
+    "line": 922,
+    "literals": [
+      "DB scripts used currently, please attempt reload later."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_reload.cpp",
+    "line": 955,
+    "literals": [
+      "DB scripts used currently, please attempt reload later."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_send.cpp",
+    "line": 277,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendNotification",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_send.cpp",
+    "line": 278,
+    "literals": [
+      "|cffff0000[Message from administrator]:|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 136,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 137,
+    "literals": [
+      "Using SSL version: %s (library: %s)"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 138,
+    "literals": [
+      "Using Boost version: %i.%i.%i"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 139,
+    "literals": [
+      "Using MySQL version: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 140,
+    "literals": [
+      "Using CMake version: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 142,
+    "literals": [
+      "Compiled on: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 146,
+    "literals": [
+      "Automatic database updates are disabled for all databases!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 169,
+    "literals": [
+      "Automatic database updates are enabled for the following databases: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 172,
+    "literals": [
+      "Worldserver listening connections on port %"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 173,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 186,
+    "literals": [
+      "VMAPs status: Enabled. LineOfSight: %i, getHeight: %i, indoorCheck: %i"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 190,
+    "literals": [
+      "VMAPs status: Disabled"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 194,
+    "literals": [
+      "MMAPs status: Enabled"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 198,
+    "literals": [
+      "MMAPs status: Disabled"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 207,
+    "literals": [
+      "%s directory doesn't exist!. Using path: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 219,
+    "literals": [
+      "%s directory located in %s. Total size: ",
+      " bytes"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 246,
+    "literals": [
+      "Using %s DBC Locale as default. All available DBC locales: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 248,
+    "literals": [
+      "Using World DB: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 263,
+    "literals": [
+      "%s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_server.cpp",
+    "line": 338,
+    "literals": [
+      "Player limits: amount %u, min. security level %s."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_tele.cpp",
+    "line": 183,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_tele.cpp",
+    "line": 281,
+    "literals": [
+      ""
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 107,
+    "literals": [
+      "%s%s|r",
+      "|cff00ff00",
+      "New path started."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 118,
+    "literals": [
+      "%s%s|r",
+      "|cffff33ff",
+      "Current creature haven't loaded path."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 142,
+    "literals": [
+      "%s%s%u%s%u%s|r",
+      "|cff00ff00",
+      "PathID: |r|cff00ffff",
+      "|r|cff00ff00: Waypoint |r|cff00ffff",
+      "|r|cff00ff00 created. "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 174,
+    "literals": [
+      "%s%s|r",
+      "|cffff33ff",
+      "You want to load path to a waypoint? Aren't you?"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 183,
+    "literals": [
+      "%s%s|r",
+      "|cffff33ff",
+      "No valid path number provided."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 237,
+    "literals": [
+      "%s%s|r|cff00ffff%u|r",
+      "|cff00ff00",
+      "Loading Path: "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 250,
+    "literals": [
+      "%s%s|r",
+      "|cff33ffff",
+      "You must select a target."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 257,
+    "literals": [
+      "%s%s|r",
+      "|cffff33ff",
+      "Target is not saved to DB."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 264,
+    "literals": [
+      "%s%s|r",
+      "|cffff33ff",
+      "Target does not have a loaded path."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 320,
+    "literals": [
+      "%s%s%u|r",
+      "|cff00ff00",
+      "Wp Event: New waypoint event added: "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 323,
+    "literals": [
+      "|cff00ff00Wp Event: You have choosed an existing waypoint script guid: %u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 334,
+    "literals": [
+      "%s%s%u|r",
+      "|cff00ff00",
+      "Wp Event: New waypoint event added: |r|cff00ffff"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 344,
+    "literals": [
+      "%s%s|r",
+      "|cff33ffff",
+      "Wp Event: You must provide waypoint script id."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 360,
+    "literals": [
+      "%s%s%u|r",
+      "|cff33ffff",
+      "Wp Event: No waypoint scripts found on id: "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 380,
+    "literals": [
+      "|cffff33ffid:|r|cff00ffff %u|r|cff00ff00, guid: |r|cff00ffff%u|r|cff00ff00, delay: |r|cff00ffff%u|r|cff00ff00, command: |r|cff00ffff%u|r|cff00ff00, datalong: |r|cff00ffff%u|r|cff00ff00, datalong2: |r|cff00ffff%u|r|cff00ff00, datatext: |r|cff00ffff%s|r|cff00ff00, posx: |r|cff00ffff%f|r|cff00ff00, posy: |r|cff00ffff%f|r|cff00ff00, posz: |r|cff00ffff%f|r|cff00ff00, orientation: |r|cff00ffff%f|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 389,
+    "literals": [
+      "|cffff33ffERROR: Waypoint script guid not present.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 405,
+    "literals": [
+      "%s%s%u|r",
+      "|cff00ff00",
+      "Wp Event: Waypoint script removed: "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 408,
+    "literals": [
+      "|cffff33ffWp Event: ERROR: you have selected a non existing script: %u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 417,
+    "literals": [
+      "|cffff33ffERROR: Waypoint script guid not present.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 425,
+    "literals": [
+      "|cffff33ffERROR: No valid waypoint script id not present.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 433,
+    "literals": [
+      "|cffff33ffERROR: No argument present.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 443,
+    "literals": [
+      "|cffff33ffERROR: No valid argument present.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 453,
+    "literals": [
+      "|cffff33ffERROR: No additional argument present.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 460,
+    "literals": [
+      "%s%s|r|cff00ffff%u|r|cff00ff00%s|r|cff00ffff%u|r",
+      "|cff00ff00",
+      "Wp Event: Waypoint script guid: ",
+      " id changed: "
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 477,
+    "literals": [
+      "|cffff33ffERROR: You have selected an non existing waypoint script guid.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 489,
+    "literals": [
+      "|cff00ff00Waypoint script:|r|cff00ffff %u|r|cff00ff00 position_x updated.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 500,
+    "literals": [
+      "|cff00ff00Waypoint script: %u position_y updated.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 511,
+    "literals": [
+      "|cff00ff00Waypoint script: |r|cff00ffff%u|r|cff00ff00 position_z updated.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 522,
+    "literals": [
+      "|cff00ff00Waypoint script: |r|cff00ffff%u|r|cff00ff00 orientation updated.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 529,
+    "literals": [
+      "|cff00ff00Waypoint script: |r|cff00ffff%u|r|cff00ff00 dataint updated.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 539,
+    "literals": [
+      "%s%s|r|cff00ffff%u:|r|cff00ff00 %s %s|r",
+      "|cff00ff00",
+      "Waypoint script:",
+      "updated."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 580,
+    "literals": [
+      "|cffff33ffERROR: You must select a waypoint.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 637,
+    "literals": [
+      "|cff00ff00DEBUG: wp modify del, PathID: |r|cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 658,
+    "literals": [
+      "|cff00ff00DEBUG: wp move, PathID: |r|cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 770,
+    "literals": [
+      "wpshow - show: %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 793,
+    "literals": [
+      "|cff00ffffDEBUG: wp show info:|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 804,
+    "literals": [
+      "|cff00ff00Show info: for current point: |r|cff00ffff%u|r|cff00ff00, Path ID: |r|cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 805,
+    "literals": [
+      "|cff00ff00Show info: delay: |r|cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 806,
+    "literals": [
+      "|cff00ff00Show info: Move flag: |r|cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 807,
+    "literals": [
+      "|cff00ff00Show info: Waypoint event: |r|cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 808,
+    "literals": [
+      "|cff00ff00Show info: Event chance: |r|cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 823,
+    "literals": [
+      "|cffff33ffPath no found.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 828,
+    "literals": [
+      "|cff00ff00DEBUG: wp on, PathID: |cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 927,
+    "literals": [
+      "|cff00ff00Showing the current creature's path.|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 933,
+    "literals": [
+      "|cff00ff00DEBUG: wp first, pathid: %u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 990,
+    "literals": [
+      "|cff00ff00DEBUG: wp last, PathID: |r|cff00ffff%u|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Commands/cs_wp.cpp",
+    "line": 1098,
+    "literals": [
+      "|cffff33ffDEBUG: wpshow - no valid command found|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_npcs.cpp",
+    "line": 69,
+    "literals": [
+      "Votre taux d'expérience personnel est désormais x%u."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_npcs.cpp",
+    "line": 71,
+    "literals": [
+      "Votre taux d'expérience est revenu à la valeur par défaut du royaume (x%g)."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_qtest.cpp",
+    "line": 35,
+    "literals": [
+      "Usage: .qtest <nomJoueur> <questId> [complete]"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_qtest.cpp",
+    "line": 48,
+    "literals": [
+      "Usage: .qtest <nomJoueur> <questId> [complete]"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_qtest.cpp",
+    "line": 56,
+    "literals": [
+      "qtest: joueur '%s' introuvable (doit etre en ligne)."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_qtest.cpp",
+    "line": 64,
+    "literals": [
+      "qtest: quete %u introuvable."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_qtest.cpp",
+    "line": 81,
+    "literals": [
+      "=== qtest joueur=%s quete=%u statut=%s ==="
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_qtest.cpp",
+    "line": 84,
+    "literals": [
+      "Objectifs: %u"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_qtest.cpp",
+    "line": 89,
+    "literals": [
+      "  [idx %d] Type=%u ObjectID=%d  %d/%d  %s"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/custom_qtest.cpp",
+    "line": 98,
+    "literals": [
+      "qtest: ForceCompleteQuest applique -> statut=%d"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "SendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/Lfg_Solo.cpp",
+    "line": 24,
+    "literals": [
+      "Service |cff4CFF00Solo LFG|r running."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Custom/solocraft.cpp",
+    "line": 205,
+    "literals": [
+      "|cffFF0000[SoloCraft]|r |cffFF8000Bonus retiré (x%0.2f).|r"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/DarkmoonIsland/darkmoon_canon.cpp",
+    "line": 50,
+    "literals": [
+      "Je souhaite devenir un homme canon !"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/DarkmoonIsland/darkmoon_canon.cpp",
+    "line": 149,
+    "literals": [
+      "Teleportez moi au canon !",
+      "Souhaitez-vous payer 30 piece d'argent ?"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/DarkmoonIsland/darkmoon_whack_gnoll.cpp",
+    "line": 215,
+    "literals": [
+      "Je souhaite jouer a Cogne-Gnoll !"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Draenor/Highmaul/highmaul.cpp",
+    "line": 4455,
+    "literals": [
+      "Oh no, it seems that you don't have anything to do here ! Beat Kargath First ! GMs have been warned."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "PSendSysMessage",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Draenor/Highmaul/highmaul.cpp",
+    "line": 4464,
+    "literals": [
+      "Oh no, it seems that you don't have anything to do here ! Beat Kargath First ! GMs have been warned."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "cp1251",
+    "file": "src/server/scripts/Draenor/TanaanIntro/tanaan_intro_finale.cpp",
+    "line": 247,
+    "literals": [
+      "Yes, I need you to help me operate that enormous tank."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "cp1251",
+    "file": "src/server/scripts/Draenor/Zones/zone_draenor_frostfire_ridge.cpp",
+    "line": 390,
+    "literals": [
+      "Emmenez-moi Г  mon fief."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "cp1251",
+    "file": "src/server/scripts/Draenor/Zones/zone_draenor_shadowmoon_dreanor.cpp",
+    "line": 185,
+    "literals": [
+      "Emmenez-moi Г  mon fief."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "cp1251",
+    "file": "src/server/scripts/Draenor/Zones/zone_draenor_shadowmoon_dreanor.cpp",
+    "line": 484,
+    "literals": [
+      "(Beast Mastery) Lean down and scratch the wolf behind its ears."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "cp1251",
+    "file": "src/server/scripts/Draenor/Zones/zone_draenor_shadowmoon_dreanor.cpp",
+    "line": 487,
+    "literals": [
+      "(Beast Mastery) Show Gara the Shadowberries."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/BlackrockMountain/BlackwingDescent/boss_chimaeron.cpp",
+    "line": 333,
+    "literals": [
+      "I suppose you'll be needing a key for this cage? Wait, don't tell me. The horrific gibbering monster behind me ate it, right?"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/BlackrockMountain/BlackwingDescent/boss_chimaeron.cpp",
+    "line": 345,
+    "literals": [
+      "You were trapped, as I recall. This situation seems oddly similar."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/BlackrockMountain/BlackwingDescent/boss_chimaeron.cpp",
+    "line": 349,
+    "literals": [
+      "Gnomes in Lava Suits, for example."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/BlackrockMountain/BlackwingDescent/boss_chimaeron.cpp",
+    "line": 353,
+    "literals": [
+      "No, I, uh, haven't seen it. You were saying?"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/BlackrockMountain/BlackwingDescent/boss_chimaeron.cpp",
+    "line": 357,
+    "literals": [
+      "Restrictions? What restrictions?"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/ScarletEnclave/chapter5.cpp",
+    "line": 297,
+    "literals": [
+      "I am ready."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/ShadowfangKeep/shadowfang_keep.cpp",
+    "line": 73,
+    "literals": [
+      "Teleport me to Baron Silberlein"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/ShadowfangKeep/shadowfang_keep.cpp",
+    "line": 75,
+    "literals": [
+      "Teleport me to Commander Springvale"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/ShadowfangKeep/shadowfang_keep.cpp",
+    "line": 77,
+    "literals": [
+      "Teleport me to Lord Walden"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/ThroneOfTheTides/instance_throne_of_the_tides.cpp",
+    "line": 552,
+    "literals": [
+      "Teleport me to on top"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "cp1251",
+    "file": "src/server/scripts/EasternKingdoms/Zones/zone_eastern_kingdoms_blasted_lands.cpp",
+    "line": 120,
+    "literals": [
+      "I would like to visit the past"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "cp1251",
+    "file": "src/server/scripts/EasternKingdoms/Zones/zone_eastern_kingdoms_blasted_lands.cpp",
+    "line": 124,
+    "literals": [
+      "Return to the present"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/EasternKingdoms/ZulAman/zulaman.cpp",
+    "line": 291,
+    "literals": [
+      "Vous etes libre ! Partez d'ici !"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 178,
+    "literals": [
+      "Azure Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 180,
+    "literals": [
+      "Ruby Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 182,
+    "literals": [
+      "Obsidian Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 184,
+    "literals": [
+      "Emerald Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 190,
+    "literals": [
+      "Azure Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 192,
+    "literals": [
+      "Ruby Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 194,
+    "literals": [
+      "Obsidian Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 196,
+    "literals": [
+      "Emerald Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/EndTime/instance_end_time.cpp",
+    "line": 201,
+    "literals": [
+      "Bronze Dragonshirine"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/WellOfEternity/well_of_eternity_teleport.cpp",
+    "line": 50,
+    "literals": [
+      "Teleport to Start."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/WellOfEternity/well_of_eternity_teleport.cpp",
+    "line": 54,
+    "literals": [
+      "Teleport to Azshara's Palace."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/WellOfEternity/well_of_eternity_teleport.cpp",
+    "line": 55,
+    "literals": [
+      "Teleport to Well of Eternity."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/WellOfEternity/well_of_eternity_teleport.cpp",
+    "line": 59,
+    "literals": [
+      "Teleport to Azshara's Palace."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/CavernsOfTime/WellOfEternity/well_of_eternity_teleport.cpp",
+    "line": 61,
+    "literals": [
+      "Teleport to Well of Eternity."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/TheVortexPinnacle/vortex_pinnacle.cpp",
+    "line": 60,
+    "literals": [
+      "Teleport me to the first platform"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/TheVortexPinnacle/vortex_pinnacle.cpp",
+    "line": 98,
+    "literals": [
+      "Teleport me to the second platform"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/Zones/zone_kalimdor_durotar.cpp",
+    "line": 476,
+    "literals": [
+      "This cannot wait. There are demons among your ranks. Let me show you."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Kalimdor/Zones/zone_kalimdor_orgrimmar.cpp",
+    "line": 573,
+    "literals": [
+      "Take me inside Grommash Hold."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Pandaria/SiegeOfOrgrimmar/boss_norushen.cpp",
+    "line": 1068,
+    "literals": [
+      "We are ready, Keeper."
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Pandaria/TerraceOfEndlessSpring/terrace_of_endless_spring.cpp",
+    "line": 64,
+    "literals": [
+      "Turn off dampening?"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Spells/spell_dh.cpp",
+    "line": 2437,
+    "literals": [
+      "Teach me!"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/Spells/spell_dh.cpp",
+    "line": 2438,
+    "literals": [
+      "Close"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  },
+  {
+    "call": "AddGossipItemFor",
+    "encoding": "utf8",
+    "file": "src/server/scripts/World/PetBattleTrainer.cpp",
+    "line": 52,
+    "literals": [
+      "Let`s Go"
+    ],
+    "reason": "heuristic visible-call literal; semantic/source/formatter review required",
+    "status": "manual_review"
+  }
+]

@@ -1,0 +1,607 @@
+{
+  "counts": [
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 6041,
+      "reason": "no target base entity",
+      "status": "entity_absent"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 108406,
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "status": "existing_translation_conflict"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 26,
+      "reason": "missing or ambiguous locale/base row",
+      "status": "insufficient_data"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 2,
+      "reason": "Russian text not confirmed",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 11,
+      "reason": "client link, texture or color identity differs",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 782,
+      "reason": "donor is English copy",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 120,
+      "reason": "empty donor text",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 125,
+      "reason": "game substitutions differ in gender branch",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 392,
+      "reason": "possible truncated sentence",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 3,
+      "reason": "unbalanced client hyperlink",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 22,
+      "reason": "unbalanced color marker",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 3,
+      "reason": "unbalanced texture marker",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 297,
+      "reason": "unknown game substitution",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 2,
+      "reason": "unsupported gender structure",
+      "status": "invalid_source"
+    },
+    {
+      "category": "broadcast",
+      "fields_or_absent_rows": 85,
+      "reason": "English field or semantic identity differs",
+      "status": "manual_review"
+    }
+  ],
+  "samples": [
+    {
+      "category": "broadcast",
+      "current": "Помогите! Хулиганы зрения лишают!",
+      "current_hash": "b366501c8ef36b3475ea142469eaa0f4193a8bac5082d40f0d43e7fed647de6f",
+      "donor_english": "Help help!  I'm being repressed!",
+      "english": "Help help!  I'm being repressed!",
+      "field": "Text_lang",
+      "key": [
+        "1"
+      ],
+      "proposal": "Помогите! Хулиганы зрения лишают!",
+      "proposal_hash": "b366501c8ef36b3475ea142469eaa0f4193a8bac5082d40f0d43e7fed647de6f",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "existing_translation_conflict",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": "Вход спрятан здесь, в Луноречье. Не зевай, берегись воров. Они меня убить хотят.",
+      "current_hash": "c5947237e16d2fa47b9cab2c6613739a6ee95645e92068bda82abf5daa787c1a",
+      "donor_english": "The entrance is hidden here in Moonbrook.  Keep your eyes peeled for thieves.  They want me dead.",
+      "english": "The entrance is hidden here in Moonbrook.  Keep your eyes peeled for thieves.  They want me dead.",
+      "field": "Text_lang",
+      "key": [
+        "10"
+      ],
+      "proposal": "Вход спрятан здесь, в Луноречье. Не зевай, берегись воров. Они меня убить хотят.",
+      "proposal_hash": "c5947237e16d2fa47b9cab2c6613739a6ee95645e92068bda82abf5daa787c1a",
+      "reason": "preserve existing nonempty text (Cyrillic is not a quality verdict)",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "existing_translation_conflict",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Can you believe there's a dwarf out there taking credit for my work? Have you ever heard of something so disrespectful?",
+      "english": "Can you believe there's a dwarf out there taking credit for my work? Have you ever heard of something so disrespectful?",
+      "field": "Text_lang",
+      "key": [
+        "100043"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "empty donor text",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Reuse",
+      "english": "Reuse",
+      "field": "Text_lang",
+      "key": [
+        "100060"
+      ],
+      "proposal": "Reuse",
+      "proposal_hash": "d688c20c64a78fab16ac5fb383a9fdd48d7e5d0cc317bf3f24690d7eb2f9b07f",
+      "reason": "donor is English copy",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Reuse",
+      "english": "Reuse",
+      "field": "Text_lang",
+      "key": [
+        "100061"
+      ],
+      "proposal": "Reuse",
+      "proposal_hash": "d688c20c64a78fab16ac5fb383a9fdd48d7e5d0cc317bf3f24690d7eb2f9b07f",
+      "reason": "donor is English copy",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "I... I don't feel so good...",
+      "english": "I... I don't feel so good...",
+      "field": "Text_lang",
+      "key": [
+        "100067"
+      ],
+      "proposal": "Мне... что-то нехорошо…",
+      "proposal_hash": "b2f2a4e790f2507aa6539847fbde2e79fc0f10add177a48445fa0892400d5a3f",
+      "reason": "possible truncated sentence",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "$p, I need you to send any survivors you find back to the temple. Chaung mentioned the Cave of the Crane, so start there. Hurry, we must escape before we are overrun!",
+      "english": "$p, I need you to send any survivors you find back to the temple. Chaung mentioned the Cave of the Crane, so start there. Hurry, we must escape before we are overrun!",
+      "field": "Text_lang",
+      "key": [
+        "100101"
+      ],
+      "proposal": "$p! Прошу тебя, найди выживших и отправь их в храм. Чуан говорил про пещеру Журавля. Начни с нее. Скорее, пока демонов не стало слишком много!",
+      "proposal_hash": "7673ca5682011e1ca3ecb78fc43b3b3912fe5edbf303ee025cec0548b0fd61e0",
+      "reason": "unknown game substitution",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "To me, hero! Elune protect us!",
+      "english": "To me, hero! Elune protect us!",
+      "field": "Text1_lang",
+      "key": [
+        "100170"
+      ],
+      "proposal": "Держись ближе, $n! Элуна защитит нас!",
+      "proposal_hash": "0e57f0f3a1f9757946c8a0e8410d5f2308eab576e8b718e3b1d230faa9f645ee",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Murky is doing exquisitely! He and his followers are working and training quite hard. Once they're fully grown, I believe that the Swamprock Tribe will be a successful, budding group of murlocs. Who knows what they'll be able to accomplish! I'm going to stay here to observe. Thank you for all your help, $p.",
+      "english": "Murky is doing exquisitely! He and his followers are working and training quite hard. Once they're fully grown, I believe that the Swamprock Tribe will be a successful, budding group of murlocs. Who knows what they'll be able to accomplish! I'm going to stay here to observe. Thank you for all your help, $p.",
+      "field": "Text_lang",
+      "key": [
+        "100171"
+      ],
+      "proposal": "У Мурчаля все великолепно! Он со своими сторонниками упорно работает и тренируется. Когда они вырастут, племя Каменистого Болота станет успешным сообществом мурлоков. Кто знает, чего они сумеют добиться! Я останусь здесь и буду наблюдать за ними. Благодарю за помощь $p.",
+      "proposal_hash": "e59ac468f70a245a862221c67914ad9e46d5d4777e66ddd045c6108ec9cef136",
+      "reason": "unknown game substitution",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Chen, take the cubs as far away from this place as you can. $n, and I will stay and seal the portal. White Tiger walk with you, my friend.",
+      "english": "Chen, take the cubs as far away from this place as you can. $n, and I will stay and seal the portal. White Tiger walk with you, my friend.",
+      "field": "Text_lang",
+      "key": [
+        "100197"
+      ],
+      "proposal": "Чэнь, уведи детей как можно дальше. Мы останемся здесь и закроем портал. Да пребудет с тобой Белый Тигр, друг мой.",
+      "proposal_hash": "feeaebdf36e6c3e98ff433d09bef2bdcd02318d17a781a28c3ac253466de798c",
+      "reason": "game substitutions differ in gender branch",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "N'eth narala. REUSE",
+      "english": "N'eth narala. REUSE",
+      "field": "Text1_lang",
+      "key": [
+        "100269"
+      ],
+      "proposal": "",
+      "proposal_hash": "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126",
+      "reason": "empty donor text",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "My strength is fading... we must find shelter...",
+      "english": "My strength is fading... we must find shelter...",
+      "field": "Text1_lang",
+      "key": [
+        "100339"
+      ],
+      "proposal": "Я слабею… Найди убежище…",
+      "proposal_hash": "c14ed58a9d30ccaa4f68d312388bb770adbfcbe526de9dc685d44963c05bf219",
+      "reason": "possible truncated sentence",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "We are discovered. Destroy $ghim:her;!",
+      "english": "We are discovered. Destroy this wretch!",
+      "field": "Text1_lang",
+      "key": [
+        "101875"
+      ],
+      "proposal": "Нас обнаружили! Избавьтесь от незваного гостя!",
+      "proposal_hash": "26dc09d0b6d07f26e6e2ac5a1c7da7fa1cd469b9e6ae537cb30ba4de1e0ecb91",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "manual_review",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "That's the $c. $GHe:She was there.",
+      "english": "That's the $c. $GHe:She was there.",
+      "field": "Text_lang",
+      "key": [
+        "103130"
+      ],
+      "proposal": "Вот $gтот:та:c; |3-6($c). $GОн был:Она была; там.",
+      "proposal_hash": "5bd6c6ab1072a79fe9dd273c28c2986234a0796e48c5f2cd96355dd1a72eae86",
+      "reason": "unsupported gender structure",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "That's the $c. $GHe:She was there.",
+      "english": "That's the $c. $GHe:She was there.",
+      "field": "Text1_lang",
+      "key": [
+        "103130"
+      ],
+      "proposal": "Вот $gтот:та:c; |3-6($c). $GОн был:Она была; там.",
+      "proposal_hash": "5bd6c6ab1072a79fe9dd273c28c2986234a0796e48c5f2cd96355dd1a72eae86",
+      "reason": "unsupported gender structure",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Look what washed up in the tides...",
+      "english": "Look what washed up in the tides...",
+      "field": "Text_lang",
+      "key": [
+        "105135"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "insufficient_data",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "This one isn't fit for service.",
+      "english": "This one isn't fit for service.",
+      "field": "Text_lang",
+      "key": [
+        "105136"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "missing or ambiguous locale/base row",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "insufficient_data",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "This is the right place. We will find the stolen recipe here.",
+      "english": "This is right place. We will find the stolen recipe here.",
+      "field": "Text1_lang",
+      "key": [
+        "105379"
+      ],
+      "proposal": "Мы на месте. Похищенный рецепт должен быть где-то здесь.",
+      "proposal_hash": "1f04d6363a209c4fb7abfc8d97f9ed8bd25e10ee2b9a5428518b30b34e9044d1",
+      "reason": "English field or semantic identity differs",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "manual_review",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "|TInterface\\Icons\\ability_thunderking_overcharge:20|t Odyn begins to cast |cFFFF0404|Hspell:201215|h[Summon Stormforged Obliterator]|h|r!",
+      "english": "|TInterface\\Icons\\ability_thunderking_overcharge:20|t Odyn begins to cast |cFFFF0404|Hspell:201215|h[Summon Stormforged Obliterator]|h|r!",
+      "field": "Text_lang",
+      "key": [
+        "106486"
+      ],
+      "proposal": "|TInterface\\Icons\\ability_priest_flashoflight:20|t Один начинает произносить заклинание |cFFFF0404|Hspell:201215|h[\"Призыв закаленного бурей уничтожителя\"]|h|r!",
+      "proposal_hash": "f434b33535b98d2dc420ddf065509978f70cc5667059724525db905268d9858e",
+      "reason": "client link, texture or color identity differs",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "|TInterface\\Icons\\ability_thunderking_overcharge:20|t Odyn begins to cast |cFFFF0404|Hspell:201215|h[Summon Stormforged Obliterator]|h|r!",
+      "english": "|TInterface\\Icons\\ability_thunderking_overcharge:20|t Odyn begins to cast |cFFFF0404|Hspell:201215|h[Summon Stormforged Obliterator]|h|r!",
+      "field": "Text1_lang",
+      "key": [
+        "106486"
+      ],
+      "proposal": "|TInterface\\Icons\\ability_priest_flashoflight:20|t Один начинает произносить заклинание |cFFFF0404|Hspell:201215|h[\"Призыв закаленного бурей уничтожителя\"]|h|r!",
+      "proposal_hash": "f434b33535b98d2dc420ddf065509978f70cc5667059724525db905268d9858e",
+      "reason": "client link, texture or color identity differs",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "%s has |cFFFF0404fallen in battle|h|r and cannot fight!",
+      "english": "%s has |cFFFF0404fallen in battle|h|r and cannot fight!",
+      "field": "Text_lang",
+      "key": [
+        "107212"
+      ],
+      "proposal": "%s |cFFFF0404пал от ран|h|r и не может продолжать сражаться!",
+      "proposal_hash": "b70499718ca2d5d89b616ec64c88ee15c5639fdfc88082eb22113c3db719163d",
+      "reason": "unbalanced client hyperlink",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "%s has |cFFFF0404fallen in battle|h|r and cannot fight!",
+      "english": "%s has |cFFFF0404fallen in battle|h|r and cannot fight!",
+      "field": "Text1_lang",
+      "key": [
+        "107212"
+      ],
+      "proposal": "%s |cFFFF0404пала от ран|h|r и не может продолжать сражаться!",
+      "proposal_hash": "5e29f7be1428c7217710aeb2b0f81b7d4ce52128c5ee48c60275af8b9fa6f024",
+      "reason": "unbalanced client hyperlink",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Eight withered.\n|cFFFF0000(Costs 400 Ancient Mana |TINTERFACE\\ICONS\\INV_Misc_ancient_mana.blp:16|t)|r",
+      "english": "Eight withered.\n|cFFFF0000(Costs 400 Ancient Mana |TINTERFACE\\ICONS\\INV_Misc_ancient_mana.blp:16|t)|r",
+      "field": "Text_lang",
+      "key": [
+        "120523"
+      ],
+      "proposal": "Восемь иссохших.\n|cFFFF0000(Стоимость – 400 ед. древней маны |TINTERFACE\\ICONS\\INV_Misc_ancient_mana.blp:16|t)",
+      "proposal_hash": "25fea0bcb2d6166b1b2ff5ad9737b5054c71606793f5084824dfadbf4b58ed49",
+      "reason": "unbalanced color marker",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "Eight withered.\n|cFFFF0000(Costs 400 Ancient Mana |TINTERFACE\\ICONS\\INV_Misc_ancient_mana.blp:16|t)|r",
+      "english": "Eight withered.\n|cFFFF0000(Costs 400 Ancient Mana |TINTERFACE\\ICONS\\INV_Misc_ancient_mana.blp:16|t)|r",
+      "field": "Text1_lang",
+      "key": [
+        "120523"
+      ],
+      "proposal": "Восемь иссохших.\n|cFFFF0000(Стоимость – 400 ед. древней маны |TINTERFACE\\ICONS\\INV_Misc_ancient_mana.blp:16|t)",
+      "proposal_hash": "25fea0bcb2d6166b1b2ff5ad9737b5054c71606793f5084824dfadbf4b58ed49",
+      "reason": "unbalanced color marker",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "....",
+      "english": "....",
+      "field": "Text_lang",
+      "key": [
+        "124181"
+      ],
+      "proposal": "…",
+      "proposal_hash": "c8d400fc2de0b15c0dfb3a365267f3f0e3d604b224bbbfb69452ab85b10fa795",
+      "reason": "Russian text not confirmed",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "....",
+      "english": "....",
+      "field": "Text1_lang",
+      "key": [
+        "124181"
+      ],
+      "proposal": "…",
+      "proposal_hash": "c8d400fc2de0b15c0dfb3a365267f3f0e3d604b224bbbfb69452ab85b10fa795",
+      "reason": "Russian text not confirmed",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "|TINTERFACE\\ICONS\\SHA_ABILITY_ROGUE_BLOODYEYE:20|Look away when Things That Should Not Be cast |cFFFF0000|Hspell:207720|h[Witness the Void] to avoid being feared|h|r!",
+      "english": "|TINTERFACE\\ICONS\\SHA_ABILITY_ROGUE_BLOODYEYE:20|Look away when Things That Should Not Be cast |cFFFF0000|Hspell:207720|h[Witness the Void] to avoid being feared|h|r!",
+      "field": "Text1_lang",
+      "key": [
+        "124327"
+      ],
+      "proposal": "|TINTERFACE\\ICONS\\SHA_ABILITY_ROGUE_BLOODYEYE:20|Отвернитесь, когда То, Чего Не Может Быть произносит заклинание |cFFFF0000|Hspell:207720|h[\"Видение Бездны\"]|h|r, чтобы вас не охватил ужас!",
+      "proposal_hash": "4073e37ca00b46ed08a37d3d4c1276b1c97922af00dccfeb3dc0ba0e1bee1974",
+      "reason": "unbalanced texture marker",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": "INTERFACE\\ICONS\\SPELL_BURNINGSOUL.BLP:20|t You have been targeted by |cFFFF0000|Hspell:240209|h[Spontaneous Fragmentation]|h|r!",
+      "english": "INTERFACE\\ICONS\\SPELL_BURNINGSOUL.BLP:20|t You have been targeted by |cFFFF0000|Hspell:240209|h[Spontaneous Fragmentation]|h|r!",
+      "field": "Text_lang",
+      "key": [
+        "134120"
+      ],
+      "proposal": "INTERFACE\\ICONS\\SPELL_BURNINGSOUL.BLP:20|t На вас нацелено заклинание |cFFFF0000|Hspell:240209|h[\"Спонтанное деление\"]|h|r!",
+      "proposal_hash": "c5b7173848903d42fc8ddfd5d90b1f739ce79eb671eb53cd34c38a829dba5aa5",
+      "reason": "unbalanced texture marker",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "invalid_source",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "1024780"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "entity_absent",
+      "table": "broadcast_text_locale"
+    },
+    {
+      "category": "broadcast",
+      "current": null,
+      "current_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "donor_english": null,
+      "english": null,
+      "field": null,
+      "key": [
+        "1024781"
+      ],
+      "proposal": null,
+      "proposal_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "reason": "no target base entity",
+      "source_sha256": "d5271b300d64147acbfa30a21c469f32a034c3a09518ddef7a5a34c95695e9c3",
+      "status": "entity_absent",
+      "table": "broadcast_text_locale"
+    }
+  ],
+  "scope": "Two samples per category/status/reason. Reproduce complete JSON/CSV with localize.py. No silent deletion of candidates."
+}
