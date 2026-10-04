@@ -287,6 +287,7 @@ void BattlegroundTP::RespawnFlagAfterDrop(uint32 team)
     RespawnFlag(team, false);
     if (team == ALLIANCE)
         SpawnBGObject(BG_TP_OBJECT_A_FLAG, RESPAWN_IMMEDIATELY);
+    else
         SpawnBGObject(BG_TP_OBJECT_H_FLAG, RESPAWN_IMMEDIATELY);
 
     SendBroadcastText(BG_TP_TEXT_FLAGS_PLACED, CHAT_MSG_BG_SYSTEM_NEUTRAL);
