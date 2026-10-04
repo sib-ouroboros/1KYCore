@@ -841,10 +841,24 @@ void ObjectMgr::LoadScriptParams()
     TC_LOG_INFO("server.loading", ">> Loaded %u script params in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
 }
 
+// These states are assigned at runtime (player control, pet rename and corpse skinning).
+static uint32 SanitizeCreatureDatabaseUnitFlags(uint32 flags)
+{
+    return flags & ~(UNIT_FLAG_PVP_ATTACKABLE | UNIT_FLAG_RENAME | UNIT_FLAG_SKINNABLE);
+}
+
 void ObjectMgr::CheckCreatureTemplate(CreatureTemplate const* cInfo)
 {
     if (!cInfo)
         return;
+
+    uint32 sanitizedFlags = SanitizeCreatureDatabaseUnitFlags(cInfo->unit_flags);
+    if (sanitizedFlags != cInfo->unit_flags)
+    {
+        TC_LOG_ERROR("sql.sql", "Creature template %u has runtime-only unit flags %u; ignoring those DB flags.",
+            cInfo->Entry, cInfo->unit_flags ^ sanitizedFlags);
+        const_cast<CreatureTemplate*>(cInfo)->unit_flags = sanitizedFlags;
+    }
 
     bool ok = true;                                     // bool to allow continue outside this loop
     for (uint32 diff = 0; diff < MAX_CREATURE_DIFFICULTIES && ok; ++diff)
@@ -2147,6 +2161,13 @@ void ObjectMgr::LoadCreatures()
         uint32 PoolId       = fields[18].GetUInt32();
         data.npcflag        = fields[19].GetUInt64();
         data.unit_flags     = fields[20].GetUInt32();
+        uint32 sanitizedFlags = SanitizeCreatureDatabaseUnitFlags(data.unit_flags);
+        if (sanitizedFlags != data.unit_flags)
+        {
+            TC_LOG_ERROR("sql.sql", "Creature spawn " UI64FMTD " (entry %u) has runtime-only unit flags %u; ignoring those DB flags.",
+                guid, data.id, data.unit_flags ^ sanitizedFlags);
+            data.unit_flags = sanitizedFlags;
+        }
         data.unit_flags2    = fields[21].GetUInt32();
         data.unit_flags3    = fields[22].GetUInt32();
         data.dynamicflags   = fields[23].GetUInt32();
