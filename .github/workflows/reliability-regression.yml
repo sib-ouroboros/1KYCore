@@ -58,6 +58,17 @@ on:
       - src/server/game/Server/ToolSocket.*
       - src/common/Utilities/MessageBuffer.h
       - src/server/game/Server/Json/**
+      - contrib/tests/test_json_array_delimiters.py
+      - contrib/tests/test_conversation_packet_layout.py
+      - src/server/game/Entities/Conversation/Conversation.h
+      - src/server/game/Globals/ConversationDataStore.h
+      - docs/audit-data/campaign-simple-conversation-restoration.json
+      - docs/audit-data/campaign-conversation-chain-restoration.json
+      - contrib/tests/test_blackhand_blaze_owner.py
+      - src/server/scripts/Draenor/BlackrockFoundry/boss_blackhand.cpp
+      - src/server/scripts/Draenor/BlackrockFoundry/boss_blackhand.h
+      - contrib/tests/test_twin_peaks_flag_return.py
+      - src/server/game/Battlegrounds/Zones/BattlegroundTP.cpp
       - src/server/game/Entities/Player/PlayerCharacterSetup.*
       - src/server/game/Entities/Player/Player.cpp
       - src/server/game/Entities/Player/Player.h
