@@ -1,0 +1,1393 @@
+{
+  "basis": "Read-only comparison of37 imported source SQL files, generated 2026_09_30 migration, clean release and all current world conversation_template INSERTs. Not a live server audit.",
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_SmartScriptMgr_sha256": "2a513b1e9796f91494230a084ef939391aaf180022c36d052e03b00817096445",
+  "source_Conversation_cpp_sha256": "8a86a8b9d1f8ec655c68b64001d2438cb606651421a5c6ad012b1844b6aa8863",
+  "migrated_conversation_rows": 98,
+  "distinct_conversation_ids": 98,
+  "present_in_clean_release": 0,
+  "covered_by_other_current_sql_inserts": [
+    2256
+  ],
+  "unresolved_template_count": 97,
+  "unresolved_ids": [
+    738,
+    740,
+    741,
+    742,
+    743,
+    1416,
+    1477,
+    1667,
+    1766,
+    1769,
+    1785,
+    1821,
+    1823,
+    1832,
+    1841,
+    1900,
+    1986,
+    2000,
+    2017,
+    2023,
+    2048,
+    2138,
+    2211,
+    2246,
+    2300,
+    2314,
+    2381,
+    2434,
+    2666,
+    2775,
+    2778,
+    2869,
+    2870,
+    2871,
+    2937,
+    2938,
+    2939,
+    2940,
+    2941,
+    2942,
+    2943,
+    2944,
+    2976,
+    3029,
+    3047,
+    3048,
+    3049,
+    3050,
+    3051,
+    3052,
+    3108,
+    3159,
+    3183,
+    3186,
+    3187,
+    3192,
+    3235,
+    3260,
+    3524,
+    3525,
+    3565,
+    3572,
+    3574,
+    3575,
+    3597,
+    3638,
+    3640,
+    3642,
+    3769,
+    3770,
+    3771,
+    3772,
+    3786,
+    3787,
+    3788,
+    3789,
+    3790,
+    3791,
+    3792,
+    3793,
+    3794,
+    3795,
+    3796,
+    3914,
+    4110,
+    4204,
+    4229,
+    4304,
+    4313,
+    4568,
+    4572,
+    4575,
+    4593,
+    4597,
+    4657,
+    4658,
+    4730
+  ],
+  "references": [
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "94138",
+      "source_type": "0",
+      "id": "2",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "2300",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "98100",
+      "source_type": "0",
+      "id": "3",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3186",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "98102",
+      "source_type": "0",
+      "id": "2",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "1821",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "98102",
+      "source_type": "0",
+      "id": "3",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "1823",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "98102",
+      "source_type": "0",
+      "id": "6",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "1841",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "102594",
+      "source_type": "0",
+      "id": "3",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "3574",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "102594",
+      "source_type": "0",
+      "id": "4",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3575",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "103761",
+      "source_type": "0",
+      "id": "1",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "4730",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "105333",
+      "source_type": "0",
+      "id": "3",
+      "link": "0",
+      "event_type": "61",
+      "action_type": "206",
+      "action_param1": "1832",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "107979",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "2381",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "11095300",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "3108",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "111307",
+      "source_type": "0",
+      "id": "3",
+      "link": "0",
+      "event_type": "2",
+      "action_type": "206",
+      "action_param1": "3183",
+      "target_type": "18"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "112959",
+      "source_type": "0",
+      "id": "0",
+      "link": "1",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3565",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_voleur_legioncore.sql",
+      "entryorguid": "112959",
+      "source_type": "0",
+      "id": "1",
+      "link": "0",
+      "event_type": "61",
+      "action_type": "206",
+      "action_param1": "3572",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "entryorguid": "99997",
+      "source_type": "0",
+      "id": "2",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3642",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "entryorguid": "111247",
+      "source_type": "0",
+      "id": "14",
+      "link": "0",
+      "event_type": "61",
+      "action_type": "206",
+      "action_param1": "3235",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "entryorguid": "111247",
+      "source_type": "9",
+      "id": "1",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "3192",
+      "target_type": "1"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "entryorguid": "111705",
+      "source_type": "0",
+      "id": "0",
+      "link": "1",
+      "event_type": "73",
+      "action_type": "206",
+      "action_param1": "3260",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "entryorguid": "113299",
+      "source_type": "0",
+      "id": "6",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3597",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "entryorguid": "119545",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "4568",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_paladin_legioncore.sql",
+      "entryorguid": "119545",
+      "source_type": "0",
+      "id": "1",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "4575",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "92447",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "3047",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "9244700",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "3048",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "9244701",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "3049",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "9244702",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "3050",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "9244703",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "3051",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "9244704",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "3052",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "109704",
+      "source_type": "0",
+      "id": "13",
+      "link": "0",
+      "event_type": "61",
+      "action_type": "206",
+      "action_param1": "3159",
+      "target_type": "1"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "116880",
+      "source_type": "0",
+      "id": "3",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "4204",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_guerrier_legioncore.sql",
+      "entryorguid": "116880",
+      "source_type": "0",
+      "id": "6",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "4597",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_pretre_legioncore.sql",
+      "entryorguid": "110687",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "10",
+      "action_type": "206",
+      "action_param1": "3029",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_pretre_legioncore.sql",
+      "entryorguid": "117648",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "6",
+      "action_type": "206",
+      "action_param1": "4304",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_pretre_legioncore.sql",
+      "entryorguid": "11769406",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "4313",
+      "target_type": "18"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_mage_legioncore.sql",
+      "entryorguid": "106700",
+      "source_type": "0",
+      "id": "4",
+      "link": "0",
+      "event_type": "4",
+      "action_type": "206",
+      "action_param1": "1667",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_mage_legioncore.sql",
+      "entryorguid": "107351",
+      "source_type": "0",
+      "id": "1",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2666",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_mage_legioncore.sql",
+      "entryorguid": "108247",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3524",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_mage_legioncore.sql",
+      "entryorguid": "108248",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3525",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_mage_legioncore.sql",
+      "entryorguid": "118242",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "10",
+      "action_type": "206",
+      "action_param1": "3914",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "entryorguid": "100812",
+      "source_type": "0",
+      "id": "9",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "1416",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "entryorguid": "105951",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "1986",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "entryorguid": "106693",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "10",
+      "action_type": "206",
+      "action_param1": "2138",
+      "target_type": "18"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "entryorguid": "115883",
+      "source_type": "0",
+      "id": "2",
+      "link": "0",
+      "event_type": "61",
+      "action_type": "206",
+      "action_param1": "4593",
+      "target_type": "2"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_demoniste_legioncore.sql",
+      "entryorguid": "119166",
+      "source_type": "0",
+      "id": "0",
+      "link": "1",
+      "event_type": "62",
+      "action_type": "206",
+      "action_param1": "4572",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "93453",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3772",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "93456",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3769",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "93555",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3788",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "93948",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "10",
+      "action_type": "206",
+      "action_param1": "738",
+      "target_type": "18"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "93948",
+      "source_type": "0",
+      "id": "1",
+      "link": "2",
+      "event_type": "4",
+      "action_type": "206",
+      "action_param1": "740",
+      "target_type": "2"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "93949",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "4",
+      "action_type": "206",
+      "action_param1": "741",
+      "target_type": "2"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "93950",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "4",
+      "action_type": "206",
+      "action_param1": "742",
+      "target_type": "2"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "93951",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "4",
+      "action_type": "206",
+      "action_param1": "743",
+      "target_type": "2"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "107554",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "2314",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "107806",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "10",
+      "action_type": "206",
+      "action_param1": "2976",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "107806",
+      "source_type": "0",
+      "id": "2",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "3187",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "108042",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "2434",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "108975",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3787",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "109000",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "10",
+      "action_type": "206",
+      "action_param1": "2778",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "109221",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "2775",
+      "target_type": "1"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "109890",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3770",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "113419",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3771",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "113481",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3786",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "113631",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3638",
+      "target_type": "1"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dk_legioncore.sql",
+      "entryorguid": "113695",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3640",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dh_legioncore.sql",
+      "entryorguid": "108572",
+      "source_type": "0",
+      "id": "8",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "2869",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dh_legioncore.sql",
+      "entryorguid": "10857200",
+      "source_type": "9",
+      "id": "0",
+      "link": "0",
+      "event_type": "0",
+      "action_type": "206",
+      "action_param1": "2870",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_dh_legioncore.sql",
+      "entryorguid": "116448",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "4110",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "42465",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "2211",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "104788",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "1900",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "105112",
+      "source_type": "0",
+      "id": "2",
+      "link": "0",
+      "event_type": "4",
+      "action_type": "206",
+      "action_param1": "1785",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "105311",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "4",
+      "action_type": "206",
+      "action_param1": "2000",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "105311",
+      "source_type": "0",
+      "id": "1",
+      "link": "0",
+      "event_type": "6",
+      "action_type": "206",
+      "action_param1": "2023",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106001",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "54",
+      "action_type": "206",
+      "action_param1": "2017",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106291",
+      "source_type": "0",
+      "id": "1",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2048",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106312",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3789",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106517",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3796",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106518",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3794",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106519",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3792",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106519",
+      "source_type": "0",
+      "id": "1",
+      "link": "2",
+      "event_type": "62",
+      "action_type": "206",
+      "action_param1": "2246",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106520",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3790",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106521",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3791",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106524",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3793",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "106649",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "3795",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "107096",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "6",
+      "action_type": "206",
+      "action_param1": "1769",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_chaman_legioncore.sql",
+      "entryorguid": "107097",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "6",
+      "action_type": "206",
+      "action_param1": "1766",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "97923",
+      "source_type": "0",
+      "id": "3",
+      "link": "4",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "1477",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "98008",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2937",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "98013",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2940",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "103778",
+      "source_type": "0",
+      "id": "3",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2939",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "103832",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2938",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "104329",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2944",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "106091",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2941",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "106093",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2942",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_druide_legioncore.sql",
+      "entryorguid": "107025",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2943",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_moine_legioncore.sql",
+      "entryorguid": "109823",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "2871",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_moine_legioncore.sql",
+      "entryorguid": "119765",
+      "source_type": "0",
+      "id": "0",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "4229",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_moine_legioncore.sql",
+      "entryorguid": "119765",
+      "source_type": "0",
+      "id": "1",
+      "link": "2",
+      "event_type": "19",
+      "action_type": "206",
+      "action_param1": "4657",
+      "target_type": "7"
+    },
+    {
+      "source_file": "sql/sylvania/campagne_moine_legioncore.sql",
+      "entryorguid": "119765",
+      "source_type": "0",
+      "id": "3",
+      "link": "0",
+      "event_type": "20",
+      "action_type": "206",
+      "action_param1": "4658",
+      "target_type": "7"
+    }
+  ],
+  "script_candidates": [
+    {
+      "entry": 245102,
+      "actions": [
+        {
+          "value": 9,
+          "source_name": "SMART_ACTION_ACTIVATE_GOBJECT",
+          "native_name": "SMART_ACTION_ACTIVATE_GOBJECT",
+          "requires_semantic_translation": false
+        }
+      ],
+      "remaining_candidate": true
+    },
+    {
+      "entry": 251262,
+      "actions": [
+        {
+          "value": 204,
+          "source_name": "SMART_ACTION_SET_SCENATIO_ID",
+          "native_name": "SMART_ACTION_CIRCLE_PATH",
+          "requires_semantic_translation": true
+        }
+      ],
+      "remaining_candidate": true
+    },
+    {
+      "entry": 251697,
+      "actions": [
+        {
+          "value": 206,
+          "source_name": "SMART_ACTION_SUMMON_CONVERSATION",
+          "native_name": "SMART_ACTION_START_CONVERSATION",
+          "requires_semantic_translation": false
+        }
+      ],
+      "remaining_candidate": true
+    },
+    {
+      "entry": 252017,
+      "actions": [
+        {
+          "value": 33,
+          "source_name": "SMART_ACTION_CALL_KILLEDMONSTER",
+          "native_name": "SMART_ACTION_CALL_KILLEDMONSTER",
+          "requires_semantic_translation": false
+        }
+      ],
+      "remaining_candidate": true
+    },
+    {
+      "entry": 266594,
+      "actions": [
+        {
+          "value": 206,
+          "source_name": "SMART_ACTION_SUMMON_CONVERSATION",
+          "native_name": "SMART_ACTION_START_CONVERSATION",
+          "requires_semantic_translation": false
+        }
+      ],
+      "remaining_candidate": true
+    },
+    {
+      "entry": 267041,
+      "actions": [
+        {
+          "value": 206,
+          "source_name": "SMART_ACTION_SUMMON_CONVERSATION",
+          "native_name": "SMART_ACTION_START_CONVERSATION",
+          "requires_semantic_translation": false
+        }
+      ],
+      "remaining_candidate": true
+    },
+    {
+      "entry": 268377,
+      "actions": [
+        {
+          "value": 28,
+          "source_name": "SMART_ACTION_REMOVEAURASFROMSPELL",
+          "native_name": "SMART_ACTION_REMOVEAURASFROMSPELL",
+          "requires_semantic_translation": false
+        },
+        {
+          "value": 33,
+          "source_name": "SMART_ACTION_CALL_KILLEDMONSTER",
+          "native_name": "SMART_ACTION_CALL_KILLEDMONSTER",
+          "requires_semantic_translation": false
+        },
+        {
+          "value": 45,
+          "source_name": "SMART_ACTION_SET_DATA",
+          "native_name": "SMART_ACTION_SET_DATA",
+          "requires_semantic_translation": false
+        }
+      ],
+      "remaining_candidate": true
+    },
+    {
+      "entry": 268378,
+      "actions": [
+        {
+          "value": 28,
+          "source_name": "SMART_ACTION_REMOVEAURASFROMSPELL",
+          "native_name": "SMART_ACTION_REMOVEAURASFROMSPELL",
+          "requires_semantic_translation": false
+        },
+        {
+          "value": 33,
+          "source_name": "SMART_ACTION_CALL_KILLEDMONSTER",
+          "native_name": "SMART_ACTION_CALL_KILLEDMONSTER",
+          "requires_semantic_translation": false
+        },
+        {
+          "value": 45,
+          "source_name": "SMART_ACTION_SET_DATA",
+          "native_name": "SMART_ACTION_SET_DATA",
+          "requires_semantic_translation": false
+        }
+      ],
+      "remaining_candidate": true
+    },
+    {
+      "entry": 268379,
+      "actions": [
+        {
+          "value": 28,
+          "source_name": "SMART_ACTION_REMOVEAURASFROMSPELL",
+          "native_name": "SMART_ACTION_REMOVEAURASFROMSPELL",
+          "requires_semantic_translation": false
+        },
+        {
+          "value": 33,
+          "source_name": "SMART_ACTION_CALL_KILLEDMONSTER",
+          "native_name": "SMART_ACTION_CALL_KILLEDMONSTER",
+          "requires_semantic_translation": false
+        },
+        {
+          "value": 45,
+          "source_name": "SMART_ACTION_SET_DATA",
+          "native_name": "SMART_ACTION_SET_DATA",
+          "requires_semantic_translation": false
+        }
+      ],
+      "remaining_candidate": true
+    }
+  ],
+  "forgotten_letter": {
+    "entry": 251697,
+    "conversation_id": 2851,
+    "native_template_present": false,
+    "native_actor_bindings_present": false,
+    "source_rows": {
+      "conversation_data": [
+        {
+          "entry": "2851",
+          "id": "5935",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "86",
+          "unk2": "0"
+        },
+        {
+          "entry": "2851",
+          "id": "5936",
+          "idx": "1",
+          "textId": "11700",
+          "unk1": "121",
+          "unk2": "1"
+        },
+        {
+          "entry": "2851",
+          "id": "5937",
+          "idx": "2",
+          "textId": "22300",
+          "unk1": "86",
+          "unk2": "0"
+        }
+      ],
+      "conversation_actor": [
+        {
+          "entry": "2851",
+          "id": "0",
+          "actorId": "54082",
+          "creatureId": "109608",
+          "displayId": "71113",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "4700"
+        },
+        {
+          "entry": "2851",
+          "id": "1",
+          "actorId": "54081",
+          "creatureId": "109605",
+          "displayId": "71111",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "4700"
+        }
+      ],
+      "conversation": [],
+      "conversation_creature": []
+    },
+    "source_actor_duration_sum": 9400,
+    "source_create_additional_duration": 5000,
+    "source_packet_end_time": 14400,
+    "source_last_line_start_time": 22300,
+    "decision": "Defer: native template/actors/line chain and trustworthy end time required; do not copy opaque fields or infer last duration."
+  },
+  "assurance": "Template presence and source action semantics only. Presence does not prove actor/line/DB2 completeness; custom/live DB changes not inspected. No conversations or original NPC SmartAI deleted."
+}

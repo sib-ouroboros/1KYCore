@@ -90,7 +90,10 @@ Conversation* Conversation::CreateConversation(uint32 conversationEntry, Unit* c
 {
     ConversationTemplate const* conversationTemplate = sConversationDataStore->GetConversationTemplate(conversationEntry);
     if (!conversationTemplate)
+    {
+        TC_LOG_ERROR("entities.conversation", "Failed to create conversation (Id: %u): template is missing.", conversationEntry);
         return nullptr;
+    }
 
     ObjectGuid::LowType lowGuid = creator->GetMap()->GenerateLowGuid<HighGuid::Conversation>();
 
