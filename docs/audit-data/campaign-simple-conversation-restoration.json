@@ -1,0 +1,886 @@
+{
+  "entries": [
+    740,
+    741,
+    742,
+    743,
+    1785,
+    2138,
+    3047,
+    3048,
+    3049,
+    3050,
+    3051,
+    3052,
+    3159
+  ],
+  "rows": {
+    "conversation_actor_template": [
+      {
+        "Id": "48432",
+        "CreatureId": "99456",
+        "CreatureModelId": "64011",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "52359",
+        "CreatureId": "105112",
+        "CreatureModelId": "38227",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "52939",
+        "CreatureId": "106693",
+        "CreatureModelId": "69686",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "54543",
+        "CreatureId": "110749",
+        "CreatureModelId": "62788",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "54324",
+        "CreatureId": "107987",
+        "CreatureModelId": "67773",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_line_template": [
+      {
+        "Id": "1768",
+        "StartTime": "0",
+        "UiCameraID": "270",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "1769",
+        "StartTime": "0",
+        "UiCameraID": "270",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "1770",
+        "StartTime": "0",
+        "UiCameraID": "270",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "1771",
+        "StartTime": "0",
+        "UiCameraID": "270",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3801",
+        "StartTime": "0",
+        "UiCameraID": "807",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4538",
+        "StartTime": "0",
+        "UiCameraID": "800",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6485",
+        "StartTime": "0",
+        "UiCameraID": "129",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6486",
+        "StartTime": "0",
+        "UiCameraID": "129",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6487",
+        "StartTime": "0",
+        "UiCameraID": "129",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6488",
+        "StartTime": "0",
+        "UiCameraID": "129",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6489",
+        "StartTime": "0",
+        "UiCameraID": "129",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6490",
+        "StartTime": "0",
+        "UiCameraID": "129",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "6675",
+        "StartTime": "0",
+        "UiCameraID": "977",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_actors": [
+      {
+        "ConversationId": "740",
+        "ConversationActorId": "48432",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "741",
+        "ConversationActorId": "48432",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "742",
+        "ConversationActorId": "48432",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "743",
+        "ConversationActorId": "48432",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "1785",
+        "ConversationActorId": "52359",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "2138",
+        "ConversationActorId": "52939",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "3047",
+        "ConversationActorId": "54543",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "3048",
+        "ConversationActorId": "54543",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "3049",
+        "ConversationActorId": "54543",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "3050",
+        "ConversationActorId": "54543",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "3051",
+        "ConversationActorId": "54543",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "3052",
+        "ConversationActorId": "54543",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "ConversationId": "3159",
+        "ConversationActorId": "54324",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_template": [
+      {
+        "Id": "740",
+        "FirstLineId": "1768",
+        "LastLineEndTime": "14700",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "741",
+        "FirstLineId": "1769",
+        "LastLineEndTime": "15250",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "742",
+        "FirstLineId": "1770",
+        "LastLineEndTime": "15900",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "743",
+        "FirstLineId": "1771",
+        "LastLineEndTime": "15050",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "1785",
+        "FirstLineId": "3801",
+        "LastLineEndTime": "14039",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2138",
+        "FirstLineId": "4538",
+        "LastLineEndTime": "8800",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3047",
+        "FirstLineId": "6485",
+        "LastLineEndTime": "19685",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3048",
+        "FirstLineId": "6486",
+        "LastLineEndTime": "17792",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3049",
+        "FirstLineId": "6487",
+        "LastLineEndTime": "15600",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3050",
+        "FirstLineId": "6488",
+        "LastLineEndTime": "20013",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3051",
+        "FirstLineId": "6489",
+        "LastLineEndTime": "20090",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3052",
+        "FirstLineId": "6490",
+        "LastLineEndTime": "17573",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3159",
+        "FirstLineId": "6675",
+        "LastLineEndTime": "14637",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      }
+    ]
+  },
+  "source": [
+    {
+      "id": 740,
+      "source_line": {
+        "entry": "740",
+        "id": "1768",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "270",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "740",
+          "id": "0",
+          "actorId": "48432",
+          "creatureId": "99456",
+          "displayId": "64011",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "9700"
+        }
+      ],
+      "last_line_end_time": 14700,
+      "client_line": {
+        "BroadcastTextID": 97437,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 5000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 741,
+      "source_line": {
+        "entry": "741",
+        "id": "1769",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "270",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "741",
+          "id": "0",
+          "actorId": "48432",
+          "creatureId": "99456",
+          "displayId": "64011",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "10250"
+        }
+      ],
+      "last_line_end_time": 15250,
+      "client_line": {
+        "BroadcastTextID": 97442,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 5000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 742,
+      "source_line": {
+        "entry": "742",
+        "id": "1770",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "270",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "742",
+          "id": "0",
+          "actorId": "48432",
+          "creatureId": "99456",
+          "displayId": "64011",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "10900"
+        }
+      ],
+      "last_line_end_time": 15900,
+      "client_line": {
+        "BroadcastTextID": 97443,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 5000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 743,
+      "source_line": {
+        "entry": "743",
+        "id": "1771",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "270",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "743",
+          "id": "0",
+          "actorId": "48432",
+          "creatureId": "99456",
+          "displayId": "64011",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "10050"
+        }
+      ],
+      "last_line_end_time": 15050,
+      "client_line": {
+        "BroadcastTextID": 97445,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 5000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 1785,
+      "source_line": {
+        "entry": "1785",
+        "id": "3801",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "807",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "1785",
+          "id": "0",
+          "actorId": "52359",
+          "creatureId": "105112",
+          "displayId": "38227",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "9039"
+        }
+      ],
+      "last_line_end_time": 14039,
+      "client_line": {
+        "BroadcastTextID": 107916,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 0,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 2138,
+      "source_line": {
+        "entry": "2138",
+        "id": "4538",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "800",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "2138",
+          "id": "0",
+          "actorId": "52939",
+          "creatureId": "106693",
+          "displayId": "69686",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "3800"
+        }
+      ],
+      "last_line_end_time": 8800,
+      "client_line": {
+        "BroadcastTextID": 110318,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 500,
+        "NextConversationLineID": 0,
+        "AnimKitID": 1267,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 3047,
+      "source_line": {
+        "entry": "3047",
+        "id": "6485",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "129",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "3047",
+          "id": "0",
+          "actorId": "54543",
+          "creatureId": "110749",
+          "displayId": "62788",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "14685"
+        }
+      ],
+      "last_line_end_time": 19685,
+      "client_line": {
+        "BroadcastTextID": 119299,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 6000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 3048,
+      "source_line": {
+        "entry": "3048",
+        "id": "6486",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "129",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "3048",
+          "id": "0",
+          "actorId": "54543",
+          "creatureId": "110749",
+          "displayId": "62788",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "12792"
+        }
+      ],
+      "last_line_end_time": 17792,
+      "client_line": {
+        "BroadcastTextID": 119300,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 6000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 3049,
+      "source_line": {
+        "entry": "3049",
+        "id": "6487",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "129",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "3049",
+          "id": "0",
+          "actorId": "54543",
+          "creatureId": "110749",
+          "displayId": "62788",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "10600"
+        }
+      ],
+      "last_line_end_time": 15600,
+      "client_line": {
+        "BroadcastTextID": 119301,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 6000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 3050,
+      "source_line": {
+        "entry": "3050",
+        "id": "6488",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "129",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "3050",
+          "id": "0",
+          "actorId": "54543",
+          "creatureId": "110749",
+          "displayId": "62788",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "15013"
+        }
+      ],
+      "last_line_end_time": 20013,
+      "client_line": {
+        "BroadcastTextID": 119302,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 6000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 3051,
+      "source_line": {
+        "entry": "3051",
+        "id": "6489",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "129",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "3051",
+          "id": "0",
+          "actorId": "54543",
+          "creatureId": "110749",
+          "displayId": "62788",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "15090"
+        }
+      ],
+      "last_line_end_time": 20090,
+      "client_line": {
+        "BroadcastTextID": 119303,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 6000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 3052,
+      "source_line": {
+        "entry": "3052",
+        "id": "6490",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "129",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "3052",
+          "id": "0",
+          "actorId": "54543",
+          "creatureId": "110749",
+          "displayId": "62788",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "12573"
+        }
+      ],
+      "last_line_end_time": 17573,
+      "client_line": {
+        "BroadcastTextID": 119304,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 6000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "id": 3159,
+      "source_line": {
+        "entry": "3159",
+        "id": "6675",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "977",
+        "unk2": "0"
+      },
+      "source_actors": [
+        {
+          "entry": "3159",
+          "id": "0",
+          "actorId": "54324",
+          "creatureId": "107987",
+          "displayId": "67773",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "9637"
+        }
+      ],
+      "last_line_end_time": 14637,
+      "client_line": {
+        "BroadcastTextID": 119787,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 500,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    }
+  ],
+  "required_creatures": [
+    99456,
+    105112,
+    106693,
+    107987,
+    110749
+  ],
+  "client_validation": {
+    "CreatureDisplayInfo": {
+      "file": "CreatureDisplayInfo.db2",
+      "sha256": "1494eb6d4705848c4dd8ca2e463b99365d913155829e53914671da3302168e23",
+      "layout_hash": "0x406268df",
+      "record_count": 66165,
+      "copy_rows": 0,
+      "identity_count": 66165,
+      "format": "WDC1",
+      "locale": "enUS",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": {
+        "62788": true,
+        "64011": true,
+        "38227": true,
+        "69686": true,
+        "67773": true
+      }
+    },
+    "UiCamera": {
+      "file": "UiCamera.db2",
+      "sha256": "6cb64ffd7d647d45e1bb8e8f849a0f9f80c7a441db9f1cecddedd2aa97d96c4d",
+      "layout_hash": "0xca6c98d4",
+      "record_count": 1060,
+      "copy_rows": 0,
+      "identity_count": 1060,
+      "format": "WDC1",
+      "locale": "enUS",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": {
+        "800": true,
+        "129": true,
+        "807": true,
+        "270": true,
+        "977": true
+      }
+    },
+    "AnimKit": {
+      "file": "AnimKit.db2",
+      "sha256": "b3b895f30bee3ced65a107c638eead9931fdf5c4f1efe1da73d328fc99faa5f1",
+      "layout_hash": "0x81d6d250",
+      "record_count": 483,
+      "copy_rows": 11799,
+      "identity_count": 12282,
+      "format": "WDC1",
+      "locale": "enUS",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": {
+        "1267": true
+      }
+    }
+  },
+  "client_line_proof": {
+    "file": "ConversationLine.db2",
+    "sha256": "ef9a39edeef5f58aebd0741839291a1a4e4ab745be881c3e155b9767c5ba7039",
+    "layout_hash": "0x32b137b",
+    "format": "WDC1 sparse",
+    "record_count": 9725,
+    "locale": "enUS",
+    "assurance": "Exact native layout, all catalog spans/idtable validated; eight scalar fields decoded, terminal line verified."
+  },
+  "broadcast_hotfix_ids": [
+    97437,
+    97442,
+    97443,
+    97445,
+    107916,
+    110318,
+    119299,
+    119300,
+    119301,
+    119302,
+    119303,
+    119304,
+    119787
+  ],
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_world_sql_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c",
+  "assurance": "Exact source client packet fields and end time; single terminal DB2 line; native server conversation lifetime remains end+10s. No live client acceptance or exact audio-duration measurement."
+}

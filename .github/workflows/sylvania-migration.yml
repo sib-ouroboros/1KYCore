@@ -26,6 +26,7 @@ jobs:
       matrix:
         suite:
           - {name: full, args: ''}
+          - {name: simple-conversations, args: '--simple-conversations-only'}
           - {name: council-books, args: '--council-books-only'}
           - {name: native-goobers, args: '--native-goobers-only'}
           - {name: wildcard-loot, args: '--wildcard-loot-only'}

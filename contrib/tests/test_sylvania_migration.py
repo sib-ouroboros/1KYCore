@@ -652,12 +652,95 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
 
 
 
+
+def test_simple_conversations(tables, restore, registry):
+    """Exercise real MyISAM dependencies, shared actors and interrupted publication."""
+    rows = registry['rows']
+    owned = list(rows)
+    keys = {table: ('ConversationId','Idx') if table == 'conversation_actors' else ('Id',) for table in owned}
+    def predicate(table, row):
+        return ' AND '.join(f'`{key}`={row[key]}' for key in keys[table])
+    def insert(table, row):
+        return f"INSERT INTO `{table}` ({','.join('`'+key+'`' for key in row)}) VALUES ({','.join(row.values())});"
+    def clear():
+        for table in reversed(owned):
+            sql(f"DELETE FROM `{table}` WHERE " + ' OR '.join('('+predicate(table,row)+')' for row in rows[table]) + ';')
+    def reject():
+        before = checksum(owned)
+        failure = sql(restore, ok=False)
+        assert 'Duplicate entry' in failure.stderr and '_1kycore_conversation_guard' in failure.stderr, failure.stderr
+        assert checksum(owned) == before, 'Rejected conversation migration changed permanent dependencies'
+    def verify():
+        for table, expected in rows.items():
+            for row in expected:
+                columns = [key for key in row if key != 'VerifiedBuild']
+                result = sql(f"SELECT {','.join('`'+key+'`' for key in columns)} FROM `{table}` WHERE {predicate(table,row)};").stdout.rstrip('\r\n').split('\t')
+                assert result == [row[key].strip("'") for key in columns], (table,row,result)
+    for table in owned:
+        assert sql(f"SELECT COUNT(*) FROM `{table}` WHERE " + ' OR '.join('('+predicate(table,row)+')' for row in rows[table]) + ';').stdout.strip() == '0'
+    protected_tables = [table for table in tables if table not in owned]
+    protected = checksum(protected_tables)
+    # Test every runtime content field. Matching provenance is intentionally not a conflict.
+    for table in owned:
+        original = rows[table][0]
+        for column in original:
+            if column in keys[table] or column == 'VerifiedBuild':
+                continue
+            bad = dict(original)
+            bad[column] = "'custom_scene'" if column == 'ScriptName' else str(int(original[column])+1)
+            sql(insert(table,bad))
+            reject()
+            sql(f"DELETE FROM `{table}` WHERE {predicate(table,original)};")
+    extra = dict(rows['conversation_actors'][-1]); extra['Idx']='1'
+    sql(insert('conversation_actors',extra)); reject()
+    sql(f"DELETE FROM conversation_actors WHERE {predicate('conversation_actors',extra)};")
+    # Required NPC disappearance must reject before inserting any conversations.
+    creature = rows['conversation_actor_template'][0]['CreatureId']
+    sql(f'CREATE TABLE saved_conversation_creature AS SELECT * FROM creature_template WHERE entry={creature}; DELETE FROM creature_template WHERE entry={creature};')
+    reject()
+    sql('INSERT INTO creature_template SELECT * FROM saved_conversation_creature; DROP TABLE saved_conversation_creature;')
+    sql(restore); verify()
+    canonical = checksum(owned)
+    sql(restore)
+    assert checksum(owned) == canonical, 'Conversation retry changed content'
+    # An already published conversation with missing native dependencies is a conflict.
+    for table in ('conversation_line_template','conversation_actors','conversation_actor_template'):
+        row = rows[table][0]
+        sql(f"DELETE FROM `{table}` WHERE {predicate(table,row)};")
+        reject()
+        sql(insert(table,row))
+    # Actual migration prefixes: shared templates, lines, then bindings; publish last.
+    for next_table in owned[1:]:
+        clear()
+        cutoff = restore.index(f'-- Install {next_table};')
+        sql(restore[:cutoff]); sql(restore); verify()
+        assert checksum(owned) == canonical, 'Interrupted conversation import differs after retry'
+    # A fully published prefix and unfinished remaining conversations can also resume.
+    clear()
+    for table in owned:
+        sql(insert(table,rows[table][0]))
+    sql(restore); verify()
+    assert checksum(owned) == canonical
+    # Keep compatible administrator build provenance, including shared actor templates.
+    for table in owned:
+        row = rows[table][0]
+        sql(f"UPDATE `{table}` SET VerifiedBuild=12345 WHERE {predicate(table,row)};")
+    shared = rows['conversation_actor_template'][0]['Id']
+    assert sql('SELECT COUNT(*) FROM conversation_actors WHERE ConversationId=4290000010;').stdout.strip() == '0'
+    sql(f'INSERT INTO conversation_actors (ConversationId,ConversationActorId,Idx,VerifiedBuild) VALUES (4290000010,{shared},0,54321);')
+    compatible = checksum(owned)
+    sql(restore); verify()
+    assert checksum(owned) == compatible, 'Matching provenance or unrelated shared actor binding changed'
+    assert checksum(protected_tables) == protected, 'Conversation migration changed NPCs, quests, spawns or other tables'
+    print('PASS: thirteen terminal conversations / exact actors and lines / all content conflicts / repeated and interrupted import / shared provenance', flush=True)
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
     parser.add_argument('--wildcard-loot-only', action='store_true', help='Run source wildcard loot translation against the real release.')
     parser.add_argument('--source-loot-only', action='store_true', help='Run the complete source loot object group against the real release.')
     parser.add_argument('--native-goobers-only', action='store_true', help='Run all seven native GOOBER dependency and retry checks against the real release.')
+    parser.add_argument('--simple-conversations-only', action='store_true', help='Run terminal conversation dependency and publication checks.')
     parser.add_argument('--council-books-only', action='store_true', help='Run page-chain and quest-credit dependency checks for two source books.')
     args = parser.parse_args()
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
@@ -690,6 +773,14 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.simple_conversations_only:
+            sql(migration)
+            tables = sql('SHOW TABLES;').stdout.splitlines()
+            restore = (ROOT / 'sql/updates/world/2026_10_04_01_world_campaign_simple_conversations.sql').read_text('utf8')
+            registry = json.loads((ROOT / 'docs/audit-data/campaign-simple-conversation-restoration.json').read_text('utf8'))
+            test_simple_conversations(tables,restore,registry)
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.council_books_only:
             sql(migration)
             tables = sql('SHOW TABLES;').stdout.splitlines()
@@ -795,6 +886,10 @@ def main():
         council_books = (ROOT / 'sql/updates/world/2026_10_04_00_world_campaign_council_books.sql').read_text('utf8')
         council_registry = json.loads((ROOT / 'docs/audit-data/campaign-council-books-restoration.json').read_text('utf8'))
         test_simple_goober_models(tables,council_books,council_registry,'two council books / two exact terminal pages / quest-credit dependencies')
+
+        conversations = (ROOT / 'sql/updates/world/2026_10_04_01_world_campaign_simple_conversations.sql').read_text('utf8')
+        conversation_registry = json.loads((ROOT / 'docs/audit-data/campaign-simple-conversation-restoration.json').read_text('utf8'))
+        test_simple_conversations(tables,conversations,conversation_registry)
 
         sql('UPDATE creature SET id=9000002 WHERE guid=290300100;')
         collision = checksum(tables)

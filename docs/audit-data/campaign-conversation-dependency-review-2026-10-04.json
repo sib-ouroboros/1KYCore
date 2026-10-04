@@ -7,21 +7,29 @@
   "distinct_conversation_ids": 98,
   "present_in_clean_release": 0,
   "covered_by_other_current_sql_inserts": [
-    2256
-  ],
-  "unresolved_template_count": 97,
-  "unresolved_ids": [
-    738,
     740,
     741,
     742,
     743,
+    1785,
+    2138,
+    2256,
+    3047,
+    3048,
+    3049,
+    3050,
+    3051,
+    3052,
+    3159
+  ],
+  "unresolved_template_count": 84,
+  "unresolved_ids": [
+    738,
     1416,
     1477,
     1667,
     1766,
     1769,
-    1785,
     1821,
     1823,
     1832,
@@ -32,7 +40,6 @@
     2017,
     2023,
     2048,
-    2138,
     2211,
     2246,
     2300,
@@ -55,14 +62,7 @@
     2944,
     2976,
     3029,
-    3047,
-    3048,
-    3049,
-    3050,
-    3051,
-    3052,
     3108,
-    3159,
     3183,
     3186,
     3187,
@@ -1389,5 +1389,6 @@
     "source_last_line_start_time": 22300,
     "decision": "Defer: native template/actors/line chain and trustworthy end time required; do not copy opaque fields or infer last duration."
   },
-  "assurance": "Template presence and source action semantics only. Presence does not prove actor/line/DB2 completeness; custom/live DB changes not inspected. No conversations or original NPC SmartAI deleted."
+  "assurance": "Template presence and source action semantics only. Presence does not prove actor/line/DB2 completeness; custom/live DB changes not inspected. No conversations or original NPC SmartAI deleted.",
+  "restoration_registry": "campaign-simple-conversation-restoration.json"
 }
