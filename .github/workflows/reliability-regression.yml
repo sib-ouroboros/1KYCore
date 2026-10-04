@@ -4,6 +4,11 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/server/game/Movement/CombatSlot.*
+      - src/server/game/Movement/MovementGenerators/TargetedMovementGenerator.*
+      - src/server/game/Entities/Object/ObjectPosSelector.*
+      - contrib/tests/test_npc_combat_slots.py
+      - contrib/tests/fixtures/crowd_test_*
       - contrib/tests/test_gameobject_visuals.py
       - src/server/game/Entities/GameObject/GameObject.*
       - src/server/game/Entities/GameObject/GameObjectData.h
@@ -103,6 +108,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test native NPC combat slots and chase with sanitizers
+        run: python contrib/tests/test_npc_combat_slots.py
       - name: Test elevated creature paths with address and undefined behavior sanitizers
         run: python contrib/tests/test_elevated_surface_pathing.py
       - name: Test native GO visual loading and state transitions

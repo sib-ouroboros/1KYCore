@@ -24,6 +24,7 @@
 #include "Timer.h"
 #include "Unit.h"
 #include "PathGenerator.h"
+#include "CombatSlot.h"
 
 class TargetedMovementGeneratorBase
 {
@@ -85,6 +86,9 @@ class ChaseMovementGenerator : public TargetedMovementGeneratorMedium<T, ChaseMo
         bool EnableWalking() const { return false;}
         bool _lostTarget(T* u) const { return u->GetVictim() != this->GetTarget(); }
         void _reachTarget(T*);
+        CombatSlotState* GetCombatSlotState() { return &i_combatSlot; }
+    private:
+        CombatSlotState i_combatSlot;
 };
 
 template<class T>
@@ -109,6 +113,7 @@ class FollowMovementGenerator : public TargetedMovementGeneratorMedium<T, Follow
         bool EnableWalking() const;
         bool _lostTarget(T*) const { return false; }
         void _reachTarget(T*) { }
+        CombatSlotState* GetCombatSlotState() { return nullptr; }
     private:
         void _updateSpeed(T* owner);
 };

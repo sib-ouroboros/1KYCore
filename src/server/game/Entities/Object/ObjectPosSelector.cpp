@@ -21,7 +21,7 @@
 ObjectPosSelector::ObjectPosSelector(float x, float y, float size, float dist)
 : m_center_x(x), m_center_y(y), m_size(size), m_dist(dist)
 {
-    m_anglestep = std::acos(m_dist/(m_dist+2*m_size));
+    m_anglestep = std::max(0.01f, SafeAngle(m_dist, m_dist + 2 * m_size));
 
     m_nextUsedPos[USED_POS_PLUS]  = m_UsedPosLists[USED_POS_PLUS].end();
     m_nextUsedPos[USED_POS_MINUS] = m_UsedPosLists[USED_POS_MINUS].end();
@@ -55,6 +55,8 @@ ObjectPosSelector::UsedPosList::value_type const* ObjectPosSelector::nextUsedPos
 
 void ObjectPosSelector::AddUsedPos(float size, float angle, float dist)
 {
+    if (!std::isfinite(size) || !std::isfinite(angle) || !std::isfinite(dist) || size < 0.0f || dist < 0.0f)
+        return;
     if (angle >= 0)
         m_UsedPosLists[USED_POS_PLUS].insert(UsedPosList::value_type(angle, UsedPos(1.0f, size, dist)));
     else

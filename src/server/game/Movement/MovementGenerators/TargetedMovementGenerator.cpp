@@ -49,6 +49,7 @@ void TargetedMovementGeneratorMedium<T, D>::_setTargetLocation(T* owner, bool up
         return;
 
     float x, y, z;
+    bool crowdPathReady = false;
 
     if (updateDestination || !i_path)
     {
@@ -59,6 +60,15 @@ void TargetedMovementGeneratorMedium<T, D>::_setTargetLocation(T* owner, bool up
 
             // to nearest contact position
             i_target->GetContactPoint(owner, x, y, z);
+            CombatSlotState* slot = static_cast<D*>(this)->GetCombatSlotState();
+            if (slot && i_angle == 0.0f && owner->GetTypeId() == TYPEID_UNIT && CombatSlots::IsEligible(owner->ToCreature(), i_target.getTarget()))
+            {
+                if (!i_path)
+                    i_path = new PathGenerator(owner);
+                crowdPathReady = CombatSlots::Select(owner->ToCreature(), i_target.getTarget(), *slot, *i_path, x, y, z);
+            }
+            else if (slot)
+                slot->Reset();
         }
         else
         {
@@ -124,7 +134,7 @@ void TargetedMovementGeneratorMedium<T, D>::_setTargetLocation(T* owner, bool up
         forceDest = (owner->ToCreature()->CanWalk() && owner->ToCreature()->IsInCombat() && owner->ToCreature()->CanSwim() && (i_target->IsInWater() || i_target->IsUnderWater()));
     }
 
-    bool result = i_path->CalculatePath(x, y, z, forceDest);
+    bool result = crowdPathReady || i_path->CalculatePath(x, y, z, forceDest);
     if (!result || (i_path->GetPathType() & PATHFIND_NOPATH))
     {
         // can't reach target
@@ -155,6 +165,9 @@ void TargetedMovementGeneratorMedium<T, D>::_setTargetLocation(T* owner, bool up
 template<class T, typename D>
 bool TargetedMovementGeneratorMedium<T, D>::DoUpdate(T* owner, uint32 time_diff)
 {
+    CombatSlotState* slot = static_cast<D*>(this)->GetCombatSlotState();
+    if (slot && (!owner || !owner->IsAlive() || !i_target.isValid() || !i_target->IsInWorld()))
+        slot->Reset();
     if (!i_target.isValid() || !i_target->IsInWorld())
         return false;
 
@@ -163,6 +176,8 @@ bool TargetedMovementGeneratorMedium<T, D>::DoUpdate(T* owner, uint32 time_diff)
 
     if (owner->HasUnitState(UNIT_STATE_NOT_MOVE))
     {
+        if (slot)
+            slot->Reset();
         D::_clearUnitStateMove(owner);
         return true;
     }
@@ -170,6 +185,8 @@ bool TargetedMovementGeneratorMedium<T, D>::DoUpdate(T* owner, uint32 time_diff)
     // prevent movement while casting spells with cast time or channel time
     if (owner->IsMovementPreventedByCasting())
     {
+        if (slot)
+            slot->Reset();
         if (!owner->IsStopped())
             owner->StopMoving();
         return true;
@@ -179,9 +196,17 @@ bool TargetedMovementGeneratorMedium<T, D>::DoUpdate(T* owner, uint32 time_diff)
     if (static_cast<D*>(this)->_lostTarget(owner))
     {
         D::_clearUnitStateMove(owner);
+        if (CombatSlotState* lostSlot = static_cast<D*>(this)->GetCombatSlotState())
+            lostSlot->Reset();
         return true;
     }
 
+    if (slot)
+    {
+        slot->Update(time_diff);
+        if (i_offset != 0.0f || i_angle != 0.0f || owner->GetTypeId() != TYPEID_UNIT || !CombatSlots::IsEligible(owner->ToCreature(), i_target.getTarget()))
+            slot->Reset();
+    }
     bool targetMoved = false;
     i_recheckDistance.Update(time_diff);
     if (i_recheckDistance.Passed())
@@ -207,6 +232,14 @@ bool TargetedMovementGeneratorMedium<T, D>::DoUpdate(T* owner, uint32 time_diff)
         else
             targetMoved = !i_target->IsWithinDist2d(dest.x, dest.y, allowed_dist);
 
+        // A slot is world-angle based: turning in place must not reshuffle the pack.
+        if (slot && slot->valid)
+        {
+            float dx = i_target->GetPositionX() - slot->targetX;
+            float dy = i_target->GetPositionY() - slot->targetY;
+            targetMoved = dx * dx + dy * dy > 0.75f * 0.75f ||
+                std::fabs(i_target->GetPositionZ() - slot->targetZ) > 0.75f;
+        }
         // then, if the target is in range, check also Line of Sight.
         if (!targetMoved)
             targetMoved = !i_target->IsWithinLOSInMap(owner);
@@ -252,6 +285,7 @@ void ChaseMovementGenerator<Player>::DoInitialize(Player* owner)
 template<>
 void ChaseMovementGenerator<Creature>::DoInitialize(Creature* owner)
 {
+    i_combatSlot.Reset();
     owner->SetWalk(false);
     owner->AddUnitState(UNIT_STATE_CHASE | UNIT_STATE_CHASE_MOVE);
     _setTargetLocation(owner, true);
@@ -260,6 +294,7 @@ void ChaseMovementGenerator<Creature>::DoInitialize(Creature* owner)
 template<class T>
 void ChaseMovementGenerator<T>::DoFinalize(T* owner)
 {
+    i_combatSlot.Reset();
     owner->ClearUnitState(UNIT_STATE_CHASE | UNIT_STATE_CHASE_MOVE);
 }
 

@@ -22,6 +22,7 @@
 #include "Common.h"
 #include <map>
 #include <cmath>
+#include <algorithm>
 
 enum UsedPosType { USED_POS_PLUS, USED_POS_MINUS };
 
@@ -136,7 +137,14 @@ struct TC_GAME_API ObjectPosSelector
     UsedPosList::value_type const* nextUsedPos(UsedPosType uptype);
 
     // angle from used pos to next possible free pos
-    float GetAngle(UsedPos const& usedPos) const { return std::acos(m_dist/(usedPos.dist+usedPos.size+m_size)); }
+    static float SafeAngle(float distance, float denominator)
+    {
+        if (!std::isfinite(distance) || !std::isfinite(denominator) || denominator <= 0.0f)
+            return float(M_PI);
+        float ratio = distance / denominator;
+        return std::acos(std::max(-1.0f, std::min(1.0f, ratio)));
+    }
+    float GetAngle(UsedPos const& usedPos) const { return SafeAngle(m_dist, usedPos.dist + usedPos.size + m_size); }
 
     float m_center_x;
     float m_center_y;

@@ -19,6 +19,7 @@
     \ingroup world
 */
 
+#include <cmath>
 #include "PlayerGameplayUtility.h"
 #include "OnlineMgr.h"
 #include "Map.h"
@@ -1385,6 +1386,13 @@ void World::LoadConfigSettings(bool reload)
     }
 
     m_bool_configs[CONFIG_DETECT_POS_COLLISION] = sConfigMgr->GetBoolDefault("DetectPosCollision", true);
+    m_bool_configs[CONFIG_CROWD_SEPARATION_ENABLE] = sConfigMgr->GetBoolDefault("Creature.CrowdSeparation.Enable", false);
+    float crowdPadding = sConfigMgr->GetFloatDefault("Creature.CrowdSeparation.Padding", 0.2f);
+    m_float_configs[CONFIG_CROWD_SEPARATION_PADDING] = std::isfinite(crowdPadding) && crowdPadding >= 0.0f && crowdPadding <= 0.5f ? crowdPadding : 0.2f;
+    int32 crowdInterval = sConfigMgr->GetIntDefault("Creature.CrowdSeparation.RecalculateInterval", 500);
+    m_int_configs[CONFIG_CROWD_SEPARATION_INTERVAL] = crowdInterval >= 100 && crowdInterval <= 5000 ? crowdInterval : 500;
+    int32 crowdNeighbors = sConfigMgr->GetIntDefault("Creature.CrowdSeparation.MaxNeighbors", 64);
+    m_int_configs[CONFIG_CROWD_SEPARATION_MAX_NEIGHBORS] = crowdNeighbors >= 1 && crowdNeighbors <= 128 ? crowdNeighbors : 64;
 
     m_bool_configs[CONFIG_RESTRICTED_LFG_CHANNEL]      = sConfigMgr->GetBoolDefault("Channel.RestrictedLfg", true);
     m_int_configs[CONFIG_TALENTS_INSPECTING]           = sConfigMgr->GetIntDefault("TalentsInspecting", 1);
