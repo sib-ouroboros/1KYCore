@@ -734,6 +734,9 @@ Garrison::Mission* Garrison::GetMissionByID(uint32 ID)
 
 void Garrison::DeleteMission(uint64 dbId)
 {
+    auto mission = _missions.find(dbId);
+    if (mission != _missions.end())
+        _missionIds.erase(mission->second.PacketInfo.MissionRecID);
     _missions.erase(dbId);
 }
 
@@ -1045,7 +1048,15 @@ void Garrison::CompleteMission(uint32 garrMissionId)
     if (!mission)
         return;
 
-    bool canComplete = mission->PacketInfo.StartTime + mission->PacketInfo.MissionDuration < time(nullptr);
+    bool canComplete = mission->PacketInfo.MissionState == GarrisonMission::State::InProgress &&
+        mission->PacketInfo.StartTime + mission->PacketInfo.MissionDuration <= time(nullptr);
+    std::vector<WorldPackets::Garrison::GarrMissionFollowerData> resultFollowers;
+    for (Follower* follower : GetMissionFollowers(missionEntry->ID))
+    {
+        WorldPackets::Garrison::GarrMissionFollowerData data;
+        data.FollowerDbID = follower->PacketInfo.DbID;
+        resultFollowers.push_back(data);
+    }
     bool success = false;
 
     if (canComplete)
@@ -1055,6 +1066,9 @@ void Garrison::CompleteMission(uint32 garrMissionId)
 
         success = roll_chance_i(mission->PacketInfo.SuccessChance);
         mission->PacketInfo.MissionState = success ? GarrisonMission::State::Completed : GarrisonMission::State::Reward2Claimed;
+        if (!success)
+            for (Follower* follower : GetMissionFollowers(missionEntry->ID))
+                follower->PacketInfo.CurrentMissionID = 0;
 
         // Rien ne mettait ce critere a jour : les etapes « mission » des campagnes de
         // domaine (ex. chasseur 42523/42525/42384/42402) etaient impossibles a valider.
@@ -1065,8 +1079,13 @@ void Garrison::CompleteMission(uint32 garrMissionId)
     WorldPackets::Garrison::GarrisonCompleteMissionResult garrisonCompleteMissionResult;
     garrisonCompleteMissionResult.Result = canComplete ? GarrisonMission::Result::Success : GarrisonMission::Result::Fail;
     garrisonCompleteMissionResult.MissionData = mission->PacketInfo;
+    garrisonCompleteMissionResult.MissionRecID = missionEntry->ID;
+    garrisonCompleteMissionResult.Followers = resultFollowers;
     garrisonCompleteMissionResult.Succeeded = success;
     _owner->SendDirectMessage(garrisonCompleteMissionResult.Write());
+    // Failed missions have no reward chest; release both indexes after sending the snapshot.
+    if (canComplete && !success)
+        DeleteMission(mission->PacketInfo.DbID);
 }
 
 void Garrison::CalculateMissonBonusRoll(uint32 garrMissionId)
@@ -1077,6 +1096,9 @@ void Garrison::CalculateMissonBonusRoll(uint32 garrMissionId)
 
     Mission* mission = GetMissionByID(missionEntry->ID);
     if (!mission)
+        return;
+
+    if (mission->PacketInfo.MissionState != GarrisonMission::State::Completed)
         return;
 
     bool withOvermaxReward = false;
@@ -1102,6 +1124,7 @@ void Garrison::RewardMission(Mission* mission, bool withOvermaxReward)
     if (withOvermaxReward)
         rewardLists.push_back(&mission->BonusRewards);
 
+    std::vector<Follower*> followers = GetMissionFollowers(mission->PacketInfo.MissionRecID);
     for (auto const* rewards : rewardLists)
     {
         for (WorldPackets::Garrison::GarrisonMissionReward reward : *rewards)
@@ -1114,11 +1137,9 @@ void Garrison::RewardMission(Mission* mission, bool withOvermaxReward)
 
             if (reward.FollowerXP)
             {
-                std::vector<Follower*> followers = GetMissionFollowers(mission->PacketInfo.MissionRecID);
                 for (Follower* follower : followers)
                 {
                     follower->EarnXP(GetOwner(), reward.FollowerXP);
-                    follower->PacketInfo.CurrentMissionID = 0;
                 }
             }
 
@@ -1129,6 +1150,9 @@ void Garrison::RewardMission(Mission* mission, bool withOvermaxReward)
                 // TODO
         }
     }
+    // Release after all normal/bonus XP rewards, including missions with no XP.
+    for (Follower* follower : followers)
+        follower->PacketInfo.CurrentMissionID = 0;
 }
 
 uint32 Garrison::GetRandomRewardId() const

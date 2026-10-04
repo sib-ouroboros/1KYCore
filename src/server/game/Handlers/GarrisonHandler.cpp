@@ -118,10 +118,10 @@ void WorldSession::HandleGarrisonOpenMissionNpc(WorldPackets::Garrison::Garrison
         // ouvre la fenetre des MISSIONS. Le core envoyait SMSG_SHOW_ADVENTURE_MAP, la carte
         // de choix de zone : une carte s affichait sans rien de cliquable (Blez, 30/09/2026).
         // Le champ lu « GarrTypeID » est en realite le type de sujet demande par le client
-        // (4 pour un domaine de classe) : on le renvoie tel quel.
+        // Class halls always use follower type 4, including clients requesting type 1.
         WorldPackets::Garrison::GarrisonOpenMissionNpc garrisonOpenMissionNpc;
         garrisonOpenMissionNpc.NpcGUID = garrisonOpenMissionNpcClient.NpcGUID;
-        garrisonOpenMissionNpc.FollowerType = garrisonOpenMissionNpcClient.GarrTypeID ? garrisonOpenMissionNpcClient.GarrTypeID : int32(FOLLOWER_TYPE_CLASS_HALL);
+        garrisonOpenMissionNpc.FollowerType = int32(FOLLOWER_TYPE_CLASS_HALL);
         SendPacket(garrisonOpenMissionNpc.Write());
     }
     else

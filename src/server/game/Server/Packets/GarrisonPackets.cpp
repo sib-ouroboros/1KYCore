@@ -480,6 +480,13 @@ WorldPacket const* WorldPackets::Garrison::GarrisonCompleteMissionResult::Write(
     _worldPacket << Result;
     _worldPacket << MissionData;
     _worldPacket << MissionRecID;
+    // Legion 7.2+ layout, confirmed by WowPacketParser V7_0_3_22248.
+    _worldPacket << uint32(Followers.size());
+    for (GarrMissionFollowerData const& follower : Followers)
+    {
+        _worldPacket << follower.FollowerDbID;
+        _worldPacket << follower.unk32;
+    }
     _worldPacket.WriteBit(Succeeded);
     _worldPacket.FlushBits();
 
