@@ -4,6 +4,8 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/server/game/Movement/PathGenerator.*
+      - contrib/tests/test_elevated_surface_pathing.py
       - src/tools/vmap4_extractor/model.cpp
       - src/tools/vmap4_extractor/adtfile.cpp
       - contrib/tests/test_vmap_model_names.py
@@ -93,6 +95,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test elevated creature paths with address and undefined behavior sanitizers
+        run: python contrib/tests/test_elevated_surface_pathing.py
       - name: Test real CMake revision generation
         run: python contrib/tests/test_revision_metadata.py
       - name: Test tool protocol with address and undefined behavior sanitizers

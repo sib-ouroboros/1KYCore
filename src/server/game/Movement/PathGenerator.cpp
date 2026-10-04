@@ -28,6 +28,7 @@
 #include "Map.h"
 #include "Metric.h"
 #include "PhasingHandler.h"
+#include <cmath>
 
 ////////////////// PathGenerator //////////////////
 PathGenerator::PathGenerator(const Unit* owner) :
@@ -573,13 +574,24 @@ void PathGenerator::BuildPointPath(const float *startPoint, const float *endPoin
     for (uint32 i = 0; i < pointCount; ++i)
         _pathPoints[i] = G3D::Vector3(pathPoints[i*VERTEX_SIZE+2], pathPoints[i*VERTEX_SIZE], pathPoints[i*VERTEX_SIZE+1]);
 
-    NormalizePath();
+    bool const elevatedSurface = NormalizePath(true);
 
     // first point is always our current location - we need the next one
     SetActualEndPosition(_pathPoints[pointCount-1]);
 
+    // An elevated collision surface is not represented by this MMAP corridor.
+    // Validate from the real start before a forced destination can bypass its floor.
+    if (elevatedSurface)
+    {
+        ValidatePathAgainstCollision();
+        if (_type & PATHFIND_NOPATH)
+            return;
+        if (!InRange(GetEndPosition(), GetActualEndPosition(), 1.0f, SMOOTH_PATH_SLOP))
+            _type = PATHFIND_INCOMPLETE;
+    }
+
     // force the given destination, if needed
-    if (_forceDestination &&
+    if (_forceDestination && !elevatedSurface &&
         (!(_type & PATHFIND_NORMAL) || !InRange(GetEndPosition(), GetActualEndPosition(), 1.0f, 1.0f)))
     {
         // we may want to keep partial subpath
@@ -597,15 +609,54 @@ void PathGenerator::BuildPointPath(const float *startPoint, const float *endPoin
         _type = PathType(PATHFIND_NORMAL | PATHFIND_NOT_USING_PATH);
     }
 
-    ValidatePathAgainstCollision();
+    if (!elevatedSurface)
+        ValidatePathAgainstCollision();
 
     TC_LOG_DEBUG("maps", "++ PathGenerator::BuildPointPath path type %d size %d poly-size %d\n", _type, pointCount, _polyLength);
 }
 
-void PathGenerator::NormalizePath()
+bool PathGenerator::NormalizePath(bool preserveSurface)
 {
+    bool elevatedSurface = false;
+    G3D::Vector3 const& start = GetStartPosition();
+    if (preserveSurface && !_pathPoints.empty() && _sourceUnit->GetTypeId() == TYPEID_UNIT &&
+        !_sourceUnit->GetTransport() && !_sourceUnit->ToCreature()->CanFly() &&
+        !_sourceUnit->IsInWater() && !_sourceUnit->IsUnderWater() &&
+        start.z > _pathPoints.front().z + SMOOTH_PATH_SLOP)
+    {
+        // A real floor must support the supplied start; do not conceal invalid spawns.
+        float const floor = _sourceUnit->GetMap()->GetHeight(_sourceUnit->GetPhaseShift(),
+            start.x, start.y, start.z, true, SMOOTH_PATH_STEP_SIZE);
+        elevatedSurface = floor > INVALID_HEIGHT && std::fabs(floor - start.z) <= SMOOTH_PATH_SLOP;
+    }
+
+    float previousZ = start.z;
     for (uint32 i = 0; i < _pathPoints.size(); ++i)
-        _sourceUnit->UpdateAllowedPositionZ(_pathPoints[i].x, _pathPoints[i].y, _pathPoints[i].z);
+    {
+        G3D::Vector3& point = _pathPoints[i];
+        _sourceUnit->UpdateAllowedPositionZ(point.x, point.y, point.z);
+        if (!elevatedSurface)
+            continue;
+
+        if (i == 0)
+        {
+            // Collision validation must see the same start that MoveSplineInit will use.
+            point = start;
+        }
+        else if (point.z + SMOOTH_PATH_SLOP < previousZ &&
+            !_sourceUnit->GetMap()->IsInWater(_sourceUnit->GetPhaseShift(), point.x, point.y, point.z))
+        {
+            // Query from the previous floor, not sourceZ+5: follow descents without
+            // reaching into an upper storey. Map height queries already have a bias.
+            float const floor = _sourceUnit->GetMap()->GetHeight(_sourceUnit->GetPhaseShift(),
+                point.x, point.y, previousZ, true, previousZ - point.z + SMOOTH_PATH_STEP_SIZE);
+            if (floor > INVALID_HEIGHT && floor > point.z + SMOOTH_PATH_SLOP &&
+                floor <= previousZ + SMOOTH_PATH_SLOP)
+                point.z = floor;
+        }
+        previousZ = point.z;
+    }
+    return elevatedSurface;
 }
 
 void PathGenerator::ValidatePathAgainstCollision()

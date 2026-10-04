@@ -104,7 +104,7 @@ class TC_GAME_API PathGenerator
         void SetStartPosition(G3D::Vector3 const& point) { _startPosition = point; }
         void SetEndPosition(G3D::Vector3 const& point) { _actualEndPosition = point; _endPosition = point; }
         void SetActualEndPosition(G3D::Vector3 const& point) { _actualEndPosition = point; }
-        void NormalizePath();
+        bool NormalizePath(bool preserveSurface = false);
 
         // Apres la generation du chemin MMAP, valide chaque segment contre la collision vmap
         // statique. Le MMAP ne modelise pas les objets fins (clotures, petites barrieres) : un
