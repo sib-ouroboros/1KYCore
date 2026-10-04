@@ -1839,7 +1839,7 @@ class npc_foundry_blaze_controller : public CreatureScript
                             Position l_Pos = { l_X, l_Y, l_Z, m_Orientation };
 
                             /// Don't even process if controller isn't here anymore//???
-                            bool l_Okay = !m_Controller ? ObjectAccessor::GetCreature(*me,  m_Controller) != nullptr : true;
+                            bool l_Okay = m_Controller ? ObjectAccessor::GetCreature(*me, m_Controller) != nullptr : true;
                             for (AreaTrigger* l_Blaze : l_BlazeList)
                             {
                                 if (!l_Okay)
@@ -1857,7 +1857,7 @@ class npc_foundry_blaze_controller : public CreatureScript
                                 if (Creature* l_Blaze = me->SummonCreature(eBlackhandCreatures::Blaze, l_Pos, TempSummonType::TEMPSUMMON_TIMED_DESPAWN, 60 * TimeConstants::IN_MILLISECONDS))
                                 {
                                     if (l_Blaze->IsAIEnabled)
-                                        l_Blaze->AI()->SetGUID(!m_Controller ? m_Controller : me->GetGUID());
+                                        l_Blaze->AI()->SetGUID(m_Controller ? m_Controller : me->GetGUID());
                                 }
                             }
 
@@ -2504,7 +2504,8 @@ class spell_foundry_blaze_growth : public SpellScriptLoader
 
             void OnTick(AuraEffect const* /*p_AurEff*/)
             {
-                if (Creature* l_Blaze = GetCaster()->ToCreature())
+                Unit* caster = GetCaster();
+                if (Creature* l_Blaze = caster ? caster->ToCreature() : nullptr)
                 {
                     if (l_Blaze->IsAIEnabled)
                         l_Blaze->AI()->DoAction(eBlackhandActions::BlackhandSpreadBlaze);

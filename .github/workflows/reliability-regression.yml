@@ -130,3 +130,5 @@ jobs:
         run: python contrib/tests/test_navigation_config.py
       - name: Test Twin Peaks dropped flag return without duplicating the opposing flag
         run: python contrib/tests/test_twin_peaks_flag_return.py
+      - name: Test Blackhand blaze controller identity and periodic caster lifetime
+        run: python contrib/tests/test_blackhand_blaze_owner.py
