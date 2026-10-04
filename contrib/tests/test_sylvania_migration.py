@@ -552,7 +552,7 @@ def test_simple_goober_models(tables, restore=None, registry=None, label="two na
         rejection()
         sql(f'UPDATE creature_template SET entry={creature} WHERE entry=9000020;')
     for objective in registry.get('required_objectives', []):
-        for field in ('ObjectID','QuestID','Type','Amount') + tuple(k for k in ('StorageIndex','Flags','Flags2') if k in objective):
+        for field in registry.get('protected_objective_fields', ('ObjectID','QuestID','Type','Amount')):
             changed = int(objective[field]) + 1
             sql(f"UPDATE quest_objectives SET `{field}`={changed} WHERE ID={objective['ID']};")
             rejection()

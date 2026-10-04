@@ -556,5 +556,14 @@
       "empty log and missing template"
     ],
     "limit": "Actual function compiled with test interfaces; no live client, group interaction or phase/lock acceptance."
-  }
+  },
+  "protected_objective_fields": [
+    "ObjectID",
+    "QuestID",
+    "Type",
+    "Amount",
+    "StorageIndex",
+    "Flags",
+    "Flags2"
+  ]
 }
