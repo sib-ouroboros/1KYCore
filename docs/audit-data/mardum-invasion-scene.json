@@ -80,5 +80,159 @@
     "existing_dialogue_preserved": true,
     "other_templates_preserved": true,
     "missing_dialogue_seeded": true
+  },
+  "navmesh_audit": {
+    "map": 1481,
+    "tiles": 2,
+    "ground_only": true,
+    "actors": [
+      {
+        "entry": 93011,
+        "complete": true,
+        "start_poly": 4503599627372432,
+        "end_poly": 4503601774855648,
+        "start_height_delta": 1.70699,
+        "end_height_delta": 1.13514,
+        "polygons": 13,
+        "points": [
+          [
+            1179.57,
+            3202.61,
+            53.1335
+          ],
+          [
+            1173.33,
+            3200,
+            52.3779
+          ],
+          [
+            1111.48,
+            3156.86,
+            18.7562
+          ]
+        ]
+      },
+      {
+        "entry": 98292,
+        "complete": true,
+        "start_poly": 4503599627371995,
+        "end_poly": 4503601774855648,
+        "start_height_delta": 0.833851,
+        "end_height_delta": 1.13514,
+        "polygons": 12,
+        "points": [
+          [
+            1170.74,
+            3204.71,
+            52.4599
+          ],
+          [
+            1111.48,
+            3156.86,
+            18.7562
+          ]
+        ]
+      },
+      {
+        "entry": 98290,
+        "complete": true,
+        "start_poly": 4503599627371995,
+        "end_poly": 4503601774855648,
+        "start_height_delta": 1.15585,
+        "end_height_delta": 1.13514,
+        "polygons": 12,
+        "points": [
+          [
+            1171.49,
+            3203.69,
+            52.4704
+          ],
+          [
+            1111.48,
+            3156.86,
+            18.7562
+          ]
+        ]
+      },
+      {
+        "entry": 99918,
+        "complete": true,
+        "start_poly": 4503599627371995,
+        "end_poly": 4503601774855648,
+        "start_height_delta": 0.704346,
+        "end_height_delta": 1.13514,
+        "polygons": 12,
+        "points": [
+          [
+            1172.92,
+            3207.82,
+            53.0978
+          ],
+          [
+            1111.48,
+            3156.86,
+            18.7562
+          ]
+        ]
+      },
+      {
+        "entry": 98228,
+        "complete": true,
+        "start_poly": 4503599627372432,
+        "end_poly": 4503601774855648,
+        "start_height_delta": 1.86324,
+        "end_height_delta": 1.13514,
+        "polygons": 16,
+        "points": [
+          [
+            1182.36,
+            3202.91,
+            53.3847
+          ],
+          [
+            1170.93,
+            3196,
+            51.3485
+          ],
+          [
+            1111.48,
+            3156.86,
+            18.7562
+          ]
+        ]
+      },
+      {
+        "entry": 98227,
+        "complete": true,
+        "start_poly": 4503599627372432,
+        "end_poly": 4503601774855648,
+        "start_height_delta": 1.61197,
+        "end_height_delta": 1.13514,
+        "polygons": 13,
+        "points": [
+          [
+            1177,
+            3203.07,
+            52.9757
+          ],
+          [
+            1111.48,
+            3156.86,
+            18.7562
+          ]
+        ]
+      }
+    ],
+    "method": "Native Detour from 1KYCore; nearest ground polygons and complete polygon corridors. Not worldserver PathGenerator/VMAP collision validation or a client test.",
+    "code_commit": "05be271a646bb1f02f16f0e76449da02043a8066",
+    "source_assets": "F:/Projects/extracted-735-new: maps, vmaps, dbc; source mmaps and ZIP lack map 1481",
+    "generated_in": "Separate temporary audit directory; source assets not modified",
+    "tiles_sha256": {
+      "1481.mmap": "06d5f2cb7250bda7869ebb96ef0192c7bffc39a634691ed8af5aabb9161374ff",
+      "14812925.mmtile": "a7c30ba2b8a26458e8b8a548ca9b484d21f976b6ad336a9593cf9c84a5d6c114",
+      "14812926.mmtile": "7013c3609b3a6567e7a95062460341dc758ccd3e8d9294e316150d439ffc9806"
+    },
+    "client_and_full_core_collision_verified": false,
+    "full_map_generated": false
   }
 }
