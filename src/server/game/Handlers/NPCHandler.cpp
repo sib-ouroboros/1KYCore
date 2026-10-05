@@ -187,16 +187,19 @@ void WorldSession::SendTrainerListLegacy(ObjectGuid guid, uint32 index)
                 ++maxReq;
             }
 
-            if (maxReq == 2)
+            if (maxReq >= spell.ReqAbility.size())
                 break;
 
             for (auto const& requirePair : sSpellMgr->GetSpellsRequiredForSpellBounds(tSpell->ReqAbility[i]))
             {
+                if (maxReq >= spell.ReqAbility.size())
+                    break;
+
                 spell.ReqAbility[maxReq] = requirePair.second;
                 ++maxReq;
             }
 
-            if (maxReq == 2)
+            if (maxReq >= spell.ReqAbility.size())
                 break;
         }
 

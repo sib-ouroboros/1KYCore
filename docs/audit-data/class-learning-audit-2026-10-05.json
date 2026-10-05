@@ -1,0 +1,3667 @@
+{
+  "scope": "Local release database copy; not the deployed Linux database. No database mutations.",
+  "npc_15283": [
+    {
+      "entry": "15283",
+      "name": "Summoner Teli'Larien",
+      "npcflag": "2",
+      "trainer_type": "0",
+      "trainer_class": "9",
+      "trainer_race": "0",
+      "AIName": "",
+      "ScriptName": ""
+    }
+  ],
+  "npc_15283_legacy": [],
+  "npc_15283_modern": [],
+  "corruption_custom_learning": [],
+  "class_trainer_missing_lists": [
+    {
+      "entry": "911",
+      "name": "Llane Beshere",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "912",
+      "name": "Thran Khorman",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "913",
+      "name": "Lyria Du Lac",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "914",
+      "name": "Ander Germaine",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "985",
+      "name": "Malosh",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "1229",
+      "name": "Granis Swiftaxe",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "1901",
+      "name": "Kelstrum Stonebreaker",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "2119",
+      "name": "Dannal Stern",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "2131",
+      "name": "Austil de Mon",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3041",
+      "name": "Torm Ragetotem",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3042",
+      "name": "Sark Ragetotem",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3043",
+      "name": "Ker Ragetotem",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3059",
+      "name": "Harutt Thunderhorn",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3063",
+      "name": "Krang Stonehoof",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3153",
+      "name": "Frang",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3169",
+      "name": "Tarshaw Jaggedscar",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3353",
+      "name": "Grezz Ragefist",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3354",
+      "name": "Sorek",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3408",
+      "name": "Zel'mak",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3593",
+      "name": "Alyissia",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "3598",
+      "name": "Kyra Windblade",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "4087",
+      "name": "Arias'ta Bladesinger",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "4089",
+      "name": "Sildanair",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "4593",
+      "name": "Christoph Walker",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "4594",
+      "name": "Angela Curthas",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "4595",
+      "name": "Baltus Fowler",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "5113",
+      "name": "Kelv Sternhammer",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "5114",
+      "name": "Bilban Tosslespanner",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "5479",
+      "name": "Wu Shen",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "5480",
+      "name": "Ilsa Corbin",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "7315",
+      "name": "Darnath Bladesinger",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "8141",
+      "name": "Captain Evencane",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "16503",
+      "name": "Kore",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "16771",
+      "name": "Ahonan",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "17120",
+      "name": "Behomat",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "17480",
+      "name": "Ruada",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "17504",
+      "name": "Kazi",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "34697",
+      "name": "Warrior-Matic NX-01",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "38037",
+      "name": "Nortet",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "42324",
+      "name": "Drill Sergeant Steamcrank",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "43009",
+      "name": "Alsudar the Bastion",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "43010",
+      "name": "Delios Silverblade",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "43012",
+      "name": "Lothan Silverblade",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "44128",
+      "name": "Sarithra",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "44129",
+      "name": "Beldis",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "45019",
+      "name": "Berserker Zanga",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "45709",
+      "name": "Bruiser Janx",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "46667",
+      "name": "Blademaster Ronakada",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "48616",
+      "name": "Karla Fain",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "49720",
+      "name": "Eugene Daller",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "49736",
+      "name": "Kallen Stanner",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "49781",
+      "name": "Grendin Swiftaxe",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "49902",
+      "name": "Warrior-Matic NX-01",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "49955",
+      "name": "Leonic Truehair",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "49961",
+      "name": "Viik",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "50006",
+      "name": "Yeniss",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "50025",
+      "name": "Bratu",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "50033",
+      "name": "Ging",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "50149",
+      "name": "Vinsun",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "50155",
+      "name": "Naseev",
+      "trainer_class": "1"
+    },
+    {
+      "entry": "925",
+      "name": "Brother Sammuel",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "926",
+      "name": "Bromos Grummner",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "927",
+      "name": "Brother Wilhelm",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "1232",
+      "name": "Azar Stronghammer",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "5147",
+      "name": "Valgar Highforge",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "5148",
+      "name": "Beldruk Doombrow",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "5149",
+      "name": "Brandur Ironhammer",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "8140",
+      "name": "Brother Karman",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "8664",
+      "name": "Sunwalker Saern",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "15280",
+      "name": "Jesthenis Sunstriker",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "16275",
+      "name": "Noellene",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "16501",
+      "name": "Aurelon",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "16679",
+      "name": "Osselan",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "16680",
+      "name": "Ithelis",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "16681",
+      "name": "Champion Bachi",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "16761",
+      "name": "Baatun",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "17121",
+      "name": "Kavaan",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "17483",
+      "name": "Tullas",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "17509",
+      "name": "Jol",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "17844",
+      "name": "Vindicator Aesom",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "20406",
+      "name": "Champion Cyssa Dawnrose",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "35281",
+      "name": "Rukua",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "37737",
+      "name": "Sunwalker Helaku",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "43001",
+      "name": "Sunwalker Reha",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "43013",
+      "name": "Sunwalker Iopi",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "43795",
+      "name": "Aponi Brightmane",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "49741",
+      "name": "Sister Darnhald",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "49793",
+      "name": "Faldoc Stonefaith",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "49954",
+      "name": "Haris Lightsbreath",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "49957",
+      "name": "Delemm",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "50023",
+      "name": "Ordo",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "50035",
+      "name": "Sunwalker Lonaki",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "50150",
+      "name": "Nelur Lightsown",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "50160",
+      "name": "Rulen Lightsreap",
+      "trainer_class": "2"
+    },
+    {
+      "entry": "895",
+      "name": "Thorgas Grimson",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "987",
+      "name": "Ogromm",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "1231",
+      "name": "Grif Wildheart",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "1404",
+      "name": "Kragg",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3038",
+      "name": "Kary Thunderhorn",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3039",
+      "name": "Holt Thunderhorn",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3040",
+      "name": "Urek Thunderhorn",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3061",
+      "name": "Lanka Farshot",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3065",
+      "name": "Yaw Sharpmane",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3154",
+      "name": "Jen'shan",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3171",
+      "name": "Thotar",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3406",
+      "name": "Xor'juul",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3407",
+      "name": "Sian'dur",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3596",
+      "name": "Ayanna Everstride",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3601",
+      "name": "Dazalar",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "3963",
+      "name": "Danlaar Nightstride",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "5115",
+      "name": "Daera Brightspear",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "5116",
+      "name": "Olmin Burningbeard",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "5117",
+      "name": "Regnus Thundergranite",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "5501",
+      "name": "Kaerbrus",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "5515",
+      "name": "Einris Brightspear",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "5516",
+      "name": "Ulfir Ironbeard",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "5517",
+      "name": "Thorfin Stoneshield",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "8308",
+      "name": "Alenndaar Lapidaar",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "10930",
+      "name": "Dargh Trueaim",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "15513",
+      "name": "Ranger Sallina",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "16270",
+      "name": "Hannovia",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "16499",
+      "name": "Keilnei",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "16672",
+      "name": "Tana",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "16673",
+      "name": "Oninath",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "16674",
+      "name": "Zandine",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "16738",
+      "name": "Deremiis",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "17110",
+      "name": "Acteon",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "17122",
+      "name": "Vord",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "17505",
+      "name": "Killac",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "34600",
+      "name": "Alenndaar Lapidaar",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "34673",
+      "name": "Bamm Megabomb",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "38247",
+      "name": "Ortezza",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "38911",
+      "name": "Xavier the Huntsman",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "39100",
+      "name": "Dedlow Wormwood",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "39116",
+      "name": "Apolos",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "43011",
+      "name": "Lyndsay Hollister",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "43277",
+      "name": "Don Omar",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "43278",
+      "name": "Ashley Blank",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "44247",
+      "name": "Wulf Hansreim",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "44249",
+      "name": "Sarisse Jume",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "45023",
+      "name": "Huntress Kuzari",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "45713",
+      "name": "Dankin Farsnipe",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "46983",
+      "name": "Benjamin Foxworthy",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "48618",
+      "name": "Darna Woad",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "49806",
+      "name": "Belda Wildheart",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "49894",
+      "name": "Bamm Megabomb",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "49946",
+      "name": "Ranger Belonis",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "49958",
+      "name": "Matt Bruxworthy",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "49966",
+      "name": "Shaniri",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "50004",
+      "name": "Jamai",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "50020",
+      "name": "Irva",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "50032",
+      "name": "Tarmod",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "50144",
+      "name": "Ranger Eoss",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "50157",
+      "name": "Ranger Selone",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "50609",
+      "name": "Nathanos Blightcaller",
+      "trainer_class": "3"
+    },
+    {
+      "entry": "915",
+      "name": "Jorik Kerridan",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "916",
+      "name": "Solm Hargrin",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "917",
+      "name": "Keryn Sylvius",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "918",
+      "name": "Osborne the Night Man",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "1234",
+      "name": "Hogral Bakkan",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "1411",
+      "name": "Ian Strom",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "2122",
+      "name": "David Trias",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "2130",
+      "name": "Marion Call",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "3155",
+      "name": "Rwag",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "3170",
+      "name": "Kaplak",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "3594",
+      "name": "Frahun Shadewhisper",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "3599",
+      "name": "Jannok Breezesong",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "4582",
+      "name": "Carolyn Ward",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "4583",
+      "name": "Miles Dexter",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "4584",
+      "name": "Gregory Charles",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "5165",
+      "name": "Hulfdan Blackbeard",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "5166",
+      "name": "Ormyr Flinteye",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "5167",
+      "name": "Fenthwick",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "6707",
+      "name": "Fahrad",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "13283",
+      "name": "Lord Tony Romano",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "15285",
+      "name": "Pathstalker Kariel",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "16279",
+      "name": "Tannaria",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "16684",
+      "name": "Zelanis",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "16685",
+      "name": "Elara",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "16686",
+      "name": "Nerisen",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "23566",
+      "name": "Calia Hastings",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "34693",
+      "name": "Slinky Sharpshiv",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "38244",
+      "name": "Legati",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "42366",
+      "name": "Kelsey Steelspark",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "45095",
+      "name": "Night-Stalker Ku'nanji",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "45717",
+      "name": "Vish the Sneak",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "48615",
+      "name": "Shernon the Footpad",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "49745",
+      "name": "Sern Hallows",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "49782",
+      "name": "Galda Bronzeblade",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "49870",
+      "name": "Angela Hipple",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "49909",
+      "name": "Stinky Sharpshiv",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "49949",
+      "name": "Pathstalker Lontral",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "50015",
+      "name": "Munalti",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "50027",
+      "name": "Dargad",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "50147",
+      "name": "Pathstalker Rislar",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "50158",
+      "name": "Pathstalker Ralsir",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "51998",
+      "name": "Arthur Huwe",
+      "trainer_class": "4"
+    },
+    {
+      "entry": "375",
+      "name": "Priestess Anetta",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "377",
+      "name": "Priestess Josetta",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "837",
+      "name": "Branstock Khalder",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "1226",
+      "name": "Maxan Anvol",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "2123",
+      "name": "Dark Cleric Duesten",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "2129",
+      "name": "Dark Cleric Beryl",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "3044",
+      "name": "Miles Welsh",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "3045",
+      "name": "Malakai Cross",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "3046",
+      "name": "Father Cobb",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "3595",
+      "name": "Shanda",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "3600",
+      "name": "Laurna Morninglight",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "3706",
+      "name": "Tai'jin",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "3707",
+      "name": "Ken'jai",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "4090",
+      "name": "Astarii Starseeker",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "4091",
+      "name": "Jandria",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "4092",
+      "name": "Lariia",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "4606",
+      "name": "Aelthalyste",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "4607",
+      "name": "Father Lankester",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "4608",
+      "name": "Father Lazarus",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "5141",
+      "name": "Theodrus Frostbeard",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "5142",
+      "name": "Braenna Flintcrag",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "5143",
+      "name": "Toldren Deepiron",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "5994",
+      "name": "Zayus",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "6014",
+      "name": "X'yera",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "6018",
+      "name": "Ur'kyo",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "11397",
+      "name": "Nara Meideros",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "11401",
+      "name": "Priestess Alathea",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "11406",
+      "name": "High Priest Rohan",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "15284",
+      "name": "Matron Arena",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "16276",
+      "name": "Ponaris",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "16502",
+      "name": "Zalduun",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "16658",
+      "name": "Aldrae",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "16659",
+      "name": "Lotheolan",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "16660",
+      "name": "Belestra",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "16756",
+      "name": "Caedmos",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "17482",
+      "name": "Guvan",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "17510",
+      "name": "Izmir",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "17511",
+      "name": "Fallat",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "34692",
+      "name": "Sister Goldskimmer",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "37724",
+      "name": "Seer Ravenfeather",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "38245",
+      "name": "Tunari",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "42323",
+      "name": "\"Doc\" Cogspin",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "43015",
+      "name": "Seer Alsoomse",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "43796",
+      "name": "Tahu Sagewind",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "43870",
+      "name": "Seer Beryl",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "45137",
+      "name": "Shadow-Walker Zuru",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "45306",
+      "name": "Chief Surgeon Gashweld",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "45347",
+      "name": "Brother Silverhallow",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "48614",
+      "name": "Dark Cleric Claressa",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "49715",
+      "name": "Dark Cleric Pordon",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "49749",
+      "name": "Priestess Cocoa Anderson",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "49784",
+      "name": "Priestess Baerla",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "49901",
+      "name": "Sister Goldskimmer",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "49950",
+      "name": "Matron Narsilla",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "49962",
+      "name": "Andrenatol",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "50001",
+      "name": "Parata",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "50024",
+      "name": "Salha",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "50031",
+      "name": "Zumolo",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "50148",
+      "name": "Matron Ossela",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "50163",
+      "name": "Matron Alesso",
+      "trainer_class": "5"
+    },
+    {
+      "entry": "28471",
+      "name": "Lady Alistra",
+      "trainer_class": "6"
+    },
+    {
+      "entry": "28472",
+      "name": "Lord Thorval",
+      "trainer_class": "6"
+    },
+    {
+      "entry": "28474",
+      "name": "Amal'thazad",
+      "trainer_class": "6"
+    },
+    {
+      "entry": "29194",
+      "name": "Amal'thazad",
+      "trainer_class": "6"
+    },
+    {
+      "entry": "29195",
+      "name": "Lady Alistra",
+      "trainer_class": "6"
+    },
+    {
+      "entry": "29196",
+      "name": "Lord Thorval",
+      "trainer_class": "6"
+    },
+    {
+      "entry": "31084",
+      "name": "Highlord Darion Mograine",
+      "trainer_class": "6"
+    },
+    {
+      "entry": "986",
+      "name": "Haromm",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "3030",
+      "name": "Siln Skychaser",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "3031",
+      "name": "Tigor Skychaser",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "3032",
+      "name": "Beram Skychaser",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "3062",
+      "name": "Meela Dawnstrider",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "3066",
+      "name": "Narm Skychaser",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "3157",
+      "name": "Shikrik",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "3173",
+      "name": "Swart",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "3344",
+      "name": "Kardris Dreamseeker",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "17089",
+      "name": "Firmanvaar",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "17204",
+      "name": "Farseer Nobundo",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "17212",
+      "name": "Tuluun",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "17219",
+      "name": "Sulaa",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "17519",
+      "name": "Hobahken",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "17520",
+      "name": "Gurrag",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "20407",
+      "name": "Farseer Umbrua",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "23127",
+      "name": "Farseer Javad",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "34695",
+      "name": "Maxx Avalanche",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "38242",
+      "name": "Nekali",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "43464",
+      "name": "Halbin Frosthammer",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "44393",
+      "name": "Bolner Hammerbeak",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "44394",
+      "name": "Dalga Hammerbeak",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "45029",
+      "name": "Witch Doctor Umbu",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "45718",
+      "name": "Environmental Engineer Linza",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "49808",
+      "name": "Grenhild Darktalon",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "49900",
+      "name": "Maxx Avalanche",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "49964",
+      "name": "Adrihi",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "50011",
+      "name": "Cona",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "50019",
+      "name": "Darahu",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "50022",
+      "name": "Brulla",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "50153",
+      "name": "Murgha the Tempered",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "50174",
+      "name": "Farseer Lopaa",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "51637",
+      "name": "Tarl Cloudsong",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "51638",
+      "name": "Garn Cloudsong",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "51639",
+      "name": "Kador Cloudsong",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "51640",
+      "name": "Lama Cloudsong",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "52292",
+      "name": "Droha",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "52317",
+      "name": "Mahala Cloudsong",
+      "trainer_class": "7"
+    },
+    {
+      "entry": "198",
+      "name": "Khelden Bremen",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "328",
+      "name": "Zaldimar Wefhellt",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "331",
+      "name": "Maginor Dumas",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "944",
+      "name": "Marryk Nurribit",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "1228",
+      "name": "Magis Sparkmantle",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "2124",
+      "name": "Isabella",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "2128",
+      "name": "Cain Firesong",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "3047",
+      "name": "Archmage Shymm",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "3048",
+      "name": "Ursyn Ghull",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "3049",
+      "name": "Thurston Xane",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "4566",
+      "name": "Kaelystia Hatebringer",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "4567",
+      "name": "Pierce Shackleton",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "4568",
+      "name": "Anastasia Hartwell",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5144",
+      "name": "Bink",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5145",
+      "name": "Juli Stormkettle",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5146",
+      "name": "Nittlebur Sparkfizzle",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5498",
+      "name": "Elsharin",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5880",
+      "name": "Un'Thuwa",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5882",
+      "name": "Pephredo",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5883",
+      "name": "Enyo",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5884",
+      "name": "Mai'ah",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5885",
+      "name": "Deino",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5957",
+      "name": "Birgitte Cranston",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "5958",
+      "name": "Thuul",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "7311",
+      "name": "Uthel'nay",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "7312",
+      "name": "Dink",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "15279",
+      "name": "Julia Sunstriker",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "16269",
+      "name": "Garridel",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "16500",
+      "name": "Valaatu",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "16651",
+      "name": "Zaedana",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "16652",
+      "name": "Quithas",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "16653",
+      "name": "Inethven",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "16749",
+      "name": "Edirah",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "16755",
+      "name": "Lunaraa",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "17105",
+      "name": "Emissary Valustraa",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "17481",
+      "name": "Semid",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "17513",
+      "name": "Harnan",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "17514",
+      "name": "Bati",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "23103",
+      "name": "Derek the Undying",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "27704",
+      "name": "Horace Alder",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "27705",
+      "name": "Lorrin Foxfire",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "28956",
+      "name": "Warcaster Fanoraithe",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "28958",
+      "name": "Jessa Weaver",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "34689",
+      "name": "Fizz Lighter",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "37121",
+      "name": "Teegli Merrowith",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "38246",
+      "name": "Soratha",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "39206",
+      "name": "Acrypha",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "42331",
+      "name": "Bipsi Frostflinger",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "43005",
+      "name": "Irriende",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "43006",
+      "name": "Rhyanda",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "45714",
+      "name": "Conjurer Mixli",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "48613",
+      "name": "Larah Firesong",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "49716",
+      "name": "Thom Denger",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "49760",
+      "name": "Zalna Wefhellt",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "49786",
+      "name": "Gindle the Green",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "49896",
+      "name": "Fizz Lighter",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "49952",
+      "name": "Denara Eversun",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "49959",
+      "name": "Lennah",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "50002",
+      "name": "Bomsanchu",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "50021",
+      "name": "Raluhi",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "50029",
+      "name": "Egnom",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "50690",
+      "name": "Tarelvir",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "50714",
+      "name": "Dyrhara",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "50715",
+      "name": "Maelir",
+      "trainer_class": "8"
+    },
+    {
+      "entry": "459",
+      "name": "Drusilla La Salle",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "460",
+      "name": "Alamar Grimm",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "906",
+      "name": "Maximillian Crowe",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "988",
+      "name": "Kartosh",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "2126",
+      "name": "Maximillion",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "2127",
+      "name": "Rupert Boch",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "3156",
+      "name": "Nartok",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "3172",
+      "name": "Dhugru Gorelust",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "3324",
+      "name": "Grol'dar",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "3325",
+      "name": "Mirkat",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "3326",
+      "name": "Zevrist",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "4563",
+      "name": "Kaal Soulreaper",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "4564",
+      "name": "Luther Pickman",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "4565",
+      "name": "Richard Kerwin",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "5171",
+      "name": "Thistleheart",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "5172",
+      "name": "Briarthorn",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "5173",
+      "name": "Alexander Calder",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "5612",
+      "name": "Gimrizz Shadowcog",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "6251",
+      "name": "Strahad Farsan",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "16266",
+      "name": "Celoenus",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "16646",
+      "name": "Alamma",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "16647",
+      "name": "Talionia",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "16648",
+      "name": "Zanien",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "23534",
+      "name": "Babagaya Shadowcleft",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "34696",
+      "name": "Evol Fingers",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "42618",
+      "name": "Voldreka",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "43455",
+      "name": "Saripal Smolderbrew",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "43883",
+      "name": "Jensen Thomasson",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "45138",
+      "name": "Unjari Feltongue",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "45720",
+      "name": "Kazrali the Witch",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "48612",
+      "name": "Maressa Milner",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "49718",
+      "name": "Bee Bruxworthy",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "49769",
+      "name": "Deborah Fain",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "49791",
+      "name": "Solbin Shadowcog",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "49895",
+      "name": "Evol Fingers",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "49945",
+      "name": "Summoner Fanorad",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "49998",
+      "name": "Gusini",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "50028",
+      "name": "Chintoka",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "50142",
+      "name": "Summoner Calwen",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "50156",
+      "name": "Summoner Nolric",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "50723",
+      "name": "Keric Smolderblade",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "50729",
+      "name": "Darba the Crone",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "50732",
+      "name": "Larn Caverndeep",
+      "trainer_class": "9"
+    },
+    {
+      "entry": "62393",
+      "name": "Ao Jian",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "62419",
+      "name": "Aysa Cloudsinger",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "62425",
+      "name": "Liu of the Bottomless Tankard",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "62450",
+      "name": "Lanfen, Brewer of Fine Teas",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "62462",
+      "name": "Tseh Rah, Peacebloom Teamaster",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "62463",
+      "name": "Sho the Wise",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "62464",
+      "name": "Pan of the Martial Spirit",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63258",
+      "name": "Bao",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63272",
+      "name": "Ting, Strong of Stomach",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63285",
+      "name": "Lo",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63296",
+      "name": "Gato",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63310",
+      "name": "Zabrax",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63327",
+      "name": "Shoyu",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63331",
+      "name": "Laoxi",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63332",
+      "name": "Pao",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "63335",
+      "name": "Mojo Stormstout",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "64975",
+      "name": "Iron-Body Ponshu",
+      "trainer_class": "10"
+    },
+    {
+      "entry": "3033",
+      "name": "Turak Runetotem",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "3034",
+      "name": "Sheal Runetotem",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "3036",
+      "name": "Kym Wildmane",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "3060",
+      "name": "Gart Mistrunner",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "3064",
+      "name": "Gennia Runetotem",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "3597",
+      "name": "Mardant Strongoak",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "3602",
+      "name": "Kal",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "5505",
+      "name": "Theridran",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "8142",
+      "name": "Jannos Lighthoof",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "9465",
+      "name": "Golhine the Hooded",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "12042",
+      "name": "Loganaar",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "13476",
+      "name": "Zen'Balai",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "16655",
+      "name": "Harene Plainwalker",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "16721",
+      "name": "Shalannius",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "38243",
+      "name": "Zen'tabra",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "44380",
+      "name": "Jabul",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "44395",
+      "name": "Celestine of the Harvest",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "44978",
+      "name": "Sesebi",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "49997",
+      "name": "Den'chulu",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "50034",
+      "name": "Musu Gentlemoon",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "50152",
+      "name": "Hahna Moonscrest",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "50171",
+      "name": "Muran Fairden",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "52319",
+      "name": "Mala Skywatcher",
+      "trainer_class": "11"
+    },
+    {
+      "entry": "52335",
+      "name": "Dareth",
+      "trainer_class": "11"
+    }
+  ],
+  "corruption_specialization_rows": [
+    [
+      0,
+      172,
+      0,
+      265,
+      7,
+      5354
+    ]
+  ],
+  "corruption_levels": [
+    [
+      3,
+      0,
+      3,
+      0,
+      0,
+      172
+    ],
+    [
+      3,
+      0,
+      3,
+      0,
+      0,
+      146739
+    ]
+  ],
+  "specializations": {
+    "client_build": 26654,
+    "tables": {
+      "SkillLineAbility": {
+        "count": 9360,
+        "layout": "0x97b5a653"
+      },
+      "SpecializationSpells": {
+        "count": 899,
+        "layout": "0xae3436f3"
+      },
+      "ChrSpecialization": {
+        "count": 42,
+        "layout": "0x3d86b8f7"
+      }
+    },
+    "specifications": [
+      {
+        "class": 8,
+        "spec": 62,
+        "spell_count": 20,
+        "same_name_candidates": [
+          {
+            "name": "Чародейский обстрел",
+            "spells": [
+              {
+                "spell": 44425,
+                "override": 0
+              },
+              {
+                "spell": 231564,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Чародейские стрелы",
+            "spells": [
+              {
+                "spell": 5143,
+                "override": 0
+              },
+              {
+                "spell": 79684,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Прилив сил",
+            "spells": [
+              {
+                "spell": 12051,
+                "override": 0
+              },
+              {
+                "spell": 231565,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Смещение",
+            "spells": [
+              {
+                "spell": 195676,
+                "override": 0
+              },
+              {
+                "spell": 212801,
+                "override": 195676
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 8,
+        "spec": 63,
+        "spell_count": 20,
+        "same_name_candidates": [
+          {
+            "name": "Огненный взрыв",
+            "spells": [
+              {
+                "spell": 108853,
+                "override": 0
+              },
+              {
+                "spell": 231567,
+                "override": 0
+              },
+              {
+                "spell": 231568,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Критическая масса",
+            "spells": [
+              {
+                "spell": 117216,
+                "override": 0
+              },
+              {
+                "spell": 231630,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 8,
+        "spec": 64,
+        "spell_count": 23,
+        "same_name_candidates": [
+          {
+            "name": "Обледенение",
+            "spells": [
+              {
+                "spell": 12982,
+                "override": 0
+              },
+              {
+                "spell": 231582,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Снежная буря",
+            "spells": [
+              {
+                "spell": 190356,
+                "override": 0
+              },
+              {
+                "spell": 236662,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Заморозка мозгов",
+            "spells": [
+              {
+                "spell": 190447,
+                "override": 0
+              },
+              {
+                "spell": 231584,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 2,
+        "spec": 65,
+        "spell_count": 27,
+        "same_name_candidates": [
+          {
+            "name": "Частица Света",
+            "spells": [
+              {
+                "spell": 53563,
+                "override": 0
+              },
+              {
+                "spell": 53651,
+                "override": 0
+              },
+              {
+                "spell": 231642,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Свет мученика",
+            "spells": [
+              {
+                "spell": 183998,
+                "override": 0
+              },
+              {
+                "spell": 219562,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 2,
+        "spec": 66,
+        "spell_count": 29,
+        "same_name_candidates": [
+          {
+            "name": "Щит мстителя",
+            "spells": [
+              {
+                "spell": 31935,
+                "override": 0
+              },
+              {
+                "spell": 231665,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 2,
+        "spec": 70,
+        "spell_count": 21,
+        "same_name_candidates": [
+          {
+            "name": "Правосудие",
+            "spells": [
+              {
+                "spell": 231663,
+                "override": 0
+              },
+              {
+                "spell": 231661,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 1,
+        "spec": 71,
+        "spell_count": 23,
+        "same_name_candidates": [
+          {
+            "name": "Смертельный удар",
+            "spells": [
+              {
+                "spell": 12294,
+                "override": 0
+              },
+              {
+                "spell": 261900,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Казнь",
+            "spells": [
+              {
+                "spell": 163201,
+                "override": 0
+              },
+              {
+                "spell": 231830,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Мощный удар",
+            "spells": [
+              {
+                "spell": 1464,
+                "override": 0
+              },
+              {
+                "spell": 261901,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Рассекающий удар",
+            "spells": [
+              {
+                "spell": 845,
+                "override": 0
+              },
+              {
+                "spell": 231833,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 1,
+        "spec": 72,
+        "spell_count": 23,
+        "same_name_candidates": [
+          {
+            "name": "Вихрь",
+            "spells": [
+              {
+                "spell": 12950,
+                "override": 0
+              },
+              {
+                "spell": 190411,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Казнь",
+            "spells": [
+              {
+                "spell": 5308,
+                "override": 0
+              },
+              {
+                "spell": 231827,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Неистовый удар сплеча",
+            "spells": [
+              {
+                "spell": 100130,
+                "override": 0
+              },
+              {
+                "spell": 231824,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 1,
+        "spec": 73,
+        "spell_count": 27,
+        "same_name_candidates": [
+          {
+            "name": "Мощный удар щитом",
+            "spells": [
+              {
+                "spell": 23922,
+                "override": 0
+              },
+              {
+                "spell": 231834,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Блок щитом",
+            "spells": [
+              {
+                "spell": 2565,
+                "override": 0
+              },
+              {
+                "spell": 231847,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 11,
+        "spec": 102,
+        "spell_count": 25,
+        "same_name_candidates": [
+          {
+            "name": "Облик лунного совуха",
+            "spells": [
+              {
+                "spell": 24858,
+                "override": 0
+              },
+              {
+                "spell": 231042,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Звездопад",
+            "spells": [
+              {
+                "spell": 191034,
+                "override": 0
+              },
+              {
+                "spell": 231049,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Звездный поток",
+            "spells": [
+              {
+                "spell": 78674,
+                "override": 0
+              },
+              {
+                "spell": 231021,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Солнечный огонь",
+            "spells": [
+              {
+                "spell": 93402,
+                "override": 0
+              },
+              {
+                "spell": 231050,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 11,
+        "spec": 103,
+        "spell_count": 36,
+        "same_name_candidates": [
+          {
+            "name": "Тигриное неистовство",
+            "spells": [
+              {
+                "spell": 5217,
+                "override": 0
+              },
+              {
+                "spell": 231055,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Глубокая рана",
+            "spells": [
+              {
+                "spell": 1822,
+                "override": 0
+              },
+              {
+                "spell": 231052,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Свирепый укус",
+            "spells": [
+              {
+                "spell": 22568,
+                "override": 0
+              },
+              {
+                "spell": 231056,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Полоснуть",
+            "spells": [
+              {
+                "spell": 5221,
+                "override": 0
+              },
+              {
+                "spell": 231057,
+                "override": 0
+              },
+              {
+                "spell": 231063,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Размах",
+            "spells": [
+              {
+                "spell": 213764,
+                "override": 0
+              },
+              {
+                "spell": 231283,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 11,
+        "spec": 104,
+        "spell_count": 28,
+        "same_name_candidates": [
+          {
+            "name": "Искусность: Страж природы",
+            "spells": [
+              {
+                "spell": 155783,
+                "override": 0
+              },
+              {
+                "spell": 159195,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Увечье",
+            "spells": [
+              {
+                "spell": 33917,
+                "override": 0
+              },
+              {
+                "spell": 231064,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Железный мех",
+            "spells": [
+              {
+                "spell": 192081,
+                "override": 0
+              },
+              {
+                "spell": 231070,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 11,
+        "spec": 105,
+        "spell_count": 28,
+        "same_name_candidates": [
+          {
+            "name": "Омоложение",
+            "spells": [
+              {
+                "spell": 774,
+                "override": 0
+              },
+              {
+                "spell": 231040,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Солнечный огонь",
+            "spells": [
+              {
+                "spell": 93402,
+                "override": 0
+              },
+              {
+                "spell": 231050,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 6,
+        "spec": 250,
+        "spell_count": 18,
+        "same_name_candidates": []
+      },
+      {
+        "class": 6,
+        "spec": 251,
+        "spell_count": 19,
+        "same_name_candidates": []
+      },
+      {
+        "class": 6,
+        "spec": 252,
+        "spell_count": 20,
+        "same_name_candidates": []
+      },
+      {
+        "class": 3,
+        "spec": 253,
+        "spell_count": 25,
+        "same_name_candidates": [
+          {
+            "name": "Звериный гнев",
+            "spells": [
+              {
+                "spell": 19574,
+                "override": 0
+              },
+              {
+                "spell": 231548,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Выстрел кобры",
+            "spells": [
+              {
+                "spell": 193455,
+                "override": 0
+              },
+              {
+                "spell": 262837,
+                "override": 0
+              },
+              {
+                "spell": 262838,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Живость",
+            "spells": [
+              {
+                "spell": 109304,
+                "override": 0
+              },
+              {
+                "spell": 231546,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Отрыв",
+            "spells": [
+              {
+                "spell": 781,
+                "override": 0
+              },
+              {
+                "spell": 231549,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 3,
+        "spec": 254,
+        "spell_count": 23,
+        "same_name_candidates": [
+          {
+            "name": "Отрыв",
+            "spells": [
+              {
+                "spell": 781,
+                "override": 0
+              },
+              {
+                "spell": 231549,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Живость",
+            "spells": [
+              {
+                "spell": 109304,
+                "override": 0
+              },
+              {
+                "spell": 231546,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 3,
+        "spec": 255,
+        "spell_count": 24,
+        "same_name_candidates": [
+          {
+            "name": "Удар ящера",
+            "spells": [
+              {
+                "spell": 186270,
+                "override": 0
+              },
+              {
+                "spell": 262839,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Гарпун",
+            "spells": [
+              {
+                "spell": 190925,
+                "override": 0
+              },
+              {
+                "spell": 231550,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Дух орла",
+            "spells": [
+              {
+                "spell": 186289,
+                "override": 0
+              },
+              {
+                "spell": 231555,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Живость",
+            "spells": [
+              {
+                "spell": 109304,
+                "override": 0
+              },
+              {
+                "spell": 231546,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Обходной удар",
+            "spells": [
+              {
+                "spell": 202800,
+                "override": 0
+              },
+              {
+                "spell": 237327,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 5,
+        "spec": 256,
+        "spell_count": 26,
+        "same_name_candidates": [
+          {
+            "name": "Темное восстановление",
+            "spells": [
+              {
+                "spell": 186440,
+                "override": 0
+              },
+              {
+                "spell": 186263,
+                "override": 2061
+              }
+            ]
+          },
+          {
+            "name": "Кара",
+            "spells": [
+              {
+                "spell": 231682,
+                "override": 0
+              },
+              {
+                "spell": 262861,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 5,
+        "spec": 257,
+        "spell_count": 25,
+        "same_name_candidates": [
+          {
+            "name": "Священный огонь",
+            "spells": [
+              {
+                "spell": 14914,
+                "override": 0
+              },
+              {
+                "spell": 231687,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 5,
+        "spec": 258,
+        "spell_count": 31,
+        "same_name_candidates": [
+          {
+            "name": "Слово Тьмы: Смерть",
+            "spells": [
+              {
+                "spell": 32379,
+                "override": 0
+              },
+              {
+                "spell": 190719,
+                "override": 0
+              },
+              {
+                "spell": 231689,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Облик Бездны",
+            "spells": [
+              {
+                "spell": 185916,
+                "override": 0
+              },
+              {
+                "spell": 228264,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Темное восстановление",
+            "spells": [
+              {
+                "spell": 186263,
+                "override": 2061
+              },
+              {
+                "spell": 186440,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Стрела Бездны",
+            "spells": [
+              {
+                "spell": 228266,
+                "override": 0
+              },
+              {
+                "spell": 231688,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 4,
+        "spec": 259,
+        "spell_count": 32,
+        "same_name_candidates": [
+          {
+            "name": "Гаррота",
+            "spells": [
+              {
+                "spell": 703,
+                "override": 0
+              },
+              {
+                "spell": 231719,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 4,
+        "spec": 260,
+        "spell_count": 28,
+        "same_name_candidates": [
+          {
+            "name": "Промеж глаз",
+            "spells": [
+              {
+                "spell": 199804,
+                "override": 0
+              },
+              {
+                "spell": 235484,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 4,
+        "spec": 261,
+        "spell_count": 31,
+        "same_name_candidates": [
+          {
+            "name": "Удар Тьмы",
+            "spells": [
+              {
+                "spell": 185438,
+                "override": 0
+              },
+              {
+                "spell": 231718,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Потрошение",
+            "spells": [
+              {
+                "spell": 196819,
+                "override": 0
+              },
+              {
+                "spell": 231716,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Спринт",
+            "spells": [
+              {
+                "spell": 231691,
+                "override": 0
+              },
+              {
+                "spell": 245751,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 7,
+        "spec": 262,
+        "spell_count": 26,
+        "same_name_candidates": [
+          {
+            "name": "Выброс лавы",
+            "spells": [
+              {
+                "spell": 51505,
+                "override": 0
+              },
+              {
+                "spell": 231721,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Огненный шок",
+            "spells": [
+              {
+                "spell": 188389,
+                "override": 0
+              },
+              {
+                "spell": 232643,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Цепная молния",
+            "spells": [
+              {
+                "spell": 188443,
+                "override": 0
+              },
+              {
+                "spell": 231722,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 7,
+        "spec": 263,
+        "spell_count": 24,
+        "same_name_candidates": [
+          {
+            "name": "Дух дикого зверя",
+            "spells": [
+              {
+                "spell": 51533,
+                "override": 0
+              },
+              {
+                "spell": 231723,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Исцеляющий всплеск",
+            "spells": [
+              {
+                "spell": 188070,
+                "override": 0
+              },
+              {
+                "spell": 190899,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 7,
+        "spec": 264,
+        "spell_count": 27,
+        "same_name_candidates": [
+          {
+            "name": "Быстрина",
+            "spells": [
+              {
+                "spell": 61295,
+                "override": 0
+              },
+              {
+                "spell": 231725,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Приливные волны",
+            "spells": [
+              {
+                "spell": 51564,
+                "override": 0
+              },
+              {
+                "spell": 231785,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Цепное исцеление",
+            "spells": [
+              {
+                "spell": 1064,
+                "override": 0
+              },
+              {
+                "spell": 231780,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Выброс лавы",
+            "spells": [
+              {
+                "spell": 51505,
+                "override": 0
+              },
+              {
+                "spell": 231721,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 9,
+        "spec": 265,
+        "spell_count": 14,
+        "same_name_candidates": [
+          {
+            "name": "Нестабильное колдовство",
+            "spells": [
+              {
+                "spell": 30108,
+                "override": 0
+              },
+              {
+                "spell": 231791,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Агония",
+            "spells": [
+              {
+                "spell": 980,
+                "override": 0
+              },
+              {
+                "spell": 231792,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 9,
+        "spec": 266,
+        "spell_count": 14,
+        "same_name_candidates": []
+      },
+      {
+        "class": 9,
+        "spec": 267,
+        "spell_count": 17,
+        "same_name_candidates": [
+          {
+            "name": "Жертвенный огонь",
+            "spells": [
+              {
+                "spell": 348,
+                "override": 0
+              },
+              {
+                "spell": 193541,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Поджигание",
+            "spells": [
+              {
+                "spell": 17962,
+                "override": 0
+              },
+              {
+                "spell": 231793,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 10,
+        "spec": 268,
+        "spell_count": 21,
+        "same_name_candidates": [
+          {
+            "name": "Излияние",
+            "spells": [
+              {
+                "spell": 116694,
+                "override": 0
+              },
+              {
+                "spell": 231602,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 10,
+        "spec": 269,
+        "spell_count": 28,
+        "same_name_candidates": [
+          {
+            "name": "Удар восходящего солнца",
+            "spells": [
+              {
+                "spell": 107428,
+                "override": 0
+              },
+              {
+                "spell": 262840,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Буря, земля и огонь",
+            "spells": [
+              {
+                "spell": 137639,
+                "override": 0
+              },
+              {
+                "spell": 231627,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Излияние",
+            "spells": [
+              {
+                "spell": 116694,
+                "override": 0
+              },
+              {
+                "spell": 231602,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Нокаутирующий удар",
+            "spells": [
+              {
+                "spell": 261916,
+                "override": 0
+              },
+              {
+                "spell": 261917,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 10,
+        "spec": 270,
+        "spell_count": 24,
+        "same_name_candidates": [
+          {
+            "name": "Заживляющий туман",
+            "spells": [
+              {
+                "spell": 115151,
+                "override": 0
+              },
+              {
+                "spell": 231606,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Громовой чай",
+            "spells": [
+              {
+                "spell": 116680,
+                "override": 0
+              },
+              {
+                "spell": 231876,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Окутывающий туман",
+            "spells": [
+              {
+                "spell": 124682,
+                "override": 0
+              },
+              {
+                "spell": 231605,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Купель сущности",
+            "spells": [
+              {
+                "spell": 191837,
+                "override": 0
+              },
+              {
+                "spell": 231633,
+                "override": 0
+              }
+            ]
+          },
+          {
+            "name": "Удар восходящего солнца",
+            "spells": [
+              {
+                "spell": 107428,
+                "override": 0
+              },
+              {
+                "spell": 262840,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "class": 12,
+        "spec": 577,
+        "spell_count": 7,
+        "same_name_candidates": []
+      },
+      {
+        "class": 12,
+        "spec": 581,
+        "spell_count": 23,
+        "same_name_candidates": [
+          {
+            "name": "Иссечение",
+            "spells": [
+              {
+                "spell": 203782,
+                "override": 0
+              },
+              {
+                "spell": 203783,
+                "override": 0
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "note": "Same localized names do not prove duplicate learned spells; different IDs may be overrides/passives/pet spells."
+  },
+  "trainer_candidates_note": "No automatic repair: these 450 rows may use scripted trainers or gossip-specific mappings; absence of a default/legacy list alone does not prove a broken trainer.",
+  "corruption_spell_level": 3,
+  "limitations": "Native fixtures, local release copy and client DB2 build 26654. No client reproduction, deployed database audit or live server changes."
+}

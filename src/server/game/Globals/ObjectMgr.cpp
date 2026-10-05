@@ -8969,6 +8969,14 @@ void ObjectMgr::AddSpellToTrainer(uint32 ID, uint32 SpellID, uint32 MoneyCost, u
         return;
     }
 
+    // Validate before inserting: spell effects have more slots than the trainer packet.
+    for (SpellEffectInfo const* effect : spellinfo->GetEffectsForDifficulty(DIFFICULTY_NONE))
+        if (effect && effect->Effect == SPELL_EFFECT_LEARN_SPELL && effect->EffectIndex >= MAX_TRAINERSPELL_ABILITY_REQS)
+        {
+            TC_LOG_ERROR("sql.sql", "Table `npc_trainer` has spell %u for trainer entry %u with unsupported learn effect index %u, ignoring spell", SpellID, ID, uint32(effect->EffectIndex));
+            return;
+        }
+
     TrainerSpellData& data = _cacheTrainerSpellStore[ID];
 
     TrainerSpell& trainerSpell = data.spellList[SpellID];

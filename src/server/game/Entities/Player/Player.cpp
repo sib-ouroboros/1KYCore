@@ -2826,7 +2826,6 @@ void Player::GiveLevel(uint8 level)
 
     UpdateSkillsForLevel();
     LearnDefaultSkills();
-    LearnSpecializationSpells();
 
     // save base values (bonuses already included in stored stats
     for (uint8 i = STAT_STRENGTH; i < MAX_STATS; ++i)
@@ -2836,6 +2835,7 @@ void Player::GiveLevel(uint8 level)
     SetCreateMana(basemana);
 
     InitTalentForLevel();
+    LearnSpecializationSpells();
     InitTaxiNodesForLevel();
 
     if (level < PLAYER_LEVEL_MIN_HONOR)
@@ -2894,7 +2894,14 @@ void Player::InitTalentForLevel()
     uint8 level = getLevel();
     // talents base at level diff (talents = level - 9 but some can be used already)
     if (level < MIN_SPECIALIZATION_LEVEL)
-        ResetTalentSpecialization();
+    {
+        ChrSpecializationEntry const* defaultSpec = ASSERT_NOTNULL(sDB2Manager.GetDefaultChrSpecializationForClass(getClass()));
+        // Reapplying the same default spec disables and relearns every known spec spell.
+        if (GetUInt32Value(PLAYER_FIELD_CURRENT_SPEC_ID) != defaultSpec->ID
+            || GetPrimarySpecialization() != defaultSpec->ID
+            || GetActiveTalentGroup() != defaultSpec->OrderIndex)
+            ResetTalentSpecialization();
+    }
 
     uint32 talentTiers = CalculateTalentsTiers();
     if (!GetSession()->HasPermission(rbac::RBAC_PERM_SKIP_CHECK_MORE_TALENTS_THAN_ALLOWED))
@@ -26249,7 +26256,7 @@ Player* Player::GetTrader() const
 
 bool Player::IsSpellFitByClassAndRace(uint32 spell_id) const
 {
-    uint32 racemask  = getRaceMask();
+    uint64 racemask  = getRaceMask();
     uint32 classmask = getClassMask();
 
     SkillLineAbilityMapBounds bounds = sSpellMgr->GetSkillLineAbilityMapBounds(spell_id);

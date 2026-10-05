@@ -94,6 +94,8 @@ on:
       - cmake/genrev.cmake
       - revision_data.h.in.cmake
       - contrib/tests/test_character_operations.py
+      - contrib/tests/test_class_learning.py
+      - src/server/game/Handlers/NPCHandler.cpp
       - contrib/tests/test_tool_socket.py
       - contrib/tests/test_character_setup_inventory.py
       - contrib/tests/test_revision_metadata.py
@@ -130,6 +132,8 @@ jobs:
         run: python contrib/tests/test_character_setup_inventory.py
       - name: Test specialization, uninterrupted preparation, status and pagination
         run: python contrib/tests/test_character_operations.py
+      - name: Test class learning, full race masks and trainer bounds with sanitizers
+        run: python contrib/tests/test_class_learning.py
       - name: Test reward reload and trainer fallback with strict sanitizers
         run: python contrib/tests/test_garrison_reward_reload.py
       - name: Test Malkorok barrier boundaries with strict sanitizers
