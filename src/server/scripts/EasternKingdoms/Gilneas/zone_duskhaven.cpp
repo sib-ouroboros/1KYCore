@@ -48,8 +48,8 @@ enum eDuskHaven
     NPC_FORSAKEN_CATAPULT                       = 36283,
     NPC_GENERIC_TRIGGER_LAB_AOI                 = 36286, // target on land
     NPC_CYNTIA_CREDIT                           = 36287,
-    NPC_JAMES_CREDIT                            = 36288,
-    NPC_ASHLEY_CREDIT                           = 36289,
+    NPC_JAMES_CREDIT                            = 36289,
+    NPC_ASHLEY_CREDIT                           = 36288,
     NPC_FORSAKEN_MACHINIST                      = 36292,
     NPC_DARK_RANGER_THYALA                      = 36312,
     NPC_LORD_GODFREY_36330                      = 36330,
@@ -98,7 +98,7 @@ enum eDuskHaven
     QUEST_AT_OUR_DOORSTEP                       = 24627,
     QUEST_PUSH_THEM_OUT                         = 24676,
     QUEST_FLANK_THE_FORSAKEN                    = 24677,
-    QUEST_THE_HUNGRY_ETTIN                      = 54416,
+    QUEST_THE_HUNGRY_ETTIN                      = 14416,
 
     SPELL_RANDOM_POINT_POISON                   = 42266,
     SPELL_RANDOM_POINT_BONE                     = 42267,
@@ -477,30 +477,49 @@ public:
         npc_horrid_abomination_36231AI(Creature* creature) : ScriptedAI(creature) { }
 
         bool m_creditGiven;
+        EventMap m_events;
 
         void Reset() override
         {
             me->ClearUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED);
             m_creditGiven = false;
+            m_events.Reset();
+            me->RemoveAurasDueToSpell(SPELL_BARREL_KEG_PLACED);
         }
 
-        void SpellHit(Unit* caster, const SpellInfo* spell) override
+        void SpellHit(Unit* caster, SpellInfo const* spell) override
         {
-            if (Player* player = caster->ToPlayer())
-            {
-                if (spell->Id == SPELL_BARREL_KEG_PLACED)
+            if (!caster || !spell || spell->Id != SPELL_BARREL_KEG || m_creditGiven || !me->IsAlive())
+                return;
+
+            Player* player = caster->ToPlayer();
+            if (!player || player->GetQuestStatus(QUEST_YOU_CANT_TAKE_EM_ALONE) != QUEST_STATUS_INCOMPLETE)
+                return;
+
+            // Claim this abomination before casts can re-enter its AI.
+            m_creditGiven = true;
+            Talk(SAY_BARREL, player);
+            me->CastSpell(me, SPELL_BARREL_KEG_PLACED, true);
+            me->AddUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED);
+            player->KilledMonsterCredit(NPC_QUEST_14348_KILL_CREDIT);
+            m_events.ScheduleEvent(EVENT_KEG_PLACED, 3s);
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            m_events.Update(diff);
+            while (uint32 eventId = m_events.ExecuteEvent())
+                if (eventId == EVENT_KEG_PLACED)
                 {
-                    Talk(SAY_BARREL);
-                    me->AddUnitState(UNIT_STATE_ROOT | UNIT_STATE_STUNNED);
+                    me->CastSpell(me, SPELL_HORRID_ABOMINATION_EXPLOSION, true);
+                    me->KillSelf();
+                    return;
                 }
 
-                if (!m_creditGiven && player->GetQuestStatus(QUEST_YOU_CANT_TAKE_EM_ALONE) == QUEST_STATUS_INCOMPLETE)
-                {
-                    player->KilledMonsterCredit(NPC_QUEST_14348_KILL_CREDIT);
-                    m_creditGiven = true;
-                }
-            }
+            if (!m_creditGiven && UpdateVictim())
+                DoMeleeAttackIfReady();
         }
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override
@@ -521,12 +540,23 @@ public:
 
         void CheckTarget(WorldObject*& target)
         {
-            if (target->GetEntry() != NPC_HORRID_ABOMINATION)
-                target = target->FindNearestCreature(NPC_HORRID_ABOMINATION, 25.0f);
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            Creature* abomination = target ? target->ToCreature() : nullptr;
+            if (!player || player->GetQuestStatus(QUEST_YOU_CANT_TAKE_EM_ALONE) != QUEST_STATUS_INCOMPLETE
+                || !abomination || abomination->GetEntry() != NPC_HORRID_ABOMINATION || !abomination->IsAlive())
+                target = nullptr;
+        }
+
+        void HandleKeg(SpellEffIndex effIndex)
+        {
+            // The default ForceCast makes the abomination cast the barrel on the player.
+            // Its AI handles the successful item hit and applies the barrel to itself.
+            PreventHitDefaultEffect(effIndex);
         }
 
         void Register() override
         {
+            OnEffectHitTarget += SpellEffectFn(spell_cast_keg_69094_SpellScript::HandleKeg, EFFECT_0, SPELL_EFFECT_FORCE_CAST);
             OnObjectTargetSelect += SpellObjectTargetSelectFn(spell_cast_keg_69094_SpellScript::CheckTarget, EFFECT_0, TARGET_UNIT_TARGET_ANY);
         }
     };
@@ -545,10 +575,11 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        if (player->GetQuestStatus(QUEST_SAVE_THE_CHILDREN) == QUEST_STATUS_INCOMPLETE)
+        if (player->GetQuestStatus(QUEST_SAVE_THE_CHILDREN) == QUEST_STATUS_INCOMPLETE
+            && player->GetQuestObjectiveData(QUEST_SAVE_THE_CHILDREN, 0) == 0)
         {
             sCreatureTextMgr->SendChat(creature, 0, NULL, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_NORMAL, 0, TEAM_OTHER, false, player);
-            creature->AI()->Talk(1);
+            sCreatureTextMgr->SendChat(creature, 1, nullptr, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_NORMAL, 0, TEAM_OTHER, false, player);
             player->KilledMonsterCredit(NPC_CYNTIA_CREDIT);
             return true;
         }
@@ -564,10 +595,11 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        if (player->GetQuestStatus(QUEST_SAVE_THE_CHILDREN) == QUEST_STATUS_INCOMPLETE)
+        if (player->GetQuestStatus(QUEST_SAVE_THE_CHILDREN) == QUEST_STATUS_INCOMPLETE
+            && player->GetQuestObjectiveData(QUEST_SAVE_THE_CHILDREN, 2) == 0)
         {
             sCreatureTextMgr->SendChat(creature, 0, NULL, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_NORMAL, 0, TEAM_OTHER, false, player);
-            creature->AI()->Talk(1);
+            sCreatureTextMgr->SendChat(creature, 1, nullptr, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_NORMAL, 0, TEAM_OTHER, false, player);
             player->KilledMonsterCredit(NPC_JAMES_CREDIT);
             return true;
         }
@@ -583,10 +615,11 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        if (player->GetQuestStatus(QUEST_SAVE_THE_CHILDREN) == QUEST_STATUS_INCOMPLETE)
+        if (player->GetQuestStatus(QUEST_SAVE_THE_CHILDREN) == QUEST_STATUS_INCOMPLETE
+            && player->GetQuestObjectiveData(QUEST_SAVE_THE_CHILDREN, 1) == 0)
         {
             sCreatureTextMgr->SendChat(creature, 0, NULL, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_NORMAL, 0, TEAM_OTHER, false, player);
-            creature->AI()->Talk(1);
+            sCreatureTextMgr->SendChat(creature, 1, nullptr, CHAT_MSG_ADDON, LANG_ADDON, TEXT_RANGE_NORMAL, 0, TEAM_OTHER, false, player);
             player->KilledMonsterCredit(NPC_ASHLEY_CREDIT);
             return true;
         }
@@ -1131,13 +1164,14 @@ public:
 
         void Reset() override
         {
+            m_events.Reset();
             m_playerGUID = ObjectGuid::Empty;
             m_isOnPlayer = false;
         }
 
         void SpellHit(Unit* caster, SpellInfo const* spell) override
         {
-            if (!m_isOnPlayer)
+            if (caster && spell && !m_isOnPlayer)
                 if (spell->Id == SPELL_RESCUE_DROWNING_WATCHMANN)
                     if (Player* player = caster->ToPlayer())
                         if (player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) == QUEST_STATUS_INCOMPLETE)
@@ -1161,22 +1195,33 @@ public:
                         me->DespawnOrUnsummon(10ms);
                         break;
                     case EVENT_CHECK_NEAR_GREYMANE:
-                        if (m_isOnPlayer)
-                            if (me->FindNearestCreature(NPC_PRINCE_LIAM_GREYMANE, 15.0f))
-                                if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                                    if (me->m_positionZ > 0.75f)
-                                    {
-                                        player->KilledMonsterCredit(NPC_DROWNING_WATCHMANN_CREDIT);
-                                        player->CastSpell(me, SPELL_SAVE_DROWNING_MILITIA_EFFECT, true);
-                                        player->CastSpell(me, SPELL_EXIT_VEHICLE, true);
-                                        Talk(0, player);
-                                        //me->ExitVehicle();
-                                        m_events.ScheduleEvent(EVENT_DESPAWN_PART_00, 3s);
-                                        break;
-                                    }
+                    {
+                        Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                        if (!player || !player->IsAlive()
+                            || player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) != QUEST_STATUS_INCOMPLETE
+                            || me->GetVehicleBase() != player)
+                        {
+                            me->ExitVehicle();
+                            me->DespawnOrUnsummon(10ms);
+                            return;
+                        }
+
+                        if (m_isOnPlayer && !player->IsInWater()
+                            && me->FindNearestCreature(NPC_PRINCE_LIAM_GREYMANE, 15.0f))
+                        {
+                            m_isOnPlayer = false;
+                            player->KilledMonsterCredit(NPC_DROWNING_WATCHMANN_CREDIT);
+                            player->CastSpell(me, SPELL_SAVE_DROWNING_MILITIA_EFFECT, true);
+                            me->ExitVehicle();
+                            player->RemoveAurasDueToSpell(SPELL_RESCUE_DROWNING_WATCHMANN);
+                            Talk(0, player);
+                            m_events.ScheduleEvent(EVENT_DESPAWN_PART_00, 3s);
+                            break;
+                        }
 
                         m_events.ScheduleEvent(EVENT_CHECK_NEAR_GREYMANE, 1s);
                         break;
+                    }
                     case EVENT_DESPAWN_PART_00:
                         me->DespawnOrUnsummon(10ms);
                         break;
@@ -1206,35 +1251,46 @@ public:
             return ValidateSpellInfo({ 68735 });
         }
 
+        SpellCastResult CheckTarget()
+        {
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            Creature* watchman = GetExplTargetUnit() ? GetExplTargetUnit()->ToCreature() : nullptr;
+            if (!player || !watchman || watchman->GetEntry() != 36440 || !watchman->IsAlive()
+                || watchman->GetVehicleBase() || !player->IsInWater()
+                || player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) != QUEST_STATUS_INCOMPLETE
+                || (player->GetVehicleKit() && player->GetVehicleKit()->GetPassenger(0)))
+                return SPELL_FAILED_BAD_TARGETS;
+            return SPELL_CAST_OK;
+        }
+
         void HandleEffectDummy(SpellEffIndex /*effIndex*/)
         {
-            if (GetCaster()->GetTypeId() != TYPEID_PLAYER || GetHitUnit()->GetTypeId() != TYPEID_UNIT || GetCaster()->GetVehicleKit() == NULL)
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            Creature* watchman = GetHitUnit() ? GetHitUnit()->ToCreature() : nullptr;
+            if (!player || !watchman || watchman->GetEntry() != 36440 || !watchman->IsAlive())
                 return;
 
-            if (GetCaster()->ToPlayer()->GetQuestStatus(14395) != QUEST_STATUS_INCOMPLETE)
+            if (player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) != QUEST_STATUS_INCOMPLETE)
             {
-                GetCaster()->RemoveAurasDueToSpell(68735);
+                player->RemoveAurasDueToSpell(SPELL_RESCUE_DROWNING_WATCHMANN);
                 return;
             }
 
-            if (GetCaster()->IsInWater())
-                GetHitUnit()->CastCustomSpell(VEHICLE_SPELL_RIDE_HARDCODED, SPELLVALUE_BASE_POINT0, 1, GetCaster(), false);
-            else if (GetHitUnit()->GetVehicle())
+            if (watchman->GetVehicleBase())
+                return; // An already carried watchman cannot be stolen or credited twice.
+
+            if (!player->GetVehicleKit() || !player->IsInWater())
             {
-                GetCaster()->GetVehicleKit()->RemoveAllPassengers();
-                GetHitUnit()->RemoveAurasDueToSpell(68730);
-                GetHitUnit()->CastSpell(GetHitUnit(), 68442, true);
-                GetCaster()->ToPlayer()->KilledMonsterCredit(36440);
-                GetCaster()->RemoveAurasDueToSpell(68735);
-                GetHitUnit()->ToCreature()->DespawnOrUnsummon(5s);
-                GetHitUnit()->ToCreature()->AI()->Talk(0);
+                player->RemoveAurasDueToSpell(SPELL_RESCUE_DROWNING_WATCHMANN);
+                return;
             }
-            else
-                GetCaster()->RemoveAurasDueToSpell(68735);
+
+            watchman->CastCustomSpell(VEHICLE_SPELL_RIDE_HARDCODED, SPELLVALUE_BASE_POINT0, 1, player, false);
         }
 
         void Register() override
         {
+            OnCheckCast += SpellCheckCastFn(spell_rescue_drowning_watchman_68735_SpellScript::CheckTarget);
             OnEffectHitTarget += SpellEffectFn(spell_rescue_drowning_watchman_68735_SpellScript::HandleEffectDummy, EFFECT_1, SPELL_EFFECT_DUMMY);
         }
     };
@@ -1454,6 +1510,11 @@ public:
                     {
                         if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
                         {
+                            if (!player->IsAlive() || player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
+                            {
+                                me->DespawnOrUnsummon();
+                                return;
+                            }
                             CheckLornaRelated(player);
                             if (m_oldPosition.GetExactDist(player) > 0.5f)
                             {
@@ -1469,7 +1530,13 @@ public:
                                     me->CastSpell(player, SPELL_MOUNTAIN_HORSE_CREDIT);
 
                                 me->DespawnOrUnsummon();
+                                return;
                             }
+                        }
+                        else
+                        {
+                            me->DespawnOrUnsummon();
+                            return;
                         }
                         m_events.ScheduleEvent(EVENT_START_FOLLOWING, 100ms);
                         break;
@@ -1483,6 +1550,7 @@ public:
             if (!player)
                 return;
 
+            m_isLornaNear = false;
             m_isPlayerMounted = player->HasAura(SPELL_RIDE_VEHICLE);
             m_hasPlayerRope = player->HasAura(SPELL_ROPE_CHANNEL);
 
@@ -1521,6 +1589,7 @@ public:
         float m_size;
         Position m_oldPosition;
         bool m_lornaIsNear;
+        bool m_creditGiven;
 
         void Reset() override
         {
@@ -1528,27 +1597,41 @@ public:
             m_playerGUID = ObjectGuid::Empty;
             m_lornaGUID = ObjectGuid::Empty;
             m_lornaIsNear = false;
+            m_creditGiven = false;
         }
 
         void PassengerBoarded(Unit* passenger, int8 /*seatId*/, bool apply) override
         {
+            Player* player = passenger ? passenger->ToPlayer() : nullptr;
+            if (!player)
+                return;
+
             if (apply)
             {
-                if (Player* player = passenger->ToPlayer())
+                if (player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE
+                    || (!m_playerGUID.IsEmpty() && m_playerGUID != player->GetGUID()) || m_creditGiven)
                 {
-                    m_playerGUID = player->GetGUID();
-                    me->SetMaxHealth(250);
+                    player->ExitVehicle();
+                    return;
                 }
 
-                m_events.ScheduleEvent(EVENT_CHECK_HEALTH_AND_LORNA, 1s);
+                m_playerGUID = player->GetGUID();
+                m_lornaIsNear = false;
+                me->SetMaxHealth(250);
+                m_events.RescheduleEvent(EVENT_CHECK_HEALTH_AND_LORNA, 1s);
             }
-            else if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+            else if (m_playerGUID == player->GetGUID())
             {
-                if (m_lornaIsNear)
+                m_events.Reset();
+                if (!m_creditGiven && m_lornaIsNear && player->IsAlive()
+                    && player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) == QUEST_STATUS_INCOMPLETE)
                 {
+                    m_creditGiven = true;
                     player->KilledMonsterCredit(36560);
                     me->DespawnOrUnsummon(1s);
                 }
+                m_playerGUID = ObjectGuid::Empty;
+                m_lornaIsNear = false;
             }
         }
 
@@ -1561,6 +1644,23 @@ public:
                 switch (eventId)
                 {
                     case EVENT_CHECK_HEALTH_AND_LORNA:
+                    {
+                        if (m_playerGUID.IsEmpty() || m_creditGiven)
+                            return;
+
+                        Player* owner = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                        if (!owner || !owner->IsAlive()
+                            || owner->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
+                        {
+                            if (owner)
+                                owner->ExitVehicle();
+                            m_playerGUID = ObjectGuid::Empty;
+                            m_lornaIsNear = false;
+                            m_events.Reset();
+                            return;
+                        }
+
+                        m_lornaIsNear = false;
                         me->SetHealth(me->GetMaxHealth());
 
                         if (!m_lornaGUID)
@@ -1576,8 +1676,10 @@ public:
                                     player->ExitVehicle();
                             }
 
+                        if (!m_playerGUID.IsEmpty() && !m_creditGiven)
                             m_events.ScheduleEvent(EVENT_CHECK_HEALTH_AND_LORNA, 1s);
-                            break;
+                        break;
+                    }
                 }
             }
         }
@@ -1606,7 +1708,8 @@ public:
 
         void HandleEffectDummy(SpellEffIndex /*effIndex*/)
         {
-            if (GetHitUnit()->GetTypeId() != TYPEID_UNIT || GetCaster()->GetTypeId() != TYPEID_PLAYER || GetCaster()->ToPlayer()->GetQuestStatus(14416) != QUEST_STATUS_INCOMPLETE)
+            if (!GetHitUnit() || !GetCaster() || !GetHitUnit()->ToCreature() || GetHitUnit()->GetEntry() != 36540
+                || !GetCaster()->ToPlayer() || GetCaster()->ToPlayer()->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
                 return;
 
             GetHitUnit()->ToCreature()->DespawnOrUnsummon();
