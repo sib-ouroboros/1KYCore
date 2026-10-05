@@ -1,0 +1,200 @@
+{
+  "file": "SpellEffect.db2",
+  "sha256": "dfcb7076421e3b99fb23e769acddb9215d051069fe5e7488fc33b67770c194db",
+  "layout_hash": "0x3244098b",
+  "record_count": 269623,
+  "copy_rows": 0,
+  "identity_count": 269623,
+  "format": "WDC1",
+  "locale": "ruRU",
+  "assurance": "WDC1 identities, current-core layout and decoded SpellEffect columns; not validation of cinematic client rendering",
+  "effects": {
+    "6660": [
+      {
+        "ID": 2376,
+        "Effect": 2,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 6,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "94053": [
+      {
+        "ID": 98775,
+        "Effect": 6,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 745,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 1,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "69873": [
+      {
+        "ID": 72168,
+        "Effect": 3,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 25,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "67349": [
+      {
+        "ID": 71051,
+        "Effect": 3,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 25,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "67350": [
+      {
+        "ID": 71052,
+        "Effect": 28,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 35370,
+        "MiscValue2": 3054,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 46,
+        "ImplicitTarget2": 0
+      },
+      {
+        "ID": 71053,
+        "Effect": 61,
+        "EffectIndex": 1,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 22158,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 0,
+        "ImplicitTarget2": 0
+      },
+      {
+        "ID": 98017,
+        "Effect": 28,
+        "EffectIndex": 2,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 50415,
+        "MiscValue2": 1961,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 46,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "67352": [
+      {
+        "ID": 71054,
+        "Effect": 140,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 67350,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 25,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "72794": [
+      {
+        "ID": 73098,
+        "Effect": 6,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 72788,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 25,
+        "ImplicitTarget2": 0
+      },
+      {
+        "ID": 98305,
+        "Effect": 6,
+        "EffectIndex": 1,
+        "DifficultyID": 0,
+        "TriggerSpell": 93477,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 25,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "67805": [
+      {
+        "ID": 71187,
+        "Effect": 41,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 38,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "68639": [
+      {
+        "ID": 71571,
+        "Effect": 140,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 68643,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 25,
+        "ImplicitTarget2": 0
+      },
+      {
+        "ID": 71572,
+        "Effect": 77,
+        "EffectIndex": 1,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 25,
+        "ImplicitTarget2": 0
+      },
+      {
+        "ID": 71573,
+        "Effect": 252,
+        "EffectIndex": 2,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 0,
+        "MiscValue2": 0,
+        "PositionFacing": 3.2388100624084473,
+        "ImplicitTarget1": 25,
+        "ImplicitTarget2": 17
+      }
+    ]
+  },
+  "source_build": 26654
+}

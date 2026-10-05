@@ -28,6 +28,8 @@
 #include "GameObject.h"
 #include "GridNotifiers.h"
 #include "ObjectAccessor.h"
+#include "ObjectMgr.h"
+#include <cmath>
 #include "MotionMaster.h"
 #include "MoveSplineInit.h"
 #include "MoveSpline.h"
@@ -61,6 +63,7 @@ enum eZoneGilneas
     NPC_BLOODFANG_STALKER                        = 35229,
     NPC_DARIUS_CROWLEY                           = 35230,
     NPC_CROWLEYS_HORSE                           = 35231,
+    NPC_JOSIAH_AVERY_35369                       = 35369,
     NPC_JOSIAH_AVERY_35370                       = 35370,
     NPC_LORNA_CROWLEY_35378                      = 35378,
     NPC_WORGEN_RUNT_C2                           = 35456,
@@ -2562,6 +2565,25 @@ public:
 
 namespace
 {
+    void KnockGilneasPlayerBack(Player* player, Creature* avery)
+    {
+        if (!player->IsAlive() || !player->IsInMap(avery) || !player->IsInPhase(avery) ||
+            player->GetVehicle() || player->GetDirectTransport() || player->IsInFlight() ||
+            player->GetExactDist2d(avery) < 0.1f || player->GetExactDist2d(avery) > 8.0f)
+            return;
+
+        // A small impulse, roughly 1.25 m on level ground. Do not force a
+        // relocation through cellar walls or onto a different floor.
+        float angle = avery->GetAngle(player);
+        float x = player->GetPositionX() + 1.25f * std::cos(angle);
+        float y = player->GetPositionY() + 1.25f * std::sin(angle);
+        float z = player->GetPositionZ();
+        player->UpdateAllowedPositionZ(x, y, z);
+        if (std::fabs(z - player->GetPositionZ()) > 0.75f || !player->IsWithinLOS(x, y, z))
+            return;
+        player->KnockbackFrom(avery->GetPositionX(), avery->GetPositionY(), 4.0f, 3.0f);
+    }
+
     void KeepGilneasAveryForScene(Creature* avery)
     {
         if (TempSummon* summon = avery->ToTempSummon())
@@ -2574,6 +2596,33 @@ namespace
         }
     }
 }
+
+// Establish the human appearance as soon as the spell's actor is summoned,
+// rather than exposing its native worgen model while the trigger is queued.
+class npc_josiah_avery_scene_35370 : public CreatureScript
+{
+public:
+    npc_josiah_avery_scene_35370() : CreatureScript("npc_josiah_avery_scene_35370") { }
+
+    struct AI : public ScriptedAI
+    {
+        AI(Creature* creature) : ScriptedAI(creature) { }
+
+        void IsSummonedBy(Unit* summoner) override
+        {
+            Player* player = summoner ? summoner->ToPlayer() : nullptr;
+            if (!player || player->GetQuestStatus(QUEST_THE_REBEL_LORDS_ARSENAL) != QUEST_STATUS_REWARDED)
+                return;
+            me->SetReactState(REACT_PASSIVE);
+            KeepGilneasAveryForScene(me);
+            if (CreatureTemplate const* human = sObjectMgr->GetCreatureTemplate(NPC_JOSIAH_AVERY_35369))
+                if (uint32 display = human->GetFirstValidModelId())
+                    me->SetDisplayId(display);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override { return new AI(creature); }
+};
 
 class npc_josiah_avery_trigger_50415 : public CreatureScript
 {
@@ -2590,6 +2639,7 @@ public:
         EVENTS_ANIM_4,
         EVENTS_ANIM_5,
         EVENTS_START_ANIM,
+        EVENTS_TRANSFORM,
     };
 
     struct npc_josiah_avery_trigger_50415AI : public ScriptedAI
@@ -2600,12 +2650,16 @@ public:
         ObjectGuid m_playerGUID;
         ObjectGuid m_badAveryGUID;
         ObjectGuid m_lornaGUID;
+        uint32 m_actorRetries = 0;
+        uint32 m_impactRetries = 0;
 
         void Reset() override
         {
             m_playerGUID = ObjectGuid::Empty;
             m_badAveryGUID = ObjectGuid::Empty;
             m_lornaGUID = ObjectGuid::Empty;
+            m_actorRetries = 0;
+            m_impactRetries = 0;
             m_events.Reset();
             Position pos = Position(-1792.37f, 1427.35f, 12.46f, 3.152f);
             me->MovePosition(pos, 0, 0);
@@ -2633,8 +2687,6 @@ public:
                 {
                     case EVENTS_START_ANIM:
                     {
-                        if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                            Talk(SAY_JOSAIH_AVERY_TRIGGER, player); // Tell Player they have been bitten
                         m_events.ScheduleEvent(EVENTS_ANIM_1, 200ms);
                         break;
                     }
@@ -2656,19 +2708,41 @@ public:
                             {
                                 m_badAveryGUID = badAvery->GetGUID();
                                 KeepGilneasAveryForScene(badAvery);
-                                badAvery->SetOrientation(badAvery->GetAngle(player)); // Face Player
-                                badAvery->CastSpell(player, SPELL_COSMETIC_COMBAT_ATTACK, true); // Do Cosmetic Attack
-                                //player->GetMotionMaster()->MoveKnockTo(-1791.94f, 1427.29f, 12.4584f, 22.0f, 8.0f, m_playerGUID.GetCounter());
-                                badAvery->getThreatManager().resetAllAggro();
+                                badAvery->SetReactState(REACT_PASSIVE);
+                                badAvery->SetFacingToObject(player);
+                                // Preserve the summoned actor's native worgen model.
+                                // Show its human counterpart briefly before the bite.
+                                if (CreatureTemplate const* human = sObjectMgr->GetCreatureTemplate(NPC_JOSIAH_AVERY_35369))
+                                    if (uint32 display = human->GetFirstValidModelId())
+                                        badAvery->SetDisplayId(display);
+                                m_events.ScheduleEvent(EVENTS_TRANSFORM, 600ms);
+                                break;
                             }
                         }
-                        m_events.ScheduleEvent(EVENTS_ANIM_2, 1s + 200ms);
+                        // Spell summons may enter the map on a later update.
+                        if (++m_actorRetries < 20)
+                            m_events.ScheduleEvent(EVENTS_ANIM_1, 100ms);
+                        else
+                            me->DespawnOrUnsummon(10ms);
+                        break;
+                    }
+                    case EVENTS_TRANSFORM:
+                    {
+                        if (Creature* badAvery = ObjectAccessor::GetCreature(*me, m_badAveryGUID))
+                            badAvery->SetDisplayId(badAvery->GetNativeDisplayId());
+                        m_events.ScheduleEvent(EVENTS_ANIM_2, 300ms);
                         break;
                     }
                     case EVENTS_ANIM_2:
                     {
-                        if (Creature* badAvery = ObjectAccessor::GetCreature(*me, m_badAveryGUID))
-                            badAvery->GetMotionMaster()->MoveJump(-1791.94f, 1427.29f, 12.4584f, 0.0f, 18.0f, 7.0f);
+                        if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                            if (Creature* badAvery = ObjectAccessor::GetCreature(*me, m_badAveryGUID))
+                            {
+                                badAvery->SetFacingToObject(player);
+                                badAvery->CastSpell(player, SPELL_COSMETIC_COMBAT_ATTACK, true);
+                                KnockGilneasPlayerBack(player, badAvery);
+                                Talk(SAY_JOSAIH_AVERY_TRIGGER, player);
+                            }
                         m_events.ScheduleEvent(EVENTS_ANIM_3, 600ms);
                         break;
                     }
@@ -2676,23 +2750,24 @@ public:
                     {
                         if (Creature* badAvery = ObjectAccessor::GetCreature(*me, m_badAveryGUID))
                             if (Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID))
+                            {
+                                lorna->SetFacingToObject(badAvery);
                                 lorna->CastSpell(badAvery, SPELL_SHOOT, true);
+                            }
                         m_events.ScheduleEvent(EVENTS_ANIM_4, 200ms);
                         break;
                     }
                     case EVENTS_ANIM_4:
                     {
-                        if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                            if (Creature* badAvery = ObjectAccessor::GetCreature(*me, m_badAveryGUID))
+                        // Death belongs to the successful projectile impact,
+                        // not a timer that can run before a shot hits or misses.
+                        if (Creature* badAvery = ObjectAccessor::GetCreature(*me, m_badAveryGUID))
+                            if (badAvery->IsAlive() && ++m_impactRetries < 50)
                             {
-                                badAvery->CastSpell(badAvery, SPELL_GET_SHOT, true);
-                                badAvery->setDeathState(JUST_DIED);
-                                player->SaveToDB();
-                                badAvery->DespawnOrUnsummon(5s);
-                                me->DespawnOrUnsummon(1s);
+                                m_events.ScheduleEvent(EVENTS_ANIM_4, 100ms);
+                                break;
                             }
-
-                        m_events.ScheduleEvent(EVENTS_ANIM_5, 5s);
+                        m_events.ScheduleEvent(EVENTS_ANIM_5, 1s);
                         break;
                     }
                     case EVENTS_ANIM_5:
@@ -2709,6 +2784,57 @@ public:
     {
         return new npc_josiah_avery_trigger_50415AI(creature);
     }
+};
+
+// Only Lorna's cinematic shot at the player's summoned Avery is overridden.
+// Ordinary spell 6660 damage, including other NPC and player casts, is retained.
+class spell_gilneas_lorna_shot : public SpellScriptLoader
+{
+public:
+    spell_gilneas_lorna_shot() : SpellScriptLoader("spell_gilneas_lorna_shot") { }
+
+    class script : public SpellScript
+    {
+        PrepareSpellScript(script);
+
+        Creature* GetSceneAvery()
+        {
+            Unit* caster = GetCaster();
+            Creature* target = GetHitCreature();
+            if (!caster || caster->GetEntry() != NPC_LORNA_CROWLEY_35378 ||
+                !target || target->GetEntry() != NPC_JOSIAH_AVERY_35370 ||
+                !caster->IsInMap(target) || !caster->IsInPhase(target))
+                return nullptr;
+            TempSummon* summon = target->ToTempSummon();
+            Player* owner = summon && summon->GetSummoner() ? summon->GetSummoner()->ToPlayer() : nullptr;
+            return owner && owner->GetQuestStatus(QUEST_THE_REBEL_LORDS_ARSENAL) == QUEST_STATUS_REWARDED ? target : nullptr;
+        }
+
+        void HandleDamage()
+        {
+            if (GetSceneAvery())
+                SetHitDamage(0);
+        }
+
+        void HandleImpact()
+        {
+            if (Creature* avery = GetSceneAvery())
+                if (avery->IsAlive())
+                {
+                    avery->CastSpell(avery, SPELL_GET_SHOT, true);
+                    avery->setDeathState(JUST_DIED);
+                    avery->DespawnOrUnsummon(5s);
+                }
+        }
+
+        void Register() override
+        {
+            OnHit += SpellHitFn(script::HandleDamage);
+            AfterHit += SpellHitFn(script::HandleImpact);
+        }
+    };
+
+    SpellScript* GetSpellScript() const override { return new script(); }
 };
 
 class npc_lorna_crowley_35378 : public CreatureScript
@@ -2741,8 +2867,8 @@ namespace
     void StartGilneasMastiffAttack(Unit* mastiff, Unit* target)
     {
         if (!mastiff || !target || mastiff->GetEntry() != NPC_GILNEAN_MASTIFF ||
-            target->GetEntry() != NPC_BLOODFANG_LURKER || !target->IsAlive() ||
-            !CanFightGilneasLurker(mastiff))
+            target->GetEntry() != NPC_BLOODFANG_LURKER || !mastiff->IsAlive() || !target->IsAlive() ||
+            !mastiff->IsInMap(target) || !mastiff->IsInPhase(target) || !CanFightGilneasLurker(mastiff))
             return;
 
         target->RemoveAura(SPELL_SHADOWSTALKER_STEALTH);
@@ -4626,11 +4752,13 @@ void AddSC_zone_gilneas_city1()
     new npc_worgen_runt_35456();
     new npc_worgen_alpha_35167();
     new npc_josiah_avery_35369();
+    new npc_josiah_avery_scene_35370();
     new npc_josiah_avery_trigger_50415();
     new npc_lorna_crowley_35378();
     new npc_bloodfang_lurker_35463();
     new npc_gilnean_mastiff_35631();
     new spell_gilneas_attack_lurker();
+    new spell_gilneas_lorna_shot();
     new npc_lord_godfrey_35906();
     new npc_gilnean_city_guard_35504();
     new npc_king_genn_greymane_35550();

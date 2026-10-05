@@ -42,7 +42,7 @@ def main():
 #include <vector>
 using uint32=std::uint32_t;using uint64=std::uint64_t;
 using namespace std::chrono_literals;
-constexpr int QUEST_FROM_THE_SHADOWS=14204,QUEST_LAST_CHANCE_AT_HUMANITY=14375,QUEST_THE_REBEL_LORDS_ARSENAL=14159;
+constexpr int QUEST_AMONG_HUMANS_AGAIN=14313,QUEST_FROM_THE_SHADOWS=14204,QUEST_LAST_CHANCE_AT_HUMANITY=14375,QUEST_THE_REBEL_LORDS_ARSENAL=14159;
 constexpr int QUEST_STATUS_NONE=0,QUEST_STATUS_INCOMPLETE=1,QUEST_STATUS_COMPLETE=2,QUEST_STATUS_REWARDED=3;
 constexpr int NPC_GILNEAN_MASTIFF=35631,NPC_BLOODFANG_LURKER=35463;
 constexpr int SPELL_SHADOWSTALKER_STEALTH=5916,SPELL_IN_STOCKS=69196,SPELL_SELF_ROOT=42716;
@@ -64,6 +64,7 @@ struct CharmInfo{
     void SetIsCommandAttack(bool v){commandAttack=v;}
 };
 struct Unit{
+    bool sameMap=true,samePhase=true;bool IsInMap(Unit*){return sameMap;}bool IsInPhase(Unit*){return samePhase;}
     int entry=0;bool alive=true;Player* player=nullptr;CharmInfo* charm=nullptr;MotionMaster motion;
     MotionMaster* GetMotionMaster(){return &motion;}
     int GetTypeId(){return TYPEID_UNIT;}bool HasUnitState(int){return false;}
@@ -77,9 +78,9 @@ struct Unit{
 };
 struct Aura{int duration=0,maxDuration=0;void SetDuration(int v){duration=v;}void SetMaxDuration(int v){maxDuration=v;}};
 struct Player:Unit{
-    int quest=QUEST_STATUS_NONE,map=654,area=4786;unsigned flags=UNIT_FLAG2_DISABLE_TURN|0x100;
+    int nextQuest=QUEST_STATUS_NONE;int quest=QUEST_STATUS_NONE,map=654,area=4786;unsigned flags=UNIT_FLAG2_DISABLE_TURN|0x100;
     std::map<int,Aura> auras;std::vector<int> casts;EventProcessor m_Events;
-    int GetQuestStatus(int)const{return quest;}int GetMapId()const{return map;}int GetAreaId()const{return area;}
+    int GetQuestStatus(int id)const{return id==QUEST_AMONG_HUMANS_AGAIN?nextQuest:quest;}int GetMapId()const{return map;}int GetAreaId()const{return area;}
     void RemoveAura(int id)override{auras.erase(id);}bool HasAura(int id)const{return auras.count(id);}
     Aura* GetAura(int id){return HasAura(id)?&auras[id]:nullptr;}
     void RemoveFlag(unsigned,unsigned bit){flags&=~bit;}
@@ -179,6 +180,9 @@ int main(){
     unsigned attacks=dog.ai.attacks;target.alive=false;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);
     target.alive=true;target.entry=1;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);
     target.entry=35463;dog.player=nullptr;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);dog.player=&owner;
+    dog.samePhase=false;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);dog.samePhase=true;
+    dog.sameMap=false;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);dog.sameMap=true;
+    dog.alive=false;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);dog.alive=true;
     Creature jumping;jumping.entry=35631;jumping.player=&owner;jumping.charm=&charm;
     jumping.motion.type=EFFECT_MOTION_TYPE;owner.quest=QUEST_STATUS_INCOMPLETE;
     StartGilneasMastiffAttack(&jumping,&target);
@@ -211,6 +215,8 @@ int main(){
     recovery.OnLogin(&login,false);check(login.HasAura(68481)&&!login.HasAura(69196)&&login.flags==0x100);
     Player partial;partial.quest=QUEST_STATUS_REWARDED;partial.auras[42716]={};
     recovery.OnLogin(&partial,false);check(!partial.HasAura(42716)&&partial.flags==0x100&&partial.HasAura(68481));
+    Player progressed;progressed.quest=QUEST_STATUS_REWARDED;progressed.nextQuest=QUEST_STATUS_REWARDED;
+    recovery.OnLogin(&progressed,false);check(progressed.casts.empty()&&progressed.flags==(UNIT_FLAG2_DISABLE_TURN|0x100));
     Player unrelated;unrelated.quest=QUEST_STATUS_NONE;unrelated.auras[69196]={};recovery.OnLogin(&unrelated,false);
     check(unrelated.HasAura(69196)&&unrelated.casts.empty());
     AveryDialogue dialogue;dialogue.m_events.ScheduleEvent(dialogue.EVENT_SAY_JOSIAH_AVERY_TEXT_00,10s);

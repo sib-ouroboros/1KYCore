@@ -75,6 +75,7 @@ enum eDuskHaven
 
     GO_BALL_AND_CHAIN                           = 201775,
 
+    QUEST_AMONG_HUMANS_AGAIN                    = 14313,
     QUEST_INVASION                              = 14321,
     QUEST_LAST_CHANCE_AT_HUMANITY               = 14375,
     QUEST_LAST_STAND                            = 14222,
@@ -218,7 +219,8 @@ public:
     void OnLogin(Player* player, bool /*firstLogin*/) override
     {
         if (player->GetMapId() != 654 || player->GetAreaId() != 4786 ||
-            player->GetQuestStatus(QUEST_LAST_CHANCE_AT_HUMANITY) != QUEST_STATUS_REWARDED)
+            player->GetQuestStatus(QUEST_LAST_CHANCE_AT_HUMANITY) != QUEST_STATUS_REWARDED ||
+            player->GetQuestStatus(QUEST_AMONG_HUMANS_AGAIN) == QUEST_STATUS_REWARDED)
             return;
         // A partial transition can persist the root/turn lock without stocks.
         // Restrict recovery to this rewarded scene, preserving unrelated flags.
