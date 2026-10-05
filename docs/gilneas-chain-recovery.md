@@ -116,3 +116,31 @@ CI для6fcd532: Reliability PASS (ASan/UBSan); MySQL gilneas-chain PASS на �
 Источники: [Grandma’s Cat](https://www.wowhead.com/quest=14401/grandmas-cat), действующие quest_objectives/creature_loot_template и исходные координаты C++. В комментариях описана попытка подобрать кота и последующий бой. Перевоплощение/помощь бабушки и дополнительные способности Lucius пока не восстановлены: требуется отдельная проверка сцены, это не окончательная Blizzlike приёмка.
 
 Локальные проверки07–08: native GCC `-Wall -Wextra -Werror` PASS; MySQL8.0.45 на изолированной копии — первичное/повторное применение00–08, чужие bindings/таблицы/фазы и native quest loot PASS. Windows полный build be3dc10 также PASS; новым07–08 нужна собственная полная сборка.
+
+### To Greymane Manor14465
+
+`2026_10_06_09`:28 точек реальной поездки из закреплённого открытого исходника перенесены только как координаты, `waypoints36741` → `waypoint_data3674101`. Provenance и SHA256 архива сохранены в `docs/audit-data/gilneas-horse-route-source.json`. Перед записью проверяется отсутствие конфликтующих точек; чужой маршрут вызывает ошибку и не меняется. Route/SQL идемпотентны. Восстановлены guarded bindings Gwen36452, horse36741 и Mia36606.
+
+Отсутствие objectives у14465 в релизной БД проверено: native COMPLETE после accept не считается отсутствием задания. Horse принимает только владельца, seat0, active INCOMPLETE/COMPLETE, map654. Высадка — только последняя28-я точка, прежняя11-я больше не обрывает поездку. Раннее спешивание не создаёт synthetic quest credit; завершение задания остаётся нативным. Cleanup: отмена, смерть, выход, потеря пассажира и предел360s.
+
+Native phase18469077 восстанавливается двумя известными правилами part2: areas4714/4817, complete/rewarded14465 до reward24438. Это возвращает видимость Mia и устойчиво к relog. Остальные зоны и произвольные существующие rules не переписываются. Полёт/телепорт вместо лошади не используется. [Описание и исторические комментарии задания](https://www.wowhead.com/quest=14465/to-greymane-manor) подтверждают поездку с высадкой у основания поместья. Native fixtures проверяют last point, чужого пассажира, early dismount, COMPLETE, cleanup и фазовый predicate. Геометрия26972, открытие ворот и полнота сцены требуют клиентской проверки.
+
+Для летучей мыши24920 источник содержит60 точек полёта и14 возврата, но они не соответствуют сегментам текущего C++; механический перенос ID запрещён. Для Tobias24902 источник содержит лишь одну точку, для stagecoach24438 подходящих маршрутов нет. Они пока не считаются восстановленными.
+
+### Постоянные поздние фазы
+
+`2026_10_06_10`:186 заканчивается после reward24676;187 начинается после этой награды,190 после принятия24903,188 после принятия24678,189 после принятия24680. Последняя заканчивается после reward14434. Правила действуют только в известных Gilneas zones4714/4755; existing custom rules сохраняются. Границы основаны на действующих queststarter/ender и фазах persistent spawns; это адаптация под текущую БД, а не подтверждённый retail sniff. Никакой COMPLETE/reward/teleport не выдаётся новым SQL.
+
+Lorna37783 остаётся в186 до сдачи24676. Два конкретных спавна Lorna37783 и Krennan38553 используют native PhaseGroup440 (186+187), чтобы не потерять questgiver/контроллер армии после перехода. PhaseId0 при ненулевом PhaseGroup440 **не** означает снятие фаз. Источник, SHA DB2 и точные masks записаны в `docs/audit-data/gilneas-late-phases-source.json`. Native predicate tests проверяют accept/complete/reward, отказ от24678, сохранённые состояния после relog и постороннюю зону. ClientDB2 доступен26654: поддержку group440 и видимость всей последовательности необходимо подтвердить на26972.
+
+Проверка свежего опубликованного world дампа00–09 на MySQL8.0.45 PASS; поздний10 проверяется отдельно. GCC полного6fcd532 PASS, Reliabilitya88c829 PASS. Эти результаты не подменяют проверку новых09–10.
+
+### Leader of the Pack14386
+
+`2026_10_06_11`: bindings36409/36405 и additive check68682. Нативный effect68682 уже summons36409; дополнительного summon/linked-spell нет. Три существующих Thyala и23 постоянных мастифа уже в182 — спавны не удаляются, quest ID14386 не используется как creature credit. Исправляется только известное ошибочное KillCredit1=14386, если такой legacy workaround присутствует.
+
+Контроллер принимает участника активного14386, выбирает живую Тиалу в той же фазе, не перехватывает чужой tapped target. SummonList заменяет underflow-подверженный счётчик. Лимит50 проверяется перед каждым summon; death+despawn не освобождают два места. После отмены/смерти/выхода/потери цели/фазы/удаления родителя псы очищаются;120s ограничивает контроллер, дочерние actor lifetime30–60s сохранены. Reset контроллера очищает детей и восстанавливает ограниченный таймер, сохраняя owner. Постоянные мастифы без owner сохраняют обычный combat.
+
+У generic NPC summons один OwnerGUID **не** выставляет IsControlledByPlayer, а `Creature::SetLootRecipient(NPC)` отклоняет NPC. Поэтому scoped DamageDealt связывает **реальный ненулевой урон** принадлежащего участнику пса по назначенной Тиале с player loot recipient и player damage requirement. Учтён native health multiplier; уже player-controlled damage повторно не учитывается. Это позволяет штатному Unit::Kill/RewardPlayerAndGroupAtKill выдать зачёт реального убийства. Scripted KilledMonsterCredit при простом наблюдении смерти удалён. Другие цели/владельцы/фазы/задания не меняются; quest автоматически не завершается.
+
+Native fixture проверяет50/60 triggers, death+despawn, свободное место, назначенный target, живого owner, scaled damage, zero damage, чужой tap, отсутствие double-count, ordinary static AI, cancel/death/logout/timeout. Полный engine kill и клиентская сцена остаются приёмкой. [Leader of the Pack](https://www.wowhead.com/quest=14386/leader-of-the-pack) и native item49240→68682 подтверждают использование стаи; старый SQL с удалением всех псов/quest-ID credit не импортирован.

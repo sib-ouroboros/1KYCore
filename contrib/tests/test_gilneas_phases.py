@@ -34,6 +34,27 @@ int main(){
  p.quests[14396]=0;check(oldPhase.IsFitToRequirements(&p,4714,4808)&&!newPhase.IsFitToRequirements(&p,4714,4808),"abandon returns prior phase");
  p.quests[14396]=6;p.quests[14465]=6;check(!newPhase.IsFitToRequirements(&p,4714,4808),"next stage ends phase183");
  p.quests[14465]=0;check(!newPhase.IsFitToRequirements(&p,1,1),"other zone not affected");
+ SpellArea manor;manor.spellId=69077;manor.questStart=14465;manor.questStartStatus=66;manor.questEnd=24438;manor.questEndStatus=64;
+ p.quests[14465]=0;check(!manor.IsFitToRequirements(&p,4714,4817),"manor phase unavailable before quest");
+ for(int status:{1,6}){p.quests[14465]=status;check(manor.IsFitToRequirements(&p,4714,4817),"complete/rewarded Manor phase persists");}
+ p.quests[14465]=0;check(!manor.IsFitToRequirements(&p,4714,4817),"abandon clears unsaved Manor stage");
+ p.quests[14465]=6;p.quests[24438]=6;check(!manor.IsFitToRequirements(&p,4714,4817),"Exodus reward ends184");
+ SpellArea p186,p187,p190,p188,p189;
+ p186.questStart=14467;p186.questStartStatus=64;p186.questEnd=24676;p186.questEndStatus=64;
+ p187.questStart=24676;p187.questStartStatus=64;p187.questEnd=24903;p187.questEndStatus=74;
+ p190.questStart=24903;p190.questStartStatus=74;p190.questEnd=24678;p190.questEndStatus=74;
+ p188.questStart=24678;p188.questStartStatus=74;p188.questEnd=24680;p188.questEndStatus=74;
+ p189.questStart=24680;p189.questStartStatus=74;p189.questEnd=14434;p189.questEndStatus=64;
+ Player story;story.quests[14467]=6;story.quests[24676]=1;
+ check(p186.IsFitToRequirements(&story,4714,4788)&&!p187.IsFitToRequirements(&story,4714,4788),"Lorna remains visible before reward");
+ story.quests[24676]=6;check(!p186.IsFitToRequirements(&story,4714,4788)&&p187.IsFitToRequirements(&story,4714,4788),"reward handoff186 to187");
+ for(int status:{3,1,6}){story.quests[24903]=status;check(!p187.IsFitToRequirements(&story,4714,4755)&&p190.IsFitToRequirements(&story,4714,4755),"delivery handoff187 to190");}
+ story.quests[24678]=3;check(!p190.IsFitToRequirements(&story,4714,4755)&&p188.IsFitToRequirements(&story,4714,4755),"Knee Deep enables188");
+ Player logged=story;check(p188.IsFitToRequirements(&logged,4714,4755),"188 derives from saved state after login");
+ story.quests[24678]=0;check(p190.IsFitToRequirements(&story,4714,4755)&&!p188.IsFitToRequirements(&story,4714,4755),"abandon rolls back to190");
+ story.quests[24678]=6;story.quests[24680]=1;check(!p188.IsFitToRequirements(&story,4714,4755)&&p189.IsFitToRequirements(&story,4714,4755),"Keel Harbor uses189");
+ story.quests[14434]=6;check(!p189.IsFitToRequirements(&story,4714,4755),"departure ends local phase");
+ check(!p188.IsFitToRequirements(&logged,7037,7037),"foreign zone stays unchanged");
  std::cout<<"Native Gilneas phase handoff predicate: PASS\n";
 }
 """

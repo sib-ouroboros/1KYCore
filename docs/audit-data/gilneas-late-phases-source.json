@@ -1,0 +1,48 @@
+{
+  "client_build": 26654,
+  "target_build": 26972,
+  "warning": "Client26972 acceptance and phase table check still needed; numeric DB2 content is from available26654 extract",
+  "phase_group": 440,
+  "native_phases": [
+    186,
+    187
+  ],
+  "db2_sha256": "4e41d75ee1e8c16b872f25e4ad0027544dad24d12b7f183655088e4dbf933053",
+  "layout": "0x66517af6",
+  "quest_rules": [
+    {
+      "spell": 69485,
+      "phase": 187,
+      "start": 24676,
+      "start_mask": 64,
+      "end": 24903,
+      "end_mask": 74
+    },
+    {
+      "spell": 70696,
+      "phase": 190,
+      "start": 24903,
+      "start_mask": 74,
+      "end": 24678,
+      "end_mask": 74
+    },
+    {
+      "spell": 69486,
+      "phase": 188,
+      "start": 24678,
+      "start_mask": 74,
+      "end": 24680,
+      "end_mask": 74
+    },
+    {
+      "spell": 70695,
+      "phase": 189,
+      "start": 24680,
+      "start_mask": 74,
+      "end": 14434,
+      "end_mask": 64
+    }
+  ],
+  "source": "Current release queststarter/questender/spawn phase graph and native Lorna37783 reward handoff; historical part5 only supports186 end/187 start, not later masks",
+  "acceptance": "persistent rules are audited adaptations, not a retail sniff or proof that all scenes work"
+}

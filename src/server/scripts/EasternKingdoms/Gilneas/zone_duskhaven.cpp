@@ -18,6 +18,8 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <algorithm>
+
 #include "CreatureTextMgr.h"
 #include "GameObject.h"
 #include "GameObjectAI.h"
@@ -907,115 +909,142 @@ public:
 
     struct npc_mastiff_36409AI : public ScriptedAI
     {
-        npc_mastiff_36409AI(Creature* creature) : ScriptedAI(creature) { }
+        npc_mastiff_36409AI(Creature* creature) : ScriptedAI(creature), m_summons(creature),
+            m_thyalaGUID(ObjectGuid::Empty), m_player_GUID(ObjectGuid::Empty) { }
 
         EventMap m_events;
+        SummonList m_summons;
         ObjectGuid m_thyalaGUID;
         ObjectGuid m_player_GUID;
-        uint32 m_mastiff_counter;
+        uint32 m_lifetime = 0;
 
         void Reset() override
         {
-            m_thyalaGUID = ObjectGuid::Empty;
-            m_player_GUID = ObjectGuid::Empty;
-            m_mastiff_counter = 0;
             m_events.Reset();
-            m_events.ScheduleEvent(EVENT_CHECK_ATTACK, 500ms);
-            m_events.ScheduleEvent(EVENT_SEND_MORE_MASTIFF, 250ms);
+            m_summons.DespawnAll();
+            me->SetReactState(REACT_PASSIVE);
+            if (!m_player_GUID.IsEmpty())
+                m_events.ScheduleEvent(EVENT_SEND_MORE_MASTIFF, 250ms);
         }
 
         void IsSummonedBy(Unit* summoner) override
         {
-            if (Player* player = summoner->ToPlayer())
-                m_player_GUID = player->GetGUID();
-            if (Creature* thyala = me->FindNearestCreature(NPC_DARK_RANGER_THYALA, 100.0f))
+            Player* player = summoner ? summoner->ToPlayer() : nullptr;
+            if (!player || !player->IsAlive() || player->GetMapId() != 654
+                || player->GetQuestStatus(QUEST_LEADER_OF_THE_PACK) != QUEST_STATUS_INCOMPLETE)
             {
-                m_thyalaGUID = thyala->GetGUID();
-                me->SetReactState(REACT_PASSIVE);
-                me->GetMotionMaster()->MoveChase(thyala, 3.0f, 0.0f);
+                me->DespawnOrUnsummon();
+                return;
             }
+            Creature* existing = player->GetSummonedCreatureByEntry(36409);
+            Creature* thyala = me->FindNearestCreature(NPC_DARK_RANGER_THYALA, 100.0f);
+            if ((existing && existing != me) || !thyala || !thyala->InSamePhase(player)
+                || (thyala->GetLootRecipient() && !thyala->isTappedBy(player)))
+            {
+                me->DespawnOrUnsummon();
+                return;
+            }
+            m_player_GUID = player->GetGUID();
+            m_thyalaGUID = thyala->GetGUID();
+            m_events.Reset();
+            m_events.ScheduleEvent(EVENT_SEND_MORE_MASTIFF, 250ms);
+            me->GetMotionMaster()->MoveChase(thyala, 3.0f, 0.0f);
         }
 
         void DamageTaken(Unit* /*attacker*/, uint32& damage) override
         {
-            damage = 0;
+            damage = 0; // Invisible encounter controller only, not ordinary NPC.
         }
 
         void JustSummoned(Creature* summon) override
         {
-            m_mastiff_counter += 1;
-            summon->GetAI()->SetGUID(m_player_GUID, PLAYER_GUID);
-            summon->GetAI()->SetGUID(m_thyalaGUID, NPC_DARK_RANGER_THYALA);
+            m_summons.Summon(summon);
+            summon->AI()->SetGUID(m_player_GUID, PLAYER_GUID);
+            summon->AI()->SetGUID(m_thyalaGUID, NPC_DARK_RANGER_THYALA);
         }
 
-        void SummonedCreatureDies(Creature* /*summon*/, Unit* /*killer*/) override
+        void SummonedCreatureDies(Creature* summon, Unit* /*killer*/) override
         {
-            m_mastiff_counter -= 1;
+            m_summons.Despawn(summon);
         }
 
-        void SummonedCreatureDespawn(Creature* /*summon*/) override
+        void SummonedCreatureDespawn(Creature* summon) override
         {
-            m_mastiff_counter -= 1;
+            m_summons.Despawn(summon); // Idempotent after death, cannot underflow.
+        }
+
+        void JustDied(Unit* /*killer*/) override
+        {
+            m_summons.DespawnAll();
         }
 
         void UpdateAI(uint32 diff) override
         {
-            m_events.Update(diff);
-
-            while (uint32 eventId = m_events.ExecuteEvent())
+            m_lifetime += diff;
+            Player* player = ObjectAccessor::GetPlayer(*me, m_player_GUID);
+            Creature* thyala = ObjectAccessor::GetCreature(*me, m_thyalaGUID);
+            if (m_lifetime >= 120000 || !player || !player->IsAlive() || player->GetMapId() != 654
+                || player->GetQuestStatus(QUEST_LEADER_OF_THE_PACK) != QUEST_STATUS_INCOMPLETE
+                || !me->InSamePhase(player) || !thyala || !thyala->IsAlive()
+                || !thyala->InSamePhase(player) || me->GetDistance(player) > 100.0f
+                || (thyala->GetLootRecipient() && !thyala->isTappedBy(player)))
             {
-                switch (eventId)
-                {
-                    case EVENT_CHECK_ATTACK:
-                    {
-                        if (Creature* thyala = ObjectAccessor::GetCreature(*me, m_thyalaGUID))
-                        {
-                            if (!thyala->IsAlive() || !thyala->IsInWorld())
-                            {
-                                if (Player* player = ObjectAccessor::GetPlayer(*me, m_player_GUID))
-                                    player->KilledMonsterCredit(NPC_DARK_RANGER_THYALA);
-
-                                me->DespawnOrUnsummon(1s);
-                            }
-
-                            if (me->GetDistance2d(thyala) < 20.0f)
-                            {
-                                me->SetWalk(false);
-                                me->GetMotionMaster()->MoveIdle();
-                            }
-                        }
-
-                        m_events.ScheduleEvent(EVENT_CHECK_ATTACK, 1s);
-                        break;
-                    }
-                    case EVENT_SEND_MORE_MASTIFF:
-                    {
-                        if (ObjectAccessor::GetCreature(*me, m_thyalaGUID))
-                            if (m_mastiff_counter < 50)
-                            {
-                                std::list<Creature*>trigger;
-                                GetCreatureListWithEntryInGrid(trigger, me, NPC_TRIGGER, 100.0f);
-
-                                for (std::list<Creature*>::const_iterator itr = trigger.begin(); itr != trigger.end(); ++itr)
-                                    me->SummonCreature(NPC_MASTIFF, (*itr)->GetNearPosition(5.0f, frand(0.0f, 6.28f)), TEMPSUMMON_TIMED_DESPAWN, urand(30000, 60000));
-                            }
-
-                        m_events.ScheduleEvent(EVENT_SEND_MORE_MASTIFF, 250ms);
-                        break;
-                    }
-                }
-            }
-
-            if (!UpdateVictim())
+                m_events.Reset();
+                m_summons.DespawnAll();
+                me->DespawnOrUnsummon();
                 return;
-            else
-                DoMeleeAttackIfReady();
+            }
+            m_events.Update(diff);
+            if (m_events.ExecuteEvent() == EVENT_SEND_MORE_MASTIFF)
+            {
+                std::list<Creature*> triggers;
+                GetCreatureListWithEntryInGrid(triggers, me, NPC_TRIGGER, 100.0f);
+                for (Creature* trigger : triggers)
+                {
+                    if (m_summons.size() >= 50)
+                        break;
+                    if (trigger->InSamePhase(player))
+                        me->SummonCreature(NPC_MASTIFF, trigger->GetNearPosition(5.0f, frand(0.0f, 6.28f)),
+                            TEMPSUMMON_TIMED_DESPAWN, urand(30000, 60000));
+                }
+                m_events.ScheduleEvent(EVENT_SEND_MORE_MASTIFF, 250ms);
+            }
+            // Owner-attributed mastiff damage uses the normal Unit::Kill reward path.
+            // Merely observing an unrelated dead Thyala never grants quest credit.
         }
     };
 
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_mastiff_36409AI(creature);
+    }
+};
+
+//49240 ->68682 summons the controller through its native effect.
+class spell_gilneas_leader_of_the_pack : public SpellScriptLoader
+{
+public:
+    spell_gilneas_leader_of_the_pack() : SpellScriptLoader("spell_gilneas_leader_of_the_pack") { }
+    class spell_gilneas_leader_of_the_pack_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_gilneas_leader_of_the_pack_SpellScript);
+        SpellCastResult CheckPack()
+        {
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            if (!player || !player->IsAlive() || player->GetMapId() != 654
+                || player->GetQuestStatus(QUEST_LEADER_OF_THE_PACK) != QUEST_STATUS_INCOMPLETE
+                || player->GetSummonedCreatureByEntry(36409))
+                return SPELL_FAILED_BAD_TARGETS;
+            return SPELL_CAST_OK;
+        }
+        void Register() override
+        {
+            OnCheckCast += SpellCheckCastFn(spell_gilneas_leader_of_the_pack_SpellScript::CheckPack);
+        }
+    };
+    SpellScript* GetSpellScript() const override
+    {
+        return new spell_gilneas_leader_of_the_pack_SpellScript();
     }
 };
 
@@ -1027,7 +1056,8 @@ public:
 
     struct npc_mastiff_36405AI : public ScriptedAI
     {
-        npc_mastiff_36405AI(Creature* creature) : ScriptedAI(creature) { }
+        npc_mastiff_36405AI(Creature* creature) : ScriptedAI(creature),
+            m_thyalaGUID(ObjectGuid::Empty), m_player_GUID(ObjectGuid::Empty) { }
 
         EventMap m_events;
         ObjectGuid m_thyalaGUID;
@@ -1039,8 +1069,6 @@ public:
             me->SetSpeed(MOVE_RUN, true);
             me->SetReactState(REACT_AGGRESSIVE);
             m_events.Reset();
-            m_thyalaGUID = ObjectGuid::Empty;
-            m_player_GUID = ObjectGuid::Empty;
             m_events.RescheduleEvent(EVENT_CHECK_ATTACK, 1s);
         }
 
@@ -1051,6 +1079,7 @@ public:
                 case PLAYER_GUID:
                 {
                     m_player_GUID = guid;
+                    me->SetOwnerGUID(guid); // Attribute real damage/kills to the quest participant.
                     break;
                 }
                 case NPC_DARK_RANGER_THYALA:
@@ -1061,6 +1090,30 @@ public:
             }
         }
 
+        void DamageDealt(Unit* victim, uint32& damage, DamageEffectType /*type*/, SpellInfo const* /*spell*/) override
+        {
+            Creature* thyala = victim ? victim->ToCreature() : nullptr;
+            Player* player = ObjectAccessor::GetPlayer(*me, m_player_GUID);
+            if (!damage || !thyala || thyala->GetEntry() != NPC_DARK_RANGER_THYALA
+                || thyala->GetGUID() != m_thyalaGUID || !player || !player->IsAlive()
+                || player->GetMapId() != 654 || !me->InSamePhase(player)
+                || player->GetQuestStatus(QUEST_LEADER_OF_THE_PACK) != QUEST_STATUS_INCOMPLETE
+                || (thyala->GetLootRecipient() && !thyala->isTappedBy(player)))
+                return;
+            // These NPC summons are not player-controlled pets. Bridge only their
+            // real damage to the ordinary loot/damage requirement and Unit::Kill path.
+            float multiplier = thyala->GetHealthMultiplierForTarget(me);
+            if (multiplier <= 0.0f)
+                return;
+            uint32 effectiveDamage = static_cast<uint32>(damage / multiplier);
+            if (!effectiveDamage)
+                return;
+            if (!thyala->GetLootRecipient())
+                thyala->SetLootRecipient(player);
+            if (!me->IsControlledByPlayer())
+                thyala->LowerPlayerDamageReq(std::min<uint64>(effectiveDamage, thyala->GetHealth()));
+        }
+
         void EnterEvadeMode(EvadeReason /*reason*/) override
         {
             StartAttackThyala();
@@ -1069,6 +1122,20 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
+            // Existing unsummoned mastiffs keep ordinary NPC combat behavior.
+            if (!m_player_GUID.IsEmpty())
+            {
+                Player* player = ObjectAccessor::GetPlayer(*me, m_player_GUID);
+                TempSummon* summon = me->ToTempSummon();
+                if (!player || !player->IsAlive() || player->GetMapId() != 654
+                    || player->GetQuestStatus(QUEST_LEADER_OF_THE_PACK) != QUEST_STATUS_INCOMPLETE
+                    || !me->InSamePhase(player) || !summon
+                    || !ObjectAccessor::GetCreature(*me, summon->GetSummonerGUID()))
+                {
+                    me->DespawnOrUnsummon();
+                    return;
+                }
+            }
             m_events.Update(diff);
 
             while (uint32 eventId = m_events.ExecuteEvent())
@@ -1908,48 +1975,80 @@ public:
 
     struct npc_swift_mountain_horse_36741AI : public ScriptedAI
     {
-        npc_swift_mountain_horse_36741AI(Creature* creature) : ScriptedAI(creature) { }
+        npc_swift_mountain_horse_36741AI(Creature* creature) : ScriptedAI(creature), m_playerGUID(ObjectGuid::Empty) { }
 
-        EventMap    m_events;
-        ObjectGuid  m_playerGUID;
+        ObjectGuid m_playerGUID;
+        uint32 m_lifetime = 0;
+        bool m_boarded = false;
+        bool m_arrived = false;
 
         void Reset() override
         {
-            m_events.Reset();
-            m_playerGUID = ObjectGuid::Empty;
+            me->SetReactState(REACT_PASSIVE);
+        }
+
+        static bool HasActiveQuest(Player* player)
+        {
+            if (!player || !player->IsAlive() || player->GetMapId() != 654)
+                return false;
+            QuestStatus status = player->GetQuestStatus(QUEST_TO_GREYMANE_MANOR);
+            //14465 has no objectives and may be COMPLETE immediately on acceptance.
+            return status == QUEST_STATUS_INCOMPLETE || status == QUEST_STATUS_COMPLETE;
+        }
+
+        void IsSummonedBy(Unit* summoner) override
+        {
+            Player* player = summoner ? summoner->ToPlayer() : nullptr;
+            if (!HasActiveQuest(player))
+            {
+                me->DespawnOrUnsummon();
+                return;
+            }
+            m_playerGUID = player->GetGUID();
         }
 
         void MovementInform(uint32 type, uint32 id) override
         {
-            if (type == WAYPOINT_MOTION_TYPE)
-                if (id == 11)
-                    me->GetVehicleKit()->RemoveAllPassengers();
+            if (type != WAYPOINT_MOTION_TYPE || id != 28 || !m_boarded || m_arrived)
+                return;
+            // The audited28-point route ends here, not at the old point11.
+            m_arrived = true;
+            if (Vehicle* vehicle = me->GetVehicleKit())
+                vehicle->RemoveAllPassengers();
+            me->DespawnOrUnsummon(1s);
         }
 
-        void PassengerBoarded(Unit* passenger, int8 /*seatId*/, bool apply) override
+        void PassengerBoarded(Unit* passenger, int8 seatId, bool apply) override
         {
+            Player* player = passenger ? passenger->ToPlayer() : nullptr;
             if (apply)
             {
-                if (Player* player = passenger->ToPlayer())
+                if (!HasActiveQuest(player) || seatId != 0 || player->GetGUID() != m_playerGUID || m_boarded)
                 {
-                    m_playerGUID = player->GetGUID();
-                    player->AddAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_08, player);
-                    player->AddAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_09, player);
-                    me->CastSpell(player, SPELL_FORCECAST_UPDATE_ZONE_AURAS, true);
-                    me->GetMotionMaster()->MovePath(WAYPOINT_ID, false);
+                    if (passenger)
+                        passenger->ExitVehicle();
+                    return;
                 }
+                m_boarded = true;
+                player->AddAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_08, player);
+                player->AddAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_09, player);
+                me->CastSpell(player, SPELL_FORCECAST_UPDATE_ZONE_AURAS, true);
+                me->GetMotionMaster()->MovePath(WAYPOINT_ID, false);
             }
-            else
+            else if (player && player->GetGUID() == m_playerGUID)
             {
-                if (Player* player = passenger->ToPlayer())
-                {
-                    player->RemoveAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_08);
-                    player->AddAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_09, player);
-                    player->AreaExploredOrEventHappens(QUEST_TO_GREYMANE_MANOR);
-                }
-
+                m_boarded = false;
                 me->DespawnOrUnsummon(1s);
             }
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            m_lifetime += diff;
+            Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+            if (m_lifetime >= 360000 || !HasActiveQuest(player)
+                || (m_boarded && player->GetVehicleBase() != me))
+                me->DespawnOrUnsummon();
         }
     };
 
@@ -3789,6 +3888,7 @@ void AddSC_zone_gilneas_duskhaven()
     new spell_fire_boulder_68591();
     new spell_launch_96185();
     new npc_mastiff_36409();
+    new spell_gilneas_leader_of_the_pack();
     new npc_mastiff_36405();
     new npc_lord_godfrey_36290();
     new npc_drowning_watchman_36440();
