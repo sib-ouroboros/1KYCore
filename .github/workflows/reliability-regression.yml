@@ -25,6 +25,8 @@ on:
       - src/server/scripts/EasternKingdoms/Gilneas/**
       - contrib/tests/test_gilneas_quests.py
       - contrib/tests/test_gilneas_scene.py
+      - src/server/scripts/BrokenIsles/DemonHunterZones/zone_mardum.cpp
+      - contrib/tests/test_mardum_invasion.py
       - src/server/game/Globals/ObjectMgr.*
       - src/server/scripts/World/PetBattleTrainer.cpp
       - contrib/tests/test_garrison_reward_reload.py
@@ -137,6 +139,8 @@ jobs:
         run: python contrib/tests/test_gilneas_quests.py
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers
         run: python contrib/tests/test_gilneas_scene.py
+      - name: Test Mardum personal departure and phase lifecycle with strict sanitizers
+        run: python contrib/tests/test_mardum_invasion.py
       - name: Test extractor model names and long paths with strict sanitizers
         run: python contrib/tests/test_vmap_model_names.py
       - name: Test dark shaman target selection and fallback with strict sanitizers

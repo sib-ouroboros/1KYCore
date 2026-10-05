@@ -1,0 +1,84 @@
+{
+  "source": "local release 1kycore_world_20260926_no_mercenaries.sql.gz; not live Linux database",
+  "map": 1481,
+  "quest": 40077,
+  "phase171_status_mask": 66,
+  "phase171_statuses": [
+    "complete",
+    "rewarded"
+  ],
+  "actors": [
+    {
+      "guid": "20540932",
+      "id": "93011",
+      "PhaseId": "170",
+      "position_x": "1179.57",
+      "position_y": "3202.61",
+      "position_z": "51.4265",
+      "orientation": "4.87377",
+      "name": "'Kayn Sunfury'"
+    },
+    {
+      "guid": "20540931",
+      "id": "98292",
+      "PhaseId": "170",
+      "position_x": "1170.74",
+      "position_y": "3204.71",
+      "position_z": "51.626",
+      "orientation": "3.36744",
+      "name": "'Kor\\'vas Bloodthorn'"
+    },
+    {
+      "guid": "20540918",
+      "id": "98290",
+      "PhaseId": "170",
+      "position_x": "1171.49",
+      "position_y": "3203.69",
+      "position_z": "51.3145",
+      "orientation": "3.4564",
+      "name": "'Cyana Nightglaive'"
+    },
+    {
+      "guid": "20540917",
+      "id": "99918",
+      "PhaseId": "170",
+      "position_x": "1172.92",
+      "position_y": "3207.82",
+      "position_z": "52.3935",
+      "orientation": "3.73185",
+      "name": "'Sevis Brightflame'"
+    },
+    {
+      "guid": "20540916",
+      "id": "98228",
+      "PhaseId": "170",
+      "position_x": "1182.36",
+      "position_y": "3202.91",
+      "position_z": "51.5215",
+      "orientation": "4.88566",
+      "name": "'Jace Darkweaver'"
+    },
+    {
+      "guid": "20540915",
+      "id": "98227",
+      "PhaseId": "170",
+      "position_x": "1177",
+      "position_y": "3203.07",
+      "position_z": "51.3637",
+      "orientation": "4.88746",
+      "name": "'Allari the Souleater'"
+    }
+  ],
+  "destination_source_guid": 20540925,
+  "geometry_verified": false,
+  "missing_local_mmap_map": 1481,
+  "local_native_test": "passed; Windows without sanitizers",
+  "mysql_test": {
+    "schema": "test_mardum_e33b39cace",
+    "status": "passed",
+    "repeat_import": true,
+    "existing_dialogue_preserved": true,
+    "other_templates_preserved": true,
+    "missing_dialogue_seeded": true
+  }
+}

@@ -18,6 +18,17 @@
 #include "Creature.h"
 #include "GameObject.h"
 #include "MotionMaster.h"
+#include "MoveSpline.h"
+#include "MoveSplineInit.h"
+#include "PathGenerator.h"
+#include "Log.h"
+#include "SmartAI.h"
+#include "CreatureTextMgr.h"
+#include "ChatPackets.h"
+#include "MiscPackets.h"
+#include "DB2Stores.h"
+#include <algorithm>
+#include <list>
 #include "ObjectAccessor.h"
 #include "Player.h"
 #include "QuestPackets.h"
@@ -172,6 +183,8 @@ Position const NPCsPos[2] =
     { 586.843323f, 2433.053955f, -62.977276f, 6.143252f }  /// Fly position when Legion Aegis Event (Inquisitor Baleful)
 };
 
+void CleanupMardumInvasionActors(Player* player);
+
 class PlayerScript_mardum_welcome_scene_trigger : public PlayerScript
 {
 public:
@@ -185,6 +198,17 @@ public:
         {
             player->RemoveAurasDueToSpell(SPELL_PHASE_MARDUM_WELCOME);
         }
+    }
+
+    void OnQuestAbandon(Player* player, Quest const* quest) override
+    {
+        if (quest->GetQuestId() != QUEST_INVASION_BEGIN || player->GetMapId() != 1481 ||
+            player->getClass() != CLASS_DEMON_HUNTER)
+            return;
+
+        CleanupMardumInvasionActors(player);
+        player->RemoveAurasDueToSpell(SPELL_PHASE_171);
+        player->AddAura(SPELL_PHASE_MARDUM_WELCOME);
     }
 
     void OnUpdate(Player* player, uint32 diff) override
@@ -211,20 +235,221 @@ public:
 
     void OnSceneComplete(Player* player, uint32 /*sceneInstanceID*/, SceneTemplate const* /*sceneTemplate*/) override
     {
-        player->AddAura(SPELL_PHASE_MARDUM_WELCOME);
+        if (player->GetQuestStatus(QUEST_INVASION_BEGIN) == QUEST_STATUS_NONE)
+            player->AddAura(SPELL_PHASE_MARDUM_WELCOME);
     }
 };
+
+// The DB has phase 170 and legacy phase 50 copies of these six Illidari.
+// Acceptance updates spell_area before CreatureScript::OnQuestAccept, so the
+// starting group may already be invisible. Never move/despawn the shared spawns.
+struct MardumInvasionSpawn
+{
+    uint32 entry;
+    Position position;
+};
+
+MardumInvasionSpawn const MardumInvasionGroup[] =
+{
+    { 93011, { 1179.57f, 3202.61f, 51.4265f, 4.87377f } }, // Kayn
+    { 98292, { 1170.74f, 3204.71f, 51.6260f, 3.36744f } }, // Kor'vas
+    { 98290, { 1171.49f, 3203.69f, 51.3145f, 3.45640f } }, // Cyana
+    { 99918, { 1172.92f, 3207.82f, 52.3935f, 3.73185f } }, // Sevis
+    { 98228, { 1182.36f, 3202.91f, 51.5215f, 4.88566f } }, // Jace
+    { 98227, { 1177.00f, 3203.07f, 51.3637f, 4.88746f } }  // Allari
+};
+
+// A ground-level point on the slope, taken from the Mardum spawn data. Detour
+// chooses the route; do not force a straight spline through the ridge/buildings.
+Position const MardumInvasionDestination = { 1111.48f, 3156.86f, 17.6211f, 0.0f };
+constexpr uint32 MardumInvasionActorMarker = 40077;
+
+bool IsMardumInvasionAcceptance(Player* player, Creature* creature, Quest const* quest)
+{
+    return quest->GetQuestId() == QUEST_INVASION_BEGIN && creature->GetEntry() == 93011 &&
+        player->getClass() == CLASS_DEMON_HUNTER && player->GetMapId() == 1481 &&
+        player->GetQuestStatus(QUEST_INVASION_BEGIN) == QUEST_STATUS_INCOMPLETE &&
+        creature->GetDistance(MardumInvasionGroup[0].position) <= 30.0f;
+}
+
+struct MardumInvasionActorAI : ScriptedAI
+{
+    MardumInvasionActorAI(Creature* creature, ObjectGuid owner, uint32 slot)
+        : ScriptedAI(creature), _owner(owner), _slot(slot) { }
+
+    ObjectGuid _owner;
+    uint32 _slot;
+    uint32 _elapsed = 0;
+    bool _firstLine = false;
+    bool _secondLine = false;
+    bool _departed = false;
+    bool _moving = false;
+
+    uint32 GetData(uint32 id) const override
+    {
+        return id == MardumInvasionActorMarker ? 1 : 0;
+    }
+
+    void SpeakToOwner(uint8 group, Player* player)
+    {
+        // Talk(group, player) still broadcasts SAY/YELL and their sound to
+        // nearby players in this core. Send localized normal chat directly to
+        // the owner, preserving bubbles/type without leaking personal scenes.
+        CreatureTextMap const& texts = sCreatureTextMgr->GetTextMap();
+        auto creatureText = texts.find(me->GetEntry());
+        if (creatureText == texts.end())
+            return;
+        auto textGroup = creatureText->second.find(group);
+        if (textGroup == creatureText->second.end())
+            return;
+        auto row = std::find_if(textGroup->second.begin(), textGroup->second.end(),
+            [](CreatureTextEntry const& entry) { return entry.id == 0; });
+        if (row == textGroup->second.end())
+            return;
+
+        LocaleConstant locale = player->GetSession()->GetSessionDbLocaleIndex();
+        WorldPackets::Chat::Chat chat;
+        chat.Initialize(row->type, row->lang, me, player,
+            sCreatureTextMgr->GetLocalizedChatString(me->GetEntry(), me->getGender(), group, row->id, locale),
+            0, "", locale);
+        player->SendDirectMessage(chat.Write());
+
+        uint32 sound = row->sound;
+        if (BroadcastTextEntry const* broadcast = sBroadcastTextStore.LookupEntry(row->BroadcastTextId))
+            if (uint32 broadcastSound = broadcast->SoundEntriesID[me->getGender() == GENDER_FEMALE ? 1 : 0])
+                sound = broadcastSound;
+        if (sound)
+            player->SendDirectMessage(WorldPackets::Misc::PlaySound(me->GetGUID(), sound).Write());
+        if (row->emote)
+            me->HandleEmoteCommand(row->emote);
+    }
+
+    void UpdateAI(uint32 diff) override
+    {
+        Player* player = ObjectAccessor::GetPlayer(*me, _owner);
+        if (!player || !me->IsInMap(player) || player->GetMapId() != 1481 ||
+            player->GetQuestStatus(QUEST_INVASION_BEGIN) != QUEST_STATUS_INCOMPLETE ||
+            !me->IsWithinDistInMap(player, 200.0f))
+        {
+            me->DespawnOrUnsummon();
+            return;
+        }
+
+        // TempSummon's 60-second lifetime is the final fallback, including a
+        // missing route. Bound arithmetic independently of unusually long ticks.
+        _elapsed = std::min<uint32>(_elapsed + std::min<uint32>(diff, 60000), 60000);
+        if (me->GetEntry() == 93011)
+        {
+            if (!_firstLine && _elapsed >= 100)
+            {
+                _firstLine = true;
+                me->SetFacingToObject(player);
+                SpeakToOwner(0, player);
+            }
+            if (!_secondLine && _elapsed >= 5100)
+            {
+                _secondLine = true;
+                SpeakToOwner(1, player);
+            }
+        }
+        else if (me->GetEntry() == 98292 && !_firstLine && _elapsed >= 10100)
+        {
+            _firstLine = true;
+            SpeakToOwner(0, player);
+        }
+
+        if (!_departed && _elapsed >= 11100 + _slot * 180)
+        {
+            _departed = true;
+            PathGenerator path(me);
+            if (!path.CalculatePath(MardumInvasionDestination.GetPositionX(),
+                    MardumInvasionDestination.GetPositionY(), MardumInvasionDestination.GetPositionZ()) ||
+                path.GetPathType() != PATHFIND_NORMAL || path.GetPath().size() < 2)
+            {
+                TC_LOG_ERROR("scripts", "Mardum quest 40077: no complete MMAP departure path for entry %u.", me->GetEntry());
+                return;
+            }
+
+            me->SetWalk(false);
+            me->GetMotionMaster()->MoveIdle();
+            Movement::MoveSplineInit movement(me);
+            movement.MovebyPath(path.GetPath());
+            movement.SetWalk(false);
+            if (movement.Launch() > 0)
+                _moving = true;
+            else
+                TC_LOG_ERROR("scripts", "Mardum quest 40077: failed to launch departure for entry %u.", me->GetEntry());
+        }
+
+        if (_moving && me->movespline->Finalized())
+            me->DespawnOrUnsummon();
+    }
+};
+
+void CleanupMardumInvasionActors(Player* player)
+{
+    for (MardumInvasionSpawn const& spawn : MardumInvasionGroup)
+    {
+        std::list<Creature*> actors;
+        player->GetCreatureListWithEntryInGrid(actors, spawn.entry, 250.0f);
+        for (Creature* actor : actors)
+            if (TempSummon* summon = actor->ToTempSummon())
+                if (summon->GetSummonerGUID() == player->GetGUID() &&
+                    actor->AI() && actor->AI()->GetData(MardumInvasionActorMarker) == 1)
+                    actor->DespawnOrUnsummon();
+    }
+}
 
 class npc_kayn_sunfury_welcome : public CreatureScript
 {
 public:
     npc_kayn_sunfury_welcome() : CreatureScript("npc_kayn_sunfury_welcome") { }
 
-    bool OnQuestAccept(Player* /*player*/, Creature* /*creature*/, Quest const* quest) override
+    struct WelcomeAI : SmartAI
     {
-        if (quest->GetQuestId() == QUEST_INVASION_BEGIN)
+        explicit WelcomeAI(Creature* creature) : SmartAI(creature) { }
+
+        void sQuestAccept(Player* player, Quest const* quest) override
         {
-            // Todo : Make creatures wing out
+            // Only this acceptance dialogue moves to the personal scene.
+            // Preserve every other SmartAI event on the shared questgiver.
+            if (!IsMardumInvasionAcceptance(player, me, quest))
+                SmartAI::sQuestAccept(player, quest);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return new WelcomeAI(creature);
+    }
+
+    bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) override
+    {
+        if (!IsMardumInvasionAcceptance(player, creature, quest))
+            return true;
+
+        CleanupMardumInvasionActors(player);
+        player->RemoveAurasDueToSpell(SPELL_PHASE_MARDUM_WELCOME);
+
+        uint32 slot = 0;
+        for (MardumInvasionSpawn const& spawn : MardumInvasionGroup)
+        {
+            // visibleBySummonerOnly is set before AddToMap, not afterwards.
+            if (TempSummon* actor = player->SummonCreature(spawn.entry, spawn.position,
+                    TEMPSUMMON_TIMED_DESPAWN, 60000, 0, true))
+            {
+                actor->SetReactState(REACT_PASSIVE);
+                actor->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_GOSSIP);
+                actor->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
+                actor->setActive(true);
+                MardumInvasionActorAI* ai = new MardumInvasionActorAI(actor, player->GetGUID(), slot);
+                if (!actor->AIM_Initialize(ai))
+                {
+                    delete ai;
+                    actor->DespawnOrUnsummon();
+                }
+            }
+            ++slot;
         }
         return true;
     }
