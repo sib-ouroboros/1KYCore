@@ -1,0 +1,25 @@
+{
+  "source": "sql/test/world/magic_storm/_revision_/need test/2018_10_12_00_world_duskhaven_part3.sql",
+  "sha256": "41f0583df8c4f9a2fed1e1dec8306d8191849d73c26c749e8f1b707438590e2e",
+  "entries": {
+    "tracker": 38027,
+    "ranger": 38022
+  },
+  "factions": {
+    "tracker": 2207,
+    "ranger": 2213,
+    "client_build": 26654,
+    "tracker_group": 2,
+    "tracker_friend_group": 2,
+    "tracker_enemy_group": 4,
+    "ranger_group": 4,
+    "ranger_enemy_group": 2
+  },
+  "item": 50134,
+  "spell": 71061,
+  "event": 23338,
+  "item_cooldown_ms": 60000,
+  "temporary_lifetime_ms": 45000,
+  "maximum_allies_per_player": 8,
+  "limitations": "No client26972 combat/geometry acceptance yet."
+}

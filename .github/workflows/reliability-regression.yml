@@ -27,6 +27,7 @@ on:
       - contrib/tests/test_gilneas_duskhaven.py
       - contrib/tests/test_gilneas_rescue.py
       - contrib/tests/test_gilneas_phases.py
+      - contrib/tests/test_gilneas_horn.py
       - contrib/tests/audit_gilneas_bindings.py
       - src/server/scripts/Custom/custom_worgen_racials.cpp
       - contrib/tests/test_gilneas_scene.py
@@ -153,6 +154,8 @@ jobs:
         run: python contrib/tests/test_gilneas_rescue.py
       - name: Test native Gilneas phase handoff with sanitizers
         run: python contrib/tests/test_gilneas_phases.py
+      - name: Test Horn of Taldoren ownership and bounded summon mechanics with sanitizers
+        run: python contrib/tests/test_gilneas_horn.py
       - name: Audit all Gilneas script registrations
         run: python contrib/tests/audit_gilneas_bindings.py > gilneas-registrations.json
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers

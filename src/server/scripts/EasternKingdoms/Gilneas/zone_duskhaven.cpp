@@ -24,6 +24,7 @@
 #include "MoveSplineInit.h"
 #include "MotionMaster.h"
 #include "ObjectAccessor.h"
+#include "ObjectMgr.h"
 #include "PassiveAI.h"
 #include "Player.h"
 #include "ScriptMgr.h"
@@ -1301,100 +1302,72 @@ public:
     }
 };
 
-// 36440
+// Chance is picked up by clicking; Lucius drops item49281 through normal quest loot.
 class npc_chance_36459 : public CreatureScript
 {
 public:
     npc_chance_36459() : CreatureScript("npc_chance_36459") { }
-
-    enum eNpc
+    bool OnGossipHello(Player* player, Creature* creature) override
     {
-        EVENT_CREATE_LUCIUS                     = 901
-    };
+        if (!player || !player->IsAlive() || player->GetMapId() != 654
+            || player->GetQuestStatus(QUEST_GRANDMAS_CAT) != QUEST_STATUS_INCOMPLETE
+            || player->GetDistance(creature) > 5.0f || player->GetSummonedCreatureByEntry(NPC_LUCIUS))
+            return true;
+        // Existing scene position; personal visibility gives each player their own ambush/loot.
+        if (Creature* lucius = player->SummonCreature(NPC_LUCIUS, -2109.36f, 2330.28f, 7.36667f,
+            0.151307f, TEMPSUMMON_TIMED_DESPAWN, 180000, true))
+        {
+            lucius->AI()->Talk(1, player);
+            lucius->AI()->AttackStart(player);
+        }
+        return true;
+    }
+};
 
-    struct npc_chance_36459AI : public ScriptedAI
+class npc_gilneas_lucius_the_cruel : public CreatureScript
+{
+public:
+    npc_gilneas_lucius_the_cruel() : CreatureScript("npc_gilneas_lucius_the_cruel") { }
+    struct ai : public ScriptedAI
     {
-        npc_chance_36459AI(Creature* creature) : ScriptedAI(creature) { }
-
+        ai(Creature* creature) : ScriptedAI(creature) { }
+        ObjectGuid m_ownerGUID = ObjectGuid::Empty;
         EventMap m_events;
-        ObjectGuid m_luciusGUID;
-        ObjectGuid m_playerGUID;
-        bool m_isLucisKilled;
-
         void Reset() override
         {
             m_events.Reset();
-            m_events.ScheduleEvent(EVENT_CHECK_PLAYER, 1s);
-            m_luciusGUID = ObjectGuid::Empty;
-            m_playerGUID = ObjectGuid::Empty;
-            m_isLucisKilled = false;
+            // Evade resets combat events, but must retain the personal summon owner.
+            if (!m_ownerGUID.IsEmpty())
+                m_events.ScheduleEvent(1, 1s);
         }
-
-        void JustSummoned(Creature* summon) override
+        void IsSummonedBy(Unit* summoner) override
         {
-            if (summon->GetEntry() == NPC_LUCIUS)
-                summon->AI()->Talk(1);
+            if (Player* player = summoner ? summoner->ToPlayer() : nullptr)
+            {
+                m_ownerGUID = player->GetGUID();
+                m_events.Reset();
+                m_events.ScheduleEvent(1, 1s);
+            }
         }
-
-        void SummonedCreatureDies(Creature* /*summon*/, Unit* /*killer*/) override
-        {
-            m_isLucisKilled = true;
-            m_luciusGUID = ObjectGuid::Empty;
-        }
-
         void UpdateAI(uint32 diff) override
         {
             m_events.Update(diff);
-
-            while (uint32 eventId = m_events.ExecuteEvent())
+            while (m_events.ExecuteEvent())
             {
-                switch (eventId)
+                Player* player = ObjectAccessor::GetPlayer(*me, m_ownerGUID);
+                if (!player || !player->IsAlive() || !me->IsInPhase(player)
+                    || player->GetQuestStatus(QUEST_GRANDMAS_CAT) != QUEST_STATUS_INCOMPLETE)
                 {
-                    case EVENT_CHECK_PLAYER:
-                    {
-                        if (!m_playerGUID)
-                        {
-                            if (Player* player = me->SelectNearestPlayer(10.0f))
-                                if (player->GetQuestStatus(QUEST_GRANDMAS_CAT) == QUEST_STATUS_INCOMPLETE)
-                                {
-                                    m_playerGUID = player->GetGUID();
-                                    m_events.ScheduleEvent(EVENT_MASTER_RESET, 180000);
-                                    me->SummonCreature(NPC_LUCIUS, -2109.36f, 2330.28f, 7.36667f, 0.151307f, TEMPSUMMON_TIMED_DESPAWN, 180000);
-                                }
-                        }
-                        else if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                        {
-                            if (player->GetQuestStatus(QUEST_GRANDMAS_CAT) == QUEST_STATUS_COMPLETE)
-                            {
-                                me->DespawnOrUnsummon(10ms);
-                                Reset();
-                            }
-                        }
-                        else if (m_isLucisKilled)
-                            Reset();
-
-                        m_events.ScheduleEvent(EVENT_CHECK_PLAYER, 1s);
-                        break;
-                    }
-                    case EVENT_MASTER_RESET:
-                    {
-                        Reset();
-                        break;
-                    }
+                    me->DespawnOrUnsummon();
+                    return;
                 }
+                m_events.ScheduleEvent(1, 1s);
             }
-
-            if (!UpdateVictim())
-                return;
-            else
+            if (UpdateVictim())
                 DoMeleeAttackIfReady();
         }
     };
-
-    CreatureAI* GetAI(Creature* creature) const override
-    {
-        return new npc_chance_36459AI(creature);
-    }
+    CreatureAI* GetAI(Creature* creature) const override { return new ai(creature); }
 };
 
 // 36488
@@ -3186,6 +3159,152 @@ public:
     }
 };
 
+// Source: audited2018_10_12_00_world_duskhaven_part3.sql, tracker positions105080-105087.
+static Position const TaldorenTrackerPositions[] =
+{
+    { -2133.54f, 1615.31f, -43.5836f, 0.752862f },
+    { -2109.32f, 1616.10f, -42.6374f, 2.402210f },
+    { -2112.86f, 1611.64f, -42.9334f, 2.331520f },
+    { -2119.90f, 1610.75f, -43.5323f, 3.140480f },
+    { -2129.60f, 1609.58f, -43.5793f, 4.593470f },
+    { -2141.55f, 1618.05f, -43.5221f, 1.059170f },
+    { -2145.55f, 1630.15f, -42.7947f, 0.0695731f },
+    { -2131.07f, 1612.27f, -43.5848f, 0.796060f }
+};
+
+class npc_gilneas_taldoren_tracker : public CreatureScript
+{
+public:
+    npc_gilneas_taldoren_tracker() : CreatureScript("npc_gilneas_taldoren_tracker") { }
+    struct ai : public ScriptedAI
+    {
+        ai(Creature* creature) : ScriptedAI(creature) { }
+        ObjectGuid m_ownerGUID = ObjectGuid::Empty;
+        EventMap m_events;
+        void Reset() override
+        {
+            m_events.Reset();
+            // Evade resets combat events, but must retain the personal summon owner.
+            if (!m_ownerGUID.IsEmpty())
+            {
+                m_events.ScheduleEvent(1, 1s);
+                m_events.ScheduleEvent(2, 3s);
+            }
+            me->SetReactState(REACT_DEFENSIVE);
+        }
+        void IsSummonedBy(Unit* summoner) override
+        {
+            Player* player = summoner ? summoner->ToPlayer() : nullptr;
+            if (!player || player->GetMapId() != 654 || player->GetQuestStatus(24646) != QUEST_STATUS_INCOMPLETE)
+            {
+                me->DespawnOrUnsummon();
+                return;
+            }
+            m_ownerGUID = player->GetGUID();
+            m_events.Reset();
+            m_events.ScheduleEvent(1, 1s);
+            m_events.ScheduleEvent(2, 3s);
+        }
+        void UpdateAI(uint32 diff) override
+        {
+            m_events.Update(diff);
+            while (uint32 event = m_events.ExecuteEvent())
+            {
+                Player* player = ObjectAccessor::GetPlayer(*me, m_ownerGUID);
+                if (!player || !player->IsAlive() || !me->IsInPhase(player)
+                    || player->GetQuestStatus(24646) != QUEST_STATUS_INCOMPLETE)
+                {
+                    me->DespawnOrUnsummon();
+                    return;
+                }
+                if (event == 1)
+                    m_events.ScheduleEvent(1, 1s);
+                else if (event == 2)
+                {
+                    if (me->GetVictim())
+                        me->CastSpell(me, 71019, false); // native War Stomp
+                    m_events.ScheduleEvent(2, 30s);
+                }
+            }
+            if (UpdateVictim())
+                DoMeleeAttackIfReady();
+        }
+    };
+    CreatureAI* GetAI(Creature* creature) const override { return new ai(creature); }
+};
+
+class spell_gilneas_horn_of_taldoren : public SpellScriptLoader
+{
+public:
+    spell_gilneas_horn_of_taldoren() : SpellScriptLoader("spell_gilneas_horn_of_taldoren") { }
+    class script : public SpellScript
+    {
+        PrepareSpellScript(script);
+        bool Validate(SpellInfo const* /*info*/) override { return ValidateSpellInfo({ 71019 }); }
+        SpellCastResult CheckTarget()
+        {
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            if (!player || !player->IsAlive() || player->GetMapId() != 654
+                || player->GetQuestStatus(24646) != QUEST_STATUS_INCOMPLETE
+                || player->GetExactDist(-2118.81f, 1630.49f, -41.6281f) > 80.0f
+                || player->GetSummonedCreatureByEntry(38027))
+                return SPELL_FAILED_BAD_TARGETS;
+            CreatureTemplate const* tracker = sObjectMgr->GetCreatureTemplate(38027);
+            if (!tracker || tracker->faction != 2207
+                || tracker->ScriptID != sObjectMgr->GetScriptId("npc_gilneas_taldoren_tracker"))
+                return SPELL_FAILED_BAD_TARGETS;
+            return SPELL_CAST_OK;
+        }
+        void HandleHorn(SpellEffIndex index)
+        {
+            PreventHitDefaultEffect(index); // replaces the otherwise unimplemented event23338
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            if (!player || CheckTarget() != SPELL_CAST_OK)
+                return;
+            std::list<Creature*> rangers;
+            GetCreatureListWithEntryInGrid(rangers, player, 38022, 80.0f);
+            rangers.remove_if([player](Creature* ranger)
+            {
+                if (!ranger->IsAlive() || !ranger->IsInPhase(player) || !ranger->IsHostileTo(player))
+                    return true;
+                // Never take an encounter away from another player's group.
+                if (Unit* victim = ranger->GetVictim())
+                {
+                    if (Creature* creature = victim->ToCreature())
+                        if (TempSummon* summon = creature->ToTempSummon())
+                            if (summon->GetEntry() == 38027 && summon->GetSummonerGUID() != player->GetGUID())
+                                return true;
+                    if (Player* owner = victim->GetCharmerOrOwnerPlayerOrPlayerItself())
+                        return owner != player;
+                }
+                return false;
+            });
+            if (rangers.empty())
+                return;
+            std::vector<Creature*> allies;
+            for (Position const& position : TaldorenTrackerPositions)
+                if (Creature* tracker = player->SummonCreature(38027, position, TEMPSUMMON_TIMED_DESPAWN, 45000))
+                    allies.push_back(tracker);
+            if (allies.empty())
+                return;
+            size_t next = 0;
+            for (Creature* ranger : rangers)
+            {
+                Creature* tracker = allies[next++ % allies.size()];
+                tracker->AI()->AttackStart(ranger);
+                ranger->AddThreat(tracker, 1000.0f);
+                ranger->AI()->AttackStart(tracker);
+            }
+        }
+        void Register() override
+        {
+            OnCheckCast += SpellCheckCastFn(script::CheckTarget);
+            OnEffectHitTarget += SpellEffectFn(script::HandleHorn, EFFECT_0, SPELL_EFFECT_SEND_EVENT);
+        }
+    };
+    SpellScript* GetSpellScript() const override { return new script(); }
+};
+
 // Half-Burnt Torch: scare the tunnel vermin, never substitute a kill credit.
 class spell_gilneas_half_burnt_torch : public SpellScriptLoader
 {
@@ -3652,6 +3771,8 @@ void AddSC_zone_gilneas_duskhaven()
 {
     new spell_gilneas_walden_brandy();
     new spell_gilneas_half_burnt_torch();
+    new npc_gilneas_taldoren_tracker();
+    new spell_gilneas_horn_of_taldoren();
     new npc_slain_watchman_36205();
     new npc_krennan_aranas_36331();
     new npc_king_genn_greymane_36332();
@@ -3673,6 +3794,7 @@ void AddSC_zone_gilneas_duskhaven()
     new npc_drowning_watchman_36440();
     new spell_rescue_drowning_watchman_68735();
     new npc_chance_36459();
+    new npc_gilneas_lucius_the_cruel();
     new npc_forsaken_castaway_36488();
     new npc_mountain_horse_36555();
     new npc_mountain_horse_36540();
