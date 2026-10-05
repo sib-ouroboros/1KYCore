@@ -1,7 +1,7 @@
 /*
  * SylvaniaCore : raciaux worgen a la validation des quetes de Gilneas
  * (reconstruit 23/07/2026). Le gate Blizzlike vit dans Player::AddSpell
- * (68992 Sombre Course <- quete 14222, 68996 Deux Formes <- quete 14375) ;
+ * (68992 Sombre Course <- quete 14222, 68996 Deux Formes <- quete 24593) ;
  * ce script apprend le sort des que la quete correspondante est rendue,
  * sans attendre un relog ou une montee de niveau.
  */
@@ -14,7 +14,7 @@ enum WorgenRacials
     SPELL_DARKFLIGHT    = 68992,
     SPELL_TWO_FORMS     = 68996,
     QUEST_DARKFLIGHT    = 14222,
-    QUEST_TWO_FORMS     = 14375,
+    QUEST_TWO_FORMS     = 24593,
     RACE_WORGEN_ID      = 22,
 };
 
@@ -22,6 +22,13 @@ class custom_worgen_racials : public PlayerScript
 {
 public:
     custom_worgen_racials() : PlayerScript("custom_worgen_racials") { }
+
+    void OnLogin(Player* player, bool /*firstLogin*/) override
+    {
+        // Repair an interrupted reward/relogin without granting racials before their quests.
+        OnQuestStatusChange(player, QUEST_DARKFLIGHT);
+        OnQuestStatusChange(player, QUEST_TWO_FORMS);
+    }
 
     void OnQuestStatusChange(Player* player, uint32 questId) override
     {

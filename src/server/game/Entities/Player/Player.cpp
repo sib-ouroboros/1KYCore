@@ -3245,14 +3245,14 @@ bool Player::AddSpell(uint32 spellId, bool active, bool learning, bool dependent
     // SylvaniaCore: gating Blizzlike de Sombre Course (68992) et Deux Formes (68996), que
     // le core accorde a tort des la creation. Bloque ici tant que la quete d'intro de
     // Gilneas correspondante n'est pas RENDUE : Sombre Course = Last Stand (14222,
-    // transformation worgen) ; Deux Formes = Last Chance at Humanity (14375, controle).
+    // transformation worgen) ; Deux Formes = Neither Human Nor Beast (24593, controle).
     // loading=true (chargement DB d'un perso existant) passe. custom_worgen_racials.cpp
     // les accorde au rendu de quete. Filet anti-blocage : debloque a partir du niveau 25.
     if (!loading && getRace() == RACE_WORGEN)
     {
         if (spellId == 68992 && !GetQuestRewardStatus(14222) && getLevel() < 25)
             return false;
-        if (spellId == 68996 && !GetQuestRewardStatus(14375) && getLevel() < 25)
+        if (spellId == 68996 && !GetQuestRewardStatus(24593) && getLevel() < 25)
             return false;
     }
 
