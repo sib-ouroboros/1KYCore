@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""Gilneas migrations on a disposable DB735.02/release schema copy.
+
+Caller must provide an isolated database; never pass the deployed world database.
+"""
+from pathlib import Path
+import json
+
+def test_gilneas_database(sql, checksum):
+ root=Path(__file__).resolve().parents[2]
+ files=['2026_10_06_00_world_gilneas_early_mechanics.sql','2026_10_06_01_world_gilneas_quest_object_spawns.sql','2026_10_06_02_world_gilneas_rescue_bindings.sql']
+ texts=[(root/'sql/updates/world'/name).read_text('utf8') for name in files]
+ manifest=json.loads((root/'docs/audit-data/gilneas-static-restoration.json').read_text('utf8'))
+ tables=sql('SHOW TABLES;').stdout.splitlines()
+ modified={'creature_template','creature','creature_addon','game_event_creature','pool_creature','creature_formations','smart_scripts','gameobject','npc_spellclick_spells','spell_script_names'}
+ untouched=checksum([t for t in tables if t not in modified])
+ # Unrelated existing spell hooks survive.
+ sql("INSERT INTO spell_script_names (spell_id,ScriptName) VALUES (68735,'gilneas_test_custom_hook');")
+ for text in texts:sql(text)
+ once=checksum(tables)
+ for text in texts:sql(text)
+ assert checksum(tables)==once,'Repeat changed persistent data'
+ assert checksum([t for t in tables if t not in modified])==untouched,'Unrelated tables changed'
+ assert sql('SELECT COUNT(*) FROM creature WHERE id=36140 AND map=654 AND PhaseId=182;').stdout.strip()=='1'
+ assert sql('SELECT COUNT(*) FROM gameobject WHERE id=196403 AND map=654 AND PhaseId=182;').stdout.strip()=='10'
+ for entry,script in [(36287,'npc_cynthia_36267'),(36288,'npc_ashley_36269'),(36289,'npc_james_36268'),(36231,'npc_horrid_abomination_36231'),(36440,'npc_drowning_watchman_36440'),(36540,'npc_mountain_horse_36540'),(36555,'npc_mountain_horse_36555'),(37067,'npc_crash_survivor_37067'),(37078,'npc_swamp_crocolisk_37078'),(36488,'npc_forsaken_castaway_36488')]:
+  assert sql(f"SELECT COUNT(*) FROM creature_template WHERE entry={entry} AND ScriptName='{script}' AND AIName='';").stdout.strip()=='1',(entry,script)
+ assert sql('SELECT cast_flags FROM npc_spellclick_spells WHERE npc_entry=36440 AND spell_id=68735;').stdout.strip()=='1'
+ assert sql("SELECT COUNT(*) FROM spell_script_names WHERE spell_id=68735 AND ScriptName='gilneas_test_custom_hook';").stdout.strip()=='1'
+ for row in manifest['rows']:
+  spawn=row['spawn']
+  assert sql(f"SELECT COUNT(*) FROM gameobject WHERE guid={spawn['guid']} AND id={spawn['id']} AND map=654 AND PhaseId={spawn['PhaseId']};").stdout.strip()=='1',spawn['guid']
+ # A foreign GUID cannot be overwritten, nor can an earlier part of this migration write.
+ first=manifest['rows'][0]['spawn'];guid=first['guid']
+ sql(f'UPDATE gameobject SET id=9999999 WHERE guid={guid};')
+ before=checksum(tables);failure=sql(texts[1],ok=False)
+ assert '_1kycore_gilneas_spawn_guard' in failure.stderr and 'Duplicate entry' in failure.stderr
+ assert checksum(tables)==before,'Conflict wrote permanent data'
+ sql(f"UPDATE gameobject SET id={first['id']} WHERE guid={guid};")
+ # Preserve a compatible existing spawn with a different GUID; don't duplicate it.
+ sql(f'UPDATE gameobject SET guid=310066999 WHERE guid={guid};')
+ sql(texts[1]);assert sql(f'SELECT COUNT(*) FROM gameobject WHERE guid={guid};').stdout.strip()=='0'
+ assert sql('SELECT COUNT(*) FROM gameobject WHERE guid=310066999;').stdout.strip()=='1'
+ # Protect administrator scripts instead of replacing them with blanket bindings.
+ sql("UPDATE creature_template SET ScriptName='custom_child',AIName='' WHERE entry=36288;")
+ for text in (texts[0],texts[2]):sql(text)
+ assert sql("SELECT ScriptName FROM creature_template WHERE entry=36288;").stdout.strip()=='custom_child'
+ print('PASS: Gilneas first/repeat migration, actor bindings, 95 spawns, conflict rejection and unrelated preservation')

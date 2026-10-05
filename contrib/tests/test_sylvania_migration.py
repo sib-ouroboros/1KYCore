@@ -12,6 +12,7 @@ import subprocess
 import tempfile
 import urllib.request
 
+from test_gilneas_database import test_gilneas_database
 from test_campaign_visual_migration import test_visual_migration
 from test_campaign_required_level_migration import test_required_level_objects
 
@@ -804,6 +805,7 @@ def test_nearest_conversations():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--gilneas-chain-only', action='store_true', help='Test audited Gilneas bindings and object spawns.')
     parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
     parser.add_argument('--wildcard-loot-only', action='store_true', help='Run source wildcard loot translation against the real release.')
     parser.add_argument('--source-loot-only', action='store_true', help='Run the complete source loot object group against the real release.')
@@ -844,6 +846,10 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.gilneas_chain_only:
+            test_gilneas_database(sql,checksum)
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.required_level_only:
             sql(migration)
             test_required_level_objects(sql,checksum)
@@ -851,7 +857,8 @@ def main():
             return
         if args.native_visuals_only:
             sql(migration)
-            test_visual_migration(sql,checksum)
+            test_gilneas_database(sql,checksum)
+        test_visual_migration(sql,checksum)
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.conversation_chains_only:
@@ -1013,6 +1020,7 @@ def main():
         sql(command)
         assert checksum(['spell_script_names']) == complete, 'Quest binding retry is not idempotent'
         print('PASS: Gilneas command binding first/repeat import preserves other scripts and all other tables', flush=True)
+        test_gilneas_database(sql,checksum)
         test_visual_migration(sql,checksum)
         test_required_level_objects(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)

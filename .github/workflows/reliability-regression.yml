@@ -24,6 +24,9 @@ on:
       - contrib/tests/test_vmap_model_names.py
       - src/server/scripts/EasternKingdoms/Gilneas/**
       - contrib/tests/test_gilneas_quests.py
+      - contrib/tests/test_gilneas_duskhaven.py
+      - contrib/tests/test_gilneas_rescue.py
+      - src/server/scripts/Custom/custom_worgen_racials.cpp
       - contrib/tests/test_gilneas_scene.py
       - src/server/scripts/BrokenIsles/DemonHunterZones/zone_mardum.cpp
       - contrib/tests/test_mardum_invasion.py
@@ -142,6 +145,10 @@ jobs:
         run: python contrib/tests/test_monk_mastery_guard.py
       - name: Test Gilneas quest combat and story transition with strict sanitizers
         run: python contrib/tests/test_gilneas_quests.py
+      - name: Test Duskhaven barrels and child objectives with sanitizers
+        run: python contrib/tests/test_gilneas_duskhaven.py
+      - name: Test rescue ownership, horse delivery and racial quest gates with sanitizers
+        run: python contrib/tests/test_gilneas_rescue.py
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers
         run: python contrib/tests/test_gilneas_scene.py
       - name: Test Mardum personal departure and phase lifecycle with strict sanitizers
