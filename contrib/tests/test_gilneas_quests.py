@@ -50,7 +50,13 @@ constexpr int SPELL_FADE_BACK=94053,SPELL_PHASE_QUEST_ZONE_SPECIFIC_06=68481;
 constexpr int SPELL_FORCE_CAST_SUMMON_JOSIAH=67352,SPELL_WORGEN_BITE=72870;
 constexpr unsigned UNIT_FIELD_FLAGS_2=0,UNIT_FLAG2_DISABLE_TURN=0x8000;
 constexpr int REACT_DEFENSIVE=1;
-struct Player;struct Creature;
+struct Player;struct Creature;struct Unit;struct TempSummon;
+constexpr int EFFECT_MOTION_TYPE=16,CHASE_MOTION_TYPE=5,TYPEID_UNIT=3;
+constexpr int UNIT_STATE_CONFUSED=1,UNIT_STATE_FLEEING=2;
+struct Guid{bool IsEmpty()const{return true;}};
+struct MotionMaster{int type=CHASE_MOTION_TYPE;unsigned chases=0;Unit* target=nullptr;
+    int GetCurrentMovementGeneratorType(){return type;}
+    void MoveChase(Unit* victim){type=CHASE_MOTION_TYPE;target=victim;++chases;}};
 struct CharmInfo{
     bool following=true,returning=true,stay=true,commandFollow=true,commandAttack=false;
     void SetIsFollowing(bool v){following=v;}void SetIsReturning(bool v){returning=v;}
@@ -58,7 +64,11 @@ struct CharmInfo{
     void SetIsCommandAttack(bool v){commandAttack=v;}
 };
 struct Unit{
-    int entry=0;bool alive=true;Player* player=nullptr;CharmInfo* charm=nullptr;
+    int entry=0;bool alive=true;Player* player=nullptr;CharmInfo* charm=nullptr;MotionMaster motion;
+    MotionMaster* GetMotionMaster(){return &motion;}
+    int GetTypeId(){return TYPEID_UNIT;}bool HasUnitState(int){return false;}
+    virtual Unit* GetVictim(){return nullptr;}
+    void CastSpell(Unit*,int,bool){}
     virtual ~Unit()=default;
     Player* GetCharmerOrOwnerPlayerOrPlayerItself(){return player;}
     int GetEntry()const{return entry;}bool IsAlive()const{return alive;}
@@ -76,15 +86,41 @@ struct Player:Unit{
     void CastSpell(Player*,int id,bool){casts.push_back(id);auras[id]={};}
 };
 struct AI{Unit* victim=nullptr;unsigned attacks=0;virtual ~AI()=default;
-    virtual void AttackStart(Unit* target){victim=target;++attacks;}};
+    MotionMaster* motion=nullptr;void MovementInform(int,int){}
+    virtual void AttackStart(Unit* target){victim=target;++attacks;if(motion)motion->MoveChase(target);}};
 struct Creature:Unit{
     ::AI ai;bool stealth=true;int reaction=0;std::vector<int> casts;unsigned bites=0;
     Creature* ToCreature()override{return this;}::AI* AI(){return &ai;}
     void RemoveAura(int id)override{if(id==SPELL_SHADOWSTALKER_STEALTH)stealth=false;}
-    void SetReactState(int value){reaction=value;}Unit* GetVictim(){return ai.victim;}
+    unsigned corpseDelay=0,despawnMs=0;
+    void Update(uint32){}virtual TempSummon* ToTempSummon(){return nullptr;}
+    void SetCorpseDelay(unsigned v){corpseDelay=v;}
+    template<typename Rep,typename Period>void DespawnOrUnsummon(std::chrono::duration<Rep,Period> v){despawnMs=std::chrono::duration_cast<std::chrono::milliseconds>(v).count();}
+    Creature(){ai.motion=&motion;}
+    void SetReactState(int value){reaction=value;}Unit* GetVictim()override{return ai.victim;}
+    bool Attack(Unit* target,bool){ai.victim=target;return true;}
     void CastSpell(Player*,int id,bool){casts.push_back(id);}void AddAura(int,Player*){++bites;}
 };
+enum {DEAD=0,CORPSE=1,TEMPSUMMON_MANUAL_DESPAWN=0,TEMPSUMMON_TIMED_DESPAWN,
+    TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT,TEMPSUMMON_CORPSE_TIMED_DESPAWN,
+    TEMPSUMMON_CORPSE_DESPAWN,TEMPSUMMON_DEAD_DESPAWN,TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN,
+    TEMPSUMMON_TIMED_OR_DEAD_DESPAWN};
+#define TC_LOG_ERROR(...) ((void)0)
+struct TempSummon:Creature{
+    int m_type=TEMPSUMMON_CORPSE_DESPAWN,m_deathState=CORPSE;
+    uint32 m_timer=0,m_lifetime=0;bool removed=false;
+    TempSummon* ToTempSummon()override{return this;}
+    void SetTempSummonType(int value){m_type=value;}
+    bool IsInCombat(){return false;}void UnSummon(){removed=true;}
+TEMP_SUMMON_UPDATE
+};
+AVERY_LIFETIME
 HELPERS
+namespace ObjectAccessor{Unit* GetUnit(Unit&,Guid){return nullptr;}}
+struct EffectMovementGenerator{
+    unsigned _arrivalSpellId=0,_id=0;Guid _arrivalSpellCasterGuid,_arrivalSpellTargetGuid;
+EFFECT_FINALIZE
+};
 using SpellCastResult=int;
 constexpr int SPELL_CAST_OK=0,SPELL_FAILED_BAD_TARGETS=1;
 struct Command{
@@ -143,6 +179,12 @@ int main(){
     unsigned attacks=dog.ai.attacks;target.alive=false;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);
     target.alive=true;target.entry=1;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);
     target.entry=35463;dog.player=nullptr;StartGilneasMastiffAttack(&dog,&target);check(dog.ai.attacks==attacks);dog.player=&owner;
+    Creature jumping;jumping.entry=35631;jumping.player=&owner;jumping.charm=&charm;
+    jumping.motion.type=EFFECT_MOTION_TYPE;owner.quest=QUEST_STATUS_INCOMPLETE;
+    StartGilneasMastiffAttack(&jumping,&target);
+    check(jumping.GetVictim()==&target&&jumping.motion.type==EFFECT_MOTION_TYPE&&jumping.ai.attacks==0);
+    EffectMovementGenerator effect;effect.Finalize(&jumping);
+    check(jumping.motion.type==CHASE_MOTION_TYPE&&jumping.motion.target==&target&&jumping.motion.chases==1);
     Creature enemy;Lurker lurker(&enemy);uint32 dmg=1;
     owner.quest=QUEST_STATUS_NONE;lurker.DamageTaken(&owner,dmg);check(enemy.ai.attacks==0);
     owner.quest=QUEST_STATUS_INCOMPLETE;lurker.DamageTaken(&dog,dmg);check(enemy.ai.victim==&dog&&dmg==1);
@@ -167,12 +209,19 @@ int main(){
 
     Player login;login.quest=QUEST_STATUS_REWARDED;login.auras[69196]={};Recovery recovery;
     recovery.OnLogin(&login,false);check(login.HasAura(68481)&&!login.HasAura(69196)&&login.flags==0x100);
+    Player partial;partial.quest=QUEST_STATUS_REWARDED;partial.auras[42716]={};
+    recovery.OnLogin(&partial,false);check(!partial.HasAura(42716)&&partial.flags==0x100&&partial.HasAura(68481));
     Player unrelated;unrelated.quest=QUEST_STATUS_NONE;unrelated.auras[69196]={};recovery.OnLogin(&unrelated,false);
     check(unrelated.HasAura(69196)&&unrelated.casts.empty());
     AveryDialogue dialogue;dialogue.m_events.ScheduleEvent(dialogue.EVENT_SAY_JOSIAH_AVERY_TEXT_00,10s);
     for(uint32 delta:{10000,30000,25000,30000,25000,30000})dialogue.UpdateAI(delta);
     check(dialogue.lines==std::vector<unsigned>({0,1,2,3,4,5}));
     dialogue.UpdateAI(25000);check(dialogue.lines.back()==0&&dialogue.lines.size()==7);
+    TempSummon oldAvery;oldAvery.Update(1);check(oldAvery.removed);
+    TempSummon sceneAvery;KeepGilneasAveryForScene(&sceneAvery);
+    sceneAvery.Update(1000);check(!sceneAvery.removed&&sceneAvery.corpseDelay==10&&sceneAvery.despawnMs==30000);
+    sceneAvery.m_deathState=DEAD;sceneAvery.Update(1);check(sceneAvery.removed);
+    Creature ordinary;KeepGilneasAveryForScene(&ordinary);check(ordinary.corpseDelay==0&&ordinary.despawnMs==0);
     Avery avery;Creature giver;Quest arsenal{14159,67352};
     avery.OnQuestReward(&owner,&giver,&arsenal,0);check(giver.bites==1&&giver.casts.empty());
     arsenal.reward=0;avery.OnQuestReward(&owner,&giver,&arsenal,0);check(giver.casts.size()==1&&giver.casts[0]==67352);
@@ -181,6 +230,9 @@ int main(){
 '''
     for token,value in {'HELPERS':helpers,'ATTACK':attack,'DAMAGE':damage,
         'CHECKCAST':method(command,'        SpellCastResult CheckTarget('),
+        'AVERY_LIFETIME':method(city,'    void KeepGilneasAveryForScene('),
+        'TEMP_SUMMON_UPDATE':method((root/'src/server/game/Entities/Creature/TemporarySummon.cpp').read_text('utf8'),'void TempSummon::Update(').replace('TempSummon::',''),
+        'EFFECT_FINALIZE':method((root/'src/server/game/Movement/MovementGenerators/PointMovementGenerator.cpp').read_text('utf8'),'void EffectMovementGenerator::Finalize(').replace('EffectMovementGenerator::',''),
         'STOCKS_EVENT':method(dusk,'    class GilneasStocksTransitionEvent final')+';',
         'STOCKS':method(dusk,'    void ReleaseGilneasStocks('),
         'KING':method(king,'    bool OnQuestReward('),

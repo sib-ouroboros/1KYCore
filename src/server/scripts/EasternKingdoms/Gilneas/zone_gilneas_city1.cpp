@@ -2560,6 +2560,21 @@ public:
     }
 };
 
+namespace
+{
+    void KeepGilneasAveryForScene(Creature* avery)
+    {
+        if (TempSummon* summon = avery->ToTempSummon())
+        {
+            // Corpse-despawn summon properties must not skip the visible death.
+            summon->SetTempSummonType(TEMPSUMMON_MANUAL_DESPAWN);
+            avery->SetCorpseDelay(10);
+            // Bound the actor lifetime even if another participant disappears.
+            avery->DespawnOrUnsummon(30s);
+        }
+    }
+}
+
 class npc_josiah_avery_trigger_50415 : public CreatureScript
 {
 public:
@@ -2640,6 +2655,7 @@ public:
                             if (badAvery)
                             {
                                 m_badAveryGUID = badAvery->GetGUID();
+                                KeepGilneasAveryForScene(badAvery);
                                 badAvery->SetOrientation(badAvery->GetAngle(player)); // Face Player
                                 badAvery->CastSpell(player, SPELL_COSMETIC_COMBAT_ATTACK, true); // Do Cosmetic Attack
                                 //player->GetMotionMaster()->MoveKnockTo(-1791.94f, 1427.29f, 12.4584f, 22.0f, 8.0f, m_playerGUID.GetCounter());
@@ -2671,10 +2687,10 @@ public:
                             {
                                 badAvery->CastSpell(badAvery, SPELL_GET_SHOT, true);
                                 badAvery->setDeathState(JUST_DIED);
-                            player->SaveToDB();
-                            badAvery->DespawnOrUnsummon(5s);
-                            me->DespawnOrUnsummon(1s);
-                        }
+                                player->SaveToDB();
+                                badAvery->DespawnOrUnsummon(5s);
+                                me->DespawnOrUnsummon(1s);
+                            }
 
                         m_events.ScheduleEvent(EVENTS_ANIM_5, 5s);
                         break;
@@ -2741,7 +2757,13 @@ namespace
         if (Creature* dog = mastiff->ToCreature())
         {
             dog->SetReactState(REACT_DEFENSIVE);
-            dog->AI()->AttackStart(target);
+            // PetAI::AttackStart clears MotionMaster and would cancel the
+            // spell's jump. EffectMovementGenerator resumes chase on arrival
+            // when a victim is already assigned.
+            if (dog->GetMotionMaster()->GetCurrentMovementGeneratorType() == EFFECT_MOTION_TYPE)
+                dog->Attack(target, true);
+            else
+                dog->AI()->AttackStart(target);
         }
         if (Creature* lurker = target->ToCreature())
             lurker->AI()->AttackStart(mastiff);

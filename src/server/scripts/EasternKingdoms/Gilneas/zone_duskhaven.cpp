@@ -220,7 +220,10 @@ public:
         if (player->GetMapId() != 654 || player->GetAreaId() != 4786 ||
             player->GetQuestStatus(QUEST_LAST_CHANCE_AT_HUMANITY) != QUEST_STATUS_REWARDED)
             return;
-        if (player->HasAura(SPELL_IN_STOCKS))
+        // A partial transition can persist the root/turn lock without stocks.
+        // Restrict recovery to this rewarded scene, preserving unrelated flags.
+        if (player->HasAura(SPELL_IN_STOCKS) || player->HasAura(SPELL_SELF_ROOT) ||
+            !player->HasAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_06))
             ReleaseGilneasStocks(player);
         if (!player->HasAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_06))
             player->CastSpell(player, SPELL_PHASE_QUEST_ZONE_SPECIFIC_06, true);
