@@ -1,0 +1,1196 @@
+{
+  "scope": "Local release copy after 2026_10_06 migrations00-06; earlier quest migrations not reapplied. Missing is diagnostic, never an instruction to bind unsafe AI.",
+  "scripts": [
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_slain_watchman_36205",
+      "kind": "CreatureScript",
+      "script": "npc_slain_watchman_36205",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_king_genn_greymane_36332",
+      "kind": "CreatureScript",
+      "script": "npc_king_genn_greymane_36332",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_krennan_aranas_36331",
+      "kind": "CreatureScript",
+      "script": "npc_krennan_aranas_36331",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_gwen_armstead_34571",
+      "kind": "CreatureScript",
+      "script": "npc_gwen_armstead_34571",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "go_mandragore_196394",
+      "kind": "GameObjectScript",
+      "script": "go_mandragore_196394",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "gameobject_template",
+          "key": 196394,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_horrid_abomination_36231",
+      "kind": "CreatureScript",
+      "script": "npc_horrid_abomination_36231",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36231,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "spell_cast_keg_69094",
+      "kind": "SpellScriptLoader",
+      "script": "spell_cast_keg_69094",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 69094,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_cynthia_36267",
+      "kind": "CreatureScript",
+      "script": "npc_cynthia_36267",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36287,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_james_36268",
+      "kind": "CreatureScript",
+      "script": "npc_james_36268",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36289,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_ashley_36269",
+      "kind": "CreatureScript",
+      "script": "npc_ashley_36269",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36288,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_forsaken_catapult_36283",
+      "kind": "CreatureScript",
+      "script": "npc_forsaken_catapult_36283",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "spell_launch_68659",
+      "kind": "SpellScriptLoader",
+      "script": "spell_launch_68659",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 68659,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "spell_launch_96185",
+      "kind": "SpellScriptLoader",
+      "script": "spell_launch_96185",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "spell_fire_boulder_68591",
+      "kind": "SpellScriptLoader",
+      "script": "spell_fire_boulder_68591",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 68591,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_mastiff_36409",
+      "kind": "CreatureScript",
+      "script": "npc_mastiff_36409",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_mastiff_36405",
+      "kind": "CreatureScript",
+      "script": "npc_mastiff_36405",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_lord_godfrey_36290",
+      "kind": "CreatureScript",
+      "script": "npc_lord_godfrey_36290",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36290,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_drowning_watchman_36440",
+      "kind": "CreatureScript",
+      "script": "npc_drowning_watchman_36440",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36440,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "spell_rescue_drowning_watchman_68735",
+      "kind": "SpellScriptLoader",
+      "script": "spell_rescue_drowning_watchman_68735",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 68735,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_chance_36459",
+      "kind": "CreatureScript",
+      "script": "npc_chance_36459",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_forsaken_castaway_36488",
+      "kind": "CreatureScript",
+      "script": "npc_forsaken_castaway_36488",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36488,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_mountain_horse_36555",
+      "kind": "CreatureScript",
+      "script": "npc_mountain_horse_36555",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36555,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_mountain_horse_36540",
+      "kind": "CreatureScript",
+      "script": "npc_mountain_horse_36540",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36540,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "spell_round_up_horse_68903",
+      "kind": "SpellScriptLoader",
+      "script": "spell_round_up_horse_68903",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 68903,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_gwen_armstead_36452",
+      "kind": "CreatureScript",
+      "script": "npc_gwen_armstead_36452",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "go_gate_196399",
+      "kind": "GameObjectScript",
+      "script": "go_gate_196399",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "gameobject_template",
+          "key": 196399,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "go_gate_196401",
+      "kind": "GameObjectScript",
+      "script": "go_gate_196401",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "gameobject_template",
+          "key": 196401,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_swift_mountain_horse_36741",
+      "kind": "CreatureScript",
+      "script": "npc_swift_mountain_horse_36741",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_queen_mia_greymane_36606",
+      "kind": "CreatureScript",
+      "script": "npc_queen_mia_greymane_36606",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_king_genn_greymane_36743",
+      "kind": "CreatureScript",
+      "script": "npc_king_genn_greymane_36743",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_stagecoach_carriage_44928",
+      "kind": "CreatureScript",
+      "script": "npc_stagecoach_carriage_44928",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_harness_43336",
+      "kind": "CreatureScript",
+      "script": "npc_harness_43336",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_stagecoach_carriage_43337",
+      "kind": "CreatureScript",
+      "script": "npc_stagecoach_carriage_43337",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "go_kings_gate_196412",
+      "kind": "GameObjectScript",
+      "script": "go_kings_gate_196412",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "gameobject_template",
+          "key": 196412,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_ogre_ambusher_38762",
+      "kind": "CreatureScript",
+      "script": "npc_ogre_ambusher_38762",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_prince_liam_greymane_37065",
+      "kind": "CreatureScript",
+      "script": "npc_prince_liam_greymane_37065",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_crash_survivor_37067",
+      "kind": "CreatureScript",
+      "script": "npc_crash_survivor_37067",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 37067,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_swamp_crocolisk_37078",
+      "kind": "CreatureScript",
+      "script": "npc_swamp_crocolisk_37078",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 37078,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "go_koroths_banner_201594",
+      "kind": "GameObjectScript",
+      "script": "go_koroths_banner_201594",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "gameobject_template",
+          "key": 201594,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_dark_scout_37953",
+      "kind": "CreatureScript",
+      "script": "npc_dark_scout_37953",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_trigger_quest_24616",
+      "kind": "CreatureScript",
+      "script": "npc_trigger_quest_24616",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_tobias_mistmantle_38051",
+      "kind": "CreatureScript",
+      "script": "npc_tobias_mistmantle_38051",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "spell_gilneas_half_burnt_torch",
+      "kind": "SpellScriptLoader",
+      "script": "spell_gilneas_half_burnt_torch",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 70631,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "spell_gilneas_walden_brandy",
+      "kind": "SpellScriptLoader",
+      "script": "spell_gilneas_walden_brandy",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 75359,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_king_genn_greymane_37876",
+      "kind": "CreatureScript",
+      "script": "npc_king_genn_greymane_37876",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 37876,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_lord_hewell_38764",
+      "kind": "CreatureScript",
+      "script": "npc_lord_hewell_38764",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_stout_mountain_horse_38765",
+      "kind": "CreatureScript",
+      "script": "npc_stout_mountain_horse_38765",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_lorna_crowley_37783",
+      "kind": "CreatureScript",
+      "script": "npc_lorna_crowley_37783",
+      "registered": true,
+      "bindings": [],
+      "status": "MISSING_BINDING"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "npc_enslaved_villager_37694",
+      "kind": "CreatureScript",
+      "script": "npc_enslaved_villager_37694",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 37694,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_duskhaven.cpp",
+      "class": "go_ball_and_chain_201775",
+      "kind": "GameObjectScript",
+      "script": "go_ball_and_chain_201775",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "gameobject_template",
+          "key": 201775,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_krennan_aranas_38553",
+      "kind": "CreatureScript",
+      "script": "npc_krennan_aranas_38553",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38553,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_marcus_37803",
+      "kind": "CreatureScript",
+      "script": "npc_marcus_37803",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 37803,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_sister_almyra_38466",
+      "kind": "CreatureScript",
+      "script": "npc_sister_almyra_38466",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38466,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_prince_liam_greymane_38218",
+      "kind": "CreatureScript",
+      "script": "npc_prince_liam_greymane_38218",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38218,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_myriam_spellwaker_38465",
+      "kind": "CreatureScript",
+      "script": "npc_myriam_spellwaker_38465",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38465,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_lorna_crowley_38426",
+      "kind": "CreatureScript",
+      "script": "npc_lorna_crowley_38426",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38426,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_lord_darius_crowley_38415",
+      "kind": "CreatureScript",
+      "script": "npc_lord_darius_crowley_38415",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38415,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_king_genn_greymane_38470",
+      "kind": "CreatureScript",
+      "script": "npc_king_genn_greymane_38470",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38470,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_lady_sylvanas_windrunner_38469",
+      "kind": "CreatureScript",
+      "script": "npc_lady_sylvanas_windrunner_38469",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38469,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_soultethered_banshee_38473",
+      "kind": "CreatureScript",
+      "script": "npc_soultethered_banshee_38473",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38473,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_prince_liam_greymane_38474",
+      "kind": "CreatureScript",
+      "script": "npc_prince_liam_greymane_38474",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38474,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_lorna_crowley_38611",
+      "kind": "CreatureScript",
+      "script": "npc_lorna_crowley_38611",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38611,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_forsaken_crossbowman_38210",
+      "kind": "CreatureScript",
+      "script": "npc_forsaken_crossbowman_38210",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38210,
+          "AIName": "SmartAI"
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_dark_ranger_elite_38464",
+      "kind": "CreatureScript",
+      "script": "npc_dark_ranger_elite_38464",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38464,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_vile_abomination_38420",
+      "kind": "CreatureScript",
+      "script": "npc_vile_abomination_38420",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38420,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_gilnean_militia_38221",
+      "kind": "CreatureScript",
+      "script": "npc_gilnean_militia_38221",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38221,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_freed_emberstone_villager_38425",
+      "kind": "CreatureScript",
+      "script": "npc_freed_emberstone_villager_38425",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38425,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_worgen_warrior_38348",
+      "kind": "CreatureScript",
+      "script": "npc_worgen_warrior_38348",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38348,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "npc_gorerot_38331",
+      "kind": "CreatureScript",
+      "script": "npc_gorerot_38331",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38331,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "spell_fiery_boulder_72050",
+      "kind": "SpellScriptLoader",
+      "script": "spell_fiery_boulder_72050",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 72050,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "spell_fiery_boulder_72051",
+      "kind": "SpellScriptLoader",
+      "script": "spell_fiery_boulder_72051",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 72051,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "spell_rapier_of_the_gilnean_patriots_71388",
+      "kind": "SpellScriptLoader",
+      "script": "spell_rapier_of_the_gilnean_patriots_71388",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 71388,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city2.cpp",
+      "class": "spell_shoot_liam_72116",
+      "kind": "SpellScriptLoader",
+      "script": "spell_shoot_liam_72116",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 72116,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_tobias_mistmantle_38507",
+      "kind": "CreatureScript",
+      "script": "npc_tobias_mistmantle_38507",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38507,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_lady_sylvanas_windrunner_38530",
+      "kind": "CreatureScript",
+      "script": "npc_lady_sylvanas_windrunner_38530",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38530,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_captured_riding_bat_38540",
+      "kind": "CreatureScript",
+      "script": "npc_captured_riding_bat_38540",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 38540,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "spell_fly_back_72849",
+      "kind": "SpellScriptLoader",
+      "script": "spell_fly_back_72849",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 72849,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "spell_iron_bomb_72247",
+      "kind": "SpellScriptLoader",
+      "script": "spell_iron_bomb_72247",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "spell_script_names",
+          "key": 72247,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_tobias_mistmantle_43749",
+      "kind": "CreatureScript",
+      "script": "npc_tobias_mistmantle_43749",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 43749,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_hippogryph_43751",
+      "kind": "CreatureScript",
+      "script": "npc_hippogryph_43751",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 43751,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "go_worgen_gunship_203428",
+      "kind": "GameObjectScript",
+      "script": "go_worgen_gunship_203428",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "gameobject_template",
+          "key": 203428,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_lorna_crowley_43566",
+      "kind": "CreatureScript",
+      "script": "npc_lorna_crowley_43566",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 43566,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_worgen_warrior_43651",
+      "kind": "CreatureScript",
+      "script": "npc_worgen_warrior_43651",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 43651,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_gilnean_sharpshooter_43703",
+      "kind": "CreatureScript",
+      "script": "npc_gilnean_sharpshooter_43703",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 43703,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_gunship_grunt_42141",
+      "kind": "CreatureScript",
+      "script": "npc_gunship_grunt_42141",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 42141,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "go_rope_204428",
+      "kind": "GameObjectScript",
+      "script": "go_rope_204428",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "gameobject_template",
+          "key": 204428,
+          "AIName": null
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_wyvern_43713",
+      "kind": "CreatureScript",
+      "script": "npc_wyvern_43713",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 43713,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_lorna_crowley_43727",
+      "kind": "CreatureScript",
+      "script": "npc_lorna_crowley_43727",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 43727,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    },
+    {
+      "file": "zone_gilneas_city3.cpp",
+      "class": "npc_admiral_nightwind_36616",
+      "kind": "CreatureScript",
+      "script": "npc_admiral_nightwind_36616",
+      "registered": true,
+      "bindings": [
+        {
+          "table": "creature_template",
+          "key": 36616,
+          "AIName": ""
+        }
+      ],
+      "status": "BOUND"
+    }
+  ]
+}

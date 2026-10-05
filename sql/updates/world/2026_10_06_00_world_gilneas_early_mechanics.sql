@@ -5,9 +5,9 @@ WHERE `entry`=36231 AND `ScriptName` IN ('','npc_horrid_abomination_36231');
 UPDATE `creature_template` SET `AIName`='', `ScriptName`='npc_cynthia_36267', `npcflag`=(`npcflag` & ~16777216) | 1
 WHERE `entry`=36287 AND `ScriptName` IN ('','npc_cynthia_36267');
 UPDATE `creature_template` SET `AIName`='', `ScriptName`='npc_ashley_36269', `npcflag`=(`npcflag` & ~16777216) | 1
-WHERE `entry`=36288 AND `ScriptName` IN ('','npc_ashley_36269');
+WHERE `entry`=36288 AND `ScriptName` IN ('','npc_ashley_36269','npc_james_36268');
 UPDATE `creature_template` SET `AIName`='', `ScriptName`='npc_james_36268', `npcflag`=(`npcflag` & ~16777216) | 1
-WHERE `entry`=36289 AND `ScriptName` IN ('','npc_james_36268');
+WHERE `entry`=36289 AND `ScriptName` IN ('','npc_james_36268','npc_ashley_36269');
 
 -- Client group385 spans phases169-188; use the quest-specific phase instead.
 -- These barrels serve quest14348 in phase182; never make all quest objects phase0.

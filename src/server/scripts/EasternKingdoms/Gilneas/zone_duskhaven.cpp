@@ -1706,6 +1706,17 @@ public:
             return ValidateSpellInfo({ 68903 });
         }
 
+        SpellCastResult CheckTarget()
+        {
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            Creature* horse = GetExplTargetUnit() ? GetExplTargetUnit()->ToCreature() : nullptr;
+            if (!player || !horse || horse->GetEntry() != 36540 || !horse->IsAlive()
+                || horse->GetVehicleBase()
+                || player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
+                return SPELL_FAILED_BAD_TARGETS;
+            return SPELL_CAST_OK;
+        }
+
         void HandleEffectDummy(SpellEffIndex /*effIndex*/)
         {
             if (!GetHitUnit() || !GetCaster() || !GetHitUnit()->ToCreature() || GetHitUnit()->GetEntry() != 36540
@@ -1717,6 +1728,7 @@ public:
 
         void Register() override
         {
+            OnCheckCast += SpellCheckCastFn(spell_round_up_horse_68903_SpellScript::CheckTarget);
             OnEffectHitTarget += SpellEffectFn(spell_round_up_horse_68903_SpellScript::HandleEffectDummy, EFFECT_1, SPELL_EFFECT_DUMMY);
         }
     };
@@ -3174,6 +3186,67 @@ public:
     }
 };
 
+// Half-Burnt Torch: scare the tunnel vermin, never substitute a kill credit.
+class spell_gilneas_half_burnt_torch : public SpellScriptLoader
+{
+public:
+    spell_gilneas_half_burnt_torch() : SpellScriptLoader("spell_gilneas_half_burnt_torch") { }
+    class script : public SpellScript
+    {
+        PrepareSpellScript(script);
+        void HandleTorch(SpellEffIndex /*index*/)
+        {
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            Creature* vermin = GetHitUnit() ? GetHitUnit()->ToCreature() : nullptr;
+            if (!player || player->GetMapId() != 654 || !vermin || !vermin->IsAlive()
+                || player->GetQuestStatus(24678) != QUEST_STATUS_INCOMPLETE)
+                return;
+            switch (vermin->GetEntry())
+            {
+                case 37889: // Graveyard Rat
+                case 37891: // Underground Spider
+                case 37892: // Putrescent Maggot
+                    vermin->AttackStop();
+                    vermin->CombatStop(true);
+                    vermin->GetMotionMaster()->MoveFleeing(player, 5000);
+                    break;
+                default:
+                    break;
+            }
+        }
+        void Register() override
+        {
+            OnEffectHitTarget += SpellEffectFn(script::HandleTorch, EFFECT_0, SPELL_EFFECT_DUMMY);
+        }
+    };
+    SpellScript* GetSpellScript() const override { return new script(); }
+};
+
+// Walden's quest attack contains a persistent drunkenness operation, not an aura.
+// Preserve its native damage/stun, but do not persist alcohol on the quest player.
+class spell_gilneas_walden_brandy : public SpellScriptLoader
+{
+public:
+    spell_gilneas_walden_brandy() : SpellScriptLoader("spell_gilneas_walden_brandy") { }
+    class script : public SpellScript
+    {
+        PrepareSpellScript(script);
+        void HandleInebriate(SpellEffIndex index)
+        {
+            Unit* caster = GetCaster();
+            Player* player = GetHitUnit() ? GetHitUnit()->ToPlayer() : nullptr;
+            if (caster && caster->GetEntry() == 37733 && caster->GetMapId() == 654 && player
+                && player->GetQuestStatus(QUEST_BETRAYAL_AT_TEMPESTS_REACH) == QUEST_STATUS_INCOMPLETE)
+                PreventHitDefaultEffect(index);
+        }
+        void Register() override
+        {
+            OnEffectHitTarget += SpellEffectFn(script::HandleInebriate, EFFECT_2, SPELL_EFFECT_INEBRIATE);
+        }
+    };
+    SpellScript* GetSpellScript() const override { return new script(); }
+};
+
 // 37876
 class npc_king_genn_greymane_37876 : public CreatureScript
 {
@@ -3198,22 +3271,38 @@ public:
 
         EventMap m_events;
         ObjectGuid m_godfreyGUID;
+        bool m_sceneStarted;
 
         void Reset() override
         {
             m_events.Reset();
+            m_sceneStarted = false;
             m_godfreyGUID = ObjectGuid::Empty;
 
             if (Creature* godfrey = me->FindNearestCreature(NPC_LORD_GODFREY, 20.0f))
                 m_godfreyGUID = godfrey->GetGUID();
         }
 
-        void DoAction(int32 /*param*/) override
+        void DamageTaken(Unit* attacker, uint32& damage) override
         {
+            // Protect the questgiver from ambient NPC combat, not player-controlled units.
+            if (me->GetMapId() == 654 && attacker && attacker->ToCreature()
+                && !attacker->GetCharmerOrOwnerPlayerOrPlayerItself())
+                damage = 0;
+        }
+
+        void DoAction(int32 param) override
+        {
+            if (param != 1 || m_sceneStarted)
+                return;
+
             if (!m_godfreyGUID)
                 if (Creature* godfrey = me->FindNearestCreature(NPC_LORD_GODFREY, 20.0f))
                     m_godfreyGUID = godfrey->GetGUID();
 
+            if (!m_godfreyGUID)
+                return;
+            m_sceneStarted = true;
             m_events.ScheduleEvent(EVENT_START_ANIM, 100ms);
         }
 
@@ -3428,15 +3517,26 @@ public:
         EventMap m_events;
         ObjectGuid m_playerGUID;
         ObjectGuid m_ballGUID;
+        bool m_sceneStarted;
 
         void Reset() override
         {
+            m_events.Reset();
+            m_sceneStarted = false;
             m_playerGUID = ObjectGuid::Empty;
             m_ballGUID = ObjectGuid::Empty;
         }
 
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == PLAYER_GUID ? m_playerGUID : ObjectGuid::Empty;
+        }
+
         void SetGUID(ObjectGuid guid, int32 id) override
         {
+            if (m_sceneStarted)
+                return;
+
             switch (id)
             {
                 case PLAYER_GUID:
@@ -3454,9 +3554,22 @@ public:
             {
                 case EVENT_START_ANIM:
                 {
-                    if (GameObject* ball = ObjectAccessor::GetGameObject(*me, m_ballGUID))
-                        ball->DestroyForNearbyPlayers();
-
+                    if (m_sceneStarted || m_playerGUID.IsEmpty() || m_ballGUID.IsEmpty())
+                        return;
+                    Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                    GameObject* ball = ObjectAccessor::GetGameObject(*me, m_ballGUID);
+                    if (!player || !player->IsAlive() || !ball || ball->GetEntry() != GO_BALL_AND_CHAIN
+                        || me->GetDistance(ball) > 5.0f
+                        || (player->GetQuestStatus(QUEST_LIBERATION_DAY) != QUEST_STATUS_INCOMPLETE
+                            && player->GetQuestStatus(QUEST_LIBERATION_DAY) != QUEST_STATUS_COMPLETE))
+                    {
+                        m_playerGUID = ObjectGuid::Empty;
+                        m_ballGUID = ObjectGuid::Empty;
+                        return;
+                    }
+                    // GO use supplies the native objective credit and loot-state visibility.
+                    // Never destroy a shared GO for every nearby player from this AI.
+                    m_sceneStarted = true;
                     m_events.ScheduleEvent(EVENT_START_ANIM, 1s);
                     break;
                 }
@@ -3493,7 +3606,7 @@ public:
                         break;
                     }
                     case EVENT_TALK_PART_01:
-                        me->DespawnOrUnsummon(10);
+                        me->DespawnOrUnsummon(10ms, 300s);
                         break;
                 }
             }
@@ -3519,11 +3632,13 @@ public:
 
     void OnLootStateChanged(GameObject* go, uint32 state, Unit* unit) override
     {
-        if (state == 2 && unit)
+        if (state == GO_ACTIVATED && unit)
             if (Player* player = unit->ToPlayer())
                 if (player->GetQuestStatus(QUEST_LIBERATION_DAY) == QUEST_STATUS_INCOMPLETE || player->GetQuestStatus(QUEST_LIBERATION_DAY) == QUEST_STATUS_COMPLETE)
                     if (Creature* villager = go->FindNearestCreature(NPC_ENSLAVED_VILLAGER, 5.0f))
                     {
+                        if (!villager->AI()->GetGUID(PLAYER_GUID).IsEmpty())
+                            return; // The active shared scene retains its original owner.
                         villager->AI()->SetGUID(go->GetGUID(), go->GetEntry());
                         villager->AI()->SetGUID(player->GetGUID(), PLAYER_GUID);
                         villager->AI()->DoAction(EVENT_START_ANIM);
@@ -3535,6 +3650,8 @@ public:
 
 void AddSC_zone_gilneas_duskhaven()
 {
+    new spell_gilneas_walden_brandy();
+    new spell_gilneas_half_burnt_torch();
     new npc_slain_watchman_36205();
     new npc_krennan_aranas_36331();
     new npc_king_genn_greymane_36332();
