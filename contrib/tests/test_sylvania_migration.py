@@ -857,8 +857,7 @@ def main():
             return
         if args.native_visuals_only:
             sql(migration)
-            test_gilneas_database(sql,checksum)
-        test_visual_migration(sql,checksum)
+            test_visual_migration(sql,checksum)
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.conversation_chains_only:
