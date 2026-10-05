@@ -1,0 +1,13 @@
+{
+  "mysql": "8.0.45",
+  "isolated_schema": "audit_remove_klauss_20261005",
+  "original_seed_spawns": 13,
+  "checks": [
+    "original Klauss seed imported against release table layouts",
+    "SQL applied twice",
+    "spawn addons, event/pool links, formations and GUID SmartAI removed",
+    "unrelated rows preserved in every affected table",
+    "same-number timed action list source_type=9 preserved"
+  ],
+  "live_server_changed": false
+}
