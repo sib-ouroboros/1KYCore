@@ -13,6 +13,7 @@ import tempfile
 import urllib.request
 
 from test_campaign_visual_migration import test_visual_migration
+from test_campaign_required_level_migration import test_required_level_objects
 
 ROOT = Path(__file__).resolve().parents[2]
 DB = 'test_1kycore_sylvania_release'
@@ -810,6 +811,7 @@ def main():
     parser.add_argument('--conversation-chains-only', action='store_true', help='Run multi-line conversation chain and actor-index checks.')
     parser.add_argument('--simple-conversations-only', action='store_true', help='Run terminal conversation dependency and publication checks.')
     parser.add_argument('--council-books-only', action='store_true', help='Run page-chain and quest-credit dependency checks for two source books.')
+    parser.add_argument('--required-level-only', action='store_true', help='Test exact source RequiredLevel mapping, conflicts and retries.')
     parser.add_argument('--native-visuals-only', action='store_true', help='Test optional GO visual schema and four restorations.')
     args = parser.parse_args()
     if os.environ.get('MYSQL_DISPOSABLE_TEST_SERVER') != '1':
@@ -842,6 +844,11 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.required_level_only:
+            sql(migration)
+            test_required_level_objects(sql,checksum)
+            sql(f'DROP DATABASE `{DB}`;', False)
+            return
         if args.native_visuals_only:
             sql(migration)
             test_visual_migration(sql,checksum)
@@ -1007,6 +1014,7 @@ def main():
         assert checksum(['spell_script_names']) == complete, 'Quest binding retry is not idempotent'
         print('PASS: Gilneas command binding first/repeat import preserves other scripts and all other tables', flush=True)
         test_visual_migration(sql,checksum)
+        test_required_level_objects(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)
 
 

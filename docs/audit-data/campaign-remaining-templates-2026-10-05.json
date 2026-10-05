@@ -1,13 +1,12 @@
 {
-  "count": 15,
+  "count": 13,
   "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
   "source_GameObject_cpp_sha256": "7f685f4c98effc4df3cc31b5aba5a172d47dcc2e96d2738e5928832d97cc5600",
   "overlapping_blocker_counts": {
     "complete_smartai_chain": 5,
     "visual_dependencies_not_restored": 3,
     "external_dependency_chain_review": 4,
-    "garrison_shipment_missing_native_use": 2,
-    "unknown_source_field": 2
+    "garrison_shipment_missing_native_use": 2
   },
   "rows": [
     {
@@ -185,32 +184,6 @@
         "Spell232169 использует TELEPORT_TO_LFG227 и dungeon1422; не подменять обычным TELEPORT_UNITS252 и фиксированным spell_target_position."
       ],
       "source_additional_fields": {}
-    },
-    {
-      "entry": 269053,
-      "type": 5,
-      "blockers": [
-        "unknown_source_field"
-      ],
-      "previous_dependency_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
-      ],
-      "source_additional_fields": {
-        "unkInt32": "100"
-      }
-    },
-    {
-      "entry": 269055,
-      "type": 5,
-      "blockers": [
-        "unknown_source_field"
-      ],
-      "previous_dependency_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
-      ],
-      "source_additional_fields": {
-        "unkInt32": "100"
-      }
     }
   ],
   "visual_lifecycle_evidence": {
@@ -224,5 +197,9 @@
     ],
     "decision": "Static non-quest visuals now have optional addon storage and native lifecycle. These remaining templates still require other dependencies; per-player visualQuestID behavior has not been ported."
   },
-  "assurance": "No templates/spawns added for these18; dependencies remain unresolved. Existing pending review retained; no unsafe source-field aliasing."
+  "assurance": "13 templates remain unresolved. Two source RequiredLevel100 generic templates restored separately; no NPC AI/quests changed. All remaining conditions and dependencies retained.",
+  "resolved_required_level_entries": [
+    269053,
+    269055
+  ]
 }

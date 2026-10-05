@@ -6,7 +6,8 @@
     "missing_native_client_reference": 19,
     "static_visual_source_chain_not_restored": 5,
     "loot_and_quest_item_dependencies": 11,
-    "unsupported_source_template_fields": 4,
+    "missing_event_and_npc_scene_chain": 3,
+    "unsupported_source_template_fields": 3,
     "no_native_garrison_shipment_use_handler": 2,
     "native_spell_or_external_dependency_review": 3
   },
@@ -244,7 +245,8 @@
       "entry": 250295,
       "type": 10,
       "blockers": [
-        "static_visual_source_chain_not_restored"
+        "static_visual_source_chain_not_restored",
+        "missing_event_and_npc_scene_chain"
       ],
       "source_data": {
         "Data2": "51128",
@@ -256,13 +258,15 @@
       "missing_native_client_references": {},
       "unsupported_source_fields": {
         "StateWorldEffectID": "2654"
-      }
+      },
+      "confirmed_event_dependency": 51128
     },
     {
       "entry": 250364,
       "type": 10,
       "blockers": [
-        "static_visual_source_chain_not_restored"
+        "static_visual_source_chain_not_restored",
+        "missing_event_and_npc_scene_chain"
       ],
       "source_data": {
         "Data2": "51140",
@@ -274,13 +278,15 @@
       "missing_native_client_references": {},
       "unsupported_source_fields": {
         "StateWorldEffectID": "2654"
-      }
+      },
+      "confirmed_event_dependency": 51140
     },
     {
       "entry": 250367,
       "type": 10,
       "blockers": [
-        "static_visual_source_chain_not_restored"
+        "static_visual_source_chain_not_restored",
+        "missing_event_and_npc_scene_chain"
       ],
       "source_data": {
         "Data2": "51142",
@@ -292,7 +298,8 @@
       "missing_native_client_references": {},
       "unsupported_source_fields": {
         "StateWorldEffectID": "2654"
-      }
+      },
+      "confirmed_event_dependency": 51142
     },
     {
       "entry": 251262,
@@ -679,8 +686,7 @@
       "entry": 267952,
       "type": 3,
       "blockers": [
-        "missing_native_client_reference",
-        "unsupported_source_template_fields"
+        "missing_native_client_reference"
       ],
       "source_data": {
         "Data0": "1690",
@@ -698,8 +704,9 @@
       "missing_native_client_references": {
         "PlayerCondition": 47913
       },
-      "unsupported_source_fields": {
-        "unkInt32": "100"
+      "unsupported_source_fields": {},
+      "confirmed_source_translation": {
+        "unkInt32": "RequiredLevel=100"
       }
     },
     {

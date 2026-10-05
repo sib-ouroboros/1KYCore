@@ -26,6 +26,7 @@ jobs:
       matrix:
         suite:
           - {name: full, args: ''}
+          - {name: required-level-objects, args: '--required-level-only'}
           - {name: native-visuals, args: '--native-visuals-only'}
           - {name: conversation-chains, args: '--conversation-chains-only'}
           - {name: simple-conversations, args: '--simple-conversations-only'}

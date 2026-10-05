@@ -1,0 +1,534 @@
+{
+  "client_path": "F:/Projects/extracted-735-new/dbc/ruRU",
+  "client_build": 26654,
+  "core_expected_build": 26972,
+  "validation": {
+    "UiCamera": {
+      "file": "UiCamera.db2",
+      "sha256": "6cb64ffd7d647d45e1bb8e8f849a0f9f80c7a441db9f1cecddedd2aa97d96c4d",
+      "layout_hash": "0xca6c98d4",
+      "record_count": 1060,
+      "copy_rows": 0,
+      "identity_count": 1060,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "AnimKit": {
+      "file": "AnimKit.db2",
+      "sha256": "b3b895f30bee3ced65a107c638eead9931fdf5c4f1efe1da73d328fc99faa5f1",
+      "layout_hash": "0x81d6d250",
+      "record_count": 483,
+      "copy_rows": 11799,
+      "identity_count": 12282,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "PlayerCondition": {
+      "file": "PlayerCondition.db2",
+      "sha256": "0d9fba0781518ce6d2fd6e859825c7995f1cbb4a016cedd4e5a8533e83a87acc",
+      "layout_hash": "0x5b3da113",
+      "record_count": 7115,
+      "copy_rows": 0,
+      "identity_count": 7115,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "Lock": {
+      "file": "Lock.db2",
+      "sha256": "3223460df70cd1e5b5d2dbe63b4c63214e6a2627110c7ada8ba0f979f26ac43d",
+      "layout_hash": "0xdac7f42f",
+      "record_count": 634,
+      "copy_rows": 84,
+      "identity_count": 718,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "Spell": {
+      "file": "Spell.db2",
+      "sha256": "6f722017f5bfd8539aa6839c2ddc0977a9fc6f1e48a85cc30a2175f7238ad080",
+      "layout_hash": "0x2273dfff",
+      "record_count": 126063,
+      "copy_rows": 53319,
+      "identity_count": 179382,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    }
+  },
+  "missing_reference_checks": [
+    {
+      "group": "conversation",
+      "entry": 1416,
+      "table": "UiCamera",
+      "id": 1,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 1986,
+      "table": "UiCamera",
+      "id": 75592,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2000,
+      "table": "UiCamera",
+      "id": 4285107616,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2314,
+      "table": "UiCamera",
+      "id": 1367019216,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2434,
+      "table": "UiCamera",
+      "id": 2311023888,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2666,
+      "table": "UiCamera",
+      "id": 1796582640,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2869,
+      "table": "UiCamera",
+      "id": 22662400,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2870,
+      "table": "UiCamera",
+      "id": 92791,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2976,
+      "table": "UiCamera",
+      "id": 138293,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3029,
+      "table": "UiCamera",
+      "id": 808923696,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3108,
+      "table": "UiCamera",
+      "id": 3718228896,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3183,
+      "table": "UiCamera",
+      "id": 2555358216,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3186,
+      "table": "UiCamera",
+      "id": 3718226304,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3192,
+      "table": "UiCamera",
+      "id": 1060835600,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3235,
+      "table": "UiCamera",
+      "id": 1060824944,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3260,
+      "table": "UiCamera",
+      "id": 105415,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3524,
+      "table": "UiCamera",
+      "id": 3237982400,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3525,
+      "table": "UiCamera",
+      "id": 3237982400,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3574,
+      "table": "UiCamera",
+      "id": 934091984,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3638,
+      "table": "UiCamera",
+      "id": 106637,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3769,
+      "table": "UiCamera",
+      "id": 2772806912,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3770,
+      "table": "UiCamera",
+      "id": 2772806912,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3789,
+      "table": "UiCamera",
+      "id": 98618,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3790,
+      "table": "UiCamera",
+      "id": 98618,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4229,
+      "table": "UiCamera",
+      "id": 5,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4313,
+      "table": "UiCamera",
+      "id": 2750931696,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4568,
+      "table": "UiCamera",
+      "id": 45256909,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4572,
+      "table": "UiCamera",
+      "id": 2154798120,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4575,
+      "table": "UiCamera",
+      "id": 3314581,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4657,
+      "table": "UiCamera",
+      "id": 878681136,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4658,
+      "table": "UiCamera",
+      "id": 2,
+      "now_present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4730,
+      "table": "UiCamera",
+      "id": 161917554,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 245234,
+      "table": "PlayerCondition",
+      "id": 19467,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 245924,
+      "table": "PlayerCondition",
+      "id": 37624,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 245994,
+      "table": "PlayerCondition",
+      "id": 39238,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 246984,
+      "table": "PlayerCondition",
+      "id": 41517,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 247037,
+      "table": "PlayerCondition",
+      "id": 38308,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 247038,
+      "table": "PlayerCondition",
+      "id": 38308,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 247052,
+      "table": "PlayerCondition",
+      "id": 38374,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 248475,
+      "table": "PlayerCondition",
+      "id": 39037,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 248876,
+      "table": "PlayerCondition",
+      "id": 39397,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 251504,
+      "table": "Spell",
+      "id": 217183,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 266081,
+      "table": "PlayerCondition",
+      "id": 48083,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 266166,
+      "table": "PlayerCondition",
+      "id": 46899,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 267176,
+      "table": "PlayerCondition",
+      "id": 47096,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 267177,
+      "table": "PlayerCondition",
+      "id": 47097,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 267222,
+      "table": "Spell",
+      "id": 233966,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 267952,
+      "table": "PlayerCondition",
+      "id": 47913,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 268408,
+      "table": "PlayerCondition",
+      "id": 48092,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 268617,
+      "table": "PlayerCondition",
+      "id": 49035,
+      "now_present": false
+    },
+    {
+      "group": "model",
+      "entry": 268736,
+      "table": "PlayerCondition",
+      "id": 48622,
+      "now_present": false
+    }
+  ],
+  "paladin_models": {
+    "entries": [
+      250295,
+      250364,
+      250367
+    ],
+    "world_effect": 2654,
+    "source_events": [
+      51128,
+      51140,
+      51142
+    ],
+    "source_event_rows": [
+      {
+        "id": "51128",
+        "delay": "0",
+        "command": "10",
+        "datalong": "107314",
+        "datalong2": "12000",
+        "dataint": "0",
+        "x": "4123.64",
+        "y": "438.674",
+        "z": "117.596",
+        "o": "0"
+      },
+      {
+        "id": "51128",
+        "delay": "0",
+        "command": "10",
+        "datalong": "107329",
+        "datalong2": "60000",
+        "dataint": "0",
+        "x": "4111.94",
+        "y": "440.644",
+        "z": "115.808",
+        "o": "0"
+      },
+      {
+        "id": "51140",
+        "delay": "0",
+        "command": "10",
+        "datalong": "107314",
+        "datalong2": "12000",
+        "dataint": "0",
+        "x": "4284.35",
+        "y": "459.635",
+        "z": "-6.5547",
+        "o": "0"
+      },
+      {
+        "id": "51140",
+        "delay": "0",
+        "command": "10",
+        "datalong": "107329",
+        "datalong2": "60000",
+        "dataint": "0",
+        "x": "4298.07",
+        "y": "465.764",
+        "z": "-6.9801",
+        "o": "0"
+      },
+      {
+        "id": "51142",
+        "delay": "0",
+        "command": "10",
+        "datalong": "107314",
+        "datalong2": "12000",
+        "dataint": "0",
+        "x": "4564.43",
+        "y": "473.285",
+        "z": "65.6611",
+        "o": "0"
+      },
+      {
+        "id": "51142",
+        "delay": "0",
+        "command": "10",
+        "datalong": "107329",
+        "datalong2": "60000",
+        "dataint": "0",
+        "x": "4550.35",
+        "y": "468.404",
+        "z": "65.6263",
+        "o": "0"
+      }
+    ],
+    "summoned_npcs": [
+      107314,
+      107329
+    ],
+    "release_event_rows": 0,
+    "release_npc_scripts": 0,
+    "release_npc_dialogue_rows": 0,
+    "source_npc_scripts": 3,
+    "source_dialogue_rows": 3,
+    "additional_timed_lists": [
+      10731400,
+      10731401,
+      10731402
+    ],
+    "decision": "Deferred: missing summon events and downstream NPC scene scripts; importing the model/visual alone would not restore interaction. Existing NPC AI untouched."
+  },
+  "remaining_before": {
+    "conversations": 45,
+    "templates": 15,
+    "models": 52
+  },
+  "remaining_after": {
+    "conversations": 45,
+    "templates": 13,
+    "models": 52
+  },
+  "assurance": "Actual new client DB2 identities rechecked. No missing conditions/cameras are zeroed, no timing is invented. Paladin source events reveal missing downstream dependencies, not a completed repair."
+}
