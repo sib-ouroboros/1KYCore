@@ -49,6 +49,8 @@ void check(bool v,char const*m){if(!v)throw std::runtime_error(m);}
 """
  for name in ('npc_mastiff_36409AI','npc_mastiff_36405AI'):
   part=s[s.index('    struct '+name):];code+=method(part,'    struct '+name).replace(' override','')+';\n'
+ part=s[s.index('class npc_mastiff_36405 :'):]
+ code+='struct Factory {'+method(part,'    CreatureAI* GetAI(').replace(' override','')+'};\n'
  code+='struct CheckCast:SpellScript {'+method(s[s.index('class spell_gilneas_leader_of_the_pack :'):],'        SpellCastResult CheckPack(')+'};\n'
  code+=r"""
 int main(){
@@ -68,6 +70,7 @@ int main(){
  hit=0;d.DamageDealt(&target,hit,0,nullptr);check(target.lowered==10,"zero damage grants nothing");
  hit=10;target.multiplier=2;d.DamageDealt(&target,hit,0,nullptr);check(target.lowered==15,"native health scaling respected");target.multiplier=1;dog.controlled=true;d.DamageDealt(&target,hit,0,nullptr);check(target.lowered==15,"player-controlled damage is not counted twice");dog.controlled=false;
  Creature innocent;innocent.guid.id=99;innocent.entry=NPC_DARK_RANGER_THYALA;d.DamageDealt(&innocent,hit,0,nullptr);check(!innocent.tap&&!innocent.lowered,"other target untouched");
+ Factory factory;Creature staticDog;check(!factory.GetAI(&staticDog),"persistent mastiff delegates to ordinary engine AI");std::unique_ptr<CreatureAI> ownedAI(factory.GetAI(&dog));check(bool(ownedAI),"quest summons use scoped AI");
  Creature ordinary;ordinary.victim=&target;npc_mastiff_36405AI ordinaryAI(&ordinary);ordinaryAI.Reset();ordinaryAI.UpdateAI(1000);check(!ordinary.despawn&&ordinaryAI.melees==1,"static mastiff keeps ordinary combat");
  p.status=QUEST_STATUS_NONE;c.UpdateAI(1);check(controller.despawn&&c.m_summons.size()==0,"abandon cleans entire pack");d.UpdateAI(1);check(dog.despawn,"abandon cleans child");p.status=QUEST_STATUS_INCOMPLETE;
  for(int mode=0;mode<5;++mode){Creature ctrl;ctrl.nearest=&target;target.tap=nullptr;target.alive=true;p.alive=true;players[1]=&p;npc_mastiff_36409AI a(&ctrl);a.IsSummonedBy(&p);

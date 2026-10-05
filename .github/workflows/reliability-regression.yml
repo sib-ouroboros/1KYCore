@@ -29,6 +29,7 @@ on:
       - contrib/tests/test_gilneas_phases.py
       - contrib/tests/test_gilneas_horn.py
       - contrib/tests/test_gilneas_transport.py
+      - contrib/tests/test_gilneas_bat.py
       - contrib/tests/test_gilneas_mastiffs.py
       - contrib/tests/audit_gilneas_bindings.py
       - src/server/scripts/Custom/custom_worgen_racials.cpp
@@ -162,6 +163,8 @@ jobs:
         run: python contrib/tests/test_gilneas_transport.py
       - name: Test quest pack cap, real damage attribution and cleanup with sanitizers
         run: python contrib/tests/test_gilneas_mastiffs.py
+      - name: Test captured bat circuit, return, landing and ownership with sanitizers
+        run: python contrib/tests/test_gilneas_bat.py
       - name: Audit all Gilneas script registrations
         run: python contrib/tests/audit_gilneas_bindings.py > gilneas-registrations.json
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers

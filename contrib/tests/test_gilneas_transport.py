@@ -38,6 +38,7 @@ int main(){
  ai.PassengerBoarded(&other,0,true);check(other.exits==1&&!horse.motion.starts,"foreign rider rejected");
  ai.PassengerBoarded(&owner,1,true);check(owner.exits==1&&!horse.motion.starts,"wrong seat rejected");
  owner.status=QUEST_STATUS_COMPLETE;ai.PassengerBoarded(&owner,0,true);
+ ai.PassengerBoarded(&owner,0,true);check(owner.exits==1&&horse.motion.starts==1,"duplicate boarding keeps own ride");
  check(horse.motion.path==3674101&&!horse.motion.repeat&&horse.motion.starts==1,"complete empty-objective quest can ride");
  ai.PassengerBoarded(&other,0,false);check(!horse.despawn,"foreign dismount does not terminate ride");
  ai.MovementInform(WAYPOINT_MOTION_TYPE,11);check(horse.vehicle.removals==0,"legacy intermediate point is not arrival");

@@ -1182,6 +1182,8 @@ public:
 
     CreatureAI* GetAI(Creature* creature) const override
     {
+        if (!creature->ToTempSummon())
+            return nullptr; // selectAI retains the normal factory for persistent NPC.
         return new npc_mastiff_36405AI(creature);
     }
 };
@@ -2023,6 +2025,8 @@ public:
             Player* player = passenger ? passenger->ToPlayer() : nullptr;
             if (apply)
             {
+                if (m_boarded && player && seatId == 0 && player->GetGUID() == m_playerGUID)
+                    return;
                 if (!HasActiveQuest(player) || seatId != 0 || player->GetGUID() != m_playerGUID || m_boarded)
                 {
                     if (passenger)

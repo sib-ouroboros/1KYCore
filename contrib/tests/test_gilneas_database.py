@@ -9,7 +9,7 @@ from audit_gilneas_bindings import registered_scripts, audit
 
 def test_gilneas_database(sql, checksum):
  root=Path(__file__).resolve().parents[2]
- files=['2026_10_06_00_world_gilneas_early_mechanics.sql','2026_10_06_01_world_gilneas_quest_object_spawns.sql','2026_10_06_02_world_gilneas_rescue_bindings.sql','2026_10_06_03_world_gilneas_duskhaven_phase_handoff.sql','2026_10_06_04_world_gilneas_walden_genn.sql','2026_10_06_05_world_gilneas_half_burnt_torch.sql','2026_10_06_06_world_gilneas_liberation_day.sql','2026_10_06_07_world_gilneas_horn_of_taldoren.sql','2026_10_06_08_world_gilneas_chance_lucius.sql','2026_10_06_09_world_gilneas_manor_ride.sql','2026_10_06_10_world_gilneas_late_phase_handoffs.sql','2026_10_06_11_world_gilneas_leader_of_the_pack.sql']
+ files=['2026_10_06_00_world_gilneas_early_mechanics.sql','2026_10_06_01_world_gilneas_quest_object_spawns.sql','2026_10_06_02_world_gilneas_rescue_bindings.sql','2026_10_06_03_world_gilneas_duskhaven_phase_handoff.sql','2026_10_06_04_world_gilneas_walden_genn.sql','2026_10_06_05_world_gilneas_half_burnt_torch.sql','2026_10_06_06_world_gilneas_liberation_day.sql','2026_10_06_07_world_gilneas_horn_of_taldoren.sql','2026_10_06_08_world_gilneas_chance_lucius.sql','2026_10_06_09_world_gilneas_manor_ride.sql','2026_10_06_10_world_gilneas_late_phase_handoffs.sql','2026_10_06_11_world_gilneas_leader_of_the_pack.sql','2026_10_06_12_world_gilneas_bat_flight.sql']
  texts=[(root/'sql/updates/world'/name).read_text('utf8') for name in files]
  manifest=json.loads((root/'docs/audit-data/gilneas-static-restoration.json').read_text('utf8'))
  tables=sql('SHOW TABLES;').stdout.splitlines()
@@ -41,7 +41,7 @@ def test_gilneas_database(sql, checksum):
  for entry,script in [(36409,'npc_mastiff_36409'),(36405,'npc_mastiff_36405'),(37783,'npc_lorna_crowley_37783'),(36741,'npc_swift_mountain_horse_36741'),(36452,'npc_gwen_armstead_36452'),(36606,'npc_queen_mia_greymane_36606'),(36459,'npc_chance_36459'),(36461,'npc_gilneas_lucius_the_cruel'),(38027,'npc_gilneas_taldoren_tracker'),(37694,'npc_enslaved_villager_37694'),(37876,'npc_king_genn_greymane_37876'),(36290,'npc_lord_godfrey_36290'),(36287,'npc_cynthia_36267'),(36288,'npc_ashley_36269'),(36289,'npc_james_36268'),(36231,'npc_horrid_abomination_36231'),(36440,'npc_drowning_watchman_36440'),(36540,'npc_mountain_horse_36540'),(36555,'npc_mountain_horse_36555'),(37067,'npc_crash_survivor_37067'),(37078,'npc_swamp_crocolisk_37078'),(36488,'npc_forsaken_castaway_36488')]:
   assert script in registered,(entry,script,'unregistered C++')
   assert sql(f"SELECT COUNT(*) FROM creature_template WHERE entry={entry} AND ScriptName='{script}' AND AIName='';").stdout.strip()=='1',(entry,script)
- for spell,script in [(68682,'spell_gilneas_leader_of_the_pack'),(71061,'spell_gilneas_horn_of_taldoren'),(68735,'spell_rescue_drowning_watchman_68735'),(68903,'spell_round_up_horse_68903'),(75359,'spell_gilneas_walden_brandy'),(70631,'spell_gilneas_half_burnt_torch')]:
+ for spell,script in [(72472,'spell_gilneas_captured_bat_summon'),(68682,'spell_gilneas_leader_of_the_pack'),(71061,'spell_gilneas_horn_of_taldoren'),(68735,'spell_rescue_drowning_watchman_68735'),(68903,'spell_round_up_horse_68903'),(75359,'spell_gilneas_walden_brandy'),(70631,'spell_gilneas_half_burnt_torch')]:
   assert script in registered
   assert sql(f"SELECT COUNT(*) FROM spell_script_names WHERE spell_id={spell} AND ScriptName='{script}';").stdout.strip()=='1'
  assert sql('SELECT COUNT(*) FROM creature_loot_template WHERE Entry=36461 AND Item=49281 AND Chance=100 AND QuestRequired=1;').stdout.strip()=='1','Native cat loot dependency'
@@ -64,6 +64,18 @@ def test_gilneas_database(sql, checksum):
  for spell,start,end,mask in [(69485,24676,24903,64),(70696,24903,24678,74),(69486,24678,24680,74),(70695,24680,14434,74)]:
   assert sql(f'SELECT COUNT(*) FROM spell_area WHERE spell={spell} AND area IN (4714,4755) AND quest_start={start} AND quest_end={end} AND quest_start_status={mask};').stdout.strip()=='2'
  assert sql('SELECT COUNT(*) FROM creature WHERE map=654 AND PhaseId=0 AND PhaseGroup=440 AND ((guid=802508 AND id=37783) OR (guid=802514 AND id=38553));').stdout.strip()=='2'
+ bat=json.loads((root/'docs/audit-data/gilneas-bat-source.json').read_text('utf8'))
+ for path_id,route in bat['routes'].items():
+  assert sql(f'SELECT COUNT(*) FROM waypoint_data WHERE id={path_id};').stdout.strip()==str(len(route['points']))
+  for point in route['points']:
+   assert sql(f"SELECT COUNT(*) FROM waypoint_data WHERE id={path_id} AND point={point['point']} AND ABS(position_x-({point['x']}))<0.01 AND ABS(position_y-({point['y']}))<0.01 AND ABS(position_z-({point['z']}))<0.01 AND move_type=1;").stdout.strip()=='1'
+ for actor in bat['actors']:
+  assert sql(f"SELECT COUNT(*) FROM creature WHERE guid={actor['guid']} AND id={actor['id']} AND map=654 AND PhaseId=190 AND PhaseGroup=0;").stdout.strip()=='1'
+ assert sql('SELECT cast_flags FROM npc_spellclick_spells WHERE npc_entry=38615 AND spell_id=72472;').stdout.strip()=='1'
+ assert sql('SELECT COUNT(*) FROM creature_template WHERE entry=38615 AND npcflag & 16777216;').stdout.strip()=='1'
+ sql('UPDATE waypoint_data SET position_x=position_x+100 WHERE id=3854003 AND point=1;')
+ before=checksum(tables);sql(texts[12],ok=False);assert checksum(tables)==before,'Foreign bat route changed'
+ sql('UPDATE waypoint_data SET position_x=position_x-100 WHERE id=3854003 AND point=1;')
  # A foreign GUID cannot be overwritten, nor can an earlier part of this migration write.
  first=manifest['rows'][0]['spawn'];guid=first['guid']
  sql(f'UPDATE gameobject SET id=9999999 WHERE guid={guid};')

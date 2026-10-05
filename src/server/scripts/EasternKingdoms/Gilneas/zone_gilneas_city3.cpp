@@ -520,90 +520,111 @@ class npc_captured_riding_bat_38540 : public CreatureScript
 public:
     npc_captured_riding_bat_38540() : CreatureScript("npc_captured_riding_bat_38540") { }
 
-    enum eNpc
-    {
-        EVENT_START_WORK_AREA = 201,
-        EVENT_TIMEOUT,
-    };
-
     struct npc_captured_riding_bat_38540AI : public ScriptedAI
     {
-        npc_captured_riding_bat_38540AI(Creature* creature) : ScriptedAI(creature) {}
+        npc_captured_riding_bat_38540AI(Creature* creature) : ScriptedAI(creature), m_playerGUID(ObjectGuid::Empty) { }
 
-        EventMap m_events;
-        uint8    m_gamePhase;
+        ObjectGuid m_playerGUID;
+        uint32 m_lifetime = 0;
+        uint8 m_flightState = 0; //0 waiting,1 circuit,3 return,4 landed
+        bool m_boarded = false;
 
-        void AttackStart(Unit* /*who*/) override {}
-        void EnterCombat(Unit* /*who*/) override {}
-
-        void Reset() override
+        void AttackStart(Unit* /*who*/) override { }
+        void EnterCombat(Unit* /*who*/) override { }
+        void EnterEvadeMode(EvadeReason /*reason*/) override { }
+        void Reset() override { me->SetReactState(REACT_PASSIVE); }
+        ObjectGuid GetGUID(int32 id) const override
         {
-            m_events.Reset();
-            m_gamePhase = 0;
+            return id == PLAYER_GUID ? m_playerGUID : ObjectGuid::Empty;
+        }
+
+        void IsSummonedBy(Unit* summoner) override
+        {
+            Player* player = summoner ? summoner->ToPlayer() : nullptr;
+            if (!player || !player->IsAlive() || player->GetMapId() != 654
+                || player->GetQuestStatus(24920) != QUEST_STATUS_INCOMPLETE)
+            {
+                me->DespawnOrUnsummon();
+                return;
+            }
+            m_playerGUID = player->GetGUID();
+        }
+
+        void DoAction(int32 action) override
+        {
+            if (action != 1 || m_flightState != 1 || !m_boarded)
+                return;
+            Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+            if (!player || !player->IsAlive() || player->GetVehicleBase() != me)
+                return;
+            m_flightState = 3;
+            me->GetMotionMaster()->Clear();
+            me->GetMotionMaster()->MovePath(3854003, false);
         }
 
         void MovementInform(uint32 type, uint32 id) override
         {
-            if (type == WAYPOINT_MOTION_TYPE)
+            if (type != WAYPOINT_MOTION_TYPE || !m_boarded)
+                return;
+            if ((m_flightState == 1 && id == 60) || (m_flightState == 3 && id == 14))
             {
-                if (m_gamePhase == 1 && id == 3)
-                {
-                    m_events.ScheduleEvent(EVENT_START_WORK_AREA, 10);
-                    m_events.ScheduleEvent(EVENT_TIMEOUT, 120000);
-                }
-                else if (m_gamePhase == 3 && id == 3)
-                {
-                    if (Vehicle* bat = me->GetVehicleKit())
-                        bat->RemoveAllPassengers();
-                    me->DespawnOrUnsummon(10);
-                }
+                m_flightState = 4;
+                me->SetDisableGravity(false);
+                if (Vehicle* vehicle = me->GetVehicleKit())
+                    vehicle->RemoveAllPassengers();
+                m_boarded = false;
+                me->DespawnOrUnsummon(100ms);
             }
         }
 
-        void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
+        void PassengerBoarded(Unit* passenger, int8 seatId, bool apply) override
         {
+            Player* player = passenger ? passenger->ToPlayer() : nullptr;
             if (apply)
             {
-                if (who->GetTypeId() == TYPEID_PLAYER)
-                    if (who->ToPlayer()->GetQuestStatus(24920) != QUEST_STATUS_INCOMPLETE)
-                    {
-                        me->GetVehicleKit()->RemoveAllPassengers();
-                        return;
-                    }
+                if (m_boarded && player && seatId == 0 && player->GetGUID() == m_playerGUID)
+                    return;
+                if (!player || !player->IsAlive() || seatId != 0 || m_boarded
+                    || player->GetGUID() != m_playerGUID || player->GetMapId() != 654
+                    || player->GetQuestStatus(24920) != QUEST_STATUS_INCOMPLETE)
+                {
+                    if (passenger)
+                        passenger->ExitVehicle();
+                    return;
+                }
+                m_boarded = true;
+                m_flightState = 1;
                 me->SetCanFly(true);
                 me->SetDisableGravity(true);
-                me->SetSpeed(MOVE_FLIGHT, 6.0f);
+                me->SetSpeed(MOVE_FLIGHT, 4.0f);
                 me->GetMotionMaster()->MovePath(3854001, false);
-                m_gamePhase = 1;
+            }
+            else if (player && player->GetGUID() == m_playerGUID)
+            {
+                m_boarded = false;
+                me->DespawnOrUnsummon(100ms);
             }
         }
 
         void UpdateAI(uint32 diff) override
         {
-            ScriptedAI::UpdateAI(diff);
-            m_events.Update(diff);
-
-            while (uint32 eventId = m_events.ExecuteEvent())
+            m_lifetime += diff;
+            if (m_lifetime >= 10000 && m_flightState == 0)
             {
-                switch (eventId)
-                {
-                case EVENT_START_WORK_AREA:
-                {
-                    me->SetSpeed(MOVE_FLIGHT, 4.0f);
-                    m_gamePhase = 2;
-                    me->GetMotionMaster()->MovePath(3854002, true);
-                    break;
-                }
-                case EVENT_TIMEOUT:
-                {
-                    m_gamePhase = 3;
-                    me->SetSpeed(MOVE_FLIGHT, 6.0f);
-                    me->GetMotionMaster()->Clear();
-                    me->GetMotionMaster()->MovePath(3854003, false);
-                    break;
-                }
-                }
+                me->DespawnOrUnsummon();
+                return;
             }
+            Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+            if (!player || !player->IsAlive() || player->GetMapId() != 654
+                || (m_boarded && player->GetVehicleBase() != me))
+            {
+                me->DespawnOrUnsummon();
+                return;
+            }
+            QuestStatus status = player->GetQuestStatus(24920);
+            if (m_lifetime >= 120000 || !me->InSamePhase(player)
+                || (status != QUEST_STATUS_INCOMPLETE && status != QUEST_STATUS_COMPLETE))
+                DoAction(1); // Abandon returns a living rider along the real route.
         }
     };
 
@@ -611,6 +632,31 @@ public:
     {
         return new npc_captured_riding_bat_38540AI(creature);
     }
+};
+
+class spell_gilneas_captured_bat_summon : public SpellScriptLoader
+{
+public:
+    spell_gilneas_captured_bat_summon() : SpellScriptLoader("spell_gilneas_captured_bat_summon") { }
+    class script : public SpellScript
+    {
+        PrepareSpellScript(script);
+        SpellCastResult CheckBat()
+        {
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            if (!player || !player->IsAlive() || player->GetMapId() != 654
+                || player->GetQuestStatus(24920) != QUEST_STATUS_INCOMPLETE
+                || player->GetSummonedCreatureByEntry(38540) || player->GetVehicleBase())
+                return SPELL_FAILED_BAD_TARGETS;
+            Creature* source = player->FindNearestCreature(38615, 15.0f);
+            return source && source->InSamePhase(player) ? SPELL_CAST_OK : SPELL_FAILED_BAD_TARGETS;
+        }
+        void Register() override
+        {
+            OnCheckCast += SpellCheckCastFn(script::CheckBat);
+        }
+    };
+    SpellScript* GetSpellScript() const override { return new script(); }
 };
 
 // 72849
@@ -625,12 +671,19 @@ public:
 
         void HandleDummy(SpellEffIndex /*effindex*/)
         {
-            if (Unit* caster = GetCaster())
-                if (Creature* bat = caster->ToCreature())
-                {
-                    bat->SetSpeed(MOVE_FLIGHT, 6.0f);
-                    bat->GetMotionMaster()->MovePath(3854003, false);
-                }
+            Unit* caster = GetCaster();
+            if (!caster)
+                return;
+            Creature* bat = caster->ToCreature();
+            if (Player* player = caster->ToPlayer())
+            {
+                Unit* vehicle = player->GetVehicleBase();
+                bat = vehicle ? vehicle->ToCreature() : nullptr;
+                if (!bat || bat->AI()->GetGUID(PLAYER_GUID) != player->GetGUID())
+                    return;
+            }
+            if (bat && bat->GetEntry() == 38540 && bat->GetMapId() == 654)
+                bat->AI()->DoAction(1);
         }
 
         void Register() override
@@ -2143,6 +2196,7 @@ void AddSC_zone_gilneas_city3()
     new npc_tobias_mistmantle_38507();
     new npc_lady_sylvanas_windrunner_38530();
     new npc_captured_riding_bat_38540();
+    new spell_gilneas_captured_bat_summon();
     new spell_fly_back_72849();
     new spell_iron_bomb_72247();
     new npc_tobias_mistmantle_43749();
