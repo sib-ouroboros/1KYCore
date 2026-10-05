@@ -37,6 +37,9 @@
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
 #include "SpellAuras.h"
+#include "SpellPackets.h"
+#include "UpdateData.h"
+#include <iterator>
 #include "SpellScript.h"
 #include "ScriptedCreature.h"
 #include "ScriptedGossip.h"
@@ -439,7 +442,7 @@ public:
                     TEMPSUMMON_TIMED_DESPAWN, 60000, 0, true))
             {
                 actor->SetReactState(REACT_PASSIVE);
-                actor->RemoveFlag(UNIT_FIELD_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_GOSSIP);
+                actor->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_GOSSIP);
                 actor->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
                 actor->setActive(true);
                 MardumInvasionActorAI* ai = new MardumInvasionActorAI(actor, player->GetGUID(), slot);
@@ -886,12 +889,12 @@ public:
         // qui valide la quete en sautant ses objectifs, et il le faisait sous
         // la condition INVERSE de ses deux jumeaux (sans le '!'), donc
         // seulement si l'objectif 0 etait DEJA acquis.
-        // Resultat : l'objectif 2 « Shivarra forces » (credit 94407), qui est
+        // Resultat : l'objectif 2 Р вЂ™Р’В« Shivarra forces Р вЂ™Р’В» (credit 94407), qui est
         // obligatoire et sequence, n'avait aucune source sur tout le serveur
         // et la quete 38765 restait bloquee.
         // On applique ici exactement le schema des portails Cendrelangue et
         // Glissentaille, avec les index d'objectif propres a 38765 :
-        //   index 2 -> 94407 « Enter the Illidari: Shivarra » Legion Gateway
+        //   index 2 -> 94407 Р вЂ™Р’В« Enter the Illidari: Shivarra Р вЂ™Р’В» Legion Gateway
         //   index 3 -> 97831 First Summoned Guardian (facultatif)
         if (!player->GetQuestObjectiveData(QUEST_SHIVARRA_FORCES, 2))
         {
@@ -1101,6 +1104,123 @@ public:
 // 243968 - Banner near 96732 - Destroyed by Ashtongue - KillCredit 96734
 // 243967 - Banner near 96731 - Destroyed by Shivarra - KillCredit 96733
 // 243965 - Banner near 93762 - Destroyed by Coilskar - KillCredit 96692
+namespace
+{
+constexpr uint32 QuestStopBombardment = 38727;
+
+struct MardumBombardmentTarget
+{
+    uint32 banner;
+    uint32 devastator;
+    uint32 credit;
+    uint32 helper;
+    int8 storageIndex;
+};
+
+MardumBombardmentTarget const BombardmentTargets[] =
+{
+    { 243968, 96732, 96734, 96877, 3 }, // Ashtongue, Doom Fortress
+    { 243967, 96731, 96733, 96888, 5 }, // Shivarra, Forge of Corruption
+    { 243965, 93762, 96692, 96884, 1 }  // Coilskar, Soul Engine
+};
+
+// Reuse only the owner-directed, localized dialogue helper. Unlike Talk(),
+// it does not broadcast a personal scene's speech/sound to nearby players.
+struct MardumBombardmentAI : MardumInvasionActorAI
+{
+    MardumBombardmentAI(Creature* helper, ObjectGuid owner, ObjectGuid devastator,
+        MardumBombardmentTarget const& target, ObjectGuid original)
+        : MardumInvasionActorAI(helper, owner, 0), _devastator(devastator), _original(original), _target(target) { }
+
+    ObjectGuid _devastator;
+    ObjectGuid _original;
+    MardumBombardmentTarget _target;
+    uint32 _timer = 0;
+    bool _greeted = false;
+    bool _attacked = false;
+    bool _destroyed = false;
+
+    uint32 GetData(uint32 id) const override
+    {
+        return id == QuestStopBombardment ? _target.banner : 0;
+    }
+
+    void UpdateAI(uint32 diff) override
+    {
+        Player* player = ObjectAccessor::GetPlayer(*me, _owner);
+        Creature* devastator = ObjectAccessor::GetCreature(*me, _devastator);
+        if (!player || !devastator || !me->IsInMap(player) ||
+            !me->IsWithinDistInMap(player, 100.0f) ||
+            (!_destroyed && (player->GetQuestStatus(QuestStopBombardment) != QUEST_STATUS_INCOMPLETE ||
+                (player->GetQuestObjectiveData(QuestStopBombardment, _target.storageIndex) != 0 &&
+                    player->GetQuestObjectiveData(QuestStopBombardment, _target.storageIndex - 1) != 0))))
+        {
+            // DestroyForPlayer does not change the server's client-GUID set.
+            // Explicitly recreate the shared spawn if an unfinished scene is
+            // cancelled nearby; SendUpdateToPlayer would send values only.
+            if (!_destroyed && player)
+                if (Creature* original = ObjectAccessor::GetCreature(*me, _original))
+                    if (original->IsWithinDistInMap(player, 50.0f))
+                    {
+                        UpdateData update(player->GetMapId());
+                        WorldPacket packet;
+                        original->BuildCreateUpdateBlockForPlayer(&update, player);
+                        update.BuildPacket(&packet);
+                        player->SendDirectMessage(&packet);
+                    }
+            if (devastator)
+                devastator->DespawnOrUnsummon();
+            me->DespawnOrUnsummon();
+            return;
+        }
+
+        _timer = std::min<uint32>(_timer + std::min<uint32>(diff, 20000), 20000);
+        if (!_greeted && _timer >= 100)
+        {
+            _greeted = true;
+            SpeakToOwner(0, player);
+            me->SetFacingToObject(devastator);
+        }
+        if (!_attacked && _timer >= 2000)
+        {
+            _attacked = true;
+            me->HandleEmoteCommand(EMOTE_ONESHOT_SPELL_CAST);
+            // Client 7.3.5: visual from the quest's dummy spell 191664.
+            // Send the visual only: real barrage 191669 triggers damaging AoE.
+            WorldPackets::Spells::PlaySpellVisual attack;
+            attack.Source = me->GetGUID();
+            attack.Target = devastator->GetGUID();
+            attack.SpellVisualID = 51328;
+            attack.TravelSpeed = 1.0f;
+            attack.SpeedAsTime = true;
+            player->SendDirectMessage(attack.Write());
+            if (_target.helper == 96884)
+                devastator->CastSpell(devastator, 191568, true); // Native frozen-state cosmetic dummy aura.
+        }
+        if (!_destroyed && _timer >= 6000)
+        {
+            _destroyed = true;
+            // Quest spell 191454's native fire visual, with no server spell
+            // execution/area targets. Only this player's temporary copy dies.
+            WorldPackets::Spells::PlaySpellVisual fire;
+            fire.Source = devastator->GetGUID();
+            fire.Target = devastator->GetGUID();
+            fire.SpellVisualID = 49571;
+            player->SendDirectMessage(fire.Write());
+            devastator->RemoveAurasDueToSpell(191568);
+            devastator->KillSelf();
+            player->KilledMonsterCredit(_target.devastator);
+            player->KilledMonsterCredit(_target.credit);
+        }
+        if (_timer >= 14000)
+        {
+            devastator->DespawnOrUnsummon();
+            me->DespawnOrUnsummon();
+        }
+    }
+};
+}
+
 class go_mardum_illidari_banner : public GameObjectScript
 {
 public:
@@ -1108,44 +1228,67 @@ public:
 
     bool OnGossipHello(Player* player, GameObject* go) override
     {
-        uint32 devastatorEntry = 0;
-        uint32 killCreditEntry = 0;
+        auto target = std::find_if(std::begin(BombardmentTargets), std::end(BombardmentTargets),
+            [go](MardumBombardmentTarget const& row) { return row.banner == go->GetEntry(); });
+        if (target == std::end(BombardmentTargets))
+            return false;
+        // Consume handled goobers even on rejected/repeated clicks: their old
+        // Data10 spells are absent from the supported Legion client data.
+        if (player->GetMapId() != 1481 || player->getClass() != CLASS_DEMON_HUNTER ||
+            player->GetQuestStatus(QuestStopBombardment) != QUEST_STATUS_INCOMPLETE ||
+            (player->GetQuestObjectiveData(QuestStopBombardment, target->storageIndex) != 0 &&
+                player->GetQuestObjectiveData(QuestStopBombardment, target->storageIndex - 1) != 0))
+            return true;
 
-        switch (go->GetEntry())
+        std::list<Creature*> helpers;
+        player->GetCreatureListWithEntryInGrid(helpers, target->helper, 100.0f);
+        for (Creature* helper : helpers)
+            if (TempSummon* summon = helper->ToTempSummon())
+                if (summon->GetSummonerGUID() == player->GetGUID() &&
+                    helper->AI()->GetData(QuestStopBombardment) == target->banner)
+                    return true;
+
+        // Another player's personal copy can occupy the same coordinates.
+        // Select the shared live spawn explicitly, never another scene actor.
+        std::list<Creature*> machines;
+        go->GetCreatureListWithEntryInGrid(machines, target->devastator, 50.0f);
+        auto shared = std::find_if(machines.begin(), machines.end(),
+            [](Creature* machine) { return !machine->ToTempSummon() && machine->IsAlive(); });
+        if (shared == machines.end())
+            return true;
+        Creature* original = *shared;
+        TempSummon* copy = player->SummonCreature(target->devastator, original->GetPosition(),
+            TEMPSUMMON_TIMED_DESPAWN, 20000, 0, true);
+        if (!copy)
+            return true;
+        TempSummon* helper = player->SummonCreature(target->helper, go->GetPosition(),
+            TEMPSUMMON_TIMED_DESPAWN, 20000, 0, true);
+        if (!helper)
         {
-            case 243968:
-                devastatorEntry = 96732;
-                killCreditEntry = 96734;
-                break;
-            case 243967:
-                devastatorEntry = 96731;
-                killCreditEntry = 96733;
-                break;
-            case 243965:
-                devastatorEntry = 93762;
-                killCreditEntry = 96692;
-                break;
-            default:
-                break;
+            copy->DespawnOrUnsummon();
+            return true;
         }
-
-        if (Creature* devastator = player->FindNearestCreature(devastatorEntry, 50.0f))
+        for (Creature* actor : { static_cast<Creature*>(copy), static_cast<Creature*>(helper) })
         {
-            if (Creature* personnalCreature = player->SummonCreature(devastatorEntry, devastator->GetPosition(), TEMPSUMMON_CORPSE_DESPAWN, 5000, 0, true))
-            {
-                player->KilledMonsterCredit(devastatorEntry);
-                player->KilledMonsterCredit(killCreditEntry);
-                devastator->DestroyForPlayer(player);
-
-                //TODO : Script destruction event
-                personnalCreature->GetScheduler().Schedule(Seconds(2), [](TaskContext context)
-                {
-                    GetContextUnit()->KillSelf();
-                });
-            }
+            actor->SetReactState(REACT_PASSIVE);
+            actor->RemoveFlag(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_GOSSIP | UNIT_NPC_FLAG_QUESTGIVER);
+            actor->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
+            actor->GetMotionMaster()->MoveIdle();
+            actor->setActive(true);
         }
-
-        return false;
+        copy->SetDisplayId(original->GetDisplayId());
+        auto ai = new MardumBombardmentAI(helper, player->GetGUID(), copy->GetGUID(), *target, original->GetGUID());
+        if (!helper->AIM_Initialize(ai))
+        {
+            delete ai;
+            helper->DespawnOrUnsummon();
+            copy->DespawnOrUnsummon();
+            return true;
+        }
+        // Preserve the previous owner-only replacement. Never kill/despawn
+        // the shared spawn; DestroyForPlayer is not permanent world phasing.
+        original->DestroyForPlayer(player);
+        return true;
     }
 };
 
@@ -1771,7 +1914,7 @@ public:
 
         void JustDied(Unit* /*killer*/) override
         {
-            // Objectif « Find the way downstairs » de la quete 38728.
+            // Objectif Р вЂ™Р’В« Find the way downstairs Р вЂ™Р’В» de la quete 38728.
             // Il etait accorde uniquement dans DamageTaken, au coup fatal, et
             // seulement aux joueurs figurant alors dans la liste de menace.
             // Dans un combat ou quatre PNJ compagnons frappent avec le joueur,
@@ -1906,7 +2049,7 @@ public:
 
     bool OnGossipHello(Player* player, GameObject* /*go*/) override
     {
-        // Objectif « Find the way downstairs » de la quete 38728 : la cle se
+        // Objectif Р вЂ™Р’В« Find the way downstairs Р вЂ™Р’В» de la quete 38728 : la cle se
         // trouve justement en bas, c'est donc l'endroit logique pour le
         // valider. Le script de Tyranna l'accorde a sa mort, mais uniquement
         // aux joueurs presents dans sa liste de menace au coup fatal - si
@@ -1941,8 +2084,8 @@ class spell_mardum_back_to_black_temple : public SpellScript
                 // donc fixe la ou le joueur venait de partir, au lieu du
                 // Caveau des Gardiennes.
                 //
-                // Signale en jeu : « j'ai utilise ma pierre de foyer qui ne
-                // m'a pas teleporte, je devais atterrir en foret d'Elwynn ».
+                // Signale en jeu : Р вЂ™Р’В« j'ai utilise ma pierre de foyer qui ne
+                // m'a pas teleporte, je devais atterrir en foret d'Elwynn Р вЂ™Р’В».
                 // La pierre fonctionnait : elle renvoyait a Mardum, ou le
                 // joueur se trouvait deja.
                 //

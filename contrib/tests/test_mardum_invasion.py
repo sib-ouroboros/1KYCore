@@ -33,7 +33,7 @@ using uint32=std::uint32_t;using uint8=std::uint8_t;using ObjectGuid=int;
 constexpr uint32 QUEST_INVASION_BEGIN=40077;
 REAL_QUEST_STATUS
 constexpr uint32 CLASS_DEMON_HUNTER=12,SPELL_PHASE_MARDUM_WELCOME=59073,SPELL_PHASE_171=59074;
-constexpr uint32 TEMPSUMMON_TIMED_DESPAWN=1,REACT_PASSIVE=0,UNIT_FIELD_NPC_FLAGS=0,UNIT_FIELD_FLAGS=1;
+constexpr uint32 TEMPSUMMON_TIMED_DESPAWN=1,REACT_PASSIVE=0,UNIT_NPC_FLAGS=0,UNIT_FIELD_FLAGS=1;
 constexpr uint32 UNIT_NPC_FLAG_QUESTGIVER=2,UNIT_NPC_FLAG_GOSSIP=1,UNIT_FLAG_IMMUNE_TO_PC=256,UNIT_FLAG_IMMUNE_TO_NPC=512;
 constexpr uint32 PATHFIND_NORMAL=1,PATHFIND_SHORTCUT=2,PATHFIND_INCOMPLETE=4,PATHFIND_NOPATH=8,PATHFIND_NOT_USING_PATH=16;
 struct Position{float x,y,z,o;float GetPositionX()const{return x;}float GetPositionY()const{return y;}float GetPositionZ()const{return z;}};
@@ -152,6 +152,10 @@ int main(){
  std::cout<<"PASS: actual Mardum handlers; dialogue ordering, personal actors, phases, safe paths, cancellation and multiplayer isolation\n";
 }
 '''
+ # Reject fixture-only field names that do not exist in the actual core.
+ updates=(root/'src/server/game/Entities/Object/Updates/UpdateFields.h').read_text('utf8')
+ assert '    UNIT_NPC_FLAGS ' in updates
+ assert 'UNIT_FIELD_NPC_FLAGS' not in block
  prefix=prefix.replace('REAL_QUEST_STATUS',method((root/'src/server/game/Quests/QuestDef.h').read_text('utf8'),'enum QuestStatus : uint8')+';')
  code=prefix+block+'struct Lifecycle{\n'+abandon.replace(' override','')+'\n'+complete.replace(' override','')+'\n};\n'+suffix
  with tempfile.TemporaryDirectory(prefix='mardum-invasion-') as tmp:

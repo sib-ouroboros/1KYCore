@@ -1,0 +1,81 @@
+{
+  "quest": 38727,
+  "database_source": "local release 1kycore_world_20260926_no_mercenaries.sql.gz, not live server",
+  "client_build": 26654,
+  "expected_core_build": 26972,
+  "client_layouts_match_core_metadata": true,
+  "crews": [
+    {
+      "banner": 243968,
+      "devastator": 96732,
+      "helper": 96877,
+      "credit": 96734,
+      "storage": [
+        2,
+        3
+      ]
+    },
+    {
+      "banner": 243967,
+      "devastator": 96731,
+      "helper": 96888,
+      "credit": 96733,
+      "storage": [
+        4,
+        5
+      ]
+    },
+    {
+      "banner": 243965,
+      "devastator": 93762,
+      "helper": 96884,
+      "credit": 96692,
+      "storage": [
+        0,
+        1
+      ]
+    }
+  ],
+  "cosmetic_spell": {
+    "spell": 191568,
+    "effect": 6,
+    "aura": 4,
+    "target": 1,
+    "visual": 49593
+  },
+  "visual_only": [
+    {
+      "spell": 191664,
+      "visual": 51328
+    },
+    {
+      "spell": 191454,
+      "visual": 49571
+    }
+  ],
+  "excluded_damage_chain": [
+    191669,
+    191667
+  ],
+  "obsolete_spells_absent": [
+    191480,
+    191519,
+    191520
+  ],
+  "mysql": {
+    "repeat_import": true,
+    "three_obsolete_spells_cleared": true,
+    "unrelated_templates_unchanged": true,
+    "custom_scripts_and_spells_preserved": true
+  },
+  "native_test": "Windows GCC without sanitizers; actual scene/flag methods against entity fixtures",
+  "client_visuals_verified": false,
+  "retail_timeline_verified": false,
+  "persistent_per_object_visibility_added": false,
+  "client_files": {
+    "Spell": "6f722017f5bfd8539aa6839c2ddc0977a9fc6f1e48a85cc30a2175f7238ad080",
+    "SpellEffect": "dfcb7076421e3b99fb23e769acddb9215d051069fe5e7488fc33b67770c194db",
+    "SpellXSpellVisual": "426186996a698e96ec7ae1a21282c5ae06d545b8f5912ad28b6be08d7f854e8a",
+    "SpellVisual": "84006f590941b62b1e4ef68f521df4037308387723097356b29699c361eeaafa"
+  }
+}
