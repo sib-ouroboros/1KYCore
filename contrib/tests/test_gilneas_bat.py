@@ -18,7 +18,8 @@ using uint32=std::uint32_t;using uint8=std::uint8_t;using int8=std::int8_t;using
 constexpr int QUEST_STATUS_NONE=0,QUEST_STATUS_INCOMPLETE=3,QUEST_STATUS_COMPLETE=1,REACT_PASSIVE=0,MOVE_FLIGHT=1,PLAYER_GUID=10,WAYPOINT_MOTION_TYPE=2;
 struct ObjectGuid{int id=0;static const ObjectGuid Empty;};const ObjectGuid ObjectGuid::Empty{};bool operator==(ObjectGuid a,ObjectGuid b){return a.id==b.id;}bool operator!=(ObjectGuid a,ObjectGuid b){return !(a==b);}
 struct Player;struct Creature;
-struct Unit{ObjectGuid guid;uint32 entry=0,map=654;bool alive=true,phase=true;int exits=0;virtual~Unit()=default;virtual Player*ToPlayer(){return nullptr;}virtual Creature*ToCreature(){return nullptr;}bool IsAlive(){return alive;}uint32 GetMapId(){return map;}uint32 GetEntry(){return entry;}ObjectGuid GetGUID(){return guid;}bool InSamePhase(Unit*){return phase;}void ExitVehicle(){++exits;}};
+struct PhaseShift {};
+struct Unit{ObjectGuid guid;uint32 entry=0,map=654;bool alive=true,phase=true;int exits=0;virtual~Unit()=default;virtual Player*ToPlayer(){return nullptr;}virtual Creature*ToCreature(){return nullptr;}bool IsAlive(){return alive;}uint32 GetMapId(){return map;}uint32 GetEntry(){return entry;}ObjectGuid GetGUID(){return guid;}PhaseShift const& GetPhaseShift()const{static PhaseShift value;return value;}bool InSamePhase(PhaseShift const&){return phase;}void ExitVehicle(){++exits;}};
 struct CreatureAI{virtual~CreatureAI()=default;virtual ObjectGuid GetGUID(int32)const{return {};}virtual void DoAction(int32){}};
 struct MotionMaster{std::vector<uint32>paths;int clears=0;void Clear(){++clears;}void MovePath(uint32 p,bool repeat){if(repeat)throw std::runtime_error("unverified loop");paths.push_back(p);}};
 struct Vehicle{int removals=0;void RemoveAllPassengers(){++removals;}};

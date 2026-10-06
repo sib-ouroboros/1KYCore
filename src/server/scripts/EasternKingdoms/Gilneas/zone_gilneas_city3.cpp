@@ -622,7 +622,7 @@ public:
                 return;
             }
             QuestStatus status = player->GetQuestStatus(24920);
-            if (m_lifetime >= 120000 || !me->InSamePhase(player)
+            if (m_lifetime >= 120000 || !me->InSamePhase(player->GetPhaseShift())
                 || (status != QUEST_STATUS_INCOMPLETE && status != QUEST_STATUS_COMPLETE))
                 DoAction(1); // Abandon returns a living rider along the real route.
         }
@@ -649,7 +649,7 @@ public:
                 || player->GetSummonedCreatureByEntry(38540) || player->GetVehicleBase())
                 return SPELL_FAILED_BAD_TARGETS;
             Creature* source = player->FindNearestCreature(38615, 15.0f);
-            return source && source->InSamePhase(player) ? SPELL_CAST_OK : SPELL_FAILED_BAD_TARGETS;
+            return source && source->InSamePhase(player->GetPhaseShift()) ? SPELL_CAST_OK : SPELL_FAILED_BAD_TARGETS;
         }
         void Register() override
         {

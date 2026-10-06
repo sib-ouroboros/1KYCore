@@ -161,7 +161,7 @@ CI наa88c829: GCC и Windows полные сборки PASS, Reliability PASS,
 
 ### Проверка сборок и приватности временных NPC
 
-На5baa187 полные GCC/Windows сборки обнаружили шесть неверных вызовов InSamePhase(Player*). Исправлены на InSamePhase(player->GetPhaseShift()); native fixture теперь использует реальную сигнатуру PhaseShift const&, чтобы не скрывать такую несовместимость. Reliability и полный MySQL workflow на5baa187 PASS.
+На5baa187 полные GCC/Windows сборки обнаружили шесть неверных вызовов InSamePhase(Player*). Исправлены на InSamePhase(player->GetPhaseShift()); Также исправлены два аналогичных вызова в новом bat AI/hook; обе native fixtures теперь используют реальную сигнатуру PhaseShift const&, чтобы не скрывать такую несовместимость. Reliability и полный MySQL workflow на5baa187 PASS.
 
 TempSummon дублировал флаг приватности WorldObject: Map записывал производное поле, CanSeeOrDetect читал базовое. Удалено дублирование, используется единый штатный флаг WorldObject. Native fixture воспроизводит ошибку на старом header и проходит на исправленном; проверяет owner/другого игрока, переключение через оба типа указателей, публичных NPC и приватные GO. Флаг по умолчанию остаётся false. Полная сборка и клиентская проверка персональных сцен ещё требуются.
 
