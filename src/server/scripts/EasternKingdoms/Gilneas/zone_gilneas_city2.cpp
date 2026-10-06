@@ -4451,13 +4451,8 @@ public:
         return true;
     }
 
-    bool OnQuestReward(Player* /*player*/, Creature* creature, Quest const* /*quest*/, uint32 /*opt*/) override
-    {
-        if (Creature* almyra = creature->FindNearestCreature(NPC_SISTER_ALMYRA, 50.0f))
-            almyra->AI()->DoAction(ACTION_QUEST_REWARDED);
-
-        return false;
-    }
+    // The battle actors are shared. Individual quest rewards must not tear down
+    // another player's event; its existing global reset timer owns cleanup.
 };
 
 // 38210
