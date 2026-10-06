@@ -5,8 +5,14 @@
     "kind": "CreatureScript",
     "script": "npc_slain_watchman_36205",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 36205,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -14,8 +20,14 @@
     "kind": "CreatureScript",
     "script": "npc_king_genn_greymane_36332",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 36332,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -23,8 +35,14 @@
     "kind": "CreatureScript",
     "script": "npc_krennan_aranas_36331",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 36331,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -32,8 +50,14 @@
     "kind": "CreatureScript",
     "script": "npc_gwen_armstead_34571",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 34571,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -131,8 +155,14 @@
     "kind": "CreatureScript",
     "script": "npc_forsaken_catapult_36283",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 36283,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -155,8 +185,14 @@
     "kind": "SpellScriptLoader",
     "script": "spell_launch_96185",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "spell_script_names",
+        "key": 96185,
+        "AIName": null
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -434,8 +470,14 @@
     "kind": "CreatureScript",
     "script": "npc_king_genn_greymane_36743",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 36743,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -443,8 +485,14 @@
     "kind": "CreatureScript",
     "script": "npc_stagecoach_carriage_44928",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 44928,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -452,8 +500,14 @@
     "kind": "CreatureScript",
     "script": "npc_harness_43336",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 43336,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -461,8 +515,14 @@
     "kind": "CreatureScript",
     "script": "npc_stagecoach_carriage_43337",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 43337,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -485,8 +545,14 @@
     "kind": "CreatureScript",
     "script": "npc_ogre_ambusher_38762",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 38762,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -494,8 +560,14 @@
     "kind": "CreatureScript",
     "script": "npc_prince_liam_greymane_37065",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 37065,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -548,8 +620,14 @@
     "kind": "CreatureScript",
     "script": "npc_dark_scout_37953",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 37953,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -557,8 +635,14 @@
     "kind": "CreatureScript",
     "script": "npc_trigger_quest_24616",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 24616,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -566,8 +650,14 @@
     "kind": "CreatureScript",
     "script": "npc_tobias_mistmantle_38051",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 38051,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -650,8 +740,14 @@
     "kind": "CreatureScript",
     "script": "npc_lord_hewell_38764",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 38764,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",
@@ -659,8 +755,14 @@
     "kind": "CreatureScript",
     "script": "npc_stout_mountain_horse_38765",
     "registered": true,
-    "bindings": [],
-    "status": "MISSING_BINDING"
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 38765,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
   },
   {
     "file": "zone_duskhaven.cpp",

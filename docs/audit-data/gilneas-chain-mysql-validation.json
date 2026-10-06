@@ -1,0 +1,91 @@
+{
+  "mysql": "8.0.45",
+  "schema": "test_gilneas_chain_27adfa4ff7",
+  "source": "Fresh import of published 20260926 world archive; original DB735.02 dump audited separately",
+  "checks": [
+    "Fresh published20260926 release import",
+    "first/repeat SQL00–13 unchanged checksums",
+    "unrelated tables and Draenor phase rules preserved",
+    "native NPC/spell binding registrations",
+    "95 GO spawns and native quest loot",
+    "28 Manor/74 bat/33 Exodus route coordinates",
+    "432 bat actor GUID phases",
+    "native Exodus accessories/caster-clicker flags/player seat1",
+    "route conflict rejection before permanent mutation",
+    "foreign carriage seat/binding/click handler rejection before permanent mutation",
+    "foreign spawn GUID/custom child script preservation"
+  ],
+  "status": "PASS",
+  "live_database_changed": false,
+  "schema_dropped_after_success": true,
+  "binding_counts": {
+    "BOUND": 94
+  },
+  "sql_files": [
+    {
+      "file": "2026_10_06_00_world_gilneas_early_mechanics.sql",
+      "sha256": "e5ef360de88a8f2c5fbaf32108dd0099736b968cd5ccb230ff47659efd890019"
+    },
+    {
+      "file": "2026_10_06_01_world_gilneas_quest_object_spawns.sql",
+      "sha256": "7255934f874e19e4f4ec437e676fc24bbf05b9ae52d8b94ddfb0c0b19079abb6"
+    },
+    {
+      "file": "2026_10_06_02_world_gilneas_rescue_bindings.sql",
+      "sha256": "9fea8b865c5191f1715242deb6786c7cc436ff54d6e2b04e5fe655930f6593aa"
+    },
+    {
+      "file": "2026_10_06_03_world_gilneas_duskhaven_phase_handoff.sql",
+      "sha256": "9d63f0fe9b9249dfa1eb62b5ebcf4d0c11a4b31d5920186616c1c0f16506e816"
+    },
+    {
+      "file": "2026_10_06_04_world_gilneas_walden_genn.sql",
+      "sha256": "80c7f377a01cbbb444fb57b9ef530cff1ae2238ac1f8ba7abdeddd243e59764c"
+    },
+    {
+      "file": "2026_10_06_05_world_gilneas_half_burnt_torch.sql",
+      "sha256": "0a5ac39e9ab5a9b8c2496e4a0264d46371e6143c0b41d24e1829fd44088eb446"
+    },
+    {
+      "file": "2026_10_06_06_world_gilneas_liberation_day.sql",
+      "sha256": "4596f542bfd5482c535488dd40e165e225c7a02568eca4b2e2c2f977085f9ee0"
+    },
+    {
+      "file": "2026_10_06_07_world_gilneas_horn_of_taldoren.sql",
+      "sha256": "0c8e66c717733f2277d132d0aeafcad34cf6369ea08736154165f01f8661bbc4"
+    },
+    {
+      "file": "2026_10_06_08_world_gilneas_chance_lucius.sql",
+      "sha256": "887fb1b6307d416da68f02985d0c7466fa0861bc9b11a7be4f847bf54537a060"
+    },
+    {
+      "file": "2026_10_06_09_world_gilneas_manor_ride.sql",
+      "sha256": "fc52bd9212f31ad598f6acd2031c715f5474161849e79d2cc3dc25a47cb8844e"
+    },
+    {
+      "file": "2026_10_06_10_world_gilneas_late_phase_handoffs.sql",
+      "sha256": "cbe8571ee54fff37529335da196be5add0ae76137836a731e4202a89f402af2e"
+    },
+    {
+      "file": "2026_10_06_11_world_gilneas_leader_of_the_pack.sql",
+      "sha256": "c4cae7230b16b817c1a485f3e468c628aab6df9ab2f0bd62162803c1592c6885"
+    },
+    {
+      "file": "2026_10_06_12_world_gilneas_bat_flight.sql",
+      "sha256": "4048356c6ecf644b141d6f0e39bae1139a1e746f15dec58b1b9ef148f568704f"
+    },
+    {
+      "file": "2026_10_06_13_world_gilneas_exodus_carriage.sql",
+      "sha256": "fe1213080e6e763e61f8fb54d50e1d61e43372a17876b44bc608755db65dd816"
+    }
+  ],
+  "archive": {
+    "filename": "1kycore_world_20260926_no_mercenaries.sql.gz",
+    "sha256": "b311837633e148df178045fd448cbaeb7e40d10b97690377866ce4560f68bac7"
+  },
+  "limitations": [
+    "Native fixtures compile production handler extracts, not the complete worldserver.",
+    "Full GCC/Windows runs are pending on62ecc17.",
+    "Client26972 acceptance remains required."
+  ]
+}

@@ -188,3 +188,9 @@ Native fixture проверяет обе callback очередности, delaye
 CI наfb4056b: GCC/Windows/Reliability PASS; MySQL gilneas-chain наde17960 PASS с теми же SQL00–12. Это результаты предыдущего пакета, не проверки нового13.
 
 Наpoint30 высадка находится в4.291m от действующего questender37065/GUID802021. Его phase186 доступна после reward14467, ещё до принятия24438; existing persistent rule сохраняется до24676. Не добавляется искусственная фаза ради сдачи. Проверка shared visibility/анимации parked spellclick и надёжности высадки всё ещё входит в клиентскую приёмку.
+
+Пакет00–13 на чистом импорте опубликованного20260926 world архива: MySQL8.0.45 PASS; отдельный disposable schema удалён после проверки. Повторное применение,33/28/74 route coordinates,432 bat phases,vehicle accessories/seat1/click flags,foreign conflicts/custom scripts и все посторонние таблицы проверены. Один предшествующий прогон остановился на bat actor assertion без указания строки; повторная проверка всех432 exact rows и полный новый импорт PASS. Диагностика теперь содержит GUID/entry/result/фактическую строку. Причина первой остановки не установлена; ошибка не объявляется исправленной без воспроизведения. Проверяемые SQL SHA и ограничения: `docs/audit-data/gilneas-chain-mysql-validation.json`.
+
+Binding snapshot после00–13: 94 классов, 94 BOUND, 0 MISSING_BINDING. Это диагностика привязок, а не количество незавершённых заданий. Reliability16c5424 и62ecc17 с ASan/UBSan PASS, включая protection of harness accessory seats. GCC/Windows62ecc17 и release SQL CI выполняются.
+
+Свежий релизный dump даёт94 BOUND, в отличие от ранее проверенной локальной копии. Привязка может присутствовать в creature override, а не только в creature_template. Сам статус BOUND не подтверждает существование маршрута, безопасный FSM или работоспособность задания; escort24902 и story scenes остаются отдельной работой.
