@@ -191,6 +191,8 @@ jobs:
         run: python contrib/tests/test_gilneas_battle_sync.py
       - name: Test Gilneas finale actor identity, duplicate callbacks and timeout cleanup
         run: python contrib/tests/test_gilneas_battle_finale.py
+      - name: Test Gilneas battle teardown stops queued combat for all leaders
+        run: python contrib/tests/test_gilneas_battle_reset.py
       - name: Audit all Gilneas script registrations
         run: python contrib/tests/audit_gilneas_bindings.py > gilneas-registrations.json
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers

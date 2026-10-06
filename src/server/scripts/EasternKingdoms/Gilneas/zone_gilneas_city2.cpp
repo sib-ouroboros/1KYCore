@@ -1356,9 +1356,10 @@ public:
                 }
                 case EVENT_GLOBAL_RESET:
                 {
+                    m_events.Reset();
                     RemoveMyMember();
                     me->DespawnOrUnsummon(100);
-                    break;
+                    return;
                 }
                 case EVENT_START_LIAMS_FIRST_ANIM:
                 {
@@ -2009,9 +2010,10 @@ public:
                 }
                 case EVENT_GLOBAL_RESET:
                 {
+                    m_events.Reset();
                     RemoveMyMember();
                     me->DespawnOrUnsummon(100);
-                    break;
+                    return;
                 }
                 case EVENT_MOTIVATION_0:
                 {
@@ -2529,9 +2531,10 @@ public:
                 }
                 case EVENT_GLOBAL_RESET:
                 {
+                    m_events.Reset();
                     RemoveMyMember();
                     me->DespawnOrUnsummon(100);
-                    break;
+                    return;
                 }
                 case EVENT_CHECK_FOR_TIMER:
                 {
@@ -2948,9 +2951,10 @@ public:
                 }
                 case EVENT_GLOBAL_RESET:
                 {
+                    m_events.Reset();
                     RemoveMyMember();
                     me->DespawnOrUnsummon(100);
-                    break;
+                    return;
                 }
                 case EVENT_CHECK_FOR_TIMER:
                 {
@@ -3431,9 +3435,10 @@ public:
                     }
                     case EVENT_GLOBAL_RESET:
                     {
+                        m_events.Reset();
                         RemoveMyMember();
                         me->DespawnOrUnsummon(100);
-                        break;
+                        return;
                     }
                     case EVENT_CHECK_FOR_TIMER:
                     {
@@ -3772,6 +3777,13 @@ public:
             {
                 switch (eventId)
                 {
+                case EVENT_GLOBAL_RESET:
+                {
+                    m_events.Reset();
+                    RemoveMyMember();
+                    me->DespawnOrUnsummon(100);
+                    return;
+                }
                 case EVENT_ACTIVE_OBJECT_CD:
                 {
                     me->setActive(false);
