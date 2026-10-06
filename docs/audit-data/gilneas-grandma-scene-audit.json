@@ -121,8 +121,8 @@
     "Geometry confirms ground paths, not retail timing or animation accuracy",
     "DB2 build26654 requires client26972 acceptance",
     "Shared Chance remains visible to other players; no global despawn or fabricated per-player hide packet",
-    "Full builds/sanitizer/release SQL CI to run on this code commit",
-    "Remaining major code scenes: Tobias24902, battle24904, Godfrey24592"
+    "Remaining major code scenes: Tobias24902, battle24904, Godfrey24592",
+    "Full GCC/Windows and release SQL CI remain in progress"
   ],
   "production_server_updated": false,
   "mysql": {
@@ -138,5 +138,25 @@
       "Native loot template item49281 retained"
     ],
     "live_database_changed": false
+  },
+  "ci": {
+    "commit": "7ab8c103eb3951230d4db6f2c90f7a5ca83e2cc7",
+    "reliability": {
+      "run": 37435103225,
+      "status": "PASS",
+      "sanitizers": "ASan/UBSan"
+    },
+    "gcc": {
+      "run": 37435110614,
+      "status": "IN_PROGRESS"
+    },
+    "windows": {
+      "run": 37435114835,
+      "status": "IN_PROGRESS"
+    },
+    "mysql": {
+      "run": 37435106932,
+      "status": "IN_PROGRESS"
+    }
   }
 }

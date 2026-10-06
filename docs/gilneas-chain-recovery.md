@@ -245,3 +245,5 @@ SQL16 только ставит ScriptName36458 при пустом AIName и bl
 После подготовки этой сценки основные следующие участки кода:24902 Tobias,24904 Battle,24592 Godfrey. Это не заявление о завершении цепочки:14401 ещё требует клиентской приёмки,14400/24627 — диагностики в клиенте,14382 — flight/landing acceptance.
 
 SQL00–16 MySQL8.0.45 isolated local clone PASS, schema после успеха удалён; native Grandma/horn fixtures PASS. Это не production обновление и не полная сборка нового кода.
+
+CI7ab8c10: Reliability37435103225 с ASan/UBSan PASS. GCC37435110614, Windows37435114835 и release SQL37435106932 выполняются. Предыдущий катапультный GCCff60e37 PASS, MySQL gilneas-chain PASS, Windowsff60e37 пока выполняется. Рабочий сервер не обновлялся.
