@@ -201,6 +201,8 @@ jobs:
         run: python contrib/tests/test_gilneas_tobias_dialogue.py
       - name: Test native creature level selection and Gilneas scaling
         run: python contrib/tests/test_gilneas_scaling.py
+      - name: Test Tobias partial actor-summon failure cleanup
+        run: python contrib/tests/test_gilneas_tobias_summons.py
       - name: Audit all Gilneas script registrations
         run: python contrib/tests/audit_gilneas_bindings.py > gilneas-registrations.json
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers
