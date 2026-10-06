@@ -4055,7 +4055,9 @@ public:
         void NotifyGenn()
         {
             if (Creature* genn = ObjectAccessor::GetCreature(*me, m_gennGUID))
-                if (genn->GetEntry() == 37876)
+                if (genn->GetEntry() == 37876 && genn->GetMapId() == 654
+                    && sObjectMgr->GetScriptId("npc_king_genn_greymane_37876")
+                    && genn->GetScriptId() == sObjectMgr->GetScriptId("npc_king_genn_greymane_37876"))
                     genn->AI()->DoAction(2);
         }
 
@@ -4128,6 +4130,9 @@ public:
                 m_elapsed += diff;
                 Creature* genn = ObjectAccessor::GetCreature(*me, m_gennGUID);
                 if (!genn || !genn->IsAlive() || genn->GetMapId() != 654
+                    || genn->GetEntry() != 37876
+                    || !sObjectMgr->GetScriptId("npc_king_genn_greymane_37876")
+                    || genn->GetScriptId() != sObjectMgr->GetScriptId("npc_king_genn_greymane_37876")
                     || !me->InSamePhase(genn->GetPhaseShift()) || m_elapsed >= 60000)
                 {
                     Cancel();
@@ -4200,11 +4205,13 @@ public:
                 m_sceneStarted = false;
                 return;
             }
-            if (param != 1 || m_sceneStarted || me->GetMapId() != 654)
+            if (param != 1 || m_sceneStarted || me->GetMapId() != 654 || me->GetEntry() != 37876)
                 return;
             uint32 scriptId = sObjectMgr->GetScriptId("npc_gilneas_godfrey_departure");
             Creature* godfrey = me->FindNearestCreature(NPC_LORD_GODFREY, 20.0f);
             if (!scriptId || !godfrey || !godfrey->IsAlive()
+                || godfrey->GetMapId() != 654 || godfrey->IsSummon()
+                || !me->InSamePhase(godfrey->GetPhaseShift())
                 || godfrey->GetScriptId() != scriptId
                 || godfrey->AI()->GetData(1))
                 return;

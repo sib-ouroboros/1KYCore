@@ -157,4 +157,6 @@ def test_gilneas_database(sql, checksum):
  print('PASS: Gilneas first/repeat migration, actor bindings, 95 spawns, conflict rejection and unrelated preservation')
  from test_gilneas_tobias_database import test_gilneas_tobias_database
  test_gilneas_tobias_database(sql, checksum)
+ from test_gilneas_godfrey_database import test_gilneas_godfrey_database
+ test_gilneas_godfrey_database(sql, checksum)
  return binding_report

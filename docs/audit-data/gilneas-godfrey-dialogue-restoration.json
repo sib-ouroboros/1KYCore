@@ -1,0 +1,15 @@
+{
+  "mysql": "8.0.45",
+  "source": "isolated local release table copies, expected native bindings established",
+  "status": "PASS",
+  "sql": "2026_10_06_18_world_gilneas_godfrey_text.sql",
+  "live_database_changed": false,
+  "schema_dropped": true,
+  "quest": 24592,
+  "source_url": "https://github.com/Dawnbrightsu/JadeCore4.3.4/blob/380bfface3da0198e5c29004b1d9d2a3ab7b133d/sql/old/4.3.4/JC-DB10_to_JC-DB11_updates/world/2016_09_01_02_world_starting_zone_worgen_01.sql",
+  "download_sha256": "f2302c6c3c847b45e48e347c7cbb936d68c3d6fd2ec65e39032485a95d79ebbb",
+  "imported": "Missing group0 text/type12/probability100 only; no SmartAI or unvalidated sound19631",
+  "native_fixture": "PASS - production Godfrey/Genn classes compiled with -Wall -Wextra -Werror; Windows without sanitizers",
+  "client_verified": false,
+  "departure_route_recovered": false
+}
