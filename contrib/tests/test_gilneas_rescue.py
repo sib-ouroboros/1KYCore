@@ -67,7 +67,7 @@ struct PlayerScript{explicit PlayerScript(char const*){}virtual ~PlayerScript()=
  code+='bool Player::Gate(uint32 spellId,bool loading){'+gate+'return true;}\n'
  part=s[s.index('class npc_king_genn_greymane_37876 :'):]
  code+='struct GennAI:ScriptedAI{using ScriptedAI::ScriptedAI;EventMap m_events;ObjectGuid m_godfreyGUID;bool m_sceneStarted=false;'
- for signature in ['        void Reset()', '        void DamageTaken(', '        void DoAction(']:code+=method(part,signature).replace(' override','')
+ for signature in ['        void DamageTaken(']:code+=method(part,signature).replace(' override','')
  code+='};\n'
  part=s[s.index('class spell_gilneas_walden_brandy :'):]
  code+='struct WaldenScript:SpellScript{'+method(part,'        void HandleInebriate(')+'};\n'
@@ -100,11 +100,9 @@ int main(){
  fresh.rewarded.insert(24593);script.OnQuestStatusChange(&fresh,24593);script.OnLogin(&fresh,false);check(fresh.learned==std::vector<uint32>{68996}&&fresh.Gate(68996,false),"reward and relog exactly once");
  Player other;other.race=1;other.rewarded.insert(24593);script.OnLogin(&other,false);check(other.learned.empty()&&other.Gate(68996,false),"other races unchanged");
  Player saved;check(saved.Gate(68996,true),"saved spell load preserved");saved.level=25;check(saved.Gate(68996,false),"existing level fallback preserved");
- Creature genn,godfrey,ambient;godfrey.guid.id=5;genn.nearest=&godfrey;GennAI g(&genn);g.Reset();uint32 damage=500;g.DamageTaken(&ambient,damage);check(damage==0,"ambient NPC cannot kill Genn");
+ Creature genn,godfrey,ambient;godfrey.guid.id=5;genn.nearest=&godfrey;GennAI g(&genn);uint32 damage=500;g.DamageTaken(&ambient,damage);check(damage==0,"ambient NPC cannot kill Genn");
  damage=500;ambient.controller=&a;g.DamageTaken(&ambient,damage);check(damage==500,"player pet damage unchanged");
  damage=500;g.DamageTaken(&a,damage);check(damage==500,"player damage unchanged");genn.map=1;ambient.controller=nullptr;g.DamageTaken(&ambient,damage);check(damage==500,"other map unchanged");genn.map=654;
- g.DoAction(1);auto count=g.m_events.events.size();g.DoAction(1);check(count==1&&g.m_events.events.size()==1,"shared Genn scene starts once");
- g.Reset();genn.nearest=nullptr;g.m_godfreyGUID=ObjectGuid::Empty;g.DoAction(1);check(!g.m_sceneStarted,"missing actor permits retry");
  Creature walden;walden.entry=37733;WaldenScript spell;spell.caster=&walden;spell.target=&a;spell.HandleInebriate(2);check(spell.prevented,"Walden quest attack cannot persist alcohol");
  spell.prevented=false;a.status=QUEST_STATUS_NONE;spell.HandleInebriate(2);check(!spell.prevented,"nonquest spell unchanged");a.status=QUEST_STATUS_INCOMPLETE;walden.map=1;spell.HandleInebriate(2);check(!spell.prevented,"other map unchanged");walden.map=654;walden.entry=1;spell.HandleInebriate(2);check(!spell.prevented,"other caster unchanged");
  TorchScript torch;Creature vermin;torch.caster=&a;torch.target=&vermin;vermin.entry=37889;torch.HandleTorch(0);check(vermin.motion.flee==5000&&vermin.stopped&&a.credits.size()==2,"torch scares rat without credit");

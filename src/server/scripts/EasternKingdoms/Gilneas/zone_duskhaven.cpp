@@ -19,6 +19,8 @@
  */
 
 #include <algorithm>
+#include <cmath>
+#include <limits>
 
 #include "CreatureTextMgr.h"
 #include "GameObject.h"
@@ -38,6 +40,7 @@
 #include "SpellScript.h"
 #include "TemporarySummon.h"
 #include "Vehicle.h"
+#include "WaypointManager.h"
 #include "WorldSession.h"
 #include "zone_gilneas.h"
 
@@ -3625,6 +3628,139 @@ public:
     SpellScript* GetSpellScript() const override { return new script(); }
 };
 
+// Godfrey owns his movement callback. No path is fabricated for this scene.
+class npc_gilneas_godfrey_departure : public CreatureScript
+{
+public:
+    npc_gilneas_godfrey_departure() : CreatureScript("npc_gilneas_godfrey_departure") { }
+    struct ai : public ScriptedAI
+    {
+        ai(Creature* creature) : ScriptedAI(creature) { }
+        ObjectGuid m_gennGUID;
+        uint32 m_elapsed = 0;
+        bool m_running = false;
+        bool m_finished = false;
+        bool m_reportedMissingPath = false;
+
+        uint32 PathId() const
+        {
+            auto id = me->GetSpawnId();
+            return id <= std::numeric_limits<uint32>::max() ? static_cast<uint32>(id) : 0;
+        }
+
+        bool HasDeparturePath() const
+        {
+            WaypointPath const* path = sWaypointMgr->GetPath(PathId());
+            return PathId() && path && path->nodes.size() > 1 && path->nodes.back().id == 4
+                && std::all_of(path->nodes.begin(), path->nodes.end(), [](WaypointNode const& node)
+                {
+                    return std::isfinite(node.x) && std::isfinite(node.y) && std::isfinite(node.z);
+                });
+        }
+
+        uint32 GetData(uint32 id) const override
+        {
+            return id == 1 && (!m_gennGUID.IsEmpty() || m_finished);
+        }
+
+        void SetGUID(ObjectGuid guid, int32 id) override
+        {
+            if (id == 37876 && !GetData(1))
+                m_gennGUID = guid;
+        }
+
+        void NotifyGenn()
+        {
+            if (Creature* genn = ObjectAccessor::GetCreature(*me, m_gennGUID))
+                if (genn->GetEntry() == 37876)
+                    genn->AI()->DoAction(2);
+        }
+
+        void Cancel()
+        {
+            if (m_running)
+            {
+                me->GetMotionMaster()->Clear();
+                me->GetMotionMaster()->MoveIdle();
+                me->StopMoving();
+            }
+            m_running = false;
+            m_elapsed = 0;
+            NotifyGenn();
+            m_gennGUID = ObjectGuid::Empty;
+        }
+
+        void Reset() override
+        {
+            Cancel();
+            m_finished = false;
+        }
+
+        void JustDied(Unit*) override
+        {
+            Cancel();
+            m_finished = true;
+        }
+
+        void DoAction(int32 action) override
+        {
+            if (action == 2)
+            {
+                Cancel();
+                return;
+            }
+            if (action != 1 || m_running || m_finished || m_gennGUID.IsEmpty())
+                return;
+            if (!HasDeparturePath())
+            {
+                if (!m_reportedMissingPath)
+                {
+                    TC_LOG_ERROR("sql.sql", "Gilneas Godfrey37875 departure path %u is absent or incomplete; movement skipped", PathId());
+                    m_reportedMissingPath = true;
+                }
+                Cancel();
+                return;
+            }
+            m_running = true;
+            me->GetMotionMaster()->MovePath(PathId(), false);
+            // Waypoint movement controls the spline. The scene must not leave
+            // a persistent NPC with manually disabled gravity.
+        }
+
+        void MovementInform(uint32 type, uint32 id) override
+        {
+            if (!m_running || type != WAYPOINT_MOTION_TYPE || id != 4)
+                return;
+            m_running = false;
+            m_finished = true;
+            NotifyGenn();
+            m_gennGUID = ObjectGuid::Empty;
+            me->DespawnOrUnsummon(5s);
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            if (!m_gennGUID.IsEmpty())
+            {
+                m_elapsed += diff;
+                Creature* genn = ObjectAccessor::GetCreature(*me, m_gennGUID);
+                if (!genn || !genn->IsAlive() || genn->GetMapId() != 654
+                    || !me->InSamePhase(genn->GetPhaseShift()) || m_elapsed >= 60000)
+                {
+                    Cancel();
+                    return;
+                }
+            }
+            if (UpdateVictim())
+                DoMeleeAttackIfReady();
+        }
+    };
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return creature->GetMapId() == 654 && !creature->IsSummon() ? new ai(creature) : nullptr;
+    }
+};
+
 // 37876
 class npc_king_genn_greymane_37876 : public CreatureScript
 {
@@ -3649,10 +3785,14 @@ public:
 
         EventMap m_events;
         ObjectGuid m_godfreyGUID;
-        bool m_sceneStarted;
+        bool m_sceneStarted = false;
 
         void Reset() override
         {
+            if (m_sceneStarted)
+                if (Creature* godfrey = ObjectAccessor::GetCreature(*me, m_godfreyGUID))
+                    if (godfrey->GetScriptId() == sObjectMgr->GetScriptId("npc_gilneas_godfrey_departure"))
+                        godfrey->AI()->DoAction(2);
             m_events.Reset();
             m_sceneStarted = false;
             m_godfreyGUID = ObjectGuid::Empty;
@@ -3671,40 +3811,30 @@ public:
 
         void DoAction(int32 param) override
         {
-            if (param != 1 || m_sceneStarted)
+            if (param == 2)
+            {
+                m_events.Reset();
+                m_sceneStarted = false;
                 return;
-
-            if (!m_godfreyGUID)
-                if (Creature* godfrey = me->FindNearestCreature(NPC_LORD_GODFREY, 20.0f))
-                    m_godfreyGUID = godfrey->GetGUID();
-
-            if (!m_godfreyGUID)
+            }
+            if (param != 1 || m_sceneStarted || me->GetMapId() != 654)
                 return;
+            uint32 scriptId = sObjectMgr->GetScriptId("npc_gilneas_godfrey_departure");
+            Creature* godfrey = me->FindNearestCreature(NPC_LORD_GODFREY, 20.0f);
+            if (!scriptId || !godfrey || !godfrey->IsAlive()
+                || godfrey->GetScriptId() != scriptId
+                || godfrey->AI()->GetData(1))
+                return;
+            m_godfreyGUID = godfrey->GetGUID();
+            godfrey->AI()->SetGUID(me->GetGUID(), 37876);
             m_sceneStarted = true;
             m_events.ScheduleEvent(EVENT_START_ANIM, 100ms);
         }
 
-        void MovementInform(uint32 type, uint32 id) override
-        {
-            if (type == WAYPOINT_MOTION_TYPE)
-            {
-                switch (id)
-                {
-                    case 4:
-                    {
-                        if (Creature* godfrey = ObjectAccessor::GetCreature(*me, m_godfreyGUID))
-                        {
-                            godfrey->SetDisableGravity(false);
-                            godfrey->DespawnOrUnsummon(5s);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-
         void UpdateAI(uint32 diff) override
         {
+            if (m_sceneStarted && !ObjectAccessor::GetCreature(*me, m_godfreyGUID))
+                DoAction(2);
             m_events.Update(diff);
 
             while (uint32 eventId = m_events.ExecuteEvent())
@@ -3726,7 +3856,8 @@ public:
                     case EVENT_START_ANIM + 2:
                     {
                         if (Creature* godfrey = ObjectAccessor::GetCreature(*me, m_godfreyGUID))
-                            godfrey->AI()->Talk(0);
+                            if (sCreatureTextMgr->TextExist(NPC_LORD_GODFREY, 0))
+                                godfrey->AI()->Talk(0);
 
                         m_events.ScheduleEvent(EVENT_START_ANIM + 3, 3s);
                         break;
@@ -3735,9 +3866,10 @@ public:
                     {
                         if (Creature* godfrey = ObjectAccessor::GetCreature(*me, m_godfreyGUID))
                         {
-                            godfrey->GetMotionMaster()->MovePath(godfrey->GetSpawnId(), false);
-                            godfrey->SetDisableGravity(true);
+                            godfrey->AI()->DoAction(1);
                         }
+                        else
+                            DoAction(2);
 
                         break;
                     }
@@ -4080,6 +4212,7 @@ void AddSC_zone_gilneas_duskhaven()
     new npc_trigger_quest_24616();
     new item_belysras_talisman_49944();
     new npc_tobias_mistmantle_38051();
+    new npc_gilneas_godfrey_departure();
     new npc_king_genn_greymane_37876();
     new npc_lord_hewell_38764();
     new npc_stout_mountain_horse_38765();

@@ -9,7 +9,7 @@ from audit_gilneas_bindings import registered_scripts, audit
 
 def test_gilneas_database(sql, checksum):
  root=Path(__file__).resolve().parents[2]
- files=['2026_10_06_00_world_gilneas_early_mechanics.sql','2026_10_06_01_world_gilneas_quest_object_spawns.sql','2026_10_06_02_world_gilneas_rescue_bindings.sql','2026_10_06_03_world_gilneas_duskhaven_phase_handoff.sql','2026_10_06_04_world_gilneas_walden_genn.sql','2026_10_06_05_world_gilneas_half_burnt_torch.sql','2026_10_06_06_world_gilneas_liberation_day.sql','2026_10_06_07_world_gilneas_horn_of_taldoren.sql','2026_10_06_08_world_gilneas_chance_lucius.sql','2026_10_06_09_world_gilneas_manor_ride.sql','2026_10_06_10_world_gilneas_late_phase_handoffs.sql','2026_10_06_11_world_gilneas_leader_of_the_pack.sql','2026_10_06_12_world_gilneas_bat_flight.sql','2026_10_06_13_world_gilneas_exodus_carriage.sql']
+ files=['2026_10_06_00_world_gilneas_early_mechanics.sql','2026_10_06_01_world_gilneas_quest_object_spawns.sql','2026_10_06_02_world_gilneas_rescue_bindings.sql','2026_10_06_03_world_gilneas_duskhaven_phase_handoff.sql','2026_10_06_04_world_gilneas_walden_genn.sql','2026_10_06_05_world_gilneas_half_burnt_torch.sql','2026_10_06_06_world_gilneas_liberation_day.sql','2026_10_06_07_world_gilneas_horn_of_taldoren.sql','2026_10_06_08_world_gilneas_chance_lucius.sql','2026_10_06_09_world_gilneas_manor_ride.sql','2026_10_06_10_world_gilneas_late_phase_handoffs.sql','2026_10_06_11_world_gilneas_leader_of_the_pack.sql','2026_10_06_12_world_gilneas_bat_flight.sql','2026_10_06_13_world_gilneas_exodus_carriage.sql','2026_10_06_14_world_gilneas_godfrey_departure.sql']
  texts=[(root/'sql/updates/world'/name).read_text('utf8') for name in files]
  manifest=json.loads((root/'docs/audit-data/gilneas-static-restoration.json').read_text('utf8'))
  tables=sql('SHOW TABLES;').stdout.splitlines()
@@ -38,7 +38,7 @@ def test_gilneas_database(sql, checksum):
  assert sql('SELECT COUNT(*) FROM gameobject WHERE id=196403 AND map=654 AND PhaseId=182;').stdout.strip()=='10'
  assert sql('SELECT * FROM spell_area WHERE area BETWEEN 7037 AND 7129 ORDER BY spell,area,quest_start,quest_end;').stdout==foreign_phases,'Draenor phases changed'
  assert sql('SELECT COUNT(*) FROM spell_area WHERE spell=68483 AND area=4714 AND quest_start=14396 AND quest_start_status=74;').stdout.strip()=='1'
- for entry,script in [(36409,'npc_mastiff_36409'),(36405,'npc_mastiff_36405'),(37783,'npc_lorna_crowley_37783'),(36741,'npc_swift_mountain_horse_36741'),(36452,'npc_gwen_armstead_36452'),(36606,'npc_queen_mia_greymane_36606'),(36459,'npc_chance_36459'),(36461,'npc_gilneas_lucius_the_cruel'),(38027,'npc_gilneas_taldoren_tracker'),(37694,'npc_enslaved_villager_37694'),(37876,'npc_king_genn_greymane_37876'),(36290,'npc_lord_godfrey_36290'),(36287,'npc_cynthia_36267'),(36288,'npc_ashley_36269'),(36289,'npc_james_36268'),(36231,'npc_horrid_abomination_36231'),(36440,'npc_drowning_watchman_36440'),(36540,'npc_mountain_horse_36540'),(36555,'npc_mountain_horse_36555'),(37067,'npc_crash_survivor_37067'),(37078,'npc_swamp_crocolisk_37078'),(36488,'npc_forsaken_castaway_36488')]:
+ for entry,script in [(37875,'npc_gilneas_godfrey_departure'),(36409,'npc_mastiff_36409'),(36405,'npc_mastiff_36405'),(37783,'npc_lorna_crowley_37783'),(36741,'npc_swift_mountain_horse_36741'),(36452,'npc_gwen_armstead_36452'),(36606,'npc_queen_mia_greymane_36606'),(36459,'npc_chance_36459'),(36461,'npc_gilneas_lucius_the_cruel'),(38027,'npc_gilneas_taldoren_tracker'),(37694,'npc_enslaved_villager_37694'),(37876,'npc_king_genn_greymane_37876'),(36290,'npc_lord_godfrey_36290'),(36287,'npc_cynthia_36267'),(36288,'npc_ashley_36269'),(36289,'npc_james_36268'),(36231,'npc_horrid_abomination_36231'),(36440,'npc_drowning_watchman_36440'),(36540,'npc_mountain_horse_36540'),(36555,'npc_mountain_horse_36555'),(37067,'npc_crash_survivor_37067'),(37078,'npc_swamp_crocolisk_37078'),(36488,'npc_forsaken_castaway_36488')]:
   assert script in registered,(entry,script,'unregistered C++')
   assert sql(f"SELECT COUNT(*) FROM creature_template WHERE entry={entry} AND ScriptName='{script}' AND AIName='';").stdout.strip()=='1',(entry,script)
  for spell,script in [(72472,'spell_gilneas_captured_bat_summon'),(68682,'spell_gilneas_leader_of_the_pack'),(71061,'spell_gilneas_horn_of_taldoren'),(68735,'spell_rescue_drowning_watchman_68735'),(68903,'spell_round_up_horse_68903'),(75359,'spell_gilneas_walden_brandy'),(70631,'spell_gilneas_half_burnt_torch')]:
@@ -123,5 +123,13 @@ def test_gilneas_database(sql, checksum):
  sql("UPDATE creature_template SET ScriptName='custom_child',AIName='' WHERE entry=36288;")
  for text in (texts[0],texts[2]):sql(text)
  assert sql("SELECT ScriptName FROM creature_template WHERE entry=36288;").stdout.strip()=='custom_child'
+ # Godfrey binding must preserve administrator scripts and alternate AI.
+ sql("UPDATE creature_template SET ScriptName='custom_godfrey',AIName='' WHERE entry=37875;")
+ before=checksum(tables);sql(texts[14]);assert checksum(tables)==before,'Custom Godfrey script overwritten'
+ sql("UPDATE creature_template SET ScriptName='',AIName='SmartAI' WHERE entry=37875;")
+ before=checksum(tables);sql(texts[14]);assert checksum(tables)==before,'Alternate Godfrey AI overwritten'
+ sql("UPDATE creature_template SET ScriptName='',AIName='' WHERE entry=37875;")
+ sql(texts[14])
+ assert sql("SELECT ScriptName FROM creature_template WHERE entry=37875;").stdout.strip()=='npc_gilneas_godfrey_departure'
  print('PASS: Gilneas first/repeat migration, actor bindings, 95 spawns, conflict rejection and unrelated preservation')
  return binding_report

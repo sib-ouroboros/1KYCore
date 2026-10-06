@@ -1,0 +1,50 @@
+{
+  "quest": 24592,
+  "map": 654,
+  "phase": 186,
+  "godfrey": {
+    "entry": 37875,
+    "guid": 802361,
+    "position": [
+      -2041.35,
+      979.016,
+      70.1487
+    ],
+    "path_id": 802361,
+    "waypoint_count": 0,
+    "text_group_0_present": false
+  },
+  "genn": {
+    "entry": 37876,
+    "guid": 802362,
+    "position": [
+      -2045.12,
+      977.207,
+      70.1487
+    ],
+    "text_group_0_present": true
+  },
+  "scope": "Callback ownership and bounded safe cancellation; not a completed cinematic",
+  "sources": [
+    {
+      "repo": "Arkania/ArkCORE-NG",
+      "commit": "a7304c3075bf8ee7eb5bdf45f31cda01c8626b52"
+    },
+    {
+      "repo": "AshamaneProject/AshamaneCore",
+      "commit": "b09c1c393cf2e01bc5e857ea6117680d2aaeadb0"
+    }
+  ],
+  "local_checks": {
+    "production_handler_fixture": "PASS",
+    "rescue_fixture": "PASS",
+    "compiler": "g++ -std=c++17 -Wall -Wextra -Werror; Windows without sanitizers"
+  },
+  "limitations": [
+    "No verified production departure route or Godfrey dialogue",
+    "Synthetic fixture route is algorithm coverage only",
+    "Full GCC/Windows and Linux sanitizer CI to run on this commit",
+    "Client26972 acceptance pending"
+  ],
+  "production_server_updated": false
+}

@@ -31,6 +31,7 @@ on:
       - contrib/tests/test_gilneas_transport.py
       - contrib/tests/test_gilneas_bat.py
       - contrib/tests/test_gilneas_carriage.py
+      - contrib/tests/test_gilneas_godfrey.py
       - contrib/tests/test_gilneas_mastiffs.py
       - contrib/tests/test_summon_visibility.py
       - src/server/game/Entities/Creature/TemporarySummon.*
@@ -172,6 +173,8 @@ jobs:
         run: python contrib/tests/test_gilneas_bat.py
       - name: Test Exodus nested vehicles, callback order and owner cleanup with sanitizers
         run: python contrib/tests/test_gilneas_carriage.py
+      - name: Test Godfrey movement ownership, missing data and scene cleanup with sanitizers
+        run: python contrib/tests/test_gilneas_godfrey.py
       - name: Audit all Gilneas script registrations
         run: python contrib/tests/audit_gilneas_bindings.py > gilneas-registrations.json
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers
