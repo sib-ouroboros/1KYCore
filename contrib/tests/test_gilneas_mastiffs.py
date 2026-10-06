@@ -26,7 +26,8 @@ using EvadeReason=int;
 struct ObjectGuid{int id=0;bool IsEmpty()const{return !id;}static const ObjectGuid Empty;};const ObjectGuid ObjectGuid::Empty{};
 bool operator!=(ObjectGuid a,ObjectGuid b){return a.id!=b.id;}
 struct Player;struct Creature;struct TempSummon;
-struct Unit{uint32 map=654,entry=0;ObjectGuid guid;bool alive=true,phase=true;virtual~Unit()=default;virtual Player*ToPlayer(){return nullptr;}virtual Creature*ToCreature(){return nullptr;}ObjectGuid GetGUID(){return guid;}uint32 GetMapId(){return map;}uint32 GetEntry(){return entry;}bool IsAlive(){return alive;}bool IsInWorld(){return true;}bool InSamePhase(Unit*){return phase;}};
+struct PhaseShift {};
+struct Unit{uint32 map=654,entry=0;ObjectGuid guid;bool alive=true,phase=true;virtual~Unit()=default;virtual Player*ToPlayer(){return nullptr;}virtual Creature*ToCreature(){return nullptr;}ObjectGuid GetGUID(){return guid;}uint32 GetMapId(){return map;}uint32 GetEntry(){return entry;}bool IsAlive(){return alive;}bool IsInWorld(){return true;}PhaseShift const& GetPhaseShift() const {static PhaseShift value;return value;}bool InSamePhase(PhaseShift const&){return phase;}};
 struct MotionMaster{void MoveChase(Unit*,float,float){}void MoveIdle(){}};
 struct Position{};float frand(float,float){return 0;}uint32 urand(uint32 a,uint32){return a;}
 struct CreatureAI{std::map<int32,int>ids;virtual~CreatureAI()=default;virtual void SetGUID(ObjectGuid g,int32 i){ids[i]=g.id;}};

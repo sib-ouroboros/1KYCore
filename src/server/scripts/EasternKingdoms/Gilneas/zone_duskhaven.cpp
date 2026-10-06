@@ -938,7 +938,7 @@ public:
             }
             Creature* existing = player->GetSummonedCreatureByEntry(36409);
             Creature* thyala = me->FindNearestCreature(NPC_DARK_RANGER_THYALA, 100.0f);
-            if ((existing && existing != me) || !thyala || !thyala->InSamePhase(player)
+            if ((existing && existing != me) || !thyala || !thyala->InSamePhase(player->GetPhaseShift())
                 || (thyala->GetLootRecipient() && !thyala->isTappedBy(player)))
             {
                 me->DespawnOrUnsummon();
@@ -985,8 +985,8 @@ public:
             Creature* thyala = ObjectAccessor::GetCreature(*me, m_thyalaGUID);
             if (m_lifetime >= 120000 || !player || !player->IsAlive() || player->GetMapId() != 654
                 || player->GetQuestStatus(QUEST_LEADER_OF_THE_PACK) != QUEST_STATUS_INCOMPLETE
-                || !me->InSamePhase(player) || !thyala || !thyala->IsAlive()
-                || !thyala->InSamePhase(player) || me->GetDistance(player) > 100.0f
+                || !me->InSamePhase(player->GetPhaseShift()) || !thyala || !thyala->IsAlive()
+                || !thyala->InSamePhase(player->GetPhaseShift()) || me->GetDistance(player) > 100.0f
                 || (thyala->GetLootRecipient() && !thyala->isTappedBy(player)))
             {
                 m_events.Reset();
@@ -1003,7 +1003,7 @@ public:
                 {
                     if (m_summons.size() >= 50)
                         break;
-                    if (trigger->InSamePhase(player))
+                    if (trigger->InSamePhase(player->GetPhaseShift()))
                         me->SummonCreature(NPC_MASTIFF, trigger->GetNearPosition(5.0f, frand(0.0f, 6.28f)),
                             TEMPSUMMON_TIMED_DESPAWN, urand(30000, 60000));
                 }
@@ -1096,7 +1096,7 @@ public:
             Player* player = ObjectAccessor::GetPlayer(*me, m_player_GUID);
             if (!damage || !thyala || thyala->GetEntry() != NPC_DARK_RANGER_THYALA
                 || thyala->GetGUID() != m_thyalaGUID || !player || !player->IsAlive()
-                || player->GetMapId() != 654 || !me->InSamePhase(player)
+                || player->GetMapId() != 654 || !me->InSamePhase(player->GetPhaseShift())
                 || player->GetQuestStatus(QUEST_LEADER_OF_THE_PACK) != QUEST_STATUS_INCOMPLETE
                 || (thyala->GetLootRecipient() && !thyala->isTappedBy(player)))
                 return;
@@ -1129,7 +1129,7 @@ public:
                 TempSummon* summon = me->ToTempSummon();
                 if (!player || !player->IsAlive() || player->GetMapId() != 654
                     || player->GetQuestStatus(QUEST_LEADER_OF_THE_PACK) != QUEST_STATUS_INCOMPLETE
-                    || !me->InSamePhase(player) || !summon
+                    || !me->InSamePhase(player->GetPhaseShift()) || !summon
                     || !ObjectAccessor::GetCreature(*me, summon->GetSummonerGUID()))
                 {
                     me->DespawnOrUnsummon();

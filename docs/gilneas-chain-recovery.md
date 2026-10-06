@@ -158,3 +158,9 @@ Native fixture проверяет50/60 triggers, death+despawn, свободно
 CI наa88c829: GCC и Windows полные сборки PASS, Reliability PASS, MySQL gilneas-chain PASS. На5baa187 Reliability с ASan/UBSan PASS, полные сборки выполняются. Это не результаты ещё не опубликованного12.
 
 Пакет00–12 локально: native mechanics/vehicles/pack/phases PASS; MySQL8.0.45 первичное/повторное применение,74 bat/28 horse points,432 actor phases, route conflicts, чужие scripts/tables/Draenor rules PASS. Binding snapshot:94 зарегистрированных класса,77 BOUND,17 MISSING_BINDING; диагностика копии без повторного раннего05.10_04. Это не17 оставшихся квестов: часть классов связана с другими стадиями или небезопасными неподготовленными сценами.
+
+### Проверка сборок и приватности временных NPC
+
+На5baa187 полные GCC/Windows сборки обнаружили шесть неверных вызовов InSamePhase(Player*). Исправлены на InSamePhase(player->GetPhaseShift()); native fixture теперь использует реальную сигнатуру PhaseShift const&, чтобы не скрывать такую несовместимость. Reliability и полный MySQL workflow на5baa187 PASS.
+
+TempSummon дублировал флаг приватности WorldObject: Map записывал производное поле, CanSeeOrDetect читал базовое. Удалено дублирование, используется единый штатный флаг WorldObject. Native fixture воспроизводит ошибку на старом header и проходит на исправленном; проверяет owner/другого игрока, переключение через оба типа указателей, публичных NPC и приватные GO. Флаг по умолчанию остаётся false. Полная сборка и клиентская проверка персональных сцен ещё требуются.
