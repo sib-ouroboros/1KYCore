@@ -372,3 +372,10 @@ SQL19 restores5..20 scaling with neutral delta0 inferred from the existing range
 Quest14400 currently has native item objective49279, chest196472 with loot27591 (100% quest-required item), a real map654 spawn without a restrictive PhaseId/PhaseGroup, and no custom script. Data14=23645 is the chest openTextID, not a wrong quest ID; no template field is changed based on that number. Client Lock1691, ordinary-character interaction, visibility and item acquisition still need reproduction. This audit does not establish that the whole quest works, and GM completion is not acceptance. Local data snapshot: gilneas-remaining-quest-data.json.
 
 Previous038b74b GCC37466500915, Windows37466504247 and Reliability37466506459 passed. Release-migration37466508011 was still running at this check; no overall SQL CI success is claimed. Production server remains untouched.
+
+
+### Tobias24902: interrupted-scene lifecycle hardening
+
+Tobias now invokes the same idempotent tracked-actor cleanup on his own JustDied callback. Previously only owner death/cancellation/reset/timeout were covered, allowing scene actors to outlive a dead guide. Sylvanas' final event additionally requires the exact linked Tobias to remain alive on the same map/phase, with expected entry38507 and matching player GUID from his AI. Missing/despawned/dead/reassigned controllers cannot award completion. Sylvanas Reset now clears queued dialogue events and the two dialogue/completion latches as well as GUIDs, so an old queued conversation does not survive reset.
+
+Both native fixtures passed local strict C++ compilation/execution, including repeated guide death (cleanup once), controller loss/death/map/phase/entry/owner mismatch and reset of queued dialogue. They compile the actual production methods/final event case, not the whole server conversation scheduler. SQL and retail dialogue/route coordinates are unchanged. Linux ASan/UBSan and full builds are dispatched separately; client26972 acceptance still pending. No production server changes.

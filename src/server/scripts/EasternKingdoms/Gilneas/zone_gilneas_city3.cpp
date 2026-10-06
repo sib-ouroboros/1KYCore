@@ -183,6 +183,11 @@ public:
             me->DespawnOrUnsummon();
         }
 
+        void JustDied(Unit*) override
+        {
+            StopScene();
+        }
+
         bool UpdateSceneOwner(uint32 diff)
         {
             if (m_stopped || m_playerGUID.IsEmpty())
@@ -525,6 +530,9 @@ public:
 
         void Reset() override
         {
+            m_events.Reset();
+            m_dialogueStarted = false;
+            m_completionHandled = false;
             m_playerGUID = ObjectGuid::Empty;
             m_tobiasGUID = ObjectGuid::Empty;
             m_sylvanasGUID = ObjectGuid::Empty;
@@ -654,6 +662,11 @@ public:
                             m_events.RescheduleEvent(EVENT_END, 1000);
                             break;
                         }
+                        Creature* tobias = ObjectAccessor::GetCreature(*me, m_tobiasGUID);
+                        if (!tobias || !tobias->IsAlive() || tobias->GetEntry() != NPC_TOBIAS_MISTMANTLE
+                            || tobias->GetMapId() != me->GetMapId() || !tobias->IsInPhase(player)
+                            || tobias->AI()->GetGUID(PLAYER_GUID) != m_playerGUID)
+                            break;
                         m_completionHandled = true;
                         if (Creature* crenshaw = ObjectAccessor::GetCreature(*me, m_crenshawGUID))
                             crenshaw->GetMotionMaster()->MovePoint(2010, -1566.053f, 1557.191f, 29.36808f);
