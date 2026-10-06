@@ -1,0 +1,47 @@
+{
+  "scope": "Transport lifecycle audit and hardening for14416 and24920; adjacent14395/14465/24438/14401/phase tests",
+  "changes": [
+    "Live horse delivery distance/map/phase/alive/entry checks",
+    "Rope owner validation, immutable ownership, hit-time target revalidation and Lorna reacquisition",
+    "Rope follower resets cancel; default AI preserved for persistent/outside-map actors",
+    "Bat circuit and return-path finite/ordered/final-node preflight before flight",
+    "Bat owner immutable; boarding repeats owner phase/path validation"
+  ],
+  "client_data": {
+    "build": 26654,
+    "target_build": 26972,
+    "spell68903_trigger": 68908,
+    "spell68908_summon_entry": 36555,
+    "spell68908_duration_index": 40,
+    "duration_ms": 1200000,
+    "limitation": "Available client DB2 are build26654; target26972 acceptance is still required"
+  },
+  "local_checks": {
+    "test_gilneas_rescue.py": "PASS",
+    "test_gilneas_bat.py": "PASS",
+    "test_gilneas_transport.py": "PASS",
+    "test_gilneas_carriage.py": "PASS",
+    "test_gilneas_grandma.py": "PASS",
+    "test_gilneas_phases.py": "PASS",
+    "compiler": "g++ -std=c++17 -Wall -Wextra -Werror; Windows without sanitizers"
+  },
+  "previous_ci": {
+    "commit": "dccd5b8",
+    "gcc": 37471890746,
+    "windows": 37471902119,
+    "reliability": 37471908148,
+    "result": "PASS",
+    "sql_gilneas_chain": {
+      "run": 37470067601,
+      "result": "PASS for Gilneas job only; full migration suite still running"
+    }
+  },
+  "sql_changed": false,
+  "production_server_updated": false,
+  "client_verified": false,
+  "remaining": [
+    "Godfrey24592 departure route802361",
+    "14400 ordinary character diagnosis",
+    "Client acceptance of all prepared scenes"
+  ]
+}

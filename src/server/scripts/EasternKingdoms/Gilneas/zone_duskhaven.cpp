@@ -1891,10 +1891,17 @@ public:
         bool m_isLornaNear;
         bool m_isPlayerMounted;
         bool m_hasPlayerRope;
+        uint32 m_lifetime = 0; // Spell68908 duration40: twenty minutes.
 
         void Reset() override
         {
             m_events.Reset();
+            if (!m_playerGUID.IsEmpty())
+            {
+                me->DespawnOrUnsummon();
+                return;
+            }
+            m_lifetime = 0;
             m_playerGUID = ObjectGuid::Empty;
             m_lornaGUID = ObjectGuid::Empty;
             m_isLornaNear = false;
@@ -1906,28 +1913,44 @@ public:
 
         void IsSummonedBy(Unit* summoner) override
         {
-            if (Player* player = summoner->ToPlayer())
+            if (!m_playerGUID.IsEmpty())
+                return;
+            Player* player = summoner ? summoner->ToPlayer() : nullptr;
+            if (!player || !player->IsAlive() || me->GetMapId() != 654
+                || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
+                || player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
             {
-                m_playerGUID = summoner->GetGUID();
-                me->CastSpell(player, SPELL_ROPE_CHANNEL, true);
-                m_dist = frand(3.0f, 5.0f);
-                m_angle = frand(2.59f, 3.53f);
-                m_size = me->GetObjectSize();
-                m_oldPosition = player->GetPosition();
-                m_events.ScheduleEvent(EVENT_START_FOLLOWING, 100ms);
+                me->DespawnOrUnsummon();
+                return;
             }
+            m_playerGUID = player->GetGUID();
+            me->SetReactState(REACT_PASSIVE);
+            me->CastSpell(player, SPELL_ROPE_CHANNEL, true);
+            m_dist = frand(3.0f, 5.0f);
+            m_angle = frand(2.59f, 3.53f);
+            m_size = me->GetObjectSize();
+            m_oldPosition = player->GetPosition();
+            m_events.ScheduleEvent(EVENT_START_FOLLOWING, 100ms);
         }
 
         void MoveInLineOfSight(Unit* who) override
         {
             if (!m_lornaGUID)
                 if (Creature* lorna = who->ToCreature())
-                    if (lorna->GetEntry() == NPC_LORNA_CROWLEY)
+                    if (lorna->GetEntry() == NPC_LORNA_CROWLEY && lorna->IsAlive()
+                        && lorna->GetMapId() == me->GetMapId() && me->IsInPhase(lorna))
                         m_lornaGUID = lorna->GetGUID();
         }
 
         void UpdateAI(uint32 diff) override
         {
+            if (diff >= 1200000 - m_lifetime)
+            {
+                m_events.Reset();
+                me->DespawnOrUnsummon();
+                return;
+            }
+            m_lifetime += diff;
             m_events.Update(diff);
 
             while (uint32 eventId = m_events.ExecuteEvent())
@@ -1938,7 +1961,8 @@ public:
                     {
                         if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
                         {
-                            if (!player->IsAlive() || player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
+                            if (!player->IsAlive() || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
+                                || player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
                             {
                                 me->DespawnOrUnsummon();
                                 return;
@@ -1983,14 +2007,20 @@ public:
             m_hasPlayerRope = player->HasAura(SPELL_ROPE_CHANNEL);
 
             if (!m_lornaGUID.IsEmpty())
-                if (Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID))
-                    m_isLornaNear = (player->GetDistance(lorna) < 10.0f);
+            {
+                Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID);
+                if (!lorna || lorna->GetEntry() != NPC_LORNA_CROWLEY || !lorna->IsAlive()
+                    || lorna->GetMapId() != player->GetMapId() || !lorna->IsInPhase(player))
+                    m_lornaGUID = ObjectGuid::Empty;
+                else
+                    m_isLornaNear = player->GetDistance(lorna) < 10.0f;
+            }
         }
     };
 
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_mountain_horse_36555AI(creature);
+        return creature->GetMapId() == 654 && creature->IsSummon() ? new npc_mountain_horse_36555AI(creature) : nullptr;
     }
 };
 
@@ -2028,6 +2058,15 @@ public:
             m_creditGiven = false;
         }
 
+        bool IsAtLorna(Player* player) const
+        {
+            Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID);
+            return player && player->GetMapId() == 654 && me->GetMapId() == 654
+                && me->IsInPhase(player) && lorna && lorna->GetEntry() == NPC_LORNA_CROWLEY
+                && lorna->IsAlive() && lorna->GetMapId() == player->GetMapId()
+                && lorna->IsInPhase(player) && player->GetDistance(lorna) < 7.0f;
+        }
+
         void PassengerBoarded(Unit* passenger, int8 /*seatId*/, bool apply) override
         {
             Player* player = passenger ? passenger->ToPlayer() : nullptr;
@@ -2036,7 +2075,9 @@ public:
 
             if (apply)
             {
-                if (player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE
+                if (!player->IsAlive() || me->GetMapId() != 654
+                    || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
+                    || player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE
                     || (!m_playerGUID.IsEmpty() && m_playerGUID != player->GetGUID()) || m_creditGiven)
                 {
                     player->ExitVehicle();
@@ -2051,7 +2092,7 @@ public:
             else if (m_playerGUID == player->GetGUID())
             {
                 m_events.Reset();
-                if (!m_creditGiven && m_lornaIsNear && player->IsAlive()
+                if (!m_creditGiven && IsAtLorna(player) && player->IsAlive()
                     && player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) == QUEST_STATUS_INCOMPLETE)
                 {
                     m_creditGiven = true;
@@ -2077,7 +2118,8 @@ public:
                             return;
 
                         Player* owner = ObjectAccessor::GetPlayer(*me, m_playerGUID);
-                        if (!owner || !owner->IsAlive()
+                        if (!owner || !owner->IsAlive() || owner->GetMapId() != me->GetMapId()
+                            || !me->IsInPhase(owner)
                             || owner->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
                         {
                             if (owner)
@@ -2091,18 +2133,20 @@ public:
                         m_lornaIsNear = false;
                         me->SetHealth(me->GetMaxHealth());
 
+                        if (!m_lornaGUID.IsEmpty())
+                        {
+                            Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID);
+                            if (!lorna || !lorna->IsAlive() || lorna->GetEntry() != NPC_LORNA_CROWLEY
+                                || !lorna->IsInPhase(owner))
+                                m_lornaGUID = ObjectGuid::Empty;
+                        }
                         if (!m_lornaGUID)
                             if (Creature* lorna = me->FindNearestCreature(NPC_LORNA_CROWLEY, 100.0f))
                                 m_lornaGUID = lorna->GetGUID();
 
-                        if (Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID))
-                            if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                            {
-                                m_lornaIsNear = player->GetDistance(lorna) < 7.0f;
-
-                                if (m_lornaIsNear)
-                                    player->ExitVehicle();
-                            }
+                        m_lornaIsNear = IsAtLorna(owner);
+                        if (m_lornaIsNear)
+                            owner->ExitVehicle();
 
                         if (!m_playerGUID.IsEmpty() && !m_creditGiven)
                             m_events.ScheduleEvent(EVENT_CHECK_HEALTH_AND_LORNA, 1s);
@@ -2138,7 +2182,8 @@ public:
         {
             Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
             Creature* horse = GetExplTargetUnit() ? GetExplTargetUnit()->ToCreature() : nullptr;
-            if (!player || !horse || horse->GetEntry() != 36540 || !horse->IsAlive()
+            if (!player || !player->IsAlive() || !horse || horse->GetEntry() != 36540 || !horse->IsAlive()
+                || player->GetMapId() != 654 || horse->GetMapId() != player->GetMapId() || !horse->IsInPhase(player)
                 || horse->GetVehicleBase()
                 || player->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
                 return SPELL_FAILED_BAD_TARGETS;
@@ -2151,7 +2196,12 @@ public:
                 || !GetCaster()->ToPlayer() || GetCaster()->ToPlayer()->GetQuestStatus(QUEST_THE_HUNGRY_ETTIN) != QUEST_STATUS_INCOMPLETE)
                 return;
 
-            GetHitUnit()->ToCreature()->DespawnOrUnsummon();
+            Player* player = GetCaster()->ToPlayer();
+            Creature* horse = GetHitUnit()->ToCreature();
+            if (!player->IsAlive() || !horse->IsAlive() || player->GetMapId() != 654
+                || horse->GetMapId() != player->GetMapId() || !horse->IsInPhase(player) || horse->GetVehicleBase())
+                return;
+            horse->DespawnOrUnsummon();
         }
 
         void Register() override

@@ -743,12 +743,44 @@ public:
             return id == PLAYER_GUID ? m_playerGUID : ObjectGuid::Empty;
         }
 
+        bool HasFlightPaths() const
+        {
+            uint32 const paths[] = {3854001, 3854003};
+            uint32 const endpoints[] = {60, 14};
+            for (uint32 i = 0; i < 2; ++i)
+            {
+                WaypointPath const* path = sWaypointMgr->GetPath(paths[i]);
+                if (!path || path->nodes.size() < 2 || path->nodes.back().id != endpoints[i])
+                    return false;
+                uint32 previousId = 0;
+                bool first = true;
+                for (WaypointNode const& node : path->nodes)
+                {
+                    if (!std::isfinite(node.x) || !std::isfinite(node.y) || !std::isfinite(node.z)
+                        || (!first && node.id <= previousId))
+                        return false;
+                    previousId = node.id;
+                    first = false;
+                }
+            }
+            return true;
+        }
+
         void IsSummonedBy(Unit* summoner) override
         {
+            if (!m_playerGUID.IsEmpty())
+                return;
             Player* player = summoner ? summoner->ToPlayer() : nullptr;
-            if (!player || !player->IsAlive() || player->GetMapId() != 654
+            if (!player || !player->IsAlive() || me->GetMapId() != 654 || player->GetMapId() != 654
+                || !me->IsInPhase(player)
                 || player->GetQuestStatus(24920) != QUEST_STATUS_INCOMPLETE)
             {
+                me->DespawnOrUnsummon();
+                return;
+            }
+            if (!HasFlightPaths())
+            {
+                TC_LOG_ERROR("sql.sql", "Gilneas quest24920: invalid bat flight/return paths3854001/3854003; boarding skipped");
                 me->DespawnOrUnsummon();
                 return;
             }
@@ -791,6 +823,7 @@ public:
                     return;
                 if (!player || !player->IsAlive() || seatId != 0 || m_boarded
                     || player->GetGUID() != m_playerGUID || player->GetMapId() != 654
+                    || !me->IsInPhase(player) || !HasFlightPaths()
                     || player->GetQuestStatus(24920) != QUEST_STATUS_INCOMPLETE)
                 {
                     if (passenger)

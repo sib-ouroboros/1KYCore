@@ -22,9 +22,11 @@ struct ObjectGuid{int id=0;static const ObjectGuid Empty;bool IsEmpty()const{ret
 const ObjectGuid ObjectGuid::Empty{};
 bool operator==(ObjectGuid a,ObjectGuid b){return a.id==b.id;}bool operator!=(ObjectGuid a,ObjectGuid b){return !(a==b);}
 struct Player;struct Creature;
-struct Unit{uint32 entry=0,map=654;Player* controller=nullptr;virtual ~Unit()=default;virtual Player* ToPlayer(){return nullptr;}virtual Creature* ToCreature(){return nullptr;}uint32 GetEntry(){return entry;}uint32 GetMapId(){return map;}Player* GetCharmerOrOwnerPlayerOrPlayerItself(){return controller;}ObjectGuid guid;ObjectGuid GetGUID(){return guid;}};
+struct Unit{bool phase=true;bool IsInPhase(Unit*){return phase;}uint32 entry=0,map=654;Player* controller=nullptr;virtual ~Unit()=default;virtual Player* ToPlayer(){return nullptr;}virtual Creature* ToCreature(){return nullptr;}uint32 GetEntry(){return entry;}uint32 GetMapId(){return map;}Player* GetCharmerOrOwnerPlayerOrPlayerItself(){return controller;}ObjectGuid guid;ObjectGuid GetGUID(){return guid;}};
 struct SpellInfo{uint32 Id;};
-struct Position{};
+struct Position{float m_positionX=0,m_positionY=0,m_positionZ=0;float GetPositionX(){return 0;}float GetPositionY(){return 0;}float GetPositionZ(){return 0;}float GetExactDist(Unit*){return 0;}};
+float frand(float a,float){return a;}
+constexpr int MOVE_RUN=1,REACT_PASSIVE=0;
 struct EventMap{uint32 now=0;std::multimap<uint32,uint32> events;
  void Reset(){now=0;events.clear();}void Update(uint32 d){now+=d;}
  template<class R,class P>void ScheduleEvent(uint32 id,std::chrono::duration<R,P> d){events.emplace(now+std::chrono::duration_cast<std::chrono::milliseconds>(d).count(),id);}
@@ -32,6 +34,7 @@ struct EventMap{uint32 now=0;std::multimap<uint32,uint32> events;
  uint32 ExecuteEvent(){if(events.empty()||events.begin()->first>now)return 0;auto id=events.begin()->second;events.erase(events.begin());return id;}};
 struct Vehicle{Unit* passenger=nullptr;Unit* GetPassenger(int){return passenger;}};
 struct Player:Unit{Vehicle* kit=nullptr;Vehicle* GetVehicleKit(){return kit;}int status=QUEST_STATUS_INCOMPLETE,race=22,level=5;bool alive=true,water=true;float distance=100;int exits=0;std::vector<uint32> credits,learned;std::set<uint32> rewarded,spells;
+ Position GetPosition(){return {};}void GetNearPoint(Player*,float&x,float&y,float&z,float,float,float){x=y=z=0;}std::set<int>auras;bool HasAura(int id){return auras.count(id);}
  Player* ToPlayer()override{return this;}int GetQuestStatus(uint32){return status;}bool IsAlive(){return alive;}bool IsInWater(){return water;}
  void KilledMonsterCredit(uint32 id){credits.push_back(id);}void CastSpell(Unit*,uint32,bool){}void RemoveAurasDueToSpell(uint32){}
  void ExitVehicle(){++exits;}float GetDistance(Creature*){return distance;}int getRace(){return race;}int getLevel(){return level;}
@@ -41,8 +44,8 @@ struct Player:Unit{Vehicle* kit=nullptr;Vehicle* GetVehicleKit(){return kit;}int
 };
 struct GameObject:Unit{};
 constexpr int EMOTE_STATE_NONE=0;
-struct MotionMaster{int flee=0;Unit* source=nullptr;void MoveFleeing(Unit* u,uint32 t){source=u;flee=t;}};
-struct Creature:Unit{float distance=1;float GetDistance(Unit*){return distance;}void HandleEmoteCommand(int){}void SetFacingToObject(Unit*){}bool alive=true;bool stopped=false;MotionMaster motion;bool IsAlive(){return alive;}void AttackStop(){stopped=true;}void CombatStop(bool){}MotionMaster* GetMotionMaster(){return &motion;}Creature* ToCreature()override{return this;}Unit* carrier=nullptr;Creature* nearest=nullptr;bool despawn=false;int exits=0;uint32 hp=100,maxhp=100;
+struct MotionMaster{int flee=0;Unit* source=nullptr;void MovePoint(int,float,float,float){}void MoveFleeing(Unit* u,uint32 t){source=u;flee=t;}};
+struct Creature:Unit{bool summon=false;bool IsSummon(){return summon;}std::vector<uint32>casts;void CastSpell(Unit*,uint32 id,bool=true){casts.push_back(id);}void SetWalk(bool){}void SetSpeed(int,float){}float GetObjectSize(){return 1;}void SetReactState(int){}float distance=1;float GetDistance(Unit*){return distance;}void HandleEmoteCommand(int){}void SetFacingToObject(Unit*){}bool alive=true;bool stopped=false;MotionMaster motion;bool IsAlive(){return alive;}void AttackStop(){stopped=true;}void CombatStop(bool){}MotionMaster* GetMotionMaster(){return &motion;}Creature* ToCreature()override{return this;}Unit* carrier=nullptr;Creature* nearest=nullptr;bool despawn=false;int exits=0;uint32 hp=100,maxhp=100;
  Unit* GetVehicleBase(){return carrier;}void ExitVehicle(){carrier=nullptr;++exits;}
  template<class... T>void DespawnOrUnsummon(T...){despawn=true;}Creature* FindNearestCreature(uint32,float){return nearest;}
  void SetMaxHealth(uint32 n){maxhp=n;}uint32 GetMaxHealth(){return maxhp;}void SetHealth(uint32 n){hp=n;}};
@@ -60,6 +63,8 @@ struct PlayerScript{explicit PlayerScript(char const*){}virtual ~PlayerScript()=
  for name in ['npc_drowning_watchman_36440','npc_mountain_horse_36540']:
   part=s[s.index('class '+name+' :'):];ai=method(part,'    struct '+name+'AI :').replace(' override','')
   code+='struct '+name+'{'+method(part,'    enum eNpc')+';\n'+ai+';};\n'
+ part=s[s.index('class npc_mountain_horse_36555 :'):];code+=method(part,'    struct npc_mountain_horse_36555AI :').replace(' override','')+';\n'
+ code+='using CreatureAI=ScriptedAI;struct FollowerFactory{'+method(part,'    CreatureAI* GetAI(').replace(' override','')+'};\n'
  racials=(root/'src/server/scripts/Custom/custom_worgen_racials.cpp').read_text('utf8')
  code+=method(racials,'enum WorgenRacials')+';\n'+method(racials,'class custom_worgen_racials :')+';\n'
  player=(root/'src/server/game/Entities/Player/Player.cpp').read_text('utf8')
@@ -76,7 +81,7 @@ struct PlayerScript{explicit PlayerScript(char const*){}virtual ~PlayerScript()=
  part=s[s.index('class npc_enslaved_villager_37694 :'):]
  code+=method(part,'    struct npc_enslaved_villager_37694AI :').replace(' override','')+';\n'
  for name,structname in [('spell_rescue_drowning_watchman_68735','RescueSpell'),('spell_round_up_horse_68903','RoundUpSpell')]:
-  part=s[s.index('class '+name+' :'):];code+='struct '+structname+':SpellScript{'+method(part,'        SpellCastResult CheckTarget(')+'};\n'
+  part=s[s.index('class '+name+' :'):];code+='struct '+structname+':SpellScript{'+method(part,'        SpellCastResult CheckTarget(')+(method(part,'        void HandleEffectDummy(') if structname=='RoundUpSpell' else '')+'};\n'
  code+=r"""
 void check(bool v,char const* n){if(!v)throw std::runtime_error(n);}
 int main(){
@@ -89,7 +94,7 @@ int main(){
  ai.Reset();watch.despawn=false;a.status=QUEST_STATUS_NONE;ai.SpellHit(&a,&rescue);check(ai.m_playerGUID.IsEmpty(),"inactive quest");
  a.status=QUEST_STATUS_INCOMPLETE;ai.SpellHit(&a,&rescue);watch.carrier=&b;ai.UpdateAI(1000);check(watch.despawn&&a.credits.size()==1,"wrong carrier denied");
  ai.Reset();watch.despawn=false;ai.SpellHit(&a,&rescue);watch.carrier=&a;a.alive=false;ai.UpdateAI(1000);check(watch.despawn,"death cleanup");a.alive=true;
- Creature horse;horse.nearest=&liam;npc_mountain_horse_36540::npc_mountain_horse_36540AI h(&horse);h.Reset();
+ Creature lorna;lorna.guid.id=7;lorna.entry=NPC_LORNA_CROWLEY;creatures[7]=&lorna;Creature horse;horse.nearest=&lorna;npc_mountain_horse_36540::npc_mountain_horse_36540AI h(&horse);h.Reset();
  h.PassengerBoarded(nullptr,0,true);h.PassengerBoarded(&a,0,true);h.PassengerBoarded(&b,0,true);check(b.exits==1&&h.m_playerGUID==a.guid,"horse owner cannot be overwritten");
  h.PassengerBoarded(&b,0,false);check(h.m_playerGUID==a.guid,"foreign dismount ignored");
  a.distance=100;h.UpdateAI(1000);h.PassengerBoarded(&a,0,false);check(a.credits.size()==1,"early dismount no credit");
@@ -114,6 +119,18 @@ int main(){
  v.SetGUID(ball.guid,201775);v.SetGUID(a.guid,PLAYER_GUID);a.status=QUEST_STATUS_NONE;v.DoAction(EVENT_START_ANIM);check(!v.m_sceneStarted,"chain quest gate");a.status=QUEST_STATUS_INCOMPLETE;
  RescueSpell rescueCast;rescueCast.caster=&a;rescueCast.target=&watch;watch.entry=36440;watch.alive=true;watch.carrier=nullptr;a.water=true;check(rescueCast.CheckTarget()==SPELL_CAST_OK,"valid rescue cast");watch.carrier=&b;check(rescueCast.CheckTarget()==SPELL_FAILED_BAD_TARGETS,"already carried watchman denied before aura");watch.carrier=nullptr;Vehicle kit;kit.passenger=&horse;a.kit=&kit;check(rescueCast.CheckTarget()==SPELL_FAILED_BAD_TARGETS,"occupied carry seat denied");a.kit=nullptr;rescueCast.target=nullptr;check(rescueCast.CheckTarget()==SPELL_FAILED_BAD_TARGETS,"missing rescue target denied");
  RoundUpSpell rope;rope.caster=&a;rope.target=&horse;horse.entry=36540;check(rope.CheckTarget()==SPELL_CAST_OK,"valid rope target");horse.carrier=&b;check(rope.CheckTarget()==SPELL_FAILED_BAD_TARGETS,"another mounted horse denied before summon");horse.carrier=nullptr;a.status=QUEST_STATUS_NONE;check(rope.CheckTarget()==SPELL_FAILED_BAD_TARGETS,"rope quest gate prevents native summon");a.status=QUEST_STATUS_INCOMPLETE;
+ for(int mode=0;mode<6;++mode){h.Reset();horse.despawn=false;horse.phase=true;lorna.phase=true;lorna.alive=true;lorna.entry=NPC_LORNA_CROWLEY;a.map=654;a.distance=6;a.alive=true;h.PassengerBoarded(&a,0,true);h.UpdateAI(1000);check(h.m_lornaIsNear,"near snapshot prepared");auto count=a.credits.size();if(mode==0)a.distance=100;if(mode==1)lorna.phase=false;if(mode==2)lorna.alive=false;if(mode==3)lorna.entry=1;if(mode==4)horse.phase=false;if(mode==5)a.map=0;h.PassengerBoarded(&a,0,false);check(a.credits.size()==count,"stale proximity or invalid phase actor cannot deliver horse");}
+ horse.phase=true;lorna.phase=true;lorna.alive=true;lorna.entry=NPC_LORNA_CROWLEY;a.map=654;a.distance=6;
+ for(int mode=0;mode<4;++mode){h.Reset();int exits=a.exits;if(mode==0)a.alive=false;if(mode==1)a.map=0;if(mode==2)horse.map=0;if(mode==3)horse.phase=false;h.PassengerBoarded(&a,0,true);check(h.m_playerGUID.IsEmpty()&&a.exits==exits+1,"invalid boarding cannot reserve horse");a.alive=true;a.map=654;horse.map=654;horse.phase=true;}
+ for(int mode=0;mode<4;++mode){horse.despawn=false;rope.caster=&a;rope.target=&horse;if(mode==0)a.alive=false;if(mode==1)a.map=0;if(mode==2)horse.phase=false;if(mode==3)horse.carrier=&b;check(rope.CheckTarget()==SPELL_FAILED_BAD_TARGETS,"rope rejects dead cross-map phase or mounted horse");rope.HandleEffectDummy(1);check(!horse.despawn,"hit-time revalidation preserves invalid target");a.alive=true;a.map=654;horse.phase=true;horse.carrier=nullptr;}
+ {Creature follower;npc_mountain_horse_36555AI f(&follower);f.Reset();f.IsSummonedBy(nullptr);check(follower.despawn,"missing rope owner fails safely");}
+ {Creature follower;npc_mountain_horse_36555AI f(&follower);f.Reset();f.IsSummonedBy(&a);f.IsSummonedBy(&b);check(f.m_playerGUID==a.guid&&follower.casts.size()==1,"rope owner and channel cannot be stolen");}
+ for(int mode=0;mode<6;++mode){Creature follower;npc_mountain_horse_36555AI f(&follower);f.Reset();a.auras={SPELL_RIDE_VEHICLE,SPELL_ROPE_CHANNEL};f.IsSummonedBy(&a);if(mode==0)a.alive=false;if(mode==1)a.map=0;if(mode==2)follower.phase=false;if(mode==3)a.status=QUEST_STATUS_NONE;if(mode==4)players.erase(a.guid.id);f.UpdateAI(mode==5?1200000:100);check(follower.despawn&&follower.casts.size()==1,"rope helper cleans death map phase abandon logout timeout without credit");a.alive=true;a.map=654;a.status=QUEST_STATUS_INCOMPLETE;players[a.guid.id]=&a;}
+ {Creature follower;npc_mountain_horse_36555AI f(&follower);f.Reset();f.IsSummonedBy(&a);f.MoveInLineOfSight(&lorna);a.auras={SPELL_ROPE_CHANNEL};lorna.phase=false;f.UpdateAI(100);check(follower.despawn&&follower.casts.size()==1,"invisible Lorna cannot receive rope delivery");lorna.phase=true;}
+ {Creature follower;npc_mountain_horse_36555AI f(&follower);f.Reset();f.IsSummonedBy(&a);f.Reset();f.IsSummonedBy(&b);check(follower.despawn&&f.m_playerGUID==a.guid&&f.m_events.events.empty(),"reset cancels rope helper without allowing reassignment");}
+ {Creature follower;npc_mountain_horse_36555AI f(&follower);f.Reset();f.IsSummonedBy(&a);f.MoveInLineOfSight(&lorna);lorna.phase=false;f.CheckLornaRelated(&a);check(f.m_lornaGUID.IsEmpty(),"lost phase clears cached Lorna");lorna.phase=true;f.MoveInLineOfSight(&lorna);f.CheckLornaRelated(&a);check(f.m_isLornaNear,"visible Lorna can be reacquired");}
+ {Creature follower;FollowerFactory factory;check(!factory.GetAI(&follower),"persistent horse does not get capped personal follower AI");follower.summon=true;follower.map=0;check(!factory.GetAI(&follower),"other map default AI preserved");follower.map=654;auto*ai=factory.GetAI(&follower);check(ai!=nullptr,"owned Gilneas summon receives follower AI");delete static_cast<npc_mountain_horse_36555AI*>(ai);}
+ a.auras.clear();
  std::cout<<"Gilneas rescue, horse ownership and Two Forms gates: PASS\n";
 }
 """
