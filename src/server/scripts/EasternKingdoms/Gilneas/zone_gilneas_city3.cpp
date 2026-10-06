@@ -184,7 +184,8 @@ public:
             Player* player = summoner ? summoner->ToPlayer() : nullptr;
             if (!player || !player->IsAlive() || me->GetMapId() != 654
                 || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
-                || player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_INCOMPLETE)
+                || (player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_INCOMPLETE
+                    && player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_COMPLETE))
             {
                 StopScene();
                 return;

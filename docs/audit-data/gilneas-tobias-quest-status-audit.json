@@ -1,0 +1,30 @@
+{
+  "quest": 24902,
+  "database_source": "read-only local release copy ru_target",
+  "quest_template": {
+    "QuestType": 2,
+    "Flags": 2,
+    "RewardNextQuest": 24903,
+    "VerifiedBuild": 25549
+  },
+  "quest_objectives_count": 0,
+  "quest_template_addon": {
+    "SpecialFlags": 0,
+    "NextQuestID": 24903,
+    "ScriptName": ""
+  },
+  "native_order": [
+    "Player::AddQuest",
+    "Player::CanCompleteQuest",
+    "Player::CompleteQuest if eligible",
+    "ScriptMgr::OnQuestAccept"
+  ],
+  "correction": "Accept both INCOMPLETE and COMPLETE as owned un-rewarded escort statuses; reject NONE and REWARDED.",
+  "limits": [
+    "No missing objective or event gate was invented in this patch.",
+    "Five native waypoint paths remain unavailable.",
+    "Client scene and intended retail quest completion still require restoration."
+  ],
+  "sql_changed": false,
+  "live_server_changed": false
+}
