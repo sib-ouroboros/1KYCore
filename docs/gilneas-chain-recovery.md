@@ -207,3 +207,5 @@ SQL14 привязывает только пустой/наш ScriptName при 
 Сцена24592 пока НЕ завершена: нужен подтверждённый маршрут прыжка/падения, текст Godfrey и проверка визуального результата в клиенте26972. Четыре крупных незавершённых участка остаются:24902 Tobias,24904 battle,14401 Grandma,24592 Godfrey;14400/24627 требуют клиентской диагностики. Рабочий сервер этим пакетом не обновляется.
 
 Источники: [ArkCORE-NG](https://github.com/Arkania/ArkCORE-NG/blob/a7304c3075bf8ee7eb5bdf45f31cda01c8626b52/src/server/scripts/EasternKingdoms/Gilneas/zone_duskhaven.cpp), [AshamaneCore](https://github.com/AshamaneProject/AshamaneCore/blob/b09c1c393cf2e01bc5e857ea6117680d2aaeadb0/src/server/scripts/EasternKingdoms/Gilneas/zone_duskhaven.cpp). Локальные данные и ограничения: `docs/audit-data/gilneas-godfrey-departure-audit.json`.
+
+Проверки4b93abb: local MySQL8.0.45 isolated clone SQL00–14 PASS (schema удалён); native Godfrey/rescue fixtures PASS; Reliability37428861065 с ASan/UBSan PASS. GCC37428868338, Windows37428872089, release SQL37428864565 и local fresh full release test пока выполняются. Предыдущий fresh-release proof00–13 сохраняется без переименования в проверку14.

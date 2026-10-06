@@ -38,13 +38,45 @@
   "local_checks": {
     "production_handler_fixture": "PASS",
     "rescue_fixture": "PASS",
-    "compiler": "g++ -std=c++17 -Wall -Wextra -Werror; Windows without sanitizers"
+    "compiler": "g++ -std=c++17 -Wall -Wextra -Werror; Windows without sanitizers",
+    "mysql_sql_00_14_local_clone": {
+      "status": "PASS",
+      "schema": "test_gilneas_chain_4bf102b0fe",
+      "schema_dropped_after_success": true,
+      "checks": [
+        "First and repeated application",
+        "Custom Godfrey ScriptName and SmartAI preserved",
+        "All unrelated tables unchanged",
+        "Existing routes, native vehicle seats, objectives and phase rules preserved"
+      ]
+    }
   },
   "limitations": [
     "No verified production departure route or Godfrey dialogue",
     "Synthetic fixture route is algorithm coverage only",
-    "Full GCC/Windows and Linux sanitizer CI to run on this commit",
+    "Full GCC/Windows and release SQL checks remain in progress",
+    "Local fresh full release import validation remains in progress",
     "Client26972 acceptance pending"
   ],
-  "production_server_updated": false
+  "production_server_updated": false,
+  "ci": {
+    "commit": "4b93abb2cb60529e23dd07449b3c79cdb51117e0",
+    "reliability": {
+      "run": 37428861065,
+      "status": "PASS",
+      "godfrey_asan_ubsan": "PASS"
+    },
+    "gcc": {
+      "run": 37428868338,
+      "status": "IN_PROGRESS"
+    },
+    "windows": {
+      "run": 37428872089,
+      "status": "IN_PROGRESS"
+    },
+    "mysql": {
+      "run": 37428864565,
+      "status": "IN_PROGRESS"
+    }
+  }
 }
