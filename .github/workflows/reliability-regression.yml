@@ -187,6 +187,8 @@ jobs:
         run: python contrib/tests/test_gilneas_battle_start.py
       - name: Test native Gilneas wave routes and stale movement callbacks with sanitizers
         run: python contrib/tests/test_gilneas_battle_waves.py
+      - name: Test Gilneas leader arrival independence and current player presence
+        run: python contrib/tests/test_gilneas_battle_sync.py
       - name: Audit all Gilneas script registrations
         run: python contrib/tests/audit_gilneas_bindings.py > gilneas-registrations.json
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers

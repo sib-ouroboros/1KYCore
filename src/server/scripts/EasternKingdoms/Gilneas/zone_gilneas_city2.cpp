@@ -1178,6 +1178,7 @@ public:
                     break;
                 case ACTION_DARIUS_ARRIVED:
                     m_arrivedMask |= 16;
+                    break;
                 case ACTION_GENN_ARRIVED:
                     m_arrivedMask |= 32;
                     break;
@@ -1285,6 +1286,38 @@ public:
             }
 
             return ObjectGuid::Empty;
+        }
+
+        bool AreWaveLeadersReady(bool playerNearby)
+        {
+            uint32 mask;
+            switch (m_wave)
+            {
+                case 1:
+                case 2:
+                    mask = 7;
+                    break;
+                case 3:
+                    mask = 15 | 128;
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    mask = 31 | 128;
+                    break;
+                case 7:
+                    mask = 63 | 128;
+                    break;
+                default:
+                    return false;
+            }
+
+            // Presence is a current requirement, not an arrival latched earlier in the wave.
+            if (playerNearby)
+                m_arrivedMask |= 128;
+            else
+                m_arrivedMask &= ~uint32(128);
+            return (m_arrivedMask & mask) == mask;
         }
 
         void EnterEvadeMode(EvadeReason /*reason*/) override { }
@@ -1424,29 +1457,7 @@ public:
                 case EVENT_SYNC_BEFORE_NEXT_WAVE:
                 {
                     m_ai_counter = 0;
-                    uint32 mask;
-                    switch (m_wave)
-                    {
-                        case 1:
-                        case 2:
-                            mask = 7;
-                            break;
-                        case 3:
-                            mask = 15 + 128;
-                            break;
-                        case 4:
-                        case 5:
-                        case 6:
-                            mask = 31 + 128;
-                            break;
-                        case 7:
-                            mask = 63 + 128;
-                            break;
-                        }
-                        if (IsPlayerNear(25.0f))
-                            m_arrivedMask |= 128;
-
-                        if ((m_arrivedMask & mask) == mask)
+                    if (AreWaveLeadersReady(IsPlayerNear(25.0f)))
                         {
                             switch (m_wave)
                             {
