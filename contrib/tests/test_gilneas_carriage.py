@@ -58,6 +58,7 @@ int main(){try{
  {Journey j(510);j.start();player_gilneas_carriage_recovery recovery;recovery.OnLogout(&j.p);check(j.h.despawn&&j.c.despawn&&!j.p.aura,"logout removes journey and phase immediately");}
  {Journey j(530);j.start();j.hai.Cleanup();Creature lateHorse,latePassenger;j.hai.JustSummoned(&lateHorse);j.cai.JustSummoned(&latePassenger);check(lateHorse.despawn&&latePassenger.despawn,"late accessories cannot leak after cleanup");}
  {npc_stagecoach_carriage_44928 script;Player p;Creature parked,result;p.summonResult=&result;for(int mode=0;mode<5;++mode){p.alive=true;p.map=654;p.status=QUEST_STATUS_COMPLETE;p.distance=1;p.base=nullptr;if(mode==0)p.alive=false;if(mode==1)p.map=0;if(mode==2)p.status=QUEST_STATUS_REWARDED;if(mode==3)p.distance=10;if(mode==4)p.base=&result;script.OnGossipHello(&p,&parked);check(!p.summons,"gossip alive/map/quest/range/vehicle gate");}}
+ {Journey j(550);j.p.base=&j.h;j.hai.PassengerBoarded(&j.p,2,true);check(j.p.exits==1&&!j.p.base&&!j.hai.m_started,"player cannot occupy a harness accessory seat before native join");j.start();check(j.p.base==&j.c&&j.p.rideValue==2,"ordinary carriage boarding survives harness rejection");}
  std::cout<<"Exodus native callback order, seat1, route stops, owner isolation and cleanup: PASS\n";
 }catch(std::exception const&e){std::cerr<<e.what()<<"\n";return 1;}}
 '''

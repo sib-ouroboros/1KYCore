@@ -2371,6 +2371,15 @@ public:
                 Cleanup();
         }
 
+        void PassengerBoarded(Unit* passenger, int8, bool apply) override
+        {
+            // Harness seats are reserved for horses and the carriage. Before
+            // asynchronous accessories finish joining, native SPELLCLICK may
+            // briefly expose them; never let a player replace an accessory.
+            if (apply && passenger->ToPlayer())
+                passenger->ExitVehicle();
+        }
+
         void JustDied(Unit*) override { Cleanup(); }
 
         void MovementInform(uint32 type, uint32 id) override
