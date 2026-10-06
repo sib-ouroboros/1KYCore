@@ -1,0 +1,142 @@
+{
+  "quest": 14401,
+  "scope": "Personal ambush/helper/return scene; shared questgiver and Chance spawns preserved",
+  "source": {
+    "url": "https://github.com/alexkulya/pandaria_5.4.8/blob/e0a20613d73e2b9324ac13a4783c724fec1d4559/src/server/scripts/EasternKingdoms/Zones/zone_gilneas.cpp",
+    "commit": "e0a20613d73e2b9324ac13a4783c724fec1d4559",
+    "sha256": "378adb818dfce87efac3dc5745b89c64964f0306c97b010c8732246edf24fde7",
+    "imported": "Only actor coordinates, dialogue group references and scene timings; not unsafe pointers/shared lookup/OR flags"
+  },
+  "route_xyz": [
+    [
+      -2098.366,
+      2352.075,
+      7.160643
+    ],
+    [
+      -2106.54,
+      2342.69,
+      6.93668
+    ],
+    [
+      -2106.12,
+      2334.9,
+      7.36691
+    ],
+    [
+      -2117.8,
+      2357.15,
+      5.88139
+    ],
+    [
+      -2111.46,
+      2366.22,
+      7.17151
+    ]
+  ],
+  "lucius_spawn": [
+    -2111.533,
+    2329.95,
+    7.390349
+  ],
+  "cat_catch_point": [
+    -2106.372,
+    2331.106,
+    7.360674
+  ],
+  "navmesh": {
+    "map": 654,
+    "tiles": 51,
+    "points": [
+      {
+        "point": 1,
+        "ground": true,
+        "source_z": 7.16064,
+        "nav_z": 8.25215
+      },
+      {
+        "point": 2,
+        "ground": true,
+        "source_z": 6.93668,
+        "nav_z": 7.26101
+      },
+      {
+        "point": 3,
+        "ground": true,
+        "source_z": 7.36691,
+        "nav_z": 7.97884
+      },
+      {
+        "point": 4,
+        "ground": true,
+        "source_z": 5.88139,
+        "nav_z": 7.004
+      },
+      {
+        "point": 5,
+        "ground": true,
+        "source_z": 7.17151,
+        "nav_z": 7.3358
+      }
+    ],
+    "segments": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "complete": true
+  },
+  "client_data": {
+    "build": 26654,
+    "display_human": 30288,
+    "display_worgen": 36852,
+    "both_present_in_CreatureDisplayInfo": true,
+    "layout": "0x406268DF",
+    "sha256": "1494eb6d4705848c4dd8ca2e463b99365d913155829e53914671da3302168e23"
+  },
+  "existing_texts": {
+    "grandma": "36458/0 (sound19605 retained)",
+    "lucius": "36461/0; old nonexistent group1 removed"
+  },
+  "combat_loot": {
+    "normal_loot_item": 49281,
+    "quest_loot_chance": 100,
+    "helper_damage": "Native IsDamageEnoughForLootingAndReward plus owner tap required",
+    "actual_player_pet_damage_tap": true,
+    "fake_item_credit_completion": false,
+    "health_floor": false,
+    "NPC_combat_scope": "Private helper targets own Lucius; Lucius targets owner/pet/helper only"
+  },
+  "fixtures": {
+    "grandma": "PASS",
+    "horn": "PASS",
+    "native_loot_functions_compiled": [
+      "Creature::IsDamageEnoughForLootingAndReward",
+      "Creature::LowerPlayerDamageReq"
+    ],
+    "summon_private_state_order_checked": true
+  },
+  "limitations": [
+    "Geometry confirms ground paths, not retail timing or animation accuracy",
+    "DB2 build26654 requires client26972 acceptance",
+    "Shared Chance remains visible to other players; no global despawn or fabricated per-player hide packet",
+    "Full builds/sanitizer/release SQL CI to run on this code commit",
+    "Remaining major code scenes: Tobias24902, battle24904, Godfrey24592"
+  ],
+  "production_server_updated": false,
+  "mysql": {
+    "status": "PASS",
+    "schema": "test_gilneas_chain_301ca0b51d",
+    "schema_dropped_after_success": true,
+    "package": "SQL00–16",
+    "checks": [
+      "First/repeat persistent checksums",
+      "Unrelated tables unchanged",
+      "Persistent Grandma faction/npcflags/unitflags/models unchanged",
+      "Custom ScriptName/SmartAI preserved",
+      "Native loot template item49281 retained"
+    ],
+    "live_database_changed": false
+  }
+}

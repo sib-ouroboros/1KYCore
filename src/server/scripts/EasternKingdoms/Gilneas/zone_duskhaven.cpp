@@ -23,6 +23,7 @@
 #include <limits>
 
 #include "CreatureTextMgr.h"
+#include "DB2Stores.h"
 #include "GameObject.h"
 #include "GameObjectAI.h"
 #include "MoveSplineInit.h"
@@ -1465,24 +1466,200 @@ public:
     }
 };
 
-// Chance is picked up by clicking; Lucius drops item49281 through normal quest loot.
+// Personal actor route from pinned Pandaria5.4.8; shared questgiver36458 is untouched.
+static Position const GrandmaSceneRoute[] =
+{
+    { -2106.54f, 2342.69f, 6.93668f, 0.0f },
+    { -2106.12f, 2334.90f, 7.36691f, 0.0f },
+    { -2117.80f, 2357.15f, 5.88139f, 0.0f },
+    { -2111.46f, 2366.22f, 7.17151f, 0.0f }
+};
+
+class npc_gilneas_grandma_scene : public CreatureScript
+{
+public:
+    npc_gilneas_grandma_scene() : CreatureScript("npc_gilneas_grandma_scene") { }
+    struct ai : public ScriptedAI
+    {
+        ai(Creature* creature) : ScriptedAI(creature) { }
+        enum Stage { IDLE, APPROACH_0, APPROACH_1, FIGHT, RETURN_WAIT, RETURN_2, RETURN_3, DONE };
+        enum Events { CHECK = 1, ATTACK, RETURN };
+        EventMap m_events;
+        ObjectGuid m_ownerGUID;
+        ObjectGuid m_luciusGUID;
+        Stage m_stage = IDLE;
+        uint32 m_elapsed = 0;
+
+        void Reset() override
+        {
+            m_events.Reset();
+            if (!m_ownerGUID.IsEmpty())
+                me->DespawnOrUnsummon(); // Never replay a personal scene on evade.
+        }
+
+        void IsSummonedBy(Unit* summoner) override
+        {
+            if (Player* player = summoner ? summoner->ToPlayer() : nullptr)
+            {
+                m_ownerGUID = player->GetGUID();
+                me->RemoveFlag64(UNIT_NPC_FLAGS, UNIT_NPC_FLAG_QUESTGIVER | UNIT_NPC_FLAG_GOSSIP);
+                me->SetReactState(REACT_PASSIVE);
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+                me->SetWalk(true);
+                m_events.ScheduleEvent(CHECK, 1s);
+            }
+            else
+                me->DespawnOrUnsummon();
+        }
+
+        void SetGUID(ObjectGuid guid, int32 id) override
+        {
+            if (id == 36461 && m_stage == IDLE)
+                m_luciusGUID = guid;
+        }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == 0 ? m_ownerGUID : ObjectGuid::Empty;
+        }
+
+        Creature* Lucius() const
+        {
+            Creature* lucius = ObjectAccessor::GetCreature(*me, m_luciusGUID);
+            uint32 script = sObjectMgr->GetScriptId("npc_gilneas_lucius_the_cruel");
+            return lucius && script && lucius->GetScriptId() == script
+                && lucius->AI()->GetGUID(0) == m_ownerGUID ? lucius : nullptr;
+        }
+
+        void DoAction(int32 action) override
+        {
+            if (action == 1 && m_stage == IDLE && Lucius())
+            {
+                m_stage = APPROACH_0;
+                me->GetMotionMaster()->MovePoint(0, GrandmaSceneRoute[0]);
+            }
+            else if (action == 2 && m_stage != IDLE && m_stage < RETURN_WAIT)
+            {
+                m_events.CancelEvent(ATTACK);
+                me->CombatStop(true);
+                me->SetReactState(REACT_PASSIVE);
+                me->GetMotionMaster()->Clear();
+                m_stage = RETURN_WAIT;
+                m_events.ScheduleEvent(RETURN, 4s);
+            }
+        }
+
+        void MovementInform(uint32 type, uint32 point) override
+        {
+            if (type != POINT_MOTION_TYPE)
+                return;
+            if (m_stage == APPROACH_0 && point == 0)
+            {
+                m_stage = APPROACH_1;
+                me->GetMotionMaster()->MovePoint(1, GrandmaSceneRoute[1]);
+            }
+            else if (m_stage == APPROACH_1 && point == 1)
+            {
+                if (!sCreatureDisplayInfoStore.LookupEntry(36852))
+                {
+                    TC_LOG_ERROR("sql.sql", "Gilneas Grandma14401: missing display36852; helper removed");
+                    me->DespawnOrUnsummon();
+                    return;
+                }
+                m_stage = FIGHT;
+                me->SetDisplayId(36852);
+                if (sCreatureTextMgr->TextExist(36458, 0))
+                    Talk(0, m_ownerGUID);
+                me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_IMMUNE_TO_NPC);
+                m_events.ScheduleEvent(ATTACK, 800ms);
+            }
+            else if (m_stage == RETURN_2 && point == 2)
+            {
+                m_stage = RETURN_3;
+                me->GetMotionMaster()->MovePoint(3, GrandmaSceneRoute[3]);
+            }
+            else if (m_stage == RETURN_3 && point == 3)
+            {
+                m_stage = DONE;
+                m_events.Reset();
+                me->DespawnOrUnsummon();
+            }
+        }
+
+        void AttackStart(Unit* target) override
+        {
+            if (m_stage == FIGHT && target && target->GetGUID() == m_luciusGUID)
+                ScriptedAI::AttackStart(target);
+        }
+
+        void DamageTaken(Unit* attacker, uint32& damage) override
+        {
+            if (!attacker || attacker->GetGUID() != m_luciusGUID)
+                damage = 0; // This private helper fights only her own ambusher.
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            m_elapsed += diff;
+            m_events.Update(diff);
+            while (uint32 event = m_events.ExecuteEvent())
+            {
+                if (event == CHECK)
+                {
+                    Player* player = ObjectAccessor::GetPlayer(*me, m_ownerGUID);
+                    if (!player || !player->IsAlive() || player->GetMapId() != 654 || !me->IsInPhase(player)
+                        || (player->GetQuestStatus(QUEST_GRANDMAS_CAT) != QUEST_STATUS_INCOMPLETE
+                            && player->GetQuestStatus(QUEST_GRANDMAS_CAT) != QUEST_STATUS_COMPLETE)
+                        || m_elapsed >= 180000 || (m_stage < RETURN_WAIT && !Lucius()))
+                    {
+                        me->DespawnOrUnsummon();
+                        return;
+                    }
+                    m_events.ScheduleEvent(CHECK, 1s);
+                }
+                else if (event == ATTACK && m_stage == FIGHT)
+                {
+                    if (Creature* lucius = Lucius())
+                        if (lucius->IsAlive())
+                        {
+                            me->SetReactState(REACT_DEFENSIVE);
+                            AttackStart(lucius);
+                        }
+                }
+                else if (event == RETURN && m_stage == RETURN_WAIT)
+                {
+                    m_stage = RETURN_2;
+                    me->GetMotionMaster()->MovePoint(2, GrandmaSceneRoute[2]);
+                }
+            }
+            if (m_stage == FIGHT && UpdateVictim())
+                DoMeleeAttackIfReady();
+        }
+    };
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return creature->GetMapId() == 654 && creature->IsSummon() && creature->IsVisibleBySummonerOnly() ? new ai(creature) : nullptr;
+    }
+};
+
+// Chance stays shared; ambush, helper and loot belong to each interacting player.
 class npc_chance_36459 : public CreatureScript
 {
 public:
     npc_chance_36459() : CreatureScript("npc_chance_36459") { }
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        if (!player || !player->IsAlive() || player->GetMapId() != 654
-            || player->GetQuestStatus(QUEST_GRANDMAS_CAT) != QUEST_STATUS_INCOMPLETE
+        if (!player || !player->IsAlive() || player->GetMapId() != 654 || creature->GetMapId() != 654
+            || !player->IsInPhase(creature) || player->GetQuestStatus(QUEST_GRANDMAS_CAT) != QUEST_STATUS_INCOMPLETE
             || player->GetDistance(creature) > 5.0f || player->GetSummonedCreatureByEntry(NPC_LUCIUS))
             return true;
-        // Existing scene position; personal visibility gives each player their own ambush/loot.
-        if (Creature* lucius = player->SummonCreature(NPC_LUCIUS, -2109.36f, 2330.28f, 7.36667f,
+        CreatureTemplate const* info = sObjectMgr->GetCreatureTemplate(NPC_LUCIUS);
+        uint32 script = sObjectMgr->GetScriptId("npc_gilneas_lucius_the_cruel");
+        if (!info || !script || info->ScriptID != script)
+            return true;
+        if (Creature* lucius = player->SummonCreature(NPC_LUCIUS, -2111.533f, 2329.95f, 7.390349f,
             0.151307f, TEMPSUMMON_TIMED_DESPAWN, 180000, true))
-        {
-            lucius->AI()->Talk(1, player);
-            lucius->AI()->AttackStart(player);
-        }
+            lucius->AI()->DoAction(1);
         return true;
     }
 };
@@ -1494,43 +1671,158 @@ public:
     struct ai : public ScriptedAI
     {
         ai(Creature* creature) : ScriptedAI(creature) { }
-        ObjectGuid m_ownerGUID = ObjectGuid::Empty;
+        enum Stage { IDLE, APPROACH, CATCH, FIGHT, DEAD };
+        enum Events { CHECK = 1, TAUNT, FIGHT_START, GRANDMA, SHOOT };
+        ObjectGuid m_ownerGUID;
+        ObjectGuid m_grandmaGUID;
         EventMap m_events;
+        Stage m_stage = IDLE;
+
+        void Cleanup()
+        {
+            m_events.Reset();
+            if (Creature* grandma = ObjectAccessor::GetCreature(*me, m_grandmaGUID))
+                if (grandma->AI()->GetGUID(0) == m_ownerGUID)
+                    grandma->DespawnOrUnsummon();
+            m_grandmaGUID = ObjectGuid::Empty;
+            me->DespawnOrUnsummon();
+        }
+
         void Reset() override
         {
             m_events.Reset();
-            // Evade resets combat events, but must retain the personal summon owner.
             if (!m_ownerGUID.IsEmpty())
-                m_events.ScheduleEvent(1, 1s);
+                Cleanup();
         }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == 0 ? m_ownerGUID : ObjectGuid::Empty;
+        }
+
         void IsSummonedBy(Unit* summoner) override
         {
             if (Player* player = summoner ? summoner->ToPlayer() : nullptr)
             {
                 m_ownerGUID = player->GetGUID();
-                m_events.Reset();
-                m_events.ScheduleEvent(1, 1s);
+                SetCombatMovement(false);
+                me->SetReactState(REACT_PASSIVE);
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+                m_events.ScheduleEvent(CHECK, 1s);
             }
+            else
+                Cleanup();
         }
+
+        void DoAction(int32 action) override
+        {
+            if (action != 1 || m_stage != IDLE || m_ownerGUID.IsEmpty())
+                return;
+            m_stage = APPROACH;
+            me->GetMotionMaster()->MovePoint(1, -2106.372f, 2331.106f, 7.360674f);
+            m_events.ScheduleEvent(TAUNT, 1s);
+        }
+
+        void MovementInform(uint32 type, uint32 point) override
+        {
+            if (type != POINT_MOTION_TYPE || point != 1 || m_stage != APPROACH)
+                return;
+            m_stage = CATCH;
+            me->HandleEmoteCommand(EMOTE_ONESHOT_KNEEL);
+            m_events.ScheduleEvent(FIGHT_START, 5s); // 4s catch +1s in the pinned scene.
+            m_events.ScheduleEvent(GRANDMA, 5500ms); // 4s catch +1.5s summon.
+        }
+
+        void AttackStart(Unit* target) override
+        {
+            Player* player = target ? target->GetCharmerOrOwnerPlayerOrPlayerItself() : nullptr;
+            if (m_stage == FIGHT && target && (target->GetGUID() == m_grandmaGUID
+                || (player && player->GetGUID() == m_ownerGUID)))
+                ScriptedAI::AttackStart(target);
+        }
+
+        void DamageTaken(Unit* attacker, uint32& damage) override
+        {
+            if (m_ownerGUID.IsEmpty())
+                return;
+            if (attacker && attacker->GetGUID() == m_grandmaGUID)
+            {
+                // Native loot requires real player damage. The helper may finish only
+                // after that requirement is satisfied; no fake credit or health floor.
+                if (!me->IsDamageEnoughForLootingAndReward() || me->GetLootRecipientGUID() != m_ownerGUID)
+                    damage = 0;
+                return;
+            }
+            Player* player = attacker ? attacker->GetCharmerOrOwnerPlayerOrPlayerItself() : nullptr;
+            if (!player || player->GetGUID() != m_ownerGUID)
+                damage = 0;
+            else if (damage && !me->hasLootRecipient())
+                me->SetLootRecipient(player); // Actual owner/pet hit only.
+        }
+
+        void JustDied(Unit*) override
+        {
+            m_stage = DEAD;
+            m_events.Reset();
+            if (Creature* grandma = ObjectAccessor::GetCreature(*me, m_grandmaGUID))
+                if (grandma->AI()->GetGUID(0) == m_ownerGUID)
+                    grandma->AI()->DoAction(2);
+            // Keep the native lootable corpse; item49281 is not granted by script.
+        }
+
         void UpdateAI(uint32 diff) override
         {
             m_events.Update(diff);
-            while (m_events.ExecuteEvent())
+            while (uint32 event = m_events.ExecuteEvent())
             {
                 Player* player = ObjectAccessor::GetPlayer(*me, m_ownerGUID);
-                if (!player || !player->IsAlive() || !me->IsInPhase(player)
+                if (!player || !player->IsAlive() || player->GetMapId() != 654 || !me->IsInPhase(player)
                     || player->GetQuestStatus(QUEST_GRANDMAS_CAT) != QUEST_STATUS_INCOMPLETE)
                 {
-                    me->DespawnOrUnsummon();
+                    Cleanup();
                     return;
                 }
-                m_events.ScheduleEvent(1, 1s);
+                if (event == CHECK)
+                    m_events.ScheduleEvent(CHECK, 1s);
+                else if (event == TAUNT && sCreatureTextMgr->TextExist(NPC_LUCIUS, 0))
+                    Talk(0, player);
+                else if (event == FIGHT_START && m_stage == CATCH)
+                {
+                    m_stage = FIGHT;
+                    me->SetReactState(REACT_AGGRESSIVE);
+                    me->HandleEmoteCommand(EMOTE_ONESHOT_NONE);
+                    m_events.ScheduleEvent(SHOOT, 500ms);
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+                    AttackStart(player);
+                }
+                else if (event == SHOOT && m_stage == FIGHT)
+                {
+                    if (UpdateVictim() && me->GetDistance(me->GetVictim()) > 2.0f)
+                        DoCastVictim(41440);
+                    m_events.ScheduleEvent(SHOOT, 1s);
+                }
+                else if (event == GRANDMA && m_stage == FIGHT && m_grandmaGUID.IsEmpty())
+                {
+                    CreatureTemplate const* info = sObjectMgr->GetCreatureTemplate(36458);
+                    uint32 script = sObjectMgr->GetScriptId("npc_gilneas_grandma_scene");
+                    if (info && script && info->ScriptID == script)
+                        if (Creature* grandma = player->SummonCreature(36458, -2098.366f, 2352.075f,
+                            7.160643f, 0.0f, TEMPSUMMON_TIMED_DESPAWN, 180000, true))
+                        {
+                            m_grandmaGUID = grandma->GetGUID();
+                            grandma->AI()->SetGUID(me->GetGUID(), 36461);
+                            grandma->AI()->DoAction(1);
+                        }
+                }
             }
-            if (UpdateVictim())
+            if (m_stage == FIGHT && UpdateVictim())
                 DoMeleeAttackIfReady();
         }
     };
-    CreatureAI* GetAI(Creature* creature) const override { return new ai(creature); }
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return creature->GetMapId() == 654 && creature->IsSummon() && creature->IsVisibleBySummonerOnly() ? new ai(creature) : nullptr;
+    }
 };
 
 // 36488
@@ -4276,6 +4568,7 @@ void AddSC_zone_gilneas_duskhaven()
     new npc_lord_godfrey_36290();
     new npc_drowning_watchman_36440();
     new spell_rescue_drowning_watchman_68735();
+    new npc_gilneas_grandma_scene();
     new npc_chance_36459();
     new npc_gilneas_lucius_the_cruel();
     new npc_forsaken_castaway_36488();

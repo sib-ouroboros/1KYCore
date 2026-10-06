@@ -48,10 +48,6 @@ struct SpellScript{Unit* caster=nullptr;bool prevented=false;Unit* GetCaster(){r
  part=s[s.index('class npc_gilneas_taldoren_tracker :'):];code+=method(part,'    struct ai :').replace(' override','')+';\n'
  part=s[s.index('class spell_gilneas_horn_of_taldoren :'):]
  code+='struct Horn:SpellScript{'+method(part,'        SpellCastResult CheckTarget(')+method(part,'        void HandleHorn(')+'};\n'
- part=s[s.index('class npc_chance_36459 :'):]
- code+='struct Chance{'+method(part,'    bool OnGossipHello(').replace(' override','')+'};\n'
- part=s[s.index('class npc_gilneas_lucius_the_cruel :'):]
- code+=method(part,'    struct ai :').replace(' override','').replace('struct ai :','struct LuciusAI :').replace('ai(Creature*','LuciusAI(Creature*')+';\n'
  code+=r"""
 void check(bool v,char const*n){if(!v)throw std::runtime_error(n);}
 int main(){
@@ -67,10 +63,6 @@ int main(){
  tracker.despawn=false;trackerAI.Reset();trackerAI.IsSummonedBy(&a);players.erase(1);trackerAI.UpdateAI(1000);check(tracker.despawn,"logout removes ally");players[1]=&a;
  tracker.despawn=false;trackerAI.Reset();trackerAI.IsSummonedBy(&a);a.alive=false;trackerAI.UpdateAI(1000);check(tracker.despawn,"death removes ally");a.alive=true;
  tracker.despawn=false;trackerAI.Reset();a.status=QUEST_STATUS_NONE;trackerAI.UpdateAI(1000);check(tracker.despawn,"evade keeps owner cleanup");a.status=QUEST_STATUS_INCOMPLETE;
- Chance chance;Creature cat;chance.OnGossipHello(&a,&cat);chance.OnGossipHello(&a,&cat);chance.OnGossipHello(&b,&cat);
- check(a.summons.size()==9&&b.summons.size()==1&&a.summons.back()->entry==36461,"each player gets exactly one Lucius");check(a.personal.back()&&b.personal.back()&&a.durations.back()==180000,"private bounded ambush leaves corpse loot time");check(a.summons.back()->ai.attacked==&a&&b.summons.back()->ai.attacked==&b,"ambush targets its own player");
- Player idle;idle.status=QUEST_STATUS_NONE;chance.OnGossipHello(&idle,&cat);check(idle.summons.empty(),"inactive Chance interaction");
- Creature lucius;LuciusAI l(&lucius);l.Reset();l.IsSummonedBy(&a);l.Reset();a.status=QUEST_STATUS_NONE;l.UpdateAI(1000);check(lucius.despawn,"Lucius abandon cleanup survives evade");a.status=QUEST_STATUS_INCOMPLETE;
  std::cout<<"Horn of Tal'doren native quest, ownership and summon guards: PASS\n";
 }
 """
