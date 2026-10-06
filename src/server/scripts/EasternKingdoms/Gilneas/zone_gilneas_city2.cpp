@@ -3992,6 +3992,9 @@ public:
 
         EventMap m_events;
         bool     m_isInitialised;
+        bool     m_cinematicStarted = false;
+        bool     m_liamDeathQueued = false;
+        bool     m_completionHandled = false;
         ObjectGuid   m_almyraGUID;
         ObjectGuid   m_liamGUID;
         ObjectGuid   m_kingGUID;
@@ -4046,6 +4049,9 @@ public:
                 }
                 case ACTION_SYLVANAS_HAS_ENOUGH:
                 {
+                    if (m_cinematicStarted)
+                        break;
+                    m_cinematicStarted = true;
                     Talk(0);
                     m_events.ScheduleEvent(EVENT_SYLVANAS_ATTACK1, 1000);
                     break;
@@ -4068,6 +4074,9 @@ public:
                 }
                 case ACTION_LIAM_IS_DEATH:
                 {
+                    if (!m_cinematicStarted || m_liamDeathQueued)
+                        break;
+                    m_liamDeathQueued = true;
                     m_events.ScheduleEvent(EVENT_LIAM_IS_DEATH, 7000);
                     break;
                 }
@@ -4143,8 +4152,18 @@ public:
                         liam->GetMotionMaster()->MovePath(3847401, false);
                     break;
                 }
+                case EVENT_GLOBAL_RESET:
+                {
+                    m_events.Reset();
+                    RemoveMyMember();
+                    me->DespawnOrUnsummon(100);
+                    return;
+                }
                 case EVENT_LIAM_IS_DEATH:
                 {
+                    if (!m_liamDeathQueued || m_completionHandled)
+                        break;
+                    m_completionHandled = true;
                     Talk(1);
                     std::list<Player*> playerList = me->SelectNearestPlayers(50.0f);
                     for (std::list<Player*>::const_iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
@@ -4276,6 +4295,7 @@ public:
         ObjectGuid   m_kingGUID;
         ObjectGuid   m_sylvanaGUID;
         bool     m_isInitialised;
+        bool     m_shootHandled = false;
 
         void Initialize()
         {
@@ -4294,9 +4314,13 @@ public:
 
         void SpellHit(Unit* caster, SpellInfo const* spell) override
         {
-            if (caster->GetEntry() == NPC_LADY_SYLVANAS_WINDRUNNER)
-                if (spell->Id == SPELL_SHOOT_LIAM)
-                {
+            if (!caster || !spell || m_shootHandled || caster->GetGUID() != m_sylvanaGUID
+                || caster->GetEntry() != NPC_LADY_SYLVANAS_WINDRUNNER || spell->Id != SPELL_SHOOT_LIAM
+                || !me->IsInPhase(caster))
+                return;
+
+            m_shootHandled = true;
+            {
                     me->CastSpell(me, SPELL_LIAM_SLAIN_DUMMY);
 
                     if (Creature* sylvana = ObjectAccessor::GetCreature(*me, m_sylvanaGUID))
