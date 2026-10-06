@@ -226,3 +226,5 @@ SQL15 исправляет только binding36283,69434 caster flag1 и nativ
 Предыдущий пакет4b93abb: GCC PASS, Reliability с ASan/UBSan PASS, MySQL gilneas-chain PASS; local fresh release SQL00–14 PASS, disposable schema удалён. Windows PASS. Эти результаты не объявляются сборкой нового кода катапульты. Для14382 нужна приёмка: убить механиста, manual launch на оба корабля, miss/early exit, безопасное приземление, обычное убийство36397/36399 и native objectives без добавленного credit.
 
 Катапульты: native production fixture PASS; полный SQL00–15 на isolated local clone MySQL8.0.45 PASS, schema85e01b4599 удалён. Повторный импорт и guarded conflicts проверены. Full GCC/Windows/sanitizer/release SQL CI запускаются на новом code commit; клиентская приёмка ещё нужна.
+
+CI катапульт ff60e37: Reliability37432693173 (ASan/UBSan) PASS. GCC37432702210, Windows37432706407 и release SQL37432697788 ещё выполняются. Клиент26972 не проверен; работа на production не выполнялась.

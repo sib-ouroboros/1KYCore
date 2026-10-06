@@ -250,5 +250,25 @@
       "Unrelated tables, existing spawns and objective records unchanged"
     ],
     "live_database_changed": false
+  },
+  "ci": {
+    "commit": "ff60e3752d3ef4bf0c3a4c655b86763ee9ca9b2a",
+    "reliability": {
+      "run": 37432693173,
+      "status": "PASS",
+      "sanitizers": "ASan/UBSan"
+    },
+    "gcc": {
+      "run": 37432702210,
+      "status": "IN_PROGRESS"
+    },
+    "windows": {
+      "run": 37432706407,
+      "status": "IN_PROGRESS"
+    },
+    "mysql": {
+      "run": 37432697788,
+      "status": "IN_PROGRESS"
+    }
   }
 }
