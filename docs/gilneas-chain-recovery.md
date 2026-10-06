@@ -247,3 +247,12 @@ SQL16 только ставит ScriptName36458 при пустом AIName и bl
 SQL00–16 MySQL8.0.45 isolated local clone PASS, schema после успеха удалён; native Grandma/horn fixtures PASS. Это не production обновление и не полная сборка нового кода.
 
 CI7ab8c10: Reliability37435103225 с ASan/UBSan PASS. GCC37435110614, Windows37435114835 и release SQL37435106932 выполняются. Предыдущий катапультный GCCff60e37 PASS, MySQL gilneas-chain PASS, Windowsff60e37 пока выполняется. Рабочий сервер не обновлялся.
+
+
+### Battle for Gilneas (24904): target lifetime and idle state
+
+The six battle leaders in `zone_gilneas_city2.cpp` now clear their target list before each grid scan. Native `Unit::GetAttackableUnitListInRange` appends to the supplied list; retaining it between scans accumulated duplicates and could dereference units already removed from the map. Each scan now uses only its current grid results. Wave, point, distance, target and completion flags have defined initial values before periodic watchdogs execute. Routes, attack ranges, damage rules and quest credits are unchanged; no SQL is required.
+
+`contrib/tests/test_gilneas_battle.py` compiles all six actual production `FindTargets` bodies and their state declarations. It tests repeated scans, destruction of a previous target, an empty grid and the existing special enemy spacing. Local Windows strict-warning compilation and execution passed. Linux ASan/UBSan and full Windows/GCC builds are submitted through CI; their results must be checked separately. Entity/grid behavior is a fixture, not a client playthrough.
+
+Quest 24904 is **not yet declared restored**: replay/stale gossip validation, shared scene participation, controller reset, wave synchronization and the final cinematic still need audit and client acceptance. Tobias 24902 and Godfrey 24592 remain substantial scene work; 14400/24627 need client diagnosis. No running server was updated.

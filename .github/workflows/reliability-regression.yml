@@ -181,6 +181,8 @@ jobs:
         run: python contrib/tests/test_gilneas_catapult.py
       - name: Test personal Grandma ambush, transformation, native loot gate and return with sanitizers
         run: python contrib/tests/test_gilneas_grandma.py
+      - name: Test Gilneas battle target lifetime and initial state with sanitizers
+        run: python contrib/tests/test_gilneas_battle.py
       - name: Audit all Gilneas script registrations
         run: python contrib/tests/audit_gilneas_bindings.py > gilneas-registrations.json
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers

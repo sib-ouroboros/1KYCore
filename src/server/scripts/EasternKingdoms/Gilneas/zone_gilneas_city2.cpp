@@ -1039,13 +1039,13 @@ public:
         uint32   m_arrivedMask;
         uint32   m_shootCoolDown;
         std::list<Unit*> m_targetList;
-        uint32    m_wave;
-        uint32    m_waveSize;
-        uint32    m_point;
-        Unit*     m_nearestTarget;
-        float     m_nearestDistance;
-        float     m_checkDistance;
-        bool      m_doneA, m_doneB;
+        uint32    m_wave = 0;
+        uint32    m_waveSize = 0;
+        uint32    m_point = 0;
+        Unit*     m_nearestTarget = nullptr;
+        float     m_nearestDistance = 0.0f;
+        float     m_checkDistance = 0.0f;
+        bool      m_doneA = false, m_doneB = false;
         uint32    m_ai_counter;
 
         void Initialize()
@@ -1507,6 +1507,8 @@ public:
 
         void FindTargets()
         {
+            // The native search appends: never retain pointers from a previous grid scan.
+            m_targetList.clear();
             me->GetAttackableUnitListInRange(m_targetList, 21.0f);
             if (m_targetList.empty())
             {
@@ -1734,13 +1736,13 @@ public:
         uint32   m_shootCoolDown;
         std::list<ObjectGuid> my_followerList;
         std::list<Unit*> m_targetList;
-        uint32    m_wave;
-        uint32    m_waveSize;
-        uint32    m_point;
-        Unit*     m_nearestTarget;
-        float     m_nearestDistance;
-        float     m_checkDistance;
-        bool      m_doneA, m_doneB;
+        uint32    m_wave = 0;
+        uint32    m_waveSize = 0;
+        uint32    m_point = 0;
+        Unit*     m_nearestTarget = nullptr;
+        float     m_nearestDistance = 0.0f;
+        float     m_checkDistance = 0.0f;
+        bool      m_doneA = false, m_doneB = false;
         uint32    m_ai_counter;
 
         void Initialize()
@@ -2111,6 +2113,8 @@ public:
 
         void FindTargets()
         {
+            // The native search appends: never retain pointers from a previous grid scan.
+            m_targetList.clear();
             me->GetAttackableUnitListInRange(m_targetList, 25.0f);
             if (m_targetList.empty())
             {
@@ -2235,13 +2239,13 @@ public:
         std::list<ObjectGuid> my_followerList;
         uint32   m_shootCoolDown;
         std::list<Unit*> m_targetList;
-        uint32    m_wave;
-        uint32    m_waveSize;
-        uint32    m_point;
-        Unit*     m_nearestTarget;
-        float     m_nearestDistance;
-        float     m_checkDistance;
-        bool      m_doneA, m_doneB;
+        uint32    m_wave = 0;
+        uint32    m_waveSize = 0;
+        uint32    m_point = 0;
+        Unit*     m_nearestTarget = nullptr;
+        float     m_nearestDistance = 0.0f;
+        float     m_checkDistance = 0.0f;
+        bool      m_doneA = false, m_doneB = false;
         uint32    m_ai_counter;
 
         void Initialize()
@@ -2533,6 +2537,8 @@ public:
 
         void FindTargets()
         {
+            // The native search appends: never retain pointers from a previous grid scan.
+            m_targetList.clear();
             me->GetAttackableUnitListInRange(m_targetList, 25.0f);
             if (m_targetList.empty())
             {
@@ -2634,13 +2640,13 @@ public:
         std::list<ObjectGuid> my_cannonerList;
         std::list<ObjectGuid> my_victimList;
         std::list<Unit*> m_targetList;
-        uint32    m_wave;
-        uint32    m_waveSize;
-        uint32    m_point;
-        Unit*     m_nearestTarget;
-        float     m_nearestDistance;
-        float     m_checkDistance;
-        bool      m_doneA, m_doneB;
+        uint32    m_wave = 0;
+        uint32    m_waveSize = 0;
+        uint32    m_point = 0;
+        Unit*     m_nearestTarget = nullptr;
+        float     m_nearestDistance = 0.0f;
+        float     m_checkDistance = 0.0f;
+        bool      m_doneA = false, m_doneB = false;
         uint32    m_ai_counter;
 
         void Initialize()
@@ -3001,6 +3007,8 @@ public:
 
         void FindTargets()
         {
+            // The native search appends: never retain pointers from a previous grid scan.
+            m_targetList.clear();
             me->GetAttackableUnitListInRange(m_targetList, 25.0f);
             if (m_targetList.empty())
             {
@@ -3117,13 +3125,13 @@ public:
         uint32   m_shootCoolDown;
         std::list<ObjectGuid> my_followerList;
         std::list<Unit*> m_targetList;
-        uint32    m_wave;
-        uint32    m_waveSize;
-        uint32    m_point;
-        Unit*     m_nearestTarget;
-        float     m_nearestDistance;
-        float     m_checkDistance;
-        bool      m_doneA, m_doneB;
+        uint32    m_wave = 0;
+        uint32    m_waveSize = 0;
+        uint32    m_point = 0;
+        Unit*     m_nearestTarget = nullptr;
+        float     m_nearestDistance = 0.0f;
+        float     m_checkDistance = 0.0f;
+        bool      m_doneA = false, m_doneB = false;
         uint32    m_ai_counter;
 
         void Initialize()
@@ -3386,6 +3394,8 @@ public:
 
         void FindTargets()
         {
+            // The native search appends: never retain pointers from a previous grid scan.
+            m_targetList.clear();
             me->GetAttackableUnitListInRange(m_targetList, 25.0f);
             if (m_targetList.empty())
             {
@@ -3483,13 +3493,13 @@ public:
         uint32   m_shootCoolDown;
         std::list<ObjectGuid> my_followerList;
         std::list<Unit*> m_targetList;
-        uint32    m_wave;
-        uint32    m_waveSize;
-        uint32    m_point;
-        Unit*     m_nearestTarget;
-        float     m_nearestDistance;
-        float     m_checkDistance;
-        bool      m_doneA, m_doneB;
+        uint32    m_wave = 0;
+        uint32    m_waveSize = 0;
+        uint32    m_point = 0;
+        Unit*     m_nearestTarget = nullptr;
+        float     m_nearestDistance = 0.0f;
+        float     m_checkDistance = 0.0f;
+        bool      m_doneA = false, m_doneB = false;
         uint32    m_ai_counter;
 
         void Initialize()
@@ -3738,6 +3748,8 @@ public:
 
         void FindTargets()
         {
+            // The native search appends: never retain pointers from a previous grid scan.
+            m_targetList.clear();
             me->GetAttackableUnitListInRange(m_targetList, 25.0f);
             if (m_targetList.empty())
             {
