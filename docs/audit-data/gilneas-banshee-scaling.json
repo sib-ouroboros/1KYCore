@@ -1,0 +1,14 @@
+{
+  "mysql": "8.0.45",
+  "source": "isolated local release copies",
+  "status": "PASS",
+  "sql": "2026_10_06_19_world_gilneas_banshee_scaling.sql",
+  "live_database_changed": false,
+  "schema_dropped": true,
+  "quest": 24627,
+  "entry": 37757,
+  "native_fixture": "PASS - actual HasScalableLevels, SelectLevel and GetLevelForTarget; levels1/5/9/20/30 clamp5/5/9/20/20",
+  "inference": "Existing5..20 bounds represent intended scaling; neutral delta0 follows adjacent Gilneas scaling data. No claim of retail sniff verification.",
+  "verified_build": 0,
+  "client_verified": false
+}

@@ -199,6 +199,8 @@ jobs:
         run: python contrib/tests/test_gilneas_tobias.py
       - name: Test Tobias final dialogue owner completion and duplicate protection
         run: python contrib/tests/test_gilneas_tobias_dialogue.py
+      - name: Test native creature level selection and Gilneas scaling
+        run: python contrib/tests/test_gilneas_scaling.py
       - name: Audit all Gilneas script registrations
         run: python contrib/tests/audit_gilneas_bindings.py > gilneas-registrations.json
       - name: Test Avery scene ordering and scoped Lorna impact with strict sanitizers
