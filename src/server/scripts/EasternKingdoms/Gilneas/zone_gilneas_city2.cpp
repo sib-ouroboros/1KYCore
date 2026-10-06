@@ -25,6 +25,7 @@
 #include "MoveSplineInit.h"
 #include "MotionMaster.h"
 #include "ObjectAccessor.h"
+#include "ObjectMgr.h"
 #include "PassiveAI.h"
 #include "PhasingHandler.h"
 #include "Player.h"
@@ -1127,6 +1128,8 @@ public:
                     case 2006:
                     case 2007:
                     {
+                        if (!m_wave || !m_waveSize || m_point >= m_waveSize || id != 2000 + m_wave)
+                            break;
                         m_events.RescheduleEvent(EVENT_FIGHT_WAVE, 250);
                         break;
                     }
@@ -1150,6 +1153,7 @@ public:
                     m_battleIsStarted = true;
                     m_events.ScheduleEvent(EVENT_START_LIAMS_FIRST_ANIM, 15000);
                     SendActionValueToAllLeader(ACTION_START_EVENT);
+                    SendActionValueToAllLeader(ACTION_EVENT_RESET_TIMER);
                     break;
                 }
                 case ACTION_MOTIVATION_DONE:
@@ -1363,6 +1367,15 @@ public:
                 }
                 case EVENT_FIGHT_WAVE:
                 {
+                    // A queued fight can outlive the final point or the active wave.
+                    if (!m_wave || !m_waveSize)
+                        break;
+                    if (m_point >= m_waveSize)
+                    {
+                        m_events.RescheduleEvent(EVENT_MOVE_WAVE, 10);
+                        break;
+                    }
+
                     CheckForStartAction();
 
                     FindTargets();
@@ -1578,22 +1591,37 @@ public:
             switch (m_wave)
             {
                 case 1:
-                    return SAWave1Pos[m_point];
+                    if (m_point < sizeof(SAWave1Pos) / sizeof(SAWave1Pos[0]))
+                        return SAWave1Pos[m_point];
+                    break;
                 case 2:
-                    return SAWave2Pos[m_point];
+                    if (m_point < sizeof(SAWave2Pos) / sizeof(SAWave2Pos[0]))
+                        return SAWave2Pos[m_point];
+                    break;
                 case 3:
-                    return SAWave3Pos[m_point];
+                    if (m_point < sizeof(SAWave3Pos) / sizeof(SAWave3Pos[0]))
+                        return SAWave3Pos[m_point];
+                    break;
                 case 4:
-                    return SAWave4Pos[m_point];
+                    if (m_point < sizeof(SAWave4Pos) / sizeof(SAWave4Pos[0]))
+                        return SAWave4Pos[m_point];
+                    break;
                 case 5:
-                    return SAWave5Pos[m_point];
+                    if (m_point < sizeof(SAWave5Pos) / sizeof(SAWave5Pos[0]))
+                        return SAWave5Pos[m_point];
+                    break;
                 case 6:
-                    return Wave6Pos[m_point];
+                    if (m_point < sizeof(Wave6Pos) / sizeof(Wave6Pos[0]))
+                        return Wave6Pos[m_point];
+                    break;
                 case 7:
-                    return SAWave7Pos[m_point];
+                    if (m_point < sizeof(SAWave7Pos) / sizeof(SAWave7Pos[0]))
+                        return SAWave7Pos[m_point];
+                    break;
                 default:
-                    return Position(0, 0);
+                    return me->GetPosition();
             }
+            return me->GetPosition();
         }
 
         void CheckForStartAction()
@@ -1827,6 +1855,8 @@ public:
                     case 2006:
                     case 2007:
                     {
+                        if (!m_wave || !m_waveSize || m_point >= m_waveSize || id != 2000 + m_wave)
+                            break;
                         m_events.RescheduleEvent(EVENT_FIGHT_WAVE, 250);
                         break;
                     }
@@ -2069,6 +2099,15 @@ public:
                 }
                 case EVENT_FIGHT_WAVE:
                 {
+                    // A queued fight can outlive the final point or the active wave.
+                    if (!m_wave || !m_waveSize)
+                        break;
+                    if (m_point >= m_waveSize)
+                    {
+                        m_events.RescheduleEvent(EVENT_MOVE_WAVE, 10);
+                        break;
+                    }
+
                     CheckForStartAction();
 
                     FindTargets();
@@ -2184,22 +2223,37 @@ public:
             switch (m_wave)
             {
                 case 1:
-                    return LGWave1Pos[m_point];
+                    if (m_point < sizeof(LGWave1Pos) / sizeof(LGWave1Pos[0]))
+                        return LGWave1Pos[m_point];
+                    break;
                 case 2:
-                    return LGWave2Pos[m_point];
+                    if (m_point < sizeof(LGWave2Pos) / sizeof(LGWave2Pos[0]))
+                        return LGWave2Pos[m_point];
+                    break;
                 case 3:
-                    return LGWave3Pos[m_point];
+                    if (m_point < sizeof(LGWave3Pos) / sizeof(LGWave3Pos[0]))
+                        return LGWave3Pos[m_point];
+                    break;
                 case 4:
-                    return LGWave4Pos[m_point];
+                    if (m_point < sizeof(LGWave4Pos) / sizeof(LGWave4Pos[0]))
+                        return LGWave4Pos[m_point];
+                    break;
                 case 5:
-                    return LGWave5Pos[m_point];
+                    if (m_point < sizeof(LGWave5Pos) / sizeof(LGWave5Pos[0]))
+                        return LGWave5Pos[m_point];
+                    break;
                 case 6:
-                    return Wave6Pos[m_point];
+                    if (m_point < sizeof(Wave6Pos) / sizeof(Wave6Pos[0]))
+                        return Wave6Pos[m_point];
+                    break;
                 case 7:
-                    return LGWave7Pos[m_point];
+                    if (m_point < sizeof(LGWave7Pos) / sizeof(LGWave7Pos[0]))
+                        return LGWave7Pos[m_point];
+                    break;
                 default:
-                    return Position(0, 0);
+                    return me->GetPosition();
             }
+            return me->GetPosition();
         }
 
         void CheckForStartAction()
@@ -2324,6 +2378,8 @@ public:
                     case 2006:
                     case 2007:
                     {
+                        if (!m_wave || !m_waveSize || m_point >= m_waveSize || id != 2000 + m_wave)
+                            break;
                         m_events.RescheduleEvent(EVENT_FIGHT_WAVE, 250);
                         break;
                     }
@@ -2495,6 +2551,15 @@ public:
                 }
                 case EVENT_FIGHT_WAVE:
                 {
+                    // A queued fight can outlive the final point or the active wave.
+                    if (!m_wave || !m_waveSize)
+                        break;
+                    if (m_point >= m_waveSize)
+                    {
+                        m_events.RescheduleEvent(EVENT_MOVE_WAVE, 10);
+                        break;
+                    }
+
                     CheckForStartAction();
                     FindTargets();
 
@@ -2608,22 +2673,37 @@ public:
             switch (m_wave)
             {
                 case 1:
-                    return MSWave1Pos[m_point];
+                    if (m_point < sizeof(MSWave1Pos) / sizeof(MSWave1Pos[0]))
+                        return MSWave1Pos[m_point];
+                    break;
                 case 2:
-                    return MSWave2Pos[m_point];
+                    if (m_point < sizeof(MSWave2Pos) / sizeof(MSWave2Pos[0]))
+                        return MSWave2Pos[m_point];
+                    break;
                 case 3:
-                    return MSWave3Pos[m_point];
+                    if (m_point < sizeof(MSWave3Pos) / sizeof(MSWave3Pos[0]))
+                        return MSWave3Pos[m_point];
+                    break;
                 case 4:
-                    return MSWave4Pos[m_point];
+                    if (m_point < sizeof(MSWave4Pos) / sizeof(MSWave4Pos[0]))
+                        return MSWave4Pos[m_point];
+                    break;
                 case 5:
-                    return MSWave5Pos[m_point];
+                    if (m_point < sizeof(MSWave5Pos) / sizeof(MSWave5Pos[0]))
+                        return MSWave5Pos[m_point];
+                    break;
                 case 6:
-                    return Wave6Pos[m_point];
+                    if (m_point < sizeof(Wave6Pos) / sizeof(Wave6Pos[0]))
+                        return Wave6Pos[m_point];
+                    break;
                 case 7:
-                    return MSWave7Pos[m_point];
+                    if (m_point < sizeof(MSWave7Pos) / sizeof(MSWave7Pos[0]))
+                        return MSWave7Pos[m_point];
+                    break;
                 default:
-                    return Position(0, 0);
+                    return me->GetPosition();
             }
+            return me->GetPosition();
         }
 
         void CheckForStartAction()
@@ -2737,6 +2817,8 @@ public:
                     case 2006:
                     case 2007:
                     {
+                        if (!m_wave || !m_waveSize || m_point >= m_waveSize || id != 2000 + m_wave)
+                            break;
                         m_events.RescheduleEvent(EVENT_FIGHT_WAVE, 250);
                         break;
                     }
@@ -2889,6 +2971,15 @@ public:
                 }
                 case EVENT_FIGHT_WAVE:
                 {
+                    // A queued fight can outlive the final point or the active wave.
+                    if (!m_wave || !m_waveSize)
+                        break;
+                    if (m_point >= m_waveSize)
+                    {
+                        m_events.RescheduleEvent(EVENT_MOVE_WAVE, 10);
+                        break;
+                    }
+
                     CheckForStartAction();
                     FindTargets();
 
@@ -3081,19 +3172,29 @@ public:
                 case 2:
                     break;
                 case 3:
-                    return LCWave3Pos[m_point];
+                    if (m_point < sizeof(LCWave3Pos) / sizeof(LCWave3Pos[0]))
+                        return LCWave3Pos[m_point];
+                    break;
                 case 4:
-                    return LCWave4Pos[m_point];
+                    if (m_point < sizeof(LCWave4Pos) / sizeof(LCWave4Pos[0]))
+                        return LCWave4Pos[m_point];
+                    break;
                 case 5:
-                    return LCWave5Pos[m_point];
+                    if (m_point < sizeof(LCWave5Pos) / sizeof(LCWave5Pos[0]))
+                        return LCWave5Pos[m_point];
+                    break;
                 case 6:
-                    return Wave6Pos[m_point];
+                    if (m_point < sizeof(Wave6Pos) / sizeof(Wave6Pos[0]))
+                        return Wave6Pos[m_point];
+                    break;
                 case 7:
-                    return LCWave7Pos[m_point];
+                    if (m_point < sizeof(LCWave7Pos) / sizeof(LCWave7Pos[0]))
+                        return LCWave7Pos[m_point];
+                    break;
                 default:
                     break;
             }
-            return Position(0, 0);
+            return me->GetPosition();
         }
 
         void CheckForStartAction()
@@ -3208,6 +3309,8 @@ public:
                     case 2006:
                     case 2007:
                     {
+                        if (!m_wave || !m_waveSize || m_point >= m_waveSize || id != 2000 + m_wave)
+                            break;
                         m_events.RescheduleEvent(EVENT_FIGHT_WAVE, 250);
                         break;
                     }
@@ -3350,6 +3453,15 @@ public:
                     }
                     case EVENT_FIGHT_WAVE:
                     {
+                        // A queued fight can outlive the final point or the active wave.
+                        if (!m_wave || !m_waveSize)
+                            break;
+                        if (m_point >= m_waveSize)
+                        {
+                            m_events.RescheduleEvent(EVENT_MOVE_WAVE, 10);
+                            break;
+                        }
+
                         CheckForStartAction();
                         FindTargets();
 
@@ -3465,17 +3577,25 @@ public:
             switch (m_wave)
             {
                 case 4:
-                    return DCWave4Pos[m_point];
+                    if (m_point < sizeof(DCWave4Pos) / sizeof(DCWave4Pos[0]))
+                        return DCWave4Pos[m_point];
+                    break;
                 case 5:
-                    return DCWave5Pos[m_point];
+                    if (m_point < sizeof(DCWave5Pos) / sizeof(DCWave5Pos[0]))
+                        return DCWave5Pos[m_point];
+                    break;
                 case 6:
-                    return Wave6Pos[m_point];
+                    if (m_point < sizeof(Wave6Pos) / sizeof(Wave6Pos[0]))
+                        return Wave6Pos[m_point];
+                    break;
                 case 7:
-                    return DCWave7Pos[m_point];
+                    if (m_point < sizeof(DCWave7Pos) / sizeof(DCWave7Pos[0]))
+                        return DCWave7Pos[m_point];
+                    break;
                 default:
                     break;
             }
-            return Position(0, 0);
+            return me->GetPosition();
         }
 
         void CheckForStartAction()
@@ -3575,6 +3695,8 @@ public:
                         break;
                     case 2007:
                     {
+                        if (!m_wave || !m_waveSize || m_point >= m_waveSize || id != 2000 + m_wave)
+                            break;
                         m_events.RescheduleEvent(EVENT_FIGHT_WAVE, 250);
                         break;
                     }
@@ -3692,6 +3814,15 @@ public:
                 }
                 case EVENT_FIGHT_WAVE:
                 {
+                    // A queued fight can outlive the final point or the active wave.
+                    if (!m_wave || !m_waveSize)
+                        break;
+                    if (m_point >= m_waveSize)
+                    {
+                        m_events.RescheduleEvent(EVENT_MOVE_WAVE, 10);
+                        break;
+                    }
+
                     CheckForStartAction();
                     FindTargets();
 
@@ -3810,11 +3941,13 @@ public:
             switch (m_wave)
             {
                 case 7:
-                    return GGWave7Pos[m_point];
+                    if (m_point < sizeof(GGWave7Pos) / sizeof(GGWave7Pos[0]))
+                        return GGWave7Pos[m_point];
+                    break;
                 default:
                     break;
             }
-            return Position(0, 0);
+            return me->GetPosition();
         }
 
         void CheckForStartAction()

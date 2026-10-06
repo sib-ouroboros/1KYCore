@@ -267,3 +267,14 @@ Krennan reserves the start before notifying Almyra, and Almyra independently ign
 `test_gilneas_battle_start.py` compiles production gossip selection, eligibility/start methods, Krennan action handling and Almyra's actual start case/GetData. Local strict-warning compilation and execution passed for two players with stale menus, direct duplicate callbacks, wrong sender, cancel option, cancelled quest, death, map/phase/range changes, missing or unregistered actors and a foreign controller script. New CI is submitted, not yet confirmed. Previous commit `fcd87fb` passed full GCC, Windows x64 and Reliability ASan/UBSan CI (37439473885, 37439478411, 37439520747).
 
 This is a start-safety correction, not full client acceptance of quest 24904. Wave synchronization, scene recovery and the final cinematic still need work. No SQL or production-server changes were made.
+
+
+### Battle for Gilneas: full-build correction and bounded wave callbacks
+
+Commit `c22cc99` passed Reliability ASan/UBSan (37442953011), but full GCC (37442956940) and Windows (37442961423) failed because `ObjectMgr.h` was missing for the new `sObjectMgr` lookup. This include is now explicit. The prior fixtures mocked ObjectMgr and did not verify that production include; the new route test also checks the include/native declaration. Full builds remain the authoritative compatibility check.
+
+All six battle leaders now ignore wave movement notifications belonging to another wave or a finished route. King Genn's separate point 1002 cinematic callback remains unchanged. A queued fight event after the final point hands off via the existing move event rather than indexing the route again; idle fight events are ignored. Every one of the 31 route lookups checks its actual native array size. Invalid lookups return the actor's current position rather than map origin, without teleporting or changing any original route coordinates.
+
+The existing ten-minute reset protocol is now broadcast when the opening event starts, not only after the first wave finishes. This covers a stalled opening speech; normal wave transitions still refresh the same timer. This does not implement participant-specific abandonment recovery or guarantee simultaneous respawn of all persistent actors; those require further audit and client testing.
+
+`test_gilneas_battle_waves.py` compiles the actual 27 coordinate arrays, six lookup methods, six movement callbacks and the six fight-entry guard prefixes. It checks all valid points in 31 lookup branches, endpoint/maximum indices, idle and stale callbacks, valid fight entry and the separate king cinematic callback. Grid, motion and EventMap scheduling are fixtures; the rest of each combat handler is not executed by this test. Local strict-warning builds/execution of wave, start and target tests passed. New ASan/UBSan and full builds are submitted separately; no new success is claimed yet. No SQL or running-server update was needed.
