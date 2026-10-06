@@ -236,7 +236,7 @@
     true
   ],
   "complete": true,
-  "status": "AUDIT_ONLY_NOT_IMPLEMENTED",
+  "status": "IMPLEMENTED_PENDING_CLIENT_ACCEPTANCE",
   "route": [
     {
       "point": 1,
@@ -449,17 +449,194 @@
     "player_exit": 30,
     "end": 33
   },
-  "current_incompatible_endpoints": [
-    28,
-    33,
-    44
-  ],
-  "findings": [
+  "current_incompatible_endpoints": {
+    "before": [
+      28,
+      33,
+      44
+    ],
+    "after": [
+      24,
+      30,
+      33
+    ]
+  },
+  "db2": {
+    "build": 26654,
+    "layout": "0x1606c582",
+    "vehicles": {
+      "958": [
+        8195,
+        8196,
+        8197,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "959": [
+        8198,
+        9568,
+        9569,
+        9570,
+        9571,
+        9572,
+        9573,
+        0
+      ],
+      "970": [
+        8231,
+        8232,
+        8233,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "spell_effects": {
+      "74096": [
+        {
+          "ID": 74075,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "Aura": 261,
+          "BasePoints": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 33554432,
+          "MiscValue2": 194,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "72764": [
+        {
+          "ID": 73077,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "Aura": 236,
+          "BasePoints": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 25,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 73078,
+          "Effect": 6,
+          "EffectIndex": 1,
+          "Aura": 4,
+          "BasePoints": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 101593,
+          "Effect": 170,
+          "EffectIndex": 2,
+          "Aura": 0,
+          "BasePoints": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "46598": [
+        {
+          "ID": 38730,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "Aura": 236,
+          "BasePoints": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 25,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 38731,
+          "Effect": 6,
+          "EffectIndex": 1,
+          "Aura": 4,
+          "BasePoints": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "72767": [
+        {
+          "ID": 73081,
+          "Effect": 28,
+          "EffectIndex": 0,
+          "Aura": 0,
+          "BasePoints": 72764,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 43336,
+          "MiscValue2": 3105,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 32,
+          "ImplicitTarget2": 0
+        }
+      ]
+    },
+    "Vehicle_sha256": "effef901400c2b7efc44d24b47aacc197593ed8b0218a7bef283f4147c299f27",
+    "VehicleSeat_sha256": "e985e44ff0f5a5f11d221634d8e68fc333c665f0ab19a02ca335283848d0f740",
+    "SpellEffect_sha256": "dfcb7076421e3b99fb23e769acddb9215d051069fe5e7488fc33b67770c194db",
+    "seat_copy_table": {
+      "8233": 8197
+    },
+    "carriage_player_seat": {
+      "seat": 1,
+      "VehicleSeatID": 9568,
+      "Flags": 33587211,
+      "FlagsB": 33554432,
+      "FlagsC": 0
+    }
+  },
+  "initial_findings": [
     "Current path ID is 4492801, not 4333601/4333701; path is absent in release.",
     "Harness IsSummonedBy may run before JustSummoned carriage; boarding must handle either callback order.",
     "Current dynamic carriage Marie accessory occupies passenger seat1; source assigns Marie seat0.",
     "Current harness accessories omit carriage seat2.",
     "Unit::HandleSpellClick requires caster-clicker flag1 to mount accessory onto parent. Source cast_flags0 must not be copied.",
     "Owner validation, duplicate suppression, bounded lifetime and phase194 cleanup remain required."
-  ]
+  ],
+  "arrival_questender": {
+    "entry": 37065,
+    "guid": 802021,
+    "map": 654,
+    "PhaseId": 186,
+    "position": [
+      -2222.06,
+      1809.64,
+      11.8432
+    ],
+    "distance_to_point30": 4.291,
+    "persistent_visibility": "69484/phase186 starts after rewarded14467 before Exodus24438; SQL10 retains it until rewarded24676."
+  }
 }

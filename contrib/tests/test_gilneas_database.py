@@ -9,11 +9,11 @@ from audit_gilneas_bindings import registered_scripts, audit
 
 def test_gilneas_database(sql, checksum):
  root=Path(__file__).resolve().parents[2]
- files=['2026_10_06_00_world_gilneas_early_mechanics.sql','2026_10_06_01_world_gilneas_quest_object_spawns.sql','2026_10_06_02_world_gilneas_rescue_bindings.sql','2026_10_06_03_world_gilneas_duskhaven_phase_handoff.sql','2026_10_06_04_world_gilneas_walden_genn.sql','2026_10_06_05_world_gilneas_half_burnt_torch.sql','2026_10_06_06_world_gilneas_liberation_day.sql','2026_10_06_07_world_gilneas_horn_of_taldoren.sql','2026_10_06_08_world_gilneas_chance_lucius.sql','2026_10_06_09_world_gilneas_manor_ride.sql','2026_10_06_10_world_gilneas_late_phase_handoffs.sql','2026_10_06_11_world_gilneas_leader_of_the_pack.sql','2026_10_06_12_world_gilneas_bat_flight.sql']
+ files=['2026_10_06_00_world_gilneas_early_mechanics.sql','2026_10_06_01_world_gilneas_quest_object_spawns.sql','2026_10_06_02_world_gilneas_rescue_bindings.sql','2026_10_06_03_world_gilneas_duskhaven_phase_handoff.sql','2026_10_06_04_world_gilneas_walden_genn.sql','2026_10_06_05_world_gilneas_half_burnt_torch.sql','2026_10_06_06_world_gilneas_liberation_day.sql','2026_10_06_07_world_gilneas_horn_of_taldoren.sql','2026_10_06_08_world_gilneas_chance_lucius.sql','2026_10_06_09_world_gilneas_manor_ride.sql','2026_10_06_10_world_gilneas_late_phase_handoffs.sql','2026_10_06_11_world_gilneas_leader_of_the_pack.sql','2026_10_06_12_world_gilneas_bat_flight.sql','2026_10_06_13_world_gilneas_exodus_carriage.sql']
  texts=[(root/'sql/updates/world'/name).read_text('utf8') for name in files]
  manifest=json.loads((root/'docs/audit-data/gilneas-static-restoration.json').read_text('utf8'))
  tables=sql('SHOW TABLES;').stdout.splitlines()
- modified={'creature_template','creature','creature_addon','game_event_creature','pool_creature','creature_formations','smart_scripts','gameobject','npc_spellclick_spells','spell_script_names','spell_area','waypoint_data'}
+ modified={'creature_template','creature','creature_addon','game_event_creature','pool_creature','creature_formations','smart_scripts','gameobject','npc_spellclick_spells','spell_script_names','spell_area','waypoint_data','vehicle_template_accessory'}
  foreign_phases=sql('SELECT * FROM spell_area WHERE area BETWEEN 7037 AND 7129 ORDER BY spell,area,quest_start,quest_end;').stdout
  untouched=checksum([t for t in tables if t not in modified])
  # Exercise the actual legacy assignments present in the published release.
@@ -70,12 +70,44 @@ def test_gilneas_database(sql, checksum):
   for point in route['points']:
    assert sql(f"SELECT COUNT(*) FROM waypoint_data WHERE id={path_id} AND point={point['point']} AND ABS(position_x-({point['x']}))<0.01 AND ABS(position_y-({point['y']}))<0.01 AND ABS(position_z-({point['z']}))<0.01 AND move_type=1;").stdout.strip()=='1'
  for actor in bat['actors']:
-  assert sql(f"SELECT COUNT(*) FROM creature WHERE guid={actor['guid']} AND id={actor['id']} AND map=654 AND PhaseId=190 AND PhaseGroup=0;").stdout.strip()=='1'
+  count=sql(f"SELECT COUNT(*) FROM creature WHERE guid={actor['guid']} AND id={actor['id']} AND map=654 AND PhaseId=190 AND PhaseGroup=0;").stdout.strip()
+  assert count=='1',(actor,repr(count),sql(f"SELECT guid,id,map,PhaseId,PhaseGroup FROM creature WHERE guid={actor['guid']};").stdout)
  assert sql('SELECT cast_flags FROM npc_spellclick_spells WHERE npc_entry=38615 AND spell_id=72472;').stdout.strip()=='1'
  assert sql('SELECT COUNT(*) FROM creature_template WHERE entry=38615 AND npcflag & 16777216;').stdout.strip()=='1'
  sql('UPDATE waypoint_data SET position_x=position_x+100 WHERE id=3854003 AND point=1;')
  before=checksum(tables);sql(texts[12],ok=False);assert checksum(tables)==before,'Foreign bat route changed'
  sql('UPDATE waypoint_data SET position_x=position_x-100 WHERE id=3854003 AND point=1;')
+ coach=json.loads((root/'docs/audit-data/gilneas-stagecoach-route-audit.json').read_text('utf8'))
+ assert sql('SELECT COUNT(*) FROM waypoint_data WHERE id=4492801;').stdout.strip()=='33'
+ for point in coach['route']:
+  assert sql(f"SELECT COUNT(*) FROM waypoint_data WHERE id=4492801 AND point={point['point']} AND ABS(position_x-({point['x']}))<0.01 AND ABS(position_y-({point['y']}))<0.01 AND ABS(position_z-({point['z']}))<0.01 AND move_type=1;").stdout.strip()=='1'
+ for entry,script in [(43336,'npc_harness_43336'),(43337,'npc_stagecoach_carriage_43337'),(44928,'npc_stagecoach_carriage_44928')]:
+  assert script in registered
+  assert sql(f"SELECT ScriptName FROM creature_template WHERE entry={entry};").stdout.strip()==script
+ for entry in (38755,43336,43337,44928):
+  assert sql(f'SELECT COUNT(*) FROM npc_spellclick_spells WHERE npc_entry={entry} AND spell_id=46598 AND cast_flags=1 AND user_type=0;').stdout.strip()=='1'
+ assert sql('SELECT COUNT(*) FROM npc_spellclick_spells WHERE npc_entry IN (38755,44928) AND spell_id=72767;').stdout.strip()=='0'
+ for entry in (43337,44928):
+  assert sql(f'SELECT COUNT(*) FROM vehicle_template_accessory WHERE entry={entry} AND seat_id=1;').stdout.strip()=='0'
+  assert sql(f'SELECT COUNT(*) FROM vehicle_template_accessory WHERE entry={entry} AND seat_id=0 AND accessory_entry=38853;').stdout.strip()=='1'
+ for entry,accessory in [(38755,44928),(43336,43337)]:
+  assert sql(f'SELECT COUNT(*) FROM vehicle_template_accessory WHERE entry={entry} AND seat_id=2 AND accessory_entry={accessory} AND minion=1 AND summontype=8;').stdout.strip()=='1'
+ # Reject conflicts before routes, bindings, seats or click handlers are changed.
+ sql('UPDATE vehicle_template_accessory SET accessory_entry=9999999 WHERE entry=43336 AND seat_id=2;')
+ before=checksum(tables);sql(texts[13],ok=False);assert checksum(tables)==before,'Foreign carriage seat overwritten'
+ sql('UPDATE vehicle_template_accessory SET accessory_entry=43337 WHERE entry=43336 AND seat_id=2;')
+ sql("UPDATE creature_template SET ScriptName='custom_coach' WHERE entry=43336;")
+ before=checksum(tables);sql(texts[13],ok=False);assert checksum(tables)==before,'Foreign carriage script overwritten'
+ sql("UPDATE creature_template SET ScriptName='npc_harness_43336' WHERE entry=43336;")
+ sql('UPDATE waypoint_data SET position_x=position_x+100 WHERE id=4492801 AND point=1;')
+ before=checksum(tables);sql(texts[13],ok=False);assert checksum(tables)==before,'Foreign carriage route overwritten'
+ sql('UPDATE waypoint_data SET position_x=position_x-100 WHERE id=4492801 AND point=1;')
+ sql("INSERT INTO vehicle_template_accessory (entry,accessory_entry,seat_id,minion,description,summontype,summontimer) VALUES (43337,9999999,1,0,'test foreign occupant',8,0);")
+ before=checksum(tables);sql(texts[13],ok=False);assert checksum(tables)==before,'Foreign player-seat occupant overwritten'
+ sql('DELETE FROM vehicle_template_accessory WHERE entry=43337 AND seat_id=1 AND accessory_entry=9999999;')
+ sql("INSERT INTO npc_spellclick_spells VALUES (43336,72767,1,0);")
+ before=checksum(tables);sql(texts[13],ok=False);assert checksum(tables)==before,'Foreign click handler overwritten'
+ sql('DELETE FROM npc_spellclick_spells WHERE npc_entry=43336 AND spell_id=72767;')
  # A foreign GUID cannot be overwritten, nor can an earlier part of this migration write.
  first=manifest['rows'][0]['spawn'];guid=first['guid']
  sql(f'UPDATE gameobject SET id=9999999 WHERE guid={guid};')

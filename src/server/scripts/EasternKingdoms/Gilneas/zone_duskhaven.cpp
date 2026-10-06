@@ -2208,141 +2208,227 @@ public:
 // after cataclysm earthquake : phase 186 (131072), WorldMap 679 and TerrainSwap 656
 // the ride has additional phase 194
 
-// 44928
+// 44928: the parked carriage is an accessory of the persistent harness.
 class npc_stagecoach_carriage_44928 : public CreatureScript
 {
 public:
     npc_stagecoach_carriage_44928() : CreatureScript("npc_stagecoach_carriage_44928") { }
 
-    /* the spell SPELL_SUMMON_CARRIAGE has failure. player mount not as passenger on carriage, but as horse in harness */
+    static void BeginJourney(Player* player, Creature* creature)
+    {
+        if (player->GetMapId() != 654 || !player->IsAlive()
+            || player->GetQuestStatus(QUEST_EXODUS) != QUEST_STATUS_COMPLETE
+            || player->GetVehicleBase() || player->GetDistance(creature) > 5.0f
+            || player->GetSummonedCreatureByEntry(NPC_HARNESS_43336))
+            return;
+
+        player->CastSpell(player, SPELL_PHASE_QUEST_ZONE_SPECIFIC_19, true);
+        if (!player->SummonCreature(NPC_HARNESS_43336, creature->GetPosition(),
+            TEMPSUMMON_TIMED_DESPAWN, 450000, 0, true))
+            player->RemoveAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19);
+    }
+
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        if (player->GetQuestStatus(QUEST_EXODUS) == QUEST_STATUS_COMPLETE)
-        {
-            player->CastSpell(player, SPELL_PHASE_QUEST_ZONE_SPECIFIC_19);
-            player->SummonCreature(NPC_HARNESS_43336, creature->GetPosition(), TEMPSUMMON_MANUAL_DESPAWN);
-        }
-
+        BeginJourney(player, creature);
         return true;
+    }
+
+    struct npc_parked_carriageAI : public ScriptedAI
+    {
+        npc_parked_carriageAI(Creature* creature) : ScriptedAI(creature) { }
+        void PassengerBoarded(Unit* passenger, int8, bool apply) override
+        {
+            // Vehicle::Install sets SPELLCLICK for the free player seat.
+            // Native right-click may therefore board the parked vehicle
+            // instead of sending gossip. Exit it first, then start the same
+            // private journey, after its pending join has completed.
+            if (apply)
+                if (Player* player = passenger->ToPlayer())
+                {
+                    player->ExitVehicle();
+                    BeginJourney(player, me);
+                }
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return creature->GetMapId() == 654 ? new npc_parked_carriageAI(creature) : nullptr;
     }
 };
 
-// 43336
+// 43336: one bounded, owner-only journey over the captured 33-point route.
 class npc_harness_43336 : public CreatureScript
 {
 public:
     npc_harness_43336() : CreatureScript("npc_harness_43336") { }
 
-    enum eNpc
-    {
-        WAYPOINT_ID                             = 4492801
-    };
-
     struct npc_harness_43336AI : public ScriptedAI
     {
-        npc_harness_43336AI(Creature* creature) : ScriptedAI(creature) { }
+        npc_harness_43336AI(Creature* creature) : ScriptedAI(creature), m_summons(me) { }
 
         EventMap m_events;
+        SummonList m_summons;
         ObjectGuid m_playerGUID;
         ObjectGuid m_carriageGUID;
+        uint32 m_lifetime = 0;
+        bool m_started = false;
+        bool m_arrived = false;
+        bool m_finished = false;
+        bool m_boardRequested = false;
 
         void Reset() override
         {
             m_events.Reset();
-            m_playerGUID = ObjectGuid::Empty;
-            m_carriageGUID = ObjectGuid::Empty;
             me->setActive(true);
+            me->SetReactState(REACT_PASSIVE);
+            if (!m_playerGUID.IsEmpty())
+                Cleanup();
         }
 
-        void DoAction(int32 param) override
+        void Cleanup()
         {
-            switch (param)
+            if (m_finished)
+                return;
+            m_finished = true; // ExitVehicle can re-enter PassengerBoarded.
+            m_events.Reset();
+            if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
             {
-                case EVENT_START_MOVEMENT:
-                    m_events.RescheduleEvent(EVENT_START_MOVEMENT, 3s);
-                    break;
+                if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
+                    if (player->GetVehicleBase() == car)
+                        player->ExitVehicle();
+                player->RemoveAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19);
+            }
+            if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
+                car->AI()->DoAction(EVENT_DESPAWN_PART_00);
+            m_summons.DespawnAll();
+            me->DespawnOrUnsummon(1s);
+        }
+
+        void TryBoard()
+        {
+            if (m_boardRequested || m_finished)
+                return;
+            Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+            Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID);
+            // The native vehicle installer can create the accessory before or
+            // after IsSummonedBy. Wait until its own boarding has completed.
+            if (!player || !car || car->GetVehicleBase() != me || !car->GetVehicleKit())
+                return;
+            m_boardRequested = true;
+            car->AI()->SetGUID(m_playerGUID, PLAYER_GUID);
+            car->AI()->DoAction(EVENT_ENTER_VEHICLE);
+        }
+
+        void DoAction(int32 action) override
+        {
+            if (action == EVENT_DESPAWN_PART_00)
+                Cleanup();
+            else if (action == EVENT_START_MOVEMENT && !m_started && !m_finished)
+            {
+                m_started = true;
+                m_events.RescheduleEvent(EVENT_START_MOVEMENT, 3s);
             }
         }
 
         ObjectGuid GetGUID(int32 id) const override
         {
-            switch (id)
-            {
-                case PLAYER_GUID:
-                    return m_playerGUID;
-            }
-            return ObjectGuid::Empty;
+            return id == PLAYER_GUID ? m_playerGUID : ObjectGuid::Empty;
         }
 
         void IsSummonedBy(Unit* summoner) override
         {
-            if (Player* player = summoner->ToPlayer())
+            if (Player* player = summoner ? summoner->ToPlayer() : nullptr)
             {
                 m_playerGUID = player->GetGUID();
-
-                if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
-                {
-                    car->AI()->SetGUID(m_playerGUID, PLAYER_GUID);
-                    car->AI()->DoAction(EVENT_ENTER_VEHICLE);
-                }
+                TryBoard();
             }
+            else
+                Cleanup();
         }
 
         void JustSummoned(Creature* summon) override
         {
-            switch (summon->GetEntry())
+            if (m_finished)
             {
-                case NPC_CARRIAGE_43337:
-                    m_carriageGUID = summon->GetGUID();
-                    summon->AI()->SetGUID(me->GetGUID(), me->GetEntry());
-                    break;
+                summon->DespawnOrUnsummon();
+                return;
+            }
+            m_summons.Summon(summon);
+            if (summon->GetEntry() == NPC_CARRIAGE_43337)
+            {
+                m_carriageGUID = summon->GetGUID();
+                summon->AI()->SetGUID(me->GetGUID(), NPC_HARNESS_43336);
+                TryBoard();
             }
         }
 
+        void SummonedCreatureDespawn(Creature* summon) override
+        {
+            m_summons.Despawn(summon);
+            if (summon->GetGUID() == m_carriageGUID && !m_finished)
+                Cleanup();
+        }
+
+        void JustDied(Unit*) override { Cleanup(); }
+
         void MovementInform(uint32 type, uint32 id) override
         {
-            if (type == WAYPOINT_MOTION_TYPE)
-                switch (id)
+            if (type != WAYPOINT_MOTION_TYPE || !m_started || m_finished)
+                return;
+            if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
+            {
+                if (id == 24)
+                    car->AI()->DoAction(EVENT_SAY_ATTACK);
+                else if (id == 30 && !m_arrived)
                 {
-                    case 28:
-                    {
-                        // attack from orc...
-                        if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
-                            car->GetAI()->DoAction(EVENT_SAY_ATTACK);
-                        break;
-                    }
-                    case 33:
-                    {
-                        if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
-                            car->GetAI()->DoAction(EVENT_EXIT_VEHICLE);
-                        break;
-                    }
-                    case 44:
-                    {
-                        me->DespawnOrUnsummon(1s);
-
-                        if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
-                            car->GetAI()->DoAction(EVENT_DESPAWN_PART_00);
-                        break;
-                    }
+                    m_arrived = true;
+                    car->AI()->DoAction(EVENT_EXIT_VEHICLE);
+                    if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                        player->RemoveAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19);
                 }
+            }
+            if (id == 33)
+                Cleanup();
         }
 
         void UpdateAI(uint32 diff) override
         {
-            m_events.Update(diff);
-
-            while (uint32 eventId = m_events.ExecuteEvent())
+            if (m_finished)
+                return;
+            m_lifetime += diff;
+            Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+            if (!player || !player->IsAlive() || player->GetMapId() != 654
+                || m_lifetime >= 450000
+                || (!m_arrived && (player->GetQuestStatus(QUEST_EXODUS) != QUEST_STATUS_COMPLETE
+                    || !me->InSamePhase(player->GetPhaseShift())
+                    || !player->HasAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19))))
             {
-                switch (eventId)
+                Cleanup();
+                return;
+            }
+            TryBoard();
+            if (!m_started && m_lifetime >= 10000)
+            {
+                Cleanup();
+                return;
+            }
+            // After the planned stop the owner can reward the quest while the
+            // carriage drives away. An earlier dismount cancels the journey.
+            if (m_started && !m_arrived)
+            {
+                Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID);
+                if (!car || player->GetVehicleBase() != car)
                 {
-                    case EVENT_START_MOVEMENT:
-                    {
-                        me->GetMotionMaster()->MovePath(WAYPOINT_ID, false);
-                        break;
-                    }
+                    Cleanup();
+                    return;
                 }
             }
+            m_events.Update(diff);
+            while (uint32 eventId = m_events.ExecuteEvent())
+                if (eventId == EVENT_START_MOVEMENT)
+                    me->GetMotionMaster()->MovePath(4492801, false);
         }
     };
 
@@ -2352,7 +2438,7 @@ public:
     }
 };
 
-// 43337
+// 43337: carriage seat1 belongs exclusively to the journey's player.
 class npc_stagecoach_carriage_43337 : public CreatureScript
 {
 public:
@@ -2360,87 +2446,148 @@ public:
 
     struct npc_stagecoach_carriage_43337AI : public ScriptedAI
     {
-        npc_stagecoach_carriage_43337AI(Creature* creature) : ScriptedAI(creature) { }
-
-        EventMap m_events;
+        npc_stagecoach_carriage_43337AI(Creature* creature) : ScriptedAI(creature), m_summons(me) { }
+        SummonList m_summons;
         ObjectGuid m_playerGUID;
         ObjectGuid m_lornaGUID;
         ObjectGuid m_harnessGUID;
+        bool m_boarded = false;
+        bool m_exiting = false;
+        bool m_finished = false;
 
         void Reset() override
         {
-            m_playerGUID = ObjectGuid::Empty;
-            m_lornaGUID = ObjectGuid::Empty;
-            m_harnessGUID = ObjectGuid::Empty;
             me->setActive(true);
+            me->SetReactState(REACT_PASSIVE);
+            if (!m_playerGUID.IsEmpty())
+                CancelJourney();
+        }
+
+        void CancelJourney()
+        {
+            if (Creature* harness = ObjectAccessor::GetCreature(*me, m_harnessGUID))
+                harness->AI()->DoAction(EVENT_DESPAWN_PART_00);
+            else
+                DoAction(EVENT_DESPAWN_PART_00);
         }
 
         void IsSummonedBy(Unit* summoner) override
         {
-            if (Creature* car = summoner->ToCreature())
-                m_harnessGUID = car->GetGUID();
+            if (Creature* harness = summoner ? summoner->ToCreature() : nullptr)
+                if (harness->GetEntry() == NPC_HARNESS_43336)
+                    m_harnessGUID = harness->GetGUID();
         }
 
         void JustSummoned(Creature* summon) override
         {
-            switch (summon->GetEntry())
+            if (m_finished)
             {
-                case NPC_LORNA_CRAWLEY:
-                    m_lornaGUID = summon->GetGUID();
-                    break;
+                summon->DespawnOrUnsummon();
+                return;
             }
+            m_summons.Summon(summon);
+            if (summon->GetEntry() == NPC_LORNA_CRAWLEY)
+                m_lornaGUID = summon->GetGUID();
         }
 
-        void PassengerBoarded(Unit* passenger, int8 /*seatId*/, bool apply) override
+        void SummonedCreatureDespawn(Creature* summon) override { m_summons.Despawn(summon); }
+        void JustDied(Unit*) override { CancelJourney(); }
+
+        void PassengerBoarded(Unit* passenger, int8 seatId, bool apply) override
         {
+            Player* player = passenger->ToPlayer();
+            if (!player)
+                return;
             if (apply)
             {
-                if (passenger->ToPlayer())
-                    if (Creature* car = ObjectAccessor::GetCreature(*me, m_harnessGUID))
-                        car->AI()->DoAction(EVENT_START_MOVEMENT);
+                if (m_finished || player->GetGUID() != m_playerGUID || seatId != 1
+                    || !player->IsAlive() || player->GetQuestStatus(QUEST_EXODUS) != QUEST_STATUS_COMPLETE)
+                {
+                    player->ExitVehicle();
+                    return;
+                }
+                if (!m_boarded)
+                {
+                    m_boarded = true;
+                    if (Creature* harness = ObjectAccessor::GetCreature(*me, m_harnessGUID))
+                        harness->AI()->DoAction(EVENT_START_MOVEMENT);
+                }
             }
+            else if (player->GetGUID() == m_playerGUID && m_boarded && !m_exiting && !m_finished)
+                CancelJourney();
         }
 
         void SetGUID(ObjectGuid guid, int32 id) override
         {
-            switch (id)
-            {
-                case PLAYER_GUID:
-                    m_playerGUID = guid;
-                    break;
-                case NPC_HARNESS_43336:
-                    m_harnessGUID = guid;
-                    break;
-            }
+            if (id == PLAYER_GUID)
+                m_playerGUID = guid;
+            else if (id == NPC_HARNESS_43336)
+                m_harnessGUID = guid;
         }
 
-        void DoAction(int32 param) override
+        void DoAction(int32 action) override
         {
-            switch (param)
+            if (action == EVENT_DESPAWN_PART_00 && !m_finished)
             {
-                case EVENT_SAY_ATTACK:
-                    if (Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID))
-                        lorna->AI()->Talk(0);
-                    break;
-                case EVENT_DESPAWN_PART_00:
-                    me->DespawnOrUnsummon(1s);
-                    break;
-                case EVENT_EXIT_VEHICLE:
-                    if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                m_finished = true;
+                m_exiting = true;
+                if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                    if (player->GetVehicleBase() == me)
                         player->ExitVehicle();
-                    break;
-                case EVENT_ENTER_VEHICLE:
-                    if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                        if (me->GetVehicleKit())
-                            player->CastSpell(me, SPELL_RIDE_VEHICLE_72764, true);
-                    break;
+                m_summons.DespawnAll();
+                me->DespawnOrUnsummon(1s);
+            }
+            else if (action == EVENT_SAY_ATTACK)
+            {
+                if (Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID))
+                    lorna->AI()->Talk(0);
+            }
+            else if (action == EVENT_EXIT_VEHICLE)
+            {
+                m_exiting = true;
+                if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                    if (player->GetVehicleBase() == me)
+                        player->ExitVehicle();
+            }
+            else if (action == EVENT_ENTER_VEHICLE && !m_finished && !m_boarded)
+            {
+                if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                    if (me->GetVehicleKit() && me->GetVehicleKit()->HasEmptySeat(1)
+                        && !player->GetVehicleBase() && player->IsAlive()
+                        && player->GetQuestStatus(QUEST_EXODUS) == QUEST_STATUS_COMPLETE)
+                        // Explicit seat1, preserving the native ride spell.
+                        player->CastCustomSpell(SPELL_RIDE_VEHICLE_72764, SPELLVALUE_BASE_POINT0, 2, me, true);
             }
         }
-   };
+    };
 
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_stagecoach_carriage_43337AI(creature);
+    }
+};
+
+class player_gilneas_carriage_recovery : public PlayerScript
+{
+public:
+    player_gilneas_carriage_recovery() : PlayerScript("player_gilneas_carriage_recovery") { }
+    void OnLogout(Player* player) override
+    {
+        if (player->GetMapId() != 654)
+            return;
+        if (Creature* harness = player->GetSummonedCreatureByEntry(NPC_HARNESS_43336))
+            harness->AI()->DoAction(EVENT_DESPAWN_PART_00);
+        player->RemoveAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19);
+    }
+
+    void OnLogin(Player* player, bool) override
+    {
+        // A temporary vehicle cannot survive a server restart. Remove only
+        // its journey aura; normal story phases and quest state are untouched.
+        if (player->GetMapId() == 654 && !player->GetVehicleBase()
+            && player->HasAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19)
+            && !player->GetSummonedCreatureByEntry(NPC_HARNESS_43336))
+            player->RemoveAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19);
     }
 };
 
@@ -3909,6 +4056,7 @@ void AddSC_zone_gilneas_duskhaven()
     new npc_swift_mountain_horse_36741();
     new npc_queen_mia_greymane_36606();
     new npc_king_genn_greymane_36743();
+    new player_gilneas_carriage_recovery();
     new npc_stagecoach_carriage_44928();
     new npc_harness_43336();
     new npc_stagecoach_carriage_43337();

@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+"""Compile production Exodus gossip, vehicle handlers and login recovery."""
+import argparse,os,subprocess,tempfile
+from pathlib import Path
+
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--no-sanitizers',action='store_true');args=p.parse_args()
+ root=Path(__file__).resolve().parents[2];source=(root/'src/server/scripts/EasternKingdoms/Gilneas/zone_duskhaven.cpp').read_text('utf8')
+ handlers=source[source.index('// 44928:'):source.index('// 196412')]
+ code=r'''
+#include <cstdint>
+#include <chrono>
+#include <map>
+#include <vector>
+#include <algorithm>
+#include <stdexcept>
+#include <iostream>
+using uint32=std::uint32_t;using int32=std::int32_t;using int8=std::int8_t;using namespace std::chrono_literals;
+constexpr int QUEST_EXODUS=24438,QUEST_STATUS_NONE=0,QUEST_STATUS_COMPLETE=1,QUEST_STATUS_INCOMPLETE=3,QUEST_STATUS_REWARDED=6;
+constexpr int NPC_HARNESS_43336=43336,NPC_CARRIAGE_43337=43337,NPC_LORNA_CRAWLEY=51409,PLAYER_GUID=1;
+constexpr int EVENT_START_MOVEMENT=2,EVENT_DESPAWN_PART_00=3,EVENT_ENTER_VEHICLE=4,EVENT_EXIT_VEHICLE=5,EVENT_SAY_ATTACK=6;
+constexpr int SPELL_PHASE_QUEST_ZONE_SPECIFIC_19=74096,SPELL_RIDE_VEHICLE_72764=72764,SPELLVALUE_BASE_POINT0=0,WAYPOINT_MOTION_TYPE=2,TEMPSUMMON_TIMED_DESPAWN=3,REACT_PASSIVE=0;
+struct ObjectGuid{int id=0;bool IsEmpty()const{return id==0;}static ObjectGuid const Empty;};ObjectGuid const ObjectGuid::Empty{};
+bool operator==(ObjectGuid a,ObjectGuid b){return a.id==b.id;}bool operator!=(ObjectGuid a,ObjectGuid b){return !(a==b);}
+struct Position{};struct PhaseShift{};struct Player;struct Creature;struct CreatureAI;
+struct Unit{ObjectGuid guid;bool alive=true;uint32 map=654,entry=0;Unit*base=nullptr;virtual~Unit()=default;virtual Player*ToPlayer(){return nullptr;}virtual Creature*ToCreature(){return nullptr;}ObjectGuid GetGUID()const{return guid;}uint32 GetEntry()const{return entry;}uint32 GetMapId()const{return map;}bool IsAlive()const{return alive;}Unit*GetVehicleBase()const{return base;}PhaseShift const&GetPhaseShift()const{static PhaseShift phase;return phase;}virtual void ExitVehicle(){};};
+struct Vehicle{bool empty=true;bool HasEmptySeat(int8 id)const{return id==1&&empty;}};
+struct MotionMaster{int starts=0;uint32 path=0;bool repeat=true;void MovePath(uint32 id,bool r){++starts;path=id;repeat=r;}};
+struct Creature:Unit{CreatureAI*ai=nullptr;Creature*summoner=nullptr;Vehicle vehicle;MotionMaster motion;Position pos;bool despawn=false,phase=true;int talks=0;Creature*ToCreature()override{return this;}CreatureAI*AI(){return ai;}Vehicle*GetVehicleKit(){return &vehicle;}Position const&GetPosition()const{return pos;}MotionMaster*GetMotionMaster(){return &motion;}void setActive(bool){}void SetReactState(int){}bool InSamePhase(PhaseShift const&)const{return phase;}void DespawnOrUnsummon();template<class T>void DespawnOrUnsummon(T){DespawnOrUnsummon();}};
+struct CreatureAI{Creature*me;explicit CreatureAI(Creature*p):me(p){p->ai=this;}virtual~CreatureAI()=default;virtual void Reset(){}virtual void DoAction(int32){}virtual ObjectGuid GetGUID(int32)const{return {};}virtual void SetGUID(ObjectGuid,int32){}virtual void IsSummonedBy(Unit*){}virtual void JustSummoned(Creature*){}virtual void SummonedCreatureDespawn(Creature*){}virtual void JustDied(Unit*){}virtual void MovementInform(uint32,uint32){}virtual void UpdateAI(uint32){}virtual void PassengerBoarded(Unit*,int8,bool){}void Talk(int){++me->talks;}};
+struct ScriptedAI:CreatureAI{using CreatureAI::CreatureAI;};
+struct Player:Unit{int status=QUEST_STATUS_COMPLETE,exits=0,casts=0,rideValue=0,rideSpell=0,summons=0,credits=0;bool aura=true,autoRide=true,summonPrivate=false;uint32 summonDuration=0,summonVehicle=0;float distance=1;Creature*existing=nullptr,*summonResult=nullptr;Player*ToPlayer()override{return this;}int GetQuestStatus(int)const{return status;}float GetDistance(Creature*)const{return distance;}Creature*GetSummonedCreatureByEntry(int){return existing&&!existing->despawn?existing:nullptr;}bool HasAura(int)const{return aura;}void RemoveAura(int){aura=false;}void CastSpell(Unit*,int,bool){aura=true;}Creature*SummonCreature(uint32,Position const&,int,uint32 duration,uint32 vehicleId,bool priv){++summons;summonDuration=duration;summonVehicle=vehicleId;summonPrivate=priv;return summonResult;}void CastCustomSpell(int spell,int,int value,Creature*target,bool){++casts;rideValue=value;rideSpell=spell;if(autoRide){base=target;target->vehicle.empty=false;target->AI()->PassengerBoarded(this,int8(value-1),true);}}void ExitVehicle()override{++exits;Unit*previous=base;base=nullptr;if(Creature*c=previous?previous->ToCreature():nullptr){c->vehicle.empty=true;c->AI()->PassengerBoarded(this,1,false);}}};
+void Creature::DespawnOrUnsummon(){if(despawn)return;despawn=true;if(summoner&&summoner->AI())summoner->AI()->SummonedCreatureDespawn(this);}
+std::map<int,Player*> players;std::map<int,Creature*> creatures;
+namespace ObjectAccessor{Player*GetPlayer(Creature&,ObjectGuid id){auto i=players.find(id.id);return i==players.end()?nullptr:i->second;}Creature*GetCreature(Creature&,ObjectGuid id){auto i=creatures.find(id.id);return i==creatures.end()?nullptr:i->second;}}
+struct SummonList{std::vector<Creature*>list;explicit SummonList(Creature*){}void Summon(Creature*p){list.push_back(p);}void Despawn(Creature*p){list.erase(std::remove(list.begin(),list.end(),p),list.end());}void DespawnAll(){while(!list.empty()){Creature*p=list.back();list.pop_back();p->DespawnOrUnsummon();}}};
+struct EventMap{uint32 event=0,remaining=0;void Reset(){event=remaining=0;}template<class R,class P>void RescheduleEvent(uint32 e,std::chrono::duration<R,P>delay){event=e;remaining=uint32(std::chrono::duration_cast<std::chrono::milliseconds>(delay).count());}void Update(uint32 diff){remaining=diff>=remaining?0:remaining-diff;}uint32 ExecuteEvent(){if(!remaining){uint32 e=event;event=0;return e;}return 0;}};
+struct CreatureScript{explicit CreatureScript(char const*){}virtual~CreatureScript()=default;virtual bool OnGossipHello(Player*,Creature*){return false;}virtual CreatureAI*GetAI(Creature*)const{return nullptr;}};
+struct PlayerScript{explicit PlayerScript(char const*){}virtual~PlayerScript()=default;virtual void OnLogin(Player*,bool){}virtual void OnLogout(Player*){}};
+'''+handlers+r'''
+using H=npc_harness_43336::npc_harness_43336AI;using C=npc_stagecoach_carriage_43337::npc_stagecoach_carriage_43337AI;
+void check(bool v,char const*m){if(!v)throw std::runtime_error(m);}
+struct Journey{Player p;Creature h,c,lorna,horse;H hai;C cai;ScriptedAI lai;int id;Journey(int i):hai(&h),cai(&c),lai(&lorna),id(i){p.guid.id=i;h.guid.id=i+1;c.guid.id=i+2;lorna.guid.id=i+3;horse.guid.id=i+4;h.entry=43336;c.entry=43337;lorna.entry=51409;c.base=&h;c.summoner=&h;lorna.summoner=&c;horse.summoner=&h;p.existing=&h;players[i]=&p;for(Creature*x:{&h,&c,&lorna,&horse})creatures[x->guid.id]=x;hai.Reset();cai.Reset();cai.IsSummonedBy(&h);hai.JustSummoned(&horse);cai.JustSummoned(&lorna);}~Journey(){players.erase(id);for(int i=1;i<=4;++i)creatures.erase(id+i);}void start(bool ownerFirst=true){if(ownerFirst){hai.IsSummonedBy(&p);hai.JustSummoned(&c);}else{hai.JustSummoned(&c);hai.IsSummonedBy(&p);}}};
+int main(){try{
+ for(bool ownerFirst:{true,false}){Journey j(ownerFirst?10:20);j.start(ownerFirst);check(j.p.casts==1&&j.p.rideSpell==72764&&j.p.rideValue==2&&j.p.base==&j.c,"both callback orders board player in seat1 with native spell");j.hai.TryBoard();j.cai.PassengerBoarded(&j.p,1,true);j.hai.UpdateAI(2999);check(j.h.motion.starts==0,"native movement delay");j.hai.UpdateAI(1);check(j.h.motion.path==4492801&&!j.h.motion.repeat&&j.h.motion.starts==1,"one captured route start");j.hai.MovementInform(WAYPOINT_MOTION_TYPE,28);check(j.p.exits==0&&j.lorna.talks==0,"old endpoint ignored");j.hai.MovementInform(WAYPOINT_MOTION_TYPE,24);check(j.lorna.talks==1,"captured dialogue stop");j.hai.MovementInform(999,30);check(j.p.exits==0,"wrong motion ignored");j.hai.MovementInform(WAYPOINT_MOTION_TYPE,30);check(j.p.exits==1&&!j.p.aura&&!j.h.despawn,"planned landing leaves carriage driving away");j.p.status=QUEST_STATUS_REWARDED;j.hai.UpdateAI(1000);check(!j.h.despawn,"reward after landing does not cancel drive-away");j.hai.MovementInform(WAYPOINT_MOTION_TYPE,33);check(j.h.despawn&&j.c.despawn&&j.horse.despawn&&j.lorna.despawn&&!j.p.credits,"endpoint cleanup all accessories without credit");j.hai.Cleanup();check(j.p.exits==1,"cleanup idempotent");}
+ {Journey j(30);j.c.base=nullptr;j.start(false);check(j.p.casts==0,"wait for accessory mounting");j.c.base=&j.h;j.hai.UpdateAI(1);check(j.p.casts==1,"delayed mount retry");}
+ {Journey j(40);j.start();Player other;other.guid.id=90;other.base=&j.c;j.cai.PassengerBoarded(&other,1,true);check(other.exits==1&&!j.h.despawn,"foreign passenger rejected without destroying owner ride");j.cai.PassengerBoarded(&other,1,false);check(!j.h.despawn,"foreign dismount ignored");j.p.ExitVehicle();check(j.h.despawn&&j.c.despawn&&!j.p.aura,"owner early dismount cleanup");}
+ {Journey a(100),b(110);a.start();b.start();a.hai.Cleanup();check(a.h.despawn&&!b.h.despawn&&b.p.base==&b.c&&b.p.aura,"two owners isolated");}
+ for(int mode=0;mode<8;++mode){Journey j(200+10*mode);j.start();if(mode==0)j.p.status=QUEST_STATUS_NONE;if(mode==1)j.p.alive=false;if(mode==2)players.erase(j.p.guid.id);if(mode==3)j.p.map=0;if(mode==4)j.h.phase=false;if(mode==5)j.p.aura=false;if(mode==6){Creature other;other.guid.id=999;j.p.base=&other;j.hai.UpdateAI(1);check(j.p.exits==0,"cleanup must not exit unrelated vehicle");}else j.hai.UpdateAI(mode==7?450000:1);check(j.h.despawn&&j.c.despawn,"cancel/death/logout/map/phase/aura/lost passenger/timeout cleanup");}
+ {Journey j(300);j.p.autoRide=false;j.start();j.hai.UpdateAI(9999);check(!j.h.despawn,"boarding window");j.hai.UpdateAI(1);check(j.h.despawn&&!j.p.aura,"failed boarding bounded");}
+ {Journey j(310);j.start();j.hai.Reset();check(j.h.despawn&&j.c.despawn,"reset cleanup");}
+ {Journey j(320);j.start();j.cai.JustDied(nullptr);check(j.h.despawn&&j.lorna.despawn,"carriage death cleans parent and nested passengers");}
+ {Journey j(330);j.start();j.c.DespawnOrUnsummon();check(j.h.despawn,"lost carriage cleanup");}
+ {Journey j(340);j.c.vehicle.empty=false;j.start();j.hai.UpdateAI(10000);check(j.h.despawn&&j.p.casts==0,"occupied seat not stolen");}
+ {npc_stagecoach_carriage_44928 gossip;Player p;Creature parked,result;p.guid.id=400;p.aura=false;p.summonResult=&result;gossip.OnGossipHello(&p,&parked);check(p.summons==1&&p.summonDuration==450000&&p.summonVehicle==0&&p.summonPrivate,"private bounded Position overload");p.existing=&result;gossip.OnGossipHello(&p,&parked);check(p.summons==1,"duplicate gossip blocked");p.existing=nullptr;p.summonResult=nullptr;gossip.OnGossipHello(&p,&parked);check(!p.aura,"failed summon clears journey phase");p.status=QUEST_STATUS_INCOMPLETE;gossip.OnGossipHello(&p,&parked);check(p.summons==2,"no premature quest ride");}
+ {player_gilneas_carriage_recovery recovery;Player p;p.aura=true;recovery.OnLogin(&p,false);check(!p.aura,"restart removes only orphan journey aura");p.aura=true;p.map=0;recovery.OnLogin(&p,false);check(p.aura,"other map untouched");p.map=654;Creature vehicle;p.base=&vehicle;recovery.OnLogin(&p,false);check(p.aura,"active vehicle not cleared");}
+ {npc_stagecoach_carriage_44928 script;Player p;Creature parked,result;npc_stagecoach_carriage_44928::npc_parked_carriageAI ai(&parked);p.guid.id=500;p.base=&parked;p.summonResult=&result;ai.PassengerBoarded(&p,1,true);check(p.exits==1&&p.summons==1&&p.summonPrivate,"native parked spellclick starts same private journey after dismount");p.existing=&result;p.base=&parked;ai.PassengerBoarded(&p,1,true);check(p.summons==1,"parked duplicate suppressed");p.existing=nullptr;p.status=QUEST_STATUS_NONE;p.base=&parked;ai.PassengerBoarded(&p,1,true);check(p.summons==1&&!p.base,"nonparticipant cannot board parked ride");parked.map=0;check(script.GetAI(&parked)==nullptr,"outside Gilneas ordinary factory preserved");}
+ {Journey j(510);j.start();player_gilneas_carriage_recovery recovery;recovery.OnLogout(&j.p);check(j.h.despawn&&j.c.despawn&&!j.p.aura,"logout removes journey and phase immediately");}
+ {Journey j(530);j.start();j.hai.Cleanup();Creature lateHorse,latePassenger;j.hai.JustSummoned(&lateHorse);j.cai.JustSummoned(&latePassenger);check(lateHorse.despawn&&latePassenger.despawn,"late accessories cannot leak after cleanup");}
+ {npc_stagecoach_carriage_44928 script;Player p;Creature parked,result;p.summonResult=&result;for(int mode=0;mode<5;++mode){p.alive=true;p.map=654;p.status=QUEST_STATUS_COMPLETE;p.distance=1;p.base=nullptr;if(mode==0)p.alive=false;if(mode==1)p.map=0;if(mode==2)p.status=QUEST_STATUS_REWARDED;if(mode==3)p.distance=10;if(mode==4)p.base=&result;script.OnGossipHello(&p,&parked);check(!p.summons,"gossip alive/map/quest/range/vehicle gate");}}
+ std::cout<<"Exodus native callback order, seat1, route stops, owner isolation and cleanup: PASS\n";
+}catch(std::exception const&e){std::cerr<<e.what()<<"\n";return 1;}}
+'''
+ with tempfile.TemporaryDirectory() as temp:
+  cpp=Path(temp)/'test.cpp';exe=Path(temp)/'test.exe';cpp.write_text(code,'utf8');cmd=[os.environ.get('CXX','g++'),'-std=c++17','-Wall','-Wextra','-Werror',str(cpp),'-o',str(exe)]
+  if not args.no_sanitizers:cmd[1:1]=['-fsanitize=address,undefined','-fno-sanitize-recover=undefined','-fno-omit-frame-pointer']
+  subprocess.run(cmd,check=True);subprocess.run([str(exe)],check=True)
+if __name__=='__main__':main()

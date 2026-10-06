@@ -79,7 +79,7 @@ MySQL8.0.45 на изолированной копии релиза: первы�
 
 ### Ещё не завершено
 
-Полный пакет25 заданий не готов к объявлению FIXED. Требуют дальнейшего кода/данных: фазовые переходы183/184/186/187 и сохранение после релога; Thyala14386; Chance14401; безопасные сцены24575/24592; horn24646 и torch24678; транспорт14465/24438/24920 и escort24902; multiplayer battle24904. Подтверждённых маршрутов3674101/3854001/02/03 и3850701…05 в проверенных источниках нет. Уровни37757 для24627 не изменены: min5/max20 сам по себе не доказывает ошибку Legion scaling. Для14400 нужен обычный клиентский тест с корректной фазой.
+Полный пакет25 заданий не готов к объявлению FIXED. Текущие изменения представлены ниже; первоначальный аудит не является перечнем остатка. Для дальнейшей реализации остаются escort24902 (достоверных маршрутов3850701…05 нет), multiplayer battle24904, полная сцена Grandma14401 и Godfrey24592. Подготовленные механики/объекты/фазы/транспорт требуют прохождения26972. Уровни37757 для24627 не изменены: min5/max20 сам по себе не доказывает ошибку Legion scaling. Для14400 нужен обычный клиентский тест с корректной фазой.
 
 Историческая таблица выше остаётся записью аудита **до реализации**; этот журнал отражает выполненные изменения. Ни один автоматический тест не заменяет прохождение клиентом26972, особенно визуалы, геометрию новых GO и транспорта. Сборки текущего пакета учитываются отдельно от успешных старых сборокe06d7ca.
 
@@ -165,8 +165,26 @@ CI наa88c829: GCC и Windows полные сборки PASS, Reliability PASS,
 
 TempSummon дублировал флаг приватности WorldObject: Map записывал производное поле, CanSeeOrDetect читал базовое. Удалено дублирование, используется единый штатный флаг WorldObject. Native fixture воспроизводит ошибку на старом header и проходит на исправленном; проверяет owner/другого игрока, переключение через оба типа указателей, публичных NPC и приватные GO. Флаг по умолчанию остаётся false. Полная сборка и клиентская проверка персональных сцен ещё требуются.
 
-### Exodus24438: подтверждён маршрут, реализация ещё не готова
+### Exodus24438: предыдущий этап аудита маршрута
 
 В закреплённом Pandaria source найден реальный маршрут4492801 из33 точек. Проверка actual Detour на предоставленных mmaps654 загрузила51 tile: все33 точки имеют ground polygon, все32 соседних сегмента дают полный путь без partial/buffer overflow. Это подтверждает проходимость предоставленной геометрии, но не retail timing/анимации/VehicleSeat клиента26972. Proof и координаты: `docs/audit-data/gilneas-stagecoach-route-audit.json`.
 
 Текущий код ждёт28/33/44 вместо исходных24/30/33. Отсутствует carriage в seat2 harness; Marie занимает player seat1 вместо source seat0. Посадка зависит от порядка IsSummonedBy/JustSummoned, нет надёжного owner/duplicate/timeout cleanup. Старый source cast_flags0 нельзя копировать: Unit::HandleSpellClick этого ядра требует caster-clicker flag1 для посадки accessory на parent. Нужны адаптированный ограниченный FSM, guarded SQL и fixture; этот аудит НЕ активирует сцену и не меняет спавны.
+
+### Exodus24438: код, аксессуары и маршрутизация
+
+`2026_10_06_13` добавляет проверенный33-point path4492801, bindings44928/43336/43337 и недостающие car accessories в seat2 persistent38755/dynamic43336. Marie в static/dynamic car переносится с player seat1 в подтверждённый NPC seat0. Native Vehicle959 использует VehicleSeat9568 для seat1; harness958 имеет8197 в seat2, persistent970 использует его copy8233. Данные DB2/их SHA и26654 ограничение сохранены в route audit.
+
+Accessory spellclick46598 cast_flags1 садит accessory на parent; старый72767 у static harness/car удаляется только в известном варианте0/0, поскольку он SUMMON43336 и непригоден для установки аксессуаров. Старые summon type0 исправляются на native manual8/minion1 только для проверенной композиции этих четырёх транспортов. Чужие route coordinates/seat occupants/bindings/click handlers вызывают отказ ДО permanent writes; неизвестные шаблоны/VehicleId тоже отклоняются. Другие world spawns, задания, обычный combat и terrain phases не переписываются.
+
+Gossip и native right-click parked vehicle ведут в одну private owner-only поездку. Vehicle::Install автоматически добавляет SPELLCLICK при свободном player seat: поэтому static AI после native boarding сначала высаживает игрока из parked car, затем запускает private harness. Это исключает бесконечную посадку в неподвижную карету. Неучастники/повторный старт/чужой owner/неверное место не допускаются. Summon(Position) передаёт vehicleId0 и private=true отдельно, TTL450s; failed summon снимает только temporary phase194.
+
+Посадка работает при обоих порядках IsSummonedBy/JustSummoned и отложенном native accessory join. Ride72764 сохранён; explicit basepoint2 выбирает seat1, а не seat0 Marie. Один native MovePath начинается через3s после посадки. Реплика Lorna наpoint24, реальная высадка/снятие194 на30, drive-away cleanup на33. Нет teleport/credit/CompleteQuest/reward. COMPLETE здесь — штатное состояние принятого задания без objectives, не scripted autocomplete.
+
+Early dismount/cancel/death/logout/map/phase loss/reset/car loss/450s timeout очищают parent, horses, carriage и её passengers; failed boarding ограничен10s. После плановой высадки разрешена сдача задания до конца drive-away. Cleanup не выбрасывает игрока из постороннего транспорта. OnLogin удаляет orphan194 после restart/relog, обычные story phases/quest state сохраняются; OnLogout очищает текущий собственный vehicle.
+
+Native fixture проверяет обе callback очередности, delayed join, parked click/gossip, seat conflicts, duplicate boarding, два владельца, endpoints/motion type, planned/early dismount, reward after landing, death/cancel/logout/restart/reset/lost carriage/timeout. Реальная посадка/анимации/звук Lorna/появление static car/высадка26972 ещё требуют клиента. Source не является retail sniff: timing3s сохраняет прежний script, endpoints24/30/33 взяты из закреплённого Pandaria implementation.
+
+CI наfb4056b: GCC/Windows/Reliability PASS; MySQL gilneas-chain наde17960 PASS с теми же SQL00–12. Это результаты предыдущего пакета, не проверки нового13.
+
+Наpoint30 высадка находится в4.291m от действующего questender37065/GUID802021. Его phase186 доступна после reward14467, ещё до принятия24438; existing persistent rule сохраняется до24676. Не добавляется искусственная фаза ради сдачи. Проверка shared visibility/анимации parked spellclick и надёжности высадки всё ещё входит в клиентскую приёмку.
