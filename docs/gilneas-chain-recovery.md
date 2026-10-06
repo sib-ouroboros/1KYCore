@@ -256,3 +256,14 @@ The six battle leaders in `zone_gilneas_city2.cpp` now clear their target list b
 `contrib/tests/test_gilneas_battle.py` compiles all six actual production `FindTargets` bodies and their state declarations. It tests repeated scans, destruction of a previous target, an empty grid and the existing special enemy spacing. Local Windows strict-warning compilation and execution passed. Linux ASan/UBSan and full Windows/GCC builds are submitted through CI; their results must be checked separately. Entity/grid behavior is a fixture, not a client playthrough.
 
 Quest 24904 is **not yet declared restored**: replay/stale gossip validation, shared scene participation, controller reset, wave synchronization and the final cinematic still need audit and client acceptance. Tobias 24902 and Godfrey 24592 remain substantial scene work; 14400/24627 need client diagnosis. No running server was updated.
+
+
+### Battle for Gilneas (24904): validated, idempotent scene start
+
+Krennan now uses the same eligibility check for displaying and accepting the start option. Selection rechecks the living player, map 654, phase, native interaction distance, incomplete quest, living controller with its expected script and a registered living Liam nearby. A merely nearby, unregistered prince cannot trigger the event during initialization. The sender must be the normal gossip sender. Only a successful start emits Krennan's invitation line.
+
+Krennan reserves the start before notifying Almyra, and Almyra independently ignores duplicate start actions. Her active state also blocks a fresh Krennan menu after Krennan resets while the existing controller is still running. This preserves the shared public event; it does not create private armies or change quest credits, routes or combat. The controller's reservation lasts for its existing lifecycle and despawn; general reset and interrupted-scene recovery remain pending audit.
+
+`test_gilneas_battle_start.py` compiles production gossip selection, eligibility/start methods, Krennan action handling and Almyra's actual start case/GetData. Local strict-warning compilation and execution passed for two players with stale menus, direct duplicate callbacks, wrong sender, cancel option, cancelled quest, death, map/phase/range changes, missing or unregistered actors and a foreign controller script. New CI is submitted, not yet confirmed. Previous commit `fcd87fb` passed full GCC, Windows x64 and Reliability ASan/UBSan CI (37439473885, 37439478411, 37439520747).
+
+This is a start-safety correction, not full client acceptance of quest 24904. Wave synchronization, scene recovery and the final cinematic still need work. No SQL or production-server changes were made.

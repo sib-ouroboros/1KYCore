@@ -792,7 +792,7 @@ class npc_krennan_aranas_38553 : public CreatureScript
 public:
     npc_krennan_aranas_38553() : CreatureScript("npc_krennan_aranas_38553") { }
 
-    bool OnGossipSelect(Player* player, Creature* creature, uint32 /*uiSender*/, uint32 uiAction) override
+    bool OnGossipSelect(Player* player, Creature* creature, uint32 uiSender, uint32 uiAction) override
     {
         player->PlayerTalkClass->ClearMenus();
         switch (uiAction)
@@ -800,8 +800,10 @@ public:
             case GOSSIP_ACTION_INFO_DEF + 1:
             {
                 CloseGossipMenuFor(player);
-                creature->AI()->Talk(0, player);
-                CAST_AI(npc_krennan_aranas_38553::npc_krennan_aranas_38553AI, creature->AI())->StartBattle();
+                if (uiSender == GOSSIP_SENDER_MAIN)
+                    if (auto* ai = CAST_AI(npc_krennan_aranas_38553AI, creature->AI()))
+                        if (ai->StartBattle(player))
+                            ai->Talk(0, player);
                 break;
             }
             case GOSSIP_ACTION_INFO_DEF + 2:
@@ -818,12 +820,8 @@ public:
         if (creature->IsQuestGiver())
             player->PrepareQuestMenu(creature->GetGUID());
 
-        bool ok = false;
-        if (player->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) == QUEST_STATUS_INCOMPLETE)
-            if (!creature->AI()->GetData(DATA_IS_BATTLE_STARTED))
-                if (creature->FindNearestCreature(NPC_PRINCE_LIAM_GREYMANE_BATTLE, 50.0f))
-                    if (creature->FindNearestCreature(NPC_SISTER_ALMYRA, 50.0f))
-                        ok = true;
+        auto* ai = CAST_AI(npc_krennan_aranas_38553AI, creature->AI());
+        bool ok = ai && ai->CanStartBattle(player);
         if (ok)
             AddGossipItemFor(player, 11061, 0, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
         else
@@ -947,13 +945,39 @@ public:
                 DoMeleeAttackIfReady();
         }
 
-        void StartBattle()
+        bool CanStartBattle(Player* player) const
         {
-            if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
-                if (almyra->IsAlive())
-                    if (me->GetDistance2d(almyra) < 50.0f)
-                        almyra->AI()->DoAction(ACTION_START_EVENT);
+            if (!player || !player->IsAlive() || !me->IsAlive() || me->GetMapId() != 654
+                || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
+                || me->GetDistance(player) > INTERACTION_DISTANCE || m_battleIsStarted
+                || player->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) != QUEST_STATUS_INCOMPLETE)
+                return false;
+
+            Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID);
+            uint32 script = sObjectMgr->GetScriptId("npc_sister_almyra_38466");
+            if (!almyra || !almyra->IsAlive() || almyra->GetEntry() != NPC_SISTER_ALMYRA
+                || !script || almyra->GetScriptId() != script || !me->IsInPhase(almyra)
+                || me->GetDistance2d(almyra) >= 50.0f || almyra->AI()->GetData(DATA_IS_BATTLE_STARTED))
+                return false;
+
+            // A nearby prince is not enough: the controller must have registered its leader.
+            Creature* liam = ObjectAccessor::GetCreature(*me, almyra->AI()->GetGUID(NPC_PRINCE_LIAM_GREYMANE_BATTLE));
+            return liam && liam->IsAlive() && liam->GetEntry() == NPC_PRINCE_LIAM_GREYMANE_BATTLE
+                && me->IsInPhase(liam) && me->GetDistance2d(liam) < 50.0f;
         }
+
+        bool StartBattle(Player* player)
+        {
+            if (!CanStartBattle(player))
+                return false;
+
+            // Reserve before notifying the controller; stale menus cannot restart the motivation.
+            Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID);
+            DoAction(ACTION_START_EVENT);
+            almyra->AI()->DoAction(ACTION_START_EVENT);
+            return true;
+        }
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override
@@ -1026,6 +1050,7 @@ public:
 
         EventMap m_events;
         bool     m_isInitialised;
+        bool     m_battleIsStarted = false;
         ObjectGuid   m_krennanGUID;
         ObjectGuid   m_prince1GUID;
         ObjectGuid   m_prince2GUID;
@@ -1108,6 +1133,11 @@ public:
                 }
         }
 
+        uint32 GetData(uint32 id) const override
+        {
+            return id == DATA_IS_BATTLE_STARTED && m_battleIsStarted ? 1 : 0;
+        }
+
         void DoAction(int32 param) override
         {
             SetActiveMode();
@@ -1115,6 +1145,9 @@ public:
             {
                 case ACTION_START_EVENT:
                 {
+                    if (m_battleIsStarted)
+                        break;
+                    m_battleIsStarted = true;
                     m_events.ScheduleEvent(EVENT_START_LIAMS_FIRST_ANIM, 15000);
                     SendActionValueToAllLeader(ACTION_START_EVENT);
                     break;
