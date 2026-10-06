@@ -1,0 +1,254 @@
+{
+  "quest": 14382,
+  "map": 654,
+  "phase": 182,
+  "catapult": {
+    "entry": 36283,
+    "vehicle_id": 516,
+    "player_seat": 0,
+    "machinist_seat": 2,
+    "machinist_entry": 36292,
+    "native_launch_spell": 68659,
+    "native_board_spell": 69434,
+    "safe_fall_aura": 66251,
+    "spawns": [
+      801355,
+      801363,
+      801367,
+      801372,
+      801374,
+      801387,
+      801391
+    ]
+  },
+  "observed_before": {
+    "template_script": "",
+    "click_cast_flags": 0,
+    "accessory_summontype": 0,
+    "accessory_minion": 0,
+    "spell_launch_hook": "Teleport to first non-generic NPC; discarded aiming and native passenger seat lifecycle"
+  },
+  "db2": {
+    "build": 26654,
+    "Vehicle516_seats": [
+      5887,
+      5888,
+      5889
+    ],
+    "VehicleSeat5889_copy_of": 5847,
+    "seat_flags": {
+      "5887": "0x72108c13",
+      "5888": "0x7a5b000b",
+      "5889": "0x0200800f"
+    },
+    "effects": {
+      "46598": [
+        {
+          "ID": 38730,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "BasePoints": 0,
+          "Aura": 236,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 25,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 38731,
+          "Effect": 6,
+          "EffectIndex": 1,
+          "BasePoints": 0,
+          "Aura": 4,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "66251": [
+        {
+          "ID": 60423,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "BasePoints": 999,
+          "Aura": 144,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 97,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "68591": [
+        {
+          "ID": 71539,
+          "Effect": 3,
+          "EffectIndex": 0,
+          "BasePoints": 0,
+          "Aura": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 22,
+          "ImplicitTarget2": 7
+        }
+      ],
+      "96114": [
+        {
+          "ID": 102000,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "BasePoints": 2,
+          "Aura": 236,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 94,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "68659": [
+        {
+          "ID": 71594,
+          "Effect": 3,
+          "EffectIndex": 0,
+          "BasePoints": 0,
+          "Aura": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 89,
+          "ImplicitTarget2": 8
+        },
+        {
+          "ID": 71595,
+          "Effect": 140,
+          "EffectIndex": 1,
+          "BasePoints": 0,
+          "Aura": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 96114,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 96,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "66227": [
+        {
+          "ID": 60404,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "BasePoints": 0,
+          "Aura": 23,
+          "DifficultyID": 0,
+          "TriggerSpell": 66251,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "96185": [
+        {
+          "ID": 102111,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "BasePoints": 0,
+          "Aura": 23,
+          "DifficultyID": 0,
+          "TriggerSpell": 66251,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "69434": [
+        {
+          "ID": 72020,
+          "Effect": 6,
+          "EffectIndex": 0,
+          "BasePoints": 1,
+          "Aura": 236,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 25,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 72021,
+          "Effect": 6,
+          "EffectIndex": 1,
+          "BasePoints": 0,
+          "Aura": 4,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ]
+    },
+    "Vehicle_sha256": "effef901400c2b7efc44d24b47aacc197593ed8b0218a7bef283f4147c299f27",
+    "VehicleSeat_sha256": "e985e44ff0f5a5f11d221634d8e68fc333c665f0ab19a02ca335283848d0f740",
+    "SpellEffect_sha256": "dfcb7076421e3b99fb23e769acddb9215d051069fe5e7488fc33b67770c194db"
+  },
+  "source_review": [
+    {
+      "source": "ArkCORE-NG",
+      "commit": "a7304c3075bf8ee7eb5bdf45f31cda01c8626b52",
+      "finding": "Old teleport and seat assumptions cannot be imported as a working Legion fix"
+    },
+    {
+      "source": "Pandaria5.4.8",
+      "commit": "e0a20613d73e2b9324ac13a4783c724fec1d4559",
+      "finding": "Vehicle AI deliberately survives OnCharmed; gossip based control not imported"
+    }
+  ],
+  "fixture": "PASS: production catapult AI and launch spell compiled with -Wall -Wextra -Werror",
+  "limitations": [
+    "Client data available26654; deployment client26972 requires validation",
+    "Native launch seat1 ejection animation is not implemented by this core: explicitly retain seat0 until delayed spline jump",
+    "No geometry/client flight or ship-deck landing acceptance yet",
+    "No quest credit, quest completion, captain AI, phases or existing spawns changed"
+  ],
+  "production_server_updated": false,
+  "mysql": {
+    "status": "PASS",
+    "schema": "test_gilneas_chain_85e01b4599",
+    "schema_dropped_after_success": true,
+    "sql_package": "00–15",
+    "checks": [
+      "First/repeat persistent checksums unchanged",
+      "Foreign catapult accessory seat/minion/entry rejected before writes",
+      "Custom catapult AI/click handler preserved on guarded rejection",
+      "Native catapult binding, operator seat2/dead despawn and click-caster flag",
+      "Unrelated tables, existing spawns and objective records unchanged"
+    ],
+    "live_database_changed": false
+  }
+}

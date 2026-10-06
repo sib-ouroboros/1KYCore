@@ -721,6 +721,21 @@
   },
   {
     "file": "zone_duskhaven.cpp",
+    "class": "npc_gilneas_godfrey_departure",
+    "kind": "CreatureScript",
+    "script": "npc_gilneas_godfrey_departure",
+    "registered": true,
+    "bindings": [
+      {
+        "table": "creature_template",
+        "key": 37875,
+        "AIName": ""
+      }
+    ],
+    "status": "BOUND"
+  },
+  {
+    "file": "zone_duskhaven.cpp",
     "class": "npc_king_genn_greymane_37876",
     "kind": "CreatureScript",
     "script": "npc_king_genn_greymane_37876",

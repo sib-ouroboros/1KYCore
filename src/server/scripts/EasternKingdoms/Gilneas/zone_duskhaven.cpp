@@ -37,6 +37,7 @@
 #include "ScriptedFollowerAI.h"
 #include "SpellAuraEffects.h"
 #include "SpellMgr.h"
+#include "Spell.h"
 #include "SpellScript.h"
 #include "TemporarySummon.h"
 #include "Vehicle.h"
@@ -633,180 +634,270 @@ public:
     }
 };
 
-// 36283 quest 14382 Two by Sea (enter the ship)
+// 36283: the machinist must be defeated before a quest player can control seat 0.
 class npc_forsaken_catapult_36283 : public CreatureScript
 {
 public:
     npc_forsaken_catapult_36283() : CreatureScript("npc_forsaken_catapult_36283") { }
-
     struct npc_forsaken_catapult_36283AI : public ScriptedAI
     {
         npc_forsaken_catapult_36283AI(Creature* creature) : ScriptedAI(creature) { }
-
+        enum Events { CHECK = 1, BOULDER, REARM, LAUNCH };
         EventMap m_events;
-        ObjectGuid m_playerGUID; // guid only set if mounted
-        ObjectGuid m_forsakenGUID; // guid only set if mounted
+        ObjectGuid m_playerGUID;
+        ObjectGuid m_forsakenGUID;
+        bool m_defeated = false;
+        bool m_launchPending = false;
+        Position m_destination;
+        float m_speedXY = 0.0f;
+        float m_speedZ = 0.0f;
+
+        void OnCharmed(bool) override { } // Keep this vehicle AI while the player aims.
+
+        bool QuestPlayer(Player* player) const
+        {
+            return player && player->IsAlive() && player->GetMapId() == 654
+                && me->InSamePhase(player->GetPhaseShift())
+                && (player->GetQuestStatus(14382) == QUEST_STATUS_INCOMPLETE
+                    || player->GetQuestStatus(14382) == QUEST_STATUS_COMPLETE);
+        }
+
+        void Availability()
+        {
+            me->setFaction(m_defeated ? 35 : 1735);
+            if (m_defeated && m_playerGUID.IsEmpty())
+                me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+            else
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
+        }
+
+        void CancelLaunch()
+        {
+            m_events.CancelEvent(LAUNCH);
+            m_launchPending = false;
+        }
 
         void Reset() override
         {
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC | UNIT_FLAG_NOT_SELECTABLE);
+            CancelLaunch();
+            if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                if (player->GetVehicleBase() == me)
+                    player->ExitVehicle();
+            m_playerGUID = ObjectGuid::Empty;
+            m_events.Reset();
+            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC);
             me->SetReactState(REACT_PASSIVE);
-            me->setFaction(1735);
+            Availability();
+            m_events.ScheduleEvent(CHECK, 500ms);
+            m_events.ScheduleEvent(BOULDER, 5s);
+            m_events.ScheduleEvent(REARM, 3min);
         }
 
-        void PassengerBoarded(Unit* passenger, int8 seatId, bool apply) override
+        void JustSummoned(Creature* summon) override
         {
-            if (apply)
+            if (summon->GetEntry() == NPC_FORSAKEN_MACHINIST)
             {
-                if (Player* player = passenger->ToPlayer())
-                {
-                    m_playerGUID = player->GetGUID();
+                m_forsakenGUID = summon->GetGUID();
+                m_defeated = false;
+                Availability();
+            }
+        }
 
-                    if (seatId == 1)
-                        m_events.ScheduleEvent(EVENT_PLAYER_LAUNCH, 2s);
-                }
-                else if (Creature* npc = passenger->ToCreature())
-                {
-                    m_forsakenGUID = npc->GetGUID();
-                    npc->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC | UNIT_FLAG_NOT_SELECTABLE);
-                    m_events.ScheduleEvent(EVENT_CAST_BOULDER, 100ms, 5s);
-                    m_events.ScheduleEvent(EVENT_CHECK_PLAYER, 1s);
-                    me->setFaction(1735);
-                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-                }
-            }
-            else
+        void SummonedCreatureDies(Creature* summon, Unit*) override
+        {
+            if (summon->GetGUID() == m_forsakenGUID)
             {
-                if (passenger->ToPlayer())
-                {
-                    if (seatId == 0)
-                        m_playerGUID = ObjectGuid::Empty;
-                }
-                else if (Creature* npc = passenger->ToCreature())
-                {
-                    m_forsakenGUID = ObjectGuid::Empty;
-                    npc->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IMMUNE_TO_PC | UNIT_FLAG_IMMUNE_TO_NPC | UNIT_FLAG_NOT_SELECTABLE);
-                    m_events.CancelEvent(EVENT_CAST_BOULDER);
-                    m_events.CancelEvent(EVENT_CHECK_PLAYER);
-                    m_events.ScheduleEvent(EVENT_MASTER_RESET, 3min);
-                    me->setFaction(35);
-                    me->RemoveAllAuras();
-                    me->HandleEmoteCommand(EMOTE_ONESHOT_NONE);
-                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-                }
+                m_defeated = true;
+                m_events.RescheduleEvent(REARM, 3min);
+                Availability();
             }
+        }
+
+        void PassengerBoarded(Unit* passenger, int8 seat, bool apply) override
+        {
+            if (Player* player = passenger->ToPlayer())
+            {
+                if (apply)
+                {
+                    if (seat != 0 || !m_defeated || !QuestPlayer(player)
+                        || (!m_playerGUID.IsEmpty() && m_playerGUID != player->GetGUID()))
+                    {
+                        player->ExitVehicle();
+                        return;
+                    }
+                    m_playerGUID = player->GetGUID();
+                }
+                else if (m_playerGUID == player->GetGUID())
+                {
+                    CancelLaunch();
+                    m_playerGUID = ObjectGuid::Empty;
+                    m_events.RescheduleEvent(REARM, 3min);
+                }
+                Availability();
+            }
+            // Native accessory 36292 belongs in seat 2, not the player control seat.
+        }
+
+        bool QueueLaunch(Player* player, Position const* destination, float speedXY, float speedZ)
+        {
+            if (m_launchPending || !m_defeated || !QuestPlayer(player)
+                || player->GetGUID() != m_playerGUID || player->GetVehicleBase() != me
+                || !me->GetVehicleKit() || me->GetVehicleKit()->GetPassenger(0) != player
+                || !destination || !destination->IsPositionValid() || !std::isfinite(destination->GetPositionX())
+                || !std::isfinite(destination->GetPositionY()) || !std::isfinite(destination->GetPositionZ())
+                || !std::isfinite(speedXY) || !std::isfinite(speedZ) || speedXY < 0.01f || speedZ < 0.0f)
+                return false;
+            m_destination = *destination;
+            m_speedXY = speedXY;
+            m_speedZ = speedZ;
+            m_launchPending = true;
+            m_events.ScheduleEvent(LAUNCH, 2s);
+            return true;
         }
 
         void UpdateAI(uint32 diff) override
         {
             m_events.Update(diff);
-
-            while (uint32 eventId = m_events.ExecuteEvent())
+            while (uint32 event = m_events.ExecuteEvent())
             {
-                switch (eventId)
+                switch (event)
                 {
-                    case EVENT_CHECK_PLAYER:
+                    case CHECK:
                     {
-                        if (Creature* target = ObjectAccessor::GetCreature(*me, m_forsakenGUID))
-                            if (me->SelectNearestPlayer(7.0f))
-                            {
-                                target->ExitVehicle();
-                                break;
-                            }
-
-                        m_events.ScheduleEvent(EVENT_CHECK_PLAYER, 1s);
-                        break;
-                    }
-                    case EVENT_CAST_BOULDER:
-                    {
-                        me->CastSpell(me, SPELL_FIERY_BOULDER, true);
-                        m_events.ScheduleEvent(EVENT_CAST_BOULDER, 8s, 15s);
-                        break;
-                    }
-                    case EVENT_MASTER_RESET:
-                    {
-                        if (!m_forsakenGUID.IsEmpty() || !m_playerGUID.IsEmpty())
-                            m_events.ScheduleEvent(EVENT_MASTER_RESET, 3min);
-                        else
+                        if (Creature* machinist = ObjectAccessor::GetCreature(*me, m_forsakenGUID))
                         {
-                            if (TempSummon* npc = me->SummonCreature(NPC_FORSAKEN_MACHINIST, me->GetPosition()))
-                                npc->EnterVehicle(me, 0);
-
-                            Reset();
+                            if (!machinist->IsAlive())
+                                m_defeated = true;
+                            else if (machinist->GetVehicleBase() == me)
+                                if (Player* player = me->SelectNearestPlayer(7.0f))
+                                    if (QuestPlayer(player))
+                                    {
+                                        machinist->ExitVehicle();
+                                        machinist->AI()->AttackStart(player);
+                                    }
                         }
+                        if (!m_playerGUID.IsEmpty())
+                        {
+                            Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                            if (!QuestPlayer(player) || player->GetVehicleBase() != me)
+                            {
+                                CancelLaunch();
+                                m_playerGUID = ObjectGuid::Empty;
+                                if (player && player->GetVehicleBase() == me)
+                                    player->ExitVehicle();
+                                m_events.RescheduleEvent(REARM, 3min);
+                            }
+                        }
+                        Availability();
+                        m_events.ScheduleEvent(CHECK, 500ms);
                         break;
                     }
-                    case EVENT_PLAYER_LAUNCH:
+                    case BOULDER:
+                        if (Creature* machinist = ObjectAccessor::GetCreature(*me, m_forsakenGUID))
+                            if (machinist->IsAlive() && machinist->GetVehicleBase() == me)
+                                me->CastSpell(me, SPELL_FIERY_BOULDER, true);
+                        m_events.ScheduleEvent(BOULDER, 8s, 15s);
+                        break;
+                    case REARM:
                     {
-                        if (ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                            me->CastSpell(me, 96185, true); // trigger spell 66251 (Aura Id 144 (SPELL_AURA_SAFE_FALL)
-
-                        m_events.ScheduleEvent(EVENT_PLAYER_LANDING, 5s);
+                        Creature* machinist = ObjectAccessor::GetCreature(*me, m_forsakenGUID);
+                        if (m_playerGUID.IsEmpty() && (!machinist || !machinist->IsAlive()))
+                            if (me->GetVehicleKit() && !me->GetVehicleKit()->GetPassenger(2))
+                                if (TempSummon* summon = me->SummonCreature(NPC_FORSAKEN_MACHINIST,
+                                    me->GetPosition(), TEMPSUMMON_DEAD_DESPAWN))
+                                    summon->EnterVehicle(me, 2);
+                        m_events.ScheduleEvent(REARM, 3min);
                         break;
                     }
-                    case EVENT_PLAYER_LANDING:
+                    case LAUNCH:
                     {
-                        m_events.RescheduleEvent(EVENT_MASTER_RESET, 10s);
-                        m_playerGUID = ObjectGuid::Empty;
+                        Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                        if (m_launchPending && QuestPlayer(player) && player->GetVehicleBase() == me
+                            && me->GetVehicleKit() && me->GetVehicleKit()->GetPassenger(0) == player)
+                        {
+                            // Native safe-fall aura; the aimed destination is supplied by the spell.
+                            me->AddAura(SPELL_LAUNCH2, player);
+                            player->ExitVehicle();
+                            player->GetMotionMaster()->MoveJump(m_destination, m_speedXY, m_speedZ);
+                        }
+                        CancelLaunch();
                         break;
                     }
                 }
             }
         }
     };
-
     CreatureAI* GetAI(Creature* creature) const override
     {
-        return new npc_forsaken_catapult_36283AI(creature);
+        return creature->GetMapId() == 654 ? new npc_forsaken_catapult_36283AI(creature) : nullptr;
     }
 };
 
-// 68659 trigger 96114
+// 68659: retain the player's trajectory destination, never teleport to a nearby NPC.
 class spell_launch_68659 : public SpellScriptLoader
 {
 public:
     spell_launch_68659() : SpellScriptLoader("spell_launch_68659") { }
-
     class spell_launch_68659_SpellScript : public SpellScript
     {
         PrepareSpellScript(spell_launch_68659_SpellScript);
+        using CatapultAI = npc_forsaken_catapult_36283::npc_forsaken_catapult_36283AI;
 
-        void CheckTargets(std::list<WorldObject*>& targets)
+        CatapultAI* Catapult() const
         {
-            targets.remove_if([](WorldObject* object)
-            {
-                return object->GetEntry() == NPC_GENERIC_TRIGGER_LAB_MP;
-            });
+            Creature* creature = GetCaster()->ToCreature();
+            uint32 script = sObjectMgr->GetScriptId("npc_forsaken_catapult_36283");
+            if (!creature || creature->GetEntry() != NPC_FORSAKEN_CATAPULT
+                || creature->GetMapId() != 654 || !script || creature->GetScriptId() != script)
+                return nullptr;
+            return CAST_AI(CatapultAI, creature->AI());
+        }
 
-            if (targets.size() > 0)
-                if (WorldObject* wo = targets.front())
-                    if (Creature* target = wo->ToCreature())
-                    {
-                        Position t = target->GetPosition();
-                        if (Unit* unit = GetCaster())
-                            if (Vehicle* car = unit->GetVehicleKit())
-                                if (Unit* pas = car->GetPassenger(0))
-                                    if (Player* player = pas->ToPlayer())
-                                    {
-                                        player->NearTeleportTo(t.GetPositionX(), t.GetPositionY(), t.GetPositionZ(), player->GetOrientation());
-                                        return;
-                                    }
-                    }
+        SpellCastResult CheckLaunch()
+        {
+            CatapultAI* ai = Catapult();
+            if (!ai || !GetCaster()->GetVehicleKit())
+                return SPELL_FAILED_DONT_REPORT;
+            Unit* passenger = GetCaster()->GetVehicleKit()->GetPassenger(0);
+            Player* player = passenger ? passenger->ToPlayer() : nullptr;
+            if (!ai->QuestPlayer(player) || !ai->m_defeated || ai->m_launchPending)
+                return SPELL_FAILED_NOT_READY;
+            Position const* destination = GetExplTargetDest();
+            float speedXY = GetSpell()->m_targets.GetSpeedXY();
+            float speedZ = GetSpell()->m_targets.GetSpeedZ();
+            if (!destination || !destination->IsPositionValid() || !GetSpell()->m_targets.HasTraj()
+                || !std::isfinite(destination->GetPositionX()) || !std::isfinite(destination->GetPositionY())
+                || !std::isfinite(destination->GetPositionZ()) || !std::isfinite(speedXY) || !std::isfinite(speedZ)
+                || speedXY < 0.01f || speedZ < 0.0f
+                || GetCaster()->GetExactDist2d(destination) > GetSpellInfo()->GetMaxRange(false))
+                return SPELL_FAILED_BAD_TARGETS;
+            return SPELL_CAST_OK;
+        }
 
-            targets.clear();
-            this->FinishCast(SPELL_CAST_OK);
+        void PreserveControlSeat(SpellEffIndex index)
+        {
+            // Retail data switches to passenger seat 1. This core does not implement
+            // its eject arc; keep seat 0 until the explicitly queued spline launch.
+            PreventHitDefaultEffect(index);
+        }
+
+        void Launch()
+        {
+            if (CatapultAI* ai = Catapult())
+                if (Vehicle* vehicle = GetCaster()->GetVehicleKit())
+                    if (Unit* passenger = vehicle->GetPassenger(0))
+                        ai->QueueLaunch(passenger->ToPlayer(), GetExplTargetDest(),
+                            GetSpell()->m_targets.GetSpeedXY(), GetSpell()->m_targets.GetSpeedZ());
         }
 
         void Register() override
         {
-            OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_launch_68659_SpellScript::CheckTargets, EFFECT_0, TARGET_UNIT_DEST_AREA_ENTRY);
+            OnCheckCast += SpellCheckCastFn(spell_launch_68659_SpellScript::CheckLaunch);
+            OnEffectHitTarget += SpellEffectFn(spell_launch_68659_SpellScript::PreserveControlSeat, EFFECT_1, SPELL_EFFECT_FORCE_CAST);
+            AfterCast += SpellCastFn(spell_launch_68659_SpellScript::Launch);
         }
     };
-
-    SpellScript* GetSpellScript() const override
-    {
-        return new spell_launch_68659_SpellScript();
-    }
+    SpellScript* GetSpellScript() const override { return new spell_launch_68659_SpellScript(); }
 };
 
 // 96185 trigger 66251

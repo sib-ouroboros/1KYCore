@@ -49,13 +49,16 @@
         "All unrelated tables unchanged",
         "Existing routes, native vehicle seats, objectives and phase rules preserved"
       ]
+    },
+    "mysql_fresh_release_sql_00_14": {
+      "status": "PASS",
+      "schema": "test_gilneas_chain_5b624235fd",
+      "schema_dropped_after_success": true
     }
   },
   "limitations": [
     "No verified production departure route or Godfrey dialogue",
     "Synthetic fixture route is algorithm coverage only",
-    "Full GCC/Windows and release SQL checks remain in progress",
-    "Local fresh full release import validation remains in progress",
     "Client26972 acceptance pending"
   ],
   "production_server_updated": false,
@@ -68,15 +71,15 @@
     },
     "gcc": {
       "run": 37428868338,
-      "status": "IN_PROGRESS"
+      "status": "PASS"
     },
     "windows": {
       "run": 37428872089,
-      "status": "IN_PROGRESS"
+      "status": "PASS"
     },
     "mysql": {
       "run": 37428864565,
-      "status": "IN_PROGRESS"
+      "status": "gilneas-chain PASS; full suite separately running"
     }
   }
 }

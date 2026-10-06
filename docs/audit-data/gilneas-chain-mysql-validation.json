@@ -1,25 +1,19 @@
 {
   "mysql": "8.0.45",
-  "schema": "test_gilneas_chain_27adfa4ff7",
+  "schema": "test_gilneas_chain_5b624235fd",
   "source": "Fresh import of published 20260926 world archive; original DB735.02 dump audited separately",
   "checks": [
     "Fresh published20260926 release import",
-    "first/repeat SQL00–13 unchanged checksums",
-    "unrelated tables and Draenor phase rules preserved",
-    "native NPC/spell binding registrations",
-    "95 GO spawns and native quest loot",
-    "28 Manor/74 bat/33 Exodus route coordinates",
-    "432 bat actor GUID phases",
-    "native Exodus accessories/caster-clicker flags/player seat1",
-    "route conflict rejection before permanent mutation",
-    "foreign carriage seat/binding/click handler rejection before permanent mutation",
-    "foreign spawn GUID/custom child script preservation"
+    "First/repeated SQL00–14 checksums",
+    "Unrelated tables and phase rules preserved",
+    "Vehicle route/click/seat conflict rejection",
+    "Custom Godfrey ScriptName/SmartAI preserved"
   ],
   "status": "PASS",
   "live_database_changed": false,
   "schema_dropped_after_success": true,
   "binding_counts": {
-    "BOUND": 94
+    "BOUND": 95
   },
   "sql_files": [
     {
@@ -77,6 +71,10 @@
     {
       "file": "2026_10_06_13_world_gilneas_exodus_carriage.sql",
       "sha256": "fe1213080e6e763e61f8fb54d50e1d61e43372a17876b44bc608755db65dd816"
+    },
+    {
+      "file": "2026_10_06_14_world_gilneas_godfrey_departure.sql",
+      "sha256": "8ab6f3fa636ff2a67d732553049cbdeef94c9af7061ada5df7c0c9673f07801a"
     }
   ],
   "archive": {
@@ -84,8 +82,7 @@
     "sha256": "b311837633e148df178045fd448cbaeb7e40d10b97690377866ce4560f68bac7"
   },
   "limitations": [
-    "Native fixtures compile production handler extracts, not the complete worldserver.",
-    "Full GCC/Windows runs are pending on62ecc17.",
-    "Client26972 acceptance remains required."
+    "Proof covers SQL00–14; new catapult SQL15 is tested separately.",
+    "Production handler fixtures do not replace full worldserver/client26972 acceptance."
   ]
 }
