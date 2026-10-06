@@ -57,7 +57,7 @@
     }
   },
   "limitations": [
-    "No verified production departure route or Godfrey dialogue",
+    "No verified complete production departure route. Dialogue was subsequently restored by SQL18; see gilneas-godfrey-dialogue-restoration.json.",
     "Synthetic fixture route is algorithm coverage only",
     "Client26972 acceptance pending"
   ],
@@ -81,5 +81,6 @@
       "run": 37428864565,
       "status": "gilneas-chain PASS; full suite separately running"
     }
-  }
+  },
+  "follow_up_source_review": "gilneas-godfrey-source-route-review.json"
 }

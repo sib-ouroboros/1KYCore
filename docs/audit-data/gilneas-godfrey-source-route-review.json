@@ -1,0 +1,53 @@
+{
+  "quest": 24592,
+  "source": {
+    "repository": "davidwow1024/DarkSiteOlympus_4.3.4",
+    "commit": "dd38c825f6fc9a059fa27b72833324d6f733babd",
+    "archive": "Data/BASE/world/world 03-03-24.7zip",
+    "sha256": "eba53d9388dac7a04c57c6c2626109006f56b5bbbb04b6930729b500d7000f30"
+  },
+  "source_spawn": {
+    "guid": 253690,
+    "entry": 37875,
+    "map": 654,
+    "position": [
+      -2041.35,
+      979.016,
+      70.1487
+    ]
+  },
+  "source_waypoints": [
+    {
+      "entry": 37875,
+      "point": 1,
+      "position": [
+        -2055.36,
+        937.946,
+        69.9443
+      ]
+    }
+  ],
+  "source_checks": {
+    "creature_addon_for_source_guid": false,
+    "waypoint_data_for_source_guid_or_guid_times_ten": false,
+    "smart_scripts_for_actor_or_source_guid": false
+  },
+  "decision": "Do not import: only one point; not a complete verified departure or jump. Current handler requires terminal point 4. Neither intermediate coordinates nor jump/death are inferred.",
+  "latest_commit_ci": {
+    "commit": "48d8d1e",
+    "gcc": {
+      "run": 37482574937,
+      "status": "success"
+    },
+    "windows": {
+      "run": 37482599327,
+      "status": "success"
+    },
+    "reliability": {
+      "run": 37482594197,
+      "status": "success"
+    }
+  },
+  "client_acceptance": "pending",
+  "production_server_updated": false
+}
