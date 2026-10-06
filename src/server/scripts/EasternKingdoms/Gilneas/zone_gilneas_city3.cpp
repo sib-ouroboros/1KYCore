@@ -38,6 +38,8 @@
 #include "SpellScript.h"
 #include "zone_gilneas.h"
 #include "WaypointManager.h"
+#include "QuestDef.h"
+#include "TemporarySummon.h"
 #include "Log.h"
 #include <cmath>
 
@@ -72,6 +74,23 @@ enum eBattleForGilneas
     SPELL_GILNEAS_MILITIA_SHOOT         = 6660,
     SPELL_CLEAVE                        = 15496,
     SPELL_FOR_GILNEAS                   = 81790,
+};
+
+// Walking candidate from pinned JadeCore SQL; all points/segments verified against map 654 mmaps.
+// See docs/audit-data/gilneas-tobias-source-audit.json; source timings/credits are not imported.
+Position const TobiasWalkingRoute[] =
+{
+    {-1654.68f, 1603.6f, 23.131f, 0.98f},
+    {-1664.22f, 1615.85f, 20.49f, 2.19f},
+    {-1632.82f, 1621.85f, 20.49f, 0.18f},
+    {-1589.17f, 1607.13f, 21.6f, 5.97f},
+    {-1569.75f, 1631.44f, 20.589f, 5.77f},
+    {-1490.2f, 1577.88f, 20.486f, 5.65f},
+    {-1504.73f, 1577.0f, 20.486f, 3.18f},
+    {-1529.4f, 1576.88f, 26.68f, 3.14f},
+    {-1545.55f, 1571.63f, 29.2f, 4.02f},
+    {-1594.87f, 1524.96f, 29.235f, 3.87f},
+    {-1614.23f, 1537.65f, 29.3f, 5.5f},
 };
 
 // 38507
@@ -109,6 +128,10 @@ public:
         uint32   m_eventPhase = 0;
         uint32   m_lifetime = 0;
         bool     m_stopped = false;
+        bool     m_walkingRoute = false;
+        bool     m_walkMoving = false;
+        bool     m_sceneActorsSpawned = false;
+        uint32   m_walkPoint = 0;
 
         void Reset() override
         {
@@ -190,15 +213,41 @@ public:
                 StopScene();
                 return;
             }
-            if (!HasScenePaths())
+            m_walkingRoute = !HasScenePaths();
+            // Spell 72470 expires after three minutes; the route plus dialogue may take longer.
+            if (TempSummon* summon = me->ToTempSummon())
             {
-                TC_LOG_ERROR("scripts", "Gilneas quest 24902: Tobias requires valid waypoint paths 3850701-3850705; scene not started.");
-                StopScene();
-                return;
+                summon->SetTempSummonType(TEMPSUMMON_MANUAL_DESPAWN);
+                summon->UnSummon(600000);
             }
             m_playerGUID = player->GetGUID();
             m_eventPhase = 1;
             m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 3000);
+        }
+
+        void StartWalkingPoint()
+        {
+            if (m_stopped || m_walkMoving || m_walkPoint >= sizeof(TobiasWalkingRoute) / sizeof(TobiasWalkingRoute[0]))
+                return;
+            if (!IsPlayerNear(20.0f))
+            {
+                m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 1000);
+                return;
+            }
+            if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+            {
+                if (m_walkPoint == 0)
+                    Talk(0, player);
+                else if (m_walkPoint == 3)
+                    Talk(1, player);
+                else if (m_walkPoint == 6)
+                    Talk(2, player);
+                else if (m_walkPoint == 10)
+                    Talk(3, player);
+            }
+            m_walkMoving = true;
+            me->SetWalk(true);
+            me->GetMotionMaster()->MovePoint(3000 + m_walkPoint, TobiasWalkingRoute[m_walkPoint]);
         }
 
         void JustSummoned(Creature* summon) override
@@ -228,6 +277,22 @@ public:
         {
             if (m_stopped || m_playerGUID.IsEmpty())
                 return;
+            if (m_walkingRoute && type == POINT_MOTION_TYPE)
+            {
+                if (!m_walkMoving || id != 3000 + m_walkPoint)
+                    return;
+                m_walkMoving = false;
+                ++m_walkPoint;
+                if (m_walkPoint < sizeof(TobiasWalkingRoute) / sizeof(TobiasWalkingRoute[0]))
+                    m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 1000);
+                else
+                {
+                    // Retain the native hiding jump and subsequent Sylvanas dialogue.
+                    m_eventPhase = 5;
+                    me->GetMotionMaster()->MoveJump(-1614.5f, 1533.9f, 27.26f, 20.0f, 5.0f, 2004);
+                }
+                return;
+            }
             switch (type)
             {
                 case WAYPOINT_MOTION_TYPE:
@@ -301,6 +366,11 @@ public:
                 {
                     case EVENT_WAIT_FOR_PLAYER_1:
                     {
+                        if (m_walkingRoute)
+                        {
+                            StartWalkingPoint();
+                            break;
+                        }
                         if (IsPlayerNear(20.0f))
                             me->GetMotionMaster()->MovePath(3850701, false);
                         else
@@ -384,6 +454,9 @@ public:
                     }
                     case EVENT_MOVEMENT_START_SYLVANAS_AI:
                     {
+                        if (m_sceneActorsSpawned)
+                            break;
+                        m_sceneActorsSpawned = true;
                         // there are several summon spell, but all have the summoner position as spawnpoint.. 72476, 72239, 72236, 72238, 72245
                         me->SummonCreature(NPC_GENERAL_WARHOWL, -1566.053f, 1557.191f, 29.36808f, 4.273f, TEMPSUMMON_TIMED_DESPAWN, 180000);
                         me->SummonCreature(NPC_LADY_SYLVANAS_WINDRUNNER_38530, -1567.477f, 1554.569f, 29.36808f, 0.88f, TEMPSUMMON_TIMED_DESPAWN, 180000);
@@ -442,6 +515,8 @@ public:
         npc_lady_sylvanas_windrunner_38530AI(Creature* pCreature) : ScriptedAI(pCreature) { }
 
         EventMap m_events;
+        bool m_dialogueStarted = false;
+        bool m_completionHandled = false;
         ObjectGuid   m_playerGUID;
         ObjectGuid   m_tobiasGUID;
         ObjectGuid   m_sylvanasGUID;
@@ -468,6 +543,9 @@ public:
             if (type == POINT_MOTION_TYPE)
                 if (id == 2005)
                 {
+                    if (m_dialogueStarted)
+                        return;
+                    m_dialogueStarted = true;
                     me->SetFacingTo(5.6f);
                     m_events.ScheduleEvent(EVENT_START_TALK, 1000);
                 }
@@ -562,11 +640,26 @@ public:
                     }
                     case EVENT_END:
                     {
+                        if (m_completionHandled)
+                            break;
+                        Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                        if (!player || !player->IsAlive() || !me->IsInPhase(player)
+                            || player->GetMapId() != me->GetMapId())
+                            break;
+                        if (player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_INCOMPLETE
+                            && player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_COMPLETE)
+                            break;
+                        if (player->GetDistance2d(me) > 50.0f)
+                        {
+                            m_events.RescheduleEvent(EVENT_END, 1000);
+                            break;
+                        }
+                        m_completionHandled = true;
                         if (Creature* crenshaw = ObjectAccessor::GetCreature(*me, m_crenshawGUID))
                             crenshaw->GetMotionMaster()->MovePoint(2010, -1566.053f, 1557.191f, 29.36808f);
                         me->GetMotionMaster()->MovePoint(2010, -1566.053f, 1557.191f, 29.36808f);
-                        if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                            player->KilledMonsterCredit(38530);
+                        player->AreaExploredOrEventHappens(QUEST_HUNT_FOR_SYLVANAS);
+                        player->KilledMonsterCredit(38530);
                         m_events.ScheduleEvent(EVENT_DESPAWN, 8000);
                         break;
                     }

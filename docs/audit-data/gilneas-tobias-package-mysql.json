@@ -1,0 +1,8 @@
+{
+  "mysql": "8.0.45",
+  "schema": "test_gilneas_chain_8ef5305dcb",
+  "source": "Local release copy, compatible DB735.02 layouts; original DB735.02 dump audited separately",
+  "checks": "first import, repeat, 95 object spawns, bindings, foreign GUID rejection, alternate matching GUID, custom binding and unrelated-table preservation",
+  "status": "PASS",
+  "live_database_changed": false
+}

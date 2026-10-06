@@ -1,0 +1,8 @@
+{
+  "mysql": "8.0.45",
+  "source": "isolated local release table copies",
+  "status": "PASS",
+  "sql": "2026_10_06_17_world_gilneas_tobias_event.sql",
+  "live_database_changed": false,
+  "schema_dropped": true
+}

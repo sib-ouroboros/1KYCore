@@ -1,0 +1,196 @@
+{
+  "quest": 24902,
+  "npc": 38507,
+  "source_url": "https://github.com/Dawnbrightsu/JadeCore4.3.4/blob/380bfface3da0198e5c29004b1d9d2a3ab7b133d/sql/old/4.3.4/JC-DB10_to_JC-DB11_updates/world/2016_09_01_02_world_starting_zone_worgen_01.sql",
+  "sha256": "f2302c6c3c847b45e48e347c7cbb936d68c3d6fd2ec65e39032485a95d79ebbb",
+  "movement_points": [
+    {
+      "event": 1,
+      "time_ms": 4000,
+      "x": -1654.68,
+      "y": 1603.6,
+      "z": 23.131,
+      "o": 0.98
+    },
+    {
+      "event": 3,
+      "time_ms": 9000,
+      "x": -1664.22,
+      "y": 1615.85,
+      "z": 20.49,
+      "o": 2.19
+    },
+    {
+      "event": 4,
+      "time_ms": 17000,
+      "x": -1632.82,
+      "y": 1621.85,
+      "z": 20.49,
+      "o": 0.18
+    },
+    {
+      "event": 6,
+      "time_ms": 28000,
+      "x": -1589.17,
+      "y": 1607.13,
+      "z": 21.6,
+      "o": 5.97
+    },
+    {
+      "event": 7,
+      "time_ms": 50000,
+      "x": -1569.75,
+      "y": 1631.44,
+      "z": 20.589,
+      "o": 5.77
+    },
+    {
+      "event": 8,
+      "time_ms": 62000,
+      "x": -1490.2,
+      "y": 1577.88,
+      "z": 20.486,
+      "o": 5.65
+    },
+    {
+      "event": 10,
+      "time_ms": 94000,
+      "x": -1504.73,
+      "y": 1577.0,
+      "z": 20.486,
+      "o": 3.18
+    },
+    {
+      "event": 11,
+      "time_ms": 101000,
+      "x": -1529.4,
+      "y": 1576.88,
+      "z": 26.68,
+      "o": 3.14
+    },
+    {
+      "event": 12,
+      "time_ms": 109500,
+      "x": -1545.55,
+      "y": 1571.63,
+      "z": 29.2,
+      "o": 4.02
+    },
+    {
+      "event": 13,
+      "time_ms": 118000,
+      "x": -1594.87,
+      "y": 1524.96,
+      "z": 29.235,
+      "o": 3.87
+    },
+    {
+      "event": 15,
+      "time_ms": 140000,
+      "x": -1614.23,
+      "y": 1537.65,
+      "z": 29.3,
+      "o": 5.5
+    }
+  ],
+  "navmesh": {
+    "map": 654,
+    "tiles": 51,
+    "points": [
+      {
+        "point": 1,
+        "ground": true,
+        "source_z": 23.131,
+        "nav_z": 23.9777
+      },
+      {
+        "point": 2,
+        "ground": true,
+        "source_z": 20.49,
+        "nav_z": 20.8443
+      },
+      {
+        "point": 3,
+        "ground": true,
+        "source_z": 20.49,
+        "nav_z": 20.9594
+      },
+      {
+        "point": 4,
+        "ground": true,
+        "source_z": 21.6,
+        "nav_z": 21.7088
+      },
+      {
+        "point": 5,
+        "ground": true,
+        "source_z": 20.589,
+        "nav_z": 20.8209
+      },
+      {
+        "point": 6,
+        "ground": true,
+        "source_z": 20.486,
+        "nav_z": 20.7095
+      },
+      {
+        "point": 7,
+        "ground": true,
+        "source_z": 20.486,
+        "nav_z": 21.1412
+      },
+      {
+        "point": 8,
+        "ground": true,
+        "source_z": 26.68,
+        "nav_z": 27.1362
+      },
+      {
+        "point": 9,
+        "ground": true,
+        "source_z": 29.2,
+        "nav_z": 29.2428
+      },
+      {
+        "point": 10,
+        "ground": true,
+        "source_z": 29.235,
+        "nav_z": 29.5344
+      },
+      {
+        "point": 11,
+        "ground": true,
+        "source_z": 29.3,
+        "nav_z": 29.4645
+      }
+    ],
+    "segments": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "complete": true,
+    "data_path": "F:/Projects/extracted-735-new/mmaps"
+  },
+  "accepted_for_import": "Walking coordinates only, as fallback; timed SmartAI/credit/actor implementation remains rejected",
+  "reasons": [
+    "Timed SmartAI route is different from five native waypoint paths and has no matching jump callback segmentation.",
+    "Source grants proximity credit repeatedly on a timer instead of proving the cinematic completed.",
+    "Source spawns actor 46026 instead of native scene actors 38530/38533/38537."
+  ],
+  "server_changed": false,
+  "limitations": [
+    "Detour nearest-poly extents are 3/5/3 metres; navigability does not prove the intended retail path or animation.",
+    "Only candidate walk points and consecutive walk segments were checked; native jump segments and scene timings were not validated.",
+    "GitHub indexed code search may omit large database dumps; the result does not prove that the missing five paths exist nowhere."
+  ],
+  "implementation": "Eleven MovePoint arrivals gated by current owner proximity; preserves native hiding jump and 38530/38533/38537 dialogue",
+  "client_verified": false
+}
