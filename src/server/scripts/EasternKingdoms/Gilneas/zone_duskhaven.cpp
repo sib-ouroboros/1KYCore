@@ -1326,20 +1326,24 @@ public:
         EventMap m_events;
         ObjectGuid m_playerGUID;
         bool m_isOnPlayer;
+        bool m_delivered = false;
 
         void Reset() override
         {
             m_events.Reset();
             m_playerGUID = ObjectGuid::Empty;
             m_isOnPlayer = false;
+            m_delivered = false;
         }
 
         void SpellHit(Unit* caster, SpellInfo const* spell) override
         {
-            if (caster && spell && !m_isOnPlayer)
+            if (caster && spell && !m_isOnPlayer && !m_delivered)
                 if (spell->Id == SPELL_RESCUE_DROWNING_WATCHMANN)
                     if (Player* player = caster->ToPlayer())
-                        if (player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) == QUEST_STATUS_INCOMPLETE)
+                        if (player->IsAlive() && me->IsAlive() && me->GetMapId() == 654
+                            && player->GetMapId() == me->GetMapId() && me->IsInPhase(player)
+                            && player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) == QUEST_STATUS_INCOMPLETE)
                         {
                             m_isOnPlayer = true;
                             m_playerGUID = player->GetGUID();
@@ -1362,7 +1366,8 @@ public:
                     case EVENT_CHECK_NEAR_GREYMANE:
                     {
                         Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
-                        if (!player || !player->IsAlive()
+                        if (!player || !player->IsAlive() || player->GetMapId() != me->GetMapId()
+                            || !me->IsInPhase(player)
                             || player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) != QUEST_STATUS_INCOMPLETE
                             || me->GetVehicleBase() != player)
                         {
@@ -1371,10 +1376,13 @@ public:
                             return;
                         }
 
-                        if (m_isOnPlayer && !player->IsInWater()
-                            && me->FindNearestCreature(NPC_PRINCE_LIAM_GREYMANE, 15.0f))
+                        Creature* liam = me->FindNearestCreature(NPC_PRINCE_LIAM_GREYMANE, 15.0f);
+                        if (m_isOnPlayer && !m_delivered && !player->IsInWater()
+                            && liam && liam->IsAlive() && liam->GetMapId() == me->GetMapId()
+                            && liam->IsInPhase(player))
                         {
                             m_isOnPlayer = false;
+                            m_delivered = true;
                             player->KilledMonsterCredit(NPC_DROWNING_WATCHMANN_CREDIT);
                             player->CastSpell(me, SPELL_SAVE_DROWNING_MILITIA_EFFECT, true);
                             me->ExitVehicle();
@@ -1420,7 +1428,8 @@ public:
         {
             Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
             Creature* watchman = GetExplTargetUnit() ? GetExplTargetUnit()->ToCreature() : nullptr;
-            if (!player || !watchman || watchman->GetEntry() != 36440 || !watchman->IsAlive()
+            if (!player || !player->IsAlive() || !watchman || watchman->GetEntry() != 36440 || !watchman->IsAlive()
+                || player->GetMapId() != 654 || watchman->GetMapId() != player->GetMapId() || !watchman->IsInPhase(player)
                 || watchman->GetVehicleBase() || !player->IsInWater()
                 || player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) != QUEST_STATUS_INCOMPLETE
                 || (player->GetVehicleKit() && player->GetVehicleKit()->GetPassenger(0)))
@@ -1432,7 +1441,8 @@ public:
         {
             Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
             Creature* watchman = GetHitUnit() ? GetHitUnit()->ToCreature() : nullptr;
-            if (!player || !watchman || watchman->GetEntry() != 36440 || !watchman->IsAlive())
+            if (!player || !player->IsAlive() || !watchman || watchman->GetEntry() != 36440 || !watchman->IsAlive()
+                || player->GetMapId() != 654 || watchman->GetMapId() != player->GetMapId() || !watchman->IsInPhase(player))
                 return;
 
             if (player->GetQuestStatus(QUEST_GASPING_FOR_BREATH) != QUEST_STATUS_INCOMPLETE)
@@ -2729,7 +2739,7 @@ public:
                 return;
             m_finished = true; // ExitVehicle can re-enter PassengerBoarded.
             m_events.Reset();
-            if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+            if (Player* player = ObjectAccessor::FindPlayer(m_playerGUID))
             {
                 if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
                     if (player->GetVehicleBase() == car)
@@ -2744,10 +2754,20 @@ public:
 
         void TryBoard()
         {
-            if (m_boardRequested || m_finished)
+            if (m_boardRequested || m_finished || m_playerGUID.IsEmpty())
                 return;
             Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
             Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID);
+            if (!player || !player->IsAlive() || player->GetMapId() != me->GetMapId()
+                || !me->InSamePhase(player->GetPhaseShift())
+                || player->GetQuestStatus(QUEST_EXODUS) != QUEST_STATUS_COMPLETE
+                || !player->HasAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19)
+                || (car && (!car->IsAlive() || car->GetMapId() != me->GetMapId()
+                    || !me->InSamePhase(car->GetPhaseShift()))))
+            {
+                Cleanup();
+                return;
+            }
             // The native vehicle installer can create the accessory before or
             // after IsSummonedBy. Wait until its own boarding has completed.
             if (!player || !car || car->GetVehicleBase() != me || !car->GetVehicleKit())
@@ -2775,18 +2795,32 @@ public:
 
         void IsSummonedBy(Unit* summoner) override
         {
-            if (Player* player = summoner ? summoner->ToPlayer() : nullptr)
+            if (m_finished || !m_playerGUID.IsEmpty())
+                return;
+            Player* player = summoner ? summoner->ToPlayer() : nullptr;
+            if (!player || !player->IsAlive() || me->GetMapId() != 654
+                || player->GetMapId() != me->GetMapId() || !me->InSamePhase(player->GetPhaseShift())
+                || player->GetQuestStatus(QUEST_EXODUS) != QUEST_STATUS_COMPLETE
+                || !player->HasAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19))
             {
-                m_playerGUID = player->GetGUID();
-                TryBoard();
-            }
-            else
+                if (player)
+                    player->RemoveAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19);
                 Cleanup();
+                return;
+            }
+            m_playerGUID = player->GetGUID();
+            TryBoard();
         }
 
         void JustSummoned(Creature* summon) override
         {
             if (m_finished)
+            {
+                summon->DespawnOrUnsummon();
+                return;
+            }
+            if (summon->GetEntry() == NPC_CARRIAGE_43337 && !m_carriageGUID.IsEmpty()
+                && m_carriageGUID != summon->GetGUID())
             {
                 summon->DespawnOrUnsummon();
                 return;
@@ -2918,8 +2952,11 @@ public:
 
         void IsSummonedBy(Unit* summoner) override
         {
+            if (m_finished || !m_harnessGUID.IsEmpty())
+                return;
             if (Creature* harness = summoner ? summoner->ToCreature() : nullptr)
-                if (harness->GetEntry() == NPC_HARNESS_43336)
+                if (harness->GetEntry() == NPC_HARNESS_43336 && harness->IsAlive()
+                    && harness->GetMapId() == me->GetMapId() && me->InSamePhase(harness->GetPhaseShift()))
                     m_harnessGUID = harness->GetGUID();
         }
 
@@ -2940,13 +2977,15 @@ public:
 
         void PassengerBoarded(Unit* passenger, int8 seatId, bool apply) override
         {
-            Player* player = passenger->ToPlayer();
+            Player* player = passenger ? passenger->ToPlayer() : nullptr;
             if (!player)
                 return;
             if (apply)
             {
                 if (m_finished || player->GetGUID() != m_playerGUID || seatId != 1
-                    || !player->IsAlive() || player->GetQuestStatus(QUEST_EXODUS) != QUEST_STATUS_COMPLETE)
+                    || !player->IsAlive() || player->GetMapId() != me->GetMapId()
+                    || !me->InSamePhase(player->GetPhaseShift())
+                    || player->GetQuestStatus(QUEST_EXODUS) != QUEST_STATUS_COMPLETE)
                 {
                     player->ExitVehicle();
                     return;
@@ -2964,9 +3003,11 @@ public:
 
         void SetGUID(ObjectGuid guid, int32 id) override
         {
-            if (id == PLAYER_GUID)
+            if (m_finished || guid.IsEmpty())
+                return;
+            if (id == PLAYER_GUID && (m_playerGUID.IsEmpty() || m_playerGUID == guid))
                 m_playerGUID = guid;
-            else if (id == NPC_HARNESS_43336)
+            else if (id == NPC_HARNESS_43336 && (m_harnessGUID.IsEmpty() || m_harnessGUID == guid))
                 m_harnessGUID = guid;
         }
 
@@ -2999,6 +3040,7 @@ public:
                 if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
                     if (me->GetVehicleKit() && me->GetVehicleKit()->HasEmptySeat(1)
                         && !player->GetVehicleBase() && player->IsAlive()
+                        && player->GetMapId() == me->GetMapId() && me->InSamePhase(player->GetPhaseShift())
                         && player->GetQuestStatus(QUEST_EXODUS) == QUEST_STATUS_COMPLETE)
                         // Explicit seat1, preserving the native ride spell.
                         player->CastCustomSpell(SPELL_RIDE_VEHICLE_72764, SPELLVALUE_BASE_POINT0, 2, me, true);
