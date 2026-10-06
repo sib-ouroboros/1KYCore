@@ -37,9 +37,13 @@
 #include "ScriptMgr.h"
 #include "SpellScript.h"
 #include "zone_gilneas.h"
+#include "WaypointManager.h"
+#include "Log.h"
+#include <cmath>
 
 enum eBattleForGilneas
 {
+    QUEST_HUNT_FOR_SYLVANAS             = 24902,
     QUEST_RUTTHERAN                     = 14434,
     QUEST_ENDGAME                       = 26706,
 
@@ -102,10 +106,18 @@ public:
         ObjectGuid   m_sylvanasGUID;
         ObjectGuid   m_warhowlGUID;
         ObjectGuid   m_crenshawGUID;
-        uint32   m_eventPhase;
+        uint32   m_eventPhase = 0;
+        uint32   m_lifetime = 0;
+        bool     m_stopped = false;
 
         void Reset() override
         {
+            if (!m_playerGUID.IsEmpty())
+            {
+                StopScene();
+                return;
+            }
+            m_events.Reset();
             m_playerGUID = ObjectGuid::Empty;
             m_eventPhase = 0;
             m_sylvanasGUID = ObjectGuid::Empty;
@@ -113,11 +125,79 @@ public:
             m_crenshawGUID = ObjectGuid::Empty;
         }
 
+        bool HasScenePaths() const
+        {
+            uint32 const endpoints[] = {1, 1, 3, 5, 23};
+            for (uint32 i = 0; i < 5; ++i)
+            {
+                WaypointPath const* path = sWaypointMgr->GetPath(3850701 + i);
+                bool endpointFound = false;
+                if (!path || path->nodes.size() < 2)
+                    return false;
+                for (WaypointNode const& node : path->nodes)
+                {
+                    if (!std::isfinite(node.x) || !std::isfinite(node.y) || !std::isfinite(node.z))
+                        return false;
+                    if (node.id == endpoints[i])
+                        endpointFound = true;
+                }
+                if (!endpointFound)
+                    return false;
+            }
+            return true;
+        }
+
+        void StopScene()
+        {
+            if (m_stopped)
+                return;
+            m_stopped = true;
+            m_events.Reset();
+            me->GetMotionMaster()->Clear();
+            for (ObjectGuid guid : {m_sylvanasGUID, m_warhowlGUID, m_crenshawGUID})
+                if (Creature* actor = ObjectAccessor::GetCreature(*me, guid))
+                    actor->DespawnOrUnsummon();
+            me->DespawnOrUnsummon();
+        }
+
+        bool UpdateSceneOwner(uint32 diff)
+        {
+            if (m_stopped || m_playerGUID.IsEmpty())
+                return false;
+            Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+            if (diff >= 600000 - m_lifetime || !player || !player->IsAlive()
+                || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
+                || (player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_INCOMPLETE
+                    && player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_COMPLETE))
+            {
+                StopScene();
+                return false;
+            }
+            m_lifetime += diff;
+            return true;
+        }
+
         void IsSummonedBy(Unit* summoner) override
         {
-            m_playerGUID = summoner->GetGUID();
+            if (m_stopped || !m_playerGUID.IsEmpty())
+                return;
+            Player* player = summoner ? summoner->ToPlayer() : nullptr;
+            if (!player || !player->IsAlive() || me->GetMapId() != 654
+                || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
+                || player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_INCOMPLETE)
+            {
+                StopScene();
+                return;
+            }
+            if (!HasScenePaths())
+            {
+                TC_LOG_ERROR("scripts", "Gilneas quest 24902: Tobias requires valid waypoint paths 3850701-3850705; scene not started.");
+                StopScene();
+                return;
+            }
+            m_playerGUID = player->GetGUID();
             m_eventPhase = 1;
-            m_events.ScheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 3000);
+            m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 3000);
         }
 
         void JustSummoned(Creature* summon) override
@@ -145,6 +225,8 @@ public:
 
         void MovementInform(uint32 type, uint32 id) override
         {
+            if (m_stopped || m_playerGUID.IsEmpty())
+                return;
             switch (type)
             {
                 case WAYPOINT_MOTION_TYPE:
@@ -155,33 +237,33 @@ public:
                             Talk(0, player);
                     }
                     else if (m_eventPhase == 1 && id == 1)
-                        m_events.ScheduleEvent(EVENT_MOVEMENT_START_PATH_1, 1000);
+                        m_events.RescheduleEvent(EVENT_MOVEMENT_START_PATH_1, 1000);
                     else if (m_eventPhase == 2 && id == 0)
                     {
                         if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
                             Talk(1, player);
                     }
                     else if (m_eventPhase == 2 && id == 1)
-                        m_events.ScheduleEvent(EVENT_WAIT_FOR_PLAYER_2, 1000); // on open gate
+                        m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_2, 1000); // on open gate
                     else if (m_eventPhase == 3 && id == 3)
-                        m_events.ScheduleEvent(EVENT_WAIT_FOR_PLAYER_3, 1000); // on wall 1
+                        m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_3, 1000); // on wall 1
                     else if (m_eventPhase == 4 && id == 5)
-                        m_events.ScheduleEvent(EVENT_WAIT_FOR_OUTSIDE_EVENT, 1000);
+                        m_events.RescheduleEvent(EVENT_WAIT_FOR_OUTSIDE_EVENT, 1000);
                     else if (m_eventPhase == 5 && id == 23)
-                        m_events.ScheduleEvent(EVENT_WAIT_FOR_PLAYER_4, 1000); // inside water
+                        m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_4, 1000); // inside water
                     break;
                 }
                 case EFFECT_MOTION_TYPE: // jump
                 {
                     if (m_eventPhase == 1 && id == 2001)
-                        m_events.ScheduleEvent(EVENT_MOVEMENT_START_PATH_2, 1000);
+                        m_events.RescheduleEvent(EVENT_MOVEMENT_START_PATH_2, 1000);
                     else if (m_eventPhase == 3 && id == 2003)
-                        m_events.ScheduleEvent(EVENT_MOVEMENT_START_PATH_4, 1000);
+                        m_events.RescheduleEvent(EVENT_MOVEMENT_START_PATH_4, 1000);
                     else if (m_eventPhase == 5 && id == 2004)
                     {
                         me->SetFacingTo(5.6f);
-                        m_events.ScheduleEvent(EVENT_MOVEMENT_START_PATH_6, 10);
-                        m_events.ScheduleEvent(EVENT_MOVEMENT_START_SYLVANAS_AI, 1000);
+                        m_events.RescheduleEvent(EVENT_MOVEMENT_START_PATH_6, 10);
+                        m_events.RescheduleEvent(EVENT_MOVEMENT_START_SYLVANAS_AI, 1000);
                     }
                     break;
                 }
@@ -208,6 +290,8 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
+            if (!UpdateSceneOwner(diff))
+                return;
             m_events.Update(diff);
 
             while (uint32 eventId = m_events.ExecuteEvent())
@@ -219,7 +303,7 @@ public:
                         if (IsPlayerNear(20.0f))
                             me->GetMotionMaster()->MovePath(3850701, false);
                         else
-                            m_events.ScheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 1000);
+                            m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 1000);
                         break;
                     }
                     case EVENT_MOVEMENT_START_PATH_1:
@@ -241,7 +325,7 @@ public:
                             me->GetMotionMaster()->MovePath(3850703, false);
                         }
                         else
-                            m_events.ScheduleEvent(EVENT_WAIT_FOR_PLAYER_2, 1000);
+                            m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_2, 1000);
                         break;
                     }
                     case EVENT_WAIT_FOR_PLAYER_3:
@@ -249,7 +333,7 @@ public:
                         if (IsPlayerNear(8.0f))
                             me->GetMotionMaster()->MoveJump(-1548.65f, 1618.41f, 23.1788f, 20.0f, 5.0f, 2003);
                         else
-                            m_events.ScheduleEvent(EVENT_WAIT_FOR_PLAYER_3, 1000);
+                            m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_3, 1000);
                         break;
                     }
                     case EVENT_MOVEMENT_START_PATH_4:
@@ -263,14 +347,14 @@ public:
                         if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
                             if (Creature* general = me->FindNearestCreature(NPC_FORSAKEN_GENERAL, 25.0f))
                                 general->AI()->Talk(0, player);
-                        m_events.ScheduleEvent(EVENT_WAIT_FOR_OUTSIDE_EVENT1, 6000);
+                        m_events.RescheduleEvent(EVENT_WAIT_FOR_OUTSIDE_EVENT1, 6000);
                         break;
                     }
                     case EVENT_WAIT_FOR_OUTSIDE_EVENT1:
                     {
                         if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
                             Talk(2, player);
-                        m_events.ScheduleEvent(EVENT_MOVEMENT_START_PATH_5, 6000);
+                        m_events.RescheduleEvent(EVENT_MOVEMENT_START_PATH_5, 6000);
                         break;
                     }
                     case EVENT_MOVEMENT_START_PATH_5:
@@ -288,7 +372,7 @@ public:
                             me->GetMotionMaster()->MoveJump(-1614.5f, 1533.9f, 27.26f, 20.0f, 5.0f, 2004);
                         }
                         else
-                            m_events.ScheduleEvent(EVENT_WAIT_FOR_PLAYER_4, 1000);
+                            m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_4, 1000);
                         break;
                     }
                     case EVENT_MOVEMENT_START_PATH_6:
@@ -325,6 +409,8 @@ public:
 
     CreatureAI* GetAI(Creature* pCreature) const override
     {
+        if (!pCreature->IsSummon() || pCreature->GetMapId() != 654)
+            return nullptr;
         return new npc_tobias_mistmantle_38507AI(pCreature);
     }
 };
