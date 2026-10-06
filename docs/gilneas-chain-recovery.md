@@ -164,3 +164,9 @@ CI наa88c829: GCC и Windows полные сборки PASS, Reliability PASS,
 На5baa187 полные GCC/Windows сборки обнаружили шесть неверных вызовов InSamePhase(Player*). Исправлены на InSamePhase(player->GetPhaseShift()); native fixture теперь использует реальную сигнатуру PhaseShift const&, чтобы не скрывать такую несовместимость. Reliability и полный MySQL workflow на5baa187 PASS.
 
 TempSummon дублировал флаг приватности WorldObject: Map записывал производное поле, CanSeeOrDetect читал базовое. Удалено дублирование, используется единый штатный флаг WorldObject. Native fixture воспроизводит ошибку на старом header и проходит на исправленном; проверяет owner/другого игрока, переключение через оба типа указателей, публичных NPC и приватные GO. Флаг по умолчанию остаётся false. Полная сборка и клиентская проверка персональных сцен ещё требуются.
+
+### Exodus24438: подтверждён маршрут, реализация ещё не готова
+
+В закреплённом Pandaria source найден реальный маршрут4492801 из33 точек. Проверка actual Detour на предоставленных mmaps654 загрузила51 tile: все33 точки имеют ground polygon, все32 соседних сегмента дают полный путь без partial/buffer overflow. Это подтверждает проходимость предоставленной геометрии, но не retail timing/анимации/VehicleSeat клиента26972. Proof и координаты: `docs/audit-data/gilneas-stagecoach-route-audit.json`.
+
+Текущий код ждёт28/33/44 вместо исходных24/30/33. Отсутствует carriage в seat2 harness; Marie занимает player seat1 вместо source seat0. Посадка зависит от порядка IsSummonedBy/JustSummoned, нет надёжного owner/duplicate/timeout cleanup. Старый source cast_flags0 нельзя копировать: Unit::HandleSpellClick этого ядра требует caster-clicker flag1 для посадки accessory на parent. Нужны адаптированный ограниченный FSM, guarded SQL и fixture; этот аудит НЕ активирует сцену и не меняет спавны.

@@ -1,0 +1,465 @@
+{
+  "map": 654,
+  "tiles": 51,
+  "points": [
+    {
+      "point": 1,
+      "ground": true,
+      "source_z": 97.84,
+      "nav_z": 98.0394
+    },
+    {
+      "point": 2,
+      "ground": true,
+      "source_z": 92.64,
+      "nav_z": 92.8966
+    },
+    {
+      "point": 3,
+      "ground": true,
+      "source_z": 84.84,
+      "nav_z": 85.413
+    },
+    {
+      "point": 4,
+      "ground": true,
+      "source_z": 80.77,
+      "nav_z": 81.3517
+    },
+    {
+      "point": 5,
+      "ground": true,
+      "source_z": 76.52,
+      "nav_z": 77.7495
+    },
+    {
+      "point": 6,
+      "ground": true,
+      "source_z": 60.8,
+      "nav_z": 60.9062
+    },
+    {
+      "point": 7,
+      "ground": true,
+      "source_z": 63.15,
+      "nav_z": 63.2728
+    },
+    {
+      "point": 8,
+      "ground": true,
+      "source_z": 67.34,
+      "nav_z": 67.6187
+    },
+    {
+      "point": 9,
+      "ground": true,
+      "source_z": 69.6,
+      "nav_z": 69.8961
+    },
+    {
+      "point": 10,
+      "ground": true,
+      "source_z": 75.77,
+      "nav_z": 76.3099
+    },
+    {
+      "point": 11,
+      "ground": true,
+      "source_z": 82.11,
+      "nav_z": 82.6514
+    },
+    {
+      "point": 12,
+      "ground": true,
+      "source_z": 87.64,
+      "nav_z": 87.1633
+    },
+    {
+      "point": 13,
+      "ground": true,
+      "source_z": 89.31,
+      "nav_z": 89.5061
+    },
+    {
+      "point": 14,
+      "ground": true,
+      "source_z": 89.31,
+      "nav_z": 89.6686
+    },
+    {
+      "point": 15,
+      "ground": true,
+      "source_z": 89.31,
+      "nav_z": 89.5985
+    },
+    {
+      "point": 16,
+      "ground": true,
+      "source_z": 89.31,
+      "nav_z": 89.4645
+    },
+    {
+      "point": 17,
+      "ground": true,
+      "source_z": 89.31,
+      "nav_z": 89.4093
+    },
+    {
+      "point": 18,
+      "ground": true,
+      "source_z": 89.31,
+      "nav_z": 89.3411
+    },
+    {
+      "point": 19,
+      "ground": true,
+      "source_z": 89.17,
+      "nav_z": 89.4884
+    },
+    {
+      "point": 20,
+      "ground": true,
+      "source_z": 89.13,
+      "nav_z": 89.1703
+    },
+    {
+      "point": 21,
+      "ground": true,
+      "source_z": 89.15,
+      "nav_z": 89.5244
+    },
+    {
+      "point": 22,
+      "ground": true,
+      "source_z": 89.28,
+      "nav_z": 89.4395
+    },
+    {
+      "point": 23,
+      "ground": true,
+      "source_z": 83.23,
+      "nav_z": 83.2736
+    },
+    {
+      "point": 24,
+      "ground": true,
+      "source_z": 73.95,
+      "nav_z": 73.4683
+    },
+    {
+      "point": 25,
+      "ground": true,
+      "source_z": 53.77,
+      "nav_z": 54.1406
+    },
+    {
+      "point": 26,
+      "ground": true,
+      "source_z": 46.52,
+      "nav_z": 48.1544
+    },
+    {
+      "point": 27,
+      "ground": true,
+      "source_z": 29.18,
+      "nav_z": 29.4223
+    },
+    {
+      "point": 28,
+      "ground": true,
+      "source_z": 19.03,
+      "nav_z": 19.4948
+    },
+    {
+      "point": 29,
+      "ground": true,
+      "source_z": 12.11,
+      "nav_z": 12.4147
+    },
+    {
+      "point": 30,
+      "ground": true,
+      "source_z": 11.78,
+      "nav_z": 12.0824
+    },
+    {
+      "point": 31,
+      "ground": true,
+      "source_z": 11.94,
+      "nav_z": 12.1227
+    },
+    {
+      "point": 32,
+      "ground": true,
+      "source_z": 11.05,
+      "nav_z": 11.445
+    },
+    {
+      "point": 33,
+      "ground": true,
+      "source_z": 11.15,
+      "nav_z": 12.0638
+    }
+  ],
+  "segments": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "complete": true,
+  "status": "AUDIT_ONLY_NOT_IMPLEMENTED",
+  "route": [
+    {
+      "point": 1,
+      "x": -1681.45,
+      "y": 2508.27,
+      "z": 97.84
+    },
+    {
+      "point": 2,
+      "x": -1695.46,
+      "y": 2486.82,
+      "z": 92.64
+    },
+    {
+      "point": 3,
+      "x": -1704.99,
+      "y": 2468.26,
+      "z": 84.84
+    },
+    {
+      "point": 4,
+      "x": -1698.38,
+      "y": 2447.65,
+      "z": 80.77
+    },
+    {
+      "point": 5,
+      "x": -1698.42,
+      "y": 2432.73,
+      "z": 76.52
+    },
+    {
+      "point": 6,
+      "x": -1725.88,
+      "y": 2390.5,
+      "z": 60.8
+    },
+    {
+      "point": 7,
+      "x": -1735.64,
+      "y": 2362.27,
+      "z": 63.15
+    },
+    {
+      "point": 8,
+      "x": -1745.18,
+      "y": 2343.69,
+      "z": 67.34
+    },
+    {
+      "point": 9,
+      "x": -1746.53,
+      "y": 2329.92,
+      "z": 69.6
+    },
+    {
+      "point": 10,
+      "x": -1757.21,
+      "y": 2300.38,
+      "z": 75.77
+    },
+    {
+      "point": 11,
+      "x": -1776.38,
+      "y": 2271.8,
+      "z": 82.11
+    },
+    {
+      "point": 12,
+      "x": -1799.38,
+      "y": 2251.48,
+      "z": 87.64
+    },
+    {
+      "point": 13,
+      "x": -1826.19,
+      "y": 2238.05,
+      "z": 89.31
+    },
+    {
+      "point": 14,
+      "x": -1868.5,
+      "y": 2174.6,
+      "z": 89.31
+    },
+    {
+      "point": 15,
+      "x": -1872.45,
+      "y": 2135.71,
+      "z": 89.31
+    },
+    {
+      "point": 16,
+      "x": -1872.96,
+      "y": 2075.18,
+      "z": 89.31
+    },
+    {
+      "point": 17,
+      "x": -1881.14,
+      "y": 2046.58,
+      "z": 89.31
+    },
+    {
+      "point": 18,
+      "x": -1885.72,
+      "y": 2019.56,
+      "z": 89.31
+    },
+    {
+      "point": 19,
+      "x": -1876.85,
+      "y": 1970.16,
+      "z": 89.17
+    },
+    {
+      "point": 20,
+      "x": -1878.35,
+      "y": 1921.33,
+      "z": 89.13
+    },
+    {
+      "point": 21,
+      "x": -1890.52,
+      "y": 1904.26,
+      "z": 89.15
+    },
+    {
+      "point": 22,
+      "x": -1990.23,
+      "y": 1901.42,
+      "z": 89.28
+    },
+    {
+      "point": 23,
+      "x": -2036.81,
+      "y": 1914.56,
+      "z": 83.23
+    },
+    {
+      "point": 24,
+      "x": -2061.07,
+      "y": 1905.41,
+      "z": 73.95
+    },
+    {
+      "point": 25,
+      "x": -2093.23,
+      "y": 1881.99,
+      "z": 53.77
+    },
+    {
+      "point": 26,
+      "x": -2103.06,
+      "y": 1870.42,
+      "z": 46.52
+    },
+    {
+      "point": 27,
+      "x": -2122.61,
+      "y": 1831.95,
+      "z": 29.18
+    },
+    {
+      "point": 28,
+      "x": -2146.32,
+      "y": 1814.97,
+      "z": 19.03
+    },
+    {
+      "point": 29,
+      "x": -2186.33,
+      "y": 1808.11,
+      "z": 12.11
+    },
+    {
+      "point": 30,
+      "x": -2217.77,
+      "y": 1809.6,
+      "z": 11.78
+    },
+    {
+      "point": 31,
+      "x": -2239.38,
+      "y": 1805.1,
+      "z": 11.94
+    },
+    {
+      "point": 32,
+      "x": -2310.3,
+      "y": 1774.33,
+      "z": 11.05
+    },
+    {
+      "point": 33,
+      "x": -2376.5,
+      "y": 1704.52,
+      "z": 11.15
+    }
+  ],
+  "source_url": "https://github.com/alexkulya/pandaria_5.4.8/blob/e0a20613d73e2b9324ac13a4783c724fec1d4559/sql/old/world/world.gilneas.sql",
+  "source_sha256": "029ceb862ff4e980784be4fd01579e1f66de33ac62f8a1bea36bbf1aa8de02fe",
+  "geometry_directory": "F:/Projects/extracted-735-new/mmaps",
+  "limitations": [
+    "Geometry test does not validate client vehicle seats, retail timing or passenger animations.",
+    "Source SQL spellclick flags must be adapted to this core; do not bulk import."
+  ],
+  "verified_source_endpoints": {
+    "dialogue": 24,
+    "player_exit": 30,
+    "end": 33
+  },
+  "current_incompatible_endpoints": [
+    28,
+    33,
+    44
+  ],
+  "findings": [
+    "Current path ID is 4492801, not 4333601/4333701; path is absent in release.",
+    "Harness IsSummonedBy may run before JustSummoned carriage; boarding must handle either callback order.",
+    "Current dynamic carriage Marie accessory occupies passenger seat1; source assigns Marie seat0.",
+    "Current harness accessories omit carriage seat2.",
+    "Unit::HandleSpellClick requires caster-clicker flag1 to mount accessory onto parent. Source cast_flags0 must not be copied.",
+    "Owner validation, duplicate suppression, bounded lifetime and phase194 cleanup remain required."
+  ]
+}
