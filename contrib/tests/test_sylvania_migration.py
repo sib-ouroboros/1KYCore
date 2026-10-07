@@ -15,6 +15,7 @@ import urllib.request
 from test_gilneas_database import test_gilneas_database
 from test_campaign_visual_migration import test_visual_migration
 from test_campaign_required_level_migration import test_required_level_objects
+from test_campaign_packed_conversations import test_packed_conversations
 
 ROOT = Path(__file__).resolve().parents[2]
 DB = 'test_1kycore_sylvania_release'
@@ -874,6 +875,7 @@ def main():
             restore = (ROOT / 'sql/updates/world/2026_10_04_01_world_campaign_simple_conversations.sql').read_text('utf8')
             registry = json.loads((ROOT / 'docs/audit-data/campaign-simple-conversation-restoration.json').read_text('utf8'))
             test_simple_conversations(tables,restore,registry)
+            test_packed_conversations(sql,checksum)
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.council_books_only:
@@ -968,6 +970,7 @@ def main():
         test_simple_goober_models(tables,false_orders,orders_registry,'two False Orders / four objectives / protected event and spawn overrides')
 
         test_nearest_conversations()
+        test_packed_conversations(sql,checksum)
 
         test_placeholder_models(tables)
         test_simple_goober_models(tables)

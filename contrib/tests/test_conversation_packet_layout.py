@@ -62,6 +62,14 @@ def main():
             packet = struct.pack('<4I', *(int(old_line[key]) for key in ('id','textId','unk1','unk2')))
             cases.append('{ ConversationLineTemplate line = {%s,%s,%s,%s,%s,0}; unsigned char expected[16] = %s; if (std::memcmp(&line,expected,16)) return 1; }' % (line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],array(packet)))
     assert len(cases) == 62
+    packed = json.loads((root/'docs/audit-data/campaign-packed-conversation-restoration.json').read_text('utf8'))
+    packed_lines = {int(row['Id']):row for row in packed['rows']['conversation_line_template']}
+    for candidate in packed['source']:
+        for old_line in candidate['lines']:
+            line = packed_lines[int(old_line['id'])]
+            packet = struct.pack('<4I', *(int(old_line[key]) for key in ('id','textId','unk1','unk2')))
+            cases.append('{ ConversationLineTemplate line = {%s,%s,%s,%s,%s,%s}; unsigned char expected[16] = %s; if (std::memcmp(&line,expected,16)) return 1; }' % (line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],line['Padding'],array(packet)))
+    assert len(cases) == 67
     harness = '''#include <cstdint>
 #include <cstddef>
 #include <cstring>
@@ -80,7 +88,7 @@ static_assert(offsetof(ConversationLineTemplate,Flags)==13);
 static_assert(offsetof(ConversationLineTemplate,Padding)==14);
 int main() {
 '''+ '\n'.join(cases)+'''
-std::cout << "PASS: sixty-two original line packets and twenty-two actor packets match actual native packed structures byte for byte\\n";
+std::cout << "PASS: sixty-seven original line packets and twenty-two actor packets match actual native packed structures byte for byte\\n";
 }
 '''
     with tempfile.TemporaryDirectory() as tmp:

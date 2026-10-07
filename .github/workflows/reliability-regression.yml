@@ -95,6 +95,7 @@ on:
       - src/server/game/Server/Json/**
       - contrib/tests/test_json_array_delimiters.py
       - contrib/tests/test_conversation_packet_layout.py
+      - contrib/tests/test_conversation_line_loading.py
       - src/server/game/Entities/Conversation/Conversation.h
       - src/server/game/Globals/ConversationDataStore.h
       - docs/audit-data/campaign-simple-conversation-restoration.json
@@ -250,5 +251,7 @@ jobs:
         run: python contrib/tests/test_blackhand_blaze_owner.py
       - name: Test original conversation packets against actual native packed structures
         run: python contrib/tests/test_conversation_packet_layout.py
+      - name: Test conversation line loading with legacy and opaque high-word schemas
+        run: python contrib/tests/test_conversation_line_loading.py
       - name: Test bundled JSON array separator parsing with sanitizers
         run: python contrib/tests/test_json_array_delimiters.py

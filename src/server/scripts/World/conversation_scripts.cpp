@@ -68,7 +68,10 @@ CampaignActorBinding const CampaignActorBindings[] = {
     {4110,0,116448},
     {4110,1,116414},
     {4593,0,115883},
-    {4597,0,116880}
+    {4597,0,116880},
+    {3914,0,118242},
+    {3914,1,110489},
+    {4204,0,116880}
 };
 
 class conversation_campaign_nearest_actors : public ConversationScript

@@ -1,0 +1,270 @@
+{
+  "entries": [
+    3914,
+    4204
+  ],
+  "rows": {
+    "conversation_line_template": [
+      {
+        "Id": "8926",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8928",
+        "StartTime": "4095",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "100",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "8931",
+        "StartTime": "12480",
+        "UiCameraID": "0",
+        "ActorIdx": "1",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "9883",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "9570",
+        "StartTime": "8129",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "2078",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_template": [
+      {
+        "Id": "3914",
+        "FirstLineId": "8926",
+        "LastLineEndTime": "42948",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4204",
+        "FirstLineId": "9883",
+        "LastLineEndTime": "18792",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "ConversationId": 3914,
+      "Idx": 0,
+      "CreatureEntry": 118242
+    },
+    {
+      "ConversationId": 3914,
+      "Idx": 1,
+      "CreatureEntry": 110489
+    },
+    {
+      "ConversationId": 4204,
+      "Idx": 0,
+      "CreatureEntry": 116880
+    }
+  ],
+  "source": [
+    {
+      "id": 3914,
+      "lines": [
+        {
+          "entry": "3914",
+          "id": "8926",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "3914",
+          "id": "8928",
+          "idx": "1",
+          "textId": "4095",
+          "unk1": "0",
+          "unk2": "6553600"
+        },
+        {
+          "entry": "3914",
+          "id": "8931",
+          "idx": "2",
+          "textId": "12480",
+          "unk1": "0",
+          "unk2": "1"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 123768,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 8928,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 123771,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 8931,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 123770,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "3914",
+          "id": "0",
+          "creatureId": "118242",
+          "creatureGuid": "2022997",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "18974"
+        },
+        {
+          "entry": "3914",
+          "id": "1",
+          "creatureId": "110489",
+          "creatureGuid": "2022997",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "18974"
+        }
+      ],
+      "end": 42948,
+      "links_match": true,
+      "timing_valid": true,
+      "ordered": true
+    },
+    {
+      "id": 4204,
+      "lines": [
+        {
+          "entry": "4204",
+          "id": "9883",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "4204",
+          "id": "9570",
+          "idx": "1",
+          "textId": "8129",
+          "unk1": "0",
+          "unk2": "136183808"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 126507,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 2000,
+          "NextConversationLineID": 9570,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 125626,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [],
+      "world_actors": [
+        {
+          "entry": "4204",
+          "id": "0",
+          "creatureId": "116880",
+          "creatureGuid": "109937",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "13792"
+        }
+      ],
+      "end": 18792,
+      "links_match": true,
+      "timing_valid": true,
+      "ordered": true
+    }
+  ],
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_Conversation_cpp_sha256": "8a86a8b9d1f8ec655c68b64001d2438cb606651421a5c6ad012b1844b6aa8863",
+  "client_line_file_sha256": "ef9a39edeef5f58aebd0741839291a1a4e4ab745be881c3e155b9767c5ba7039",
+  "required_creatures": [
+    110489,
+    116880,
+    118242
+  ],
+  "validated_broadcast_texts": [
+    123768,
+    123770,
+    123771,
+    125626,
+    126507
+  ],
+  "assurance": "Original raw line word retained byte for byte, including opaque high word; no claim about undocumented client semantics. Original nearest-actor lookup and duration sum plus5000 preserved. Client26972 playtest pending; supplied client26654 mismatch remains.",
+  "local_mysql": {
+    "status": "PASS",
+    "mysql": "8.0.45",
+    "schema": "test_campaign_packed_f889b64563",
+    "source": "Disposable copied release conversation tables, required NPC templates and representative protected quest/spawn/SmartAI rows",
+    "schema_dropped": true,
+    "production_server_updated": false
+  },
+  "local_cpp_checks": [
+    "Actual legacy/compatible/incompatible-schema loader and invalid DB2 filtering PASS",
+    "67 original line packets and22 actor packets match actual packed native structures byte for byte PASS",
+    "Actual nearest-actor hook:37 scenes and missing-actor/null-input behavior PASS"
+  ],
+  "client_line_recheck": {
+    "path": "F:/Projects/extracted-735-new/dbc/ruRU/ConversationLine.db2",
+    "sha256": "ef9a39edeef5f58aebd0741839291a1a4e4ab745be881c3e155b9767c5ba7039",
+    "unchanged_from_decoded_audit": true
+  },
+  "wire_field_policy": "Padding is an opaque preserved source high word, not a new gameplay flag; no decoding or semantic reassignment claimed."
+}

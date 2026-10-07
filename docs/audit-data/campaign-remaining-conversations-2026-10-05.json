@@ -1,9 +1,9 @@
 {
   "basis": "All45 remaining IDs: original source semantics and supplied DB2 plus prepared isolated release; no source GUID requirement",
-  "count": 45,
+  "count": 43,
   "overlapping_blocker_counts": {
     "source_duration_does_not_cover_lines": 17,
-    "packed_fields_require_semantic_review": 15,
+    "packed_fields_require_semantic_review": 13,
     "actor_template_requires_separate_translation": 2,
     "missing_native_camera": 32,
     "source_player_sentinel_actor": 5,
@@ -594,44 +594,6 @@
       "missing_target_broadcast_texts": []
     },
     {
-      "conversation": 3914,
-      "blockers": [
-        "packed_fields_require_semantic_review"
-      ],
-      "packed_fields": [
-        {
-          "line": 8928,
-          "raw": 6553600,
-          "actor_index": 0,
-          "flags": 0,
-          "padding": 100
-        }
-      ],
-      "missing_npc_templates": [],
-      "missing_native_cameras": [],
-      "missing_native_animkits": [],
-      "missing_target_broadcast_texts": []
-    },
-    {
-      "conversation": 4204,
-      "blockers": [
-        "packed_fields_require_semantic_review"
-      ],
-      "packed_fields": [
-        {
-          "line": 9570,
-          "raw": 136183808,
-          "actor_index": 0,
-          "flags": 0,
-          "padding": 2078
-        }
-      ],
-      "missing_npc_templates": [],
-      "missing_native_cameras": [],
-      "missing_native_animkits": [],
-      "missing_target_broadcast_texts": []
-    },
-    {
       "conversation": 4229,
       "blockers": [
         "missing_native_camera"
@@ -757,5 +719,13 @@
       "missing_target_broadcast_texts": []
     }
   ],
-  "assurance": "No remapping, camera suppression, NPC creation or invented timing. Packed byte Flags differs from ActorIdx; nonzero high word is Padding and cannot be silently discarded."
+  "assurance": "43 unresolved conversations; two high-word-only cases restored by byte-preserving native loader and protected SQL. Missing cameras/conditions, timing and other packed semantics are not silently changed.",
+  "followup_2026_10_07": {
+    "restored": [
+      3914,
+      4204
+    ],
+    "proof": "campaign-packed-conversation-restoration.json",
+    "remaining_count": 43
+  }
 }

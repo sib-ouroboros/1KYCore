@@ -14,6 +14,8 @@ def main():
     a=p.parse_args();root=Path(__file__).resolve().parents[2]
     source=root/'src/server/scripts/World/conversation_scripts.cpp'
     registry=json.loads((root/'docs/audit-data/campaign-nearest-conversation-restoration.json').read_text())
+    extra=json.loads((root/'docs/audit-data/campaign-packed-conversation-restoration.json').read_text())
+    registry['entries']+=extra['entries'];registry['bindings']+=extra['bindings']
     fixtures=[]
     for cid in registry['entries']:
         bindings=[b for b in registry['bindings'] if b['ConversationId']==cid]
@@ -47,7 +49,7 @@ int main(){try{
  CASES
  Conversation unknown{999999};hook.OnConversationCreate(&unknown,&creator);check(unknown.actors.empty(),"unknown scene");
  hook.OnConversationCreate(nullptr,&creator);hook.OnConversationCreate(&unknown,nullptr);
- std::cout<<"PASS: actual nearest-actor hook, all35 conversations, actor indices, creator range, missing actors and null inputs\n";
+ std::cout<<"PASS: actual nearest-actor hook, all37 conversations, actor indices, creator range, missing actors and null inputs\n";
 }catch(std::exception const& e){std::cerr<<e.what()<<std::endl;return 1;}}
 """.replace('CASES','\n'.join(fixtures))
     with tempfile.TemporaryDirectory() as d:

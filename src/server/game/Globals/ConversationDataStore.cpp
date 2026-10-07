@@ -62,7 +62,12 @@ void ConversationDataStore::LoadConversationTemplates()
         TC_LOG_INFO("server.loading", ">> Loaded 0 Conversation actor templates. DB table `conversation_actor_template` is empty.");
     }
 
-    if (QueryResult lineTemplates = WorldDatabase.Query("SELECT Id, StartTime, UiCameraID, ActorIdx, Flags FROM conversation_line_template"))
+    // Older databases retain the original zero high word until the optional schema update.
+    QueryResult paddingColumns = WorldDatabase.Query("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='conversation_line_template' AND COLUMN_NAME='Padding' AND DATA_TYPE='smallint' AND COLUMN_TYPE LIKE '%unsigned' AND IS_NULLABLE='NO' AND (COLUMN_DEFAULT <=> '0') AND EXTRA=''");
+    bool hasLinePadding = paddingColumns && paddingColumns->Fetch()[0].GetUInt32() == 1;
+    if (QueryResult lineTemplates = WorldDatabase.Query(hasLinePadding
+        ? "SELECT Id, StartTime, UiCameraID, ActorIdx, Flags, Padding FROM conversation_line_template"
+        : "SELECT Id, StartTime, UiCameraID, ActorIdx, Flags FROM conversation_line_template"))
     {
         uint32 oldMSTime = getMSTime();
 
@@ -84,6 +89,7 @@ void ConversationDataStore::LoadConversationTemplates()
             conversationLine.UiCameraID = fields[2].GetUInt32();
             conversationLine.ActorIdx   = fields[3].GetUInt8();
             conversationLine.Flags      = fields[4].GetUInt8();
+            conversationLine.Padding    = hasLinePadding ? fields[5].GetUInt16() : 0;
         }
         while (lineTemplates->NextRow());
 

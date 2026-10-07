@@ -1,0 +1,429 @@
+{
+  "date": "2026-10-07",
+  "remaining": {
+    "conversations": 43,
+    "templates": 13,
+    "models": 52
+  },
+  "client_path": "F:/Projects/extracted-735-new/dbc/ruRU",
+  "supplied_client_build": 26654,
+  "target_client_build": 26972,
+  "validation": {
+    "UiCamera": {
+      "file": "UiCamera.db2",
+      "sha256": "6cb64ffd7d647d45e1bb8e8f849a0f9f80c7a441db9f1cecddedd2aa97d96c4d",
+      "layout_hash": "0xca6c98d4",
+      "record_count": 1060,
+      "copy_rows": 0,
+      "identity_count": 1060,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "AnimKit": {
+      "file": "AnimKit.db2",
+      "sha256": "b3b895f30bee3ced65a107c638eead9931fdf5c4f1efe1da73d328fc99faa5f1",
+      "layout_hash": "0x81d6d250",
+      "record_count": 483,
+      "copy_rows": 11799,
+      "identity_count": 12282,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "PlayerCondition": {
+      "file": "PlayerCondition.db2",
+      "sha256": "0d9fba0781518ce6d2fd6e859825c7995f1cbb4a016cedd4e5a8533e83a87acc",
+      "layout_hash": "0x5b3da113",
+      "record_count": 7115,
+      "copy_rows": 0,
+      "identity_count": 7115,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "Lock": {
+      "file": "Lock.db2",
+      "sha256": "3223460df70cd1e5b5d2dbe63b4c63214e6a2627110c7ada8ba0f979f26ac43d",
+      "layout_hash": "0xdac7f42f",
+      "record_count": 634,
+      "copy_rows": 84,
+      "identity_count": 718,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "Spell": {
+      "file": "Spell.db2",
+      "sha256": "6f722017f5bfd8539aa6839c2ddc0977a9fc6f1e48a85cc30a2175f7238ad080",
+      "layout_hash": "0x2273dfff",
+      "record_count": 126063,
+      "copy_rows": 53319,
+      "identity_count": 179382,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    }
+  },
+  "previously_missing_references": [
+    {
+      "group": "conversation",
+      "entry": 1416,
+      "table": "UiCamera",
+      "id": 1,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 1986,
+      "table": "UiCamera",
+      "id": 75592,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2000,
+      "table": "UiCamera",
+      "id": 4285107616,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2314,
+      "table": "UiCamera",
+      "id": 1367019216,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2434,
+      "table": "UiCamera",
+      "id": 2311023888,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2666,
+      "table": "UiCamera",
+      "id": 1796582640,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2869,
+      "table": "UiCamera",
+      "id": 22662400,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2870,
+      "table": "UiCamera",
+      "id": 92791,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 2976,
+      "table": "UiCamera",
+      "id": 138293,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3029,
+      "table": "UiCamera",
+      "id": 808923696,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3108,
+      "table": "UiCamera",
+      "id": 3718228896,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3183,
+      "table": "UiCamera",
+      "id": 2555358216,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3186,
+      "table": "UiCamera",
+      "id": 3718226304,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3192,
+      "table": "UiCamera",
+      "id": 1060835600,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3235,
+      "table": "UiCamera",
+      "id": 1060824944,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3260,
+      "table": "UiCamera",
+      "id": 105415,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3524,
+      "table": "UiCamera",
+      "id": 3237982400,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3525,
+      "table": "UiCamera",
+      "id": 3237982400,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3574,
+      "table": "UiCamera",
+      "id": 934091984,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3638,
+      "table": "UiCamera",
+      "id": 106637,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3769,
+      "table": "UiCamera",
+      "id": 2772806912,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3770,
+      "table": "UiCamera",
+      "id": 2772806912,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3789,
+      "table": "UiCamera",
+      "id": 98618,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 3790,
+      "table": "UiCamera",
+      "id": 98618,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4229,
+      "table": "UiCamera",
+      "id": 5,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4313,
+      "table": "UiCamera",
+      "id": 2750931696,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4568,
+      "table": "UiCamera",
+      "id": 45256909,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4572,
+      "table": "UiCamera",
+      "id": 2154798120,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4575,
+      "table": "UiCamera",
+      "id": 3314581,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4657,
+      "table": "UiCamera",
+      "id": 878681136,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4658,
+      "table": "UiCamera",
+      "id": 2,
+      "present": false
+    },
+    {
+      "group": "conversation",
+      "entry": 4730,
+      "table": "UiCamera",
+      "id": 161917554,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 245234,
+      "table": "PlayerCondition",
+      "id": 19467,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 245924,
+      "table": "PlayerCondition",
+      "id": 37624,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 245994,
+      "table": "PlayerCondition",
+      "id": 39238,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 246984,
+      "table": "PlayerCondition",
+      "id": 41517,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 247037,
+      "table": "PlayerCondition",
+      "id": 38308,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 247038,
+      "table": "PlayerCondition",
+      "id": 38308,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 247052,
+      "table": "PlayerCondition",
+      "id": 38374,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 248475,
+      "table": "PlayerCondition",
+      "id": 39037,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 248876,
+      "table": "PlayerCondition",
+      "id": 39397,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 251504,
+      "table": "Spell",
+      "id": 217183,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 266081,
+      "table": "PlayerCondition",
+      "id": 48083,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 266166,
+      "table": "PlayerCondition",
+      "id": 46899,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 267176,
+      "table": "PlayerCondition",
+      "id": 47096,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 267177,
+      "table": "PlayerCondition",
+      "id": 47097,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 267222,
+      "table": "Spell",
+      "id": 233966,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 267952,
+      "table": "PlayerCondition",
+      "id": 47913,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 268408,
+      "table": "PlayerCondition",
+      "id": 48092,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 268617,
+      "table": "PlayerCondition",
+      "id": 49035,
+      "present": false
+    },
+    {
+      "group": "model",
+      "entry": 268736,
+      "table": "PlayerCondition",
+      "id": 48622,
+      "present": false
+    }
+  ],
+  "newly_available_references": 0,
+  "assurance": "Read-only recheck of every recorded missing camera and model client reference. No missing IDs replaced, no NPC/quest/spawn changes. Other script, timing, loot and shipment dependencies remain unresolved."
+}

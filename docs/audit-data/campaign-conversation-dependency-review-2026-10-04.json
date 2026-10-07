@@ -57,11 +57,13 @@
     3794,
     3795,
     3796,
+    3914,
     4110,
+    4204,
     4593,
     4597
   ],
-  "unresolved_template_count": 45,
+  "unresolved_template_count": 43,
   "unresolved_ids": [
     738,
     1416,
@@ -97,8 +99,6 @@
     3770,
     3789,
     3790,
-    3914,
-    4204,
     4229,
     4304,
     4313,
@@ -1391,5 +1391,13 @@
   },
   "assurance": "Template presence and source action semantics only. Presence does not prove actor/line/DB2 completeness; custom/live DB changes not inspected. No conversations or original NPC SmartAI deleted.",
   "restoration_registry": "campaign-simple-conversation-restoration.json",
-  "chain_restoration_registry": "campaign-conversation-chain-restoration.json"
+  "chain_restoration_registry": "campaign-conversation-chain-restoration.json",
+  "followup_2026_10_07": {
+    "restored": [
+      3914,
+      4204
+    ],
+    "remaining_count": 43,
+    "proof": "campaign-packed-conversation-restoration.json"
+  }
 }
