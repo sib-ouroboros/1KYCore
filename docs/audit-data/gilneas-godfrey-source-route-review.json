@@ -49,5 +49,7 @@
     }
   },
   "client_acceptance": "pending",
-  "production_server_updated": false
+  "production_server_updated": false,
+  "superseded_by": "gilneas-battle-source-restoration.json",
+  "follow_up": "Complete five-point route subsequently recovered from pinned ArkCORE July2016 archive; the one-point DarkSite route remains rejected."
 }

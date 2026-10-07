@@ -57,9 +57,9 @@
     }
   },
   "limitations": [
-    "No verified complete production departure route. Dialogue was subsequently restored by SQL18; see gilneas-godfrey-dialogue-restoration.json.",
-    "Synthetic fixture route is algorithm coverage only",
-    "Client26972 acceptance pending"
+    "Original missing route subsequently recovered from pinned ArkCORE July2016 archive and restored by SQL2026_10_07_01; this original snapshot has waypoint_count0.",
+    "Current fixture uses recovered source coordinates; motion/event substitutes are not real server traversal.",
+    "Client26972 visual and gameplay acceptance pending"
   ],
   "production_server_updated": false,
   "ci": {
@@ -82,5 +82,5 @@
       "status": "gilneas-chain PASS; full suite separately running"
     }
   },
-  "follow_up_source_review": "gilneas-godfrey-source-route-review.json"
+  "follow_up_source_review": "gilneas-battle-source-restoration.json"
 }

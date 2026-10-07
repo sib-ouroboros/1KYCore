@@ -1,0 +1,682 @@
+{
+  "source": {
+    "repo": "Arkania/ArkCORE-NG",
+    "commit": "a7304c3075bf8ee7eb5bdf45f31cda01c8626b52",
+    "archive": "sql/old/Old 2016/_world_2016_07.zip",
+    "archive_sha256": "98cd17277d6ea00e58f30f7aa1ce272958d042d19615c5f45226630b3304f924",
+    "files": [
+      {
+        "file": "2016_07_08_00_world.sql",
+        "sha256": "ed542e4c3a359ff6e7b1f447677c199e3daa03ab9c43923e9d8182eb93ea98af"
+      },
+      {
+        "file": "2016_07_09_00_world.sql",
+        "sha256": "d65fec0a61a04588c7fce0323a18f3e767e968cd8cb557a58a8e437639d52980"
+      },
+      {
+        "file": "2016_07_09_02_world.sql",
+        "sha256": "ce7b7fffef8cc3add115b14187fdd04b85a301c2bb43f15de0dc1d2fd1c1a868"
+      },
+      {
+        "file": "2016_07_14_02_world.sql",
+        "sha256": "e34d3d4919cb162ca96ad0ab67441fa0b634f84a189d27895b1adffd8fd8e6c4"
+      },
+      {
+        "file": "2016_07_14_03_world.sql",
+        "sha256": "1fc3d6d17c90f654d6f18c44dde8780b5f89c6865e4c51e001275262a0384785"
+      },
+      {
+        "file": "2016_07_07_00_world.sql",
+        "sha256": "37f800459feedb6838d0c423ebc56ab968b4190e6113c6540bbf9a67f60767ca"
+      }
+    ]
+  },
+  "spawns": [
+    {
+      "entry": 38218,
+      "guid": 802761,
+      "script": "npc_prince_liam_greymane_38218",
+      "old_position": [
+        -1770.8,
+        1381.13,
+        19.8033,
+        3.36518
+      ],
+      "position": [
+        -1408.661,
+        1260.017,
+        36.51123,
+        1.79
+      ],
+      "old_movement": 1,
+      "old_distance": 10.0,
+      "respawn": 90
+    },
+    {
+      "entry": 38415,
+      "guid": 802707,
+      "script": "npc_lord_darius_crowley_38415",
+      "old_position": [
+        -1752.55,
+        1362.04,
+        19.8818,
+        0.785867
+      ],
+      "position": [
+        -1773.54,
+        1341.46,
+        19.786,
+        0.94
+      ],
+      "old_movement": 1,
+      "old_distance": 10.0,
+      "respawn": 90
+    },
+    {
+      "entry": 38426,
+      "guid": 802754,
+      "script": "npc_lorna_crowley_38426",
+      "old_position": [
+        -1804.81,
+        1470.29,
+        19.3146,
+        1.70597
+      ],
+      "position": [
+        -1549.21,
+        1285.97,
+        11.7804,
+        3.47383
+      ],
+      "old_movement": 1,
+      "old_distance": 10.0,
+      "respawn": 90
+    },
+    {
+      "entry": 38465,
+      "guid": 802671,
+      "script": "npc_myriam_spellwaker_38465",
+      "old_position": [
+        -1412.95,
+        1248.7,
+        36.5112,
+        1.76278
+      ],
+      "position": [
+        -1412.95,
+        1248.7,
+        36.5112,
+        1.76278
+      ],
+      "old_movement": 0,
+      "old_distance": 0.0,
+      "respawn": 90
+    },
+    {
+      "entry": 38466,
+      "guid": 802670,
+      "script": "npc_sister_almyra_38466",
+      "old_position": [
+        -1401.31,
+        1251.91,
+        36.5112,
+        2.02458
+      ],
+      "position": [
+        -1401.31,
+        1251.91,
+        36.5112,
+        2.02458
+      ],
+      "old_movement": 0,
+      "old_distance": 0.0,
+      "respawn": 90
+    },
+    {
+      "entry": 38469,
+      "guid": 802781,
+      "script": "npc_lady_sylvanas_windrunner_38469",
+      "old_position": [
+        -1678.06,
+        1611.81,
+        20.5728,
+        2.44346
+      ],
+      "position": [
+        -1678.06,
+        1611.81,
+        20.5728,
+        2.44346
+      ],
+      "old_movement": 0,
+      "old_distance": 0.0,
+      "respawn": 90
+    },
+    {
+      "entry": 38470,
+      "guid": 802822,
+      "script": "npc_king_genn_greymane_38470",
+      "old_position": [
+        -1779.95,
+        1694.7,
+        22.158,
+        5.58193
+      ],
+      "position": [
+        -1750.84,
+        1670.42,
+        22.158,
+        5.6022
+      ],
+      "old_movement": 0,
+      "old_distance": 0.0,
+      "respawn": 90
+    }
+  ],
+  "battle_routes": {
+    "3847401": [
+      {
+        "point": 0,
+        "position": [
+          -1634.873,
+          1636.791,
+          21.12881,
+          4.689035
+        ],
+        "move_type": 1,
+        "entry": 38474,
+        "script": "npc_prince_liam_greymane_38474"
+      },
+      {
+        "point": 1,
+        "position": [
+          -1635.782,
+          1621.483,
+          20.42826,
+          3.177146
+        ],
+        "move_type": 1,
+        "entry": 38474,
+        "script": "npc_prince_liam_greymane_38474"
+      },
+      {
+        "point": 2,
+        "position": [
+          -1661.025,
+          1620.674,
+          20.48856,
+          3.188927
+        ],
+        "move_type": 1,
+        "entry": 38474,
+        "script": "npc_prince_liam_greymane_38474"
+      },
+      {
+        "point": 3,
+        "position": [
+          -1679.49,
+          1618.253,
+          20.48856,
+          3.361714
+        ],
+        "move_type": 1,
+        "entry": 38474,
+        "script": "npc_prince_liam_greymane_38474"
+      }
+    ],
+    "3846901": [
+      {
+        "point": 0,
+        "position": [
+          -1659.57,
+          1620.006,
+          20.48808,
+          0.24366
+        ],
+        "move_type": 0,
+        "entry": 38469,
+        "script": "npc_lady_sylvanas_windrunner_38469"
+      },
+      {
+        "point": 1,
+        "position": [
+          -1631.088,
+          1621.131,
+          20.48824,
+          0.039456
+        ],
+        "move_type": 0,
+        "entry": 38469,
+        "script": "npc_lady_sylvanas_windrunner_38469"
+      },
+      {
+        "point": 2,
+        "position": [
+          -1631.993,
+          1651.859,
+          20.48824,
+          1.563129
+        ],
+        "move_type": 0,
+        "entry": 38469,
+        "script": "npc_lady_sylvanas_windrunner_38469"
+      }
+    ]
+  },
+  "godfrey_route": {
+    "source_guid": 252545,
+    "target_guid": 802361,
+    "points": [
+      {
+        "point": 0,
+        "position": [
+          -2039.679,
+          983.3817,
+          70.06663,
+          4.322849
+        ],
+        "move_type": 1
+      },
+      {
+        "point": 1,
+        "position": [
+          -2043.107,
+          977.2275,
+          70.06663,
+          4.684133
+        ],
+        "move_type": 1
+      },
+      {
+        "point": 2,
+        "position": [
+          -2043.373,
+          967.8233,
+          70.07954,
+          4.511345
+        ],
+        "move_type": 1
+      },
+      {
+        "point": 3,
+        "position": [
+          -2051.509,
+          960.2091,
+          70.09149,
+          3.890882
+        ],
+        "move_type": 1
+      },
+      {
+        "point": 4,
+        "position": [
+          -2077.494,
+          952.7342,
+          70.49577,
+          3.301833
+        ],
+        "move_type": 1
+      }
+    ]
+  },
+  "navmesh": {
+    "liam-start": {
+      "map": 654,
+      "tiles": 51,
+      "points": [
+        {
+          "point": 1,
+          "ground": true,
+          "source_z": 36.5112,
+          "nav_z": 36.5131
+        },
+        {
+          "point": 2,
+          "ground": true,
+          "source_z": 36.5112,
+          "nav_z": 36.7443
+        }
+      ],
+      "segments": [
+        true
+      ],
+      "complete": true,
+      "source_points": [
+        [
+          -1408.661,
+          1260.017,
+          36.51123
+        ],
+        [
+          -1401.31,
+          1251.91,
+          36.5112
+        ]
+      ]
+    },
+    "lorna-start": {
+      "map": 654,
+      "tiles": 51,
+      "points": [
+        {
+          "point": 1,
+          "ground": true,
+          "source_z": 11.7804,
+          "nav_z": 12.8356
+        }
+      ],
+      "segments": [],
+      "complete": true,
+      "source_points": [
+        [
+          -1549.21,
+          1285.97,
+          11.7804
+        ]
+      ]
+    },
+    "darius-start": {
+      "map": 654,
+      "tiles": 51,
+      "points": [
+        {
+          "point": 1,
+          "ground": true,
+          "source_z": 19.786,
+          "nav_z": 20.1238
+        }
+      ],
+      "segments": [],
+      "complete": true,
+      "source_points": [
+        [
+          -1773.54,
+          1341.46,
+          19.786
+        ]
+      ]
+    },
+    "genn-start": {
+      "map": 654,
+      "tiles": 51,
+      "points": [
+        {
+          "point": 1,
+          "ground": true,
+          "source_z": 22.158,
+          "nav_z": 22.3985
+        }
+      ],
+      "segments": [],
+      "complete": true,
+      "source_points": [
+        [
+          -1750.84,
+          1670.42,
+          22.158
+        ]
+      ]
+    },
+    "liam-finale": {
+      "map": 654,
+      "tiles": 51,
+      "points": [
+        {
+          "point": 1,
+          "ground": true,
+          "source_z": 21.2116,
+          "nav_z": 20.9312
+        },
+        {
+          "point": 2,
+          "ground": true,
+          "source_z": 21.1288,
+          "nav_z": 20.9372
+        },
+        {
+          "point": 3,
+          "ground": true,
+          "source_z": 20.4283,
+          "nav_z": 20.8542
+        },
+        {
+          "point": 4,
+          "ground": true,
+          "source_z": 20.4886,
+          "nav_z": 20.6645
+        },
+        {
+          "point": 5,
+          "ground": true,
+          "source_z": 20.4886,
+          "nav_z": 20.6645
+        }
+      ],
+      "segments": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "complete": true,
+      "source_points": [
+        [
+          -1634.62,
+          1632.86,
+          21.2116
+        ],
+        [
+          -1634.873,
+          1636.791,
+          21.12881
+        ],
+        [
+          -1635.782,
+          1621.483,
+          20.42826
+        ],
+        [
+          -1661.025,
+          1620.674,
+          20.48856
+        ],
+        [
+          -1679.49,
+          1618.253,
+          20.48856
+        ]
+      ]
+    },
+    "sylvanas-departure": {
+      "map": 654,
+      "tiles": 51,
+      "points": [
+        {
+          "point": 1,
+          "ground": true,
+          "source_z": 20.5728,
+          "nav_z": 20.6645
+        },
+        {
+          "point": 2,
+          "ground": true,
+          "source_z": 20.4881,
+          "nav_z": 20.6645
+        },
+        {
+          "point": 3,
+          "ground": true,
+          "source_z": 20.4882,
+          "nav_z": 20.7783
+        },
+        {
+          "point": 4,
+          "ground": true,
+          "source_z": 20.4882,
+          "nav_z": 20.7098
+        }
+      ],
+      "segments": [
+        true,
+        true,
+        true
+      ],
+      "complete": true,
+      "source_points": [
+        [
+          -1678.06,
+          1611.81,
+          20.5728
+        ],
+        [
+          -1659.57,
+          1620.006,
+          20.48808
+        ],
+        [
+          -1631.088,
+          1621.131,
+          20.48824
+        ],
+        [
+          -1631.993,
+          1651.859,
+          20.48824
+        ]
+      ]
+    },
+    "godfrey-departure": {
+      "map": 654,
+      "tiles": 51,
+      "points": [
+        {
+          "point": 1,
+          "ground": true,
+          "source_z": 70.1487,
+          "nav_z": 70.2741
+        },
+        {
+          "point": 2,
+          "ground": true,
+          "source_z": 70.0666,
+          "nav_z": 70.2741
+        },
+        {
+          "point": 3,
+          "ground": true,
+          "source_z": 70.0666,
+          "nav_z": 70.2741
+        },
+        {
+          "point": 4,
+          "ground": true,
+          "source_z": 70.0795,
+          "nav_z": 70.2741
+        },
+        {
+          "point": 5,
+          "ground": true,
+          "source_z": 70.0915,
+          "nav_z": 70.1628
+        },
+        {
+          "point": 6,
+          "ground": true,
+          "source_z": 70.4958,
+          "nav_z": 70.2417
+        }
+      ],
+      "segments": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "complete": true,
+      "source_points": [
+        [
+          -2041.35,
+          979.016,
+          70.1487
+        ],
+        [
+          -2039.679,
+          983.3817,
+          70.06663
+        ],
+        [
+          -2043.107,
+          977.2275,
+          70.06663
+        ],
+        [
+          -2043.373,
+          967.8233,
+          70.07954
+        ],
+        [
+          -2051.509,
+          960.2091,
+          70.09149
+        ],
+        [
+          -2077.494,
+          952.7342,
+          70.49577
+        ]
+      ]
+    }
+  },
+  "persistent_cinematic_liam": {
+    "guid": 802851,
+    "entry": 38474,
+    "decision": "Remove only unchanged unreferenced release duplicate; native Sylvanas summons the real cinematic actor"
+  },
+  "client_acceptance": "pending: normal account26972, multiplayer and interrupted/repeated battle, cinematic visuals and Godfrey departure",
+  "production_server_updated": false,
+  "local_cpp_checks": {
+    "status": "PASS",
+    "compiler": "g++ -std=c++17 -Wall -Wextra -Werror; Windows without sanitizers",
+    "fixtures": [
+      "battle targets",
+      "battle start/links/pending initialization/player gates",
+      "native wave routes",
+      "wave synchronization",
+      "finale",
+      "queued teardown",
+      "AI reuse and owned cleanup/cinematic Liam",
+      "individual reward",
+      "Godfrey source route callbacks"
+    ]
+  },
+  "previous_ci": {
+    "commit": "48d8d1e",
+    "gcc": 37482574937,
+    "windows": 37482599327,
+    "reliability": 37482594197,
+    "status": "all success",
+    "sql": {
+      "run": 37470067601,
+      "status": "all11 jobs success"
+    }
+  },
+  "mysql_source_package": {
+    "status": "PASS",
+    "mysql": "8.0.45",
+    "schema": "test_gilneas_battle_b704dfa3b1",
+    "source": "disposable local release table copy with previously prepared native Godfrey bindings",
+    "schema_dropped": true,
+    "production_server_updated": false
+  },
+  "mysql_full_package": {
+    "mysql": "8.0.45",
+    "schema": "test_gilneas_chain_7e9dc7b67b",
+    "source": "Local release copy, compatible DB735.02 layouts; original DB735.02 dump audited separately",
+    "checks": "Prepared Gilneas SQL package 00 through 21: first/repeat application, actor bindings, 95 object spawns, conflict rejection, Tobias event, Godfrey dialogue, banshee scaling, native battle positions and routes, custom actor/spawn/timer/ownership/route/quest and unrelated data preservation",
+    "status": "PASS",
+    "live_database_changed": false,
+    "schema_dropped": true,
+    "production_server_updated": false
+  }
+}

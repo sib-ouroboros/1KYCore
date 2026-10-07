@@ -152,6 +152,68 @@ enum eZoneGilneasCity2
 };
 
 
+namespace
+{
+    char const* GetGilneasBattleScript(uint32 entry)
+    {
+        switch (entry)
+        {
+            case NPC_KRENNAN_ARANAS: return "npc_krennan_aranas_38553";
+            case NPC_SISTER_ALMYRA: return "npc_sister_almyra_38466";
+            case NPC_PRINCE_LIAM_GREYMANE_BATTLE: return "npc_prince_liam_greymane_38218";
+            case NPC_MYRIAM_SPELLWAKER: return "npc_myriam_spellwaker_38465";
+            case NPC_LORNA_CROWLEY: return "npc_lorna_crowley_38426";
+            case NPC_LORD_DARIUS_CROWLEY: return "npc_lord_darius_crowley_38415";
+            case NPC_KING_GENN_GREYMANE: return "npc_king_genn_greymane_38470";
+            case NPC_LADY_SYLVANAS_WINDRUNNER: return "npc_lady_sylvanas_windrunner_38469";
+            case NPC_PRINCE_LIAM_GREYMANE: return "npc_prince_liam_greymane_38474";
+            default: return nullptr;
+        }
+    }
+
+    Creature* GetGilneasBattleActor(Creature* context, ObjectGuid guid, uint32 entry)
+    {
+        char const* scriptName = GetGilneasBattleScript(entry);
+        if (!scriptName || context->GetMapId() != 654)
+            return nullptr;
+
+        Creature* actor = ObjectAccessor::GetCreature(*context, guid);
+        uint32 scriptId = sObjectMgr->GetScriptId(scriptName);
+        return actor && actor->IsAlive() && actor->GetEntry() == entry
+            && actor->GetMapId() == context->GetMapId() && context->IsInPhase(actor)
+            && scriptId && actor->GetScriptId() == scriptId && actor->AI() ? actor : nullptr;
+    }
+
+    Creature* FindGilneasBattleActor(Creature* context, ObjectGuid& guid, uint32 entry, float range)
+    {
+        if (Creature* actor = GetGilneasBattleActor(context, guid, entry))
+            return actor;
+
+        // A nonempty GUID may refer to a despawned actor; allow pending registration to retry.
+        guid = ObjectGuid::Empty;
+        if (Creature* nearby = context->FindNearestCreature(entry, range))
+            if (Creature* actor = GetGilneasBattleActor(context, nearby->GetGUID(), entry))
+            {
+                guid = actor->GetGUID();
+                return actor;
+            }
+        return nullptr;
+    }
+
+    bool HasGilneasBattlePlayer(Creature* context, float range)
+    {
+        if (context->GetMapId() != 654)
+            return false;
+
+        for (Player* player : context->SelectNearestPlayers(range, true))
+            if (player->IsAlive() && player->GetMapId() == context->GetMapId()
+                && context->IsInPhase(player)
+                && player->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) == QUEST_STATUS_INCOMPLETE)
+                return true;
+        return false;
+    }
+}
+
  // 38221 -- gilneas militia... first 3 groups
 Position const SpawnPosGroup1[19] =
 {
@@ -856,7 +918,9 @@ public:
             switch (id)
             {
                 case NPC_SISTER_ALMYRA:
-                    m_almyraGUID = guid;
+                    if (GetGilneasBattleActor(me, guid, NPC_SISTER_ALMYRA)
+                        && (!m_battleIsStarted || m_almyraGUID == guid))
+                        m_almyraGUID = guid;
                     break;
             }
         }
@@ -902,6 +966,10 @@ public:
                 {
                 case EVENT_CHECK_PLAYER_FOR_PHASE:
                 {
+                    // Reset clears the local link while Almyra may already have acknowledged it.
+                    if (!m_battleIsStarted)
+                        FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 50.0f);
+
                     std::list<Player*> playerList = me->SelectNearestPlayers(100.0f, true);
                     for (std::list<Player*>::const_iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
                         if ((*itr)->GetQuestStatus(QUEST_PUSH_THEM_OUT) == QUEST_STATUS_REWARDED)
@@ -954,17 +1022,16 @@ public:
                 || player->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) != QUEST_STATUS_INCOMPLETE)
                 return false;
 
-            Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID);
-            uint32 script = sObjectMgr->GetScriptId("npc_sister_almyra_38466");
-            if (!almyra || !almyra->IsAlive() || almyra->GetEntry() != NPC_SISTER_ALMYRA
-                || !script || almyra->GetScriptId() != script || !me->IsInPhase(almyra)
-                || me->GetDistance2d(almyra) >= 50.0f || almyra->AI()->GetData(DATA_IS_BATTLE_STARTED))
+            Creature* almyra = GetGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA);
+            if (!almyra || me->GetDistance2d(almyra) >= 50.0f
+                || almyra->AI()->GetData(DATA_IS_BATTLE_STARTED))
                 return false;
 
-            // A nearby prince is not enough: the controller must have registered its leader.
-            Creature* liam = ObjectAccessor::GetCreature(*me, almyra->AI()->GetGUID(NPC_PRINCE_LIAM_GREYMANE_BATTLE));
-            return liam && liam->IsAlive() && liam->GetEntry() == NPC_PRINCE_LIAM_GREYMANE_BATTLE
-                && me->IsInPhase(liam) && me->GetDistance2d(liam) < 50.0f;
+            // Both leaders are required by the first wave's native arrival mask.
+            Creature* liam = GetGilneasBattleActor(me, almyra->AI()->GetGUID(NPC_PRINCE_LIAM_GREYMANE_BATTLE), NPC_PRINCE_LIAM_GREYMANE_BATTLE);
+            Creature* myriam = GetGilneasBattleActor(me, almyra->AI()->GetGUID(NPC_MYRIAM_SPELLWAKER), NPC_MYRIAM_SPELLWAKER);
+            return liam && myriam && me->GetDistance2d(liam) < 50.0f
+                && me->GetDistance2d(myriam) < 50.0f;
         }
 
         bool StartBattle(Player* player)
@@ -1077,6 +1144,15 @@ public:
         void Initialize()
         {
             m_events.Reset();
+            m_waveSize = 0;
+            m_point = 0;
+            m_nearestTarget = nullptr;
+            m_nearestDistance = 0.0f;
+            m_checkDistance = 0.0f;
+            m_doneA = false;
+            m_doneB = false;
+            m_targetList.clear();
+            m_battleIsStarted = false;
             m_krennanGUID = ObjectGuid::Empty;
             m_prince1GUID = ObjectGuid::Empty;
             m_prince2GUID = ObjectGuid::Empty;
@@ -1094,6 +1170,8 @@ public:
 
         void Reset() override
         {
+            RemoveMyMember();
+            Initialize();
             me->SetReactState(REACT_PASSIVE);
             if (my_followerList.empty())
                 SummonMyMember();
@@ -1190,79 +1268,30 @@ public:
 
         void SetGUID(ObjectGuid guid, int32 id) override
         {
+            ObjectGuid* link = nullptr;
             switch (id)
             {
-                case NPC_PRINCE_LIAM_GREYMANE_BATTLE:
-                {
-                    if (m_prince1GUID != guid)
-                        if (Creature* check = ObjectAccessor::GetCreature(*me, guid))
-                        {
-                            check->AI()->DoAction(ACTION_INITIALIZE_DONE);
-                            m_prince1GUID = guid;
-                        }
-                    break;
-                }
-                case NPC_PRINCE_LIAM_GREYMANE:
-                {
-                    if (m_prince2GUID != guid)
-                        if (Creature* check = ObjectAccessor::GetCreature(*me, guid))
-                        {
-                            check->AI()->DoAction(ACTION_INITIALIZE_DONE);
-                            m_prince2GUID = guid;
-                        }
-                    break;
-                }
-                case NPC_MYRIAM_SPELLWAKER:
-                {
-                    if (m_myriamGUID != guid)
-                        if (Creature* check = ObjectAccessor::GetCreature(*me, guid))
-                        {
-                            check->AI()->DoAction(ACTION_INITIALIZE_DONE);
-                            m_myriamGUID = guid;
-                        }
-                    break;
-                }
-                case NPC_LORNA_CROWLEY:
-                {
-                    if (m_lornaGUID != guid)
-                        if (Creature* check = ObjectAccessor::GetCreature(*me, guid))
-                        {
-                            check->AI()->DoAction(ACTION_INITIALIZE_DONE);
-                            m_lornaGUID = guid;
-                        }
-                    break;
-                }
-                case NPC_LORD_DARIUS_CROWLEY:
-                {
-                    if (m_dariusGUID != guid)
-                        if (Creature* check = ObjectAccessor::GetCreature(*me, guid))
-                        {
-                            check->AI()->DoAction(ACTION_INITIALIZE_DONE);
-                            m_dariusGUID = guid;
-                        }
-                    break;
-                }
-                case NPC_KING_GENN_GREYMANE:
-                {
-                    if (m_kingGUID != guid)
-                        if (Creature* check = ObjectAccessor::GetCreature(*me, guid))
-                        {
-                            check->AI()->DoAction(ACTION_INITIALIZE_DONE);
-                            m_kingGUID = guid;
-                        }
-                    break;
-                }
-                case NPC_LADY_SYLVANAS_WINDRUNNER:
-                {
-                    if (m_sylvanaGUID != guid)
-                        if (Creature* check = ObjectAccessor::GetCreature(*me, guid))
-                        {
-                            check->AI()->DoAction(ACTION_INITIALIZE_DONE);
-                            m_sylvanaGUID = guid;
-                        }
-                    break;
-                }
+                case NPC_PRINCE_LIAM_GREYMANE_BATTLE: link = &m_prince1GUID; break;
+                case NPC_PRINCE_LIAM_GREYMANE: link = &m_prince2GUID; break;
+                case NPC_MYRIAM_SPELLWAKER: link = &m_myriamGUID; break;
+                case NPC_LORNA_CROWLEY: link = &m_lornaGUID; break;
+                case NPC_LORD_DARIUS_CROWLEY: link = &m_dariusGUID; break;
+                case NPC_KING_GENN_GREYMANE: link = &m_kingGUID; break;
+                case NPC_LADY_SYLVANAS_WINDRUNNER: link = &m_sylvanaGUID; break;
+                default: return;
             }
+
+            Creature* actor = GetGilneasBattleActor(me, guid, id);
+            if (!actor)
+                return;
+
+            // Keep active leaders; the cinematic deliberately replaces Liam38474 with a summon.
+            if (id != NPC_PRINCE_LIAM_GREYMANE && *link != guid && m_battleIsStarted
+                && GetGilneasBattleActor(me, *link, id))
+                return;
+
+            *link = guid;
+            actor->AI()->DoAction(ACTION_INITIALIZE_DONE);
         }
 
         ObjectGuid GetGUID(int32 id) const override
@@ -1339,11 +1368,7 @@ public:
                 {
                     if (!m_isInitialised)
                     {
-                        if (!m_krennanGUID)
-                            if (Creature* krennan = me->FindNearestCreature(NPC_KRENNAN_ARANAS, 25.0f))
-                                m_krennanGUID = krennan->GetGUID();
-
-                        if (Creature* krennan = ObjectAccessor::GetCreature(*me, m_krennanGUID))
+                        if (Creature* krennan = FindGilneasBattleActor(me, m_krennanGUID, NPC_KRENNAN_ARANAS, 25.0f))
                         {
                             krennan->AI()->SetGUID(me->GetGUID(), me->GetEntry());
                             m_isInitialised = true;
@@ -1669,21 +1694,21 @@ public:
 
         void SendActionValueToAllLeader(uint32 ActionValue)
         {
-            if (Creature* krennan = ObjectAccessor::GetCreature(*me, m_krennanGUID))
+            if (Creature* krennan = GetGilneasBattleActor(me, m_krennanGUID, NPC_KRENNAN_ARANAS))
                 krennan->AI()->DoAction(ActionValue);
-            if (Creature* liam = ObjectAccessor::GetCreature(*me, m_prince1GUID))
+            if (Creature* liam = GetGilneasBattleActor(me, m_prince1GUID, NPC_PRINCE_LIAM_GREYMANE_BATTLE))
                 liam->AI()->DoAction(ActionValue);
-            if (Creature* liam = ObjectAccessor::GetCreature(*me, m_prince2GUID))
+            if (Creature* liam = GetGilneasBattleActor(me, m_prince2GUID, NPC_PRINCE_LIAM_GREYMANE))
                 liam->AI()->DoAction(ActionValue);
-            if (Creature* myriam = ObjectAccessor::GetCreature(*me, m_myriamGUID))
+            if (Creature* myriam = GetGilneasBattleActor(me, m_myriamGUID, NPC_MYRIAM_SPELLWAKER))
                 myriam->AI()->DoAction(ActionValue);
-            if (Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID))
+            if (Creature* lorna = GetGilneasBattleActor(me, m_lornaGUID, NPC_LORNA_CROWLEY))
                 lorna->AI()->DoAction(ActionValue);
-            if (Creature* darius = ObjectAccessor::GetCreature(*me, m_dariusGUID))
+            if (Creature* darius = GetGilneasBattleActor(me, m_dariusGUID, NPC_LORD_DARIUS_CROWLEY))
                 darius->AI()->DoAction(ActionValue);
-            if (Creature* king = ObjectAccessor::GetCreature(*me, m_kingGUID))
+            if (Creature* king = GetGilneasBattleActor(me, m_kingGUID, NPC_KING_GENN_GREYMANE))
                 king->AI()->DoAction(ActionValue);
-            if (Creature* sylvana = ObjectAccessor::GetCreature(*me, m_sylvanaGUID))
+            if (Creature* sylvana = GetGilneasBattleActor(me, m_sylvanaGUID, NPC_LADY_SYLVANAS_WINDRUNNER))
                 sylvana->AI()->DoAction(ActionValue);
 
             switch (ActionValue)
@@ -1759,20 +1784,19 @@ public:
 
         bool IsPlayerNear(float range)
         {
-            return (me->SelectNearestPlayer(range)) ? true : false;
+            return HasGilneasBattlePlayer(me, range);
         }
 
         bool IsPlayerNearBase()
         {
             Position pos = Position(-1733.5f, 1389.5f, 20.0f);
-            if (Creature* myriam = ObjectAccessor::GetCreature(*me, m_myriamGUID))
-                if (Creature* liam = ObjectAccessor::GetCreature(*me, m_prince1GUID))
+            if (Creature* myriam = GetGilneasBattleActor(me, m_myriamGUID, NPC_MYRIAM_SPELLWAKER))
+                if (Creature* liam = GetGilneasBattleActor(me, m_prince1GUID, NPC_PRINCE_LIAM_GREYMANE_BATTLE))
                 {
                     float d1 = myriam->GetDistance(pos);
                     float d2 = liam->GetDistance(pos);
-                    Player* p1 = myriam->SelectNearestPlayer(25.0f);
-                    Player* p2 = liam->SelectNearestPlayer(25.0f);
-                    if (d1 < 25.0f && d2 < 25.0f && (p1 || p2))
+                    if (d1 < 25.0f && d2 < 25.0f
+                        && (HasGilneasBattlePlayer(myriam, 25.0f) || HasGilneasBattlePlayer(liam, 25.0f)))
                         return true;
                 }
 
@@ -1821,6 +1845,15 @@ public:
         void Initialize()
         {
             m_events.Reset();
+            m_wave = 0;
+            m_waveSize = 0;
+            m_point = 0;
+            m_nearestTarget = nullptr;
+            m_nearestDistance = 0.0f;
+            m_checkDistance = 0.0f;
+            m_doneA = false;
+            m_doneB = false;
+            m_targetList.clear();
             m_almyraGUID = ObjectGuid::Empty;
             m_isInitialised = false;
             m_shootCoolDown = 4000;
@@ -1829,6 +1862,8 @@ public:
 
         void Reset() override
         {
+            RemoveMyMember();
+            Initialize();
             if (!me->HasAura(458))
                 me->AddAura(458, me);
             if (!me->HasAura(72069))
@@ -1997,11 +2032,7 @@ public:
                 {
                     if (!m_isInitialised)
                     {
-                        if (!m_almyraGUID)
-                            if (Creature* almyra = me->FindNearestCreature(NPC_SISTER_ALMYRA, 50.0f))
-                                m_almyraGUID = almyra->GetGUID();
-
-                        if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 50.0f))
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
                         m_events.ScheduleEvent(EVENT_INITIALISE, 1000);
@@ -2351,6 +2382,15 @@ public:
         void Initialize()
         {
             m_events.Reset();
+            m_wave = 0;
+            m_waveSize = 0;
+            m_point = 0;
+            m_nearestTarget = nullptr;
+            m_nearestDistance = 0.0f;
+            m_checkDistance = 0.0f;
+            m_doneA = false;
+            m_doneB = false;
+            m_targetList.clear();
             m_almyraGUID = ObjectGuid::Empty;
             m_isInitialised = false;
             m_shootCoolDown = 4000;
@@ -2359,6 +2399,8 @@ public:
 
         void Reset() override
         {
+            RemoveMyMember();
+            Initialize();
             me->setActive(true);
             me->SetReactState(REACT_PASSIVE);
             if (my_followerList.empty())
@@ -2518,11 +2560,7 @@ public:
                 {
                     if (!m_isInitialised)
                     {
-                        if (!m_almyraGUID)
-                            if (Creature* almyra = me->FindNearestCreature(NPC_SISTER_ALMYRA, 50.0f))
-                                m_almyraGUID = almyra->GetGUID();
-
-                        if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 50.0f))
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
                         m_events.ScheduleEvent(EVENT_INITIALISE, 1000);
@@ -2779,6 +2817,15 @@ public:
         void Initialize()
         {
             m_events.Reset();
+            m_wave = 0;
+            m_waveSize = 0;
+            m_point = 0;
+            m_nearestTarget = nullptr;
+            m_nearestDistance = 0.0f;
+            m_checkDistance = 0.0f;
+            m_doneA = false;
+            m_doneB = false;
+            m_targetList.clear();
             m_almyraGUID = ObjectGuid::Empty;
             m_isInitialised = false;
             m_shootCoolDown = 4000;
@@ -2787,6 +2834,8 @@ public:
 
         void Reset() override
         {
+            RemoveMyMember();
+            Initialize();
             me->setActive(true);
             me->SetReactState(REACT_PASSIVE);
             if (my_followerList.empty())
@@ -2938,11 +2987,7 @@ public:
                 {
                     if (!m_isInitialised)
                     {
-                        if (!m_almyraGUID)
-                            if (Creature* almyra = me->FindNearestCreature(NPC_SISTER_ALMYRA, 100.0f))
-                                m_almyraGUID = almyra->GetGUID();
-
-                        if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 100.0f))
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
                         m_events.ScheduleEvent(EVENT_INITIALISE, 1000);
@@ -3286,6 +3331,15 @@ public:
         void Initialize()
         {
             m_events.Reset();
+            m_wave = 0;
+            m_waveSize = 0;
+            m_point = 0;
+            m_nearestTarget = nullptr;
+            m_nearestDistance = 0.0f;
+            m_checkDistance = 0.0f;
+            m_doneA = false;
+            m_doneB = false;
+            m_targetList.clear();
             m_almyraGUID = ObjectGuid::Empty;
             m_isInitialised = false;
             m_ridingWorgen = 0;
@@ -3295,6 +3349,8 @@ public:
 
         void Reset() override
         {
+            RemoveMyMember();
+            Initialize();
             me->SetReactState(REACT_PASSIVE);
             if (my_followerList.empty())
                 SummonMyMember();
@@ -3422,11 +3478,7 @@ public:
                     {
                         if (!m_isInitialised)
                         {
-                            if (!m_almyraGUID)
-                                if (Creature* almyra = me->FindNearestCreature(NPC_SISTER_ALMYRA, 100.0f))
-                                    m_almyraGUID = almyra->GetGUID();
-
-                            if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
+                            if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 100.0f))
                                 almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
                             m_events.ScheduleEvent(EVENT_INITIALISE, 1000);
@@ -3674,6 +3726,15 @@ public:
         void Initialize()
         {
             m_events.Reset();
+            m_wave = 0;
+            m_waveSize = 0;
+            m_point = 0;
+            m_nearestTarget = nullptr;
+            m_nearestDistance = 0.0f;
+            m_checkDistance = 0.0f;
+            m_doneA = false;
+            m_doneB = false;
+            m_targetList.clear();
             m_almyraGUID = ObjectGuid::Empty;
             m_liam2GUID = ObjectGuid::Empty;
             m_isInitialised = false;
@@ -3683,6 +3744,8 @@ public:
 
         void Reset() override
         {
+            RemoveMyMember();
+            Initialize();
             me->SetReactState(REACT_PASSIVE);
             if (my_followerList.empty())
                 SummonMyMember();
@@ -3769,6 +3832,13 @@ public:
 
         void EnterEvadeMode(EvadeReason /*reason*/) override { }
 
+        void RefreshCinematicLiam()
+        {
+            // The native cinematic summons Liam after Genn's initial registration.
+            Creature* almyra = GetGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA);
+            m_liam2GUID = almyra ? almyra->AI()->GetGUID(NPC_PRINCE_LIAM_GREYMANE) : ObjectGuid::Empty;
+        }
+
         void UpdateAI(uint32 diff) override
         {
             m_events.Update(diff);
@@ -3793,11 +3863,7 @@ public:
                 {
                     if (!m_isInitialised)
                     {
-                        if (!m_almyraGUID)
-                            if (Creature* almyra = me->FindNearestCreature(NPC_SISTER_ALMYRA, 100.0f))
-                                m_almyraGUID = almyra->GetGUID();
-
-                        if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 100.0f))
                         {
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
@@ -3885,6 +3951,7 @@ public:
                 }
                 case EVENT_LIAM_DEATH_TALK1:
                 {
+                    RefreshCinematicLiam();
                     if (Creature* liam = ObjectAccessor::GetCreature(*me, m_liam2GUID))
                         liam->AI()->Talk(2);
 
@@ -3893,6 +3960,7 @@ public:
                 }
                 case EVENT_LIAM_DEATH_TALK2:
                 {
+                    RefreshCinematicLiam();
                     if (Creature* liam = ObjectAccessor::GetCreature(*me, m_liam2GUID))
                         liam->AI()->Talk(3);
                     break;
@@ -4015,6 +4083,9 @@ public:
         void Initialize()
         {
             m_events.Reset();
+            m_cinematicStarted = false;
+            m_liamDeathQueued = false;
+            m_completionHandled = false;
             m_almyraGUID = ObjectGuid::Empty;
             m_liamGUID = ObjectGuid::Empty;
             m_kingGUID = ObjectGuid::Empty;
@@ -4023,6 +4094,8 @@ public:
 
         void Reset() override
         {
+            RemoveMyMember();
+            Initialize();
             me->SetReactState(REACT_PASSIVE);
             if (my_followerList.empty())
                 SummonMyMember();
@@ -4123,11 +4196,7 @@ public:
 
                     if (!m_isInitialised)
                     {
-                        if (!m_almyraGUID)
-                            if (Creature* almyra = me->FindNearestCreature(NPC_SISTER_ALMYRA, 100.0f))
-                                m_almyraGUID = almyra->GetGUID();
-
-                        if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 100.0f))
                         {
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
@@ -4402,11 +4471,7 @@ public:
 
                     if (!m_isInitialised)
                     {
-                        if (!m_almyraGUID)
-                            if (Creature* almyra = me->FindNearestCreature(NPC_SISTER_ALMYRA, 500.0f))
-                                m_almyraGUID = almyra->GetGUID();
-
-                        if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 500.0f))
                         {
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Compile production Genn/Godfrey handlers and actual waypoint structures."""
-import argparse,os,subprocess,tempfile
+import argparse,os,subprocess,tempfile,json
 from pathlib import Path
 from test_gilneas_quests import method
 
@@ -47,7 +47,7 @@ struct WaypointMgr{std::map<uint32,WaypointPath>paths;WaypointPath const*GetPath
  code+=r'''
 using F=npc_gilneas_godfrey_departure::ai;using G=npc_king_genn_greymane_37876::npc_king_genn_greymane_37876AI;
 void check(bool v,char const*m){if(!v)throw std::runtime_error(m);}
-struct Scene{Creature genn,godfrey;F f;G g;Scene():f(&godfrey),g(&genn){actors.clear();waypointMgr.paths.clear();objectMgr.id=7;textMgr.exists=false;genn.entry=37876;godfrey.entry=37875;genn.guid.id=1;godfrey.guid.id=2;genn.nearest=&godfrey;actors[1]=&genn;actors[2]=&godfrey;f.Reset();g.Reset();}void path(){std::vector<WaypointNode>nodes;for(uint32 id=0;id<=4;++id)nodes.emplace_back(id,-2041.f+id,979.f,70.f);waypointMgr.paths.emplace(802361,WaypointPath(802361,std::move(nodes)));}void tick(uint32 diff){g.UpdateAI(diff);f.UpdateAI(diff);}void dialogue(){g.DoAction(1);tick(100);tick(100);tick(5000);tick(3000);}};
+struct Scene{Creature genn,godfrey;F f;G g;Scene():f(&godfrey),g(&genn){actors.clear();waypointMgr.paths.clear();objectMgr.id=7;textMgr.exists=false;genn.entry=37876;godfrey.entry=37875;genn.guid.id=1;godfrey.guid.id=2;genn.nearest=&godfrey;actors[1]=&genn;actors[2]=&godfrey;f.Reset();g.Reset();}void path(){std::vector<WaypointNode>nodes;SOURCE_ROUTE_NODESwaypointMgr.paths.emplace(802361,WaypointPath(802361,std::move(nodes)));}void tick(uint32 diff){g.UpdateAI(diff);f.UpdateAI(diff);}void dialogue(){g.DoAction(1);tick(100);tick(100);tick(5000);tick(3000);}};
 int main(){try{
  {Scene s;s.dialogue();check(!s.g.m_sceneStarted&&!s.f.m_running&&!s.f.GetData(1)&&!s.godfrey.motion.starts&&!s.godfrey.gravityDisabled&&!s.godfrey.despawn,"missing route releases reservation without flight or fake departure");int count=logs;s.dialogue();check(logs==count,"missing route logged once per actor");check(s.genn.talks==2&&s.godfrey.talks==0,"known Genn dialogue retained; missing Godfrey text not requested");}
  {Scene s;s.path();textMgr.exists=true;s.g.DoAction(1);s.g.DoAction(1);check(s.g.m_events.events.size()==1&&s.f.GetData(1)==1,"scene and actor reserved once");s.tick(100);s.tick(100);s.tick(5000);s.tick(3000);check(s.f.m_running&&s.godfrey.motion.starts==1&&s.godfrey.motion.path==802361&&!s.godfrey.motion.repeat&&!s.godfrey.gravityDisabled&&s.godfrey.talks==1,"existing captured endpoint path starts only on Godfrey");s.g.MovementInform(WAYPOINT_MOTION_TYPE,4);check(!s.godfrey.despawn,"Genn callback cannot end Godfrey movement");s.f.MovementInform(999,4);s.f.MovementInform(WAYPOINT_MOTION_TYPE,3);check(!s.godfrey.despawn,"wrong motion and intermediate point ignored");s.f.MovementInform(WAYPOINT_MOTION_TYPE,4);check(s.godfrey.despawn&&s.f.m_finished&&!s.g.m_sceneStarted&&s.g.m_events.events.empty(),"own endpoint ends scene");s.g.DoAction(1);check(!s.g.m_sceneStarted,"departed actor cannot restart before respawn");s.f.Reset();check(!s.f.GetData(1),"respawn resets departure state");}
@@ -67,6 +67,10 @@ int main(){try{
  std::cout<<"Godfrey native path guard, actor callback, reservation and controller cleanup: PASS\n";
 }catch(std::exception const&e){std::cerr<<e.what()<<"\n";return 1;}}
 '''
+ manifest=json.loads((root/'docs/audit-data/gilneas-battle-source-restoration.json').read_text('utf8'))
+ nodes=manifest['godfrey_route']['points']
+ assert [p['point'] for p in nodes]==[0,1,2,3,4]
+ code=code.replace('SOURCE_ROUTE_NODES',''.join('nodes.emplace_back('+str(p['point'])+','+','.join(str(v)+'f' for v in p['position'])+');nodes.back().moveType='+str(p['move_type'])+';' for p in nodes))
  with tempfile.TemporaryDirectory() as temp:
   cpp=Path(temp)/'test.cpp';exe=Path(temp)/'test.exe';cpp.write_text(code,'utf8');cmd=[os.environ.get('CXX','g++'),'-std=c++17','-Wall','-Wextra','-Werror',str(cpp),'-o',str(exe)]
   if not args.no_sanitizers:cmd[1:1]=['-fsanitize=address,undefined','-fno-sanitize-recover=undefined','-fno-omit-frame-pointer']
