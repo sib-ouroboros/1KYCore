@@ -1,7 +1,7 @@
 {
   "source_commit": "a6145c22e9ad6ac69690d4a2f7794bae4e1caf95",
-  "remaining_templates": 15,
-  "remaining_spawns": 105,
+  "remaining_templates": 13,
+  "remaining_spawns": 102,
   "entries": [
     {
       "entry": 245233,
@@ -139,8 +139,8 @@
       },
       "required_review": [
         "Требуется проверка клиентских записей Lock/PlayerCondition/BroadcastText на развёрнутом сервере.",
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его.",
-        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится."
+        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
+        "SpellVisualID поддерживается текущим addon/backend; остаётся перевод собственной цепочки SmartScript и проверка её зависимостей."
       ]
     },
     {
@@ -209,32 +209,6 @@
         "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
         "Spell232169 использует TELEPORT_TO_LFG227 и dungeon1422; не подменять обычным TELEPORT_UNITS252 и фиксированным spell_target_position."
       ]
-    },
-    {
-      "entry": 269053,
-      "type": 5,
-      "source_name": "'Box'",
-      "source_spawns": 2,
-      "references": {},
-      "additional_source_fields": {
-        "unkInt32": "100"
-      },
-      "required_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
-      ]
-    },
-    {
-      "entry": 269055,
-      "type": 5,
-      "source_name": "'Banner'",
-      "source_spawns": 1,
-      "references": {},
-      "additional_source_fields": {
-        "unkInt32": "100"
-      },
-      "required_review": [
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его."
-      ]
     }
   ],
   "client_condition_audit": {
@@ -257,5 +231,14 @@
       "40074": true
     }
   },
-  "static_visual_backend": "Optional SpellVisualID/SpellStateVisualID/StateWorldEffectID fields now supported; remaining source chains and quest-dependent visuals still require review."
+  "static_visual_backend": "Optional SpellVisualID/SpellStateVisualID/StateWorldEffectID fields now supported; remaining source chains and quest-dependent visuals still require review.",
+  "removed_completed_entries": {
+    "entries": [
+      269053,
+      269055
+    ],
+    "proof": "campaign-required-level-restoration.json",
+    "migration": "2026_10_05_08_world_campaign_required_level_objects.sql"
+  },
+  "scope": "Current unresolved templates only; dated historical snapshots are not live counters."
 }

@@ -48,6 +48,10 @@ on:
       - src/server/game/Globals/ObjectMgr.*
       - src/server/scripts/World/PetBattleTrainer.cpp
       - contrib/tests/test_garrison_reward_reload.py
+      - src/server/game/Garrison/Garrison.*
+      - contrib/tests/test_garrison_work_orders.py
+      - contrib/tests/test_campaign_audit_counts.py
+      - docs/audit-data/campaign-*.json
       - src/server/scripts/Pandaria/SiegeOfOrgrimmar/boss_malkorok.cpp
       - contrib/tests/test_malkorok_barrier.py
       - src/server/scripts/Pandaria/SiegeOfOrgrimmar/boss_korkron_dark_shaman.cpp
@@ -132,6 +136,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Test native work-order queue, identity and reward lifecycle
+        run: python contrib/tests/test_garrison_work_orders.py
+      - name: Check current campaign audit counters and dependency groups
+        run: python contrib/tests/test_campaign_audit_counts.py
       - name: Test native private summon visibility with sanitizers
         run: python contrib/tests/test_summon_visibility.py
       - name: Test native NPC combat slots and chase with sanitizers

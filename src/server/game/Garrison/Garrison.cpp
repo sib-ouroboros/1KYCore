@@ -33,6 +33,7 @@
 #include "SpellMgr.h"
 #include "SpellInfo.h"
 #include "VehicleDefines.h"
+#include <limits>
 
 Garrison::Garrison(Player* owner) : _garrisonType(), _owner(owner), _siteLevel(nullptr), _followerActivationsRemainingToday(1)
 {
@@ -348,7 +349,7 @@ void Garrison::SaveToDB(CharacterDatabaseTransaction& trans)
     for (auto const& p : _workorders)
     {
         WorkOrder const& workorder = p.second;
-        if ((uint32)workorder.DatabaseID == 0)
+        if (!workorder.DatabaseID)
             continue;
         //printf("_workorders >>>DatabaseID=%d; PlotInstanceID=%d\n", (uint32)workorder.DatabaseID, workorder.PlotInstanceID);
         uint8 index = 0;
@@ -848,15 +849,8 @@ void Garrison::GenerateMissions()
 
 Garrison::WorkOrder* Garrison::GetWorkOrder(uint64 dbId)
 {
-    for (auto it = _workorders.begin(); it != _workorders.end(); ++it)
-    {
-        if ((uint32)it->second.DatabaseID == (uint32)dbId)
-        {
-            return &it->second;
-        }
-    }
-
-    return nullptr;
+    auto itr = _workorders.find(dbId);
+    return itr != _workorders.end() ? &itr->second : nullptr;
 }
 
 uint32 Garrison::GetClassHallPlotId(uint32 creatureID) const
@@ -902,14 +896,17 @@ uint64 Garrison::StartWorkOrder(uint32 plotInstanceID, uint32 shipmentID)
 
     uint32 MaxCompleteTime = time(0);
 
-    for (uint32 I = 0; I < _workorders.size(); ++I)
-    {
-        if (_workorders[I].PlotInstanceID == plotInstanceID)
-            MaxCompleteTime = std::max<uint32>(MaxCompleteTime, _workorders[I].CompleteTime);
-    }
+    // Work orders are keyed by database ID, not by a contiguous array index.
+    // operator[] here would insert phantom orders while the loop grows its bound.
+    for (auto const& pair : _workorders)
+        if (pair.second.PlotInstanceID == plotInstanceID)
+            MaxCompleteTime = std::max<uint32>(MaxCompleteTime, pair.second.CompleteTime);
+
+    if (uint64(MaxCompleteTime) + charShipmentEntry->Duration > std::numeric_limits<uint32>::max())
+        return 0;
 
     uint64 dbId = sGarrisonMgr.GenerateWorkorderDbId();
-    WorkOrder& workOrder = _workorders[dbId];;
+    WorkOrder& workOrder = _workorders[dbId];
     workOrder.DatabaseID = dbId;
     workOrder.PlotInstanceID = plotInstanceID;
     workOrder.ShipmentID = shipmentID;
@@ -936,48 +933,49 @@ uint64 Garrison::StartWorkOrder(uint32 plotInstanceID, uint32 shipmentID)
 
 void Garrison::DeleteWorkOrder(uint64 dbId)
 {
+    auto itr = _workorders.find(dbId);
+    if (itr == _workorders.end())
+        return;
+
     CharacterDatabasePreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_GARRISON_WORKORDER);
     stmt->setUInt64(0, dbId);
     CharacterDatabase.AsyncQuery(stmt);
-
-    for (auto it = _workorders.begin(); it != _workorders.end(); ++it)
-    {
-        if ((uint32)it->second.DatabaseID == (uint32)dbId)
-        {
-            _workorders.erase(it);
-            break;
-        }
-    }
+    _workorders.erase(itr);
 }
 
 void Garrison::RewardWorkOrder(uint32 shipmentContainerID)
 {
-    for (uint32 i = 0; i < sCharShipmentStore.GetNumRows(); ++i)
-    {
-        if (CharShipmentEntry const* charShipmentData = sCharShipmentStore.LookupEntry(i))
-        {
-            if (charShipmentData->ShipmentContainerID == shipmentContainerID)
-            {
-                CharShipmentContainerEntry const* charShipmentContainerData = sCharShipmentContainerStore.LookupEntry(charShipmentData->ShipmentContainerID);
-                const SpellInfo* spell = sSpellMgr->GetSpellInfo(charShipmentData->OnCompleteSpellID);
-                uint32 CurrentTimeStamp = time(0);
+    if (!sCharShipmentContainerStore.LookupEntry(shipmentContainerID))
+        return;
 
-                for (auto it = _workorders.begin(); it != _workorders.end(); ++it)
-                {
-                    if (it->second.CompleteTime <= CurrentTimeStamp && it->second.ShipmentID == charShipmentData->ID)
-                    {
-                        if (spell)
-                            _owner->CastSpell(_owner, spell, TRIGGERED_FULL_MASK);
-                        if (charShipmentData->DummyItemID)
-                            _owner->AddItem(charShipmentData->DummyItemID, 1);
-                        if (charShipmentData->GarrFollowerID)
-                            AddShipmentFollower(charShipmentData->GarrFollowerID);
-                        DeleteWorkOrder(it->second.DatabaseID);
-                    }
-                }
-                break;
-            }
-        }
+    uint32 const currentTime = time(nullptr);
+    std::vector<uint64> completedOrders;
+    for (auto const& pair : _workorders)
+    {
+        CharShipmentEntry const* shipment = sCharShipmentStore.LookupEntry(pair.second.ShipmentID);
+        if (shipment && shipment->ShipmentContainerID == shipmentContainerID && pair.second.CompleteTime <= currentTime)
+            completedOrders.push_back(pair.first);
+    }
+
+    // DeleteWorkOrder erases from this map. Never keep its iterator through a reward.
+    // Different shipment recipes may share the same collection container.
+    for (uint64 dbId : completedOrders)
+    {
+        WorkOrder const* order = GetWorkOrder(dbId);
+        if (!order)
+            continue;
+
+        CharShipmentEntry const* shipment = sCharShipmentStore.LookupEntry(order->ShipmentID);
+        if (!shipment || shipment->ShipmentContainerID != shipmentContainerID)
+            continue;
+
+        if (SpellInfo const* spell = sSpellMgr->GetSpellInfo(shipment->OnCompleteSpellID))
+            _owner->CastSpell(_owner, spell, TRIGGERED_FULL_MASK);
+        if (shipment->DummyItemID)
+            _owner->AddItem(shipment->DummyItemID, 1);
+        if (shipment->GarrFollowerID)
+            AddShipmentFollower(shipment->GarrFollowerID);
+        DeleteWorkOrder(dbId);
     }
 }
 
@@ -1297,49 +1295,43 @@ void Garrison::UpdateWorkOrders()
     if (!GetOwner()->IsInGarrison())
         return;
 
-    if (_workorders.size() > 0)
+    uint32 const currentTime = time(nullptr);
+    std::unordered_map<uint32, bool> completedPlots;
+    for (auto const& pair : _workorders)
     {
-        for (auto const& p : _workorders)
+        WorkOrder const& order = pair.second;
+        CharShipmentEntry const* shipment = sCharShipmentStore.LookupEntry(order.ShipmentID);
+        if (!shipment || !sCharShipmentContainerStore.LookupEntry(shipment->ShipmentContainerID))
+            continue;
+
+        // One object represents the whole plot. A later unfinished order must not
+        // hide an already collectable order depending on unordered_map iteration.
+        bool& complete = completedPlots[order.PlotInstanceID];
+        complete = complete || order.CompleteTime <= currentTime;
+    }
+
+    for (auto const& plot : completedPlots)
+    {
+        GarrisonClassHallPlotGOInfo const* info = sGarrisonMgr.GetPlotClassHallGOInfo(plot.first);
+        if (!info)
+            continue;
+
+        GameObject* object = _owner->FindNearestGameObject(info->GameObjectId, 30.f);
+        if (!object)
+            object = _owner->SummonGameObject(info->GameObjectId, info->Pos, QuaternionData(), WEEK, true);
+        if (!object)
+            continue;
+
+        if (plot.second)
         {
-            WorkOrder const& workorder = p.second;
-            CharShipmentEntry const* charShipmentEntry = sCharShipmentStore.LookupEntry(workorder.ShipmentID);
-
-            if (charShipmentEntry == nullptr)
-                continue;
-
-            CharShipmentContainerEntry const* charShipmentContainerEntry = sCharShipmentContainerStore.LookupEntry(charShipmentEntry->ShipmentContainerID);
-
-            if (charShipmentContainerEntry == nullptr)
-                continue;
-
-
-
-            bool complete = false;
-            GarrisonClassHallPlotGOInfo const* GOInfo = sGarrisonMgr.GetPlotClassHallGOInfo(workorder.PlotInstanceID);
-            uint32 GobDisplayID = GOInfo->workDisplayId;
-            uint32 CurrentTimeStamp = time(0);
-            uint32 ShipmentsSize = (uint32)_workorders.size();
-
-            GameObject* workOrderGameObject = _owner->FindNearestGameObject(GOInfo->GameObjectId, 30.f);
-
-            if (!workOrderGameObject)
-                workOrderGameObject = _owner->SummonGameObject(GOInfo->GameObjectId, GOInfo->Pos, QuaternionData(), WEEK, true);
-
-            if (workorder.CompleteTime <= CurrentTimeStamp)
-                complete = true;
-
-            if (!complete)
-            {
-                workOrderGameObject->SetDisplayId(GobDisplayID);
-                workOrderGameObject->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_FREEZE_ANIMATION);
-            }
-            else
-            {
-                workOrderGameObject->SetDisplayId(GOInfo->completeDisplayId);
-                workOrderGameObject->SetFlag(GAMEOBJECT_FLAGS, GO_FLAG_FREEZE_ANIMATION);
-                workOrderGameObject->SetGoState(GO_STATE_READY);
-            }
+            object->SetDisplayId(info->completeDisplayId);
+            object->SetFlag(GAMEOBJECT_FLAGS, GO_FLAG_FREEZE_ANIMATION);
+            object->SetGoState(GO_STATE_READY);
         }
-
+        else
+        {
+            object->SetDisplayId(info->workDisplayId);
+            object->RemoveFlag(GAMEOBJECT_FLAGS, GO_FLAG_FREEZE_ANIMATION);
+        }
     }
 }

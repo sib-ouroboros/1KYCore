@@ -65,7 +65,7 @@ public:
 
     struct WorkOrder
     {
-        uint32 DatabaseID;      ///< Building DB ID
+        uint64 DatabaseID;      ///< Work order DB ID
         uint32 PlotInstanceID;  ///< Plot instance ID
         uint32 ShipmentID;      ///< Shipment ID (CharShipment.db2)
         uint32 CreationTime;    ///< Timestamp of creation
