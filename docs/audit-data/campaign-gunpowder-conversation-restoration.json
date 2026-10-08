@@ -1,0 +1,384 @@
+{
+  "entries": [
+    4269
+  ],
+  "rows": {
+    "conversation_actor_template": [
+      {
+        "Id": "56913",
+        "CreatureId": "117263",
+        "CreatureModelId": "67721",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_line_template": [
+      {
+        "Id": "9723",
+        "StartTime": "0",
+        "UiCameraID": "133",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "9724",
+        "StartTime": "9320",
+        "UiCameraID": "133",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_actors": [
+      {
+        "ConversationId": "4269",
+        "ConversationActorId": "56913",
+        "ConversationActorGuid": "0",
+        "Idx": "0",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_template": [
+      {
+        "Id": "4269",
+        "FirstLineId": "9723",
+        "LastLineEndTime": "22302",
+        "ScriptName": "''",
+        "VerifiedBuild": "0"
+      }
+    ]
+  },
+  "source": {
+    "conversation_actor": [
+      {
+        "entry": "4269",
+        "id": "0",
+        "actorId": "56913",
+        "creatureId": "117263",
+        "displayId": "67721",
+        "unk1": "0",
+        "unk2": "1",
+        "unk3": "0",
+        "duration": "17302"
+      }
+    ],
+    "conversation_creature": [],
+    "conversation_data": [
+      {
+        "entry": "4269",
+        "id": "9723",
+        "idx": "0",
+        "textId": "0",
+        "unk1": "133",
+        "unk2": "0"
+      },
+      {
+        "entry": "4269",
+        "id": "9724",
+        "idx": "1",
+        "textId": "9320",
+        "unk1": "133",
+        "unk2": "0"
+      }
+    ]
+  },
+  "required_creatures": [
+    117263
+  ],
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_world_sql_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c",
+  "client_validation": {
+    "GameObjectDisplayInfo": {
+      "file": "GameObjectDisplayInfo.db2",
+      "sha256": "23b4e725c73048de7da7d765be0410f7d9cba2ae07447c0765c8ebeb0586c4d8",
+      "layout_hash": "0x9f2098d1",
+      "record_count": 12716,
+      "copy_rows": 0,
+      "identity_count": 12716,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        15383,
+        31225
+      ]
+    },
+    "Lock": {
+      "file": "Lock.db2",
+      "sha256": "3223460df70cd1e5b5d2dbe63b4c63214e6a2627110c7ada8ba0f979f26ac43d",
+      "layout_hash": "0xdac7f42f",
+      "record_count": 634,
+      "copy_rows": 84,
+      "identity_count": 718,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        93,
+        1690
+      ]
+    },
+    "Spell": {
+      "file": "Spell.db2",
+      "sha256": "6f722017f5bfd8539aa6839c2ddc0977a9fc6f1e48a85cc30a2175f7238ad080",
+      "layout_hash": "0x2273dfff",
+      "record_count": 126063,
+      "copy_rows": 53319,
+      "identity_count": 179382,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        219701,
+        233370
+      ]
+    },
+    "UiCamera": {
+      "file": "UiCamera.db2",
+      "sha256": "6cb64ffd7d647d45e1bb8e8f849a0f9f80c7a441db9f1cecddedd2aa97d96c4d",
+      "layout_hash": "0xca6c98d4",
+      "record_count": 1060,
+      "copy_rows": 0,
+      "identity_count": 1060,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        133
+      ]
+    },
+    "CreatureDisplayInfo": {
+      "file": "CreatureDisplayInfo.db2",
+      "sha256": "1494eb6d4705848c4dd8ca2e463b99365d913155829e53914671da3302168e23",
+      "layout_hash": "0x406268df",
+      "record_count": 66165,
+      "copy_rows": 0,
+      "identity_count": 66165,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        67721
+      ]
+    },
+    "SceneScriptPackage": {
+      "file": "SceneScriptPackage.db2",
+      "sha256": "59ad53f2110d0c15783f00a5516143020500e2ea083b8b62ad8b4038e3e3277c",
+      "layout_hash": "0x96663abf",
+      "record_count": 1378,
+      "copy_rows": 0,
+      "identity_count": 1378,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        1680,
+        1784
+      ]
+    },
+    "broadcast_text_hotfix": {
+      "source": {
+        "19700": [
+          {
+            "ID": "19700",
+            "Text": "'Using'",
+            "Text1": "'Using'",
+            "EmoteID1": "0",
+            "EmoteID2": "0",
+            "EmoteID3": "0",
+            "EmoteDelay1": "0",
+            "EmoteDelay2": "0",
+            "EmoteDelay3": "0",
+            "EmotesID": "0",
+            "LanguageID": "0",
+            "Flags": "1",
+            "ConditionID": "0",
+            "SoundEntriesID1": "0",
+            "SoundEntriesID2": "0",
+            "VerifiedBuild": "26124"
+          }
+        ],
+        "125962": [
+          {
+            "ID": "125962",
+            "Text": "'Picking Up'",
+            "Text1": "'Picking Up'",
+            "EmoteID1": "0",
+            "EmoteID2": "0",
+            "EmoteID3": "0",
+            "EmoteDelay1": "0",
+            "EmoteDelay2": "0",
+            "EmoteDelay3": "0",
+            "EmotesID": "0",
+            "LanguageID": "0",
+            "Flags": "0",
+            "ConditionID": "0",
+            "SoundEntriesID1": "0",
+            "SoundEntriesID2": "0",
+            "VerifiedBuild": "26124"
+          }
+        ],
+        "126017": [
+          {
+            "ID": "126017",
+            "Text": "''",
+            "Text1": "'Good. The next step is simple--just get out of this cave without being seen. The gunpowder will do its job.'",
+            "EmoteID1": "0",
+            "EmoteID2": "0",
+            "EmoteID3": "0",
+            "EmoteDelay1": "0",
+            "EmoteDelay2": "0",
+            "EmoteDelay3": "0",
+            "EmotesID": "0",
+            "LanguageID": "0",
+            "Flags": "0",
+            "ConditionID": "0",
+            "SoundEntriesID1": "0",
+            "SoundEntriesID2": "81232",
+            "VerifiedBuild": "26124"
+          }
+        ],
+        "126018": [
+          {
+            "ID": "126018",
+            "Text": "''",
+            "Text1": "'Actually, one more thing. Plant some explosives around for a little extra \\\"boom\\\".'",
+            "EmoteID1": "0",
+            "EmoteID2": "0",
+            "EmoteID3": "0",
+            "EmoteDelay1": "0",
+            "EmoteDelay2": "0",
+            "EmoteDelay3": "0",
+            "EmotesID": "0",
+            "LanguageID": "0",
+            "Flags": "0",
+            "ConditionID": "0",
+            "SoundEntriesID1": "0",
+            "SoundEntriesID2": "81233",
+            "VerifiedBuild": "26124"
+          }
+        ]
+      },
+      "release": {
+        "19700": [
+          {
+            "ID": "19700",
+            "Text": "'Using'",
+            "Text1": "'Using'",
+            "EmoteID1": "0",
+            "EmoteID2": "0",
+            "EmoteID3": "0",
+            "EmoteDelay1": "0",
+            "EmoteDelay2": "0",
+            "EmoteDelay3": "0",
+            "EmotesID": "0",
+            "LanguageID": "0",
+            "Flags": "1",
+            "ConditionID": "0",
+            "SoundEntriesID1": "0",
+            "SoundEntriesID2": "0",
+            "VerifiedBuild": "24330"
+          }
+        ],
+        "126018": [
+          {
+            "ID": "126018",
+            "Text": "''",
+            "Text1": "'Actually, one more thing. Plant some explosives around for a little extra \\\"boom\\\".'",
+            "EmoteID1": "0",
+            "EmoteID2": "0",
+            "EmoteID3": "0",
+            "EmoteDelay1": "0",
+            "EmoteDelay2": "0",
+            "EmoteDelay3": "0",
+            "EmotesID": "0",
+            "LanguageID": "0",
+            "Flags": "0",
+            "ConditionID": "0",
+            "SoundEntriesID1": "0",
+            "SoundEntriesID2": "81233",
+            "VerifiedBuild": "24330"
+          }
+        ],
+        "126017": [
+          {
+            "ID": "126017",
+            "Text": "''",
+            "Text1": "'Good. The next step is simple--just get out of this cave without being seen. The gunpowder will do its job.'",
+            "EmoteID1": "0",
+            "EmoteID2": "0",
+            "EmoteID3": "0",
+            "EmoteDelay1": "0",
+            "EmoteDelay2": "0",
+            "EmoteDelay3": "0",
+            "EmotesID": "0",
+            "LanguageID": "0",
+            "Flags": "0",
+            "ConditionID": "0",
+            "SoundEntriesID1": "0",
+            "SoundEntriesID2": "81232",
+            "VerifiedBuild": "24330"
+          }
+        ],
+        "125962": [
+          {
+            "ID": "125962",
+            "Text": "'Picking Up'",
+            "Text1": "'Picking Up'",
+            "EmoteID1": "0",
+            "EmoteID2": "0",
+            "EmoteID3": "0",
+            "EmoteDelay1": "0",
+            "EmoteDelay2": "0",
+            "EmoteDelay3": "0",
+            "EmotesID": "0",
+            "LanguageID": "0",
+            "Flags": "0",
+            "ConditionID": "0",
+            "SoundEntriesID1": "0",
+            "SoundEntriesID2": "0",
+            "VerifiedBuild": "24330"
+          }
+        ]
+      }
+    }
+  },
+  "client_lines": [
+    {
+      "Id": 9723,
+      "NextConversationLineID": 9724,
+      "AdditionalDuration": 2000,
+      "BroadcastTextID": 126017,
+      "decoded": {
+        "BroadcastTextID": 126017,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 2000,
+        "NextConversationLineID": 9724,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    },
+    {
+      "Id": 9724,
+      "NextConversationLineID": 0,
+      "AdditionalDuration": 1000,
+      "BroadcastTextID": 126018,
+      "decoded": {
+        "BroadcastTextID": 126018,
+        "SpellVisualKitID": 0,
+        "AdditionalDuration": 1000,
+        "NextConversationLineID": 0,
+        "AnimKitID": 0,
+        "SpeechType": 0,
+        "StartAnimation": 60,
+        "EndAnimation": 60
+      }
+    }
+  ],
+  "assurance": "Source actor/line bytes and 22302ms end retained. Participant is the interacting player; no world NPC GUID required. Additional conversation outside the 98 imported IDs. Client acceptance pending (available DB2 build26654; server26972).",
+  "client_line_sha256": "ef9a39edeef5f58aebd0741839291a1a4e4ab745be881c3e155b9767c5ba7039"
+}

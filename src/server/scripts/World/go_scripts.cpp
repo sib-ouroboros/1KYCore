@@ -44,6 +44,7 @@ go_toy_train_set
 EndContentData */
 
 #include "ScriptMgr.h"
+#include "Conversation.h"
 #include "DB2Structure.h"
 #include "GameObject.h"
 #include "GameObjectAI.h"
@@ -1591,6 +1592,28 @@ private:
     bool _doorCreditSent = false; // source NOT_REPEATABLE, reset with the object AI
 };
 
+// Translate the two source SmartAI reactions; ordinary GOOBER use continues.
+struct go_campaign_rogue_interaction : public GameObjectAI
+{
+    explicit go_campaign_rogue_interaction(GameObject* object) : GameObjectAI(object) { }
+
+    bool GossipHello(Player* player, bool /*isUse*/) override
+    {
+        if (go->GetEntry() == 252017 && player && player->GetMap() == go->GetMap())
+            player->KilledMonsterCredit(110470);
+        return false;
+    }
+
+    void OnStateChanged(uint32 state, Unit* unit) override
+    {
+        if (go->GetEntry() != 267041 || state != GO_ACTIVATED || !unit)
+            return;
+        Player* player = unit->ToPlayer();
+        if (player && player->GetMap() == go->GetMap())
+            Conversation::CreateConversation(4269, player, *player, { player->GetGUID() });
+    }
+};
+
 void AddSC_go_scripts()
 {
     new go_cat_figurine();
@@ -1637,6 +1660,7 @@ void AddSC_go_scripts()
     new go_allied_race_infos("go_allied_race_infos_voidelf",    29);
     new go_allied_race_infos("go_allied_race_infos_draenei",    30);
     RegisterGameObjectAI(go_campaign_scenario_interaction);
+    RegisterGameObjectAI(go_campaign_rogue_interaction);
     RegisterGameObjectAI(go_warboard_alliance);
     RegisterGameObjectAI(go_warboard_horde);
 }

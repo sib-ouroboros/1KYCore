@@ -1813,7 +1813,7 @@
         "BroadcastText": 19700
       },
       "missing_client_references": {},
-      "review_status": "requires_script_chain",
+      "review_status": "restored_native_rogue_interaction",
       "client_references_present": {
         "GameObjectDisplayInfo": 31225,
         "Lock": 93,
@@ -1854,7 +1854,7 @@
       ],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {}
     },
     {
@@ -2756,7 +2756,7 @@
         "BroadcastText": 125962
       },
       "missing_client_references": {},
-      "review_status": "requires_script_chain",
+      "review_status": "restored_native_rogue_interaction",
       "client_references_present": {
         "GameObjectDisplayInfo": 15383,
         "Lock": 1690,
@@ -2797,7 +2797,7 @@
       ],
       "release_smart_references": [],
       "unsupported_source_fields": {},
-      "remaining_candidate": true,
+      "remaining_candidate": false,
       "additional_table_dependencies": {}
     },
     {

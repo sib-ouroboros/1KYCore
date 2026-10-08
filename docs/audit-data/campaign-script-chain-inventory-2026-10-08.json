@@ -3,12 +3,12 @@
   "source_world_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c",
   "source_header_sha256": "2a513b1e9796f91494230a084ef939391aaf180022c36d052e03b00817096445",
   "native_header_sha256": "054d83ac1e26ce1b6b053a1644d873e876fcbbbb2a46d22b592d70a24eb9f202",
-  "candidate_count": 59,
+  "candidate_count": 57,
   "source_smart_rows": 71889,
   "candidate_enum_mismatches": {
     "205": 1,
     "204": 2,
-    "206": 4
+    "206": 3
   },
   "scope": "All current absent templates and placeholder models; source GO-entry rows, incoming entry-based targets, outgoing SetData targets and fixed timed lists. GUID targets, random lists, spells, conditions, event/waypoint scripts, client timing and native/release receiver behavior require separate review.",
   "assurance": "Inventory only. Equal enum names do not establish equal parameter/target/lifecycle semantics. No SQL or gameplay changes; no candidate marked restored.",
@@ -5433,54 +5433,6 @@
       ]
     },
     {
-      "entry": 252017,
-      "own_source_rows": 1,
-      "incoming_rows": 0,
-      "connected_keys": [
-        [
-          252017,
-          1
-        ]
-      ],
-      "connected_source_rows": 1,
-      "enum_mismatches": [],
-      "edges": [],
-      "conversation_dependencies": [],
-      "source_rows": [
-        {
-          "entryorguid": "252017",
-          "source_type": "1",
-          "id": "0",
-          "link": "0",
-          "Difficulties": "''",
-          "event_type": "64",
-          "event_phase_mask": "0",
-          "event_chance": "100",
-          "event_flags": "0",
-          "event_param1": "0",
-          "event_param2": "0",
-          "event_param3": "0",
-          "event_param4": "0",
-          "action_type": "33",
-          "action_param1": "110470",
-          "action_param2": "0",
-          "action_param3": "0",
-          "action_param4": "0",
-          "action_param5": "0",
-          "action_param6": "0",
-          "target_type": "7",
-          "target_param1": "0",
-          "target_param2": "0",
-          "target_param3": "0",
-          "target_x": "0",
-          "target_y": "0",
-          "target_z": "0",
-          "target_o": "0",
-          "comment": "'GSS - KC'"
-        }
-      ]
-    },
-    {
       "entry": 252018,
       "own_source_rows": 1,
       "incoming_rows": 0,
@@ -6184,68 +6136,6 @@
       "edges": [],
       "conversation_dependencies": [],
       "source_rows": []
-    },
-    {
-      "entry": 267041,
-      "own_source_rows": 1,
-      "incoming_rows": 0,
-      "connected_keys": [
-        [
-          267041,
-          1
-        ]
-      ],
-      "connected_source_rows": 1,
-      "enum_mismatches": [
-        {
-          "key": [
-            267041,
-            1,
-            0
-          ],
-          "field": "action_type",
-          "value": 206,
-          "source": "SMART_ACTION_SUMMON_CONVERSATION",
-          "native": "SMART_ACTION_START_CONVERSATION"
-        }
-      ],
-      "edges": [],
-      "conversation_dependencies": [
-        4269
-      ],
-      "source_rows": [
-        {
-          "entryorguid": "267041",
-          "source_type": "1",
-          "id": "0",
-          "link": "0",
-          "Difficulties": "''",
-          "event_type": "70",
-          "event_phase_mask": "0",
-          "event_chance": "100",
-          "event_flags": "0",
-          "event_param1": "2",
-          "event_param2": "0",
-          "event_param3": "0",
-          "event_param4": "0",
-          "action_type": "206",
-          "action_param1": "4269",
-          "action_param2": "0",
-          "action_param3": "0",
-          "action_param4": "0",
-          "action_param5": "0",
-          "action_param6": "0",
-          "target_type": "7",
-          "target_param1": "0",
-          "target_param2": "0",
-          "target_param3": "0",
-          "target_x": "0",
-          "target_y": "0",
-          "target_z": "0",
-          "target_o": "0",
-          "comment": "'GSS - SC'"
-        }
-      ]
     },
     {
       "entry": 267176,

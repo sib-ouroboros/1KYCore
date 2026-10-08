@@ -1,8 +1,8 @@
 {
-  "remaining_count": 48,
-  "restored_count": 42,
+  "remaining_count": 46,
+  "restored_count": 44,
   "overlapping_blocker_counts": {
-    "script_chain_not_translated": 16,
+    "script_chain_not_translated": 14,
     "missing_native_client_reference": 19,
     "static_visual_source_chain_not_restored": 4,
     "loot_and_quest_item_dependencies": 11,
@@ -350,23 +350,6 @@
       "unsupported_source_fields": {}
     },
     {
-      "entry": 252017,
-      "type": 10,
-      "blockers": [
-        "script_chain_not_translated"
-      ],
-      "source_data": {
-        "Data0": "93",
-        "Data3": "1",
-        "Data10": "219701",
-        "Data14": "19700",
-        "Data20": "1",
-        "Data23": "1"
-      },
-      "missing_native_client_references": {},
-      "unsupported_source_fields": {}
-    },
-    {
       "entry": 252796,
       "type": 45,
       "blockers": [
@@ -520,22 +503,6 @@
         "Data3": "1",
         "Data10": "233399",
         "Data14": "24585",
-        "Data20": "1",
-        "Data23": "1"
-      },
-      "missing_native_client_references": {},
-      "unsupported_source_fields": {}
-    },
-    {
-      "entry": 267041,
-      "type": 10,
-      "blockers": [
-        "script_chain_not_translated"
-      ],
-      "source_data": {
-        "Data0": "1690",
-        "Data10": "233370",
-        "Data14": "125962",
         "Data20": "1",
         "Data23": "1"
       },

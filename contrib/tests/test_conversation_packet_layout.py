@@ -54,6 +54,13 @@ def main():
             if (std::memcmp(&actor,expectedActor,24) || std::memcmp(&line,expectedLine,16)) return 1;
         }''' % (actor['Id'],actor['CreatureId'],actor['CreatureModelId'],line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],array(actor_packet),array(line_packet)))
     assert len(cases) == 22
+    gunpowder = json.loads((root/'docs/audit-data/campaign-gunpowder-conversation-restoration.json').read_text('utf8'))
+    actor = gunpowder['rows']['conversation_actor_template'][0]
+    original_actor = gunpowder['source']['conversation_actor'][0]
+    actor_packet = struct.pack('<6I', *(int(original_actor[k]) for k in ('actorId','creatureId','displayId','unk1','unk2','unk3')))
+    for original_line,line in zip(gunpowder['source']['conversation_data'],gunpowder['rows']['conversation_line_template']):
+        line_packet = struct.pack('<4I', *(int(original_line[k]) for k in ('id','textId','unk1','unk2')))
+        cases.append('{ ConversationDynamicFieldActor actor; actor.ActorTemplate={%s,%s,%s}; actor.Type=ConversationDynamicFieldActor::CreatureActor; ConversationLineTemplate line={%s,%s,%s,%s,%s,%s}; unsigned char a[24]=%s,l[16]=%s; if(std::memcmp(&actor,a,24)||std::memcmp(&line,l,16)) return 1; }' % (actor['Id'],actor['CreatureId'],actor['CreatureModelId'],line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],line['Padding'],array(actor_packet),array(line_packet)))
     nearest = json.loads((root/'docs/audit-data/campaign-nearest-conversation-restoration.json').read_text('utf8'))
     nearest_lines = {int(row['Id']):row for row in nearest['rows']['conversation_line_template']}
     for candidate in nearest['source']:
@@ -61,7 +68,7 @@ def main():
             line = nearest_lines[int(old_line['id'])]
             packet = struct.pack('<4I', *(int(old_line[key]) for key in ('id','textId','unk1','unk2')))
             cases.append('{ ConversationLineTemplate line = {%s,%s,%s,%s,%s,0}; unsigned char expected[16] = %s; if (std::memcmp(&line,expected,16)) return 1; }' % (line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],array(packet)))
-    assert len(cases) == 62
+    assert len(cases) == 64
     packed = json.loads((root/'docs/audit-data/campaign-packed-conversation-restoration.json').read_text('utf8'))
     timing=json.loads((root/'docs/audit-data/campaign-source-timing-conversations.json').read_text('utf8'))
     packed['source']+=timing['source'];packed['rows']['conversation_line_template']+=timing['rows']['conversation_line_template']
@@ -71,7 +78,7 @@ def main():
             line = packed_lines[int(old_line['id'])]
             packet = struct.pack('<4I', *(int(old_line[key]) for key in ('id','textId','unk1','unk2')))
             cases.append('{ ConversationLineTemplate line = {%s,%s,%s,%s,%s,%s}; unsigned char expected[16] = %s; if (std::memcmp(&line,expected,16)) return 1; }' % (line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],line['Padding'],array(packet)))
-    assert len(cases) == 71
+    assert len(cases) == 73
     harness = '''#include <cstdint>
 #include <cstddef>
 #include <cstring>
@@ -90,7 +97,7 @@ static_assert(offsetof(ConversationLineTemplate,Flags)==13);
 static_assert(offsetof(ConversationLineTemplate,Padding)==14);
 int main() {
 '''+ '\n'.join(cases)+'''
-std::cout << "PASS: seventy-one original line packets and twenty-two actor packets match actual native packed structures byte for byte\\n";
+std::cout << "PASS: seventy-three original line packets and twenty-four actor packets match actual native packed structures byte for byte\\n";
 }
 '''
     with tempfile.TemporaryDirectory() as tmp:

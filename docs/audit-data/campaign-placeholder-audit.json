@@ -2147,6 +2147,7 @@
     251615,
     251696,
     251698,
+    252017,
     252045,
     252049,
     252241,
@@ -2156,6 +2157,7 @@
     266732,
     266734,
     266886,
+    267041,
     267180,
     267227,
     267353,
@@ -2165,7 +2167,7 @@
     268458,
     268626
   ],
-  "remaining_placeholder_candidates": 48,
+  "remaining_placeholder_candidates": 46,
   "restoration_migrations": [
     "2026_10_02_01_world_campaign_placeholder_models.sql",
     "2026_10_02_02_world_campaign_simple_goober_models.sql",
@@ -2177,7 +2179,8 @@
     "2026_10_05_02_world_campaign_false_orders.sql",
     "2026_10_05_04_world_campaign_native_visuals.sql",
     "2026_10_08_01_world_campaign_cage_state_animations.sql",
-    "2026_10_08_03_world_campaign_fel_boiler_loot.sql"
+    "2026_10_08_03_world_campaign_fel_boiler_loot.sql",
+    "2026_10_08_07_world_campaign_rogue_objects.sql"
   ],
   "followup_2026_10_08": {
     "restored_model_total": 41,
@@ -2185,7 +2188,7 @@
     "proof": "campaign-cage-state-restoration.json"
   },
   "current_counts": {
-    "restored_models": 42,
-    "remaining_models": 48
+    "restored_models": 44,
+    "remaining_models": 46
   }
 }

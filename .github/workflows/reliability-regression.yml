@@ -279,5 +279,7 @@ jobs:
         run: python contrib/tests/test_campaign_script_inventory.py
       - name: Test native shipment request handlers and packet writers
         run: python contrib/tests/test_garrison_shipment_handlers.py
+      - name: Test rogue object invokers, native use and personal conversation dispatch
+        run: python contrib/tests/test_campaign_rogue_objects.py
       - name: Test native scene lifecycle, recursive callbacks and scoped aura cancellation
         run: python contrib/tests/test_scene_lifecycle.py
