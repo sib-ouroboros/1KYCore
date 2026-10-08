@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Exercise native loot-key selection and item eligibility for restored objects."""
+import argparse
 import json
 import os
 from pathlib import Path
@@ -15,13 +16,15 @@ def method(source,marker):
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--no-sanitizers',action='store_true');args=parser.parse_args()
     root=Path(__file__).resolve().parents[2]
     registry=json.loads((root/'docs/audit-data/campaign-source-loot-restoration.json').read_text('utf8'))
     key=method((root/'src/server/game/Entities/GameObject/GameObjectData.h').read_text('utf8'),'    uint32 GetLootId() const')
     allowed=method((root/'src/server/game/Loot/Loot.cpp').read_text('utf8'),'bool LootItem::AllowedForPlayer(')
     registry2=json.loads((root/'docs/audit-data/campaign-wildcard-loot-restoration.json').read_text('utf8'))
+    boiler=json.loads((root/'docs/audit-data/campaign-fel-boiler-restoration.json').read_text('utf8'))
     rows=[]
-    for template,loot in zip(registry['templates']+registry2['templates'],registry['loot']+registry2['loot']):
+    for template,loot in zip(registry['templates']+registry2['templates']+boiler['templates'],registry['loot']+registry2['loot']+boiler['loot']):
         assert template['entry']==loot['Entry']==template['Data1'] and template['Data30']=='0'
         assert loot['Reference']=='0' and loot['LootMode'] in ('1','65535') and loot['Chance']=='100'
         rows.append('{'+','.join((template['type'],template['Data1'],loot['Item'],loot['QuestRequired']))+'}')
@@ -73,13 +76,13 @@ int main(){
         objectMgr.proto.flags2=ITEM_FLAG2_FACTION_ALLIANCE;check(!item.AllowedForPlayer(&player));objectMgr.proto.flags2=0;
     }
     GameObjectTemplate unrelated;unrelated.type=5;unrelated.chest.chestLoot=123;check(unrelated.GetLootId()==0);
-    std::cout<<"PASS: actual native loot ID and item eligibility, all seven source rows, needed/completed/unrelated quest, conditions, missing item and faction restriction\n";
+    std::cout<<"PASS: actual native loot ID and item eligibility, all eight source rows, needed/completed/unrelated quest, conditions, missing item and faction restriction\n";
 }
 '''.replace('ALLOWED',allowed).replace('KEY',key).replace('ROWS',','.join(rows))
     with tempfile.TemporaryDirectory() as tmp:
         cpp=Path(tmp)/'loot.cpp';exe=Path(tmp)/'loot';cpp.write_text(harness,encoding='utf8')
-        subprocess.run([os.environ.get('CXX','c++'),'-std=c++17','-Wall','-Wextra','-Werror',
-            '-fsanitize=address,undefined','-fno-sanitize-recover=all','-fno-omit-frame-pointer','-g',str(cpp),'-o',str(exe)],check=True)
+        flags=[] if args.no_sanitizers else ['-fsanitize=address,undefined','-fno-sanitize-recover=all','-fno-omit-frame-pointer']
+        subprocess.run([os.environ.get('CXX','c++'),'-std=c++17','-Wall','-Wextra','-Werror',*flags,'-g',str(cpp),'-o',str(exe)],check=True)
         subprocess.run([str(exe)],check=True)
 
 

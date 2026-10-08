@@ -1,0 +1,391 @@
+{
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "entries": [
+    {
+      "entry": 248781,
+      "item": 128758,
+      "source_personalLoot_Data30": 65643,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "248781",
+          "item": "128758",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        },
+        {
+          "entry": "248782",
+          "item": "128758",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "282793",
+          "QuestID": "41780",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "1",
+          "ObjectID": "128758",
+          "Amount": "8",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 248782,
+      "item": 128758,
+      "source_personalLoot_Data30": 65643,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "248781",
+          "item": "128758",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        },
+        {
+          "entry": "248782",
+          "item": "128758",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "282793",
+          "QuestID": "41780",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "1",
+          "ObjectID": "128758",
+          "Amount": "8",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 266291,
+      "item": 142393,
+      "source_personalLoot_Data30": 70459,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "266291",
+          "item": "142393",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "287428",
+          "QuestID": "45025",
+          "Type": "1",
+          "Order": "0",
+          "StorageIndex": "0",
+          "ObjectID": "142393",
+          "Amount": "5",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 266588,
+      "item": 143330,
+      "source_personalLoot_Data30": 70531,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "266588",
+          "item": "143330",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "287652",
+          "QuestID": "45145",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "2",
+          "ObjectID": "143330",
+          "Amount": "1",
+          "Flags": "28",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 266595,
+      "item": 143332,
+      "source_personalLoot_Data30": 70533,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "266595",
+          "item": "143332",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "287654",
+          "QuestID": "45145",
+          "Type": "1",
+          "Order": "3",
+          "StorageIndex": "4",
+          "ObjectID": "143332",
+          "Amount": "1",
+          "Flags": "28",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 267641,
+      "item": 143654,
+      "source_personalLoot_Data30": 70957,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "267641",
+          "item": "143654",
+          "chanceorquestchance": "-100",
+          "lootmode": "1",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "287970",
+          "QuestID": "45344",
+          "Type": "1",
+          "Order": "0",
+          "StorageIndex": "0",
+          "ObjectID": "143654",
+          "Amount": "6",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 268474,
+      "item": 146402,
+      "source_personalLoot_Data30": 71934,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268474",
+          "item": "146402",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289289",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "0",
+          "StorageIndex": "0",
+          "ObjectID": "146402",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 268475,
+      "item": 146403,
+      "source_personalLoot_Data30": 71935,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268475",
+          "item": "146403",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289290",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "1",
+          "StorageIndex": "1",
+          "ObjectID": "146403",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 268476,
+      "item": 146404,
+      "source_personalLoot_Data30": 71936,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268476",
+          "item": "146404",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289291",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "2",
+          "StorageIndex": "2",
+          "ObjectID": "146404",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 268477,
+      "item": 146405,
+      "source_personalLoot_Data30": 71938,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268477",
+          "item": "146405",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289292",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "3",
+          "StorageIndex": "3",
+          "ObjectID": "146405",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    },
+    {
+      "entry": 268479,
+      "item": 146409,
+      "source_personalLoot_Data30": 71943,
+      "source_loot_rows_for_item_or_entry": [
+        {
+          "entry": "268479",
+          "item": "146409",
+          "chanceorquestchance": "-100",
+          "lootmode": "0",
+          "groupid": "0",
+          "mincountorref": "1",
+          "maxcount": "1"
+        }
+      ],
+      "release_item_objectives": [
+        {
+          "ID": "289294",
+          "QuestID": "46335",
+          "Type": "1",
+          "Order": "4",
+          "StorageIndex": "4",
+          "ObjectID": "146409",
+          "Amount": "1",
+          "Flags": "0",
+          "Flags2": "1",
+          "ProgressBarWeight": "0",
+          "Description": "''",
+          "VerifiedBuild": "25996"
+        }
+      ]
+    }
+  ],
+  "source_Player_cpp_sha256": "4a301c3970bfc1e095092207b8590def05ee3f4a343409d370f733d58de79be4",
+  "source_requirements": [
+    "Per-player personalLoot map indexed by object GUID",
+    "Personal FillLoot branch and personal loot flag",
+    "Release/item/money routing to the player-owned container",
+    "GUID or GO loot cooldown selected by source HasQuestItem and PersonalLootData"
+  ],
+  "current_behavior": "Player::SendLoot binds Loot* to go->loot and uses shared GO_READY/ACTIVATED state. Source player-owned map/cooldown path is absent.",
+  "decision": "Deferred as one complete backend task; do not turn Data30 into ordinary chestLoot or enable model-only containers.",
+  "future_acceptance": [
+    "Two players and two groups receive independent quest loot",
+    "Owner/logout/map transfer/object unload/respawn lifetime",
+    "Loot release/take item/take money and duplicate requests",
+    "Existing ordinary/group/fishing loot unchanged"
+  ],
+  "live_server_changed": false
+}

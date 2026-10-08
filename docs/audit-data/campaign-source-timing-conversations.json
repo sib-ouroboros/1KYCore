@@ -1,0 +1,393 @@
+{
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_Conversation_cpp_sha256": "8a86a8b9d1f8ec655c68b64001d2438cb606651421a5c6ad012b1844b6aa8863",
+  "client_line_file_sha256": "ef9a39edeef5f58aebd0741839291a1a4e4ab745be881c3e155b9767c5ba7039",
+  "client_line_recheck": {
+    "path": "F:/Projects/extracted-735-new/dbc/ruRU/ConversationLine.db2",
+    "sha256": "ef9a39edeef5f58aebd0741839291a1a4e4ab745be881c3e155b9767c5ba7039",
+    "unchanged_from_decoded_audit": true
+  },
+  "entries": [
+    1841,
+    2778
+  ],
+  "source": [
+    {
+      "id": 1841,
+      "lines": [
+        {
+          "entry": "1841",
+          "id": "3906",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "1841",
+          "id": "3907",
+          "idx": "1",
+          "textId": "6950",
+          "unk1": "0",
+          "unk2": "538968064"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 108226,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 2000,
+          "NextConversationLineID": 3907,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 108227,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "world_actors": [
+        {
+          "entry": "1841",
+          "id": "0",
+          "creatureId": "105464",
+          "creatureGuid": "16150977",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "3450"
+        }
+      ],
+      "end": 8450,
+      "links_match": true,
+      "ordered": true
+    },
+    {
+      "id": 2778,
+      "lines": [
+        {
+          "entry": "2778",
+          "id": "5781",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "2778",
+          "id": "5782",
+          "idx": "1",
+          "textId": "5810",
+          "unk1": "0",
+          "unk2": "540803072"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 115343,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 5782,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 115344,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "world_actors": [
+        {
+          "entry": "2778",
+          "id": "0",
+          "creatureId": "109000",
+          "creatureGuid": "2353422",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "5276"
+        }
+      ],
+      "end": 10276,
+      "links_match": true,
+      "ordered": true
+    }
+  ],
+  "bindings": [
+    {
+      "ConversationId": 1841,
+      "Idx": 0,
+      "CreatureEntry": 105464
+    },
+    {
+      "ConversationId": 2778,
+      "Idx": 0,
+      "CreatureEntry": 109000
+    }
+  ],
+  "rows": {
+    "conversation_line_template": [
+      {
+        "Id": "3906",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "3907",
+        "StartTime": "6950",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "8224",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "5781",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "5782",
+        "StartTime": "5810",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "8252",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_template": [
+      {
+        "Id": "1841",
+        "FirstLineId": "3906",
+        "LastLineEndTime": "8450",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "2778",
+        "FirstLineId": "5781",
+        "LastLineEndTime": "10276",
+        "ScriptName": "'conversation_campaign_nearest_actors'",
+        "VerifiedBuild": "0"
+      }
+    ]
+  },
+  "required_creatures": [
+    105464,
+    109000
+  ],
+  "timing_policy": "Retain source duration sum plus5000; require StartTime+decoded AdditionalDuration <= end. Previous additional minimum5000 audit margin is not source semantics. Audio/client acceptance remains pending.",
+  "validated_broadcast_texts": [
+    108226,
+    108227,
+    115343,
+    115344
+  ],
+  "client_playtest": "pending",
+  "local_mysql_regression": {
+    "status": "PASS",
+    "mysql": "8.0.45",
+    "schema": "test_campaign_followup_35241ce557",
+    "source": "Disposable release conversation/candidate tables, six objectives and representative protected rows; prior and new migration suites",
+    "schema_dropped": true,
+    "production_server_updated": false
+  },
+  "local_native_regression": {
+    "status": "PASS",
+    "sanitizers": false,
+    "conversation_line_packets": 71,
+    "conversation_actor_packets": 22,
+    "nearest_actor_scenes": 39,
+    "source_loot_rows": 8,
+    "ci_sanitizers_remain_enabled": true
+  },
+  "broadcast_text_source_release_proof": {
+    "source": {
+      "108226": [
+        {
+          "ID": "108226",
+          "Text": "'Stop! Stop! I did not know! I swear it!'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "63742",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ],
+      "108227": [
+        {
+          "ID": "108227",
+          "Text": "'I can still help you! I can take you to Akaari\\'s stronghold!'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "63743",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ],
+      "115343": [
+        {
+          "ID": "115343",
+          "Text": "'Those who terrorize the innocent have no place in this world or the next.'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "69430",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ],
+      "115344": [
+        {
+          "ID": "115344",
+          "Text": "'The Realm of Shadow offers little respite to the souls of the wicked.'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "69431",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ]
+    },
+    "release": {
+      "108226": [
+        {
+          "ID": "108226",
+          "Text": "'Stop! Stop! I did not know! I swear it!'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "63742",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ],
+      "108227": [
+        {
+          "ID": "108227",
+          "Text": "'I can still help you! I can take you to Akaari\\'s stronghold!'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "63743",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ],
+      "115343": [
+        {
+          "ID": "115343",
+          "Text": "'Those who terrorize the innocent have no place in this world or the next.'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "69430",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ],
+      "115344": [
+        {
+          "ID": "115344",
+          "Text": "'The Realm of Shadow offers little respite to the souls of the wicked.'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "69431",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ]
+    }
+  }
+}

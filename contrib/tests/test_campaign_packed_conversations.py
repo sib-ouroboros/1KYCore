@@ -6,10 +6,10 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 
 
-def test_packed_conversations(sql,checksum):
+def test_packed_conversations(sql,checksum,registry_name="campaign-packed-conversation-restoration.json",migration_name="2026_10_07_03_world_campaign_packed_conversations.sql"):
     schema=(ROOT/'sql/updates/world/2026_10_07_02_world_conversation_line_padding.sql').read_text('utf8')
-    restore=(ROOT/'sql/updates/world/2026_10_07_03_world_campaign_packed_conversations.sql').read_text('utf8')
-    registry=json.loads((ROOT/'docs/audit-data/campaign-packed-conversation-restoration.json').read_text('utf8'))
+    restore=(ROOT/'sql/updates/world'/migration_name).read_text('utf8')
+    registry=json.loads((ROOT/'docs/audit-data'/registry_name).read_text('utf8'))
     rows=registry['rows'];owned=list(rows);tables=sql('SHOW TABLES;').stdout.splitlines()
     assert sql("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='conversation_line_template' AND COLUMN_NAME='Padding';").stdout.strip()=='0'
     before=checksum(tables)
@@ -79,7 +79,7 @@ def test_packed_conversations(sql,checksum):
             for row in (data[:1] if t=='conversation_template' else data):sql(insert(t,row))
         sql(restore);verify();assert checksum(owned)==canonical
         assert checksum(protected)==untouched
-        print('PASS: two source conversations/five opaque line packets; legacy/schema conflicts, all content conflicts, first/repeat/interrupted import, provenance, missing actors and unchanged NPC/quest/spawn data',flush=True)
+        print('PASS: source conversations/exact opaque line packets; legacy/schema conflicts, all content conflicts, first/repeat/interrupted import, provenance, missing actors and unchanged NPC/quest/spawn data',flush=True)
     finally:
         clear()
         present=sql("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='conversation_line_template' AND COLUMN_NAME='Padding';").stdout.strip()=='1'

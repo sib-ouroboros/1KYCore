@@ -861,6 +861,7 @@ def main():
             sql(migration)
             test_visual_migration(sql,checksum)
             test_cage_state_restoration(sql,checksum)
+            test_cage_state_restoration(sql,checksum,'campaign-fel-boiler-restoration.json','2026_10_08_03_world_campaign_fel_boiler_loot.sql')
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.conversation_chains_only:
@@ -878,6 +879,7 @@ def main():
             registry = json.loads((ROOT / 'docs/audit-data/campaign-simple-conversation-restoration.json').read_text('utf8'))
             test_simple_conversations(tables,restore,registry)
             test_packed_conversations(sql,checksum)
+            test_packed_conversations(sql,checksum,'campaign-source-timing-conversations.json','2026_10_08_02_world_campaign_source_timing_conversations.sql')
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.council_books_only:
@@ -973,6 +975,7 @@ def main():
 
         test_nearest_conversations()
         test_packed_conversations(sql,checksum)
+        test_packed_conversations(sql,checksum,'campaign-source-timing-conversations.json','2026_10_08_02_world_campaign_source_timing_conversations.sql')
 
         test_placeholder_models(tables)
         test_simple_goober_models(tables)
@@ -1027,6 +1030,7 @@ def main():
         test_gilneas_database(sql,checksum)
         test_visual_migration(sql,checksum)
         test_cage_state_restoration(sql,checksum)
+        test_cage_state_restoration(sql,checksum,'campaign-fel-boiler-restoration.json','2026_10_08_03_world_campaign_fel_boiler_loot.sql')
         test_required_level_objects(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)
 

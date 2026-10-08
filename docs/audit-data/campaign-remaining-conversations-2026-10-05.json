@@ -1,9 +1,9 @@
 {
   "basis": "All45 remaining IDs: original source semantics and supplied DB2 plus prepared isolated release; no source GUID requirement",
-  "count": 43,
+  "count": 41,
   "overlapping_blocker_counts": {
-    "source_duration_does_not_cover_lines": 17,
-    "packed_fields_require_semantic_review": 13,
+    "source_duration_does_not_cover_lines": 15,
+    "packed_fields_require_semantic_review": 11,
     "actor_template_requires_separate_translation": 2,
     "missing_native_camera": 32,
     "source_player_sentinel_actor": 5,
@@ -96,26 +96,6 @@
         "actor_template_requires_separate_translation"
       ],
       "packed_fields": [],
-      "missing_npc_templates": [],
-      "missing_native_cameras": [],
-      "missing_native_animkits": [],
-      "missing_target_broadcast_texts": []
-    },
-    {
-      "conversation": 1841,
-      "blockers": [
-        "source_duration_does_not_cover_lines",
-        "packed_fields_require_semantic_review"
-      ],
-      "packed_fields": [
-        {
-          "line": 3907,
-          "raw": 538968064,
-          "actor_index": 0,
-          "flags": 0,
-          "padding": 8224
-        }
-      ],
       "missing_npc_templates": [],
       "missing_native_cameras": [],
       "missing_native_animkits": [],
@@ -262,26 +242,6 @@
       "missing_native_cameras": [
         1796582640
       ],
-      "missing_native_animkits": [],
-      "missing_target_broadcast_texts": []
-    },
-    {
-      "conversation": 2778,
-      "blockers": [
-        "source_duration_does_not_cover_lines",
-        "packed_fields_require_semantic_review"
-      ],
-      "packed_fields": [
-        {
-          "line": 5782,
-          "raw": 540803072,
-          "actor_index": 0,
-          "flags": 0,
-          "padding": 8252
-        }
-      ],
-      "missing_npc_templates": [],
-      "missing_native_cameras": [],
       "missing_native_animkits": [],
       "missing_target_broadcast_texts": []
     },
@@ -719,7 +679,7 @@
       "missing_target_broadcast_texts": []
     }
   ],
-  "assurance": "43 unresolved conversations; two high-word-only cases restored by byte-preserving native loader and protected SQL. Missing cameras/conditions, timing and other packed semantics are not silently changed.",
+  "assurance": "41 unresolved conversations; exact source timing bounds applied to two additional byte-preserved conversations. No invented camera, timing or sentinel actor substitutions.",
   "followup_2026_10_07": {
     "restored": [
       3914,
@@ -727,5 +687,14 @@
     ],
     "proof": "campaign-packed-conversation-restoration.json",
     "remaining_count": 43
+  },
+  "followup_source_timing_2026_10_08": {
+    "restored": [
+      1841,
+      2778
+    ],
+    "remaining": 41,
+    "proof": "campaign-source-timing-conversations.json",
+    "full_review": "campaign-conversation-source-timing-review-2026-10-08.json"
   }
 }

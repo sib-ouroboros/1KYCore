@@ -1869,7 +1869,9 @@
       "imported_spawn_occurrences": 12,
       "source_files": [
         "sql/sylvania/campagne_moine_legioncore.sql"
-      ]
+      ],
+      "remaining_candidate": false,
+      "restoration": "2026_10_08_03_world_campaign_fel_boiler_loot.sql"
     },
     {
       "entry": 268454,
@@ -2147,6 +2149,9 @@
     251698,
     252045,
     252049,
+    252241,
+    252243,
+    252244,
     260004,
     266732,
     266734,
@@ -2155,11 +2160,12 @@
     267227,
     267353,
     267492,
+    268448,
     268454,
     268458,
     268626
   ],
-  "remaining_placeholder_candidates": 52,
+  "remaining_placeholder_candidates": 48,
   "restoration_migrations": [
     "2026_10_02_01_world_campaign_placeholder_models.sql",
     "2026_10_02_02_world_campaign_simple_goober_models.sql",
@@ -2169,11 +2175,17 @@
     "2026_10_05_00_world_campaign_native_interactions.sql",
     "2026_10_04_00_world_campaign_council_books.sql",
     "2026_10_05_02_world_campaign_false_orders.sql",
-    "2026_10_05_04_world_campaign_native_visuals.sql"
+    "2026_10_05_04_world_campaign_native_visuals.sql",
+    "2026_10_08_01_world_campaign_cage_state_animations.sql",
+    "2026_10_08_03_world_campaign_fel_boiler_loot.sql"
   ],
   "followup_2026_10_08": {
     "restored_model_total": 41,
     "remaining_model_total": 49,
     "proof": "campaign-cage-state-restoration.json"
+  },
+  "current_counts": {
+    "restored_models": 42,
+    "remaining_models": 48
   }
 }

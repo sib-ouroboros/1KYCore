@@ -17,6 +17,7 @@
     1821,
     1823,
     1832,
+    1841,
     2017,
     2023,
     2138,
@@ -25,6 +26,7 @@
     2300,
     2381,
     2775,
+    2778,
     2937,
     2938,
     2939,
@@ -63,13 +65,12 @@
     4593,
     4597
   ],
-  "unresolved_template_count": 43,
+  "unresolved_template_count": 41,
   "unresolved_ids": [
     738,
     1416,
     1477,
     1667,
-    1841,
     1900,
     1986,
     2000,
@@ -78,7 +79,6 @@
     2314,
     2434,
     2666,
-    2778,
     2869,
     2870,
     2871,
@@ -1399,5 +1399,12 @@
     ],
     "remaining_count": 43,
     "proof": "campaign-packed-conversation-restoration.json"
+  },
+  "followup_source_timing_2026_10_08": {
+    "restored": [
+      1841,
+      2778
+    ],
+    "remaining": 41
   }
 }

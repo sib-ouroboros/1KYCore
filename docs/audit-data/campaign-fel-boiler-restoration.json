@@ -1,0 +1,561 @@
+{
+  "entries": [
+    268448
+  ],
+  "templates": [
+    {
+      "entry": "268448",
+      "type": "3",
+      "displayId": "16741",
+      "name": "'Fel Boiler'",
+      "IconName": "'questinteract'",
+      "castBarCaption": "'Вытягивание'",
+      "unk1": "''",
+      "size": "2",
+      "Data0": "1691",
+      "Data1": "268448",
+      "Data2": "0",
+      "Data3": "1",
+      "Data4": "0",
+      "Data5": "0",
+      "Data6": "0",
+      "Data7": "0",
+      "Data8": "0",
+      "Data9": "0",
+      "Data10": "0",
+      "Data11": "0",
+      "Data12": "0",
+      "Data13": "0",
+      "Data14": "114339",
+      "Data15": "0",
+      "Data16": "0",
+      "Data17": "0",
+      "Data18": "0",
+      "Data19": "0",
+      "Data20": "0",
+      "Data21": "0",
+      "Data22": "0",
+      "Data23": "0",
+      "Data24": "0",
+      "Data25": "0",
+      "Data26": "0",
+      "Data27": "0",
+      "Data28": "1",
+      "Data29": "0",
+      "Data30": "0",
+      "Data31": "0",
+      "Data32": "0",
+      "RequiredLevel": "0",
+      "AIName": "''",
+      "ScriptName": "''",
+      "VerifiedBuild": "0"
+    }
+  ],
+  "baseline": [
+    {
+      "entry": "268448",
+      "type": "0",
+      "displayId": "0",
+      "name": "'Fel Cauldron'",
+      "IconName": "''",
+      "castBarCaption": "''",
+      "unk1": "''",
+      "size": "1",
+      "Data0": "0",
+      "Data1": "0",
+      "Data2": "0",
+      "Data3": "0",
+      "Data4": "0",
+      "Data5": "0",
+      "Data6": "0",
+      "Data7": "0",
+      "Data8": "0",
+      "Data9": "0",
+      "Data10": "0",
+      "Data11": "0",
+      "Data12": "0",
+      "Data13": "0",
+      "Data14": "0",
+      "Data15": "0",
+      "Data16": "0",
+      "Data17": "0",
+      "Data18": "0",
+      "Data19": "0",
+      "Data20": "0",
+      "Data21": "0",
+      "Data22": "0",
+      "Data23": "0",
+      "Data24": "0",
+      "Data25": "0",
+      "Data26": "0",
+      "Data27": "0",
+      "Data28": "0",
+      "Data29": "0",
+      "Data30": "0",
+      "Data31": "0",
+      "Data32": "0",
+      "RequiredLevel": "0",
+      "AIName": "''",
+      "ScriptName": "''",
+      "VerifiedBuild": "0"
+    }
+  ],
+  "addons": [
+    {
+      "entry": "268448",
+      "faction": "0",
+      "flags": "8196",
+      "mingold": "0",
+      "maxgold": "0",
+      "WorldEffectID": "0",
+      "SpellVisualID": "0",
+      "SpellStateVisualID": "65309",
+      "StateWorldEffectID": "0",
+      "SpellStateAnimID": "0"
+    }
+  ],
+  "loot": [
+    {
+      "Entry": "268448",
+      "Item": "146310",
+      "Reference": "0",
+      "Chance": "100",
+      "QuestRequired": "0",
+      "LootMode": "1",
+      "GroupId": "0",
+      "MinCount": "1",
+      "MaxCount": "1"
+    }
+  ],
+  "questitems": [
+    {
+      "GameObjectEntry": "268448",
+      "Idx": "0",
+      "ItemId": "146310",
+      "VerifiedBuild": "0"
+    }
+  ],
+  "required_objectives": [],
+  "source_template": {
+    "entry": "268448",
+    "type": "3",
+    "displayId": "16741",
+    "name": "'Fel Boiler'",
+    "IconName": "'questinteract'",
+    "castBarCaption": "'Ð’Ñ‹Ñ‚ÑÐ³Ð¸Ð²Ð°Ð½Ð¸Ðµ'",
+    "unk1": "''",
+    "faction": "0",
+    "flags": "8196",
+    "size": "2",
+    "questItem1": "146310",
+    "questItem2": "0",
+    "questItem3": "0",
+    "questItem4": "0",
+    "questItem5": "0",
+    "questItem6": "0",
+    "Data0": "1691",
+    "Data1": "268448",
+    "Data2": "0",
+    "Data3": "1",
+    "Data4": "0",
+    "Data5": "0",
+    "Data6": "0",
+    "Data7": "0",
+    "Data8": "0",
+    "Data9": "0",
+    "Data10": "0",
+    "Data11": "0",
+    "Data12": "0",
+    "Data13": "0",
+    "Data14": "114339",
+    "Data15": "0",
+    "Data16": "0",
+    "Data17": "0",
+    "Data18": "0",
+    "Data19": "0",
+    "Data20": "0",
+    "Data21": "0",
+    "Data22": "0",
+    "Data23": "0",
+    "Data24": "0",
+    "Data25": "0",
+    "Data26": "0",
+    "Data27": "0",
+    "Data28": "1",
+    "Data29": "0",
+    "Data30": "0",
+    "Data31": "0",
+    "Data32": "0",
+    "unkInt32": "0",
+    "AIName": "''",
+    "ScriptName": "''",
+    "WorldEffectID": "0",
+    "StateWorldEffectID": "0",
+    "SpellVisualID": "0",
+    "SpellStateVisualID": "65309",
+    "SpellStateAnimID": "0",
+    "SpellStateAnimKitID": "0",
+    "MaxVisible": "0",
+    "IgnoreDynLos": "0",
+    "MinGold": "0",
+    "MaxGold": "0",
+    "VerifiedBuild": "24367"
+  },
+  "source_loot": [
+    {
+      "entry": "268448",
+      "item": "146310",
+      "chanceorquestchance": "100",
+      "lootmode": "1",
+      "groupid": "0",
+      "mincountorref": "1",
+      "maxcount": "1"
+    }
+  ],
+  "client_validation": {
+    "Item": {
+      "file": "Item.db2",
+      "sha256": "67b3b9b5c33dfa226910b3c62fdaec674e6198c54b39a6cd07d622a90374b010",
+      "layout_hash": "0xdfcc83d",
+      "record_count": 32785,
+      "copy_rows": 96081,
+      "identity_count": 128866,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        146310
+      ]
+    },
+    "GameObjectDisplayInfo": {
+      "file": "GameObjectDisplayInfo.db2",
+      "sha256": "23b4e725c73048de7da7d765be0410f7d9cba2ae07447c0765c8ebeb0586c4d8",
+      "layout_hash": "0x9f2098d1",
+      "record_count": 12716,
+      "copy_rows": 0,
+      "identity_count": 12716,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        16741
+      ]
+    },
+    "SpellVisual": {
+      "file": "SpellVisual.db2",
+      "sha256": "84006f590941b62b1e4ef68f521df4037308387723097356b29699c361eeaafa",
+      "layout_hash": "0x1c1301d2",
+      "record_count": 11199,
+      "copy_rows": 52161,
+      "identity_count": 63360,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        65309
+      ]
+    },
+    "Lock": {
+      "file": "Lock.db2",
+      "sha256": "3223460df70cd1e5b5d2dbe63b4c63214e6a2627110c7ada8ba0f979f26ac43d",
+      "layout_hash": "0xdac7f42f",
+      "record_count": 634,
+      "copy_rows": 84,
+      "identity_count": 718,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": [
+        1691
+      ]
+    },
+    "ItemSparse": {
+      "file": "ItemSparse.db2",
+      "sha256": "aea3fe42f393f24db1f516b72a7771853eb9f29a13e1d28d139fedf0b8c56aad",
+      "layout_hash": "0x4007de16",
+      "format": "WDC1 sparse",
+      "record_count": 103967,
+      "identity_count": 104009,
+      "catalog_alias_count": 42,
+      "catalog_min_id": 25,
+      "catalog_max_id": 157831,
+      "locale": "ruRU",
+      "assurance": "Native SparseImpl catalog / RecordGetId (-1 metadata index): identities and bounded record spans only, no item-stat decoding",
+      "requested": [
+        146310
+      ]
+    }
+  },
+  "hotfix_validation": {
+    "source": {
+      "108226": [
+        {
+          "ID": "108226",
+          "Text": "'Stop! Stop! I did not know! I swear it!'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "63742",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ],
+      "108227": [
+        {
+          "ID": "108227",
+          "Text": "'I can still help you! I can take you to Akaari\\'s stronghold!'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "63743",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ],
+      "114339": [
+        {
+          "ID": "114339",
+          "Text": "'Siphoning'",
+          "Text1": "'Siphoning'",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "0",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ],
+      "115343": [
+        {
+          "ID": "115343",
+          "Text": "'Those who terrorize the innocent have no place in this world or the next.'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "69430",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ],
+      "115344": [
+        {
+          "ID": "115344",
+          "Text": "'The Realm of Shadow offers little respite to the souls of the wicked.'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "69431",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ]
+    },
+    "release": {
+      "108226": [
+        {
+          "ID": "108226",
+          "Text": "'Stop! Stop! I did not know! I swear it!'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "63742",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ],
+      "108227": [
+        {
+          "ID": "108227",
+          "Text": "'I can still help you! I can take you to Akaari\\'s stronghold!'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "63743",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ],
+      "114339": [
+        {
+          "ID": "114339",
+          "Text": "'Siphoning'",
+          "Text1": "'Siphoning'",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "0",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ],
+      "115343": [
+        {
+          "ID": "115343",
+          "Text": "'Those who terrorize the innocent have no place in this world or the next.'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "69430",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ],
+      "115344": [
+        {
+          "ID": "115344",
+          "Text": "'The Realm of Shadow offers little respite to the souls of the wicked.'",
+          "Text1": "''",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "69431",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ]
+    }
+  },
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "assurance": "Ordinary chest Data30=0, native loot key equals source entry, exact +100 ordinary item and source quest-item hint preserved. No personal-container conversion, NPC AI/spawn/quest changes. Name encoding recovered reversibly; live/client acceptance pending.",
+  "sql_sha256": "89cfd4ac986330ff4fd47b2e9c5a8e83c2d01824f47d29c7d4aa18cf5c8e5a17",
+  "local_mysql_regression": {
+    "status": "PASS",
+    "mysql": "8.0.45",
+    "schema": "test_campaign_followup_35241ce557",
+    "source": "Disposable release conversation/candidate tables, six objectives and representative protected rows; prior and new migration suites",
+    "schema_dropped": true,
+    "production_server_updated": false
+  },
+  "local_native_regression": {
+    "status": "PASS",
+    "sanitizers": false,
+    "conversation_line_packets": 71,
+    "conversation_actor_packets": 22,
+    "nearest_actor_scenes": 39,
+    "source_loot_rows": 8,
+    "ci_sanitizers_remain_enabled": true
+  },
+  "broadcast_text_source_release_proof": {
+    "source": {
+      "114339": [
+        {
+          "ID": "114339",
+          "Text": "'Siphoning'",
+          "Text1": "'Siphoning'",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "0",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "26124"
+        }
+      ]
+    },
+    "release": {
+      "114339": [
+        {
+          "ID": "114339",
+          "Text": "'Siphoning'",
+          "Text1": "'Siphoning'",
+          "EmoteID1": "0",
+          "EmoteID2": "0",
+          "EmoteID3": "0",
+          "EmoteDelay1": "0",
+          "EmoteDelay2": "0",
+          "EmoteDelay3": "0",
+          "EmotesID": "0",
+          "LanguageID": "0",
+          "Flags": "0",
+          "ConditionID": "0",
+          "SoundEntriesID1": "0",
+          "SoundEntriesID2": "0",
+          "VerifiedBuild": "24330"
+        }
+      ]
+    }
+  }
+}
