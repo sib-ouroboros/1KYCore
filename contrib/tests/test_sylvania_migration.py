@@ -16,6 +16,7 @@ from test_gilneas_database import test_gilneas_database
 from test_campaign_visual_migration import test_visual_migration
 from test_campaign_required_level_migration import test_required_level_objects
 from test_campaign_packed_conversations import test_packed_conversations
+from test_campaign_cage_states import test_cage_state_restoration
 
 ROOT = Path(__file__).resolve().parents[2]
 DB = 'test_1kycore_sylvania_release'
@@ -859,6 +860,7 @@ def main():
         if args.native_visuals_only:
             sql(migration)
             test_visual_migration(sql,checksum)
+            test_cage_state_restoration(sql,checksum)
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.conversation_chains_only:
@@ -1024,6 +1026,7 @@ def main():
         print('PASS: Gilneas command binding first/repeat import preserves other scripts and all other tables', flush=True)
         test_gilneas_database(sql,checksum)
         test_visual_migration(sql,checksum)
+        test_cage_state_restoration(sql,checksum)
         test_required_level_objects(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)
 

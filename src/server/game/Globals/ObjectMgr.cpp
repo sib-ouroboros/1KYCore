@@ -7486,6 +7486,8 @@ void ObjectMgr::LoadGameObjectTemplate()
 
 void ObjectMgr::LoadGameObjectTemplateAddons()
 {
+    for (auto& addon : _gameObjectTemplateAddonStore)
+        addon.second.SpellStateAnimID = 0;
     uint32 oldMSTime = getMSTime();
 
     //                                                0       1       2      3        4        5
@@ -7562,6 +7564,24 @@ void ObjectMgr::LoadGameObjectTemplateAddons()
         ++count;
     }
     while (result->NextRow());
+
+    // AnimationData IDs are distinct from AnimKit IDs; retain the source update field.
+    QueryResult animationColumn = WorldDatabase.Query("SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='gameobject_template_addon' AND COLUMN_NAME='SpellStateAnimID' AND DATA_TYPE='int' AND COLUMN_TYPE LIKE '%unsigned' AND IS_NULLABLE='NO' AND (COLUMN_DEFAULT <=> '0') AND EXTRA=''");
+    if (animationColumn && animationColumn->Fetch()[0].GetUInt32() == 1)
+    {
+        if (QueryResult animations = WorldDatabase.Query("SELECT entry, SpellStateAnimID FROM gameobject_template_addon"))
+        {
+            do
+            {
+                Field* fields = animations->Fetch();
+                uint32 entry = fields[0].GetUInt32();
+                auto addon = _gameObjectTemplateAddonStore.find(entry);
+                if (addon != _gameObjectTemplateAddonStore.end() && GetGameObjectTemplate(entry))
+                    addon->second.SpellStateAnimID = fields[1].GetUInt32();
+            }
+            while (animations->NextRow());
+        }
+    }
 
     TC_LOG_INFO("server.loading", ">> Loaded %u game object template addons in %u ms", count, GetMSTimeDiffToNow(oldMSTime));
 }

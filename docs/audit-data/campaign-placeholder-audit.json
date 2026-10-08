@@ -1083,7 +1083,9 @@
       "imported_spawn_occurrences": 1,
       "source_files": [
         "sql/sylvania/campagne_paladin_legioncore.sql"
-      ]
+      ],
+      "remaining_candidate": false,
+      "restoration": "2026_10_08_01_world_campaign_cage_state_animations.sql"
     },
     {
       "entry": 252243,
@@ -1110,7 +1112,9 @@
       "imported_spawn_occurrences": 1,
       "source_files": [
         "sql/sylvania/campagne_paladin_legioncore.sql"
-      ]
+      ],
+      "remaining_candidate": false,
+      "restoration": "2026_10_08_01_world_campaign_cage_state_animations.sql"
     },
     {
       "entry": 252244,
@@ -1137,7 +1141,9 @@
       "imported_spawn_occurrences": 1,
       "source_files": [
         "sql/sylvania/campagne_paladin_legioncore.sql"
-      ]
+      ],
+      "remaining_candidate": false,
+      "restoration": "2026_10_08_01_world_campaign_cage_state_animations.sql"
     },
     {
       "entry": 252796,
@@ -2164,5 +2170,10 @@
     "2026_10_04_00_world_campaign_council_books.sql",
     "2026_10_05_02_world_campaign_false_orders.sql",
     "2026_10_05_04_world_campaign_native_visuals.sql"
-  ]
+  ],
+  "followup_2026_10_08": {
+    "restored_model_total": 41,
+    "remaining_model_total": 49,
+    "proof": "campaign-cage-state-restoration.json"
+  }
 }

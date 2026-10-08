@@ -881,6 +881,7 @@ struct GameObjectTemplateAddon
     uint32  SpellVisualID = 0;
     uint32  SpellStateVisualID = 0;
     uint32  StateWorldEffectID = 0;
+    uint32  SpellStateAnimID = 0;
 };
 
 

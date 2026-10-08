@@ -21,6 +21,8 @@ def main():
     go=(root/'src/server/game/Entities/GameObject/GameObject.cpp').read_text('latin1')
     mgr=(root/'src/server/game/Globals/ObjectMgr.cpp').read_text('latin1')
     data=(root/'src/server/game/Entities/GameObject/GameObjectData.h').read_text('latin1')
+    updates=(root/'src/server/game/Entities/Object/Updates/UpdateFields.h').read_text('utf8')
+    assert 'GAMEOBJECT_STATE_ANIM_ID                               = OBJECT_END + 0x00F' in updates
     addon=block(data,'struct GameObjectTemplateAddon\n')+';'
     functions='\n'.join([block(mgr,'void ObjectMgr::LoadGameObjectTemplateAddons()'),block(go,'void GameObject::ApplyTemplateVisuals('),block(go,'void GameObject::SetGoState(')])
     create=block(go,'bool GameObject::Create(')
@@ -38,13 +40,24 @@ using uint16=std::uint16_t;using uint32=std::uint32_t;
 ADDON
 constexpr uint32 GO_STATE_ACTIVE=0,GO_STATE_READY=1,GO_STATE_ACTIVE_ALTERNATIVE=2;
 using GOState=uint32;
-constexpr uint32 GAMEOBJECT_BYTES_1=100,GAMEOBJECT_SPELL_VISUAL_ID=101,GAMEOBJECT_STATE_SPELL_VISUAL_ID=102,GAMEOBJECT_STATE_WORLD_EFFECT_ID=103;
+constexpr uint32 GAMEOBJECT_BYTES_1=100,GAMEOBJECT_SPELL_VISUAL_ID=101,GAMEOBJECT_STATE_SPELL_VISUAL_ID=102,GAMEOBJECT_STATE_WORLD_EFFECT_ID=103,GAMEOBJECT_STATE_ANIM_ID=104;
 constexpr uint32 GAMEOBJECT_TYPE_CHEST=3,GAMEOBJECT_TYPE_FISHINGHOLE=25;
 struct GameObjectTemplate {uint32 type=5;};
 struct Field {uint32 value=0;uint32 GetUInt32()const{return value;}uint16 GetUInt16()const{return static_cast<uint16>(value);}};
 struct Result {std::vector<std::array<Field,9>> rows;std::size_t position=0;Field* Fetch(){return rows[position].data();}bool NextRow(){return ++position<rows.size();}};
 using QueryResult=std::unique_ptr<Result>;
-struct Database {std::vector<std::array<Field,9>> fixture;std::string query;uint32 visualColumnCount=3;QueryResult Query(char const* q){query=q;if(query.find("information_schema.COLUMNS")!=std::string::npos){std::array<Field,9> count{};count[0].value=visualColumnCount;return std::make_unique<Result>(Result{{count}});}if(fixture.empty())return nullptr;return std::make_unique<Result>(Result{fixture});}} WorldDatabase;
+struct Database {
+ std::vector<std::array<Field,9>> fixture,animationFixture;std::string query;
+ uint32 visualColumnCount=3,animationColumnCount=0;
+ QueryResult Query(char const* q){
+  std::string current=q;
+  if(current.find("information_schema.COLUMNS")!=std::string::npos){std::array<Field,9> count{};count[0].value=current.find("SpellStateAnimID")!=std::string::npos?animationColumnCount:visualColumnCount;return std::make_unique<Result>(Result{{count}});}
+  query=current;
+  auto const& rows=current=="SELECT entry, SpellStateAnimID FROM gameobject_template_addon"?animationFixture:fixture;
+  if(rows.empty())return nullptr;
+  return std::make_unique<Result>(Result{rows});
+ }
+} WorldDatabase;
 uint32 getMSTime(){return 0;}uint32 GetMSTimeDiffToNow(uint32){return 0;}
 template<class... Args>void testLog(Args const&...){}
 #define TC_LOG_INFO(...) testLog(__VA_ARGS__)
@@ -83,6 +96,15 @@ GameObjectTemplateAddon empty{};object.m_goTemplateAddon=&empty;object.fields={{
 object.m_goTemplateAddon=nullptr;object.ApplyTemplateVisuals(true, GO_STATE_ACTIVE);object.SetGoState(GO_STATE_READY);check(object.fields==original,"no addon unchanged");
 row[0].value=999999;WorldDatabase.fixture={row};manager.LoadGameObjectTemplateAddons();check(manager._gameObjectTemplateAddonStore.size()==1,"orphan addon rejected");
 row[0].value=267180;row[6].value=row[7].value=row[8].value=0;WorldDatabase.fixture={row};manager.LoadGameObjectTemplateAddons();check(loaded.SpellVisualID==0 && loaded.SpellStateVisualID==0 && loaded.StateWorldEffectID==0,"reload clears removed configuration");
+WorldDatabase.animationColumnCount=1;std::array<Field,9> animation{};animation[0].value=267180;animation[1].value=149;WorldDatabase.animationFixture={animation};manager.LoadGameObjectTemplateAddons();check(loaded.SpellStateAnimID==149,"AnimationData ID loaded separately from AnimKit");
+object.m_goTemplateAddon=&loaded;object.fields.clear();object.ApplyTemplateVisuals(true,GO_STATE_ACTIVE);check(object.fields.at(104)==149,"source initial animation independent of spawn state");
+object.fields[104]=777;object.SetGoState(GO_STATE_READY);object.SetGoState(GO_STATE_ACTIVE);check(object.fields.at(104)==777,"state transitions preserve script-owned animation");
+animation[0].value=999999;animation[1].value=147;WorldDatabase.animationFixture={animation};manager.LoadGameObjectTemplateAddons();check(loaded.SpellStateAnimID==0,"removed animation resets on reload; orphan ignored");
+WorldDatabase.animationFixture={};manager.LoadGameObjectTemplateAddons();check(loaded.SpellStateAnimID==0,"empty animation table leaves zero");
+WorldDatabase.visualColumnCount=0;animation[0].value=267180;animation[1].value=147;WorldDatabase.animationFixture={animation};manager.LoadGameObjectTemplateAddons();check(loaded.SpellStateAnimID==147 && loaded.flags==262144,"animation with legacy visual schema preserves addon flags");
+WorldDatabase.animationColumnCount=2;manager.LoadGameObjectTemplateAddons();check(loaded.SpellStateAnimID==0,"incompatible animation schema ignored");
+WorldDatabase.animationColumnCount=0;manager.LoadGameObjectTemplateAddons();check(loaded.SpellStateAnimID==0,"legacy animation schema safe");
+object.fields[104]=777;object.ApplyTemplateVisuals(true,GO_STATE_ACTIVE);check(object.fields.at(104)==777,"zero configuration preserves script animation");
 std::cout<<"PASS: actual addon loader, initial/ready/active visuals, collision/early-return callbacks, invalid effects, reload and zero-default compatibility\n";
 }catch(std::exception const& e){std::cerr<<e.what()<<'\n';return 1;}}
 '''

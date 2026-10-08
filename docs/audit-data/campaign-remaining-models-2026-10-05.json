@@ -1,13 +1,12 @@
 {
-  "remaining_count": 52,
-  "restored_count": 38,
+  "remaining_count": 49,
+  "restored_count": 41,
   "overlapping_blocker_counts": {
     "script_chain_not_translated": 16,
     "missing_native_client_reference": 19,
     "static_visual_source_chain_not_restored": 5,
-    "loot_and_quest_item_dependencies": 11,
+    "loot_and_quest_item_dependencies": 12,
     "missing_event_and_npc_scene_chain": 3,
-    "unsupported_source_template_fields": 3,
     "no_native_garrison_shipment_use_handler": 2,
     "native_spell_or_external_dependency_review": 3
   },
@@ -366,66 +365,6 @@
       },
       "missing_native_client_references": {},
       "unsupported_source_fields": {}
-    },
-    {
-      "entry": 252241,
-      "type": 10,
-      "blockers": [
-        "unsupported_source_template_fields"
-      ],
-      "source_data": {
-        "Data0": "93",
-        "Data3": "1",
-        "Data10": "220835",
-        "Data14": "21400",
-        "Data20": "1",
-        "Data23": "1",
-        "Data25": "1"
-      },
-      "missing_native_client_references": {},
-      "unsupported_source_fields": {
-        "SpellStateAnimID": "149"
-      }
-    },
-    {
-      "entry": 252243,
-      "type": 10,
-      "blockers": [
-        "unsupported_source_template_fields"
-      ],
-      "source_data": {
-        "Data0": "93",
-        "Data3": "1",
-        "Data10": "220844",
-        "Data14": "21400",
-        "Data20": "1",
-        "Data23": "1",
-        "Data25": "1"
-      },
-      "missing_native_client_references": {},
-      "unsupported_source_fields": {
-        "SpellStateAnimID": "147"
-      }
-    },
-    {
-      "entry": 252244,
-      "type": 10,
-      "blockers": [
-        "unsupported_source_template_fields"
-      ],
-      "source_data": {
-        "Data0": "93",
-        "Data3": "1",
-        "Data10": "220845",
-        "Data14": "21400",
-        "Data20": "1",
-        "Data23": "1",
-        "Data25": "1"
-      },
-      "missing_native_client_references": {},
-      "unsupported_source_fields": {
-        "SpellStateAnimID": "147"
-      }
     },
     {
       "entry": 252796,
@@ -792,7 +731,8 @@
       "entry": 268448,
       "type": 3,
       "blockers": [
-        "static_visual_source_chain_not_restored"
+        "static_visual_source_chain_not_restored",
+        "loot_and_quest_item_dependencies"
       ],
       "source_data": {
         "Data0": "1691",
@@ -804,6 +744,19 @@
       "missing_native_client_references": {},
       "unsupported_source_fields": {
         "SpellStateVisualID": "65309"
+      },
+      "confirmed_loot_dependency": {
+        "entry": 268448,
+        "item": 146310,
+        "source_chance": 100,
+        "source_lootmode": 1,
+        "source_count": [
+          1,
+          1
+        ],
+        "release_loot_rows": 0,
+        "source_quest_item_hint": 146310,
+        "decision": "Deferred with its source state visual; import loot and validate item/eligibility dependencies together, not the model alone."
       }
     },
     {
@@ -1017,5 +970,14 @@
     ],
     "source_quest_dependent_visuals_supported": false,
     "restoration": "campaign-native-visual-restoration.json"
+  },
+  "followup_2026_10_08": {
+    "restored": [
+      252241,
+      252243,
+      252244
+    ],
+    "proof": "campaign-cage-state-restoration.json",
+    "remaining": 49
   }
 }

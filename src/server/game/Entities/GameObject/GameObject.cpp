@@ -2390,6 +2390,9 @@ void GameObject::ApplyTemplateVisuals(bool initial, GOState state)
     if (!m_goTemplateAddon)
         return;
 
+    if (initial && m_goTemplateAddon->SpellStateAnimID)
+        SetUInt32Value(GAMEOBJECT_STATE_ANIM_ID, m_goTemplateAddon->SpellStateAnimID);
+
     bool ready = initial || state == GO_STATE_READY;
     if (m_goTemplateAddon->SpellVisualID)
         SetUInt32Value(GAMEOBJECT_SPELL_VISUAL_ID, ready ? m_goTemplateAddon->SpellVisualID : 0);

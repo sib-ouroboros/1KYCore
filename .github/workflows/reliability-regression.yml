@@ -10,6 +10,7 @@ on:
       - contrib/tests/test_npc_combat_slots.py
       - contrib/tests/fixtures/crowd_test_*
       - contrib/tests/test_gameobject_visuals.py
+      - contrib/tests/test_campaign_cage_credit.py
       - src/server/game/Entities/GameObject/GameObject.*
       - src/server/game/Entities/GameObject/GameObjectData.h
       - src/server/game/Globals/ObjectMgr.cpp
@@ -139,6 +140,8 @@ jobs:
         run: python contrib/tests/test_elevated_surface_pathing.py
       - name: Test native GO visual loading and state transitions
         run: python contrib/tests/test_gameobject_visuals.py
+      - name: Test native personal and group credit for campaign cages
+        run: python contrib/tests/test_campaign_cage_credit.py
       - name: Test native False Orders quest credit
         run: python contrib/tests/test_false_orders_credit.py
       - name: Test source-compatible nearest conversation actors
