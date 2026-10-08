@@ -479,7 +479,7 @@ void Garrison::AddFollower(uint32 garrFollowerId)
     CharacterDatabase.CommitTransaction(trans);
 }
 
-void Garrison::AddShipmentFollower(uint32 garrFollowerId)
+bool Garrison::AddShipmentFollower(uint32 garrFollowerId)
 {
     WorldPackets::Garrison::GarrisonAddFollowerResult addFollowerResult;
     addFollowerResult.GarrTypeID = _garrisonType;
@@ -488,7 +488,7 @@ void Garrison::AddShipmentFollower(uint32 garrFollowerId)
     {
         addFollowerResult.Result = GARRISON_ERROR_INVALID_FOLLOWER;
         _owner->SendDirectMessage(addFollowerResult.Write());
-        return;
+        return false;
     }
 
     uint64 dbId = sGarrisonMgr.GenerateFollowerDbId();
@@ -510,6 +510,7 @@ void Garrison::AddShipmentFollower(uint32 garrFollowerId)
     CharacterDatabaseTransaction trans = CharacterDatabase.BeginTransaction();
     SaveToDB(trans);
     CharacterDatabase.CommitTransaction(trans);
+    return true;
 }
 
 Garrison::Follower* Garrison::GetFollower(uint64 dbId)
@@ -958,12 +959,21 @@ void Garrison::RewardWorkOrder(uint32 shipmentContainerID)
         if (!shipment || shipment->ShipmentContainerID != shipmentContainerID)
             continue;
 
-        if (SpellInfo const* spell = sSpellMgr->GetSpellInfo(shipment->OnCompleteSpellID))
+        SpellInfo const* spell = shipment->OnCompleteSpellID ? sSpellMgr->GetSpellInfo(shipment->OnCompleteSpellID) : nullptr;
+        if ((shipment->OnCompleteSpellID && !spell) ||
+            (shipment->GarrFollowerID && !sGarrFollowerStore.LookupEntry(shipment->GarrFollowerID)))
+            continue;
+        // Treasure-only recipes require a separate implementation; do not discard them.
+        if (!spell && !shipment->DummyItemID && !shipment->GarrFollowerID)
+            continue;
+        // AddItem reports inventory/unique-item failure. Preserve the order for retry
+        // before granting any follower or completion spell side effects.
+        if (shipment->DummyItemID && !_owner->AddItem(shipment->DummyItemID, 1))
+            continue;
+        if (shipment->GarrFollowerID && !AddShipmentFollower(shipment->GarrFollowerID))
+            continue;
+        if (spell)
             _owner->CastSpell(_owner, spell, TRIGGERED_FULL_MASK);
-        if (shipment->DummyItemID)
-            _owner->AddItem(shipment->DummyItemID, 1);
-        if (shipment->GarrFollowerID)
-            AddShipmentFollower(shipment->GarrFollowerID);
         DeleteWorkOrder(dbId);
     }
 }

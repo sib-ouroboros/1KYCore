@@ -46,8 +46,10 @@ struct Position{};struct QuaternionData{};
 struct SpellInfo{uint32 ID;};
 struct CharShipmentEntry{uint32 ID,ShipmentContainerID,Duration,OnCompleteSpellID,DummyItemID,GarrFollowerID;};
 struct CharShipmentContainerEntry{uint32 ID;};
+struct GarrFollowerEntry{uint32 ID;};
 template<class T>struct Store{std::unordered_map<uint32,T> rows;
  T const* LookupEntry(uint32 id)const{auto i=rows.find(id);return i==rows.end()?nullptr:&i->second;}};
+Store<GarrFollowerEntry> sGarrFollowerStore;
 Store<CharShipmentEntry> sCharShipmentStore;Store<CharShipmentContainerEntry> sCharShipmentContainerStore;
 struct SpellMgr{Store<SpellInfo> spells;SpellInfo const* GetSpellInfo(uint32 id){return spells.LookupEntry(id);}} spellMgr;
 SpellMgr* sSpellMgr=&spellMgr;
@@ -71,9 +73,9 @@ struct GameObject{uint32 display=0;bool frozen=false;uint32 state=0,calls=0;
  void SetDisplayId(uint32 id){display=id;++calls;}void SetFlag(uint32,uint32){frozen=true;}
  void RemoveFlag(uint32,uint32){frozen=false;}void SetGoState(uint32 v){state=v;}};
 struct Guid{uint64 GetCounter()const{return 9876543210ULL;}};
-struct Player{bool inside=true,failSummon=false;std::unordered_map<uint32,GameObject> objects;unsigned casts=0,items=0,summons=0;
+struct Player{bool inside=true,failSummon=false,failItem=false;std::unordered_map<uint32,GameObject> objects;unsigned casts=0,items=0,summons=0;
  Guid GetGUID()const{return {};}
- void CastSpell(Player*,SpellInfo const*,uint32){++casts;}void AddItem(uint32,uint32 n){items+=n;}
+ void CastSpell(Player*,SpellInfo const*,uint32){++casts;}bool AddItem(uint32,uint32 n){if(failItem)return false;items+=n;return true;}
  bool IsInGarrison()const{return inside;}
  GameObject* FindNearestGameObject(uint32 id,float){auto i=objects.find(id);return i==objects.end()?nullptr:&i->second;}
  GameObject* SummonGameObject(uint32 id,Position const&,QuaternionData,uint32,bool){++summons;return failSummon?nullptr:&objects[id];}
@@ -84,12 +86,13 @@ ORDER
  explicit Garrison(Player* p):_owner(p){}
  Player* GetOwner(){return _owner;}
  WorkOrder* GetWorkOrder(uint64);uint64 StartWorkOrder(uint32,uint32);void DeleteWorkOrder(uint64);
- void RewardWorkOrder(uint32);void UpdateWorkOrders();void SaveOrders(CharacterDatabaseTransaction&);void AddShipmentFollower(uint32){++followers;}
+ void RewardWorkOrder(uint32);void UpdateWorkOrders();void SaveOrders(CharacterDatabaseTransaction&);bool AddShipmentFollower(uint32){++followers;return true;}
 };
 METHODS
 int main(){
  sCharShipmentStore.rows={{10,{10,1,10,100,200,300}},{11,{11,1,20,100,200,300}},{12,{12,2,10,0,200,0}},{13,{13,99,10,0,0,0}}};
  sCharShipmentContainerStore.rows={{1,{1}},{2,{2}}};spellMgr.spells.rows={{100,{100}}};
+ sGarrFollowerStore.rows={{300,{300}}};
  Player player;Garrison g(&player);
  uint64 const high=uint64(1)<<40;
  g._workorders.emplace(7,Garrison::WorkOrder{7,50,10,100,300,0});
@@ -121,6 +124,24 @@ int main(){
  check(!g.GetWorkOrder(high)&&!g.GetWorkOrder(high+1)&&g.GetWorkOrder(high+2),"completed boundary or future order incorrect");
  g.RewardWorkOrder(1);check(player.items==2&&CharacterDatabase.deletes.size()==2,"repeat awarded twice");
  g.RewardWorkOrder(2);check(player.items==3&&g.GetWorkOrder(high+4),"other container or invalid shipment mishandled");
+ // Refused delivery must keep the order before any follower/spell side effect.
+ g._workorders.clear();CharacterDatabase.deletes.clear();
+ g._workorders.emplace(high,Garrison::WorkOrder{high,50,10,0,200,0});
+ auto casts=player.casts,items=player.items,followers=g.followers;
+ player.failItem=true;g.RewardWorkOrder(1);
+ check(g.GetWorkOrder(high)&&CharacterDatabase.deletes.empty()&&player.casts==casts&&player.items==items&&g.followers==followers,"inventory failure lost order or granted partial reward");
+ player.failItem=false;g.RewardWorkOrder(1);g.RewardWorkOrder(1);
+ check(!g.GetWorkOrder(high)&&player.items==items+1&&player.casts==casts+1&&g.followers==followers+1&&CharacterDatabase.deletes.size()==1,"inventory retry duplicated or failed");
+ for(unsigned mode=0;mode<3;++mode){
+  g._workorders.emplace(high,Garrison::WorkOrder{high,50,10,0,200,0});
+  auto recipe=sCharShipmentStore.rows.at(10);
+  if(mode==0)sCharShipmentStore.rows.at(10).OnCompleteSpellID=999;
+  if(mode==1)sCharShipmentStore.rows.at(10).GarrFollowerID=999;
+  if(mode==2){sCharShipmentStore.rows.at(10).OnCompleteSpellID=0;sCharShipmentStore.rows.at(10).DummyItemID=0;sCharShipmentStore.rows.at(10).GarrFollowerID=0;}
+  items=player.items;casts=player.casts;followers=g.followers;
+  g.RewardWorkOrder(1);check(g.GetWorkOrder(high)&&items==player.items&&casts==player.casts&&followers==g.followers,"missing completion dependency discarded order or delivered partial reward");
+  sCharShipmentStore.rows.at(10)=recipe;g.RewardWorkOrder(1);check(!g.GetWorkOrder(high),"dependency repair cannot retry");
+ }
  // A mixed ready/pending plot remains ready regardless of insertion order.
  sGarrisonMgr.plots={{50,{500,{},1000,2000}},{60,{600,{},1001,2001}}};
  for(bool reverse:{false,true}){

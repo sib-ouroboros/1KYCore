@@ -104,7 +104,7 @@ public:
 
     // Followers
     void AddFollower(uint32 garrFollowerId);
-    void AddShipmentFollower(uint32 garrFollowerId);
+    bool AddShipmentFollower(uint32 garrFollowerId);
     Follower* GetFollower(uint64 dbId);
     template<typename Predicate>
     uint32 CountFollowers(Predicate&& predicate) const

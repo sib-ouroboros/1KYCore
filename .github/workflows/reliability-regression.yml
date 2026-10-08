@@ -274,3 +274,5 @@ jobs:
         run: python contrib/tests/test_garrison_identity.py
       - name: Check all remaining campaign source script dependency inventories
         run: python contrib/tests/test_campaign_script_inventory.py
+      - name: Test native shipment request handlers and packet writers
+        run: python contrib/tests/test_garrison_shipment_handlers.py

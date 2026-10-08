@@ -317,10 +317,29 @@
     "ci_sanitizers": true
   },
   "remaining_before_enabling": [
-    "owner/garrison/container interaction gate and packet result",
-    "inventory-full retry and follower recruitment cap handling; reward delivery must not lose an order",
+    "native type45 Use and owner/personal-plot interaction gate",
+    "full recipe resource costs and troop recruitment cap",
     "atomic or recoverable reward/database deletion and replay protection",
+    "TreasureID rewards and verified capacity upgrades",
     "personal plot-object ownership and respawn lifecycle",
     "client 26972 verification and two players"
-  ]
+  ],
+  "handler_hardening": {
+    "documentation": "docs/campaign-shipment-handler-hardening.md",
+    "native_handlers": [
+      "HandleRequestLandingPageShipmentInfoOpcode",
+      "HandleGarrisonGetShipmentInfo",
+      "HandleGarrisonCreateShipmentOpcode"
+    ],
+    "packet_writers": [
+      "GarrisonLandingPageShipmentInfo::Write",
+      "GarrisonCreateShipmentResponse::Write"
+    ],
+    "queue_capacity_policy": "Same MaxShipments as existing advertised capacity; no troop recruitment cap or upgrade modifiers implemented",
+    "inventory_failure_policy": "Single-item AddItem failure preserves order before spell/follower effects",
+    "local_handler_regression": "PASS",
+    "local_work_order_reward_regression": "PASS",
+    "client_validation": false,
+    "crash_atomic_reward_delivery": false
+  }
 }
