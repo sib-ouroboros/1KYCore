@@ -514,15 +514,8 @@ void Garrison::AddShipmentFollower(uint32 garrFollowerId)
 
 Garrison::Follower* Garrison::GetFollower(uint64 dbId)
 {
-    for (auto it = _followers.begin(); it != _followers.end(); ++it)
-    {
-        if ((uint32)it->second.PacketInfo.DbID == (uint32)dbId)
-        {
-            return &it->second;
-        }
-    }
-
-    return nullptr;
+    auto itr = _followers.find(dbId);
+    return itr != _followers.end() ? &itr->second : nullptr;
 }
 
 uint32 Garrison::GetActiveFollowersCount() const
@@ -535,7 +528,7 @@ uint32 Garrison::GetActiveFollowersCount() const
 
 uint32 Garrison::GetAverageFollowerILevel() const
 {
-    uint32 followerIlevels = 0;
+    uint64 followerIlevels = 0;
     uint32 activeFollowerCount = 0;
 
     for (auto itr : _followers)
@@ -547,7 +540,10 @@ uint32 Garrison::GetAverageFollowerILevel() const
         }
     }
 
-    return ceil(float(followerIlevels) / float(activeFollowerCount));
+    if (!activeFollowerCount)
+        return 0;
+
+    return uint32((followerIlevels + activeFollowerCount - 1) / activeFollowerCount);
 }
 
 uint32 Garrison::GetMaxFollowerLevel() const
@@ -709,15 +705,8 @@ void Garrison::AddMission(uint32 garrMissionId)
 
 Garrison::Mission* Garrison::GetMission(uint64 dbId)
 {
-    for (auto it = _missions.begin(); it != _missions.end(); ++it)
-    {
-        if ((uint32)it->second.PacketInfo.DbID == (uint32)dbId)
-        {
-            return &it->second;
-        }
-    }
-
-    return nullptr;
+    auto itr = _missions.find(dbId);
+    return itr != _missions.end() ? &itr->second : nullptr;
 }
 
 Garrison::Mission* Garrison::GetMissionByID(uint32 ID)
@@ -1174,7 +1163,7 @@ Map* Garrison::FindMap() const
 
 uint32 Garrison::Follower::GetItemLevel() const
 {
-    return (PacketInfo.ItemLevelWeapon + PacketInfo.ItemLevelArmor) / 2;
+    return uint32((uint64(PacketInfo.ItemLevelWeapon) + PacketInfo.ItemLevelArmor) / 2);
 }
 
 void Garrison::Follower::EarnXP(Player* owner, uint32 xp)
@@ -1256,7 +1245,7 @@ bool Garrison::Follower::HasAbility(uint32 garrAbilityId) const
 {
     return std::find_if(PacketInfo.AbilityID.begin(), PacketInfo.AbilityID.end(), [garrAbilityId](GarrAbilityEntry const* garrAbility)
     {
-        return garrAbility->ID == garrAbilityId;
+        return garrAbility && garrAbility->ID == garrAbilityId;
     }) != PacketInfo.AbilityID.end();
 }
 

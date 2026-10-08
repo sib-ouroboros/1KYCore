@@ -270,3 +270,7 @@ jobs:
         run: python contrib/tests/test_conversation_line_loading.py
       - name: Test bundled JSON array separator parsing with sanitizers
         run: python contrib/tests/test_json_array_delimiters.py
+      - name: Test full-width garrison identity and roster arithmetic
+        run: python contrib/tests/test_garrison_identity.py
+      - name: Check all remaining campaign source script dependency inventories
+        run: python contrib/tests/test_campaign_script_inventory.py
