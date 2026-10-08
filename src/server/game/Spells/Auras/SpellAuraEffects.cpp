@@ -6515,7 +6515,7 @@ void AuraEffect::HandlePlayScene(AuraApplication const* aurApp, uint8 mode, bool
     if (apply)
         player->GetSceneMgr().PlaySceneByTemplate(*sceneTemplate);
     else
-        player->GetSceneMgr().CancelSceneByPackageId(sceneTemplate->ScenePackageId);
+        player->GetSceneMgr().CancelSceneBySceneId(sceneTemplate->SceneId);
 }
 
 void AuraEffect::HandleOverrideZonePvpType(AuraApplication const* aurApp, uint8 mode, bool apply) const

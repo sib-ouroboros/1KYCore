@@ -20,6 +20,7 @@
 
 #include "Common.h"
 #include <map>
+#include <set>
 
 enum SceneFlags
 {
@@ -80,6 +81,7 @@ public:
 private:
     Player* _player;
     SceneTemplateByInstance _scenesByInstance;
+    std::set<uint32> _endingScenes;
     uint32 _standaloneSceneInstanceID;
     bool _isDebuggingScenes;
 };

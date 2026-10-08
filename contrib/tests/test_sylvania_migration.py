@@ -15,6 +15,7 @@ import urllib.request
 from test_gilneas_database import test_gilneas_database
 from test_campaign_visual_migration import test_visual_migration
 from test_campaign_required_level_migration import test_required_level_objects
+from test_campaign_scene_templates import test_campaign_scene_templates
 from test_campaign_packed_conversations import test_packed_conversations
 from test_campaign_cage_states import test_cage_state_restoration
 
@@ -807,6 +808,7 @@ def test_nearest_conversations():
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--campaign-scenes-only', action='store_true', help='Test source scene mappings, conflicts and interrupted publication.')
     parser.add_argument('--gilneas-chain-only', action='store_true', help='Test audited Gilneas bindings and object spawns.')
     parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
     parser.add_argument('--wildcard-loot-only', action='store_true', help='Run source wildcard loot translation against the real release.')
@@ -848,6 +850,10 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.campaign_scenes_only:
+            test_campaign_scene_templates(sql,checksum)
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.gilneas_chain_only:
             test_gilneas_database(sql,checksum)
             sql(f'DROP DATABASE `{DB}`;',False)
@@ -1034,6 +1040,7 @@ def main():
         test_cage_state_restoration(sql,checksum,'campaign-fel-boiler-restoration.json','2026_10_08_03_world_campaign_fel_boiler_loot.sql')
         test_required_level_objects(sql,checksum)
         test_required_level_objects(sql,checksum,'campaign-scenario-object-restoration.json','2026_10_08_04_world_campaign_scenario_objects.sql')
+        test_campaign_scene_templates(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)
 
 

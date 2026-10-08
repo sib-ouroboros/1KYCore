@@ -1,0 +1,971 @@
+{
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_world_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c",
+  "reviewed_object_count": 59,
+  "direct_spell_count": 26,
+  "object_reference_scope": "All 11 current missing templates and 48 placeholder models. Direct Spell references only, not a transitive spell/trigger graph.",
+  "source_scene_rows": [
+    {
+      "SceneScriptPackageID": "1680",
+      "MiscValue": "1363",
+      "PlaybackFlags": "27",
+      "CustomDuration": "0",
+      "ScriptName": "NULL",
+      "comment": "''"
+    },
+    {
+      "SceneScriptPackageID": "1784",
+      "MiscValue": "1547",
+      "PlaybackFlags": "20",
+      "CustomDuration": "0",
+      "ScriptName": "NULL",
+      "comment": "''"
+    }
+  ],
+  "source_scene_events": [],
+  "client_package_proof": {
+    "file": "SceneScriptPackage.db2",
+    "sha256": "59ad53f2110d0c15783f00a5516143020500e2ea083b8b62ad8b4038e3e3277c",
+    "layout_hash": "0x96663abf",
+    "record_count": 1378,
+    "copy_rows": 0,
+    "identity_count": 1378,
+    "format": "WDC1",
+    "locale": "ruRU",
+    "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+    "requested": {
+      "1680": true,
+      "1784": true
+    }
+  },
+  "client_effect_proof": {
+    "file": "SpellEffect.db2",
+    "sha256": "dfcb7076421e3b99fb23e769acddb9215d051069fe5e7488fc33b67770c194db",
+    "layout_hash": "0x3244098b",
+    "record_count": 269623,
+    "copy_rows": 0,
+    "identity_count": 269623,
+    "format": "WDC1",
+    "locale": "ruRU",
+    "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+    "effects": {
+      "233857": [
+        {
+          "ID": 353221,
+          "Effect": 61,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 56079,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "239044": [
+        {
+          "ID": 362157,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 120,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 370265,
+          "Effect": 90,
+          "EffectAura": 0,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 115748,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "204230": [
+        {
+          "ID": 301416,
+          "Effect": 77,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 301417,
+          "Effect": 90,
+          "EffectAura": 0,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 103184,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 301420,
+          "Effect": 170,
+          "EffectAura": 0,
+          "EffectIndex": 2,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 301426,
+          "Effect": 140,
+          "EffectAura": 0,
+          "EffectIndex": 3,
+          "DifficultyID": 0,
+          "TriggerSpell": 204234,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "215687": [
+        {
+          "ID": 320726,
+          "Effect": 227,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 1297,
+          "PositionFacing": 6.270444393157959,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 17
+        },
+        {
+          "ID": 325130,
+          "Effect": 90,
+          "EffectAura": 0,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 106233,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "237385": [
+        {
+          "ID": 359426,
+          "Effect": 160,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 230493,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "218574": [
+        {
+          "ID": 325472,
+          "Effect": 6,
+          "EffectAura": 290,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 325473,
+          "Effect": 6,
+          "EffectAura": 61,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 325474,
+          "Effect": 6,
+          "EffectAura": 87,
+          "EffectIndex": 2,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 127,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 325489,
+          "Effect": 64,
+          "EffectAura": 0,
+          "EffectIndex": 3,
+          "DifficultyID": 0,
+          "TriggerSpell": 218578,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 344425,
+          "Effect": 164,
+          "EffectAura": 0,
+          "EffectIndex": 4,
+          "DifficultyID": 0,
+          "TriggerSpell": 226929,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 344427,
+          "Effect": 64,
+          "EffectAura": 0,
+          "EffectIndex": 5,
+          "DifficultyID": 0,
+          "TriggerSpell": 179376,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "204944": [
+        {
+          "ID": 302534,
+          "Effect": 6,
+          "EffectAura": 12,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 302535,
+          "Effect": 64,
+          "EffectAura": 0,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 204943,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 0,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "233370": [
+        {
+          "ID": 352445,
+          "Effect": 6,
+          "EffectAura": 430,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 1547,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 366231,
+          "Effect": 6,
+          "EffectAura": 40,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 127,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "201690": [
+        {
+          "ID": 297186,
+          "Effect": 2,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 22,
+          "ImplicitTarget2": 15
+        },
+        {
+          "ID": 297193,
+          "Effect": 144,
+          "EffectAura": 0,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 100,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 18,
+          "ImplicitTarget2": 16
+        },
+        {
+          "ID": 297914,
+          "Effect": 61,
+          "EffectAura": 0,
+          "EffectIndex": 2,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 48569,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 0,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "218330": [
+        {
+          "ID": 325059,
+          "Effect": 90,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 109693,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 22,
+          "ImplicitTarget2": 7
+        }
+      ],
+      "203995": [
+        {
+          "ID": 301022,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 38,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "240221": [
+        {
+          "ID": 364141,
+          "Effect": 90,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 120507,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        },
+        {
+          "ID": 364169,
+          "Effect": 167,
+          "EffectAura": 0,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "203994": [
+        {
+          "ID": 301021,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 38,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "217183": [],
+      "233896": [
+        {
+          "ID": 353287,
+          "Effect": 61,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 56093,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "232169": [
+        {
+          "ID": 350325,
+          "Effect": 227,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 1350,
+          "MiscValue2": 1422,
+          "PositionFacing": 0.030019663274288177,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 17
+        }
+      ],
+      "233450": [
+        {
+          "ID": 352599,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 18,
+          "ImplicitTarget2": 8
+        }
+      ],
+      "237673": [
+        {
+          "ID": 360109,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 120,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "233966": [],
+      "199727": [
+        {
+          "ID": 293924,
+          "Effect": 213,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 46
+        }
+      ],
+      "236018": [
+        {
+          "ID": 356766,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 18,
+          "ImplicitTarget2": 8
+        },
+        {
+          "ID": 357326,
+          "Effect": 61,
+          "EffectAura": 0,
+          "EffectIndex": 1,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 56752,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "237619": [
+        {
+          "ID": 359961,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 120,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "237620": [
+        {
+          "ID": 359962,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 120,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "237621": [
+        {
+          "ID": 359963,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 120,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "219701": [
+        {
+          "ID": 327360,
+          "Effect": 6,
+          "EffectAura": 430,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 1363,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 1,
+          "ImplicitTarget2": 0
+        }
+      ],
+      "233399": [
+        {
+          "ID": 352488,
+          "Effect": 3,
+          "EffectAura": 0,
+          "EffectIndex": 0,
+          "DifficultyID": 0,
+          "TriggerSpell": 0,
+          "MiscValue1": 0,
+          "MiscValue2": 0,
+          "PositionFacing": 0.0,
+          "ImplicitTarget1": 18,
+          "ImplicitTarget2": 8
+        }
+      ]
+    }
+  },
+  "client_build": 26654,
+  "expected_core_build": 26972,
+  "rows": [
+    {
+      "SceneId": 1363,
+      "Flags": 27,
+      "ScriptPackageID": 1680,
+      "ScriptName": "''"
+    },
+    {
+      "SceneId": 1547,
+      "Flags": 20,
+      "ScriptPackageID": 1784,
+      "ScriptName": "''"
+    }
+  ],
+  "original_release_mapping_rows": [],
+  "migration": "sql/updates/world/2026_10_08_05_world_campaign_scene_templates.sql",
+  "local_mysql_test": "PASS: MySQL 8.0.45 disposable schema with copied release tables and representative protected rows; schema dropped",
+  "local_native_test": "PASS: 14 actual SceneMgr methods and actual AuraEffect::HandlePlayScene, checked iterators, no sanitizers",
+  "before_fix_reproduction": "Previous HEAD fails the unrelated same-package scene cancellation fixture.",
+  "client_playtest": false,
+  "restored_objects": [],
+  "restored_conversations": [],
+  "production_server_updated": false,
+  "object_spell_references": {
+    "252800": {
+      "GameObjectDisplayInfo": 15781,
+      "CharShipmentContainer": 190
+    },
+    "246148": {
+      "GameObjectDisplayInfo": 30858,
+      "Lock": 1691,
+      "BroadcastText": 35196
+    },
+    "246536": {
+      "Lock": 5,
+      "PlayerCondition": 18177
+    },
+    "246537": {
+      "Spell": 204944,
+      "PlayerCondition": 18177
+    },
+    "247052": {
+      "GameObjectDisplayInfo": 31977,
+      "Lock": 1691,
+      "Spell": 204230,
+      "PlayerCondition": 38374,
+      "BroadcastText": 56085
+    },
+    "266767": {
+      "Spell": 232169
+    },
+    "250899": {
+      "CharShipmentContainer": 154
+    },
+    "247321": {
+      "PageText": 5243
+    },
+    "248475": {
+      "GameObjectDisplayInfo": 27619,
+      "Lock": 1952,
+      "PlayerCondition": 39037
+    },
+    "250908": {
+      "CharShipmentContainer": 148
+    },
+    "247038": {
+      "GameObjectDisplayInfo": 35433,
+      "Lock": 1691,
+      "Spell": 203995,
+      "PlayerCondition": 38308,
+      "BroadcastText": 96631
+    },
+    "267041": {
+      "GameObjectDisplayInfo": 15383,
+      "Lock": 1690,
+      "Spell": 233370,
+      "BroadcastText": 125962
+    },
+    "245924": {
+      "GameObjectDisplayInfo": 26998,
+      "Lock": 1691,
+      "PlayerCondition": 37624,
+      "BroadcastText": 19676
+    },
+    "267176": {
+      "GameObjectDisplayInfo": 8235,
+      "Lock": 1691,
+      "Spell": 233857,
+      "PlayerCondition": 47096,
+      "Quest": 45632,
+      "BroadcastText": 21400
+    },
+    "267177": {
+      "GameObjectDisplayInfo": 8235,
+      "Lock": 1691,
+      "Spell": 233896,
+      "PlayerCondition": 47097,
+      "Quest": 45648,
+      "BroadcastText": 21400
+    },
+    "248876": {
+      "GameObjectDisplayInfo": 2650,
+      "Lock": 43,
+      "PlayerCondition": 39397,
+      "BroadcastText": 108167
+    },
+    "267952": {
+      "GameObjectDisplayInfo": 335,
+      "Lock": 1690,
+      "PlayerCondition": 47913,
+      "BroadcastText": 19680,
+      "PersonalLootEntry": 71556
+    },
+    "251697": {
+      "GameObjectDisplayInfo": 9130,
+      "Spell": 218330,
+      "PageText": 5314
+    },
+    "266291": {
+      "GameObjectDisplayInfo": 21960,
+      "Lock": 93,
+      "BroadcastText": 19676,
+      "PersonalLootEntry": 70459
+    },
+    "252981": {
+      "PlayerCondition": 44383
+    },
+    "266166": {
+      "GameObjectDisplayInfo": 41159,
+      "Lock": 1690,
+      "Spell": 239044,
+      "PlayerCondition": 46899,
+      "BroadcastText": 83759
+    },
+    "250295": {
+      "GameObjectDisplayInfo": 8464,
+      "GameEvent": 51128
+    },
+    "268474": {
+      "GameObjectDisplayInfo": 6896,
+      "Lock": 1691,
+      "BroadcastText": 19676,
+      "PersonalLootEntry": 71934
+    },
+    "268475": {
+      "GameObjectDisplayInfo": 9849,
+      "Lock": 1691,
+      "BroadcastText": 21400,
+      "PersonalLootEntry": 71935
+    },
+    "268476": {
+      "GameObjectDisplayInfo": 41126,
+      "Lock": 1691,
+      "BroadcastText": 21400,
+      "PersonalLootEntry": 71936
+    },
+    "268477": {
+      "GameObjectDisplayInfo": 6426,
+      "Lock": 1691,
+      "BroadcastText": 19676,
+      "PersonalLootEntry": 71938
+    },
+    "246459": {
+      "Lock": 2507,
+      "Spell": 201690,
+      "PlayerCondition": 18177
+    },
+    "268479": {
+      "GameObjectDisplayInfo": 41127,
+      "Lock": 1691,
+      "BroadcastText": 19676,
+      "PersonalLootEntry": 71943
+    },
+    "268736": {
+      "GameObjectDisplayInfo": 36278,
+      "Lock": 2688,
+      "Spell": 240221,
+      "PlayerCondition": 48622
+    },
+    "266307": {
+      "GameObjectDisplayInfo": 21959,
+      "Lock": 93,
+      "Spell": 236018,
+      "BroadcastText": 35196
+    },
+    "249027": {
+      "Lock": 1691,
+      "LootEntry": 249027,
+      "PlayerCondition": 23645,
+      "QuestItem": 136694
+    },
+    "268359": {
+      "GameObjectDisplayInfo": 9410,
+      "Spell": 237385,
+      "Quest": 45147
+    },
+    "246984": {
+      "GameObjectDisplayInfo": 31885,
+      "Lock": 93,
+      "Spell": 218574,
+      "PlayerCondition": 41517,
+      "BroadcastText": 21295
+    },
+    "252796": {
+      "GameObjectDisplayInfo": 15781,
+      "CharShipmentContainer": 186
+    },
+    "268617": {
+      "GameObjectDisplayInfo": 31826,
+      "Lock": 1690,
+      "PlayerCondition": 49035,
+      "GameEvent": 57304,
+      "BroadcastText": 27700
+    },
+    "248781": {
+      "GameObjectDisplayInfo": 32890,
+      "Lock": 43,
+      "BroadcastText": 19676,
+      "PersonalLootEntry": 65643
+    },
+    "248782": {
+      "GameObjectDisplayInfo": 32891,
+      "Lock": 43,
+      "BroadcastText": 19676,
+      "PersonalLootEntry": 65643
+    },
+    "267222": {
+      "GameObjectDisplayInfo": 26854,
+      "Lock": 2668,
+      "Spell": 233966,
+      "Quest": 45725,
+      "BroadcastText": 21400
+    },
+    "268377": {
+      "GameObjectDisplayInfo": 10976,
+      "Lock": 2640,
+      "Spell": 237619
+    },
+    "268378": {
+      "GameObjectDisplayInfo": 10976,
+      "Lock": 2640,
+      "Spell": 237620
+    },
+    "268379": {
+      "GameObjectDisplayInfo": 10976,
+      "Lock": 2640,
+      "Spell": 237621
+    },
+    "266588": {
+      "GameObjectDisplayInfo": 10313,
+      "Lock": 43,
+      "BroadcastText": 21400,
+      "PersonalLootEntry": 70531
+    },
+    "266081": {
+      "GameObjectDisplayInfo": 30744,
+      "Lock": 1691,
+      "Spell": 233450,
+      "PlayerCondition": 48083,
+      "GameEvent": 55277,
+      "BroadcastText": 28503
+    },
+    "266594": {
+      "GameObjectDisplayInfo": 10313,
+      "Lock": 43,
+      "BroadcastText": 21400,
+      "PersonalLootEntry": 70532
+    },
+    "266595": {
+      "GameObjectDisplayInfo": 10313,
+      "Lock": 43,
+      "BroadcastText": 21400,
+      "PersonalLootEntry": 70533
+    },
+    "245994": {
+      "GameObjectDisplayInfo": 32046,
+      "Lock": 1691,
+      "Spell": 199727,
+      "PlayerCondition": 39238,
+      "BroadcastText": 19676
+    },
+    "245102": {
+      "GameObjectDisplayInfo": 28635,
+      "FactionTemplate": 114
+    },
+    "251504": {
+      "GameObjectDisplayInfo": 13907,
+      "Lock": 2565,
+      "Spell": 217183
+    },
+    "252017": {
+      "GameObjectDisplayInfo": 31225,
+      "Lock": 93,
+      "Spell": 219701,
+      "BroadcastText": 19700
+    },
+    "245234": {
+      "GameObjectDisplayInfo": 28635,
+      "Lock": 1691,
+      "PlayerCondition": 19467,
+      "BroadcastText": 33516
+    },
+    "245233": {},
+    "252018": {
+      "Spell": 219701,
+      "PlayerCondition": 41852
+    },
+    "268408": {
+      "GameObjectDisplayInfo": 30744,
+      "Lock": 1691,
+      "Spell": 237673,
+      "PlayerCondition": 48092
+    },
+    "267641": {
+      "GameObjectDisplayInfo": 39368,
+      "Lock": 43,
+      "BroadcastText": 19676,
+      "PersonalLootEntry": 70957
+    },
+    "267003": {
+      "GameObjectDisplayInfo": 28632,
+      "Lock": 99,
+      "Spell": 233399,
+      "BroadcastText": 24585
+    },
+    "250364": {
+      "GameObjectDisplayInfo": 19875,
+      "GameEvent": 51140
+    },
+    "247037": {
+      "GameObjectDisplayInfo": 35434,
+      "Lock": 1691,
+      "Spell": 203994,
+      "PlayerCondition": 38308,
+      "BroadcastText": 96631
+    },
+    "251262": {
+      "GameObjectDisplayInfo": 8111,
+      "Spell": 215687
+    },
+    "250367": {
+      "GameObjectDisplayInfo": 33527,
+      "GameEvent": 51142
+    }
+  }
+}

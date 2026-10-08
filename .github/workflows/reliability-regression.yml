@@ -4,6 +4,9 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/server/game/Entities/Player/SceneMgr.*
+      - src/server/game/Spells/Auras/SpellAuraEffects.cpp
+      - contrib/tests/test_scene_lifecycle.py
       - src/server/game/Movement/CombatSlot.*
       - src/server/game/Movement/MovementGenerators/TargetedMovementGenerator.*
       - src/server/game/Entities/Object/ObjectPosSelector.*
@@ -276,3 +279,5 @@ jobs:
         run: python contrib/tests/test_campaign_script_inventory.py
       - name: Test native shipment request handlers and packet writers
         run: python contrib/tests/test_garrison_shipment_handlers.py
+      - name: Test native scene lifecycle, recursive callbacks and scoped aura cancellation
+        run: python contrib/tests/test_scene_lifecycle.py

@@ -25,6 +25,17 @@
 #include "ScriptMgr.h"
 #include "SpellAuraEffects.h"
 
+namespace
+{
+    // Script callbacks may recursively finish/cancel a scene or erase its entry.
+    struct SceneEndGuard
+    {
+        std::set<uint32>& Instances;
+        uint32 InstanceId;
+        ~SceneEndGuard() { Instances.erase(InstanceId); }
+    };
+}
+
 SceneMgr::SceneMgr(Player* player) : _player(player)
 {
     _standaloneSceneInstanceID = 0;
@@ -97,14 +108,14 @@ void SceneMgr::CancelScene(uint32 sceneInstanceID, bool removeFromMap /*= true*/
 
 void SceneMgr::OnSceneTrigger(uint32 sceneInstanceID, std::string const& triggerName)
 {
-    if (!HasScene(sceneInstanceID))
+    if (!HasScene(sceneInstanceID) || _endingScenes.count(sceneInstanceID))
         return;
 
     if (_isDebuggingScenes)
         ChatHandler(GetPlayer()->GetSession()).PSendSysMessage(LANG_COMMAND_SCENE_DEBUG_TRIGGER, sceneInstanceID, triggerName.c_str());
 
-    SceneTemplate const* sceneTemplate = GetSceneTemplateFromInstanceId(sceneInstanceID);
-    sScriptMgr->OnSceneTrigger(GetPlayer(), sceneInstanceID, sceneTemplate, triggerName);
+    SceneTemplate const sceneTemplate = *GetSceneTemplateFromInstanceId(sceneInstanceID);
+    sScriptMgr->OnSceneTrigger(GetPlayer(), sceneInstanceID, &sceneTemplate, triggerName);
 
     // Legacy PlayerScript
     sScriptMgr->OnSceneTriggerEvent(GetPlayer(), sceneInstanceID, triggerName);
@@ -112,25 +123,26 @@ void SceneMgr::OnSceneTrigger(uint32 sceneInstanceID, std::string const& trigger
 
 void SceneMgr::OnSceneCancel(uint32 sceneInstanceID)
 {
-    if (!HasScene(sceneInstanceID))
+    if (!HasScene(sceneInstanceID) || _endingScenes.count(sceneInstanceID))
         return;
 
     if (_isDebuggingScenes)
         ChatHandler(GetPlayer()->GetSession()).PSendSysMessage(LANG_COMMAND_SCENE_DEBUG_CANCEL, sceneInstanceID);
 
-    SceneTemplate const* sceneTemplate = GetSceneTemplateFromInstanceId(sceneInstanceID);
-    uint32 const sceneId = sceneTemplate->SceneId;
+    SceneTemplate const sceneTemplate = *GetSceneTemplateFromInstanceId(sceneInstanceID);
+    uint32 const sceneId = sceneTemplate.SceneId;
+    _endingScenes.insert(sceneInstanceID);
+    SceneEndGuard const endingGuard{ _endingScenes, sceneInstanceID };
 
-    sScriptMgr->OnSceneCancel(GetPlayer(), sceneInstanceID, sceneTemplate);
+    sScriptMgr->OnSceneCancel(GetPlayer(), sceneInstanceID, &sceneTemplate);
 
     // Legacy PlayerScript
     sScriptMgr->OnSceneCancel(GetPlayer(), sceneInstanceID);
 
-    if (sceneTemplate->PlaybackFlags & SCENEFLAG_CANCEL_AT_END)
+    if ((sceneTemplate.PlaybackFlags & SCENEFLAG_CANCEL_AT_END) && HasScene(sceneInstanceID))
         CancelScene(sceneInstanceID, false);
 
-    // Must be done before removing aura but after every use of sceneTemplate,
-    // this will invalidate the pointer
+    // Erase before aura removal, which may recursively cancel scene instances.
     RemoveSceneInstanceId(sceneInstanceID);
 
     if (sceneId != 0)
@@ -139,25 +151,26 @@ void SceneMgr::OnSceneCancel(uint32 sceneInstanceID)
 
 void SceneMgr::OnSceneComplete(uint32 sceneInstanceID)
 {
-    if (!HasScene(sceneInstanceID))
+    if (!HasScene(sceneInstanceID) || _endingScenes.count(sceneInstanceID))
         return;
 
     if (_isDebuggingScenes)
         ChatHandler(GetPlayer()->GetSession()).PSendSysMessage(LANG_COMMAND_SCENE_DEBUG_COMPLETE, sceneInstanceID);
 
-    SceneTemplate const* sceneTemplate = GetSceneTemplateFromInstanceId(sceneInstanceID);
-    uint32 const sceneId = sceneTemplate->SceneId;
+    SceneTemplate const sceneTemplate = *GetSceneTemplateFromInstanceId(sceneInstanceID);
+    uint32 const sceneId = sceneTemplate.SceneId;
+    _endingScenes.insert(sceneInstanceID);
+    SceneEndGuard const endingGuard{ _endingScenes, sceneInstanceID };
 
-    sScriptMgr->OnSceneComplete(GetPlayer(), sceneInstanceID, sceneTemplate);
+    sScriptMgr->OnSceneComplete(GetPlayer(), sceneInstanceID, &sceneTemplate);
 
     // Legacy PlayerScript
     sScriptMgr->OnSceneComplete(GetPlayer(), sceneInstanceID);
 
-    if (sceneTemplate->PlaybackFlags & SCENEFLAG_CANCEL_AT_END)
+    if ((sceneTemplate.PlaybackFlags & SCENEFLAG_CANCEL_AT_END) && HasScene(sceneInstanceID))
         CancelScene(sceneInstanceID, false);
 
-    // Must be done before removing aura but after every use of sceneTemplate,
-    // this will invalidate the pointer
+    // Erase before aura removal, which may recursively cancel scene instances.
     RemoveSceneInstanceId(sceneInstanceID);
 
     if (sceneId != 0)
