@@ -1,0 +1,295 @@
+{
+  "basis": "Read-only SELECT from ru_target; MyISAM consistency requires a quiescent copy",
+  "complete": true,
+  "core_option_max": 30,
+  "enum_header_sha256": "be54e35198db4a3002d843c6e50819f50d8ce10da501d5edf1a28b1cceeac88c",
+  "table_counts": {
+    "gossip_menu": 9934,
+    "gossip_menu_option": 7867,
+    "gossip_menu_option_action": 3072,
+    "gossip_menu_option_box": 104,
+    "gossip_menu_option_trainer": 153,
+    "gossip_menu_option_locale": 5638,
+    "conditions": 10034,
+    "creature_template": 110482,
+    "gameobject_template": 49276,
+    "smart_scripts": 51255,
+    "points_of_interest": 794,
+    "trainer": 62,
+    "npc_trainer": 39138,
+    "creature_default_trainer": 165
+  },
+  "counts": {
+    "ORPHAN_OPTION": 57,
+    "ORPHAN_MENU": 880,
+    "DEFAULT_MENU_REVIEW": 18,
+    "MISSING_TRAINER": 428,
+    "SUSPICIOUS_NPCFLAG": 1173,
+    "MISSING_SMART_EVENT": 283,
+    "BROKEN_ACTION_MENU": 14,
+    "INVALID_OPTION_TYPE": 3,
+    "SMARTAI_CPP_CONFLICT": 923,
+    "SMART_BINDING_MISMATCH": 116,
+    "DUPLICATE_SMART_EVENT": 117,
+    "SMART_CONDITION_REVIEW": 36,
+    "ORPHAN_CONDITION": 2
+  },
+  "status_counts": {
+    "CONFIRMED_DATA_ERROR": 62,
+    "REVIEW_REQUIRED": 3859,
+    "VALID": 127,
+    "FALSE_POSITIVE": 2
+  },
+  "category_status_counts": {
+    "BROKEN_ACTION_MENU": {
+      "REVIEW_REQUIRED": 11,
+      "CONFIRMED_DATA_ERROR": 1,
+      "FALSE_POSITIVE": 2
+    },
+    "DEFAULT_MENU_REVIEW": {
+      "REVIEW_REQUIRED": 18
+    },
+    "DUPLICATE_SMART_EVENT": {
+      "REVIEW_REQUIRED": 117
+    },
+    "INVALID_OPTION_TYPE": {
+      "CONFIRMED_DATA_ERROR": 3
+    },
+    "MISSING_SMART_EVENT": {
+      "REVIEW_REQUIRED": 283
+    },
+    "MISSING_TRAINER": {
+      "REVIEW_REQUIRED": 301,
+      "VALID": 127
+    },
+    "ORPHAN_CONDITION": {
+      "REVIEW_REQUIRED": 1,
+      "CONFIRMED_DATA_ERROR": 1
+    },
+    "ORPHAN_MENU": {
+      "REVIEW_REQUIRED": 880
+    },
+    "ORPHAN_OPTION": {
+      "CONFIRMED_DATA_ERROR": 57
+    },
+    "SMARTAI_CPP_CONFLICT": {
+      "REVIEW_REQUIRED": 923
+    },
+    "SMART_BINDING_MISMATCH": {
+      "REVIEW_REQUIRED": 116
+    },
+    "SMART_CONDITION_REVIEW": {
+      "REVIEW_REQUIRED": 36
+    },
+    "SUSPICIOUS_NPCFLAG": {
+      "REVIEW_REQUIRED": 1173
+    }
+  },
+  "cpp_hook_counts": {
+    "sGossipSelect": 96,
+    "sGossipHello": 20,
+    "OnGossipSelect": 199,
+    "OnGossipHello": 407,
+    "GossipSelect": 2
+  },
+  "limits": [
+    "Read-only audit; no repair SQL. Counts refer to selected database snapshot, not production.",
+    "Missing menu text is not proof that options are unusable.",
+    "C++ inventory is lexical, not a control-flow proof.",
+    "Current conditions and player-specific states require client/server reproduction.",
+    "SmartAI GUID scripts and dynamic/default menus prevent inferring missing handlers as confirmed bugs."
+  ],
+  "source_head": "c5d4583160bdc74ba33f8a8136997a751534412d",
+  "upstream_head": "30bfb3cf13520bf032737d3e5c607e57d547f128",
+  "snapshot_sha256": "ad52923eca93c76a06b8f2ff69df6a46b6c2c46c6f462e99abed225ac73ef61f",
+  "baseline_scope": "Local read-only ru_target release copy; not production and not proof of its currently applied world updates.",
+  "key_findings": [
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 6321,
+      "OptionText": "Jin'rokh, I need assistance in recovering a piece of my Freethinker's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 0,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21263,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 6321,
+      "OptionText": "Jin'rokh, I need assistance in recovering a piece of my Vindicator's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 1,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21264,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 6322,
+      "OptionText": "Al'tabim, I need assistance in recovering a piece of my Confessor's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 0,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21265,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 6322,
+      "OptionText": "Al'tabim, I need assistance in recovering a piece of my Demoniac's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 1,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21266,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 6322,
+      "OptionText": "Al'tabim, I need assistance in recovering a piece of my Illusionist's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 2,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21267,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 6341,
+      "OptionText": "Maywiki, I need assistance in recovering a piece of my Augur's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 0,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21268,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 6341,
+      "OptionText": "Maywiki, I need assistance in recovering a piece of my Haruspex's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 1,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21269,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 21262,
+      "OptionText": "Falthir, I need assistance in recovering a piece of my Madcap's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 0,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21270,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 21262,
+      "OptionText": "Falthir, I need assistance in recovering a piece of my Predator's outfit.",
+      "OptionType": 1,
+      "OptionIndex": 1,
+      "OptionNpcFlag": 3,
+      "ActionMenuId": 21271,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "CONFIRMED_DATA_ERROR",
+      "MenuId": 21295,
+      "OptionText": "I have killed many of your ogres, Lantresor. I have no fear.",
+      "OptionType": 1,
+      "OptionIndex": 0,
+      "OptionNpcFlag": 1,
+      "ActionMenuId": 21296,
+      "reason": "Missing destination text and option rows; verify quest/default-menu fallback before repair"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "FALSE_POSITIVE",
+      "MenuId": 10662,
+      "OptionText": "Queue for Wintergrasp.",
+      "OptionType": 12,
+      "OptionIndex": 0,
+      "OptionNpcFlag": 1,
+      "ActionMenuId": 1048576,
+      "reason": "Native dispatch does not use ActionMenuId for this OptionType"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 11322,
+      "OptionText": "Matoclaw believes that you may yet be redeemed. This is your chance to atone for siding with demons.",
+      "OptionType": 1,
+      "OptionIndex": 2,
+      "OptionNpcFlag": 1,
+      "ActionMenuId": 11326,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "REVIEW_REQUIRED",
+      "MenuId": 11324,
+      "OptionText": "Where is your master now, Blackhorn? It's not too late to turn to the light...",
+      "OptionType": 1,
+      "OptionIndex": 1,
+      "OptionNpcFlag": 1,
+      "ActionMenuId": 11326,
+      "reason": "Destination options exist; default text may be intentional"
+    },
+    {
+      "category": "BROKEN_ACTION_MENU",
+      "status": "FALSE_POSITIVE",
+      "MenuId": 20086,
+      "OptionText": "Why can't I research Artifact Knowledge?",
+      "OptionType": 0,
+      "OptionIndex": 1,
+      "OptionNpcFlag": 0,
+      "ActionMenuId": 21664,
+      "reason": "Native dispatch does not use ActionMenuId for this OptionType"
+    },
+    {
+      "category": "INVALID_OPTION_TYPE",
+      "status": "CONFIRMED_DATA_ERROR",
+      "MenuId": 19958,
+      "OptionText": "I'd like to refund the traits in my artifact.",
+      "OptionType": 27,
+      "OptionIndex": 2,
+      "OptionNpcFlag": 1,
+      "core_max": 30
+    },
+    {
+      "category": "INVALID_OPTION_TYPE",
+      "status": "CONFIRMED_DATA_ERROR",
+      "MenuId": 19955,
+      "OptionText": "I'd like to refund the traits in my artifact.",
+      "OptionType": 27,
+      "OptionIndex": 0,
+      "OptionNpcFlag": 1,
+      "core_max": 30
+    },
+    {
+      "category": "INVALID_OPTION_TYPE",
+      "status": "CONFIRMED_DATA_ERROR",
+      "MenuId": 18745,
+      "OptionText": "I'd like to refund the traits in my artifact.",
+      "OptionType": 27,
+      "OptionIndex": 0,
+      "OptionNpcFlag": 1,
+      "core_max": 30
+    }
+  ],
+  "full_report": "gossip-system-audit-2026-10-08.json.gz",
+  "full_report_sha256": "88f5af1c99afb55af2040a4427c9ec6475a7e26be6a3d87e7acd0613be71e38c",
+  "cpp_gossip_overlap_creatures": 77
+}

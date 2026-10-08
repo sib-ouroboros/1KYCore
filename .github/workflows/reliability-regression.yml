@@ -4,6 +4,11 @@ on:
   push:
     branches: [cleanup/remove-bots, main, 'development/**']
     paths:
+      - src/server/game/Entities/Creature/GossipDef.*
+      - src/server/game/Handlers/NPCHandler.cpp
+      - contrib/tests/test_gossip_dispatch.py
+      - contrib/tests/test_gossip_audit.py
+      - contrib/tools/gossip_audit.py
       - src/server/game/Entities/Player/SceneMgr.*
       - src/server/game/Spells/Auras/SpellAuraEffects.cpp
       - contrib/tests/test_scene_lifecycle.py
@@ -279,6 +284,10 @@ jobs:
         run: python contrib/tests/test_campaign_script_inventory.py
       - name: Test native shipment request handlers and packet writers
         run: python contrib/tests/test_garrison_shipment_handlers.py
+      - name: Test Gossip snapshots, lifecycle, stale menus and dispatch with sanitizers
+        run: python contrib/tests/test_gossip_dispatch.py
+      - name: Test read-only Gossip audit classifications and enum synchronization
+        run: python contrib/tests/test_gossip_audit.py
       - name: Test rogue object invokers, native use and personal conversation dispatch
         run: python contrib/tests/test_campaign_rogue_objects.py
       - name: Test native scene lifecycle, recursive callbacks and scoped aura cancellation

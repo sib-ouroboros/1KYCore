@@ -183,8 +183,9 @@ class TC_GAME_API GossipMenu
         uint32 AddMenuItem(int32 optionIndex, uint8 icon, std::string const& message, uint32 sender, uint32 action, std::string const& boxMessage, uint32 boxMoney, bool coded = false);
         void AddMenuItem(uint32 menuId, uint32 optionIndex, uint32 sender, uint32 action);
 
-        void SetMenuId(uint32 menu_id) { _menuId = menu_id; }
+        void SetMenuId(uint32 menu_id) { if (_menuId != menu_id) { _menuId = menu_id; ++_revision; } }
         uint32 GetMenuId() const { return _menuId; }
+        uint64 GetRevision() const { return _revision; }
         void SetLocale(LocaleConstant locale) { _locale = locale; }
         LocaleConstant GetLocale() const { return _locale; }
 
@@ -227,6 +228,7 @@ class TC_GAME_API GossipMenu
         GossipMenuItemContainer _menuItems;
         GossipMenuItemDataContainer _menuItemData;
         uint32 _menuId;
+        uint64 _revision = 0; // distinguishes clear/rebuild even with identical menu IDs
         LocaleConstant _locale;
 };
 

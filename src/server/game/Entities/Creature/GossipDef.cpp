@@ -59,6 +59,7 @@ uint32 GossipMenu::AddMenuItem(int32 optionIndex, uint8 icon, std::string const&
         }
     }
 
+    ++_revision;
     GossipMenuItem& menuItem = _menuItems[optionIndex];
 
     menuItem.MenuItemIcon    = icon;
@@ -137,6 +138,7 @@ void GossipMenu::AddMenuItem(uint32 menuId, uint32 optionIndex, uint32 sender, u
 
 void GossipMenu::AddGossipMenuItemData(uint32 optionIndex, uint32 gossipActionMenuId, uint32 gossipActionPoi, uint32 trainerId)
 {
+    ++_revision;
     GossipMenuItemData& itemData = _menuItemData[optionIndex];
 
     itemData.GossipActionMenuId  = gossipActionMenuId;
@@ -182,6 +184,7 @@ bool GossipMenu::HasMenuItemType(uint32 optionType) const
 
 void GossipMenu::ClearMenu()
 {
+    ++_revision;
     _menuItems.clear();
     _menuItemData.clear();
 }

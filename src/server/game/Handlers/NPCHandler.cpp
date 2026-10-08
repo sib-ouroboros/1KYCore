@@ -362,12 +362,36 @@ void WorldSession::HandleGossipHelloOpcode(WorldPackets::NPC::Hello& packet)
 
 void WorldSession::HandleGossipSelectOptionOpcode(WorldPackets::NPC::GossipSelectOption& packet)
 {
-    if (!_player->PlayerTalkClass->GetGossipMenu().GetItem(packet.GossipIndex))
+    GossipMenu& gossipMenu = _player->PlayerTalkClass->GetGossipMenu();
+    GossipMenuItem const* item = gossipMenu.GetItem(packet.GossipIndex);
+    if (!item)
+    {
+        TC_LOG_DEBUG("network", "Gossip select rejected: missing item; player=%s source=%s menu=%u index=%u",
+            _player->GetGUID().ToString().c_str(), packet.GossipUnit.ToString().c_str(), packet.GossipID, packet.GossipIndex);
         return;
+    }
+
+    // The message sends this exact MenuId, including zero for scripted menus.
+    if (packet.GossipID != gossipMenu.GetMenuId())
+    {
+        TC_LOG_DEBUG("network", "Gossip select rejected: stale menu; packet=%u current=%u source=%s index=%u",
+            packet.GossipID, gossipMenu.GetMenuId(), packet.GossipUnit.ToString().c_str(), packet.GossipIndex);
+        return;
+    }
+
+    // AI and legacy scripts can erase/rebuild this container during one click.
+    // Copy values now; never keep an item reference across those callbacks.
+    uint32 const gossipOptionSender = item->Sender;
+    uint32 const gossipOptionAction = item->OptionType;
+    uint64 const gossipRevision = gossipMenu.GetRevision();
 
     // Prevent cheating on C++ scripted menus
     if (_player->PlayerTalkClass->GetInteractionData().SourceGuid != packet.GossipUnit)
+    {
+        TC_LOG_DEBUG("network", "Gossip select rejected: source guid mismatch; player=%s source=%s menu=%u index=%u",
+            _player->GetGUID().ToString().c_str(), packet.GossipUnit.ToString().c_str(), packet.GossipID, packet.GossipIndex);
         return;
+    }
 
     Creature* unit = nullptr;
     GameObject* go = nullptr;
@@ -396,6 +420,24 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPackets::NPC::GossipSelec
         return;
     }
 
+    TC_LOG_DEBUG("network", "Gossip select: player=%s source=%s packetMenu=%u currentMenu=%u index=%u sender=%u action=%u AI=%s script=%s",
+        _player->GetGUID().ToString().c_str(), packet.GossipUnit.ToString().c_str(), packet.GossipID,
+        gossipMenu.GetMenuId(), packet.GossipIndex, gossipOptionSender, gossipOptionAction,
+        (unit ? unit->GetAIName() : go->GetAIName()).c_str(),
+        sObjectMgr->GetScriptName(unit ? unit->GetScriptId() : go->GetScriptId()).c_str());
+
+    // Native DB fallback reads the menu. Do not apply this click to a menu
+    // installed by AI/legacy scripts, even if its ID and option index coincide.
+    auto unchangedMenu = [&]()
+    {
+        bool const unchanged = gossipMenu.GetRevision() == gossipRevision &&
+            _player->PlayerTalkClass->GetInteractionData().SourceGuid == packet.GossipUnit;
+        if (!unchanged)
+            TC_LOG_DEBUG("network", "Gossip native fallback skipped: menu changed during callback; source=%s menu=%u index=%u",
+                packet.GossipUnit.ToString().c_str(), packet.GossipID, packet.GossipIndex);
+        return unchanged;
+    };
+
     // remove fake death
     if (GetPlayer()->HasUnitState(UNIT_STATE_DIED))
         GetPlayer()->RemoveAurasByType(SPELL_AURA_FEIGN_DEATH);
@@ -417,13 +459,14 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPackets::NPC::GossipSelec
         if (unit)
         {
             unit->AI()->sGossipSelectCode(_player, packet.GossipID, packet.GossipIndex, packet.PromotionCode.c_str());
-            if (!sScriptMgr->OnGossipSelectCode(_player, unit, _player->PlayerTalkClass->GetGossipOptionSender(packet.GossipIndex), _player->PlayerTalkClass->GetGossipOptionAction(packet.GossipIndex), packet.PromotionCode.c_str()))
+            if (!sScriptMgr->OnGossipSelectCode(_player, unit, gossipOptionSender, gossipOptionAction, packet.PromotionCode.c_str()) && unchangedMenu())
                 _player->OnGossipSelect(unit, packet.GossipIndex, packet.GossipID);
         }
         else
         {
-            go->AI()->GossipSelectCode(_player, packet.GossipID, packet.GossipIndex, packet.PromotionCode.c_str());
-            if (!sScriptMgr->OnGossipSelectCode(_player, go, _player->PlayerTalkClass->GetGossipOptionSender(packet.GossipIndex), _player->PlayerTalkClass->GetGossipOptionAction(packet.GossipIndex), packet.PromotionCode.c_str()))
+            if (go->AI()->GossipSelectCode(_player, packet.GossipID, packet.GossipIndex, packet.PromotionCode.c_str()))
+                return;
+            if (!sScriptMgr->OnGossipSelectCode(_player, go, gossipOptionSender, gossipOptionAction, packet.PromotionCode.c_str()) && unchangedMenu())
                 _player->OnGossipSelect(go, packet.GossipIndex, packet.GossipID);
         }
     }
@@ -432,13 +475,14 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPackets::NPC::GossipSelec
         if (unit)
         {
             unit->AI()->sGossipSelect(_player, packet.GossipID, packet.GossipIndex);
-            if (!sScriptMgr->OnGossipSelect(_player, unit, _player->PlayerTalkClass->GetGossipOptionSender(packet.GossipIndex), _player->PlayerTalkClass->GetGossipOptionAction(packet.GossipIndex)))
+            if (!sScriptMgr->OnGossipSelect(_player, unit, gossipOptionSender, gossipOptionAction) && unchangedMenu())
                 _player->OnGossipSelect(unit, packet.GossipIndex, packet.GossipID);
         }
         else
         {
-            go->AI()->GossipSelect(_player, packet.GossipID, packet.GossipIndex);
-            if (!sScriptMgr->OnGossipSelect(_player, go, _player->PlayerTalkClass->GetGossipOptionSender(packet.GossipIndex), _player->PlayerTalkClass->GetGossipOptionAction(packet.GossipIndex)))
+            if (go->AI()->GossipSelect(_player, packet.GossipID, packet.GossipIndex))
+                return;
+            if (!sScriptMgr->OnGossipSelect(_player, go, gossipOptionSender, gossipOptionAction) && unchangedMenu())
                 _player->OnGossipSelect(go, packet.GossipIndex, packet.GossipID);
         }
     }
