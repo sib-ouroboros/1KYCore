@@ -40,7 +40,7 @@ struct Player:Unit,Position{Map* map;uint32 guid;std::vector<uint32> credits;
  Player(Map* m,uint32 g):map(m),guid(g){}Player* ToPlayer()override{return this;}
  Map* GetMap(){return map;}uint32 GetGUID(){return guid;}void KilledMonsterCredit(uint32 id){credits.push_back(id);}};
 struct GameObjectAI;
-struct GameObject{uint32 entry;Map* map;GameObjectAI* ai=nullptr;LootState m_lootState=GO_READY;Guid m_lootStateUnitGUID;bool m_model=false;
+struct GameObject{uint32 entry;Map* map;GameObjectAI* ai=nullptr;LootState m_lootState=GO_READY;Guid m_lootStateUnitGUID{};bool m_model=false;
  uint32 GetEntry(){return entry;}Map* GetMap(){return map;}uint32 GetGoType(){return 10;}uint32 GetGoState(){return GO_STATE_READY;}
  void EnableCollision(bool){}GameObjectAI* AI(){return ai;}void SetLootState(LootState,Unit*);};
 struct GameObjectAI{protected:GameObject* go;public:explicit GameObjectAI(GameObject* object):go(object){}virtual ~GameObjectAI()=default;
