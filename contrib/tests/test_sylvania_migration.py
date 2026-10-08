@@ -855,6 +855,7 @@ def main():
         if args.required_level_only:
             sql(migration)
             test_required_level_objects(sql,checksum)
+            test_required_level_objects(sql,checksum,'campaign-scenario-object-restoration.json','2026_10_08_04_world_campaign_scenario_objects.sql')
             sql(f'DROP DATABASE `{DB}`;', False)
             return
         if args.native_visuals_only:
@@ -1032,6 +1033,7 @@ def main():
         test_cage_state_restoration(sql,checksum)
         test_cage_state_restoration(sql,checksum,'campaign-fel-boiler-restoration.json','2026_10_08_03_world_campaign_fel_boiler_loot.sql')
         test_required_level_objects(sql,checksum)
+        test_required_level_objects(sql,checksum,'campaign-scenario-object-restoration.json','2026_10_08_04_world_campaign_scenario_objects.sql')
         sql(f'DROP DATABASE `{DB}`;', False)
 
 

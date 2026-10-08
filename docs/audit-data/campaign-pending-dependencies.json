@@ -1,7 +1,7 @@
 {
   "source_commit": "a6145c22e9ad6ac69690d4a2f7794bae4e1caf95",
-  "remaining_templates": 13,
-  "remaining_spawns": 102,
+  "remaining_templates": 11,
+  "remaining_spawns": 100,
   "entries": [
     {
       "entry": 245233,
@@ -126,24 +126,6 @@
       ]
     },
     {
-      "entry": 251591,
-      "type": 0,
-      "source_name": "'Door at the Scroll Keeper\\'s Sanctuary'",
-      "source_spawns": 1,
-      "references": {
-        "Lock": 2570
-      },
-      "additional_source_fields": {
-        "SpellVisualID": "58002",
-        "AIName": "'SmartGameObjectAI'"
-      },
-      "required_review": [
-        "Требуется проверка клиентских записей Lock/PlayerCondition/BroadcastText на развёрнутом сервере.",
-        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
-        "SpellVisualID поддерживается текущим addon/backend; остаётся перевод собственной цепочки SmartScript и проверка её зависимостей."
-      ]
-    },
-    {
       "entry": 252018,
       "type": 22,
       "source_name": "'SI:7 Letter'",
@@ -177,23 +159,6 @@
         "Spell=0: найти реальную цепочку обработки; не подставлять выдуманное заклинание.",
         "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
         "PlayerCondition 44383 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
-      ]
-    },
-    {
-      "entry": 254253,
-      "type": 10,
-      "source_name": "'Ancient Scroll of Meitre'",
-      "source_spawns": 1,
-      "references": {
-        "Lock": 43
-      },
-      "additional_source_fields": {
-        "AIName": "'SmartGameObjectAI'"
-      },
-      "required_review": [
-        "Проверить замок и исходный сценарий использования, не превращать GOOBER в простой декор.",
-        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
-        "Исходный SmartScript action205 с параметрами92/54147 и комментарием Complete Scenario Criteria несовместим с native action205 SET_OVERRIDE_ZONE_LIGHT; в GO обработчик не выполняет действие, поскольку требует me (NPC). Нельзя импортировать номер действия без проверки исходного enum и перевода сценарной семантики."
       ]
     },
     {
@@ -240,5 +205,13 @@
     "proof": "campaign-required-level-restoration.json",
     "migration": "2026_10_05_08_world_campaign_required_level_objects.sql"
   },
-  "scope": "Current unresolved templates only; dated historical snapshots are not live counters."
+  "scope": "Current unresolved templates only; dated historical snapshots are not live counters.",
+  "scenario_object_followup": {
+    "restored_entries": [
+      251591,
+      254253
+    ],
+    "proof": "campaign-scenario-object-restoration.json",
+    "migration": "2026_10_08_04_world_campaign_scenario_objects.sql"
+  }
 }

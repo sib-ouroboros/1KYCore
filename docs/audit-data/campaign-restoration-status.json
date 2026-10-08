@@ -102,6 +102,7 @@
     251331,
     251332,
     251396,
+    251591,
     251596,
     251597,
     251606,
@@ -121,6 +122,7 @@
     252048,
     252050,
     252777,
+    254253,
     266293,
     266486,
     266668,
@@ -153,7 +155,7 @@
     269055,
     301343
   ],
-  "restored_spawns": 400,
+  "restored_spawns": 402,
   "pending_entries": [
     245233,
     246459,
@@ -163,13 +165,11 @@
     249027,
     250899,
     250908,
-    251591,
     252018,
     252981,
-    254253,
     266767
   ],
-  "pending_spawns": 102,
+  "pending_spawns": 100,
   "migrations": [
     "2026_10_01_00_world_campaign_generic_objects.sql",
     "2026_10_01_02_world_campaign_generic_objects.sql",
@@ -180,6 +180,7 @@
     "2026_10_02_03_world_campaign_client_validated_objects.sql",
     "2026_10_02_05_world_campaign_smart_wall.sql",
     "2026_10_05_04_world_campaign_native_visuals.sql",
-    "2026_10_05_08_world_campaign_required_level_objects.sql"
+    "2026_10_05_08_world_campaign_required_level_objects.sql",
+    "2026_10_08_04_world_campaign_scenario_objects.sql"
   ]
 }

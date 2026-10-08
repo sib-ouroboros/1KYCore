@@ -51,6 +51,8 @@ on:
       - src/server/game/Garrison/Garrison.*
       - contrib/tests/test_garrison_work_orders.py
       - contrib/tests/test_campaign_audit_counts.py
+      - src/server/scripts/World/go_scripts.cpp
+      - contrib/tests/test_campaign_scenario_objects.py
       - docs/audit-data/campaign-*.json
       - src/server/scripts/Pandaria/SiegeOfOrgrimmar/boss_malkorok.cpp
       - contrib/tests/test_malkorok_barrier.py
@@ -138,6 +140,8 @@ jobs:
           python-version: '3.12'
       - name: Test native work-order queue, identity and reward lifecycle
         run: python contrib/tests/test_garrison_work_orders.py
+      - name: Test native campaign scenario object interactions and criteria routing
+        run: python contrib/tests/test_campaign_scenario_objects.py
       - name: Check current campaign audit counters and dependency groups
         run: python contrib/tests/test_campaign_audit_counts.py
       - name: Test native private summon visibility with sanitizers

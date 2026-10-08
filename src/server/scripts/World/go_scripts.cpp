@@ -1554,6 +1554,43 @@ struct go_warboard_horde : public GameObjectAI
 
 };
 
+// LegionCore action205 is UPDATE_ACHIEVEMENT_CRITERIA, whereas native205
+// changes zone lighting. Translate these two source reactions without remapping
+// existing SmartScript action numbers or changing normal object use.
+struct go_campaign_scenario_interaction : public GameObjectAI
+{
+    explicit go_campaign_scenario_interaction(GameObject* object) : GameObjectAI(object) { }
+
+    void Reset() override { _doorCreditSent = false; }
+
+    bool GossipHello(Player* player, bool /*isUse*/) override
+    {
+        if (go->GetEntry() == 251591 && !_doorCreditSent)
+            _doorCreditSent = SendEvent(player, 52452, 1625);
+        return false;
+    }
+
+    void OnStateChanged(uint32 state, Unit* unit) override
+    {
+        if (go->GetEntry() == 254253 && state == GO_ACTIVATED && unit)
+            SendEvent(unit->ToPlayer(), 54147, 1583);
+    }
+
+private:
+    bool SendEvent(Player* player, uint32 eventId, uint32 mapId)
+    {
+        if (!player || go->GetMapId() != mapId || player->GetMap() != go->GetMap() || !player->GetScenario())
+            return false;
+
+        // Preserve the source invoker and criteria arguments. The native player
+        // path forwards to the active scenario, whose current-step gate remains.
+        player->UpdateCriteria(CRITERIA_TYPE_SEND_EVENT_SCENARIO, eventId, 0, 0, player);
+        return true;
+    }
+
+    bool _doorCreditSent = false; // source NOT_REPEATABLE, reset with the object AI
+};
+
 void AddSC_go_scripts()
 {
     new go_cat_figurine();
@@ -1599,6 +1636,7 @@ void AddSC_go_scripts()
     new go_allied_race_infos("go_allied_race_infos_tauren",     28);
     new go_allied_race_infos("go_allied_race_infos_voidelf",    29);
     new go_allied_race_infos("go_allied_race_infos_draenei",    30);
+    RegisterGameObjectAI(go_campaign_scenario_interaction);
     RegisterGameObjectAI(go_warboard_alliance);
     RegisterGameObjectAI(go_warboard_horde);
 }
