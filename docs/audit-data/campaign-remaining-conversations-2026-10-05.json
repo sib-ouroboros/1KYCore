@@ -1,14 +1,13 @@
 {
   "basis": "All45 remaining IDs: original source semantics and supplied DB2 plus prepared isolated release; no source GUID requirement",
-  "count": 41,
+  "count": 40,
   "overlapping_blocker_counts": {
     "source_duration_does_not_cover_lines": 15,
     "packed_fields_require_semantic_review": 11,
     "actor_template_requires_separate_translation": 2,
     "missing_native_camera": 32,
-    "source_player_sentinel_actor": 5,
-    "client_line_chain_mismatch": 1,
-    "source_actor_template_precedes_world_actor_rows": 1
+    "source_player_sentinel_actor": 4,
+    "client_line_chain_mismatch": 1
   },
   "client_validation": {
     "UiCamera": {
@@ -567,18 +566,6 @@
       "missing_target_broadcast_texts": []
     },
     {
-      "conversation": 4304,
-      "blockers": [
-        "source_player_sentinel_actor",
-        "source_actor_template_precedes_world_actor_rows"
-      ],
-      "packed_fields": [],
-      "missing_npc_templates": [],
-      "missing_native_cameras": [],
-      "missing_native_animkits": [],
-      "missing_target_broadcast_texts": []
-    },
-    {
       "conversation": 4313,
       "blockers": [
         "missing_native_camera"
@@ -679,7 +666,7 @@
       "missing_target_broadcast_texts": []
     }
   ],
-  "assurance": "41 unresolved conversations; exact source timing bounds applied to two additional byte-preserved conversations. No invented camera, timing or sentinel actor substitutions.",
+  "assurance": "40 unresolved conversations;4304 restored with exact source actor-branch precedence, a silent first line and conversation-local actor payloads.4576 is an additional dependency, not subtracted from this list.",
   "followup_2026_10_07": {
     "restored": [
       3914,
@@ -696,5 +683,11 @@
     "remaining": 41,
     "proof": "campaign-source-timing-conversations.json",
     "full_review": "campaign-conversation-source-timing-review-2026-10-08.json"
+  },
+  "followup_source_actors": {
+    "restored": [
+      4304
+    ],
+    "proof": "campaign-source-actor-conversations.json"
   }
 }

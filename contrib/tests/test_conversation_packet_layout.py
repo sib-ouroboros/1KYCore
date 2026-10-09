@@ -79,6 +79,18 @@ def main():
             packet = struct.pack('<4I', *(int(old_line[key]) for key in ('id','textId','unk1','unk2')))
             cases.append('{ ConversationLineTemplate line = {%s,%s,%s,%s,%s,%s}; unsigned char expected[16] = %s; if (std::memcmp(&line,expected,16)) return 1; }' % (line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],line['Padding'],array(packet)))
     assert len(cases) == 73
+    source_actors=json.loads((root/'docs/audit-data/campaign-source-actor-conversations.json').read_text('utf8'))
+    restored_lines={int(row['Id']):row for row in source_actors['rows']['conversation_line_template']}
+    for candidate in source_actors['source']:
+        for old_line in candidate['lines']:
+            line=restored_lines[int(old_line['id'])]
+            packet=struct.pack('<4I', *(int(old_line[key]) for key in ('id','textId','unk1','unk2')))
+            cases.append('{ ConversationLineTemplate line = {%s,%s,%s,%s,%s,%s}; unsigned char expected[16] = %s; if (std::memcmp(&line,expected,16)) return 1; }' % (line['Id'],line['StartTime'],line['UiCameraID'],line['ActorIdx'],line['Flags'],line['Padding'],array(packet)))
+        for old_actor in candidate['actors']:
+            packet=struct.pack('<6I', *(int(old_actor[key]) for key in ('actorId','creatureId','displayId','unk1','unk2','unk3')))
+            cases.append('{ ConversationDynamicFieldActor actor; actor.ActorTemplate={%s,%s,%s}; actor.Type=ConversationDynamicFieldActor::CreatureActor; unsigned char expected[24]=%s; if (std::memcmp(&actor,expected,24)) return 1; }' % (old_actor['actorId'],old_actor['creatureId'],old_actor['displayId'],array(packet)))
+    assert len(cases) == 82
+
     harness = '''#include <cstdint>
 #include <cstddef>
 #include <cstring>
@@ -97,7 +109,7 @@ static_assert(offsetof(ConversationLineTemplate,Flags)==13);
 static_assert(offsetof(ConversationLineTemplate,Padding)==14);
 int main() {
 '''+ '\n'.join(cases)+'''
-std::cout << "PASS: seventy-three original line packets and twenty-four actor packets match actual native packed structures byte for byte\\n";
+std::cout << "PASS: seventy-nine original line packets and twenty-seven actor packets match actual native packed structures byte for byte\\n";
 }
 '''
     with tempfile.TemporaryDirectory() as tmp:

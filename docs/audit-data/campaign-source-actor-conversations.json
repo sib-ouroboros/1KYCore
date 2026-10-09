@@ -1,0 +1,348 @@
+{
+  "entries": [
+    4304,
+    4576
+  ],
+  "rows": {
+    "conversation_line_template": [
+      {
+        "Id": "9822",
+        "StartTime": "0",
+        "UiCameraID": "0",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "10101",
+        "StartTime": "4000",
+        "UiCameraID": "593",
+        "ActorIdx": "1",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "9796",
+        "StartTime": "17213",
+        "UiCameraID": "98",
+        "ActorIdx": "2",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "10223",
+        "StartTime": "0",
+        "UiCameraID": "99",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "10224",
+        "StartTime": "10549",
+        "UiCameraID": "99",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "8214",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "10225",
+        "StartTime": "20645",
+        "UiCameraID": "99",
+        "ActorIdx": "0",
+        "Flags": "0",
+        "Padding": "0",
+        "VerifiedBuild": "0"
+      }
+    ],
+    "conversation_template": [
+      {
+        "Id": "4304",
+        "FirstLineId": "9822",
+        "LastLineEndTime": "54554",
+        "ScriptName": "'conversation_campaign_source_actors'",
+        "VerifiedBuild": "0"
+      },
+      {
+        "Id": "4576",
+        "FirstLineId": "10223",
+        "LastLineEndTime": "39764",
+        "ScriptName": "'conversation_campaign_source_actors'",
+        "VerifiedBuild": "0"
+      }
+    ]
+  },
+  "source": [
+    {
+      "id": 4304,
+      "lines": [
+        {
+          "entry": "4304",
+          "id": "9822",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "0",
+          "unk2": "0"
+        },
+        {
+          "entry": "4304",
+          "id": "10101",
+          "idx": "1",
+          "textId": "4000",
+          "unk1": "593",
+          "unk2": "1"
+        },
+        {
+          "entry": "4304",
+          "id": "9796",
+          "idx": "2",
+          "textId": "17213",
+          "unk1": "98",
+          "unk2": "2"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 0,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 4000,
+          "NextConversationLineID": 10101,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 127290,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 3000,
+          "NextConversationLineID": 9796,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 126279,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 2000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [
+        {
+          "entry": "4304",
+          "id": "1",
+          "actorId": "57431",
+          "creatureId": "118975",
+          "displayId": "75428",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "24777"
+        },
+        {
+          "entry": "4304",
+          "id": "2",
+          "actorId": "51642",
+          "creatureId": "117443",
+          "displayId": "60845",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "24777"
+        }
+      ],
+      "ignored_world_actors": [
+        {
+          "entry": "4304",
+          "id": "0",
+          "creatureId": "0",
+          "creatureGuid": "1099511627775",
+          "unk1": "0",
+          "unk2": "0",
+          "duration": "24777"
+        }
+      ],
+      "end": 54554,
+      "source_branch": "actor_template"
+    },
+    {
+      "id": 4576,
+      "lines": [
+        {
+          "entry": "4576",
+          "id": "10223",
+          "idx": "0",
+          "textId": "0",
+          "unk1": "99",
+          "unk2": "0"
+        },
+        {
+          "entry": "4576",
+          "id": "10224",
+          "idx": "1",
+          "textId": "10549",
+          "unk1": "99",
+          "unk2": "538312704"
+        },
+        {
+          "entry": "4576",
+          "id": "10225",
+          "idx": "2",
+          "textId": "20645",
+          "unk1": "99",
+          "unk2": "0"
+        }
+      ],
+      "client_lines": [
+        {
+          "BroadcastTextID": 128080,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 10224,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 128081,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 10225,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        },
+        {
+          "BroadcastTextID": 128082,
+          "SpellVisualKitID": 0,
+          "AdditionalDuration": 1000,
+          "NextConversationLineID": 0,
+          "AnimKitID": 0,
+          "SpeechType": 0,
+          "StartAnimation": 60,
+          "EndAnimation": 60
+        }
+      ],
+      "actors": [
+        {
+          "entry": "4576",
+          "id": "0",
+          "actorId": "57350",
+          "creatureId": "118793",
+          "displayId": "74218",
+          "unk1": "0",
+          "unk2": "1",
+          "unk3": "0",
+          "duration": "34764"
+        }
+      ],
+      "ignored_world_actors": [],
+      "end": 39764,
+      "source_branch": "actor_template"
+    }
+  ],
+  "scoped_actors": [
+    {
+      "ConversationId": 4304,
+      "Idx": 1,
+      "ActorId": 57431,
+      "CreatureId": 118975,
+      "CreatureModelId": 75428
+    },
+    {
+      "ConversationId": 4304,
+      "Idx": 2,
+      "ActorId": 51642,
+      "CreatureId": 117443,
+      "CreatureModelId": 60845
+    },
+    {
+      "ConversationId": 4576,
+      "Idx": 0,
+      "ActorId": 57350,
+      "CreatureId": 118793,
+      "CreatureModelId": 74218
+    }
+  ],
+  "required_creatures": [
+    117443,
+    118793,
+    118975
+  ],
+  "validated_broadcast_texts": [
+    126279,
+    127290,
+    128080,
+    128081,
+    128082
+  ],
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_world_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c",
+  "client_line_sha256": "ef9a39edeef5f58aebd0741839291a1a4e4ab745be881c3e155b9767c5ba7039",
+  "actor_collision": {
+    "Id": 51642,
+    "release_creature": 121263,
+    "release_model": 76255,
+    "source_creature": 117443,
+    "source_model": 60845,
+    "policy": "Leave global actor table untouched; assign exact source payload only in this conversation instance"
+  },
+  "assurance": "Exact source actor-table precedence, line bytes and durations. No player-sentinel merge or world-GUID substitution.4576 is an additional object dependency;266594 remains deferred for personal loot.",
+  "client_playtest": false,
+  "client_validation": {
+    "UiCamera": {
+      "file": "UiCamera.db2",
+      "sha256": "6cb64ffd7d647d45e1bb8e8f849a0f9f80c7a441db9f1cecddedd2aa97d96c4d",
+      "layout_hash": "0xca6c98d4",
+      "record_count": 1060,
+      "copy_rows": 0,
+      "identity_count": 1060,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": {
+        "98": true,
+        "99": true,
+        "593": true
+      }
+    },
+    "CreatureDisplayInfo": {
+      "file": "CreatureDisplayInfo.db2",
+      "sha256": "1494eb6d4705848c4dd8ca2e463b99365d913155829e53914671da3302168e23",
+      "layout_hash": "0x406268df",
+      "record_count": 66165,
+      "copy_rows": 0,
+      "identity_count": 66165,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+      "requested": {
+        "60845": true,
+        "74218": true,
+        "75428": true
+      }
+    }
+  },
+  "mysql_validation": {
+    "status": "PASS",
+    "mysql": "8.0.45",
+    "disposable_schema": "test_source_actors_946b90316c",
+    "schema_dropped": true,
+    "global_actor_collision_present": true,
+    "scope": "Complete release conversation tables and representative protected world data; CI covers full release",
+    "production_updated": false
+  }
+}

@@ -1,14 +1,14 @@
 {
   "basis": "Current pinned release/source registries; not a live server database audit",
   "counts": {
-    "conversations": 41,
+    "conversations": 40,
     "templates": 11,
     "models": 46
   },
   "pending_spawns": 100,
   "input_sha256": {
-    "campaign-remaining-conversations-2026-10-05.json": "38cebbdec92dcca1d619a6f73716662e293f101381c9f3985e65a84326d652da",
-    "campaign-remaining-models-2026-10-05.json": "829e358b9c19e896b3d7b46eb0809df5af92be5b0dc87d90a3796e1ce4728e19",
+    "campaign-remaining-conversations-2026-10-05.json": "10bc01fd8c4455e80b1b7ba6ce228e63f904b46497833cf9cfce33e7beb51bda",
+    "campaign-remaining-models-2026-10-05.json": "0b863b57786018541516b0b17079c8ba7181b8f4d5c0e2fa623adebac16a04d4",
     "campaign-remaining-templates-2026-10-05.json": "052481a9fa3573eda7bf86cebff39e672ae09cd1eefb7ad20e04f64a86e62c21",
     "campaign-pending-dependencies.json": "27e656565c079b5949e3da5af7b94e9f884841001c9760717685b85cd1a1b514",
     "campaign-restoration-status.json": "5b7a8bb0a08c5430789c7a749dfd7c5f62f2015630f785ba7cc4556a3499016e",
@@ -17,15 +17,14 @@
   },
   "groups": {
     "conversations": {
-      "count": 41,
+      "count": 40,
       "blocker_counts_overlap": {
         "actor_template_requires_separate_translation": 2,
         "client_line_chain_mismatch": 1,
         "missing_native_camera": 32,
         "packed_fields_require_semantic_review": 11,
-        "source_actor_template_precedes_world_actor_rows": 1,
         "source_duration_does_not_cover_lines": 15,
-        "source_player_sentinel_actor": 5
+        "source_player_sentinel_actor": 4
       },
       "rows": [
         {
@@ -857,27 +856,6 @@
           "next_step": "Obtain matching client camera/animation records"
         },
         {
-          "id": 4304,
-          "blockers": [
-            "source_player_sentinel_actor",
-            "source_actor_template_precedes_world_actor_rows"
-          ],
-          "status": "REVIEW_REQUIRED",
-          "source_timing": {
-            "source_branch": "actor_template",
-            "source_create_last_line_end": 54554,
-            "decoded_duration_bounds_valid": true,
-            "client_line_links_match": true,
-            "mixed_source_actor_tables": true
-          },
-          "missing_client_references": {
-            "UiCamera": [],
-            "AnimKit": []
-          },
-          "packed_fields": [],
-          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
-        },
-        {
           "id": 4313,
           "blockers": [
             "missing_native_camera"
@@ -1387,11 +1365,12 @@
     "models": {
       "count": 46,
       "blocker_counts_overlap": {
-        "loot_and_quest_item_dependencies": 11,
+        "loot_and_quest_item_dependencies": 12,
         "missing_event_and_npc_scene_chain": 3,
         "missing_native_client_reference": 19,
         "native_spell_or_external_dependency_review": 3,
         "no_native_garrison_shipment_use_handler": 2,
+        "personal_loot_lifecycle_not_implemented": 1,
         "script_chain_not_translated": 14,
         "static_visual_source_chain_not_restored": 4
       },
@@ -2370,7 +2349,9 @@
         {
           "id": 266594,
           "blockers": [
-            "script_chain_not_translated"
+            "script_chain_not_translated",
+            "loot_and_quest_item_dependencies",
+            "personal_loot_lifecycle_not_implemented"
           ],
           "status": "REVIEW_REQUIRED",
           "script_chain": {

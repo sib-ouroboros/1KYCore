@@ -26,6 +26,7 @@ jobs:
       matrix:
         suite:
           - {name: full, args: ''}
+          - {name: source-actor-conversations, args: '--source-actor-conversations-only'}
           - {name: campaign-scenes, args: '--campaign-scenes-only'}
           - {name: campaign-rogue-objects, args: '--campaign-rogue-objects-only'}
           - {name: gilneas-chain, args: '--gilneas-chain-only'}

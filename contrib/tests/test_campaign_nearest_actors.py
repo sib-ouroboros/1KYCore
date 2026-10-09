@@ -33,13 +33,14 @@ def main():
 #include <utility>
 using uint32=std::uint32_t;using uint8=std::uint8_t;
 struct ObjectGuid { uint32 value=0; };
+struct ConversationActorTemplate { uint32 Id,CreatureId,CreatureModelId; };
 struct Creature { uint32 entry;ObjectGuid GetGUID()const{return {entry};} };
 struct Unit {
  std::map<uint32,Creature> creatures;std::vector<std::pair<uint32,float>> searches;
  float GetVisibilityRange()const{return 90;}
  Creature* FindNearestCreature(uint32 entry,float range){searches.push_back({entry,range});auto i=creatures.find(entry);return i==creatures.end()?nullptr:&i->second;}
 };
-struct Conversation { uint32 id;std::map<uint8,ObjectGuid> actors;uint32 GetEntry()const{return id;}void AddActor(ObjectGuid guid,uint8 index){actors[index]=guid;} };
+struct Conversation { uint32 id;std::map<uint8,ObjectGuid> actors;uint32 GetEntry()const{return id;}void AddActor(ObjectGuid guid,uint8 index){actors[index]=guid;} void AddActor(ConversationActorTemplate const& actor,uint8 index){actors[index]={actor.CreatureId};} };
 struct ConversationScript { explicit ConversationScript(char const*){}virtual ~ConversationScript()=default;virtual void OnConversationCreate(Conversation*,Unit*){} };
 """
     main=r"""

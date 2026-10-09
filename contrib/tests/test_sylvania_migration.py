@@ -17,6 +17,7 @@ from test_campaign_visual_migration import test_visual_migration
 from test_campaign_required_level_migration import test_required_level_objects
 from test_campaign_scene_templates import test_campaign_scene_templates
 from test_campaign_rogue_objects_db import test_campaign_rogue_objects
+from test_campaign_source_actors_db import test_source_actor_conversations
 from test_campaign_packed_conversations import test_packed_conversations
 from test_campaign_cage_states import test_cage_state_restoration
 
@@ -810,6 +811,7 @@ def test_nearest_conversations():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--campaign-rogue-objects-only', action='store_true', help='Test complete source rogue objects, conversation, scenes and conflict guards.')
+    parser.add_argument('--source-actor-conversations-only', action='store_true', help='Test scoped source actors, silent conversation pauses and guarded SQL.')
     parser.add_argument('--campaign-scenes-only', action='store_true', help='Test source scene mappings, conflicts and interrupted publication.')
     parser.add_argument('--gilneas-chain-only', action='store_true', help='Test audited Gilneas bindings and object spawns.')
     parser.add_argument('--smart-wall-only', action='store_true', help='Run the complete wall conflict/retry tests against the real release, before the full suite.')
@@ -855,6 +857,10 @@ def main():
         if args.campaign_rogue_objects_only:
             sql(migration)
             test_campaign_rogue_objects(sql,checksum,test_simple_goober_models,test_simple_conversations)
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
+        if args.source_actor_conversations_only:
+            test_source_actor_conversations(sql,checksum)
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.campaign_scenes_only:
@@ -1049,6 +1055,7 @@ def main():
         test_required_level_objects(sql,checksum,'campaign-scenario-object-restoration.json','2026_10_08_04_world_campaign_scenario_objects.sql')
         test_campaign_scene_templates(sql,checksum)
         test_campaign_rogue_objects(sql,checksum,test_simple_goober_models,test_simple_conversations)
+        test_source_actor_conversations(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)
 
 

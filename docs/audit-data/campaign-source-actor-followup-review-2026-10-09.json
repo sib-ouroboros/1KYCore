@@ -1,0 +1,93 @@
+{
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "reviews": {
+    "245102": {
+      "connected_source_rows": 31,
+      "connected_keys": [
+        [
+          98771,
+          0
+        ],
+        [
+          98771,
+          9
+        ],
+        [
+          98836,
+          0
+        ],
+        [
+          245102,
+          1
+        ],
+        [
+          9877100,
+          9
+        ]
+      ],
+      "enum_mismatches": [
+        {
+          "key": [
+            98771,
+            9,
+            5
+          ],
+          "field": "action_type",
+          "value": 205,
+          "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+          "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+        },
+        {
+          "key": [
+            98836,
+            0,
+            5
+          ],
+          "field": "action_type",
+          "value": 205,
+          "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+          "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+        },
+        {
+          "key": [
+            98836,
+            0,
+            9
+          ],
+          "field": "action_type",
+          "value": 205,
+          "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+          "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+        }
+      ],
+      "decision": "Deferred: NPC98771/98836, routes, dialogue, multiple spells and scenario criteria must be translated together; restoring the lever alone is not completion."
+    },
+    "738": {
+      "source_last_line_end": 9350,
+      "last_line_start": 9700,
+      "decision": "Deferred: last line begins after source lifetime; no guessed extension."
+    },
+    "1667": {
+      "source_last_line_end": 8550,
+      "last_line_start": 29150,
+      "decision": "Deferred: later lines exceed source lifetime; no guessed extension."
+    },
+    "251262": {
+      "source_action204": "SMART_ACTION_SUMMON_SCENE",
+      "requested_scene": 1136,
+      "source_scene_mapping_rows": 0,
+      "source_default_cancel_delay_ms": 60000,
+      "decision": "Deferred: native action129 PlayScene is not a complete translation of source start-and-delayed-cancel. Scene mapping1136 missing in pinned source."
+    },
+    "266594": {
+      "conversation_restored": 4576,
+      "source_state_event": 3,
+      "source_action206": "SMART_ACTION_SUMMON_CONVERSATION",
+      "personal_loot_id": 70532,
+      "source_loot_entry": 266594,
+      "quest_item": 143331,
+      "decision": "Conversation dependency published separately; chest model remains deferred until personal loot and native state3 invocation are verified."
+    }
+  },
+  "assurance": "These deferred candidates are not marked restored; unrelated NPC AI unchanged."
+}

@@ -17,6 +17,7 @@
 
 #include "Conversation.h"
 #include "Creature.h"
+#include "DB2Stores.h"
 #include "IteratorPair.h"
 #include "Log.h"
 #include "Map.h"
@@ -131,10 +132,7 @@ bool Conversation::Create(ObjectGuid::LowType lowGuid, uint32 conversationEntry,
     {
         if (ConversationActorTemplate const* actor = conversationTemplate->Actors[actorIndex])
         {
-            ConversationDynamicFieldActor actorField;
-            actorField.ActorTemplate = *actor;
-            actorField.Type = ConversationDynamicFieldActor::ActorType::CreatureActor;
-            SetDynamicStructuredValue(CONVERSATION_DYNAMIC_FIELD_ACTORS, actorIndex, &actorField);
+            AddActor(*actor, actorIndex);
         }
     }
 
@@ -166,6 +164,26 @@ bool Conversation::Create(ObjectGuid::LowType lowGuid, uint32 conversationEntry,
         ConversationDynamicFieldActor const* actor = GetDynamicStructuredValue<ConversationDynamicFieldActor>(CONVERSATION_DYNAMIC_FIELD_ACTORS, actorIndex);
         if (!actor || actor->IsEmpty())
         {
+            // A silent, effect-free pause does not require a speaking actor.
+            // Keep actor validation for text, visual/animation cues and callbacks.
+            bool actorRequired = false;
+            for (ConversationLineTemplate const* line : conversationTemplate->Lines)
+            {
+                if (line->ActorIdx != actorIndex)
+                    continue;
+                ConversationLineEntry const* clientLine = sConversationLineStore.LookupEntry(line->Id);
+                if (!clientLine || clientLine->BroadcastTextID || clientLine->SpellVisualKitID ||
+                    clientLine->AnimKitID || clientLine->SpeechType ||
+                    clientLine->StartAnimation != 60 || clientLine->EndAnimation != 60 ||
+                    line->UiCameraID || line->Flags || line->Padding)
+                {
+                    actorRequired = true;
+                    break;
+                }
+            }
+            if (!actorRequired)
+                continue;
+
             TC_LOG_ERROR("entities.conversation", "Failed to create conversation (Id: %u) due to missing actor (Idx: %u).", conversationEntry, actorIndex);
             return false;
         }
@@ -182,6 +200,14 @@ void Conversation::AddActor(ObjectGuid const& actorGuid, uint16 actorIdx)
     ConversationDynamicFieldActor actorField;
     actorField.ActorGuid = actorGuid;
     actorField.Type = ConversationDynamicFieldActor::ActorType::WorldObjectActor;
+    SetDynamicStructuredValue(CONVERSATION_DYNAMIC_FIELD_ACTORS, actorIdx, &actorField);
+}
+
+void Conversation::AddActor(ConversationActorTemplate const& actorTemplate, uint16 actorIdx)
+{
+    ConversationDynamicFieldActor actorField;
+    actorField.ActorTemplate = actorTemplate;
+    actorField.Type = ConversationDynamicFieldActor::ActorType::CreatureActor;
     SetDynamicStructuredValue(CONVERSATION_DYNAMIC_FIELD_ACTORS, actorIdx, &actorField);
 }
 

@@ -112,6 +112,8 @@ on:
       - contrib/tests/test_conversation_packet_layout.py
       - contrib/tests/test_conversation_line_loading.py
       - src/server/game/Entities/Conversation/Conversation.h
+      - src/server/game/Entities/Conversation/Conversation.cpp
+      - contrib/tests/test_conversation_source_actors.py
       - src/server/game/Globals/ConversationDataStore.h
       - docs/audit-data/campaign-simple-conversation-restoration.json
       - docs/audit-data/campaign-conversation-chain-restoration.json
@@ -274,6 +276,8 @@ jobs:
         run: python contrib/tests/test_blackhand_blaze_owner.py
       - name: Test original conversation packets against actual native packed structures
         run: python contrib/tests/test_conversation_packet_layout.py
+      - name: Test source conversation actors, silent pauses and strict required actors
+        run: python contrib/tests/test_conversation_source_actors.py
       - name: Test conversation line loading with legacy and opaque high-word schemas
         run: python contrib/tests/test_conversation_line_loading.py
       - name: Test bundled JSON array separator parsing with sanitizers

@@ -102,9 +102,39 @@ public:
             conversation->AddActor(actor.Guid, actor.Idx);
     }
 };
+
+// These source conversations use generated actors, not existing world NPC GUIDs.
+// Keep actor payload IDs local: source51642 has different contents in the release
+// actor table and must not overwrite actors used by unrelated conversations.
+class conversation_campaign_source_actors : public ConversationScript
+{
+public:
+    conversation_campaign_source_actors() : ConversationScript("conversation_campaign_source_actors") { }
+
+    void OnConversationCreate(Conversation* conversation, Unit* /*creator*/) override
+    {
+        if (!conversation)
+            return;
+        switch (conversation->GetEntry())
+        {
+            case 4304:
+                // Source chooses conversation_actor and ignores conversation_creature.
+                // Slot0 is an empty silent pause; do not merge its player sentinel.
+                conversation->AddActor(ConversationActorTemplate{57431, 118975, 75428}, 1);
+                conversation->AddActor(ConversationActorTemplate{51642, 117443, 60845}, 2);
+                break;
+            case 4576:
+                conversation->AddActor(ConversationActorTemplate{57350, 118793, 74218}, 0);
+                break;
+            default:
+                break;
+        }
+    }
+};
 }
 
 void AddSC_conversation_scripts()
 {
     new conversation_campaign_nearest_actors();
+    new conversation_campaign_source_actors();
 }

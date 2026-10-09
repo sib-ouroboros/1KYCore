@@ -5,10 +5,11 @@
     "script_chain_not_translated": 14,
     "missing_native_client_reference": 19,
     "static_visual_source_chain_not_restored": 4,
-    "loot_and_quest_item_dependencies": 11,
+    "loot_and_quest_item_dependencies": 12,
     "missing_event_and_npc_scene_chain": 3,
     "no_native_garrison_shipment_use_handler": 2,
-    "native_spell_or_external_dependency_review": 3
+    "native_spell_or_external_dependency_review": 3,
+    "personal_loot_lifecycle_not_implemented": 1
   },
   "rows": [
     {
@@ -311,7 +312,13 @@
         "Data3": "1"
       },
       "missing_native_client_references": {},
-      "unsupported_source_fields": {}
+      "unsupported_source_fields": {},
+      "source_scene_review": {
+        "requested_scene": 1136,
+        "source_spell_scene_row_present": false,
+        "source_cancel_delay_ms": 60000,
+        "policy": "Do not substitute native scene129 or a package guessed from ID1136. Confirm source mapping and teleport spell215687 chain first."
+      }
     },
     {
       "entry": 251504,
@@ -466,7 +473,9 @@
       "entry": 266594,
       "type": 3,
       "blockers": [
-        "script_chain_not_translated"
+        "script_chain_not_translated",
+        "loot_and_quest_item_dependencies",
+        "personal_loot_lifecycle_not_implemented"
       ],
       "source_data": {
         "Data0": "43",
@@ -475,7 +484,14 @@
         "Data30": "70532"
       },
       "missing_native_client_references": {},
-      "unsupported_source_fields": {}
+      "unsupported_source_fields": {},
+      "conversation_dependency_restored": 4576,
+      "source_loot_evidence": {
+        "original_key": 266594,
+        "personal_loot_id": 70532,
+        "quest_item": 143331,
+        "migration_policy": "Keep model deferred. Publishing conversation does not enable chest or replace personal loot with shared loot."
+      }
     },
     {
       "entry": 266595,
