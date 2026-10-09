@@ -12,6 +12,8 @@ on:
       - 'contrib/tests/test_scenario_step_condition.py'
       - 'contrib/tests/test_campaign_lever_dependencies.py'
       - 'docs/audit-data/campaign-lever-dependencies-*.json'
+      - 'docs/audit-data/campaign-lever-conversation*.json'
+      - 'contrib/tests/test_campaign_lever_conversations.py'
       - 'contrib/tests/test_smart_scenario_event.py'
       - 'contrib/tests/test_campaign_lever_smartai_draft.py'
       - 'contrib/tools/campaign_lever_smartai_draft.py'
@@ -30,6 +32,8 @@ on:
       - 'contrib/tests/test_scenario_step_condition.py'
       - 'contrib/tests/test_campaign_lever_dependencies.py'
       - 'docs/audit-data/campaign-lever-dependencies-*.json'
+      - 'docs/audit-data/campaign-lever-conversation*.json'
+      - 'contrib/tests/test_campaign_lever_conversations.py'
       - 'contrib/tests/test_smart_scenario_event.py'
       - 'contrib/tests/test_campaign_lever_smartai_draft.py'
       - 'contrib/tools/campaign_lever_smartai_draft.py'
@@ -66,3 +70,5 @@ jobs:
         run: |
           python contrib/tests/test_scenario_step_condition.py
           python contrib/tests/test_campaign_lever_dependencies.py
+          python contrib/tests/test_campaign_lever_conversations.py
+          python contrib/tests/test_conversation_packet_layout.py

@@ -90,6 +90,14 @@ def main():
             packet=struct.pack('<6I', *(int(old_actor[key]) for key in ('actorId','creatureId','displayId','unk1','unk2','unk3')))
             cases.append('{ ConversationDynamicFieldActor actor; actor.ActorTemplate={%s,%s,%s}; actor.Type=ConversationDynamicFieldActor::CreatureActor; unsigned char expected[24]=%s; if (std::memcmp(&actor,expected,24)) return 1; }' % (old_actor['actorId'],old_actor['creatureId'],old_actor['displayId'],array(packet)))
     assert len(cases) == 82
+    lever = json.loads((root/'docs/audit-data/campaign-lever-conversation-restoration.json').read_text('utf8'))
+    for candidate in lever['source']:
+        old_actor,old_line = candidate['source_actors'][0],candidate['source_line']
+        actor_packet = struct.pack('<6I', *(int(old_actor[key]) for key in ('actorId','creatureId','displayId','unk1','unk2','unk3')))
+        line_packet = struct.pack('<4I', *(int(old_line[key]) for key in ('id','textId','unk1','unk2')))
+        cases.append('{ ConversationDynamicFieldActor actor; actor.ActorTemplate={%s,%s,%s}; actor.Type=ConversationDynamicFieldActor::CreatureActor; ConversationLineTemplate line={%s,%s,%s,0,0,0}; unsigned char a[24]=%s,l[16]=%s; if(std::memcmp(&actor,a,24)||std::memcmp(&line,l,16)) return 1; }' % (old_actor['actorId'],old_actor['creatureId'],old_actor['displayId'],old_line['id'],old_line['textId'],old_line['unk1'],array(actor_packet),array(line_packet)))
+    assert len(cases) == 86
+
 
     harness = '''#include <cstdint>
 #include <cstddef>
@@ -109,7 +117,7 @@ static_assert(offsetof(ConversationLineTemplate,Flags)==13);
 static_assert(offsetof(ConversationLineTemplate,Padding)==14);
 int main() {
 '''+ '\n'.join(cases)+'''
-std::cout << "PASS: seventy-nine original line packets and twenty-seven actor packets match actual native packed structures byte for byte\\n";
+std::cout << "PASS: eighty-three original line packets and thirty-one actor packets match actual native packed structures byte for byte\\n";
 }
 '''
     with tempfile.TemporaryDirectory() as tmp:

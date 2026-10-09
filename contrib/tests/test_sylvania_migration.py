@@ -867,6 +867,10 @@ def main():
             return
         if args.source_actor_conversations_only:
             test_source_actor_conversations(sql,checksum)
+            sql((ROOT / 'sql/updates/world/2026_10_07_02_world_conversation_line_padding.sql').read_text('utf8'))
+            restore = (ROOT / 'sql/updates/world/2026_10_09_02_world_campaign_lever_conversations.sql').read_text('utf8')
+            registry = json.loads((ROOT / 'docs/audit-data/campaign-lever-conversation-restoration.json').read_text('utf8'))
+            test_simple_conversations(tables,restore,registry)
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.campaign_scenes_only:
@@ -1062,6 +1066,10 @@ def main():
         test_campaign_scene_templates(sql,checksum)
         test_campaign_rogue_objects(sql,checksum,test_simple_goober_models,test_simple_conversations)
         test_source_actor_conversations(sql,checksum)
+        sql((ROOT / 'sql/updates/world/2026_10_07_02_world_conversation_line_padding.sql').read_text('utf8'))
+        restore = (ROOT / 'sql/updates/world/2026_10_09_02_world_campaign_lever_conversations.sql').read_text('utf8')
+        registry = json.loads((ROOT / 'docs/audit-data/campaign-lever-conversation-restoration.json').read_text('utf8'))
+        test_simple_conversations(tables,restore,registry)
         test_brew_delivery(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)
 
