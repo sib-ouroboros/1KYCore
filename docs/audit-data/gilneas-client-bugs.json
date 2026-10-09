@@ -298,7 +298,8 @@
         "Accessory callbacks ignored; owner immutable; one delayed takeoff; foreign passenger cannot terminate ride; abandon/death/logout/map/phase/vehicle loss cancels event queue and releases own passenger",
         "Per-owner escape creation/boarding and filtered same-ship participants; null creation guard",
         "Arrival-only once43729 credit; interruption/reset cleanup; escape DEBUG states",
-        "Restore10 missing native groups48 points from pinned July2016/May2017 Ark sources. Preserve all existing/custom/partial paths and altered template/vehicle bindings."
+        "Restore10 missing native groups48 points from pinned July2016/May2017 Ark sources. Preserve all existing/custom/partial paths and altered template/vehicle bindings.",
+        "Personal escape wyvern inherits the owner PhaseShift via native PhasingHandler; creation-to-boarding fixture covers phase188 with initially incompatible vehicles"
       ],
       "automated_test_result": [
         "test_gilneas_endgame_transport.py: full native AI extract local strict C++ PASS, controlled world/event boundaries",

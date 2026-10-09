@@ -29,6 +29,7 @@
 #include "GameObjectAI.h"
 #include "CreatureGroups.h"
 #include "Player.h"
+#include "PhasingHandler.h"
 #include "MotionMaster.h"
 #include "Transport.h"
 #include "TransportMgr.h"
@@ -1935,6 +1936,7 @@ public:
                                     TC_LOG_ERROR("scripts", "Gilneas26706: failed to create escape wyvern43713; passenger skipped");
                                     continue;
                                 }
+                                PhasingHandler::InheritPhaseShift(npc, player);
                                 sObjectMgr->AddCreatureToGrid(guid, &data);
                                 npc->AI()->SetGUID(player->GetGUID(), PLAYER_GUID);
                                 wList.push_back(npc->GetGUID());
