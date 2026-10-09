@@ -8,6 +8,10 @@ on:
       - 'contrib/tests/test_campaign_brew_scripts.py'
       - 'src/server/scripts/World/campaign_brew_scripts.cpp'
       - 'src/server/game/AI/SmartScripts/**'
+      - 'src/server/game/Conditions/ConditionMgr.*'
+      - 'contrib/tests/test_scenario_step_condition.py'
+      - 'contrib/tests/test_campaign_lever_dependencies.py'
+      - 'docs/audit-data/campaign-lever-dependencies-*.json'
       - 'contrib/tests/test_smart_scenario_event.py'
       - 'contrib/tests/test_campaign_lever_smartai_draft.py'
       - 'contrib/tools/campaign_lever_smartai_draft.py'
@@ -22,6 +26,10 @@ on:
       - 'contrib/tests/test_campaign_brew_scripts.py'
       - 'src/server/scripts/World/campaign_brew_scripts.cpp'
       - 'src/server/game/AI/SmartScripts/**'
+      - 'src/server/game/Conditions/ConditionMgr.*'
+      - 'contrib/tests/test_scenario_step_condition.py'
+      - 'contrib/tests/test_campaign_lever_dependencies.py'
+      - 'docs/audit-data/campaign-lever-dependencies-*.json'
       - 'contrib/tests/test_smart_scenario_event.py'
       - 'contrib/tests/test_campaign_lever_smartai_draft.py'
       - 'contrib/tools/campaign_lever_smartai_draft.py'
@@ -53,3 +61,8 @@ jobs:
           python contrib/tests/test_smart_scenario_event.py
           python contrib/tests/test_campaign_lever_smartai_draft.py
           python contrib/tests/test_campaign_scenario_objects.py
+
+      - name: Exercise scenario step conditions and pinned lever dependencies
+        run: |
+          python contrib/tests/test_scenario_step_condition.py
+          python contrib/tests/test_campaign_lever_dependencies.py

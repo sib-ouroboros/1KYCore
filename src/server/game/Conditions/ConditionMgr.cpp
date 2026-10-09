@@ -35,6 +35,7 @@
 #include "Pet.h"
 #include "ReputationMgr.h"
 #include "ScriptMgr.h"
+#include "Scenario.h"
 #include "SpellAuras.h"
 #include "SpellMgr.h"
 #include "World.h"
@@ -127,6 +128,7 @@ ConditionMgr::ConditionTypeInfo const ConditionMgr::StaticConditionTypeData[COND
     { "Object Entry or Guid", true, true,  true  },
     { "Object TypeMask",      true, false, false },
     { "Specialization",       true, false, false },
+    { "Scenario step",        true, true,  false },
 };
 
 // Checks if object meets the condition
@@ -483,6 +485,16 @@ bool Condition::Meets(ConditionSourceInfo& sourceInfo) const
                 condMeets = player->IsDailyQuestDone(ConditionValue1);
             break;
         }
+        case CONDITION_SCENARIO_STEP:
+        {
+            if (Player* player = object->ToPlayer())
+                if (Scenario* scenario = player->GetScenario())
+                    if (ScenarioEntry const* entry = scenario->GetEntry())
+                        if (ScenarioStepEntry const* step = scenario->GetStep())
+                            condMeets = entry->ID == ConditionValue1 && !step->IsBonusObjective() &&
+                                step->ScenarioID == ConditionValue1 && step->OrderIndex == ConditionValue2;
+            break;
+        }
         case CONDITION_CHARMED:
         {
             if (Unit* unit = object->ToUnit())
@@ -715,6 +727,9 @@ uint32 Condition::GetSearcherTypeMaskForCondition() const
             mask |= GRID_MAP_TYPE_MASK_CREATURE | GRID_MAP_TYPE_MASK_PLAYER;
             break;
         case CONDITION_DAILY_QUEST_DONE:
+            mask |= GRID_MAP_TYPE_MASK_PLAYER;
+            break;
+        case CONDITION_SCENARIO_STEP:
             mask |= GRID_MAP_TYPE_MASK_PLAYER;
             break;
         case CONDITION_CHARMED:
@@ -1880,6 +1895,28 @@ bool ConditionMgr::isConditionTypeValid(Condition* cond) const
 {
     switch (cond->ConditionType)
     {
+        case CONDITION_SCENARIO_STEP:
+        {
+            if (!sScenarioStore.LookupEntry(cond->ConditionValue1) || cond->ConditionValue3)
+            {
+                TC_LOG_ERROR("sql.sql", "ConditionMgr: invalid scenario or nonzero unused scenario-step parameter, skipped.");
+                return false;
+            }
+            bool found = false;
+            for (ScenarioStepEntry const* step : sScenarioStepStore)
+                if (step->ScenarioID == cond->ConditionValue1 && step->OrderIndex == cond->ConditionValue2 &&
+                    !step->IsBonusObjective())
+                {
+                    found = true;
+                    break;
+                }
+            if (!found)
+            {
+                TC_LOG_ERROR("sql.sql", "ConditionMgr: scenario step does not exist, skipped.");
+                return false;
+            }
+            break;
+        }
         case CONDITION_AURA:
         {
             if (!sSpellMgr->GetSpellInfo(cond->ConditionValue1))
