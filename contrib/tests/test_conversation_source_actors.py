@@ -55,7 +55,10 @@ def main():
 #include <stdexcept>
 #include <utility>
 using uint8=std::uint8_t;using uint16=std::uint16_t;using uint32=std::uint32_t;
+// Match the actual packed ObjectGuid boundary, including sanitizer alignment.
+#pragma pack(push,1)
 struct ObjectGuid{using LowType=std::uint64_t;std::uint64_t low=0,high=0;bool IsEmpty()const{return !low&&!high;}template<auto Kind,class...T>static ObjectGuid Create(T...){return {1,0};}};
+#pragma pack(pop)
 #pragma pack(push,1)
 NATIVE
 #pragma pack(pop)
