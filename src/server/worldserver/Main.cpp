@@ -587,7 +587,10 @@ void StopDB()
     CharacterDatabase.Close();
     WorldDatabase.Close();
     LoginDatabase.Close();
+    HotfixDatabase.Close();
+    ShopDatabase.Close();
 
+    // All connection workers must finish before the MySQL client library is freed.
     MySQL::Library_End();
 }
 

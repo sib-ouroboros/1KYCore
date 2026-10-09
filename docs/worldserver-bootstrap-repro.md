@@ -115,3 +115,21 @@ mysql CLI warning и отсутствие имён персонажей в св�
 проверка зависимостей и сравнение before/after. `audit.json` probe содержит
 `empty_database_bootstrap_verified=false`, пока исходная пустота не подтверждена отдельным
 протоколом; отдельный PASS анализатора не означает завершение всего ТЗ.
+
+## Confirmed database shutdown lifetime defect
+
+`StartDB()` opens Character, World, Login, Hotfix and Shop pools. Previously,
+`StopDB()` explicitly closed only the first three before `MySQL::Library_End()`.
+The repair closes Hotfix and Shop as well. MySQL requires all connections to be
+closed before library finalization:
+https://dev.mysql.com/doc/c-api/8.0/en/mysql-library-end.html
+
+`contrib/tests/test_worldserver_database_shutdown.py` compiles the actual StopDB
+and DatabaseWorkerPool::Close bodies with controlled connection boundaries.
+It checks five pools, 15 connections and 10 workers, and rejects the old
+missing-close behavior. CI runs this check with ASan/UBSan. This is a lifetime
+contract regression check, not a real MySQL or complete worldserver shutdown test.
+
+This defect is fixed in source; its connection to the logged segmentation fault
+is UNPROVEN. The startup crash investigation remains open pending a Linux
+backtrace or complete sanitizer bootstrap/shutdown trace with matching data.
