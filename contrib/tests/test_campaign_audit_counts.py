@@ -23,6 +23,10 @@ def main():
     assert unique([x['entry'] for x in pending['entries']],'pending details')==missing
     assert pending['remaining_templates']==len(missing)
     assert pending['remaining_spawns']==sum(x['source_spawns'] for x in pending['entries'])==templates['pending_spawns']
+    template_details=read('campaign-remaining-templates-2026-10-05.json')
+    assert unique([x['entry'] for x in template_details['rows']],'template details')==missing
+    assert template_details['count']==len(missing)
+    assert dict(Counter(b for x in template_details['rows'] for b in x['blockers']))==template_details['overlapping_blocker_counts']
     models=read('campaign-remaining-models-2026-10-05.json')
     baseline=read('campaign-placeholder-audit.json')
     missing_models=unique([x['entry'] for x in models['rows']],'remaining models')

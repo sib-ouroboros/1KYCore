@@ -1,10 +1,10 @@
 {
-  "count": 13,
+  "count": 11,
   "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
   "source_GameObject_cpp_sha256": "7f685f4c98effc4df3cc31b5aba5a172d47dcc2e96d2738e5928832d97cc5600",
   "overlapping_blocker_counts": {
-    "complete_smartai_chain": 5,
-    "visual_dependencies_not_restored": 3,
+    "complete_smartai_chain": 3,
+    "visual_dependencies_not_restored": 2,
     "external_dependency_chain_review": 4,
     "garrison_shipment_missing_native_use": 2
   },
@@ -111,23 +111,6 @@
       "source_additional_fields": {}
     },
     {
-      "entry": 251591,
-      "type": 0,
-      "blockers": [
-        "visual_dependencies_not_restored",
-        "complete_smartai_chain"
-      ],
-      "previous_dependency_review": [
-        "Требуется проверка клиентских записей Lock/PlayerCondition/BroadcastText на развёрнутом сервере.",
-        "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его.",
-        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится."
-      ],
-      "source_additional_fields": {
-        "SpellVisualID": "58002",
-        "AIName": "'SmartGameObjectAI'"
-      }
-    },
-    {
       "entry": 252018,
       "type": 22,
       "blockers": [
@@ -159,21 +142,6 @@
       }
     },
     {
-      "entry": 254253,
-      "type": 10,
-      "blockers": [
-        "complete_smartai_chain"
-      ],
-      "previous_dependency_review": [
-        "Проверить замок и исходный сценарий использования, не превращать GOOBER в простой декор.",
-        "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
-        "Исходный SmartScript action205 с параметрами92/54147 и комментарием Complete Scenario Criteria несовместим с native action205 SET_OVERRIDE_ZONE_LIGHT; в GO обработчик не выполняет действие, поскольку требует me (NPC). Нельзя импортировать номер действия без проверки исходного enum и перевода сценарной семантики."
-      ],
-      "source_additional_fields": {
-        "AIName": "'SmartGameObjectAI'"
-      }
-    },
-    {
       "entry": 266767,
       "type": 22,
       "blockers": [
@@ -197,9 +165,16 @@
     ],
     "decision": "Static non-quest visuals now have optional addon storage and native lifecycle. These remaining templates still require other dependencies; per-player visualQuestID behavior has not been ported."
   },
-  "assurance": "13 templates remain unresolved. Two source RequiredLevel100 generic templates restored separately; no NPC AI/quests changed. All remaining conditions and dependencies retained.",
+  "assurance": "11 unresolved templates; restored scenario objects251591/254253 excluded from current detail rows. Historical reviews retained separately. No gameplay changes.",
   "resolved_required_level_entries": [
     269053,
     269055
-  ]
+  ],
+  "followup_scenario_objects": {
+    "restored_entries": [
+      251591,
+      254253
+    ],
+    "proof": "campaign-scenario-object-restoration.json"
+  }
 }

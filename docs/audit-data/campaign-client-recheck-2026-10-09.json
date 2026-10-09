@@ -1,0 +1,512 @@
+{
+  "client_path": "F:/Projects/extracted-735-new/dbc/ruRU",
+  "validation": {
+    "UiCamera": {
+      "file": "UiCamera.db2",
+      "sha256": "6cb64ffd7d647d45e1bb8e8f849a0f9f80c7a441db9f1cecddedd2aa97d96c4d",
+      "layout_hash": "0xca6c98d4",
+      "record_count": 1060,
+      "copy_rows": 0,
+      "identity_count": 1060,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "AnimKit": {
+      "file": "AnimKit.db2",
+      "sha256": "b3b895f30bee3ced65a107c638eead9931fdf5c4f1efe1da73d328fc99faa5f1",
+      "layout_hash": "0x81d6d250",
+      "record_count": 483,
+      "copy_rows": 11799,
+      "identity_count": 12282,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "PlayerCondition": {
+      "file": "PlayerCondition.db2",
+      "sha256": "0d9fba0781518ce6d2fd6e859825c7995f1cbb4a016cedd4e5a8533e83a87acc",
+      "layout_hash": "0x5b3da113",
+      "record_count": 7115,
+      "copy_rows": 0,
+      "identity_count": 7115,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "Lock": {
+      "file": "Lock.db2",
+      "sha256": "3223460df70cd1e5b5d2dbe63b4c63214e6a2627110c7ada8ba0f979f26ac43d",
+      "layout_hash": "0xdac7f42f",
+      "record_count": 634,
+      "copy_rows": 84,
+      "identity_count": 718,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    },
+    "Spell": {
+      "file": "Spell.db2",
+      "sha256": "6f722017f5bfd8539aa6839c2ddc0977a9fc6f1e48a85cc30a2175f7238ad080",
+      "layout_hash": "0x2273dfff",
+      "record_count": 126063,
+      "copy_rows": 53319,
+      "identity_count": 179382,
+      "format": "WDC1",
+      "locale": "ruRU",
+      "assurance": "ID presence and exact current-core layout; not decoding gameplay effects"
+    }
+  },
+  "checks": [
+    {
+      "group": "conversations",
+      "id": 1416,
+      "table": "UiCamera",
+      "reference": 1,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 1986,
+      "table": "UiCamera",
+      "reference": 75592,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 2000,
+      "table": "UiCamera",
+      "reference": 4285107616,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 2314,
+      "table": "UiCamera",
+      "reference": 1367019216,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 2434,
+      "table": "UiCamera",
+      "reference": 2311023888,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 2666,
+      "table": "UiCamera",
+      "reference": 1796582640,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 2869,
+      "table": "UiCamera",
+      "reference": 22662400,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 2870,
+      "table": "UiCamera",
+      "reference": 92791,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 2976,
+      "table": "UiCamera",
+      "reference": 138293,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3029,
+      "table": "UiCamera",
+      "reference": 808923696,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3108,
+      "table": "UiCamera",
+      "reference": 3718228896,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3183,
+      "table": "UiCamera",
+      "reference": 2555358216,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3186,
+      "table": "UiCamera",
+      "reference": 3718226304,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3192,
+      "table": "UiCamera",
+      "reference": 1060835600,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3235,
+      "table": "UiCamera",
+      "reference": 1060824944,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3260,
+      "table": "UiCamera",
+      "reference": 105415,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3524,
+      "table": "UiCamera",
+      "reference": 3237982400,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3525,
+      "table": "UiCamera",
+      "reference": 3237982400,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3574,
+      "table": "UiCamera",
+      "reference": 934091984,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3638,
+      "table": "UiCamera",
+      "reference": 106637,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3769,
+      "table": "UiCamera",
+      "reference": 2772806912,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3770,
+      "table": "UiCamera",
+      "reference": 2772806912,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3789,
+      "table": "UiCamera",
+      "reference": 98618,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 3790,
+      "table": "UiCamera",
+      "reference": 98618,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 4229,
+      "table": "UiCamera",
+      "reference": 5,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 4313,
+      "table": "UiCamera",
+      "reference": 2750931696,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 4568,
+      "table": "UiCamera",
+      "reference": 45256909,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 4572,
+      "table": "UiCamera",
+      "reference": 2154798120,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 4575,
+      "table": "UiCamera",
+      "reference": 3314581,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 4657,
+      "table": "UiCamera",
+      "reference": 878681136,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 4658,
+      "table": "UiCamera",
+      "reference": 2,
+      "present": false
+    },
+    {
+      "group": "conversations",
+      "id": 4730,
+      "table": "UiCamera",
+      "reference": 161917554,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 245234,
+      "table": "PlayerCondition",
+      "reference": 19467,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 245924,
+      "table": "PlayerCondition",
+      "reference": 37624,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 245994,
+      "table": "PlayerCondition",
+      "reference": 39238,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 246984,
+      "table": "PlayerCondition",
+      "reference": 41517,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 247037,
+      "table": "PlayerCondition",
+      "reference": 38308,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 247038,
+      "table": "PlayerCondition",
+      "reference": 38308,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 247052,
+      "table": "PlayerCondition",
+      "reference": 38374,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 248475,
+      "table": "PlayerCondition",
+      "reference": 39037,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 248876,
+      "table": "PlayerCondition",
+      "reference": 39397,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 266081,
+      "table": "PlayerCondition",
+      "reference": 48083,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 266166,
+      "table": "PlayerCondition",
+      "reference": 46899,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 267176,
+      "table": "PlayerCondition",
+      "reference": 47096,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 267177,
+      "table": "PlayerCondition",
+      "reference": 47097,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 267952,
+      "table": "PlayerCondition",
+      "reference": 47913,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 268408,
+      "table": "PlayerCondition",
+      "reference": 48092,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 268617,
+      "table": "PlayerCondition",
+      "reference": 49035,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 268736,
+      "table": "PlayerCondition",
+      "reference": 48622,
+      "present": false
+    },
+    {
+      "group": "templates",
+      "id": 246459,
+      "table": "PlayerCondition",
+      "reference": 18177,
+      "present": false
+    },
+    {
+      "group": "templates",
+      "id": 246536,
+      "table": "PlayerCondition",
+      "reference": 18177,
+      "present": false
+    },
+    {
+      "group": "templates",
+      "id": 246537,
+      "table": "PlayerCondition",
+      "reference": 18177,
+      "present": false
+    },
+    {
+      "group": "templates",
+      "id": 249027,
+      "table": "PlayerCondition",
+      "reference": 23645,
+      "present": false
+    },
+    {
+      "group": "templates",
+      "id": 252018,
+      "table": "PlayerCondition",
+      "reference": 41852,
+      "present": false
+    },
+    {
+      "group": "templates",
+      "id": 252981,
+      "table": "PlayerCondition",
+      "reference": 44383,
+      "present": false
+    },
+    {
+      "group": "templates",
+      "id": 246459,
+      "table": "Lock",
+      "reference": 2507,
+      "present": true
+    },
+    {
+      "group": "templates",
+      "id": 246536,
+      "table": "Lock",
+      "reference": 5,
+      "present": true
+    },
+    {
+      "group": "templates",
+      "id": 249027,
+      "table": "Lock",
+      "reference": 1691,
+      "present": true
+    },
+    {
+      "group": "models",
+      "id": 251504,
+      "table": "Spell",
+      "reference": 217183,
+      "present": false
+    },
+    {
+      "group": "models",
+      "id": 267222,
+      "table": "Spell",
+      "reference": 233966,
+      "present": false
+    },
+    {
+      "group": "templates",
+      "id": 246459,
+      "table": "Spell",
+      "reference": 201690,
+      "present": true
+    },
+    {
+      "group": "templates",
+      "id": 246537,
+      "table": "Spell",
+      "reference": 204944,
+      "present": true
+    },
+    {
+      "group": "templates",
+      "id": 252018,
+      "table": "Spell",
+      "reference": 219701,
+      "present": true
+    },
+    {
+      "group": "templates",
+      "id": 266767,
+      "table": "Spell",
+      "reference": 232169,
+      "present": true
+    }
+  ],
+  "newly_present_previously_missing": 0,
+  "assurance": "Exact core layout and ID presence only; not decoded condition/spell behavior. No live server data changed."
+}

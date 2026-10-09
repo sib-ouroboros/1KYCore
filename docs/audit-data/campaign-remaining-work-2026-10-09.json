@@ -1,0 +1,3018 @@
+{
+  "basis": "Current pinned release/source registries; not a live server database audit",
+  "counts": {
+    "conversations": 41,
+    "templates": 11,
+    "models": 46
+  },
+  "pending_spawns": 100,
+  "input_sha256": {
+    "campaign-remaining-conversations-2026-10-05.json": "38cebbdec92dcca1d619a6f73716662e293f101381c9f3985e65a84326d652da",
+    "campaign-remaining-models-2026-10-05.json": "829e358b9c19e896b3d7b46eb0809df5af92be5b0dc87d90a3796e1ce4728e19",
+    "campaign-remaining-templates-2026-10-05.json": "052481a9fa3573eda7bf86cebff39e672ae09cd1eefb7ad20e04f64a86e62c21",
+    "campaign-pending-dependencies.json": "27e656565c079b5949e3da5af7b94e9f884841001c9760717685b85cd1a1b514",
+    "campaign-restoration-status.json": "5b7a8bb0a08c5430789c7a749dfd7c5f62f2015630f785ba7cc4556a3499016e",
+    "campaign-conversation-source-timing-review-2026-10-08.json": "0c1b0a9ceb7c884524bfb83d3a476cd87ee0f155e70ff6c276815475cb30b35f",
+    "campaign-script-chain-inventory-2026-10-08.json": "3d54d884b4d9b8de82f2ce2e8a2ff7590b5476e81994bae563fca9fc5b2352e0"
+  },
+  "groups": {
+    "conversations": {
+      "count": 41,
+      "blocker_counts_overlap": {
+        "actor_template_requires_separate_translation": 2,
+        "client_line_chain_mismatch": 1,
+        "missing_native_camera": 32,
+        "packed_fields_require_semantic_review": 11,
+        "source_actor_template_precedes_world_actor_rows": 1,
+        "source_duration_does_not_cover_lines": 15,
+        "source_player_sentinel_actor": 5
+      },
+      "rows": [
+        {
+          "id": 738,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "packed_fields_require_semantic_review",
+            "actor_template_requires_separate_translation"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "actor_template",
+            "source_create_last_line_end": 9350,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 1762,
+              "raw": 538968064,
+              "actor_index": 0,
+              "flags": 0,
+              "padding": 8224
+            }
+          ],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 1416,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 7150,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              1
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 1477,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "packed_fields_require_semantic_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 8950,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 3318,
+              "raw": 1411383296,
+              "actor_index": 0,
+              "flags": 0,
+              "padding": 21536
+            }
+          ],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 1667,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "actor_template_requires_separate_translation"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "actor_template",
+            "source_create_last_line_end": 8550,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 1900,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "packed_fields_require_semantic_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 15547,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 4017,
+              "raw": 540016640,
+              "actor_index": 0,
+              "flags": 0,
+              "padding": 8240
+            }
+          ],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 1986,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 11656,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              75592
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 2000,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 13250,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              4285107616
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 2048,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "packed_fields_require_semantic_review",
+            "source_player_sentinel_actor"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 21000,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 4324,
+              "raw": 257,
+              "actor_index": 1,
+              "flags": 1,
+              "padding": 0
+            },
+            {
+              "line": 4395,
+              "raw": 257,
+              "actor_index": 1,
+              "flags": 1,
+              "padding": 0
+            },
+            {
+              "line": 4359,
+              "raw": 257,
+              "actor_index": 1,
+              "flags": 1,
+              "padding": 0
+            }
+          ],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 2246,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "packed_fields_require_semantic_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 64070,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 4730,
+              "raw": 16711680,
+              "actor_index": 0,
+              "flags": 0,
+              "padding": 255
+            }
+          ],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 2314,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 9148,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              1367019216
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 2434,
+          "blockers": [
+            "source_player_sentinel_actor",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 17714,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              2311023888
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 2666,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 30736,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              1796582640
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 2869,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 16178,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              22662400
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 2870,
+          "blockers": [
+            "client_line_chain_mismatch",
+            "source_duration_does_not_cover_lines",
+            "packed_fields_require_semantic_review",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 35000,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": false,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              92791
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 6001,
+              "raw": 258,
+              "actor_index": 2,
+              "flags": 1,
+              "padding": 0
+            }
+          ],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 2871,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "packed_fields_require_semantic_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 7345,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 6009,
+              "raw": 256,
+              "actor_index": 0,
+              "flags": 1,
+              "padding": 0
+            }
+          ],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 2976,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 12588,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              138293
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3029,
+          "blockers": [
+            "packed_fields_require_semantic_review",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 20151,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              808923696
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 6408,
+              "raw": 1811939328,
+              "actor_index": 0,
+              "flags": 0,
+              "padding": 27648
+            }
+          ],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3108,
+          "blockers": [
+            "packed_fields_require_semantic_review",
+            "source_player_sentinel_actor",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 171878,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              3718228896
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 6575,
+              "raw": 258,
+              "actor_index": 2,
+              "flags": 1,
+              "padding": 0
+            }
+          ],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3183,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 60239,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              2555358216
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3186,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 38757,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              3718226304
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3192,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 33716,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              1060835600
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3235,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 26816,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              1060824944
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3260,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 14312,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              105415
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3524,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 13019,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              3237982400
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3525,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 11581,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              3237982400
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3574,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 7700,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              934091984
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3638,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 9916,
+            "decoded_duration_bounds_valid": false,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              106637
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3640,
+          "blockers": [
+            "source_duration_does_not_cover_lines",
+            "packed_fields_require_semantic_review",
+            "source_player_sentinel_actor"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 35000,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 8791,
+              "raw": 257,
+              "actor_index": 1,
+              "flags": 1,
+              "padding": 0
+            }
+          ],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 3769,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 8528,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              2772806912
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3770,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 9786,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              2772806912
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3789,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 8480,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              98618
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 3790,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 8921,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              98618
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 4229,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 118106,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              5
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 4304,
+          "blockers": [
+            "source_player_sentinel_actor",
+            "source_actor_template_precedes_world_actor_rows"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "actor_template",
+            "source_create_last_line_end": 54554,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": true
+          },
+          "missing_client_references": {
+            "UiCamera": [],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Verify actor semantics, packed packets and exact source/client timing"
+        },
+        {
+          "id": 4313,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 145616,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              2750931696
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 4568,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 75406,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              45256909
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 4572,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 14578,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              2154798120
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 4575,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 23138,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              3314581
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 4657,
+          "blockers": [
+            "packed_fields_require_semantic_review",
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 30617,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              878681136
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [
+            {
+              "line": 10328,
+              "raw": 540672000,
+              "actor_index": 0,
+              "flags": 0,
+              "padding": 8250
+            }
+          ],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 4658,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 65060,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              2
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        },
+        {
+          "id": 4730,
+          "blockers": [
+            "missing_native_camera"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "source_timing": {
+            "source_branch": "world_actor",
+            "source_create_last_line_end": 32480,
+            "decoded_duration_bounds_valid": true,
+            "client_line_links_match": true,
+            "mixed_source_actor_tables": false
+          },
+          "missing_client_references": {
+            "UiCamera": [
+              161917554
+            ],
+            "AnimKit": []
+          },
+          "packed_fields": [],
+          "next_step": "Obtain matching client camera/animation records"
+        }
+      ]
+    },
+    "templates": {
+      "count": 11,
+      "blocker_counts_overlap": {
+        "complete_smartai_chain": 3,
+        "external_dependency_chain_review": 4,
+        "garrison_shipment_missing_native_use": 2,
+        "visual_dependencies_not_restored": 2
+      },
+      "rows": [
+        {
+          "id": 245233,
+          "blockers": [
+            "complete_smartai_chain"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 1,
+            "connected_source_rows": 2,
+            "connected_keys": [
+              [
+                245233,
+                1
+              ],
+              [
+                245234,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 1,
+          "references": {},
+          "required_review": [
+            "Требуется исходный AI и все связанные сценарии. Для 245233 найден SmartScript event38 SetData(1,1) -> action9 ACTIVATE_GOBJECT self; в release его нет, отправитель найден: GO 245234 event70 state2 -> SetData(1,1), но его release-шаблон — заготовка с type=0/displayId=0; исходный GOOBER использует Lock1691, BroadcastText33516, PlayerCondition19467.",
+            "У управляющего GO245234 отсутствует клиентский PlayerCondition19467; восстановление только двери нарушит цепочку."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 246459,
+          "blockers": [
+            "visual_dependencies_not_restored"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                246459,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 86,
+          "references": {
+            "Lock": 2507,
+            "Spell": 201690,
+            "PlayerCondition": 18177
+          },
+          "required_review": [
+            "Проверить заклинание ловушки, её радиус/перезарядку и внешние клиентские зависимости.",
+            "Поле исходной схемы отсутствует в gameobject_template целевой базы; нельзя молча отбросить или переименовать его.",
+            "PlayerCondition 18177 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 246536,
+          "blockers": [
+            "external_dependency_chain_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                246536,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 1,
+          "references": {
+            "Lock": 5,
+            "PlayerCondition": 18177
+          },
+          "required_review": [
+            "Требуется проверка клиентских записей Lock/PlayerCondition/BroadcastText на развёрнутом сервере.",
+            "PlayerCondition 18177 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 246537,
+          "blockers": [
+            "visual_dependencies_not_restored"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                246537,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 1,
+          "references": {
+            "Spell": 204944,
+            "PlayerCondition": 18177
+          },
+          "required_review": [
+            "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
+            "PlayerCondition 18177 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 247321,
+          "blockers": [
+            "external_dependency_chain_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                247321,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 1,
+          "references": {
+            "PageText": 5243
+          },
+          "required_review": [
+            "Страница 5243 отсутствует и в исходном Legion SQL; требуется достоверный источник текста."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 249027,
+          "blockers": [
+            "external_dependency_chain_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                249027,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 3,
+          "references": {
+            "Lock": 1691,
+            "LootEntry": 249027,
+            "PlayerCondition": 23645,
+            "QuestItem": 136694
+          },
+          "required_review": [
+            "Лут 249027 найден в источнике, но перед импортом нужны Lock/PlayerCondition/Item и корректный контекст получения предмета.",
+            "PlayerCondition 23645 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 250899,
+          "blockers": [
+            "garrison_shipment_missing_native_use"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                250899,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 2,
+          "references": {
+            "CharShipmentContainer": 154
+          },
+          "required_review": [
+            "Обычные войска оплота, не удалённые боты. Запись CharShipmentContainer есть в клиенте, но требуется проверить полный путь взаимодействия GO type45 с заказами в ядре."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 250908,
+          "blockers": [
+            "garrison_shipment_missing_native_use"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                250908,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 1,
+          "references": {
+            "CharShipmentContainer": 148
+          },
+          "required_review": [
+            "Обычные войска оплота, не удалённые боты. Запись CharShipmentContainer есть в клиенте, но требуется проверить полный путь взаимодействия GO type45 с заказами в ядре."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 252018,
+          "blockers": [
+            "complete_smartai_chain"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 1,
+            "connected_keys": [
+              [
+                252018,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 1,
+          "references": {
+            "Spell": 219701,
+            "PlayerCondition": 41852
+          },
+          "required_review": [
+            "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
+            "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
+            "PlayerCondition 41852 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 252981,
+          "blockers": [
+            "complete_smartai_chain"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 2,
+            "incoming_rows": 0,
+            "connected_source_rows": 2,
+            "connected_keys": [
+              [
+                252981,
+                1
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  252981,
+                  1,
+                  0
+                ],
+                "field": "action_type",
+                "value": 204,
+                "source": "SMART_ACTION_SET_SCENATIO_ID",
+                "native": "SMART_ACTION_CIRCLE_PATH"
+              }
+            ]
+          },
+          "source_spawns": 2,
+          "references": {
+            "PlayerCondition": 44383
+          },
+          "required_review": [
+            "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
+            "Spell=0: найти реальную цепочку обработки; не подставлять выдуманное заклинание.",
+            "Требуется найти и проверить собственный исходный SmartScript и все внешние отправители событий; цепочка245233/245234 к этому объекту не относится.",
+            "PlayerCondition 44383 отсутствует в предоставленной DB2; не заменять нулём, требуется установить корректную семантику условия."
+          ],
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 266767,
+          "blockers": [
+            "external_dependency_chain_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                266767,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "source_spawns": 1,
+          "references": {
+            "Spell": 232169
+          },
+          "required_review": [
+            "Проверить заклинание, эффекты и способ определения цели/места назначения; наличие spell_target_position само по себе недостаточно.",
+            "Spell232169 использует TELEPORT_TO_LFG227 и dungeon1422; не подменять обычным TELEPORT_UNITS252 и фиксированным spell_target_position."
+          ],
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        }
+      ]
+    },
+    "models": {
+      "count": 46,
+      "blocker_counts_overlap": {
+        "loot_and_quest_item_dependencies": 11,
+        "missing_event_and_npc_scene_chain": 3,
+        "missing_native_client_reference": 19,
+        "native_spell_or_external_dependency_review": 3,
+        "no_native_garrison_shipment_use_handler": 2,
+        "script_chain_not_translated": 14,
+        "static_visual_source_chain_not_restored": 4
+      },
+      "rows": [
+        {
+          "id": 245102,
+          "blockers": [
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 1,
+            "connected_source_rows": 31,
+            "connected_keys": [
+              [
+                98771,
+                0
+              ],
+              [
+                98771,
+                9
+              ],
+              [
+                98836,
+                0
+              ],
+              [
+                245102,
+                1
+              ],
+              [
+                9877100,
+                9
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  98771,
+                  9,
+                  5
+                ],
+                "field": "action_type",
+                "value": 205,
+                "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+                "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+              },
+              {
+                "key": [
+                  98836,
+                  0,
+                  5
+                ],
+                "field": "action_type",
+                "value": 205,
+                "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+                "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+              },
+              {
+                "key": [
+                  98836,
+                  0,
+                  9
+                ],
+                "field": "action_type",
+                "value": 205,
+                "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+                "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+              }
+            ]
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data3": "3000"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 245234,
+          "blockers": [
+            "missing_native_client_reference",
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 2,
+            "connected_keys": [
+              [
+                245233,
+                1
+              ],
+              [
+                245234,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 19467
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data3": "300000",
+            "Data14": "33516",
+            "Data22": "19467"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 245924,
+          "blockers": [
+            "missing_native_client_reference",
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 48,
+            "connected_keys": [
+              [
+                99145,
+                0
+              ],
+              [
+                99147,
+                0
+              ],
+              [
+                99178,
+                0
+              ],
+              [
+                99178,
+                9
+              ],
+              [
+                245924,
+                1
+              ],
+              [
+                9917800,
+                9
+              ],
+              [
+                9917801,
+                9
+              ],
+              [
+                9917802,
+                9
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  9917800,
+                  9,
+                  3
+                ],
+                "field": "action_type",
+                "value": 205,
+                "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+                "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+              }
+            ]
+          },
+          "missing_client_references": {
+            "PlayerCondition": 37624
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data2": "1",
+            "Data3": "1",
+            "Data14": "19676",
+            "Data17": "37624"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 245994,
+          "blockers": [
+            "missing_native_client_reference",
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 1,
+            "connected_keys": [
+              [
+                245994,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 39238
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data3": "300000",
+            "Data10": "199727",
+            "Data14": "19676",
+            "Data22": "39238",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 246148,
+          "blockers": [
+            "static_visual_source_chain_not_restored",
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 4,
+            "incoming_rows": 0,
+            "connected_source_rows": 56,
+            "connected_keys": [
+              [
+                99145,
+                0
+              ],
+              [
+                99147,
+                0
+              ],
+              [
+                99178,
+                0
+              ],
+              [
+                99178,
+                9
+              ],
+              [
+                246148,
+                1
+              ],
+              [
+                246148,
+                9
+              ],
+              [
+                9917800,
+                9
+              ],
+              [
+                9917801,
+                9
+              ],
+              [
+                9917802,
+                9
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  246148,
+                  1,
+                  0
+                ],
+                "field": "action_type",
+                "value": 205,
+                "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+                "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+              },
+              {
+                "key": [
+                  246148,
+                  9,
+                  2
+                ],
+                "field": "action_type",
+                "value": 205,
+                "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+                "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+              },
+              {
+                "key": [
+                  9917800,
+                  9,
+                  3
+                ],
+                "field": "action_type",
+                "value": 205,
+                "source": "SMART_ACTION_UPDATE_ACHIEVEMENT_CRITERIA",
+                "native": "SMART_ACTION_SET_OVERRIDE_ZONE_LIGHT"
+              }
+            ]
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "1691",
+            "Data3": "100000",
+            "Data13": "1",
+            "Data14": "35196"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 246984,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                246984,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 41517
+          },
+          "source_data": {
+            "Data0": "93",
+            "Data10": "218574",
+            "Data14": "21295",
+            "Data22": "41517",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 247037,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                247037,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 38308
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data3": "1000",
+            "Data10": "203994",
+            "Data14": "96631",
+            "Data22": "38308",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 247038,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                247038,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 38308
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data3": "1000",
+            "Data10": "203995",
+            "Data14": "96631",
+            "Data22": "38308",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 247052,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                247052,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 38374
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data3": "1",
+            "Data10": "204230",
+            "Data13": "1",
+            "Data14": "56085",
+            "Data22": "38374",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 248475,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                248475,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 39037
+          },
+          "source_data": {
+            "Data0": "1952",
+            "Data3": "3000",
+            "Data5": "1",
+            "Data22": "39037",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 248781,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                248781,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "43",
+            "Data2": "1",
+            "Data14": "19676",
+            "Data30": "65643"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 248782,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                248782,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "43",
+            "Data2": "1",
+            "Data14": "19676",
+            "Data30": "65643"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 248876,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                248876,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 39397
+          },
+          "source_data": {
+            "Data0": "43",
+            "Data2": "1",
+            "Data14": "108167",
+            "Data17": "39397",
+            "Data31": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 250295,
+          "blockers": [
+            "static_visual_source_chain_not_restored",
+            "missing_event_and_npc_scene_chain"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                250295,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data2": "51128",
+            "Data3": "3000",
+            "Data13": "1",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 250364,
+          "blockers": [
+            "static_visual_source_chain_not_restored",
+            "missing_event_and_npc_scene_chain"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                250364,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data2": "51140",
+            "Data3": "3000",
+            "Data13": "1",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 250367,
+          "blockers": [
+            "static_visual_source_chain_not_restored",
+            "missing_event_and_npc_scene_chain"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                250367,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data2": "51142",
+            "Data3": "3000",
+            "Data13": "1",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 251262,
+          "blockers": [
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 1,
+            "connected_keys": [
+              [
+                251262,
+                1
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  251262,
+                  1,
+                  0
+                ],
+                "field": "action_type",
+                "value": 204,
+                "source": "SMART_ACTION_SET_SCENATIO_ID",
+                "native": "SMART_ACTION_CIRCLE_PATH"
+              }
+            ]
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "215687",
+            "Data3": "1"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 251504,
+          "blockers": [
+            "missing_native_client_reference",
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 2,
+            "connected_keys": [
+              [
+                109206,
+                0
+              ],
+              [
+                251504,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "Spell": 217183
+          },
+          "source_data": {
+            "Data0": "2565",
+            "Data3": "40000",
+            "Data10": "217183",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 251697,
+          "blockers": [
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 1,
+            "connected_keys": [
+              [
+                251697,
+                1
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  251697,
+                  1,
+                  0
+                ],
+                "field": "action_type",
+                "value": 206,
+                "source": "SMART_ACTION_SUMMON_CONVERSATION",
+                "native": "SMART_ACTION_START_CONVERSATION"
+              }
+            ]
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data3": "4",
+            "Data7": "5314",
+            "Data9": "1",
+            "Data10": "218330",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 252796,
+          "blockers": [
+            "no_native_garrison_shipment_use_handler"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                252796,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "186"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 252800,
+          "blockers": [
+            "no_native_garrison_shipment_use_handler"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                252800,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "190"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 266081,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                266081,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 48083
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data2": "55277",
+            "Data3": "3000",
+            "Data10": "233450",
+            "Data14": "28503",
+            "Data20": "1",
+            "Data22": "48083",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 266166,
+          "blockers": [
+            "missing_native_client_reference",
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 2,
+            "incoming_rows": 0,
+            "connected_source_rows": 9,
+            "connected_keys": [
+              [
+                119982,
+                0
+              ],
+              [
+                119982,
+                9
+              ],
+              [
+                266166,
+                1
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  119982,
+                  0,
+                  1
+                ],
+                "field": "event_type",
+                "value": 4,
+                "source": "SMART_EVENT_PARAM_COUNT",
+                "native": "SMART_EVENT_AGGRO"
+              },
+              {
+                "key": [
+                  266166,
+                  1,
+                  0
+                ],
+                "field": "action_type",
+                "value": 206,
+                "source": "SMART_ACTION_SUMMON_CONVERSATION",
+                "native": "SMART_ACTION_START_CONVERSATION"
+              }
+            ]
+          },
+          "missing_client_references": {
+            "PlayerCondition": 46899
+          },
+          "source_data": {
+            "Data0": "1690",
+            "Data3": "1",
+            "Data10": "239044",
+            "Data14": "83759",
+            "Data20": "1",
+            "Data22": "46899",
+            "Data23": "1"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 266291,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                266291,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "93",
+            "Data2": "1",
+            "Data14": "19676",
+            "Data30": "70459"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 266307,
+          "blockers": [
+            "native_spell_or_external_dependency_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                266307,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "93",
+            "Data3": "1",
+            "Data10": "236018",
+            "Data14": "35196",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 266588,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                266588,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "43",
+            "Data2": "1",
+            "Data14": "21400",
+            "Data30": "70531"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 266594,
+          "blockers": [
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 1,
+            "connected_keys": [
+              [
+                266594,
+                1
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  266594,
+                  1,
+                  0
+                ],
+                "field": "action_type",
+                "value": 206,
+                "source": "SMART_ACTION_SUMMON_CONVERSATION",
+                "native": "SMART_ACTION_START_CONVERSATION"
+              }
+            ]
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "43",
+            "Data2": "1",
+            "Data14": "21400",
+            "Data30": "70532"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 266595,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                266595,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "43",
+            "Data2": "1",
+            "Data14": "21400",
+            "Data30": "70533"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 267003,
+          "blockers": [
+            "native_spell_or_external_dependency_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                267003,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "99",
+            "Data3": "1",
+            "Data10": "233399",
+            "Data14": "24585",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 267176,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                267176,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 47096
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data1": "45632",
+            "Data3": "5000",
+            "Data10": "233857",
+            "Data13": "1",
+            "Data14": "21400",
+            "Data20": "1",
+            "Data22": "47096",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 267177,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                267177,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 47097
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data1": "45648",
+            "Data3": "5000",
+            "Data10": "233896",
+            "Data13": "1",
+            "Data14": "21400",
+            "Data20": "1",
+            "Data22": "47097",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 267222,
+          "blockers": [
+            "missing_native_client_reference",
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 1,
+            "incoming_rows": 0,
+            "connected_source_rows": 5,
+            "connected_keys": [
+              [
+                117537,
+                0
+              ],
+              [
+                267222,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "Spell": 233966
+          },
+          "source_data": {
+            "Data0": "2668",
+            "Data1": "45725",
+            "Data10": "233966",
+            "Data14": "21400",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 267641,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                267641,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "43",
+            "Data2": "1",
+            "Data14": "19676",
+            "Data30": "70957"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 267952,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                267952,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 47913
+          },
+          "source_data": {
+            "Data0": "1690",
+            "Data2": "1",
+            "Data3": "1",
+            "Data13": "1",
+            "Data14": "19680",
+            "Data17": "47913",
+            "Data18": "100",
+            "Data19": "4",
+            "Data20": "100",
+            "Data30": "71556",
+            "Data31": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268359,
+          "blockers": [
+            "native_spell_or_external_dependency_review"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268359,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data1": "45147",
+            "Data10": "237385",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268377,
+          "blockers": [
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 3,
+            "incoming_rows": 0,
+            "connected_source_rows": 7,
+            "connected_keys": [
+              [
+                119620,
+                0
+              ],
+              [
+                268377,
+                1
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  119620,
+                  0,
+                  0
+                ],
+                "field": "action_type",
+                "value": 207,
+                "source": "SMART_ACTION_SUMMON_ADD_PLR_PERSONNAL_VISIBILE",
+                "native": "SMART_ACTION_MODIFY_THREAT"
+              }
+            ]
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "2640",
+            "Data10": "237619",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 268378,
+          "blockers": [
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 3,
+            "incoming_rows": 0,
+            "connected_source_rows": 7,
+            "connected_keys": [
+              [
+                119619,
+                0
+              ],
+              [
+                268378,
+                1
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  119619,
+                  0,
+                  0
+                ],
+                "field": "action_type",
+                "value": 207,
+                "source": "SMART_ACTION_SUMMON_ADD_PLR_PERSONNAL_VISIBILE",
+                "native": "SMART_ACTION_MODIFY_THREAT"
+              }
+            ]
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "2640",
+            "Data10": "237620",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 268379,
+          "blockers": [
+            "script_chain_not_translated"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 3,
+            "incoming_rows": 0,
+            "connected_source_rows": 7,
+            "connected_keys": [
+              [
+                119621,
+                0
+              ],
+              [
+                268379,
+                1
+              ]
+            ],
+            "enum_mismatches": [
+              {
+                "key": [
+                  119621,
+                  0,
+                  0
+                ],
+                "field": "action_type",
+                "value": 207,
+                "source": "SMART_ACTION_SUMMON_ADD_PLR_PERSONNAL_VISIBILE",
+                "native": "SMART_ACTION_MODIFY_THREAT"
+              }
+            ]
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "2640",
+            "Data10": "237621",
+            "Data20": "1",
+            "Data23": "1"
+          },
+          "next_step": "Translate connected source AI semantics before importing"
+        },
+        {
+          "id": 268408,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268408,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 48092
+          },
+          "source_data": {
+            "Data0": "1691",
+            "Data3": "3000",
+            "Data10": "237673",
+            "Data20": "1",
+            "Data22": "48092",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268474,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268474,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "1691",
+            "Data14": "19676",
+            "Data30": "71934"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268475,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268475,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "1691",
+            "Data14": "21400",
+            "Data28": "1",
+            "Data30": "71935"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268476,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268476,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "1691",
+            "Data14": "21400",
+            "Data28": "1",
+            "Data30": "71936"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268477,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268477,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "1691",
+            "Data14": "19676",
+            "Data30": "71938"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268479,
+          "blockers": [
+            "loot_and_quest_item_dependencies"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268479,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {},
+          "source_data": {
+            "Data0": "1691",
+            "Data14": "19676",
+            "Data30": "71943"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268617,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268617,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 49035
+          },
+          "source_data": {
+            "Data0": "1690",
+            "Data2": "57304",
+            "Data13": "1",
+            "Data14": "27700",
+            "Data20": "1",
+            "Data22": "49035",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        },
+        {
+          "id": 268736,
+          "blockers": [
+            "missing_native_client_reference"
+          ],
+          "status": "REVIEW_REQUIRED",
+          "script_chain": {
+            "own_source_rows": 0,
+            "incoming_rows": 0,
+            "connected_source_rows": 0,
+            "connected_keys": [
+              [
+                268736,
+                1
+              ]
+            ],
+            "enum_mismatches": []
+          },
+          "missing_client_references": {
+            "PlayerCondition": 48622
+          },
+          "source_data": {
+            "Data0": "2688",
+            "Data3": "3000",
+            "Data10": "240221",
+            "Data20": "1",
+            "Data22": "48622",
+            "Data23": "1"
+          },
+          "next_step": "Validate full dependency and native interaction lifecycle"
+        }
+      ]
+    }
+  },
+  "assurance": "Dependency work list only. No camera/condition zeroing, invented timings, model-only completion or NPC AI changes. Missing source joins fail closed."
+}
