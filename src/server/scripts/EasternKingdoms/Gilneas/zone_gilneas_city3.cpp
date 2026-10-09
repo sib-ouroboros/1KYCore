@@ -1797,9 +1797,13 @@ public:
                             data.posY = -0.00663333f;
                             data.posZ = 10.4467f;
                             data.orientation = 2.010638f;
-                            GameObject* go = trans->CreateGOPassenger(guid, &data);
-                            go->SetObjectScale(2.0f);
-                            sObjectMgr->AddGameobjectToGrid(guid, &data);
+                            if (GameObject* go = trans->CreateGOPassenger(guid, &data))
+                            {
+                                go->SetObjectScale(2.0f);
+                                sObjectMgr->AddGameobjectToGrid(guid, &data);
+                            }
+                            else
+                                TC_LOG_ERROR("scripts", "Gilneas 26706: failed to create gunpowder 204458 on transport");
                         }
                         if (ObjectGuid::LowType guid = me->GetMap()->GenerateLowGuid<HighGuid::GameObject>())
                         {
@@ -1809,9 +1813,13 @@ public:
                             data.posY = -2.18513f;
                             data.posZ = 10.4467f;
                             data.orientation = 2.010638f;
-                            GameObject* go = trans->CreateGOPassenger(guid, &data);
-                            go->SetObjectScale(2.0f);
-                            sObjectMgr->AddGameobjectToGrid(guid, &data);
+                            if (GameObject* go = trans->CreateGOPassenger(guid, &data))
+                            {
+                                go->SetObjectScale(2.0f);
+                                sObjectMgr->AddGameobjectToGrid(guid, &data);
+                            }
+                            else
+                                TC_LOG_ERROR("scripts", "Gilneas 26706: failed to create gunpowder 204458 on transport");
                         }
                         //
                         if (ObjectGuid::LowType guid = me->GetMap()->GenerateLowGuid<HighGuid::GameObject>())
@@ -1822,9 +1830,13 @@ public:
                             data.posY = 2.12947f;
                             data.posZ = 10.4467f;
                             data.orientation = 2.010638f;
-                            GameObject* go = trans->CreateGOPassenger(guid, &data);
-                            go->SetObjectScale(2.0f);
-                            sObjectMgr->AddGameobjectToGrid(guid, &data);
+                            if (GameObject* go = trans->CreateGOPassenger(guid, &data))
+                            {
+                                go->SetObjectScale(2.0f);
+                                sObjectMgr->AddGameobjectToGrid(guid, &data);
+                            }
+                            else
+                                TC_LOG_ERROR("scripts", "Gilneas 26706: failed to create gunpowder 204458 on transport");
                         }
                     }
                     Talk(5);
@@ -1845,6 +1857,12 @@ public:
                             data.posZ = 13.089049f;
                             data.orientation = 0.549271f;
                             Creature* npc = trans->CreateNPCPassenger(guid, &data);
+                            if (!npc)
+                            {
+                                m_bigOrcGUID = ObjectGuid::Empty;
+                                TC_LOG_ERROR("scripts", "Gilneas 26706: failed to create orc 43567; encounter cannot start");
+                                break;
+                            }
                             sObjectMgr->AddCreatureToGrid(guid, &data);
                             m_bigOrcGUID = npc->GetGUID();
                         }

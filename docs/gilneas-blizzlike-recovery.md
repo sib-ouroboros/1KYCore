@@ -143,3 +143,27 @@ GUID Лорны, ошибка создания, фильтрация участ�
 Проверка creation→boarding включает владельцев/Лорну в188 и изначально
 созданные машины в другой фазе. Native вызов использован в production;
 граница PhasingHandler в fixture подставлена. Клиентская видимость ещё не проверена.
+
+
+### 2026-10-10: Endgame transport creation failure audit
+
+Lorna's native `EVENT_TALK_PART_09` and `EVENT_SPAWN_OBJECT` unconditionally
+dereferenced three `CreateGOPassenger` results and one `CreateNPCPassenger`
+result. Both native transport factories explicitly return null when DB creation,
+position validation, or map insertion fails. Each gunpowder object now receives
+scale and grid registration only after successful creation; a failed object is
+logged and the remaining objects are still attempted. A failed orc spawn clears
+the stale actor GUID, logs the failure and does not schedule actor movement.
+No replacement actor, quest credit, retry loop, coordinates or phase changes
+are introduced. Successful scene timing and original routes remain unchanged.
+
+`test_gilneas_endgame_scene.py` compiles and executes the actual two production
+switch cases. Controlled factory boundaries cover all three individual barrel
+failures, successful creation, failed orc creation, registration, original offsets,
+scale and event scheduling. Local strict C++ tests passed, including adjacent
+escape AI tests. The new fixture is included in sanitizer CI. These fixtures do
+not execute transport geometry or prove the full ship scene in the client.
+
+At this audit, cd06a45 GCC and the complete Gilneas native/MySQL workflow passed;
+its Windows job was still running. All three workflows for 8480825 passed.
+Full client acceptance of 26706 and the 14-quest recovery remains required.

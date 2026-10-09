@@ -24,7 +24,7 @@ jobs:
       - name: Native production handlers with ASan and UBSan
         shell: bash
         run: |
-          for test in manor_gates endgame_escape endgame_transport survivor_combat transport scaling duskhaven rescue bat carriage; do
+          for test in manor_gates endgame_escape endgame_scene endgame_transport survivor_combat transport scaling duskhaven rescue bat carriage; do
             python "contrib/tests/test_gilneas_${test}.py"
           done
   mysql:
