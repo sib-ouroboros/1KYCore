@@ -5,6 +5,8 @@ on:
     paths:
       - 'contrib/tools/campaign_brew_chain_audit.py'
       - 'contrib/tests/test_campaign_brew_chain.py'
+      - 'contrib/tests/test_campaign_brew_scripts.py'
+      - 'src/server/scripts/World/campaign_brew_scripts.cpp'
       - 'docs/audit-data/campaign-brew-*.json'
       - 'docs/audit-data/campaign-script-chain-inventory-*.json'
       - '.github/workflows/campaign-dependency-audit.yml'
@@ -12,6 +14,8 @@ on:
     paths:
       - 'contrib/tools/campaign_brew_chain_audit.py'
       - 'contrib/tests/test_campaign_brew_chain.py'
+      - 'contrib/tests/test_campaign_brew_scripts.py'
+      - 'src/server/scripts/World/campaign_brew_scripts.cpp'
       - 'docs/audit-data/campaign-brew-*.json'
       - 'docs/audit-data/campaign-script-chain-inventory-*.json'
       - '.github/workflows/campaign-dependency-audit.yml'
@@ -30,3 +34,6 @@ jobs:
           python contrib/tests/test_campaign_audit_counts.py
           python contrib/tests/test_campaign_script_inventory.py
           python contrib/tests/test_campaign_brew_chain.py
+
+      - name: Exercise delivery scripts with address and undefined behavior sanitizers
+        run: python contrib/tests/test_campaign_brew_scripts.py
