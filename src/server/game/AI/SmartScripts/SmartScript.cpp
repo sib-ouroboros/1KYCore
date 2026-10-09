@@ -2745,6 +2745,20 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
                 me->GetMap()->SetZoneOverrideLight(e.action.setOverrideZoneLight.zoneId, e.action.setOverrideZoneLight.lightId, e.action.setOverrideZoneLight.fadeTime);
             break;
         }
+        case SMART_ACTION_SEND_EVENT_SCENARIO:
+        {
+            ObjectList* targets = GetTargets(e, unit);
+            if (!targets)
+                break;
+            for (WorldObject* target : *targets)
+                if (target)
+                    if (Player* player = target->ToPlayer())
+                        if (player->GetScenario())
+                            player->UpdateCriteria(CRITERIA_TYPE_SEND_EVENT_SCENARIO,
+                                                   e.action.sendScenarioEvent.eventId, 0, 0, player);
+            delete targets;
+            break;
+        }
         case SMART_ACTION_START_CONVERSATION:
         {
             ObjectList* targets = GetTargets(e, unit);

@@ -954,6 +954,16 @@ bool SmartAIMgr::IsEventValid(SmartScriptHolder& e)
 
     switch (e.GetActionType())
     {
+        case SMART_ACTION_SEND_EVENT_SCENARIO:
+        {
+            if (!e.action.sendScenarioEvent.eventId || e.action.raw.param2 || e.action.raw.param3 ||
+                e.action.raw.param4 || e.action.raw.param5 || e.action.raw.param6)
+            {
+                TC_LOG_ERROR("sql.sql", "SmartAIMgr: scenario event requires an event ID and zero unused parameters, skipped.");
+                return false;
+            }
+            break;
+        }
         case SMART_ACTION_TALK:
         case SMART_ACTION_SIMPLE_TALK:
             if (!IsTextValid(e, e.action.talk.textGroupID))

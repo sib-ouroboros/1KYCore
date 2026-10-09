@@ -596,6 +596,9 @@ enum SMART_ACTION
     SMART_ACTION_CAST_SPELL_OFFSET                  = 215,    // SpellId, triggered if value = 1.
     SMART_ACTION_RISE_UP                            = 216,    // distance
 
+    // 1KYCore extension; legacy and pinned upstream action IDs stay unchanged.
+    SMART_ACTION_SEND_EVENT_SCENARIO                = 250,    // event asset ID; params2-6 must be zero
+
     SMART_ACTION_END
 };
 
@@ -1177,6 +1180,10 @@ struct SmartAction
         struct {
             uint32 conversationId;
         } startConversation;
+
+        struct {
+            uint32 eventId;
+        } sendScenarioEvent;
 
         struct {
             uint32 increase;
