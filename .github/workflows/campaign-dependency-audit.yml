@@ -1,0 +1,32 @@
+name: Campaign dependency audit
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'contrib/tools/campaign_brew_chain_audit.py'
+      - 'contrib/tests/test_campaign_brew_chain.py'
+      - 'docs/audit-data/campaign-brew-*.json'
+      - 'docs/audit-data/campaign-script-chain-inventory-*.json'
+      - '.github/workflows/campaign-dependency-audit.yml'
+  pull_request:
+    paths:
+      - 'contrib/tools/campaign_brew_chain_audit.py'
+      - 'contrib/tests/test_campaign_brew_chain.py'
+      - 'docs/audit-data/campaign-brew-*.json'
+      - 'docs/audit-data/campaign-script-chain-inventory-*.json'
+      - '.github/workflows/campaign-dependency-audit.yml'
+permissions:
+  contents: read
+jobs:
+  brew-chains:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate campaign registries and linked delivery dependencies
+        run: |
+          python contrib/tests/test_campaign_audit_counts.py
+          python contrib/tests/test_campaign_script_inventory.py
+          python contrib/tests/test_campaign_brew_chain.py

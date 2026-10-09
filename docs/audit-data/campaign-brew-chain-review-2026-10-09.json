@@ -1,0 +1,107 @@
+{
+  "source_core_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "source_world_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c",
+  "candidate_count": 3,
+  "rows": [
+    {
+      "entry": 268377,
+      "receiver": 119620,
+      "credit": 119623,
+      "source_removed_aura": 237611,
+      "client_receiver_aura": 237613,
+      "source_aura_matches_client_receiver": false,
+      "route": [
+        {
+          "entry": "119620",
+          "pointid": "1",
+          "position_x": "796.264",
+          "position_y": "3613.06",
+          "position_z": "160.521",
+          "point_comment": "NULL"
+        },
+        {
+          "entry": "119620",
+          "pointid": "2",
+          "position_x": "793.338",
+          "position_y": "3616.69",
+          "position_z": "160.521",
+          "point_comment": "NULL"
+        }
+      ],
+      "status": "blocked-not-restored",
+      "blockers": [
+        "linked-aura-removal-despawns-returning-summon",
+        "source-action-207-is-native-modify-threat",
+        "owner-scoped-receiver-selection-required",
+        "target-client-and-source-hotfix-validation-required"
+      ]
+    },
+    {
+      "entry": 268378,
+      "receiver": 119619,
+      "credit": 119624,
+      "source_removed_aura": 237613,
+      "client_receiver_aura": 237611,
+      "source_aura_matches_client_receiver": false,
+      "route": [
+        {
+          "entry": "119619",
+          "pointid": "1",
+          "position_x": "738.549",
+          "position_y": "3620.22",
+          "position_z": "140.628",
+          "point_comment": "NULL"
+        },
+        {
+          "entry": "119619",
+          "pointid": "2",
+          "position_x": "733.016",
+          "position_y": "3622.28",
+          "position_z": "140.625",
+          "point_comment": "NULL"
+        }
+      ],
+      "status": "blocked-not-restored",
+      "blockers": [
+        "linked-aura-removal-despawns-returning-summon",
+        "source-action-207-is-native-modify-threat",
+        "owner-scoped-receiver-selection-required",
+        "target-client-and-source-hotfix-validation-required"
+      ]
+    },
+    {
+      "entry": 268379,
+      "receiver": 119621,
+      "credit": 119625,
+      "source_removed_aura": 237615,
+      "client_receiver_aura": 237615,
+      "source_aura_matches_client_receiver": true,
+      "route": [
+        {
+          "entry": "119621",
+          "pointid": "1",
+          "position_x": "750.196",
+          "position_y": "3543.7",
+          "position_z": "139.534",
+          "point_comment": "NULL"
+        },
+        {
+          "entry": "119621",
+          "pointid": "2",
+          "position_x": "748.375",
+          "position_y": "3537.1",
+          "position_z": "139.332",
+          "point_comment": "NULL"
+        }
+      ],
+      "status": "blocked-not-restored",
+      "blockers": [
+        "linked-aura-removal-despawns-returning-summon",
+        "source-action-207-is-native-modify-threat",
+        "owner-scoped-receiver-selection-required",
+        "target-client-and-source-hotfix-validation-required"
+      ]
+    }
+  ],
+  "assurance": "Decoded client evidence identifies discrepancies; no SQL, AI, spawn or restoration change."
+}
