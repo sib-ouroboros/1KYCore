@@ -167,3 +167,25 @@ not execute transport geometry or prove the full ship scene in the client.
 At this audit, cd06a45 GCC and the complete Gilneas native/MySQL workflow passed;
 its Windows job was still running. All three workflows for 8480825 passed.
 Full client acceptance of 26706 and the 14-quest recovery remains required.
+
+
+### 2026-10-10: Endgame participant and floor checks
+
+Lorna previously let any nearby player satisfy range gates or block progress
+with combat. `IsSceneParticipant` now limits both checks to alive players with
+26706 incomplete, on map 654, visible in Lorna's phase and on the same transport.
+Range checks scan all nearby players, so a nearer outsider does not mask a
+valid participant. Existing range values and wait timings are unchanged.
+
+Floor cleanup previously counted any attackable unit with a similar transport
+offset Z, including units on other transports or units without a transport.
+It now counts only native gunship grunts 42141 on Lorna's transport and in her
+phase. The existing attackable-unit query retains its alive-target filtering;
+floor heights, distances and dialogue conditions remain unchanged.
+
+The native four-method fixture `test_gilneas_endgame_gates.py` covers participant
+combat, outsider combat, outsider-first range selection, quest loss, death,
+map/phase mismatch, another ship, no ship and both native floor heights. World
+selection boundaries are controlled; full scene/client acceptance is still open.
+No SQL, teleport, credit or production-server changes are part of this package.
+All GCC, Windows and Gilneas native/MySQL jobs for ca8a192 passed before this work.

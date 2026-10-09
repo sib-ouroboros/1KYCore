@@ -2029,11 +2029,19 @@ public:
             return nullptr;
         }
 
+        bool IsSceneParticipant(Player* player) const
+        {
+            return player && player->IsAlive() && me->GetMapId() == 654
+                && player->GetMapId() == me->GetMapId() && me->IsInPhase(player)
+                && me->GetTransport() && player->GetTransport() == me->GetTransport()
+                && player->GetQuestStatus(QUEST_ENDGAME) == QUEST_STATUS_INCOMPLETE;
+        }
+
         bool IsPlayerInCombat()
         {
             std::list<Player*> pList = me->SelectNearestPlayers(20.0f);
             for (auto player : pList)
-                if (player->IsInCombat())
+                if (IsSceneParticipant(player) && player->IsInCombat())
                     return true;
 
             return false;
@@ -2041,8 +2049,10 @@ public:
 
         bool IsPlayerInRange(float range)
         {
-            Player* player = me->SelectNearestPlayer(range);
-            return player ? true : false;
+            for (Player* player : me->SelectNearestPlayers(range))
+                if (IsSceneParticipant(player))
+                    return true;
+            return false;
         }
 
         bool isInSameTranportFloor(Creature* creature)
@@ -2058,7 +2068,11 @@ public:
             me->GetAttackableUnitListInRange(m_targetList, 75.0f); // returns only alive
             for (std::list<Unit*>::iterator itr = m_targetList.begin(); itr != m_targetList.end(); ++itr)
             {
-                Position pos = (*itr)->GetTransOffset();
+                Unit* target = *itr;
+                if (target->GetEntry() != NPC_GUNSHIP_GRUNT || !me->GetTransport()
+                    || target->GetTransport() != me->GetTransport() || !me->IsInPhase(target))
+                    continue;
+                Position pos = target->GetTransOffset();
                 if (fabs(pos.GetPositionZ() - posZ) < rangeZ)
                     count += 1;
             }
