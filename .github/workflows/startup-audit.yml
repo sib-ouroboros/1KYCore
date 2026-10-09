@@ -34,7 +34,7 @@ jobs:
       - run: python contrib/tests/test_smartai_victim_casting_diagnostic.py
 
   diagnostics:
-    if: github.event_name == 'workflow_dispatch' && inputs.build_diagnostics
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.build_diagnostics)
     runs-on: ubuntu-22.04
     strategy:
       fail-fast: false

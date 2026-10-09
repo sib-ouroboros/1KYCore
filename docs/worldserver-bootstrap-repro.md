@@ -51,7 +51,9 @@ Probe отклоняет секции/includes, дубликаты ключей,
 
 ## Сборки
 
-В Actions запустить `Clean startup audit preparation` с `build_diagnostics=true`.
+Публикация изменений audit-инструментов в feature-ветку автоматически запускает обе сборки.
+После появления workflow в default branch также доступен ручной запуск
+`Clean startup audit preparation` с `build_diagnostics=true`.
 Два артефакта содержат бинарники и Dynamic modules одного commit. Использовать отдельные
 каталоги установки. Sanitizer-сборка: `-O1 -g -fno-omit-frame-pointer
 -fsanitize=address,undefined`, jemalloc отключён. RelWithDebInfo для GDB собран отдельно.
