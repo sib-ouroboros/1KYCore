@@ -279,27 +279,34 @@
     {
       "quest_id": 26706,
       "observed_bug": "Endgame cannot complete through native ship assault",
-      "root_cause": "Confirmed transport lifecycle defects: accessory/foreign callbacks despawned hippogryph, repeated boarding queued takeoff and replaced owner, cancellation did not gate queued events. Ship FSM, route4375101, passengers and credit43729 remain unverified.",
+      "root_cause": "Confirmed transport lifecycle defects: accessory/foreign callbacks despawned hippogryph, repeated boarding queued takeoff and replaced owner, cancellation did not gate queued events. Ship FSM, route4375101, passengers and credit43729 remain unverified. Additional source-confirmed defects: Lorna ignored each wyvern owner, wyvern lacked GetGUID, any dismount queued credit, Reset retained queued events, failed NPC creation was unchecked. All ten native route groups absent in local release base.",
       "status": [
         "CONFIRMED_BUG",
         "CLIENT_TEST_REQUIRED",
         "FIXED_CORE",
-        "TESTED_NATIVE"
+        "TESTED_NATIVE",
+        "FIXED_SQL"
       ],
       "affected_source_files": [
-        "zone_gilneas_city3.cpp"
+        "zone_gilneas_city3.cpp",
+        "sql/updates/world/2026_10_10_00_world_gilneas_endgame_routes.sql"
       ],
       "affected_database_records": [
-        "route4375101, vehicle/accessories and ship203428 (unchanged/unverified)"
+        "waypoint_data ids4375101,4356601..4356607,4356701,4371301"
       ],
       "changes_made": [
-        "Accessory callbacks ignored; owner immutable; one delayed takeoff; foreign passenger cannot terminate ride; abandon/death/logout/map/phase/vehicle loss cancels event queue and releases own passenger"
+        "Accessory callbacks ignored; owner immutable; one delayed takeoff; foreign passenger cannot terminate ride; abandon/death/logout/map/phase/vehicle loss cancels event queue and releases own passenger",
+        "Per-owner escape creation/boarding and filtered same-ship participants; null creation guard",
+        "Arrival-only once43729 credit; interruption/reset cleanup; escape DEBUG states",
+        "Restore10 missing native groups48 points from pinned July2016/May2017 Ark sources. Preserve all existing/custom/partial paths and altered template/vehicle bindings."
       ],
       "automated_test_result": [
-        "test_gilneas_endgame_transport.py: full native AI extract local strict C++ PASS, controlled world/event boundaries"
+        "test_gilneas_endgame_transport.py: full native AI extract local strict C++ PASS, controlled world/event boundaries",
+        "test_gilneas_endgame_escape.py: local strict C++ PASS, full native wyvern AI and native Lorna creation/boarding event cases, controlled boundaries",
+        "test_gilneas_endgame_database: isolated MySQL8.0.45 PASS, schema dropped"
       ],
       "live_client_test_result": "CLIENT_TEST_REQUIRED",
-      "remaining_limitations": "Full ordinary-character26972 progression, repeat/multiplayer/death/relog/abandon/restart acceptance required; no complete quest acceptance claimed"
+      "remaining_limitations": "Full ship FSM, transport population/readiness, spline/seat/collision, actual destruction, restart/retry and client26972 progression remain unverified. Existing post-arrival teleport retained; no retail correctness claim."
     }
   ],
   "zone_level_audit": {
@@ -6567,5 +6574,12 @@
       "50570"
     ],
     "candidate_scope": "Includes friendly/story actors: not a confirmed hostile-NPC list. Faction DB2, scene use, HP/damage and shared-map review required before batch scaling."
+  },
+  "previous_package_ci": {
+    "commit": "3250544",
+    "gcc": 37952293602,
+    "windows": 37952298607,
+    "native_and_sql": 37952269840,
+    "conclusion": "success"
   }
 }

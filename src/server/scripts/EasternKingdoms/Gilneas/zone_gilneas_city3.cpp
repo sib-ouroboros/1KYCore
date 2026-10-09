@@ -1491,6 +1491,15 @@ public:
             }
         }
 
+        bool CanJoinEscape(Player* player) const
+        {
+            return player && player->IsAlive() && me->GetMapId() == 654
+                && player->GetMapId() == me->GetMapId() && me->IsInPhase(player)
+                && me->GetTransport() && player->GetTransport() == me->GetTransport()
+                && !player->GetVehicleBase()
+                && player->GetQuestStatus(QUEST_ENDGAME) == QUEST_STATUS_INCOMPLETE;
+        }
+
         void DoAction(int32 param) override
         {
             switch (param)
@@ -1909,6 +1918,8 @@ public:
                     std::list<Player*> pList = me->SelectNearestPlayers(100.0f);
                     for (auto player : pList)
                     {
+                        if (!CanJoinEscape(player))
+                            continue;
                         if (Transport* trans = me->GetTransport())
                             if (ObjectGuid::LowType guid = me->GetMap()->GenerateLowGuid<HighGuid::GameObject>())
                             {
@@ -1919,6 +1930,11 @@ public:
                                 data.posZ = player->GetTransOffset().GetPositionZ();
                                 data.orientation = player->GetTransOffset().GetOrientation();
                                 Creature* npc = trans->CreateNPCPassenger(guid, &data);
+                                if (!npc)
+                                {
+                                    TC_LOG_ERROR("scripts", "Gilneas26706: failed to create escape wyvern43713; passenger skipped");
+                                    continue;
+                                }
                                 sObjectMgr->AddCreatureToGrid(guid, &data);
                                 npc->AI()->SetGUID(player->GetGUID(), PLAYER_GUID);
                                 wList.push_back(npc->GetGUID());
@@ -1932,9 +1948,10 @@ public:
                     for (auto guid : wList)
                         if (Creature* wyvern = ObjectAccessor::GetCreature(*me, guid))
                         {
-                            guid = wyvern->AI()->GetGUID(PLAYER_GUID);
-                            if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
-                                player->EnterVehicle(wyvern, 0);
+                            ObjectGuid ownerGUID = wyvern->AI()->GetGUID(PLAYER_GUID);
+                            if (Player* player = ObjectAccessor::GetPlayer(*me, ownerGUID))
+                                if (CanJoinEscape(player) && wyvern->IsInPhase(player))
+                                    player->EnterVehicle(wyvern, 0);
                         }
 
                     break;
@@ -2359,44 +2376,123 @@ public:
         EventMap m_events;
         ObjectGuid   m_playerGUID;
         uint32   m_flyPart;
+        bool m_boarded = false;
+        bool m_arrived = false;
+        bool m_stopped = false;
+
+        void TraceEscape(char const* state) const
+        {
+            TC_LOG_DEBUG("scripts", "Gilneas26706 %s: vehicle=%s owner=%s route=4371301 part=%u boarded=%u arrived=%u",
+                state, me->GetGUID().ToString().c_str(), m_playerGUID.ToString().c_str(),
+                m_flyPart, uint32(m_boarded), uint32(m_arrived));
+        }
 
         void Reset() override
         {
+            if (m_boarded || m_stopped)
+            {
+                CancelFlight();
+                return;
+            }
+            m_events.Reset();
             m_playerGUID = ObjectGuid::Empty;
             m_flyPart = 0;
+            m_boarded = false;
+            m_arrived = false;
+            m_stopped = false;
+            TraceEscape("ESCAPE_WAITING");
         }
 
         void MovementInform(uint32 type, uint32 id) override
         {
-            if (m_flyPart == 1 && type == WAYPOINT_MOTION_TYPE && id == 2)
+            if (m_boarded && !m_stopped && !m_arrived && m_flyPart == 1
+                && type == WAYPOINT_MOTION_TYPE && id == 2)
+            {
+                m_arrived = true;
+                TraceEscape("ESCAPE_ARRIVED");
                 m_events.ScheduleEvent(EVENT_MOVE_PART1, 200);
+            }
         }
 
-        void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
+        ObjectGuid GetGUID(int32 id) const override
         {
-            if (who->IsPlayer())
+            return id == PLAYER_GUID ? m_playerGUID : ObjectGuid::Empty;
+        }
+
+        bool IsEligibleOwner(Player* player) const
+        {
+            return player && player->GetGUID() == m_playerGUID && player->IsAlive()
+                && me->GetMapId() == 654 && player->GetMapId() == 654 && me->IsInPhase(player)
+                && player->GetQuestStatus(QUEST_ENDGAME) == QUEST_STATUS_INCOMPLETE;
+        }
+
+        void CancelFlight()
+        {
+            if (m_stopped)
+                return;
+            m_stopped = true;
+            m_boarded = false;
+            m_events.Reset();
+            TraceEscape("ESCAPE_CANCELLED");
+            if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                if (player->GetVehicleBase() == me)
+                    player->ExitVehicle();
+            me->DespawnOrUnsummon(200ms);
+        }
+
+        void JustDied(Unit* /*killer*/) override { CancelFlight(); }
+
+        void PassengerBoarded(Unit* who, int8 seatId, bool apply) override
+        {
+            Player* player = who ? who->ToPlayer() : nullptr;
+            if (!player)
+                return;
+            if (apply)
             {
-                if (apply)
-                    m_events.ScheduleEvent(EVENT_MOVEMENT_START, 200);
+                if (m_stopped || seatId != 0 || !IsEligibleOwner(player))
+                {
+                    player->ExitVehicle();
+                    return;
+                }
+                if (!m_boarded)
+                {
+                    m_boarded = true;
+                    TraceEscape("ESCAPE_BOARDED");
+                    m_events.RescheduleEvent(EVENT_MOVEMENT_START, 200);
+                }
+            }
+            else if (player->GetGUID() == m_playerGUID && !m_stopped)
+            {
+                m_boarded = false;
+                if (m_arrived && m_flyPart == 1 && IsEligibleOwner(player))
+                    m_events.RescheduleEvent(EVENT_MOVE_PART2, 200);
                 else
-                    m_events.ScheduleEvent(EVENT_MOVE_PART2, 200);
+                    CancelFlight();
             }
         }
 
         void SetGUID(ObjectGuid guid, int32 id) override
         {
-            switch (id)
+            if (id == PLAYER_GUID && m_playerGUID.IsEmpty() && !guid.IsEmpty() && !m_stopped)
             {
-                case PLAYER_GUID:
-                {
-                    m_playerGUID = guid;
-                    break;
-                }
+                m_playerGUID = guid;
+                TraceEscape("ESCAPE_OWNER_BOUND");
             }
         }
 
         void UpdateAI(uint32 diff) override
         {
+            if (m_stopped)
+                return;
+            if (m_boarded)
+            {
+                Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                if (!IsEligibleOwner(player) || player->GetVehicleBase() != me)
+                {
+                    CancelFlight();
+                    return;
+                }
+            }
             ScriptedAI::UpdateAI(diff);
             m_events.Update(diff);
 
@@ -2407,6 +2503,7 @@ public:
                 case EVENT_MOVEMENT_START:
                 {
                     m_flyPart = 1;
+                    TraceEscape("ESCAPE_START");
                     me->GetMotionMaster()->MovePath(4371301, false);                    // fly to the open ship gate..
                     break;
                 }
@@ -2420,13 +2517,20 @@ public:
                 }
                 case EVENT_MOVE_PART2:
                 {
-                    m_flyPart = 2;
-                    WorldLocation wLoc = WorldLocation(654, -1317.54f, 2121.90f, 5.6296f, 0.218f); // last we teleport to questtaker..
-                    if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                    Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                    if (!m_arrived || m_boarded || m_flyPart != 1 || !IsEligibleOwner(player)
+                        || player->GetVehicleBase())
                     {
-                        player->KilledMonsterCredit(43729);
-                        player->TeleportTo(wLoc);
+                        CancelFlight();
+                        break;
                     }
+                    m_flyPart = 2;
+                    m_stopped = true;
+                    m_events.Reset();
+                    WorldLocation wLoc = WorldLocation(654, -1317.54f, 2121.90f, 5.6296f, 0.218f); // last we teleport to questtaker..
+                    TraceEscape("ESCAPE_COMPLETED");
+                    player->KilledMonsterCredit(43729);
+                    player->TeleportTo(wLoc);
                     me->DespawnOrUnsummon(200);
                     break;
                 }

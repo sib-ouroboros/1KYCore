@@ -65,8 +65,9 @@
     {
       "quest": 26706,
       "path_id": 4375101,
-      "status": "BLOCKED_MISSING_SOURCE",
-      "reason": "Native AI references path and point7; no verified full path evidence in existing Gilneas route artifacts. Base snapshot lacks repository-restored routes too, so absence there does not prove deployed absence."
+      "status": "FIXED_SQL",
+      "reason": "Pinned original route recovered with later source endpoint replacements; native core references matched. Runtime/client remains unverified.",
+      "source_artifact": "gilneas-endgame-source-routes.json"
     }
   ],
   "required_runtime_fields": [
@@ -88,5 +89,137 @@
     "terrain_z": null,
     "vmap_surface_z": null,
     "client_status": "CLIENT_TEST_REQUIRED"
-  }
+  },
+  "endgame_routes": [
+    {
+      "id": 4356601,
+      "coordinate_space": "transport-relative",
+      "points": 5,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4356602,
+      "coordinate_space": "transport-relative",
+      "points": 11,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4356603,
+      "coordinate_space": "transport-relative",
+      "points": 3,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4356604,
+      "coordinate_space": "transport-relative",
+      "points": 3,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4356605,
+      "coordinate_space": "transport-relative",
+      "points": 3,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4356606,
+      "coordinate_space": "transport-relative",
+      "points": 2,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4356607,
+      "coordinate_space": "transport-relative",
+      "points": 2,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4356701,
+      "coordinate_space": "transport-relative",
+      "points": 8,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4371301,
+      "coordinate_space": "transport-relative",
+      "points": 3,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    },
+    {
+      "id": 4375101,
+      "coordinate_space": "world",
+      "points": 8,
+      "source_artifact": "gilneas-endgame-source-routes.json",
+      "status": [
+        "FIXED_SQL",
+        "CLIENT_TEST_REQUIRED"
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "actual_spline_z": null
+    }
+  ]
 }
