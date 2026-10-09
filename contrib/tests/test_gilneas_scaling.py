@@ -32,7 +32,7 @@ struct Creature:Unit{CreatureTemplate info;std::map<int,int32>values;bool pet=fa
  code+=r"""
 };
 void check(bool v){if(!v)throw std::runtime_error("native scaling regression");}
-int main(){try{Creature c;Player p;c.SelectLevel();check(c.level==20&&c.GetLevelForTarget(&p)==20);c.info.levelScaling=Scaling{};c.SelectLevel();check(c.level==20);int levels[]={1,5,9,20,30},expected[]={5,5,9,20,20};for(int i=0;i<5;++i){p.level=levels[i];check(c.GetLevelForTarget(&p)==expected[i]);}c.pet=true;check(!c.HasScalableLevels());std::cout<<"Native Creature selection and target scaling: PASS\n";}catch(std::exception const&e){std::cerr<<e.what();return 1;}}
+int main(){try{Creature c;Player p;c.SelectLevel();check(c.level==20&&c.GetLevelForTarget(&p)==20);c.info.levelScaling=Scaling{};c.SelectLevel();check(c.level==20);int levels[]={1,4,7,10,12,15,20,30},expected[]={5,5,7,10,12,15,20,20};for(int i=0;i<8;++i){p.level=levels[i];check(c.GetLevelForTarget(&p)==expected[i]);}c.pet=true;check(!c.HasScalableLevels());std::cout<<"Native Creature selection and target scaling: PASS\n";}catch(std::exception const&e){std::cerr<<e.what();return 1;}}
 """
  with tempfile.TemporaryDirectory() as temp:
   cpp=Path(temp)/'test.cpp';exe=Path(temp)/'test.exe';cpp.write_text(code,'utf8');cmd=[os.environ.get('CXX','g++'),'-std=c++17','-Wall','-Wextra','-Werror',str(cpp),'-o',str(exe)]

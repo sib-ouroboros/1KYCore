@@ -1,0 +1,55 @@
+name: Gilneas client bug regressions
+
+on:
+  push:
+    branches: [feature/npc-crowd-separation]
+    paths:
+      - src/server/scripts/EasternKingdoms/Gilneas/**
+      - contrib/tests/test_gilneas_*.py
+      - sql/updates/world/*gilneas*.sql
+      - .github/workflows/gilneas-blizzlike.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  native:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Native production handlers with ASan and UBSan
+        shell: bash
+        run: |
+          for test in manor_gates endgame_transport survivor_combat transport scaling duskhaven rescue bat carriage; do
+            python "contrib/tests/test_gilneas_${test}.py"
+          done
+  mysql:
+    runs-on: ubuntu-22.04
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: disposable-test-only
+          MYSQL_ROOT_HOST: '%'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pdisposable-test-only"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y mysql-client
+      - name: Published release and guarded Gilneas SQL, isolated MySQL only
+        env:
+          MYSQL_PWD: disposable-test-only
+          MYSQL_DISPOSABLE_TEST_SERVER: '1'
+        run: python contrib/tests/test_sylvania_migration.py --gilneas-chain-only

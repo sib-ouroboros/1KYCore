@@ -1,0 +1,422 @@
+{
+  "quest": 24602,
+  "item": 49921,
+  "entry": 201871,
+  "source_repository": "https://github.com/The-Legion-Preservation-Project/LegionCore-7.3.5",
+  "source_filename": "LegionCore_world_735.26972_2024_10_23.sql",
+  "source_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c",
+  "source_records": 32,
+  "unique_positions": 17,
+  "phase": 188,
+  "phase_evidence": "Release queststarter/ender38144 GUID803966 on654 has PhaseId188 for24602/24679. Legacy phaseMask not copied.",
+  "rotation_adaptation": "Source zero quaternion normalized to identity for orientation0. No XYZ changes.",
+  "rows": [
+    {
+      "source_guid": 47094,
+      "guid": 310065200,
+      "x": -1708.87,
+      "y": 1970.5,
+      "z": 30.077,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47127,
+      "guid": 310065201,
+      "x": -1649.55,
+      "y": 1834.94,
+      "z": 4.67572,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47129,
+      "guid": 310065202,
+      "x": -1671.58,
+      "y": 1910.84,
+      "z": 30.1048,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47130,
+      "guid": 310065203,
+      "x": -1715.45,
+      "y": 1928.21,
+      "z": 21.0419,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47131,
+      "guid": 310065204,
+      "x": -1668.23,
+      "y": 1926.97,
+      "z": 29.37,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47132,
+      "guid": 310065205,
+      "x": -1656.87,
+      "y": 1942.22,
+      "z": 28.7851,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47133,
+      "guid": 310065206,
+      "x": -1670.88,
+      "y": 1965.61,
+      "z": 23.5595,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47134,
+      "guid": 310065207,
+      "x": -1597.41,
+      "y": 1903.84,
+      "z": 13.2749,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47135,
+      "guid": 310065208,
+      "x": -1578.16,
+      "y": 1887.74,
+      "z": 6.25989,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47136,
+      "guid": 310065209,
+      "x": -1552.21,
+      "y": 1901.93,
+      "z": 4.65225,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47137,
+      "guid": 310065210,
+      "x": -1548.97,
+      "y": 1927.64,
+      "z": 4.54196,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47138,
+      "guid": 310065211,
+      "x": -1615.96,
+      "y": 1831.83,
+      "z": 5.21441,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47139,
+      "guid": 310065212,
+      "x": -1651.92,
+      "y": 1967.34,
+      "z": 23.5357,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47140,
+      "guid": 310065213,
+      "x": -1655.8,
+      "y": 1999.02,
+      "z": 27.4704,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47141,
+      "guid": 310065214,
+      "x": -1568.16,
+      "y": 1857.54,
+      "z": 4.01089,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47142,
+      "guid": 310065215,
+      "x": -1583.5,
+      "y": 1977.01,
+      "z": 7.61991,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    },
+    {
+      "source_guid": 47209,
+      "guid": 310065216,
+      "x": -1671.04,
+      "y": 1829.54,
+      "z": 6.48764,
+      "zone": 4714,
+      "area": 4727,
+      "orientation": 0.0
+    }
+  ],
+  "navmesh_scope": "Existing extracted-735-new map654: all32 source rows found ground polygons; duplicates removed, no terrain/VMAP/client interaction assertion",
+  "navmesh": {
+    "map": 654,
+    "tiles": 51,
+    "points": [
+      {
+        "point": 1,
+        "ground": true,
+        "source_z": 30.077,
+        "nav_z": 30.1856
+      },
+      {
+        "point": 2,
+        "ground": true,
+        "source_z": 4.67572,
+        "nav_z": 5.72318
+      },
+      {
+        "point": 3,
+        "ground": true,
+        "source_z": 30.1048,
+        "nav_z": 29.6945
+      },
+      {
+        "point": 4,
+        "ground": true,
+        "source_z": 21.0419,
+        "nav_z": 22.5261
+      },
+      {
+        "point": 5,
+        "ground": true,
+        "source_z": 29.37,
+        "nav_z": 30.7489
+      },
+      {
+        "point": 6,
+        "ground": true,
+        "source_z": 28.7851,
+        "nav_z": 28.6704
+      },
+      {
+        "point": 7,
+        "ground": true,
+        "source_z": 23.5595,
+        "nav_z": 24.8604
+      },
+      {
+        "point": 8,
+        "ground": true,
+        "source_z": 13.2749,
+        "nav_z": 13.6912
+      },
+      {
+        "point": 9,
+        "ground": true,
+        "source_z": 6.25989,
+        "nav_z": 6.66723
+      },
+      {
+        "point": 10,
+        "ground": true,
+        "source_z": 4.65225,
+        "nav_z": 4.9489
+      },
+      {
+        "point": 11,
+        "ground": true,
+        "source_z": 4.54196,
+        "nav_z": 5.45934
+      },
+      {
+        "point": 12,
+        "ground": true,
+        "source_z": 5.21441,
+        "nav_z": 5.26008
+      },
+      {
+        "point": 13,
+        "ground": true,
+        "source_z": 23.5357,
+        "nav_z": 24.3079
+      },
+      {
+        "point": 14,
+        "ground": true,
+        "source_z": 27.4704,
+        "nav_z": 28.3242
+      },
+      {
+        "point": 15,
+        "ground": true,
+        "source_z": 4.01089,
+        "nav_z": 4.63722
+      },
+      {
+        "point": 16,
+        "ground": true,
+        "source_z": 7.61991,
+        "nav_z": 7.41263
+      },
+      {
+        "point": 17,
+        "ground": true,
+        "source_z": 6.48764,
+        "nav_z": 6.66187
+      },
+      {
+        "point": 18,
+        "ground": true,
+        "source_z": 4.67572,
+        "nav_z": 5.72318
+      },
+      {
+        "point": 19,
+        "ground": true,
+        "source_z": 6.48764,
+        "nav_z": 6.66187
+      },
+      {
+        "point": 20,
+        "ground": true,
+        "source_z": 5.21441,
+        "nav_z": 5.26008
+      },
+      {
+        "point": 21,
+        "ground": true,
+        "source_z": 21.0419,
+        "nav_z": 22.5261
+      },
+      {
+        "point": 22,
+        "ground": true,
+        "source_z": 29.37,
+        "nav_z": 30.7489
+      },
+      {
+        "point": 23,
+        "ground": true,
+        "source_z": 28.7851,
+        "nav_z": 28.6704
+      },
+      {
+        "point": 24,
+        "ground": true,
+        "source_z": 23.5595,
+        "nav_z": 24.8604
+      },
+      {
+        "point": 25,
+        "ground": true,
+        "source_z": 4.01089,
+        "nav_z": 4.63722
+      },
+      {
+        "point": 26,
+        "ground": true,
+        "source_z": 13.2749,
+        "nav_z": 13.6912
+      },
+      {
+        "point": 27,
+        "ground": true,
+        "source_z": 6.25989,
+        "nav_z": 6.66723
+      },
+      {
+        "point": 28,
+        "ground": true,
+        "source_z": 4.65225,
+        "nav_z": 4.9489
+      },
+      {
+        "point": 29,
+        "ground": true,
+        "source_z": 4.54196,
+        "nav_z": 5.45934
+      },
+      {
+        "point": 30,
+        "ground": true,
+        "source_z": 23.5357,
+        "nav_z": 24.3079
+      },
+      {
+        "point": 31,
+        "ground": true,
+        "source_z": 27.4704,
+        "nav_z": 28.3242
+      },
+      {
+        "point": 32,
+        "ground": true,
+        "source_z": 7.61991,
+        "nav_z": 7.41263
+      }
+    ],
+    "segments": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "complete": true
+  },
+  "status": [
+    "FIXED_SQL",
+    "CLIENT_TEST_REQUIRED"
+  ]
+}

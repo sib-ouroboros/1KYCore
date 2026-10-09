@@ -2287,7 +2287,8 @@ public:
                         for (auto horse : c1)
                             if (Unit* p1 = horse->GetOwner())
                                 if (Player* player = p1->ToPlayer())
-                                    if (player->GetQuestStatus(QUEST_TO_GREYMANE_MANOR) == QUEST_STATUS_INCOMPLETE)
+                                    if (player->GetQuestStatus(QUEST_TO_GREYMANE_MANOR) == QUEST_STATUS_INCOMPLETE
+                                        || player->GetQuestStatus(QUEST_TO_GREYMANE_MANOR) == QUEST_STATUS_COMPLETE)
                                         cList.push_back(horse->GetGUID());
 
                         m_events.RescheduleEvent(EVENT_CHECK_PLAYER_NEAR, 1s);
@@ -2358,7 +2359,9 @@ public:
 
                         for (auto mount : c1)
                             if (Player* player = GetPlayer(mount))
-                                if (player->GetQuestStatus(QUEST_TO_GREYMANE_MANOR) == QUEST_STATUS_INCOMPLETE || player->GetQuestStatus(QUEST_EXODUS) == QUEST_STATUS_COMPLETE)
+                                if (player->GetQuestStatus(QUEST_TO_GREYMANE_MANOR) == QUEST_STATUS_INCOMPLETE
+                                    || player->GetQuestStatus(QUEST_TO_GREYMANE_MANOR) == QUEST_STATUS_COMPLETE
+                                    || player->GetQuestStatus(QUEST_EXODUS) == QUEST_STATUS_COMPLETE)
                                     cList.push_back(mount->GetGUID());
 
                         m_events.RescheduleEvent(EVENT_CHECK_PLAYER_NEAR, 1s);
@@ -3448,7 +3451,11 @@ public:
                             {
                                 me->HandleEmoteCommand(EMOTE_ONESHOT_NONE);
                                 me->SetFacingToObject(croc);
-                                me->Attack(croc, true);
+                                // Both defensive actors need a victim; zero scripted
+                                // damage must not be relied on to aggro the crocodile.
+                                if (!croc->IsInCombat() && croc->IsAlive() && me->IsInPhase(croc)
+                                    && me->Attack(croc, true))
+                                    croc->AI()->AttackStart(me);
                             }
 
                         m_events.ScheduleEvent(EVENT_CHECK_FOR_CREATURE, 1s);

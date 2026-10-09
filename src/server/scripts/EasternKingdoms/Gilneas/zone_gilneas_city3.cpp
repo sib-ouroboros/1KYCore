@@ -1194,6 +1194,8 @@ public:
         ObjectGuid m_playerGUID;
         ObjectGuid m_lornaGUID;
         float  m_maxSpeed;
+        bool m_boarded = false;
+        bool m_finished = false;
 
         void Reset() override
         {
@@ -1201,12 +1203,16 @@ public:
             m_playerGUID = ObjectGuid::Empty;
             m_lornaGUID = ObjectGuid::Empty;
             m_maxSpeed = 4.9f;
+            m_boarded = false;
+            m_finished = false;
             if (Creature* wy = me->FindNearestCreature(43747, 10.0f))
                 me->SetOrientation(wy->GetOrientation());
         }
 
         void MovementInform(uint32 type, uint32 id) override
         {
+            if (!m_boarded || m_finished)
+                return;
             switch (type)
             {
                 case WAYPOINT_MOTION_TYPE:
@@ -1231,24 +1237,63 @@ public:
             } // end switch
         }
 
+        void FinishRide()
+        {
+            if (m_finished)
+                return;
+            m_finished = true;
+            m_boarded = false;
+            m_events.Reset();
+            if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                if (player->GetVehicleBase() == me)
+                    player->ExitVehicle();
+            me->DespawnOrUnsummon(100ms);
+        }
+
+        void JustDied(Unit* /*killer*/) override { FinishRide(); }
+
         void PassengerBoarded(Unit* who, int8 /*seatId*/, bool apply) override
         {
-            if (apply)
+            Player* player = who ? who->ToPlayer() : nullptr;
+            // Accessory callbacks must not destroy another player's transport.
+            if (!player)
+                return;
+            if (!apply)
             {
-                if (Player* player = who->ToPlayer())
-                    if (player->GetQuestStatus(QUEST_ENDGAME) == QUEST_STATUS_INCOMPLETE)
-                    {
-                        m_events.ScheduleEvent(EVENT_MOVEMENT_START, 1000);
-                        m_playerGUID = who->GetGUID();
-                        return;
-                    }
+                if (player->GetGUID() == m_playerGUID)
+                    FinishRide();
+                return;
             }
-
-            me->DespawnOrUnsummon(100);
+            if (m_finished || !player->IsAlive() || player->GetMapId() != 654
+                || me->GetMapId() != 654 || !me->IsInPhase(player)
+                || player->GetQuestStatus(QUEST_ENDGAME) != QUEST_STATUS_INCOMPLETE
+                || (!m_playerGUID.IsEmpty() && player->GetGUID() != m_playerGUID))
+            {
+                player->ExitVehicle();
+                return;
+            }
+            if (m_boarded)
+                return;
+            m_playerGUID = player->GetGUID();
+            m_boarded = true;
+            m_events.RescheduleEvent(EVENT_MOVEMENT_START, 1000);
         }
 
         void UpdateAI(uint32 diff) override
         {
+            if (m_finished)
+                return;
+            if (m_boarded)
+            {
+                Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+                if (!player || !player->IsAlive() || player->GetMapId() != 654
+                    || !me->IsInPhase(player) || player->GetVehicleBase() != me
+                    || player->GetQuestStatus(QUEST_ENDGAME) != QUEST_STATUS_INCOMPLETE)
+                {
+                    FinishRide();
+                    return;
+                }
+            }
             ScriptedAI::UpdateAI(diff);
             m_events.Update(diff);
 

@@ -1,0 +1,92 @@
+{
+  "map": 654,
+  "client_build_required": 26972,
+  "scope": "Evidence inventory; no new live route validation claimed",
+  "routes": [
+    {
+      "quest": 14465,
+      "path_id": 3674101,
+      "existing_evidence_file": "gilneas-horse-route-source.json",
+      "sha256": "dfa03a30b9e1e8a41682c446f576fa8db5e3a106b06f9853a27ef2bc4b0f5eb1",
+      "existing_result": "Coordinate-only adaptation; source28-point route ends at the foot of Greymane Manor. No quest/SmartAI import. Client26972 geometry acceptance remains required.",
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "mmap_projected_z": "see existing artifact if measured; not rerun in this package",
+      "actual_spline_z": null,
+      "movement_flags": null,
+      "status": "CLIENT_TEST_REQUIRED"
+    },
+    {
+      "quest": 24438,
+      "path_id": 4492801,
+      "existing_evidence_file": "gilneas-stagecoach-route-audit.json",
+      "sha256": "9e1f1713eb4e3ed6a8103c1b0f88e6f77a840de0c16ad1b7290bc4c3e53c5b89",
+      "existing_result": [
+        "Geometry test does not validate client vehicle seats, retail timing or passenger animations.",
+        "Source SQL spellclick flags must be adapted to this core; do not bulk import."
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "mmap_projected_z": "see existing artifact if measured; not rerun in this package",
+      "actual_spline_z": null,
+      "movement_flags": null,
+      "status": "CLIENT_TEST_REQUIRED"
+    },
+    {
+      "quest": 24920,
+      "path_id": null,
+      "existing_evidence_file": "gilneas-bat-source.json",
+      "sha256": "50a01bb5f44f6b122d3bd172d1a2aaf680ceb6ce5cf14104603fe97f0038b415",
+      "existing_result": "Source route is one full60-point circuit with landing, plus14-point return; do not fabricate the previous nonexistent3-segment loop. Coordinates need client26972 acceptance.",
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "mmap_projected_z": "see existing artifact if measured; not rerun in this package",
+      "actual_spline_z": null,
+      "movement_flags": null,
+      "status": "CLIENT_TEST_REQUIRED"
+    },
+    {
+      "quest": 24902,
+      "path_id": null,
+      "existing_evidence_file": "gilneas-tobias-walking-restoration.json",
+      "sha256": "d1c713bf6fe8035b8e5f3d11902027dd8101f261d037998fe17f3daf4fa188e0",
+      "existing_result": [
+        "Detour nearest-poly extents are 3/5/3 metres; navigability does not prove the intended retail path or animation.",
+        "Only candidate walk points and consecutive walk segments were checked; native jump segments and scene timings were not validated.",
+        "GitHub indexed code search may omit large database dumps; the result does not prove that the missing five paths exist nowhere."
+      ],
+      "terrain_z": null,
+      "vmap_surface_z": null,
+      "mmap_projected_z": "see existing artifact if measured; not rerun in this package",
+      "actual_spline_z": null,
+      "movement_flags": null,
+      "status": "CLIENT_TEST_REQUIRED"
+    },
+    {
+      "quest": 26706,
+      "path_id": 4375101,
+      "status": "BLOCKED_MISSING_SOURCE",
+      "reason": "Native AI references path and point7; no verified full path evidence in existing Gilneas route artifacts. Base snapshot lacks repository-restored routes too, so absence there does not prove deployed absence."
+    }
+  ],
+  "required_runtime_fields": [
+    "waypoint",
+    "XYZ",
+    "terrain Z",
+    "VMAP surface Z",
+    "MMAP projected Z",
+    "actual spline Z",
+    "deviation",
+    "movement flags"
+  ],
+  "client_verified": false,
+  "additional_object_geometry_evidence": {
+    "quest": 24602,
+    "artifact": "gilneas-memento-restoration.json",
+    "ground_polygons_found": 32,
+    "unique_positions": 17,
+    "terrain_z": null,
+    "vmap_surface_z": null,
+    "client_status": "CLIENT_TEST_REQUIRED"
+  }
+}
