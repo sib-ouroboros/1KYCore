@@ -126,7 +126,7 @@ def main():
     with tempfile.TemporaryDirectory() as path:
         path=Path(path)
         (path/'ScriptMgr.h').write_text(HEADER)
-        for name in ('ScriptedCreature.h','GameObjectAI.h','GameObject.h','Player.h','TemporarySummon.h','MotionMaster.h','SpellMgr.h','SpellScript.h','SpellAuraEffects.h'):
+        for name in ('ScriptedCreature.h','GameObjectAI.h','GameObject.h','Player.h','TemporarySummon.h','MotionMaster.h','SpellMgr.h','SpellInfo.h','SpellScript.h','SpellAuraEffects.h'):
             (path/name).write_text('#include "ScriptMgr.h"\n')
         cpp=path/'brew.cpp';cpp.write_text((ROOT/'src/server/scripts/World/campaign_brew_scripts.cpp').read_text(encoding='utf-8-sig')+'\n'+MAIN)
         flags=['-std=c++17','-Wall','-Wextra','-Werror']

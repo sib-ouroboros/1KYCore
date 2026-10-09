@@ -7,6 +7,7 @@
 #include "TemporarySummon.h"
 #include "MotionMaster.h"
 #include "SpellMgr.h"
+#include "SpellInfo.h"
 #include "SpellScript.h"
 #include "SpellAuraEffects.h"
 #include <list>
