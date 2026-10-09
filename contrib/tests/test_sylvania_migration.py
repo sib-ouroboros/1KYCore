@@ -866,6 +866,7 @@ def main():
             sql(f'DROP DATABASE `{DB}`;',False)
             return
         if args.source_actor_conversations_only:
+            tables=sql('SHOW TABLES;').stdout.splitlines()
             test_source_actor_conversations(sql,checksum)
             sql((ROOT / 'sql/updates/world/2026_10_07_02_world_conversation_line_padding.sql').read_text('utf8'))
             restore = (ROOT / 'sql/updates/world/2026_10_09_02_world_campaign_lever_conversations.sql').read_text('utf8')

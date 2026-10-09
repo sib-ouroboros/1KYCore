@@ -54,7 +54,7 @@ jobs:
             flags+=('-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined')
             flags+=('-DCMAKE_SHARED_LINKER_FLAGS=-fsanitize=address,undefined')
           fi
-          cmake -S . -B diagnostic-build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_COMPILER=gcc-11 -DCMAKE_CXX_COMPILER=g++-11 -DSCRIPTS=dynamic -DSERVERS=1 -DTOOLS=0 -DNOJEM=1 -DUSE_COREPCH=0 -DUSE_SCRIPTPCH=0 -DWITH_WARNINGS_AS_ERRORS=0 -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/diagnostic-install" "${flags[@]}"
+          cmake -S . -B diagnostic-build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_COMPILER=gcc-11 -DCMAKE_CXX_COMPILER=g++-11 -DSCRIPTS=dynamic -DSERVERS=1 -DTOOLS=0 -DNOJEM=1 -DUSE_COREPCH=1 -DUSE_SCRIPTPCH=1 -DWITH_WARNINGS_AS_ERRORS=0 -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/diagnostic-install" "${flags[@]}"
       - run: cmake --build diagnostic-build --parallel 2 && cmake --install diagnostic-build
       - name: Version smoke check (not a bootstrap/shutdown acceptance test)
         run: diagnostic-install/bin/worldserver --version
