@@ -1,0 +1,30 @@
+{
+  "provenance": {
+    "database": "ru_target",
+    "scope": "read-only release base snapshot; NOT the user all-updates bootstrap and NOT the runtime post-rejection graph",
+    "query_sha256": "206e3b99a3ad2efd2242b8b8039eeb4e5c328e5d3975f181ce13efe25f08f911"
+  },
+  "source_sql_sha256": "0265cc795b6507f8918162293e7c905143cdb2ef227ee72179bb43bcf889f68c",
+  "source_commit": "22bfd97d0e0e30d215e408eb4da2b0419d8f00e7",
+  "rows": [],
+  "interpretation": "Matching source rows establish provenance only; no correct replacement spell is established and no edits are applied.",
+  "selection_scope": "Action spell fields in release-only ru_target; zero matches cannot explain the all-updates runtime log.",
+  "diagnostic_finding": {
+    "status": "FIXED",
+    "cause": "VICTIM_CASTING validator checks event.targetCasting.spellId (param3) but logs event.spellHit.spell (param1, a cooldown).",
+    "example": {
+      "entryorguid": 120808,
+      "source_type": 0,
+      "id": 3,
+      "event_type": 13,
+      "event_param1": 5000,
+      "event_param2": 8000,
+      "event_param3": 20000,
+      "action_type": 11,
+      "action_param1": 241027,
+      "source_file": "sql/updates/world/Tomb of Sargeras.sql",
+      "source_file_sha256": "7503be3e8330a146839817de1f630768e33a12830379c55456902b71df84ce5d"
+    },
+    "remaining": "The rejected event still needs authoritative gameplay data; no spell substitution or event-parameter edits."
+  }
+}

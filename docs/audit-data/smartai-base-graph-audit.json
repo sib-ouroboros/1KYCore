@@ -1,0 +1,2980 @@
+{
+  "graph_count": 21190,
+  "row_count": 51255,
+  "scope": "raw snapshot only; resource-rejected runtime graph requires startup log",
+  "findings": [
+    {
+      "entryorguid": -102845,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -102845,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -102845,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -102845,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -102844,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -102844,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -102844,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -102844,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -95068,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -95054,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -95054,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -95054,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": -95054,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 391,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 391,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 391,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 3502,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 3691,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 3691,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 3696,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 3845,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 3845,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 3926,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 4052,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 4052,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 4422,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 5111,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 5251,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 5251,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 5953,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 6649,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 6735,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 6740,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 6741,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 6746,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 6929,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 7337,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 7337,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 7849,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 7915,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 7915,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 7915,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 7956,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 8147,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 8151,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 8151,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 8154,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 8479,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 8895,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 8895,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 8895,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11441,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11441,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11441,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11441,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11488,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11488,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11492,
+      "source_type": 0,
+      "event_id": 18,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11492,
+      "source_type": 0,
+      "event_id": 21,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11492,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11492,
+      "source_type": 0,
+      "event_id": 23,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11492,
+      "source_type": 0,
+      "event_id": 21,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11492,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11492,
+      "source_type": 0,
+      "event_id": 23,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 11882,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 12856,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 12856,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 12856,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 12864,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 14322,
+      "source_type": 0,
+      "event_id": 8,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 14322,
+      "source_type": 0,
+      "event_id": 8,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 14322,
+      "source_type": 0,
+      "event_id": 9,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 14322,
+      "source_type": 0,
+      "event_id": 9,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 14715,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 14753,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 7,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 8,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 13,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 15,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 18,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 21,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 23,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 24,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 29,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 31,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 34,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 14,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 16,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 17,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 19,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 23,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 25,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 27,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 29,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 30,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 32,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 33,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 35,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 40,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 13,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 14,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 16,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 17,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 19,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 23,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 25,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 27,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 29,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 30,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 32,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 33,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 35,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16409,
+      "source_type": 0,
+      "event_id": 40,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16522,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16522,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16876,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16876,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16876,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16876,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16876,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16876,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 16876,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17371,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17371,
+      "source_type": 0,
+      "event_id": 7,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17371,
+      "source_type": 0,
+      "event_id": 7,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17725,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17725,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17729,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17729,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17820,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17820,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17820,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17820,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17826,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17826,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17826,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17826,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17826,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17892,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17892,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 17892,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18094,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18094,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18450,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18450,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18453,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18453,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18455,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18455,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18539,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18539,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18638,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18638,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18638,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 10,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 21,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 32,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 43,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 54,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 65,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 33,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 44,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 55,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 66,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 33,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 44,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 55,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18683,
+      "source_type": 0,
+      "event_id": 66,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 10,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 21,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 32,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 43,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 54,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 65,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 33,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 44,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 55,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 66,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 33,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 44,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 55,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18870,
+      "source_type": 0,
+      "event_id": 66,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18995,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18995,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 18995,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19449,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19449,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19449,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 10,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 21,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 32,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 43,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 54,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 65,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 33,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 44,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 55,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 66,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 22,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 33,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 44,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 55,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 19527,
+      "source_type": 0,
+      "event_id": 66,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 20859,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 20859,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 20859,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 20859,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 20859,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 20859,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 21218,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 21218,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 21218,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 21644,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 21644,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 21644,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 21644,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 22473,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 22473,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 22844,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 22844,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 22844,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 22874,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 22874,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23030,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23030,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23196,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23196,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23196,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23285,
+      "source_type": 0,
+      "event_id": 13,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23285,
+      "source_type": 0,
+      "event_id": 14,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23285,
+      "source_type": 0,
+      "event_id": 14,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 23636,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 24841,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 25599,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 25599,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 25599,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 26581,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 26581,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28132,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28132,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28132,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28557,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28557,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28557,
+      "source_type": 0,
+      "event_id": 12,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28580,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28580,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28580,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28580,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28580,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 28882,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 29820,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 29820,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 29820,
+      "source_type": 0,
+      "event_id": 7,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 29836,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 29836,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 29836,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 32888,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 32888,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 33071,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 33356,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 33356,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 33419,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34177,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34177,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34204,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34204,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34208,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34208,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34309,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34419,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 34419,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 35161,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 35312,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 35312,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 35880,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 35880,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "SELF_LINK",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 35880,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 36636,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 36660,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 36708,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 36815,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 36890,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 36942,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 36942,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 37212,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 37548,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38002,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38002,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38070,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38409,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38409,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38409,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38409,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38912,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 38942,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39261,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39261,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39268,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39268,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39317,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39582,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39582,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39582,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39946,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 39972,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 40069,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 40069,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 41162,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 41162,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 41641,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 43325,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 45410,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 45438,
+      "source_type": 0,
+      "event_id": 7,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 53129,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 53130,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 55418,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 57875,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 57877,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 57890,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 92489,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 92936,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 93949,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 99632,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 99986,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 100171,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 100475,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 100475,
+      "source_type": 0,
+      "event_id": 6,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 100810,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 100812,
+      "source_type": 0,
+      "event_id": 4,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 100812,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 101344,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 101880,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 102459,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 102561,
+      "source_type": 0,
+      "event_id": 25,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 103151,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 103658,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 103658,
+      "source_type": 0,
+      "event_id": 3,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 104841,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 105018,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "ORPHAN_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 105018,
+      "source_type": 0,
+      "event_id": 1,
+      "category": "UNREACHABLE_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 105332,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 105333,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 106346,
+      "source_type": 0,
+      "event_id": 2,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 106815,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 108648,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 109704,
+      "source_type": 0,
+      "event_id": 5,
+      "category": "MISSING_DESTINATION",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 111247,
+      "source_type": 0,
+      "event_id": 10,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 111247,
+      "source_type": 0,
+      "event_id": 11,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 111247,
+      "source_type": 0,
+      "event_id": 12,
+      "category": "DESTINATION_NOT_LINK_EVENT",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    },
+    {
+      "entryorguid": 117694,
+      "source_type": 0,
+      "event_id": 0,
+      "category": "DUPLICATE_EVENT_ID",
+      "severity": "P1",
+      "status": "NEEDS_SOURCE_DATA"
+    }
+  ],
+  "category_counts": {
+    "DUPLICATE_EVENT_ID": 19,
+    "DESTINATION_NOT_LINK_EVENT": 114,
+    "ORPHAN_LINK_EVENT": 77,
+    "UNREACHABLE_LINK_EVENT": 76,
+    "MISSING_DESTINATION": 72,
+    "SELF_LINK": 12
+  },
+  "provenance": {
+    "database": "ru_target",
+    "scope": "read-only release base snapshot; NOT the user all-updates bootstrap and NOT the runtime post-rejection graph",
+    "query_sha256": "206e3b99a3ad2efd2242b8b8039eeb4e5c328e5d3975f181ce13efe25f08f911"
+  }
+}

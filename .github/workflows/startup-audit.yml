@@ -1,0 +1,66 @@
+name: Clean startup audit preparation
+
+on:
+  push:
+    branches: [feature/npc-crowd-separation]
+    paths:
+      - 'contrib/tools/worldserver_*audit.py'
+      - 'contrib/tools/worldserver_bootstrap_probe.py'
+      - 'contrib/tools/script_binding_audit.py'
+      - 'contrib/tools/smartai_graph_audit.py'
+      - 'contrib/tests/test_startup_audit.py'
+      - '.github/workflows/startup-audit.yml'
+      - 'contrib/tests/test_smartai_victim_casting_diagnostic.py'
+      - 'src/server/game/AI/SmartScripts/SmartScriptMgr.cpp'
+  workflow_dispatch:
+    inputs:
+      build_diagnostics:
+        type: boolean
+        default: false
+        description: Build isolated Linux RelWithDebInfo and ASan/UBSan dynamic servers
+
+permissions:
+  contents: read
+
+jobs:
+  tools:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python contrib/tests/test_startup_audit.py
+      - run: python contrib/tests/test_smartai_victim_casting_diagnostic.py
+
+  diagnostics:
+    if: github.event_name == 'workflow_dispatch' && inputs.build_diagnostics
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [relwithdebinfo, asan-ubsan]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: sudo apt-get update && sudo apt-get install -y libboost-all-dev g++-11 gdb
+      - name: Configure isolated dynamic build
+        shell: bash
+        run: |
+          flags=()
+          if [[ '${{ matrix.profile }}' == 'asan-ubsan' ]]; then
+            flags+=('-DCMAKE_C_FLAGS_RELWITHDEBINFO=-O1 -g -fno-omit-frame-pointer -fsanitize=address,undefined')
+            flags+=('-DCMAKE_CXX_FLAGS_RELWITHDEBINFO=-O1 -g -fno-omit-frame-pointer -fsanitize=address,undefined')
+            flags+=('-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined')
+            flags+=('-DCMAKE_SHARED_LINKER_FLAGS=-fsanitize=address,undefined')
+          fi
+          cmake -S . -B diagnostic-build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_C_COMPILER=gcc-11 -DCMAKE_CXX_COMPILER=g++-11 -DSCRIPTS=dynamic -DSERVERS=1 -DTOOLS=0 -DNOJEM=1 -DUSE_COREPCH=0 -DUSE_SCRIPTPCH=0 -DWITH_WARNINGS_AS_ERRORS=0 -DCMAKE_INSTALL_PREFIX="$GITHUB_WORKSPACE/diagnostic-install" "${flags[@]}"
+      - run: cmake --build diagnostic-build --parallel 2 && cmake --install diagnostic-build
+      - name: Version smoke check (not a bootstrap/shutdown acceptance test)
+        run: diagnostic-install/bin/worldserver --version
+      - uses: actions/upload-artifact@v4
+        with:
+          name: startup-diagnostics-${{ matrix.profile }}-${{ github.sha }}
+          path: diagnostic-install/
+          retention-days: 7
+          if-no-files-found: error
