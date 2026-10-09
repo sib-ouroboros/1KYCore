@@ -30,6 +30,7 @@ def audit(evidence, inventory):
             raise ValueError('Ambiguous aura ownership')
         aura_by_creature[creature] = aura
     candidates = {r['entry']: r for r in inventory['rows']}
+    candidates.update({r['entry']: r for r in evidence.get('source_smart_chains', [])})
     rows = []
     for entry in (268377, 268378, 268379):
         candidate = candidates[entry]

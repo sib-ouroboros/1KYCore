@@ -17,7 +17,7 @@ HEADER = r'''
 using uint32=std::uint32_t;
 constexpr uint32 EFFECT_0=0, SPELL_EFFECT_APPLY_AURA=6, SPELL_EFFECT_SUMMON=28,
  SPELL_AURA_LINKED_SUMMON=428, POINT_MOTION_TYPE=8, GO_ACTIVATED=2,
- QUEST_STATUS_INCOMPLETE=1, AURA_EFFECT_HANDLE_REAL=1;
+ QUEST_STATUS_INCOMPLETE=1, AURA_EFFECT_HANDLE_REAL=1, SUMMON_CATEGORY_ALLY=1, SUMMON_TYPE_NONE=0, SUMMON_PROP_FLAG_PERSONAL_SPAWN=16;
 using AuraEffectHandleModes=uint32;
 struct Unit;struct Player;struct Creature;struct TempSummon;struct CreatureAI;
 struct MotionMaster { std::vector<uint32> points;int follows=0;float angle=0;
@@ -53,10 +53,14 @@ struct ScriptedAI:CreatureAI { Creature* me;explicit ScriptedAI(Creature* c):me(
 struct GameObject:Unit {uint32 entry=0,mapId=1514;uint32 GetEntry(){return entry;}uint32 GetMapId(){return mapId;}float GetDistance(Creature* c){return c->distance;} };
 struct GameObjectAI { GameObject* go;explicit GameObjectAI(GameObject* g):go(g){}
  virtual ~GameObjectAI()=default;virtual void OnStateChanged(uint32,Unit*){} };
-struct SpellEffectInfo {uint32 Effect=0,ApplyAuraName=0,TriggerSpell=0,MiscValue=0;};
+struct SpellEffectInfo {uint32 Effect=0,ApplyAuraName=0,TriggerSpell=0,MiscValue=0,MiscValueB=4031;};
 struct SpellInfo { SpellEffectInfo effect;SpellEffectInfo const* GetEffect(uint32)const{return &effect;} };
 struct SpellMgr {std::map<uint32,SpellInfo> spells;SpellInfo const* GetSpellInfo(uint32 id){auto p=spells.find(id);return p==spells.end()?nullptr:&p->second;} };
 SpellMgr mgr;SpellMgr* sSpellMgr=&mgr;
+struct SummonPropertiesEntry {uint32 Control=1,Title=0,Flags=16;};
+struct PropertiesStore {SummonPropertiesEntry properties;bool present=true;
+ SummonPropertiesEntry const* LookupEntry(uint32 id){return present&&id>=4031&&id<=4033?&properties:nullptr;}
+} sSummonPropertiesStore;
 struct AuraEffect {};
 struct Hook {template<class T> void operator+=(T){} };
 struct AuraScript {Unit* target=nullptr;SpellInfo const* info=nullptr;bool prevented=false;Hook OnEffectRemove;
@@ -75,8 +79,8 @@ MAIN = r'''
 void check(bool ok,char const* why){if(!ok)throw std::runtime_error(why);}
 int main(){try{
  int map;Player owner,other;owner.guid=1;other.guid=2;owner.map=other.map=&map;
- uint32 entries[]={119619,119620,119621};uint32 auras[]={237611,237613,237615};uint32 summons[]={237610,237612,237614};
- for(int i=0;i<3;++i){mgr.spells[auras[i]].effect={6,428,summons[i],0};mgr.spells[summons[i]].effect={28,0,0,entries[i]};}
+ uint32 properties[]={4032,4031,4033};uint32 entries[]={119619,119620,119621};uint32 auras[]={237611,237613,237615};uint32 summons[]={237610,237612,237614};
+ for(int i=0;i<3;++i){mgr.spells[auras[i]].effect={6,428,summons[i],0};mgr.spells[summons[i]].effect={28,0,0,entries[i],properties[i]};}
  for(auto const& delivery:CampaignBrew::Deliveries){
   TempSummon own,foreign;own.entry=foreign.entry=delivery.Creature;own.owner=1;foreign.owner=2;own.distance=5;foreign.distance=1;
   npc_campaign_brew_companion ai(&own),foreignAI(&foreign);
@@ -109,6 +113,9 @@ int main(){try{
  removal.Remove(nullptr,1);check(removal.prevented&&!old.despawn&&newer.despawn&&!foreign.despawn,"simultaneous summons and ownership");
  oldAI.UpdateAI(29999);check(!old.despawn,"return timeout boundary");oldAI.UpdateAI(1);check(old.despawn,"blocked route bounded cleanup");
  owner.creatures={&newer};removal.prevented=false;removal.Remove(nullptr,1);check(!removal.prevented,"ordinary cancellation retains native behavior");
+ sSummonPropertiesStore.present=false;check(!removal.Validate(removal.info),"missing summon properties");sSummonPropertiesStore.present=true;
+ sSummonPropertiesStore.properties.Flags=0;check(CampaignBrew::AuraFor(119619)==0,"non-personal summon rejected");sSummonPropertiesStore.properties.Flags=16;
+ sSummonPropertiesStore.properties.Control=2;check(!removal.Validate(removal.info),"pet category rejected");sSummonPropertiesStore.properties.Control=1;
  // Different hotfix mapping is accepted only if it remains unambiguous.
  mgr.spells[237611].effect.TriggerSpell=237612;mgr.spells[237613].effect.TriggerSpell=237610;
  check(CampaignBrew::AuraFor(119620)==237611&&CampaignBrew::AuraFor(119619)==237613,"loaded hotfix mapping, not fixed source IDs");
@@ -126,7 +133,7 @@ def main():
     with tempfile.TemporaryDirectory() as path:
         path=Path(path)
         (path/'ScriptMgr.h').write_text(HEADER)
-        for name in ('ScriptedCreature.h','GameObjectAI.h','GameObject.h','Player.h','TemporarySummon.h','MotionMaster.h','SpellMgr.h','SpellInfo.h','SpellScript.h','SpellAuraEffects.h'):
+        for name in ('ScriptedCreature.h','GameObjectAI.h','GameObject.h','DB2Stores.h','DBCEnums.h','Player.h','TemporarySummon.h','MotionMaster.h','SpellMgr.h','SpellInfo.h','SpellScript.h','SpellAuraEffects.h'):
             (path/name).write_text('#include "ScriptMgr.h"\n')
         cpp=path/'brew.cpp';cpp.write_text((ROOT/'src/server/scripts/World/campaign_brew_scripts.cpp').read_text(encoding='utf-8-sig')+'\n'+MAIN)
         flags=['-std=c++17','-Wall','-Wextra','-Werror']

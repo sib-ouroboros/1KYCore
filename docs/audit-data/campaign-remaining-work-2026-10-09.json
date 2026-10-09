@@ -3,17 +3,17 @@
   "counts": {
     "conversations": 40,
     "templates": 11,
-    "models": 46
+    "models": 43
   },
   "pending_spawns": 100,
   "input_sha256": {
     "campaign-remaining-conversations-2026-10-05.json": "10bc01fd8c4455e80b1b7ba6ce228e63f904b46497833cf9cfce33e7beb51bda",
-    "campaign-remaining-models-2026-10-05.json": "0b863b57786018541516b0b17079c8ba7181b8f4d5c0e2fa623adebac16a04d4",
+    "campaign-remaining-models-2026-10-05.json": "b0238f82e0211c395228f70cd9fcde4aca99befcfa6f597359b8a98ea582cf17",
     "campaign-remaining-templates-2026-10-05.json": "052481a9fa3573eda7bf86cebff39e672ae09cd1eefb7ad20e04f64a86e62c21",
     "campaign-pending-dependencies.json": "27e656565c079b5949e3da5af7b94e9f884841001c9760717685b85cd1a1b514",
     "campaign-restoration-status.json": "5b7a8bb0a08c5430789c7a749dfd7c5f62f2015630f785ba7cc4556a3499016e",
     "campaign-conversation-source-timing-review-2026-10-08.json": "0c1b0a9ceb7c884524bfb83d3a476cd87ee0f155e70ff6c276815475cb30b35f",
-    "campaign-script-chain-inventory-2026-10-08.json": "3d54d884b4d9b8de82f2ce2e8a2ff7590b5476e81994bae563fca9fc5b2352e0"
+    "campaign-script-chain-inventory-2026-10-08.json": "059aaea675a11640c9afbae24cac418312da78dc7a02935bef811388055534fe"
   },
   "groups": {
     "conversations": {
@@ -1363,7 +1363,7 @@
       ]
     },
     "models": {
-      "count": 46,
+      "count": 43,
       "blocker_counts_overlap": {
         "loot_and_quest_item_dependencies": 12,
         "missing_event_and_npc_scene_chain": 3,
@@ -1371,7 +1371,7 @@
         "native_spell_or_external_dependency_review": 3,
         "no_native_garrison_shipment_use_handler": 2,
         "personal_loot_lifecycle_not_implemented": 1,
-        "script_chain_not_translated": 14,
+        "script_chain_not_translated": 11,
         "static_visual_source_chain_not_restored": 4
       },
       "rows": [
@@ -2636,135 +2636,6 @@
             "Data23": "1"
           },
           "next_step": "Validate full dependency and native interaction lifecycle"
-        },
-        {
-          "id": 268377,
-          "blockers": [
-            "script_chain_not_translated"
-          ],
-          "status": "REVIEW_REQUIRED",
-          "script_chain": {
-            "own_source_rows": 3,
-            "incoming_rows": 0,
-            "connected_source_rows": 7,
-            "connected_keys": [
-              [
-                119620,
-                0
-              ],
-              [
-                268377,
-                1
-              ]
-            ],
-            "enum_mismatches": [
-              {
-                "key": [
-                  119620,
-                  0,
-                  0
-                ],
-                "field": "action_type",
-                "value": 207,
-                "source": "SMART_ACTION_SUMMON_ADD_PLR_PERSONNAL_VISIBILE",
-                "native": "SMART_ACTION_MODIFY_THREAT"
-              }
-            ]
-          },
-          "missing_client_references": {},
-          "source_data": {
-            "Data0": "2640",
-            "Data10": "237619",
-            "Data20": "1",
-            "Data23": "1"
-          },
-          "next_step": "Translate connected source AI semantics before importing"
-        },
-        {
-          "id": 268378,
-          "blockers": [
-            "script_chain_not_translated"
-          ],
-          "status": "REVIEW_REQUIRED",
-          "script_chain": {
-            "own_source_rows": 3,
-            "incoming_rows": 0,
-            "connected_source_rows": 7,
-            "connected_keys": [
-              [
-                119619,
-                0
-              ],
-              [
-                268378,
-                1
-              ]
-            ],
-            "enum_mismatches": [
-              {
-                "key": [
-                  119619,
-                  0,
-                  0
-                ],
-                "field": "action_type",
-                "value": 207,
-                "source": "SMART_ACTION_SUMMON_ADD_PLR_PERSONNAL_VISIBILE",
-                "native": "SMART_ACTION_MODIFY_THREAT"
-              }
-            ]
-          },
-          "missing_client_references": {},
-          "source_data": {
-            "Data0": "2640",
-            "Data10": "237620",
-            "Data20": "1",
-            "Data23": "1"
-          },
-          "next_step": "Translate connected source AI semantics before importing"
-        },
-        {
-          "id": 268379,
-          "blockers": [
-            "script_chain_not_translated"
-          ],
-          "status": "REVIEW_REQUIRED",
-          "script_chain": {
-            "own_source_rows": 3,
-            "incoming_rows": 0,
-            "connected_source_rows": 7,
-            "connected_keys": [
-              [
-                119621,
-                0
-              ],
-              [
-                268379,
-                1
-              ]
-            ],
-            "enum_mismatches": [
-              {
-                "key": [
-                  119621,
-                  0,
-                  0
-                ],
-                "field": "action_type",
-                "value": 207,
-                "source": "SMART_ACTION_SUMMON_ADD_PLR_PERSONNAL_VISIBILE",
-                "native": "SMART_ACTION_MODIFY_THREAT"
-              }
-            ]
-          },
-          "missing_client_references": {},
-          "source_data": {
-            "Data0": "2640",
-            "Data10": "237621",
-            "Data20": "1",
-            "Data23": "1"
-          },
-          "next_step": "Translate connected source AI semantics before importing"
         },
         {
           "id": 268408,

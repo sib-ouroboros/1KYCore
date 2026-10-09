@@ -3,6 +3,8 @@
 #include "ScriptedCreature.h"
 #include "GameObjectAI.h"
 #include "GameObject.h"
+#include "DB2Stores.h"
+#include "DBCEnums.h"
 #include "Player.h"
 #include "TemporarySummon.h"
 #include "MotionMaster.h"
@@ -46,6 +48,10 @@ uint32 SummonedEntry(SpellInfo const* info)
     auto summon = trigger ? trigger->GetEffect(EFFECT_0) : nullptr;
     if (!summon || summon->Effect != SPELL_EFFECT_SUMMON ||
         summon->MiscValue < 119619 || summon->MiscValue > 119621)
+        return 0;
+    auto properties = sSummonPropertiesStore.LookupEntry(summon->MiscValueB);
+    if (!properties || properties->Control != SUMMON_CATEGORY_ALLY || properties->Title != SUMMON_TYPE_NONE ||
+        !(properties->Flags & SUMMON_PROP_FLAG_PERSONAL_SPAWN))
         return 0;
     return summon->MiscValue;
 }

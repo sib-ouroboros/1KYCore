@@ -39,7 +39,7 @@ def main():
             if mismatch['key'][:2]==[r['entry'],1] and mismatch['field']=='action_type':own[str(mismatch['value'])]+=1
     assert dict(own)==report['candidate_enum_mismatches']
     for entry in (268377,268378,268379):
-        r=next(x for x in rows if x['entry']==entry)
+        r=next(x for x in read('campaign-brew-client-evidence-2026-10-09.json')['source_smart_chains'] if x['entry']==entry)
         assert any(m['value']==207 and m['source']=='SMART_ACTION_SUMMON_ADD_PLR_PERSONNAL_VISIBILE' and m['native']=='SMART_ACTION_MODIFY_THREAT' for m in r['enum_mismatches'])
     print(f'PASS: {len(candidates)} current campaign objects, dependency edges and source/native action collisions')
 

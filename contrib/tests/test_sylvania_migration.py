@@ -18,6 +18,7 @@ from test_campaign_required_level_migration import test_required_level_objects
 from test_campaign_scene_templates import test_campaign_scene_templates
 from test_campaign_rogue_objects_db import test_campaign_rogue_objects
 from test_campaign_source_actors_db import test_source_actor_conversations
+from test_campaign_brew_delivery_db import test_brew_delivery
 from test_campaign_packed_conversations import test_packed_conversations
 from test_campaign_cage_states import test_cage_state_restoration
 
@@ -811,6 +812,7 @@ def test_nearest_conversations():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--campaign-rogue-objects-only', action='store_true', help='Test complete source rogue objects, conversation, scenes and conflict guards.')
+    parser.add_argument('--brew-delivery-only', action='store_true', help='Test three guarded monk brew deliveries and retry conflicts.')
     parser.add_argument('--source-actor-conversations-only', action='store_true', help='Test scoped source actors, silent conversation pauses and guarded SQL.')
     parser.add_argument('--campaign-scenes-only', action='store_true', help='Test source scene mappings, conflicts and interrupted publication.')
     parser.add_argument('--gilneas-chain-only', action='store_true', help='Test audited Gilneas bindings and object spawns.')
@@ -854,6 +856,10 @@ def main():
                 "(4290000000,9000000,1,1,2,3,0),(210300260,9000001,1,4,5,6,0);")
 
         reset()
+        if args.brew_delivery_only:
+            test_brew_delivery(sql,checksum)
+            sql(f'DROP DATABASE `{DB}`;',False)
+            return
         if args.campaign_rogue_objects_only:
             sql(migration)
             test_campaign_rogue_objects(sql,checksum,test_simple_goober_models,test_simple_conversations)
@@ -1056,6 +1062,7 @@ def main():
         test_campaign_scene_templates(sql,checksum)
         test_campaign_rogue_objects(sql,checksum,test_simple_goober_models,test_simple_conversations)
         test_source_actor_conversations(sql,checksum)
+        test_brew_delivery(sql,checksum)
         sql(f'DROP DATABASE `{DB}`;', False)
 
 
