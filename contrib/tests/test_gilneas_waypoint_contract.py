@@ -29,16 +29,16 @@ def main():
 #include <iostream>
 using uint32=std::uint32_t;using namespace std::chrono_literals;
 enum{WAYPOINT_MOTION_TYPE=2};
-struct AI{virtual~AI()=default;virtual void MovementInform(uint32,uint32)=0;};
+struct NativeAI{virtual~NativeAI()=default;virtual void MovementInform(uint32,uint32)=0;};
 struct Vehicle{int removals=0;void RemoveAllPassengers(){++removals;}};
-struct Creature{AI*ai=nullptr;Vehicle vehicle;int despawns=0;bool gravity=true;AI*AI(){return ai;}Vehicle*GetVehicleKit(){return &vehicle;}void SetDisableGravity(bool b){gravity=b;}template<class T>void DespawnOrUnsummon(T){++despawns;}};
+struct Creature{NativeAI*ai=nullptr;Vehicle vehicle;int despawns=0;bool gravity=true;NativeAI*AI(){return ai;}Vehicle*GetVehicleKit(){return &vehicle;}void SetDisableGravity(bool b){gravity=b;}template<class T>void DespawnOrUnsummon(T){++despawns;}};
 template<class T>struct WaypointMovementGenerator{uint32 i_currentNode=0;void MovementInform(T*);};
 '''
     # Compile the engine's real dispatch, without rewriting index semantics.
     code+=method(movement,'void WaypointMovementGenerator<Creature>::MovementInform(').replace('void WaypointMovementGenerator<Creature>::','template<> void WaypointMovementGenerator<Creature>::')
-    code+='struct Manor:AI{Creature*me;bool m_boarded=true,m_arrived=false;'
+    code+='struct Manor:NativeAI{Creature*me;bool m_boarded=true,m_arrived=false;'
     code+=method(dusk[dusk.index('    struct npc_swift_mountain_horse_36741AI'):],'        void MovementInform(')+'};\n'
-    code+='struct Bat:AI{Creature*me;bool m_boarded=true;uint32 m_flightState=1;'
+    code+='struct Bat:NativeAI{Creature*me;bool m_boarded=true;uint32 m_flightState=1;'
     code+=method(city[city.index('    struct npc_captured_riding_bat_38540AI'):],'        void MovementInform(')+'};\n'
     code+=r'''
 void check(bool b,char const*m){if(!b)throw std::runtime_error(m);}
