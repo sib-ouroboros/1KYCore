@@ -7,6 +7,7 @@ on:
       - src/server/scripts/EasternKingdoms/Gilneas/**
       - contrib/tests/test_gilneas_*.py
       - sql/updates/world/*gilneas*.sql
+      - sql/updates/hotfixes/*broadcast_text_fr_dependencies.sql
       - .github/workflows/gilneas-blizzlike.yml
   workflow_dispatch:
 
@@ -24,7 +25,7 @@ jobs:
       - name: Native production handlers with ASan and UBSan
         shell: bash
         run: |
-          for test in manor_gates endgame_escape endgame_scene endgame_gates endgame_transport survivor_combat transport scaling duskhaven rescue bat carriage; do
+          for test in waypoint_contract manor_gates endgame_escape endgame_scene endgame_gates endgame_transport survivor_combat transport scaling duskhaven rescue bat carriage tobias tobias_summons tobias_dialogue battle battle_start battle_sync battle_waves battle_lifecycle battle_reset battle_finale battle_reward horn grandma godfrey catapult phases mastiffs scene; do
             python "contrib/tests/test_gilneas_${test}.py"
           done
   mysql:
@@ -53,3 +54,8 @@ jobs:
           MYSQL_PWD: disposable-test-only
           MYSQL_DISPOSABLE_TEST_SERVER: '1'
         run: python contrib/tests/test_sylvania_migration.py --gilneas-chain-only
+      - name: Targeted BroadcastText dependencies and locale preservation
+        env:
+          MYSQL_PWD: disposable-test-only
+          MYSQL_DISPOSABLE_TEST_SERVER: '1'
+        run: python contrib/tests/test_gilneas_broadcast_database.py

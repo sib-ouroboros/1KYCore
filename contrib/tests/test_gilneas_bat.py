@@ -47,7 +47,7 @@ int main(){
  check(cast.CheckBat()==SPELL_FAILED_BAD_TARGETS,"already riding cannot create second bat");a.PassengerBoarded(&other,0,false);check(!bat.despawn,"foreign dismount ignored");
  a.MovementInform(WAYPOINT_MOTION_TYPE,3);check(!bat.vehicle.removals,"old intermediate point does not land");
  Return ret;ret.caster=&p;ret.HandleDummy(0);check(a.m_flightState==3&&bat.motion.paths.back()==3854003&&bat.motion.paths.size()==2,"return button changes state and real route");ret.HandleDummy(0);check(bat.motion.paths.size()==2,"return idempotent");
- a.MovementInform(WAYPOINT_MOTION_TYPE,3);check(!bat.vehicle.removals,"return waits for real last point");a.MovementInform(WAYPOINT_MOTION_TYPE,14);a.MovementInform(WAYPOINT_MOTION_TYPE,14);check(bat.vehicle.removals==1&&bat.despawn&&!bat.gravity,"safe final-point landing once");
+ a.MovementInform(WAYPOINT_MOTION_TYPE,3);check(!bat.vehicle.removals,"return waits for real last point");a.MovementInform(WAYPOINT_MOTION_TYPE,13);a.MovementInform(WAYPOINT_MOTION_TYPE,13);check(bat.vehicle.removals==1&&bat.despawn&&!bat.gravity,"safe final-point landing once");
  p.base=nullptr;for(int mode=0;mode<6;++mode){Creature c;c.entry=38540;AI ai(&c);p.status=QUEST_STATUS_INCOMPLETE;p.alive=true;players[1]=&p;ai.IsSummonedBy(&p);p.base=&c;ai.PassengerBoarded(&p,0,true);
   if(mode==0)p.status=QUEST_STATUS_NONE;
   if(mode==1)p.status=QUEST_STATUS_COMPLETE;

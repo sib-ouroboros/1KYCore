@@ -169,4 +169,8 @@ def test_gilneas_database(sql, checksum):
  test_gilneas_memento_database(sql,checksum)
  from test_gilneas_endgame_database import test_gilneas_endgame_database
  test_gilneas_endgame_database(sql,checksum)
+ from test_gilneas_expanded_database import test_gilneas_expanded_database
+ test_gilneas_expanded_database(sql,checksum)
+ from test_gilneas_tobias_native_database import test_gilneas_tobias_native_database
+ test_gilneas_tobias_native_database(sql,checksum)
  return binding_report

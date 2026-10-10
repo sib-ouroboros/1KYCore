@@ -2460,9 +2460,10 @@ public:
 
         void MovementInform(uint32 type, uint32 id) override
         {
-            if (type != WAYPOINT_MOTION_TYPE || id != 28 || !m_boarded || m_arrived)
+            // WaypointMovementGenerator reports a zero-based vector index, not SQL point.
+            if (type != WAYPOINT_MOTION_TYPE || id != 27 || !m_boarded || m_arrived)
                 return;
-            // The audited28-point route ends here, not at the old point11.
+            // The audited 28-point route ends at index 27 (SQL point 28).
             m_arrived = true;
             if (Vehicle* vehicle = me->GetVehicleKit())
                 vehicle->RemoveAllPassengers();

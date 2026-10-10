@@ -155,18 +155,17 @@ public:
             for (uint32 i = 0; i < 5; ++i)
             {
                 WaypointPath const* path = sWaypointMgr->GetPath(3850701 + i);
-                bool endpointFound = false;
-                if (!path || path->nodes.size() < 2)
+                // MovementInform receives a vector index; all expected stops
+                // must exist as contiguous points in these native zero-based paths.
+                if (!path || path->nodes.size() != endpoints[i] + 1)
                     return false;
+                uint32 index = 0;
                 for (WaypointNode const& node : path->nodes)
                 {
-                    if (!std::isfinite(node.x) || !std::isfinite(node.y) || !std::isfinite(node.z))
+                    if (node.id != index++ || !std::isfinite(node.x)
+                        || !std::isfinite(node.y) || !std::isfinite(node.z))
                         return false;
-                    if (node.id == endpoints[i])
-                        endpointFound = true;
                 }
-                if (!endpointFound)
-                    return false;
             }
             return true;
         }
@@ -804,7 +803,8 @@ public:
         {
             if (type != WAYPOINT_MOTION_TYPE || !m_boarded)
                 return;
-            if ((m_flightState == 1 && id == 60) || (m_flightState == 3 && id == 14))
+            // Callbacks carry zero-based indices: SQL point60/14 is index59/13.
+            if ((m_flightState == 1 && id == 59) || (m_flightState == 3 && id == 13))
             {
                 m_flightState = 4;
                 me->SetDisableGravity(false);

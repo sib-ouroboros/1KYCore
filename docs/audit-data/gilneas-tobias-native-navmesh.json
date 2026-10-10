@@ -1,0 +1,273 @@
+{
+  "map": 654,
+  "tiles": 51,
+  "points": [
+    {
+      "point": 1,
+      "ground": true,
+      "source_z": 19.9719,
+      "nav_z": 19.5397
+    },
+    {
+      "point": 2,
+      "ground": true,
+      "source_z": 20.7427,
+      "nav_z": 20.1021
+    },
+    {
+      "point": 3,
+      "ground": true,
+      "source_z": 21.5989,
+      "nav_z": 21.6982
+    },
+    {
+      "point": 4,
+      "ground": true,
+      "source_z": 21.5989,
+      "nav_z": 21.7199
+    },
+    {
+      "point": 5,
+      "ground": true,
+      "source_z": 21.5938,
+      "nav_z": 21.4541
+    },
+    {
+      "point": 6,
+      "ground": true,
+      "source_z": 20.6476,
+      "nav_z": 21.6112
+    },
+    {
+      "point": 7,
+      "ground": true,
+      "source_z": 20.6031,
+      "nav_z": 20.7946
+    },
+    {
+      "point": 8,
+      "ground": true,
+      "source_z": 20.7936,
+      "nav_z": 20.8999
+    },
+    {
+      "point": 9,
+      "ground": true,
+      "source_z": 23.1788,
+      "nav_z": 22.5801
+    },
+    {
+      "point": 10,
+      "ground": true,
+      "source_z": 20.5702,
+      "nav_z": 20.7095
+    },
+    {
+      "point": 11,
+      "ground": true,
+      "source_z": 20.4857,
+      "nav_z": 20.7095
+    },
+    {
+      "point": 12,
+      "ground": true,
+      "source_z": 20.4857,
+      "nav_z": 20.7788
+    },
+    {
+      "point": 13,
+      "ground": true,
+      "source_z": 20.4857,
+      "nav_z": 20.7188
+    },
+    {
+      "point": 14,
+      "ground": true,
+      "source_z": 20.4857,
+      "nav_z": 20.7095
+    },
+    {
+      "point": 15,
+      "ground": true,
+      "source_z": 20.4869,
+      "nav_z": 20.7095
+    },
+    {
+      "point": 16,
+      "ground": true,
+      "source_z": 21.1645,
+      "nav_z": 21.4564
+    },
+    {
+      "point": 17,
+      "ground": true,
+      "source_z": 22.9593,
+      "nav_z": 23.2678
+    },
+    {
+      "point": 18,
+      "ground": true,
+      "source_z": 25.3814,
+      "nav_z": 25.0643
+    },
+    {
+      "point": 19,
+      "ground": true,
+      "source_z": 26.5368,
+      "nav_z": 26.5166
+    },
+    {
+      "point": 20,
+      "ground": true,
+      "source_z": 26.9762,
+      "nav_z": 27.5921
+    },
+    {
+      "point": 21,
+      "ground": true,
+      "source_z": 26.9762,
+      "nav_z": 27.5921
+    },
+    {
+      "point": 22,
+      "ground": true,
+      "source_z": 27.704,
+      "nav_z": 27.8829
+    },
+    {
+      "point": 23,
+      "ground": true,
+      "source_z": 27.704,
+      "nav_z": 27.8829
+    },
+    {
+      "point": 24,
+      "ground": true,
+      "source_z": 28.5757,
+      "nav_z": 28.3287
+    },
+    {
+      "point": 25,
+      "ground": true,
+      "source_z": 29.2073,
+      "nav_z": 28.9331
+    },
+    {
+      "point": 26,
+      "ground": true,
+      "source_z": 29.2208,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 27,
+      "ground": true,
+      "source_z": 29.2208,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 28,
+      "ground": true,
+      "source_z": 29.191,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 29,
+      "ground": true,
+      "source_z": 29.191,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 30,
+      "ground": true,
+      "source_z": 29.1903,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 31,
+      "ground": true,
+      "source_z": 29.1903,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 32,
+      "ground": true,
+      "source_z": 29.2225,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 33,
+      "ground": true,
+      "source_z": 29.2225,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 34,
+      "ground": true,
+      "source_z": 29.2021,
+      "nav_z": 29.2428
+    },
+    {
+      "point": 35,
+      "ground": true,
+      "source_z": 29.2224,
+      "nav_z": 29.4666
+    },
+    {
+      "point": 36,
+      "ground": true,
+      "source_z": 29.2297,
+      "nav_z": 29.7458
+    },
+    {
+      "point": 37,
+      "ground": true,
+      "source_z": 29.2366,
+      "nav_z": 29.6749
+    },
+    {
+      "point": 38,
+      "ground": true,
+      "source_z": 29.23,
+      "nav_z": 29.4645
+    }
+  ],
+  "segments": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "complete": true,
+  "assurance": "Nearest ground polys and within-route navmesh corridors only; not VMAP floor/spline/jump/client validation.",
+  "client_build": 26654,
+  "returncode": 0
+}

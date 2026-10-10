@@ -43,9 +43,9 @@ int main(){
  ai.PassengerBoarded(&other,0,false);check(!horse.despawn,"foreign dismount does not terminate ride");
  ai.MovementInform(WAYPOINT_MOTION_TYPE,11);check(horse.vehicle.removals==0,"legacy intermediate point is not arrival");
  ai.UpdateAI(1000);check(!horse.despawn,"active owner ride survives tick");
- ai.MovementInform(999,28);check(horse.vehicle.removals==0,"wrong movement type ignored");
- ai.MovementInform(WAYPOINT_MOTION_TYPE,28);check(horse.vehicle.removals==1&&horse.despawn,"actual final point lands once");
- ai.MovementInform(WAYPOINT_MOTION_TYPE,28);check(horse.vehicle.removals==1,"duplicate arrival ignored");
+ ai.MovementInform(999,27);check(horse.vehicle.removals==0,"wrong movement type ignored");
+ ai.MovementInform(WAYPOINT_MOTION_TYPE,27);check(horse.vehicle.removals==1&&horse.despawn,"actual final point lands once");
+ ai.MovementInform(WAYPOINT_MOTION_TYPE,27);check(horse.vehicle.removals==1,"duplicate arrival ignored");
  Creature early;AI e(&early);e.IsSummonedBy(&owner);owner.base=&early;e.PassengerBoarded(&owner,0,true);e.PassengerBoarded(&owner,0,false);check(early.despawn&&!e.m_arrived&&!owner.credits,"early dismount no fake arrival or credit");
  for(int mode=0;mode<5;++mode){
   Creature mount;AI a(&mount);owner.status=QUEST_STATUS_INCOMPLETE;owner.alive=true;owner.base=&mount;players[1]=&owner;a.IsSummonedBy(&owner);a.PassengerBoarded(&owner,0,true);

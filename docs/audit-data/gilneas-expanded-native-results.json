@@ -1,0 +1,157 @@
+[
+  {
+    "test": "waypoint_contract",
+    "status": "PASS",
+    "output": "PASS: native WaypointMovementGenerator callback indices, 28-point Manor and 60/14-point bat routes\n"
+  },
+  {
+    "test": "transport",
+    "status": "PASS",
+    "output": "Manor native route endpoint, owner and vehicle lifecycle: PASS\n"
+  },
+  {
+    "test": "bat",
+    "status": "PASS",
+    "output": "Captured bat native circuit, return, landing and ownership: PASS\n"
+  },
+  {
+    "test": "manor_gates",
+    "status": "PASS",
+    "output": "PASS: both native Manor gate AIs; completed/incomplete quests, cooldown, no quest, rewarded, missing owner and Exodus\n"
+  },
+  {
+    "test": "rescue",
+    "status": "PASS",
+    "output": "Gilneas rescue, horse ownership and Two Forms gates: PASS\n"
+  },
+  {
+    "test": "survivor_combat",
+    "status": "PASS",
+    "output": "PASS: native survivor/crocodile pairing, existing NPC damage gates, player damage/chase and occupied/dead/phase/failed-attack guards\n"
+  },
+  {
+    "test": "carriage",
+    "status": "PASS",
+    "output": "Exodus native callback order, seat1, route stops, owner isolation and cleanup: PASS\n"
+  },
+  {
+    "test": "tobias",
+    "status": "PASS",
+    "output": "Tobias production owner lifecycle, native waypoint validation and cleanup PASS\n"
+  },
+  {
+    "test": "tobias_summons",
+    "status": "PASS",
+    "output": "Native Tobias partial summon cleanup and unrelated preservation: PASS\n"
+  },
+  {
+    "test": "tobias_dialogue",
+    "status": "PASS",
+    "output": "Tobias final dialogue: actual owner event gate and duplicate protection PASS\n"
+  },
+  {
+    "test": "battle",
+    "status": "PASS",
+    "output": "Gilneas battle: six production scans and idle states PASS\n"
+  },
+  {
+    "test": "battle_start",
+    "status": "PASS",
+    "output": "Gilneas battle: native actor links, eight pending initializers, gossip recovery and participant gates PASS\n"
+  },
+  {
+    "test": "battle_sync",
+    "status": "PASS",
+    "output": "Gilneas battle synchronization: production arrival cases and readiness PASS\n"
+  },
+  {
+    "test": "battle_waves",
+    "status": "PASS",
+    "output": "Gilneas battle: 31 native routes, six movement callbacks and fight entry gates PASS\n"
+  },
+  {
+    "test": "battle_lifecycle",
+    "status": "PASS",
+    "output": "Gilneas battle: seven reused AI resets/owned cleanups and fresh cinematic Liam dialogue PASS\n"
+  },
+  {
+    "test": "battle_reset",
+    "status": "PASS",
+    "output": "Seven Gilneas production reset cases stop queued combat PASS\n"
+  },
+  {
+    "test": "battle_finale",
+    "status": "PASS",
+    "output": "Gilneas finale production callbacks and native credit dispatch PASS\n"
+  },
+  {
+    "test": "battle_reward",
+    "status": "PASS",
+    "output": "Lorna production script: shared battle preserved across individual rewards PASS\n"
+  },
+  {
+    "test": "horn",
+    "status": "PASS",
+    "output": "Horn of Tal'doren native quest, ownership and summon guards: PASS\n"
+  },
+  {
+    "test": "grandma",
+    "status": "PASS",
+    "output": "Grandma personal route, transform, fight, loot gate and owner cleanup: PASS\n"
+  },
+  {
+    "test": "godfrey",
+    "status": "PASS",
+    "output": "Godfrey native path guard, actor callback, reservation and controller cleanup: PASS\n"
+  },
+  {
+    "test": "catapult",
+    "status": "PASS",
+    "output": "Catapult operator gate, aimed jump, cast ownership and cancellation: PASS\n"
+  },
+  {
+    "test": "phases",
+    "status": "PASS",
+    "output": "Native Gilneas phase handoff predicate: PASS\n"
+  },
+  {
+    "test": "mastiffs",
+    "status": "PASS",
+    "output": "Mastiff native cap, death/despawn, owner, attribution and cleanup: PASS\n"
+  },
+  {
+    "test": "scene",
+    "status": "PASS",
+    "output": "PASS: actual Avery transformation/bite/shot order, impact-only death, owner isolation, bounded retries and guarded small knockback\n"
+  },
+  {
+    "test": "endgame_escape",
+    "status": "PASS",
+    "output": "PASS: native wyvern AI and Lorna boarding; two owners, arrival-only once credit, cancellation and reset\n"
+  },
+  {
+    "test": "endgame_transport",
+    "status": "PASS",
+    "output": "PASS: native Endgame hippogryph boarding/update/finish/movement; accessories, ownership, delays, abandon/death/logout/map/phase/vehicle loss\n"
+  },
+  {
+    "test": "endgame_scene",
+    "status": "PASS",
+    "output": "PASS: native Endgame three barrel and orc creation cases, success and every null failure\n"
+  },
+  {
+    "test": "endgame_gates",
+    "status": "PASS",
+    "output": "PASS: native Endgame participant combat/range and same-ship grunt floor gates\n"
+  },
+  {
+    "test": "scaling",
+    "status": "PASS",
+    "output": "Native Creature selection and target scaling: PASS\n"
+  },
+  {
+    "test": "duskhaven",
+    "status": "PASS",
+    "output": "Duskhaven barrel and child handlers: PASS\n"
+  }
+]
