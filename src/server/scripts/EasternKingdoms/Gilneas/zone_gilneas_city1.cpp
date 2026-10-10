@@ -3563,22 +3563,33 @@ public:
         ACTION_STARTING_EVENT = 101,
         EVENT_STARTING_EVENT,
         EVENT_STARTING_DO_FIRE,
+        EVENT_FINISHING_EVENT,
     };
 
     struct npc_commandeered_cannon_35914AI : public ScriptedAI
     {
-        npc_commandeered_cannon_35914AI(Creature* creature) : ScriptedAI(creature) { }
+        npc_commandeered_cannon_35914AI(Creature* creature) : ScriptedAI(creature), m_summons(creature) { }
 
         EventMap m_events;
+        SummonList m_summons;
+        bool m_sceneActive = false;
 
         void Reset() override
         {
             m_events.Reset();
+            m_sceneActive = false;
+            m_summons.DespawnAll();
         }
 
         void JustSummoned(Creature* summon) override
         {
+            m_summons.Summon(summon);
             summon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL);
+        }
+
+        void SummonedCreatureDespawn(Creature* summon) override
+        {
+            m_summons.Despawn(summon);
         }
 
         void DoAction(int32 param) override
@@ -3587,7 +3598,11 @@ public:
             {
                 case ACTION_STARTING_EVENT:
                 {
-                    m_events.ScheduleEvent(EVENT_STARTING_EVENT, 25ms);
+                    if (!m_sceneActive)
+                    {
+                        m_sceneActive = true;
+                        m_events.ScheduleEvent(EVENT_STARTING_EVENT, 25ms);
+                    }
                 }
             }
         }
@@ -3611,8 +3626,23 @@ public:
                     }
                     case EVENT_STARTING_DO_FIRE:
                     {
-                        if (Creature* Worgen = me->FindNearestCreature(NPC_BLOODFANG_WORGEN_35118, 50.0f, true))
-                            me->CastSpell(Worgen, SPELL_CANNON_FIRE, true);
+                        // Fire only at a live actor created by this cannon scene.
+                        // Never substitute an unrelated quest/combat NPC if summons fail.
+                        for (ObjectGuid const& guid : m_summons)
+                            if (Creature* worgen = ObjectAccessor::GetCreature(*me, guid))
+                                if (worgen->IsAlive() && worgen->GetEntry() == NPC_BLOODFANG_WORGEN_35118
+                                    && worgen->IsInPhase(me) && me->IsWithinDistInMap(worgen, 50.0f))
+                                {
+                                    me->CastSpell(worgen, SPELL_CANNON_FIRE, true);
+                                    break;
+                                }
+                        // Existing scene actors expire five seconds after their spawn.
+                        m_events.ScheduleEvent(EVENT_FINISHING_EVENT, 4600);
+                        break;
+                    }
+                    case EVENT_FINISHING_EVENT:
+                    {
+                        m_sceneActive = false;
                         break;
                     }
                 }

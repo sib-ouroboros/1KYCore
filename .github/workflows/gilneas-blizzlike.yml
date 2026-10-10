@@ -25,7 +25,7 @@ jobs:
       - name: Native production handlers with ASan and UBSan
         shell: bash
         run: |
-          for test in krennan_owner waypoint_contract manor_gates endgame_escape endgame_scene endgame_gates endgame_transport survivor_combat transport scaling duskhaven rescue bat carriage tobias tobias_summons tobias_dialogue battle battle_start battle_sync battle_waves battle_lifecycle battle_reset battle_finale battle_reward horn grandma godfrey catapult phases mastiffs scene; do
+          for test in cannon krennan_owner waypoint_contract manor_gates endgame_escape endgame_scene endgame_gates endgame_transport survivor_combat transport scaling duskhaven rescue bat carriage tobias tobias_summons tobias_dialogue battle battle_start battle_sync battle_waves battle_lifecycle battle_reset battle_finale battle_reward horn grandma godfrey catapult phases mastiffs scene; do
             python "contrib/tests/test_gilneas_${test}.py"
           done
   mysql:

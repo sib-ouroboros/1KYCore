@@ -1,0 +1,104 @@
+{
+  "quest": 14293,
+  "source_repository": "boom8866/Starfall-Legacy-434",
+  "commit": "0fe678dfe779df4d3ab5902343b177ce40de13ad",
+  "file": "src/server/scripts/EasternKingdoms/Gilneas/gilneas.cpp",
+  "sha256": "6bd5fbe5fe8a0b3077023e1fb5b4c58ea8f2180903e064d386b2b11c49aac15d",
+  "url": "https://github.com/boom8866/Starfall-Legacy-434/blob/0fe678dfe779df4d3ab5902343b177ce40de13ad/src/server/scripts/EasternKingdoms/Gilneas/gilneas.cpp",
+  "camera_class": "npc_cannon_camera",
+  "spawn_points": [
+    [
+      -1715.219,
+      1352.839,
+      19.8645,
+      2.72649
+    ],
+    [
+      -1721.182,
+      1350.429,
+      19.8656,
+      2.48614
+    ],
+    [
+      -1746.523,
+      1361.108,
+      19.8681,
+      1.85957
+    ],
+    [
+      -1724.385,
+      1348.462,
+      19.6781,
+      2.10692
+    ],
+    [
+      -1734.542,
+      1344.554,
+      19.8769,
+      1.65637
+    ],
+    [
+      -1732.773,
+      1367.837,
+      19.901,
+      1.10063
+    ],
+    [
+      -1744.358,
+      1363.382,
+      19.8996,
+      2.06127
+    ],
+    [
+      -1719.358,
+      1357.512,
+      19.7791,
+      2.91488
+    ],
+    [
+      -1728.276,
+      1353.201,
+      19.6823,
+      2.2537
+    ],
+    [
+      -1726.747,
+      1364.599,
+      19.9263,
+      2.71766
+    ],
+    [
+      -1737.693,
+      1352.986,
+      19.8711,
+      1.96818
+    ],
+    [
+      -1734.391,
+      1359.887,
+      19.9064,
+      2.48052
+    ],
+    [
+      -1730.286,
+      1390.384,
+      20.7707,
+      4.35712
+    ]
+  ],
+  "historical_code_timeline_ms": {
+    "spawn": 1000,
+    "first_fire": 2500,
+    "fire_interval": 2000,
+    "fire_count": 8,
+    "last_fire": 16500
+  },
+  "not_imported": [
+    "raw Creature pointers",
+    "force-killing actors on dismount",
+    "legacy phase/vehicle data",
+    "unverified original gameplay timing"
+  ],
+  "acceptance": "BLOCKED_CLIENT",
+  "note": "Repository code is evidence of an implementation, not proof of exact Blizzard timing. Source coordinates and sequence are not added to gameplay by the safety patch."
+}
