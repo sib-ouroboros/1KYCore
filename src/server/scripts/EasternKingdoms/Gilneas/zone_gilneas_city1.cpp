@@ -28,6 +28,8 @@
 #include "GameObject.h"
 #include "GridNotifiers.h"
 #include "ObjectAccessor.h"
+#include "SmartAI.h"
+#include "PhasingHandler.h"
 #include "ObjectMgr.h"
 #include <cmath>
 #include "MotionMaster.h"
@@ -2371,6 +2373,17 @@ public:
             m_enrage = false;
         }
 
+        void DamageDealt(Unit* victim, uint32& damage, DamageEffectType /*type*/) override
+        {
+            // Only horse-owned attackers of this ride; ordinary Bloodfang combat is untouched.
+            TempSummon* summon = me->ToTempSummon();
+            Unit* owner = summon ? summon->GetSummoner() : nullptr;
+            Player* player = victim ? victim->ToPlayer() : nullptr;
+            if (owner && owner->GetEntry() == NPC_GRAYMANE_HORSE_35905 && owner->GetMapId() == 654
+                && player && player->GetVehicleBase() == owner)
+                damage = std::min(damage, std::max<uint32>(1, player->GetMaxHealth() / 100));
+        }
+
         void DamageTaken(Unit* /*who*/, uint32& /*damage*/) override
         {
             if (!m_enrage && me->GetHealthPct() < 50.0f)
@@ -3358,6 +3371,133 @@ public:
 };
 
 // 35905
+// Keep the release SmartAI route; only this quest vehicle remains AI controlled.
+class npc_gilneas_rescue_horse_runtime : public CreatureScript
+{
+public:
+    npc_gilneas_rescue_horse_runtime() : CreatureScript("npc_gilneas_rescue_horse_runtime") { }
+
+    struct RescueAI : public SmartAI
+    {
+        explicit RescueAI(Creature* creature) : SmartAI(creature), m_attackers(creature) { }
+        ObjectGuid m_ownerGUID;
+        SummonList m_attackers;
+        uint32 m_lifetime = 180000;
+        uint32 m_attackTimer = 5000;
+        bool m_waiting = false;
+        bool m_rescued = false;
+        bool m_stopped = false;
+
+        // Vehicle charm must not end the native SmartAI escort or hand movement to the rider.
+        void OnCharmed(bool /*apply*/) override { }
+
+        void StopRide()
+        {
+            if (m_stopped)
+                return;
+            m_stopped = true;
+            m_attackers.DespawnAll();
+            if (Vehicle* vehicle = me->GetVehicleKit())
+                vehicle->RemoveAllPassengers();
+            me->DespawnOrUnsummon(1);
+        }
+
+        void PassengerBoarded(Unit* who, int8 seatId, bool apply) override
+        {
+            if (Player* player = who->ToPlayer())
+            {
+                if (seatId == 0 && apply && !m_ownerGUID)
+                {
+                    m_ownerGUID = player->GetGUID();
+                    PhasingHandler::InheritPhaseShift(me, player);
+                    player->SetClientControl(me, false);
+                }
+                else if (!apply && player->GetGUID() == m_ownerGUID)
+                    StopRide();
+            }
+            else if (apply && seatId == 1 && who->GetEntry() == NPC_KRENNAN_ARANAS)
+            {
+                m_rescued = true;
+                if (m_waiting)
+                {
+                    m_waiting = false;
+                    ResumePath();
+                }
+            }
+            if (!m_stopped)
+                SmartAI::PassengerBoarded(who, seatId, apply);
+        }
+
+        void MovementInform(uint32 type, uint32 id) override
+        {
+            SmartAI::MovementInform(type, id);
+            // Native callback index6 is SmartAI point7, next to the tree.
+            if (type == WAYPOINT_MOTION_TYPE && id == 6 && !m_rescued && !m_waiting)
+            {
+                m_waiting = true;
+                PausePath(180000, true);
+            }
+        }
+
+        void JustSummoned(Creature* summon) override
+        {
+            SmartAI::JustSummoned(summon);
+            if (summon->GetEntry() != NPC_BLOODFANG_WORGEN_35118)
+                return;
+            m_attackers.Summon(summon);
+            PhasingHandler::InheritPhaseShift(summon, me);
+            if (Player* player = ObjectAccessor::GetPlayer(*me, m_ownerGUID))
+                if (summon->AI())
+                    summon->AI()->AttackStart(player);
+        }
+
+        void SummonedCreatureDespawn(Creature* summon) override
+        {
+            m_attackers.Despawn(summon);
+            SmartAI::SummonedCreatureDespawn(summon);
+        }
+
+        void UpdateAI(uint32 diff) override
+        {
+            if (m_stopped)
+                return;
+            if (m_ownerGUID)
+            {
+                Player* player = ObjectAccessor::GetPlayer(*me, m_ownerGUID);
+                if (!player || !player->IsAlive() || player->GetVehicleBase() != me
+                    || player->GetMapId() != 654 || !player->IsInPhase(me)
+                    || (player->GetQuestStatus(QUEST_SAVE_KRENNAN_ARANAS) != QUEST_STATUS_INCOMPLETE
+                        && player->GetQuestStatus(QUEST_SAVE_KRENNAN_ARANAS) != QUEST_STATUS_COMPLETE)
+                    || diff >= m_lifetime)
+                {
+                    StopRide();
+                    return;
+                }
+                m_lifetime -= diff;
+                if (diff >= m_attackTimer)
+                {
+                    m_attackTimer = 8000;
+                    if (m_attackers.size() < 2)
+                    {
+                        Position position = me->GetFirstCollisionPosition(6.0f, 3.14f);
+                        me->SummonCreature(NPC_BLOODFANG_WORGEN_35118, position,
+                            TEMPSUMMON_TIMED_DESPAWN, 12000);
+                    }
+                }
+                else
+                    m_attackTimer -= diff;
+            }
+            SmartAI::UpdateAI(diff);
+        }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        return creature->GetMapId() == 654 ? static_cast<CreatureAI*>(new RescueAI(creature))
+                                         : static_cast<CreatureAI*>(new SmartAI(creature));
+    }
+};
+
 class npc_king_greymanes_horse_35905 : public CreatureScript
 {
 public:
@@ -3563,6 +3703,7 @@ public:
         ACTION_STARTING_EVENT = 101,
         EVENT_STARTING_EVENT,
         EVENT_STARTING_DO_FIRE,
+        EVENT_SECOND_SHOT,
         EVENT_FINISHING_EVENT,
     };
 
@@ -3573,11 +3714,13 @@ public:
         EventMap m_events;
         SummonList m_summons;
         bool m_sceneActive = false;
+        ObjectGuid m_sceneTarget;
 
         void Reset() override
         {
             m_events.Reset();
             m_sceneActive = false;
+            m_sceneTarget.Clear();
             m_summons.DespawnAll();
         }
 
@@ -3600,11 +3743,17 @@ public:
                 {
                     if (!m_sceneActive)
                     {
+                        m_sceneTarget.Clear();
                         m_sceneActive = true;
                         m_events.ScheduleEvent(EVENT_STARTING_EVENT, 25ms);
                     }
                 }
             }
+        }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == QUEST_SAVE_KRENNAN_ARANAS && m_sceneActive ? m_sceneTarget : ObjectGuid::Empty;
         }
 
         void UpdateAI(uint32 diff) override
@@ -3633,11 +3782,21 @@ public:
                                 if (worgen->IsAlive() && worgen->GetEntry() == NPC_BLOODFANG_WORGEN_35118
                                     && worgen->IsInPhase(me) && me->IsWithinDistInMap(worgen, 50.0f))
                                 {
+                                    m_sceneTarget = worgen->GetGUID();
                                     me->CastSpell(worgen, SPELL_CANNON_FIRE, true);
                                     break;
                                 }
-                        // Existing scene actors expire five seconds after their spawn.
-                        m_events.ScheduleEvent(EVENT_FINISHING_EVENT, 4600);
+                        m_events.ScheduleEvent(EVENT_SECOND_SHOT, 1500);
+                        break;
+                    }
+                    case EVENT_SECOND_SHOT:
+                    {
+                        // A corpse can still anchor a destination-targeted impact.
+                        // The spell hook selects our saved actor, not a nearby stranger.
+                        if (Creature* anchor = ObjectAccessor::GetCreature(*me, m_sceneTarget))
+                            if (anchor->IsInPhase(me) && me->IsWithinDistInMap(anchor, 50.0f))
+                                me->CastSpell(me, SPELL_CANNON_FIRE, true);
+                        m_events.ScheduleEvent(EVENT_FINISHING_EVENT, 3100);
                         break;
                     }
                     case EVENT_FINISHING_EVENT:
@@ -3654,6 +3813,41 @@ public:
     {
         return new npc_commandeered_cannon_35914AI(creature);
     }
+};
+
+//68235 uses a nearby-entry destination; explicitly anchor the two scene shots.
+class spell_gilneas_cannon_scene_target : public SpellScriptLoader
+{
+public:
+    spell_gilneas_cannon_scene_target() : SpellScriptLoader("spell_gilneas_cannon_scene_target") { }
+    class script : public SpellScript
+    {
+        PrepareSpellScript(script);
+        void SelectSceneTarget(WorldObject*& target)
+        {
+            Creature* cannon = GetCaster() ? GetCaster()->ToCreature() : nullptr;
+            if (!cannon || cannon->GetEntry() != NPC_COMMANDEERED_CANNON
+                || cannon->GetMapId() != 654 || !cannon->AI())
+                return;
+            ObjectGuid guid = cannon->AI()->GetGUID(QUEST_SAVE_KRENNAN_ARANAS);
+            if (!guid)
+                return;
+            Creature* actor = ObjectAccessor::GetCreature(*cannon, guid);
+            TempSummon* summon = actor ? actor->ToTempSummon() : nullptr;
+            if (!summon || summon->GetSummoner() != cannon
+                || actor->GetEntry() != NPC_BLOODFANG_WORGEN_35118 || !actor->IsInPhase(cannon))
+            {
+                target = nullptr;
+                return;
+            }
+            target = actor;
+        }
+        void Register() override
+        {
+            OnObjectTargetSelect += SpellObjectTargetSelectFn(script::SelectSceneTarget, EFFECT_0, TARGET_DEST_NEARBY_ENTRY);
+        }
+    };
+    SpellScript* GetSpellScript() const override { return new script(); }
 };
 
 class npc_lord_godfrey_35906 : public CreatureScript
@@ -4792,9 +4986,11 @@ void AddSC_zone_gilneas_city1()
     new npc_lord_godfrey_35906();
     new npc_gilnean_city_guard_35504();
     new npc_king_genn_greymane_35550();
+    new npc_gilneas_rescue_horse_runtime();
     new npc_king_greymanes_horse_35905();
     new npc_krennan_aranas_35907();
     new npc_commandeered_cannon_35914();
+    new spell_gilneas_cannon_scene_target();
     new npc_bloodfang_stalker_35229();
     new npc_lord_darius_crowley_35552();
     new npc_sister_almyra_44468();

@@ -175,4 +175,6 @@ def test_gilneas_database(sql, checksum):
  test_gilneas_tobias_native_database(sql,checksum)
  from test_gilneas_krennan_database import test_gilneas_krennan_database
  test_gilneas_krennan_database(sql,checksum)
+ from test_gilneas_rescue_ride_database import test_gilneas_rescue_ride_database
+ test_gilneas_rescue_ride_database(sql,checksum)
  return binding_report
