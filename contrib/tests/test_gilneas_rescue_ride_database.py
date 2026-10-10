@@ -39,8 +39,21 @@ def test_gilneas_rescue_ride_database(sql,checksum):
  assert sql("SELECT InhabitType FROM creature_template WHERE entry=35753;").stdout.strip()=='4'
  assert passenger==sql("SELECT * FROM creature_template WHERE entry=35907;").stdout
  before=checksum(tables);sql(tree);assert before==checksum(tables)
+ sql((root/'sql/updates/world/2026_10_10_11_world_gilneas_krennan_height.sql').read_text('utf8'))
+ assert abs(float(sql("SELECT position_z FROM creature WHERE guid=20556808;").stdout.strip())-19.05)<0.0001
+ start=(root/'sql/updates/world/2026_10_10_12_world_gilneas_rescue_start.sql').read_text('utf8')
+ other_accessories=sql("SELECT * FROM vehicle_template_accessory WHERE NOT(entry=35905 AND accessory_entry=35907) ORDER BY entry,accessory_entry,seat_id;").stdout
+ sql(start)
+ assert sql("SELECT COUNT(*) FROM spell_script_names WHERE spell_id=68219 AND ScriptName='spell_gilneas_rescue_at_tree';").stdout.strip()=='1'
+ assert sql("SELECT COUNT(*) FROM vehicle_template_accessory WHERE entry=35905 AND accessory_entry=35907 AND seat_id=1;").stdout.strip()=='0'
+ assert sql("SELECT event_param1,event_param2,event_param3,event_param4,action_param2,action_param4 FROM smart_scripts WHERE entryorguid=3590500 AND source_type=9 AND id=0;").stdout.strip()=='0\t0\t0\t0\t35905\t14293'
+ assert sql("SELECT COUNT(*) FROM smart_scripts WHERE entryorguid=35905 AND source_type=0 AND id=2;").stdout.strip()=='0'
+ assert other_accessories==sql("SELECT * FROM vehicle_template_accessory WHERE NOT(entry=35905 AND accessory_entry=35907) ORDER BY entry,accessory_entry,seat_id;").stdout
+ assert route==sql('SELECT * FROM waypoints WHERE entry=35905 ORDER BY pointid;').stdout
+ before=checksum(tables);sql(start);assert before==checksum(tables)
  sql("UPDATE creature_template SET ScriptName='custom_horse' WHERE entry=35905; UPDATE creature_addon SET emote=1 WHERE guid=20556808; UPDATE creature SET position_z=30 WHERE guid=20556808;")
- before=checksum(tables);sql(text);sql(calibration);sql(measured);sql(tree);assert before==checksum(tables),'custom horse, pose or placement changed'
+ sql("INSERT INTO vehicle_template_accessory(entry,accessory_entry,seat_id,minion,description,summontype,summontimer) VALUES(35905,35907,1,0,'custom horse passenger',3,300000);")
+ before=checksum(tables);sql(text);sql(calibration);sql(measured);sql(tree);sql(start);assert before==checksum(tables),'custom horse, pose or placement changed'
  binding=(root/'sql/updates/world/2026_10_10_07_world_gilneas_cannon_two_shots.sql').read_text('utf8')
  existing=sql("SELECT spell_id,ScriptName FROM spell_script_names WHERE spell_id=68235 ORDER BY ScriptName;").stdout
  sql(binding)

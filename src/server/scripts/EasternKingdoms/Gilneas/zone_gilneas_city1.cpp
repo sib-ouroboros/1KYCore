@@ -3394,6 +3394,16 @@ public:
         // Vehicle charm must not end the native SmartAI escort or hand movement to the rider.
         void OnCharmed(bool /*apply*/) override { }
 
+        uint32 GetData(uint32 id) const override
+        {
+            return id == QUEST_SAVE_KRENNAN_ARANAS && m_waiting && !m_rescued && !m_stopped ? 1 : 0;
+        }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == QUEST_SAVE_KRENNAN_ARANAS ? m_ownerGUID : ObjectGuid::Empty;
+        }
+
         void StopRide()
         {
             if (m_stopped)
@@ -3413,9 +3423,9 @@ public:
                 {
                     m_ownerGUID = player->GetGUID();
                     PhasingHandler::InheritPhaseShift(me, player);
-                    // Keep the vehicle as spell caster, but never allow keyboard movement.
+                    // Preserve vehicle spells/action bar; the unit flag disables keyboard movement.
                     me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL);
-                    player->SetClientControl(me, false);
+                    player->SetClientControl(me, true);
                 }
                 else if (!apply && player->GetGUID() == m_ownerGUID)
                     StopRide();
@@ -3435,13 +3445,14 @@ public:
 
         void MovementInform(uint32 type, uint32 id) override
         {
-            SmartAI::MovementInform(type, id);
+            // Pause before native arrival processing so it cannot advance past the tree.
             // Native callback index6 is SmartAI point7, next to the tree.
             if (type == WAYPOINT_MOTION_TYPE && id == 6 && !m_rescued && !m_waiting)
             {
                 m_waiting = true;
                 PausePath(180000, true);
             }
+            SmartAI::MovementInform(type, id);
         }
 
         void JustSummoned(Creature* summon) override
@@ -3501,6 +3512,32 @@ public:
         return creature->GetMapId() == 654 ? static_cast<CreatureAI*>(new RescueAI(creature))
                                          : static_cast<CreatureAI*>(new SmartAI(creature));
     }
+};
+
+//68219 is cast by the rider; rescue becomes available only while waiting at the tree.
+class spell_gilneas_rescue_at_tree : public SpellScriptLoader
+{
+public:
+    spell_gilneas_rescue_at_tree() : SpellScriptLoader("spell_gilneas_rescue_at_tree") { }
+    class script : public SpellScript
+    {
+        PrepareSpellScript(script);
+        SpellCastResult CheckRescue()
+        {
+            Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            Creature* horse = player && player->GetVehicleBase() ? player->GetVehicleBase()->ToCreature() : nullptr;
+            if (!horse || horse->GetEntry() != NPC_GRAYMANE_HORSE_35905 || horse->GetMapId() != 654
+                || !horse->AI() || horse->AI()->GetGUID(QUEST_SAVE_KRENNAN_ARANAS) != player->GetGUID()
+                || !horse->AI()->GetData(QUEST_SAVE_KRENNAN_ARANAS))
+                return SPELL_FAILED_NOT_READY;
+            return SPELL_CAST_OK;
+        }
+        void Register() override
+        {
+            OnCheckCast += SpellCheckCastFn(script::CheckRescue);
+        }
+    };
+    SpellScript* GetSpellScript() const override { return new script(); }
 };
 
 class npc_king_greymanes_horse_35905 : public CreatureScript
@@ -4992,6 +5029,7 @@ void AddSC_zone_gilneas_city1()
     new npc_gilnean_city_guard_35504();
     new npc_king_genn_greymane_35550();
     new npc_gilneas_rescue_horse_runtime();
+    new spell_gilneas_rescue_at_tree();
     new npc_king_greymanes_horse_35905();
     new npc_krennan_aranas_35907();
     new npc_commandeered_cannon_35914();
