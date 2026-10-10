@@ -2709,7 +2709,7 @@ public:
     }
 };
 
-// 43336: one bounded, owner-only journey over the captured 33-point route.
+// 43336: one bounded, owner-only journey over the player-measured ride and original drive-away tail.
 class npc_harness_43336 : public CreatureScript
 {
 public:
@@ -2863,9 +2863,9 @@ public:
                 return;
             if (Creature* car = ObjectAccessor::GetCreature(*me, m_carriageGUID))
             {
-                if (id == 24)
+                if (id == 44)
                     car->AI()->DoAction(EVENT_SAY_ATTACK);
-                else if (id == 30 && !m_arrived)
+                else if (id == 52 && !m_arrived)
                 {
                     m_arrived = true;
                     car->AI()->DoAction(EVENT_EXIT_VEHICLE);
@@ -2873,7 +2873,7 @@ public:
                         player->RemoveAura(SPELL_PHASE_QUEST_ZONE_SPECIFIC_19);
                 }
             }
-            if (id == 33)
+            if (id == 55)
                 Cleanup();
         }
 
@@ -2912,7 +2912,7 @@ public:
             m_events.Update(diff);
             while (uint32 eventId = m_events.ExecuteEvent())
                 if (eventId == EVENT_START_MOVEMENT)
-                    me->GetMotionMaster()->MovePath(4492801, false);
+                    me->GetMotionMaster()->MovePath(4492802, false);
         }
     };
 

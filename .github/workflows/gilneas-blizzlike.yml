@@ -7,6 +7,7 @@ on:
       - src/server/scripts/EasternKingdoms/Gilneas/**
       - src/server/scripts/Commands/cs_wp.cpp
       - contrib/tests/test_gilneas_*.py
+      - contrib/data/gilneas/**
       - sql/updates/world/*gilneas*.sql
       - sql/updates/hotfixes/*broadcast_text_fr_dependencies.sql
       - .github/workflows/gilneas-blizzlike.yml

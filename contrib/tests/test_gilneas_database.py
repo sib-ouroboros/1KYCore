@@ -181,4 +181,6 @@ def test_gilneas_database(sql, checksum):
  test_gilneas_chest_database(sql,checksum)
  from test_gilneas_survivor_gossip_database import test_gilneas_survivor_gossip_database
  test_gilneas_survivor_gossip_database(sql,checksum)
+ from test_gilneas_exodus_route_database import test_gilneas_exodus_route_database
+ test_gilneas_exodus_route_database(sql,checksum)
  return binding_report
