@@ -29,6 +29,7 @@
 #include "GridNotifiers.h"
 #include "ObjectAccessor.h"
 #include "SmartAI.h"
+#include "WaypointMovementGenerator.h"
 #include "PhasingHandler.h"
 #include "ObjectMgr.h"
 #include <cmath>
@@ -3387,9 +3388,23 @@ public:
         SummonList m_attackers;
         uint32 m_lifetime = 180000;
         uint32 m_attackTimer = 5000;
+        bool m_jumpStarted = false;
         bool m_waiting = false;
         bool m_rescued = false;
         bool m_stopped = false;
+
+        void IsSummonedBy(Unit* summoner) override
+        {
+            // Anchor this ride at its existing first waypoint, before the player boards.
+            if (summoner && summoner->ToPlayer())
+                if (WPPath const* path = sSmartWaypointMgr->GetPath(NPC_GRAYMANE_HORSE_35905))
+                    if (!path->empty() && path->front().id == 1)
+                    {
+                        WayPoint const& first = path->front();
+                        me->NearTeleportTo(first.x, first.y, first.z, me->GetOrientation());
+                    }
+            SmartAI::IsSummonedBy(summoner);
+        }
 
         // Vehicle charm must not end the native SmartAI escort or hand movement to the rider.
         void OnCharmed(bool /*apply*/) override { }
@@ -3445,12 +3460,34 @@ public:
 
         void MovementInform(uint32 type, uint32 id) override
         {
-            // Pause before native arrival processing so it cannot advance past the tree.
-            // Native callback index6 is SmartAI point7, next to the tree.
-            if (type == WAYPOINT_MOTION_TYPE && id == 6 && !m_rescued && !m_waiting)
+            // Let the original SmartAI point6 action launch its jump first.
+            if (type == WAYPOINT_MOTION_TYPE && id == 5)
             {
+                SmartAI::MovementInform(type, id);
+                if (me->GetMotionMaster()->GetCurrentMovementGeneratorType() == EFFECT_MOTION_TYPE)
+                {
+                    m_jumpStarted = true;
+                    // OnArrived must not immediately launch point7 over the jump spline.
+                    if (auto* path = dynamic_cast<WaypointMovementGenerator<Creature>*>(
+                        me->GetMotionMaster()->GetMotionSlot(MOTION_SLOT_IDLE)))
+                        path->Stop(180000);
+                }
+                return;
+            }
+
+            bool landed = type == EFFECT_MOTION_TYPE && id == EVENT_JUMP && m_jumpStarted;
+            // Point7 fallback also supports a custom route without the jump action.
+            bool reachedTree = type == WAYPOINT_MOTION_TYPE && id == 6;
+            if ((landed || reachedTree) && !m_rescued && !m_waiting)
+            {
+                m_jumpStarted = false;
                 m_waiting = true;
                 PausePath(180000, true);
+                // EffectMovementGenerator finalization resets the underlying waypoint generator.
+                // Stop its timer now so that reset cannot launch the return path before rescue.
+                if (auto* path = dynamic_cast<WaypointMovementGenerator<Creature>*>(
+                    me->GetMotionMaster()->GetMotionSlot(MOTION_SLOT_IDLE)))
+                    path->Stop(180000);
             }
             SmartAI::MovementInform(type, id);
         }

@@ -51,9 +51,14 @@ def test_gilneas_rescue_ride_database(sql,checksum):
  assert other_accessories==sql("SELECT * FROM vehicle_template_accessory WHERE NOT(entry=35905 AND accessory_entry=35907) ORDER BY entry,accessory_entry,seat_id;").stdout
  assert route==sql('SELECT * FROM waypoints WHERE entry=35905 ORDER BY pointid;').stdout
  before=checksum(tables);sql(start);assert before==checksum(tables)
+ jump=(root/'sql/updates/world/2026_10_10_13_world_gilneas_rescue_original_jump.sql').read_text('utf8')
+ sql(jump)
+ assert sql("SELECT event_type,event_flags,event_param1,action_type,action_param1,action_param2 FROM smart_scripts WHERE entryorguid=35905 AND source_type=0 AND id=2;").stdout.strip()=='40\t512\t6\t97\t25\t10'
+ assert route==sql('SELECT * FROM waypoints WHERE entry=35905 ORDER BY pointid;').stdout
+ before=checksum(tables);sql(jump);assert before==checksum(tables)
  sql("UPDATE creature_template SET ScriptName='custom_horse' WHERE entry=35905; UPDATE creature_addon SET emote=1 WHERE guid=20556808; UPDATE creature SET position_z=30 WHERE guid=20556808;")
  sql("INSERT INTO vehicle_template_accessory(entry,accessory_entry,seat_id,minion,description,summontype,summontimer) VALUES(35905,35907,1,0,'custom horse passenger',3,300000);")
- before=checksum(tables);sql(text);sql(calibration);sql(measured);sql(tree);sql(start);assert before==checksum(tables),'custom horse, pose or placement changed'
+ before=checksum(tables);sql(text);sql(calibration);sql(measured);sql(tree);sql(start);sql(jump);assert before==checksum(tables),'custom horse, pose or placement changed'
  binding=(root/'sql/updates/world/2026_10_10_07_world_gilneas_cannon_two_shots.sql').read_text('utf8')
  existing=sql("SELECT spell_id,ScriptName FROM spell_script_names WHERE spell_id=68235 ORDER BY ScriptName;").stdout
  sql(binding)
