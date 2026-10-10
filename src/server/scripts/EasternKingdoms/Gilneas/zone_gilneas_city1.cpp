@@ -3379,7 +3379,10 @@ public:
 
     struct RescueAI : public SmartAI
     {
-        explicit RescueAI(Creature* creature) : SmartAI(creature), m_attackers(creature) { }
+        explicit RescueAI(Creature* creature) : SmartAI(creature), m_attackers(creature)
+        {
+            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL);
+        }
         ObjectGuid m_ownerGUID;
         SummonList m_attackers;
         uint32 m_lifetime = 180000;
@@ -3410,6 +3413,8 @@ public:
                 {
                     m_ownerGUID = player->GetGUID();
                     PhasingHandler::InheritPhaseShift(me, player);
+                    // Keep the vehicle as spell caster, but never allow keyboard movement.
+                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_REMOVE_CLIENT_CONTROL);
                     player->SetClientControl(me, false);
                 }
                 else if (!apply && player->GetGUID() == m_ownerGUID)
