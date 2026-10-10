@@ -35,6 +35,95 @@ EndScriptData */
 #include "RBAC.h"
 #include "WaypointManager.h"
 #include "WorldSession.h"
+#include <fstream>
+#include <iomanip>
+#include <locale>
+#include <map>
+#include <memory>
+#include <mutex>
+#include <chrono>
+
+// Record measured player coordinates only; never mutate an active NPC path.
+namespace
+{
+    struct RouteRecording
+    {
+        std::ofstream file;
+        std::string name;
+        uint32 map = 0, instance = 0, elapsed = 0, timer = 0, points = 0;
+        Position last;
+    };
+    std::mutex routeMutex;
+    std::map<ObjectGuid, std::unique_ptr<RouteRecording>> routeRecordings;
+
+    void WriteRoutePoint(RouteRecording& recording, Player* player)
+    {
+        recording.file << ++recording.points << ',' << recording.elapsed << ','
+            << player->GetMapId() << ',' << player->GetInstanceId() << ','
+            << player->GetPositionX() << ',' << player->GetPositionY() << ','
+            << player->GetPositionZ() << ',' << player->GetOrientation() << '\n';
+        recording.last.Relocate(player);
+    }
+
+    void StopRouteRecording(Player* player, bool finalPoint)
+    {
+        auto it = routeRecordings.find(player->GetGUID());
+        if (it == routeRecordings.end())
+            return;
+        RouteRecording& recording = *it->second;
+        if (finalPoint && player->GetMapId() == recording.map
+            && player->GetInstanceId() == recording.instance
+            && recording.last.GetExactDist(player) <= 50.0f
+            && recording.last.GetExactDist(player) > 0.05f)
+            WriteRoutePoint(recording, player);
+        recording.file.flush();
+        ChatHandler(player->GetSession()).PSendSysMessage(
+            "Route saved: %s (%u points).", recording.name.c_str(), recording.points);
+        if (!recording.file)
+            ChatHandler(player->GetSession()).SendSysMessage("Route file write failed; check disk space and permissions.");
+        routeRecordings.erase(it);
+    }
+}
+
+class player_route_recorder : public PlayerScript
+{
+public:
+    player_route_recorder() : PlayerScript("player_route_recorder") { }
+
+    void OnUpdate(Player* player, uint32 diff) override
+    {
+        std::lock_guard<std::mutex> lock(routeMutex);
+        auto it = routeRecordings.find(player->GetGUID());
+        if (it == routeRecordings.end())
+            return;
+        RouteRecording& recording = *it->second;
+        recording.elapsed += diff;
+        recording.timer += diff;
+        if (player->GetMapId() != recording.map || player->GetInstanceId() != recording.instance
+            || recording.elapsed >= 3600000 || recording.last.GetExactDist(player) > 50.0f)
+        {
+            StopRouteRecording(player, false);
+            return;
+        }
+        if (recording.timer >= 1000)
+        {
+            recording.timer = 0;
+            if (recording.last.GetExactDist(player) >= 0.5f)
+            {
+                WriteRoutePoint(recording, player);
+                recording.file.flush();
+                if (!recording.file)
+                    StopRouteRecording(player, false);
+            }
+        }
+    }
+
+    void OnLogout(Player* player) override
+    {
+        std::lock_guard<std::mutex> lock(routeMutex);
+        StopRouteRecording(player, true);
+    }
+};
 
 class wp_commandscript : public CommandScript
 {
@@ -43,8 +132,14 @@ public:
 
     std::vector<ChatCommand> GetCommands() const override
     {
+        static std::vector<ChatCommand> recordCommandTable =
+        {
+            { "start", rbac::RBAC_PERM_COMMAND_WP_ADD, false, &HandleRecordStart, "" },
+            { "stop", rbac::RBAC_PERM_COMMAND_WP_ADD, false, &HandleRecordStop, "" },
+        };
         static std::vector<ChatCommand> wpCommandTable =
         {
+            { "record", rbac::RBAC_PERM_COMMAND_WP_ADD, false, nullptr, "", recordCommandTable },
             { "add",    rbac::RBAC_PERM_COMMAND_WP_ADD,    false, &HandleWpAddCommand,    "" },
             { "event",  rbac::RBAC_PERM_COMMAND_WP_EVENT,  false, &HandleWpEventCommand,  "" },
             { "load",   rbac::RBAC_PERM_COMMAND_WP_LOAD,   false, &HandleWpLoadCommand,   "" },
@@ -59,6 +154,57 @@ public:
         };
         return commandTable;
     }
+    static bool HandleRecordStart(ChatHandler* handler, char const* args)
+    {
+        if (*args)
+            return false;
+        Player* player = handler->GetSession()->GetPlayer();
+        std::lock_guard<std::mutex> lock(routeMutex);
+        if (routeRecordings.count(player->GetGUID()))
+        {
+            handler->SendSysMessage("Recording already active. Use .wp record stop first.");
+            return true;
+        }
+        auto recording = std::make_unique<RouteRecording>();
+        auto stamp = std::chrono::system_clock::now().time_since_epoch().count();
+        recording->name = "route-" + std::to_string(player->GetGUID().GetCounter())
+            + "-" + std::to_string(stamp) + ".csv";
+        recording->file.open(recording->name, std::ios::out | std::ios::trunc);
+        if (!recording->file)
+        {
+            handler->SendSysMessage("Cannot create route CSV in worldserver working directory.");
+            return true;
+        }
+        recording->file.imbue(std::locale::classic());
+        recording->file << std::fixed << std::setprecision(6)
+            << "point,elapsed_ms,map,instance,x,y,z,orientation\n";
+        recording->map = player->GetMapId();
+        recording->instance = player->GetInstanceId();
+        WriteRoutePoint(*recording, player);
+        recording->file.flush();
+        if (!recording->file)
+        {
+            handler->SendSysMessage("Cannot write route CSV; check disk space.");
+            return true;
+        }
+        handler->PSendSysMessage("Recording: %s. Walk the route, then .wp record stop.", recording->name.c_str());
+        routeRecordings.emplace(player->GetGUID(), std::move(recording));
+        return true;
+    }
+
+    static bool HandleRecordStop(ChatHandler* handler, char const* args)
+    {
+        if (*args)
+            return false;
+        Player* player = handler->GetSession()->GetPlayer();
+        std::lock_guard<std::mutex> lock(routeMutex);
+        if (!routeRecordings.count(player->GetGUID()))
+            handler->SendSysMessage("No active route recording.");
+        else
+            StopRouteRecording(player, true);
+        return true;
+    }
+
     /**
     * Add a waypoint to a creature.
     *
@@ -1103,4 +1249,5 @@ public:
 void AddSC_wp_commandscript()
 {
     new wp_commandscript();
+    new player_route_recorder();
 }

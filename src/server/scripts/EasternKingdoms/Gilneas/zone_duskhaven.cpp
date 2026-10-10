@@ -32,6 +32,7 @@
 #include "ObjectMgr.h"
 #include "PassiveAI.h"
 #include "Player.h"
+#include "QuestDef.h"
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
 #include "ScriptedEscortAI.h"
@@ -3413,6 +3414,25 @@ class npc_crash_survivor_37067 : public CreatureScript
 {
 public:
     npc_crash_survivor_37067() : CreatureScript("npc_crash_survivor_37067") { }
+
+    bool OnGossipHello(Player* player, Creature* creature) override
+    {
+        if (creature->GetMapId() == 654 && creature->IsInPhase(player)
+            && player->GetQuestStatus(24468) == QUEST_STATUS_INCOMPLETE)
+        {
+            if (Quest const* quest = sObjectMgr->GetQuestTemplate(24468))
+            {
+                // Update only this quest, without synthetic kills affecting other quests.
+                for (QuestObjective const& objective : quest->GetObjectives())
+                    if (objective.Type == QUEST_OBJECTIVE_MONSTER)
+                        player->SetQuestObjectiveData(objective, objective.Amount);
+                player->CompleteQuest(24468);
+                player->SendQuestUpdate(24468);
+            }
+        }
+        return false;
+    }
+
 
     struct npc_crash_survivor_37067AI : public ScriptedAI
     {
