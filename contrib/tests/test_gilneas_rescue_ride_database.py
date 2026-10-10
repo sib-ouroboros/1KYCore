@@ -25,8 +25,14 @@ def test_gilneas_rescue_ride_database(sql,checksum):
   a=old.split('\t');b=new.split('\t');assert a[:3]==b[:3] and int(b[3])==(int(a[3])|512)
  assert other_scripts==sql("SELECT * FROM smart_scripts WHERE entryorguid NOT IN(35905,3590500) ORDER BY entryorguid,source_type,id;").stdout
  before=checksum(tables);sql(calibration);assert before==checksum(tables)
+ measured=(root/'sql/updates/world/2026_10_10_09_world_gilneas_krennan_measured_height.sql').read_text('utf8')
+ placement=sql("SELECT position_x,position_y,orientation,PhaseId FROM creature WHERE guid=20556808;").stdout
+ sql(measured)
+ assert abs(float(sql("SELECT position_z FROM creature WHERE guid=20556808;").stdout.strip())-19.456224)<0.0001
+ assert placement==sql("SELECT position_x,position_y,orientation,PhaseId FROM creature WHERE guid=20556808;").stdout
+ before=checksum(tables);sql(measured);assert before==checksum(tables)
  sql("UPDATE creature_template SET ScriptName='custom_horse' WHERE entry=35905; UPDATE creature_addon SET emote=1 WHERE guid=20556808; UPDATE creature SET position_z=30 WHERE guid=20556808;")
- before=checksum(tables);sql(text);sql(calibration);assert before==checksum(tables),'custom horse, pose or placement changed'
+ before=checksum(tables);sql(text);sql(calibration);sql(measured);assert before==checksum(tables),'custom horse, pose or placement changed'
  binding=(root/'sql/updates/world/2026_10_10_07_world_gilneas_cannon_two_shots.sql').read_text('utf8')
  existing=sql("SELECT spell_id,ScriptName FROM spell_script_names WHERE spell_id=68235 ORDER BY ScriptName;").stdout
  sql(binding)
