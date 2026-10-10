@@ -26,4 +26,15 @@ def test_gilneas_slavedriver_database(sql,checksum):
  guid=sql('SELECT MIN(guid) FROM creature WHERE id=37701;').stdout.strip()
  sql('UPDATE creature SET map=0 WHERE guid='+guid+';');before=checksum(tables);sql(text);assert checksum(tables)==before,'Mixed-map template changed';sql('UPDATE creature SET map=654 WHERE guid='+guid+';')
  sql(text)
+ # Exercise the real duplicate-key branch with both release MyISAM and InnoDB.
+ engine=sql("SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA=DATABASE() AND TABLE_NAME='creature_template_scaling';").stdout.strip()
+ try:
+  for target_engine in ('MyISAM','InnoDB'):
+   sql('ALTER TABLE creature_template_scaling ENGINE='+target_engine+';')
+   sql('DELETE FROM creature_template_scaling WHERE Entry=37701;')
+   sql(text);before=checksum(tables);sql(text);assert checksum(tables)==before,'Repeated insert changed '+target_engine
+   sql('UPDATE creature_template_scaling SET LevelScalingMin=7,LevelScalingMax=12,LevelScalingDeltaMin=-1,LevelScalingDeltaMax=2,VerifiedBuild=26972 WHERE Entry=37701;')
+   before=checksum(tables);sql(text);assert checksum(tables)==before,'Duplicate-key branch overwrote custom '+target_engine
+ finally:
+  sql('ALTER TABLE creature_template_scaling ENGINE='+engine+';')
  print('PASS: Slavedriver first/repeat/custom scaling/AI/bounds/faction/no Gilneas/mixed-map/unrelated preservation')
