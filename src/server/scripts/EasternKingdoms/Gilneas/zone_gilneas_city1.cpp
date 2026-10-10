@@ -3470,7 +3470,7 @@ public:
                     // OnArrived must not immediately launch point7 over the jump spline.
                     if (auto* path = dynamic_cast<WaypointMovementGenerator<Creature>*>(
                         me->GetMotionMaster()->GetMotionSlot(MOTION_SLOT_IDLE)))
-                        path->Stop(180000);
+                        path->GetTrackerTimer().Reset(180000);
                 }
                 return;
             }
@@ -3487,7 +3487,7 @@ public:
                 // Stop its timer now so that reset cannot launch the return path before rescue.
                 if (auto* path = dynamic_cast<WaypointMovementGenerator<Creature>*>(
                     me->GetMotionMaster()->GetMotionSlot(MOTION_SLOT_IDLE)))
-                    path->Stop(180000);
+                    path->GetTrackerTimer().Reset(180000);
             }
             SmartAI::MovementInform(type, id);
         }
