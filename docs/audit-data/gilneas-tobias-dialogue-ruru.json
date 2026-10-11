@@ -1,0 +1,148 @@
+{
+  "quest": 24902,
+  "source": "User supplied DB_world_735.02.sql / DB_hotfixes_735.02.sql",
+  "names": {
+    "38507": [
+      "Tobias Mistmantle",
+      "Тобиас Мистмантл"
+    ],
+    "38530": [
+      "Lady Sylvanas Windrunner",
+      "Леди Сильвана Ветрокрылая"
+    ],
+    "38533": [
+      "General Warhowl",
+      "Генерал Ворхол"
+    ],
+    "38537": [
+      "High Executor Crenshaw",
+      "Верховный палач Креншо"
+    ],
+    "38617": [
+      "Forsaken General",
+      "Отрекшийся-генерал"
+    ]
+  },
+  "lines": [
+    {
+      "entry": 38507,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38399,
+      "en": "Let us go at once.  We will track Sylvanas down.  For Gilneas!",
+      "ru": "Идем же, все вместе! Мы выследим, где прячется Сильвана. За Гилнеас!"
+    },
+    {
+      "entry": 38507,
+      "group": 1,
+      "id": 0,
+      "broadcast": 38400,
+      "en": "Follow Tobias Mistmantle into the Cathedral District.",
+      "ru": "Следуйте за Тобиасом Мистмантлом в Соборный квартал."
+    },
+    {
+      "entry": 38507,
+      "group": 2,
+      "id": 0,
+      "broadcast": 38401,
+      "en": "Let's do our best not to be seen, $n.",
+      "ru": "Постарайся, чтобы нас не заметили, $n."
+    },
+    {
+      "entry": 38507,
+      "group": 3,
+      "id": 0,
+      "broadcast": 38402,
+      "en": "Did you hear that, $n?  Sylvanas is headed to the cathedral.  Let's hurry!",
+      "ru": "Ты это $gслышал:слышала;, $n? Сильвана направляется к собору. Быстрее, за ней!"
+    },
+    {
+      "entry": 38507,
+      "group": 4,
+      "id": 0,
+      "broadcast": 38403,
+      "en": "Quick!  Hide in the water!",
+      "ru": "Быстрее, прячься в воде!"
+    },
+    {
+      "entry": 38530,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38422,
+      "en": "You can assure Garrosh that this is a minor setback.  Our victory in Gilneas will be absolute.",
+      "ru": "Можете передать Гаррошу, что это лишь небольшая задержка. Нас ждет верная победа."
+    },
+    {
+      "entry": 38530,
+      "group": 1,
+      "id": 0,
+      "broadcast": 38423,
+      "en": "You'd do well to watch your tone, General.  Neither you nor Garrosh have anything to worry about.  We've ceased all production of the Plague, as he ordered.  We'd never deploy it without his permission.",
+      "ru": "Следите за тоном, генерал. Вам с Гаррошем не о чем беспокоиться. Мы прекратили производство чумы, как и было приказано. Мы никогда бы не стали использовать ее без разрешения."
+    },
+    {
+      "entry": 38530,
+      "group": 2,
+      "id": 0,
+      "broadcast": 38424,
+      "en": "Go with honor, General.",
+      "ru": "Ступайте с честью, генерал."
+    },
+    {
+      "entry": 38530,
+      "group": 3,
+      "id": 0,
+      "broadcast": 38425,
+      "en": "What kind of question is that?  Of course we're deploying the Plague as planned!  Let the Gilneans enjoy their small victory.  Not even their bones will remain by tomorrow.",
+      "ru": "Что за вопрос? Мы распространим ее, как и запланировали. Пусть люди Гилнеаса насладятся своей маленькой победой. А завтра от них не останется и костей."
+    },
+    {
+      "entry": 38533,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38426,
+      "en": "It appears you're losing control of Gilneas, Sylvanas.  Garrosh fears he's going to have to carry out this invasion himself.",
+      "ru": "Гаррош опасается за ситуацию в Гилнеасе. Вы уверены в своих силах, Сильвана?"
+    },
+    {
+      "entry": 38533,
+      "group": 1,
+      "id": 0,
+      "broadcast": 38427,
+      "en": "You sound very confident, your Majesty.  I seriously hope you do not plan to use the Plague.  Garrosh has explicitly forbidden it.",
+      "ru": "Вы говорите очень убедительно, Ваше Величество. Надеюсь, что вы не собираетесь использовать чуму. Гаррош это категорически запретил."
+    },
+    {
+      "entry": 38533,
+      "group": 2,
+      "id": 0,
+      "broadcast": 38428,
+      "en": "I will deliver my report to our leader, then.  By your leave, my lady.",
+      "ru": "Тогда я доложу обо всем Вождю. С Вашего позволения, моя госпожа."
+    },
+    {
+      "entry": 38537,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38440,
+      "en": "My Lady!  Should I order my men to stop the deployment of the Plague?  Or are we to continue as planned?",
+      "ru": "Моя госпожа, мне остановить распространение чумы? Или мы продолжаем действовать по плану?"
+    },
+    {
+      "entry": 38537,
+      "group": 1,
+      "id": 0,
+      "broadcast": 38441,
+      "en": "As you wish!",
+      "ru": "Как пожелаете."
+    },
+    {
+      "entry": 38617,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38514,
+      "en": "Make sure everything is ready.  The orcs' emissary is ready to meet Sylvanas inside the cathedral.",
+      "ru": "Убедитесь, что все приготовления завершены. Гонец орков уже ждет Сильвану в соборе."
+    }
+  ]
+}

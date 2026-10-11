@@ -194,3 +194,10 @@ Make only the summoned map-654 Tobias guide passive, disable line-of-sight/Attac
 ## Tobias jump API argument order
 
 The actual core signature is `MoveJump(x,y,z,orientation,speedXY,speedZ,id,...)`. Four Tobias calls supplied six arguments, omitting orientation: callback IDs 2001/2003/2004 became vertical speeds and the actual ID defaulted to EVENT_JUMP. Insert orientation 0 (unused because hasOrientation defaults false) into all native and fallback jump calls. The native fixture now matches the real seven-argument signature and validates XY/Z speeds and callback IDs for moat, wall and hiding jumps, using the recorded first-jump ID to continue the escort. No SQL changes. Client jump/landing verification remains required.
+
+
+## Quest 24902 ruRU names and dialogue
+
+`2026_10_12_00_world_gilneas_tobias_ruru.sql` restores five Russian NPC names and binds all 15 stock creature_text groups to matching BroadcastText IDs. Russian strings come verbatim from the supplied hotfix dump; see `docs/audit-data/gilneas-tobias-dialogue-ruru.json`. This includes five Tobias groups, four Sylvanas groups, three Warhowl groups, two Crenshaw groups and the outside Forsaken general. Some groups are reserve lines not currently invoked by the script. Remove only stock placeholder Sound 19606; native BroadcastText sound selection remains available. No invented audio or translated voice files.
+
+Missing stock groups can be inserted; custom text/broadcast IDs/scripts and nonempty custom Russian names/translations are preserved. The locale table's primary key excludes Locale, so never overwrite an existing foreign-language row. BroadcastText binding provides the client locale fallback. The regression executes the portable statements using SQLite to verify first/repeat import, stock repairs and preservation; local MySQL execution was unavailable because the previous disposable MySQL binaries are absent. CI includes the regression; a real MySQL import and client display/voice check remain needed. Apply this world SQL or enable normal DB updates, then restart worldserver. No production database was modified.
