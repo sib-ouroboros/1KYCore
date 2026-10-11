@@ -2507,6 +2507,13 @@ public:
             if (type != WAYPOINT_MOTION_TYPE || id != 27 || !m_boarded || m_arrived)
                 return;
             // The audited 28-point route ends at index 27 (SQL point 28).
+            FinishRide();
+        }
+
+        void FinishRide()
+        {
+            if (m_arrived)
+                return;
             m_arrived = true;
             if (Vehicle* vehicle = me->GetVehicleKit())
                 vehicle->RemoveAllPassengers();
@@ -2543,9 +2550,17 @@ public:
         {
             m_lifetime += diff;
             Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
+            if (m_arrived)
+                return;
             if (m_lifetime >= 360000 || !HasActiveQuest(player)
                 || (m_boarded && player->GetVehicleBase() != me))
+            {
                 me->DespawnOrUnsummon();
+                return;
+            }
+            // Dismount at the manor boundary even before the route's final point.
+            if (m_boarded && player->GetAreaId() == 4817)
+                FinishRide();
         }
     };
 
