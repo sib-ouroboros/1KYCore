@@ -90,3 +90,17 @@ boulder. Legitimate visible attacks remain enabled. No blanket player immunity,
 NPC damage nerf, or route/speed change is introduced by this follow-up. If damage
 persists, capture the combat-log attacker and spell; that is needed to attribute
 remaining attacks accurately. Production server and database were not updated.
+
+
+## Quest 24592 duplicate targets
+
+SQL 2026_10_11_11_world_gilneas_betrayal_duplicate_spawns.sql leaves Walden37733
+GUID802443 (ground-floor random patrol) and Ashbury37735 GUID802419. Removes only
+stock GUID802425,802426,802450,802416 at audited original coordinates in phase186.
+Requires a surviving same-entry/map/phase actor and excludes custom waypoint,
+formation, pool, event, linked-respawn and per-spawn SmartAI bindings. Quest
+objectives265565/265566, templates, combat SmartAI and other phases are unchanged.
+Native archived Walden252538 route begins at ground-floor Z77.740814, matching
+retained actor height rather than the extra roof spawn Z86.8961. Client validation
+of both targets in 24592 is still required. Apply SQL to world and restart or
+reload affected grids; no binary change is required for this SQL-only follow-up.

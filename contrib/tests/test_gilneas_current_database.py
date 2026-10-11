@@ -4,7 +4,7 @@ import json
 
 def test_gilneas_current_database(sql,checksum):
  root=Path(__file__).resolve().parents[2]
- names=['2026_10_11_01_world_gilneas_quest_ruru_missing.sql','2026_10_11_02_world_gilneas_scene_spawns_balance.sql','2026_10_11_03_world_gilneas_dialogue_ruru.sql','2026_10_11_04_world_gilneas_fox_roaming.sql','2026_10_11_05_world_gilneas_gwen_mount.sql','2026_10_11_06_world_gilneas_koroth_scene_visibility.sql','2026_10_11_07_world_gilneas_survivor_talk_credit.sql','2026_10_11_08_world_gilneas_battle_actor_scaling.sql','2026_10_11_09_world_gilneas_battle_dialogue.sql','2026_10_11_10_world_gilneas_koroth_scene_passive.sql']
+ names=['2026_10_11_01_world_gilneas_quest_ruru_missing.sql','2026_10_11_02_world_gilneas_scene_spawns_balance.sql','2026_10_11_03_world_gilneas_dialogue_ruru.sql','2026_10_11_04_world_gilneas_fox_roaming.sql','2026_10_11_05_world_gilneas_gwen_mount.sql','2026_10_11_06_world_gilneas_koroth_scene_visibility.sql','2026_10_11_07_world_gilneas_survivor_talk_credit.sql','2026_10_11_08_world_gilneas_battle_actor_scaling.sql','2026_10_11_09_world_gilneas_battle_dialogue.sql','2026_10_11_10_world_gilneas_koroth_scene_passive.sql','2026_10_11_11_world_gilneas_betrayal_duplicate_spawns.sql']
  texts=[(root/'sql/updates/world'/n).read_text('utf8') for n in names]
  tables=sql('SHOW TABLES;').stdout.splitlines()
  modified={'creature_template','waypoint_data','creature_text','quest_objectives','quest_template_locale','quest_objectives_locale','quest_offer_reward_locale','quest_request_items_locale','creature','creature_addon','creature_template_scaling','creature_text_locale'}
@@ -13,6 +13,7 @@ def test_gilneas_current_database(sql,checksum):
  untouched=checksum([t for t in tables if t not in modified])
  for text in texts:sql(text)
  assert sql("SELECT COUNT(*) FROM creature_template WHERE entry IN (37805,37806,37807,37808) AND AIName='' AND ScriptName='npc_gilneas_koroth_scene_actor';").stdout.strip()=='4'
+ assert sql('SELECT guid,id FROM creature WHERE map=654 AND id IN (37733,37735) ORDER BY id;').stdout.strip()=='802443\t37733\n802419\t37735'
  assert sql('SELECT mount FROM creature_addon WHERE guid=801805;').stdout.strip()=='229'
  assert sql("SELECT COUNT(*) FROM creature_addon a JOIN creature c ON c.guid=a.guid WHERE c.map=654 AND c.id IN (37805,37806,37807,37808) AND a.auras='80852';").stdout.strip()=='28'
  assert sql('SELECT ObjectID,Amount FROM quest_objectives WHERE ID=255768 AND QuestID=24468;').stdout.strip()=='37067\t5'
@@ -59,7 +60,7 @@ def test_gilneas_current_database(sql,checksum):
  sql("UPDATE creature_text_locale SET Locale='frFR',Text='custom fr speech' WHERE CreatureID=38218 AND GroupID=2 AND ID=0;")
  sql("DELETE FROM creature_text WHERE CreatureID=38218 AND GroupID=7; INSERT INTO creature_text (CreatureID,GroupID,ID,Text,Type,Probability) VALUES (38218,7,9,'custom variant',14,100);")
  sql('UPDATE creature_text SET Sound=99999 WHERE CreatureID=38218 AND GroupID=3 AND ID=0;')
- sql(texts[-1])
+ sql(texts[names.index('2026_10_11_09_world_gilneas_battle_dialogue.sql')])
  assert sql('SELECT Sound FROM creature_text WHERE CreatureID=38218 AND GroupID=3 AND ID=0;').stdout.strip()=='99999'
  assert sql('SELECT Text,BroadcastTextId FROM creature_text WHERE CreatureID=38218 AND GroupID=0 AND ID=0;').stdout.strip()=='custom speech\t12345'
  assert sql('SELECT Text FROM creature_text_locale WHERE CreatureID=38218 AND GroupID=1 AND ID=0;').stdout.strip()=='custom ru speech'
@@ -69,11 +70,21 @@ def test_gilneas_current_database(sql,checksum):
 
  sql('DELETE FROM waypoint_data WHERE id=3847401; INSERT INTO waypoint_data(id,point,position_x,position_y,position_z) VALUES (3847401,99,1,2,3);')
  before=sql('SELECT * FROM waypoint_data WHERE id=3847401;').stdout
- sql(texts[-1])
+ sql(texts[names.index('2026_10_11_09_world_gilneas_battle_dialogue.sql')])
  assert sql('SELECT * FROM waypoint_data WHERE id=3847401;').stdout==before,'Partial custom cinematic route was mixed with native points'
 
  sql("UPDATE creature_template SET ScriptName='custom_scene_script' WHERE entry=37806;")
  sql("UPDATE creature_template SET ScriptName='',AIName='SmartAI' WHERE entry=37807;")
- sql(texts[-1])
+ sql(texts[names.index('2026_10_11_10_world_gilneas_koroth_scene_passive.sql')])
  assert sql("SELECT ScriptName FROM creature_template WHERE entry=37806;").stdout.strip()=='custom_scene_script'
  assert sql("SELECT AIName,ScriptName FROM creature_template WHERE entry=37807;").stdout.strip()=='SmartAI'
+
+ # Restore a stock duplicate with a custom waypoint binding; it must survive.
+ columns=sql('SHOW COLUMNS FROM creature;').stdout.splitlines()
+ column_names=[line.split('\t')[0] for line in columns]
+ values=['802426' if name=='guid' else '-1925.5' if name=='position_x' else '982.557' if name=='position_y' else '77.7381' if name=='position_z' else '0' if name in ('MovementType','spawndist') else '`'+name+'`' for name in column_names]
+ sql('INSERT INTO creature ('+','.join('`'+name+'`' for name in column_names)+') SELECT '+','.join(values)+' FROM creature WHERE guid=802443;')
+ sql('INSERT INTO creature_addon (guid,path_id) VALUES (802426,123456);')
+ sql(texts[names.index('2026_10_11_11_world_gilneas_betrayal_duplicate_spawns.sql')])
+ assert sql('SELECT COUNT(*) FROM creature WHERE guid=802426;').stdout.strip()=='1'
+ assert sql('SELECT path_id FROM creature_addon WHERE guid=802426;').stdout.strip()=='123456'
