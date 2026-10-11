@@ -70,7 +70,7 @@ struct Unit{};
 struct AI{virtual~AI()=default;virtual ObjectGuid GetGUID(int32)const{return {};}int talks=0;void Talk(int){++talks;}};
 struct Creature:Unit{ObjectGuid guid;bool alive=true,phase=true;uint32 entry=0,map=654,script=7;int despawns=0;std::set<int>auras;struct AI*ai=nullptr;
  bool IsAlive()const{return alive;}uint32 GetEntry()const{return entry;}uint32 GetMapId()const{return map;}uint32 GetScriptId()const{return script;}bool IsInPhase(Creature*c)const{return phase&&c->phase;}struct AI*AI(){return ai;}
- void DespawnOrUnsummon(int){++despawns;}void SetReactState(int){}void setActive(bool){}bool HasAura(int id){return auras.count(id);}void AddAura(int id,Creature*){auras.insert(id);}void SetSpeed(int,float){}
+ void DespawnOrUnsummon(int){++despawns;}void SetReactState(int){}void setActive(bool){}bool HasAura(int id){return auras.count(id);}void AddAura(int id,Creature*){auras.insert(id);}void SetSpeedRate(int,float){}
 };
 std::map<int,Creature*>actors;namespace ObjectAccessor{Creature*GetCreature(Creature&context,ObjectGuid guid){auto i=actors.find(guid.value);return i==actors.end()||i->second->map!=context.map?nullptr:i->second;}}
 struct Manager{uint32 GetScriptId(char const*){return 7;}}manager;auto*sObjectMgr=&manager;

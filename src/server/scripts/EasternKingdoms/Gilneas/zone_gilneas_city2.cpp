@@ -1518,7 +1518,7 @@ public:
                     if (m_point < m_waveSize)
                     {
                         me->SetWalk(false);
-                        me->SetSpeed(MOVE_RUN, 1.2f);
+                        me->SetSpeedRate(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else
@@ -1692,7 +1692,7 @@ public:
                     float dist = frand(1.0f, 3.0f);
                     float angl = frand(0.0f, float(M_PI) * 2);
                     follower->SetWalk(false);
-                    follower->SetSpeed(MOVE_RUN, 1.2f);
+                    follower->SetSpeedRate(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -1981,7 +1981,7 @@ public:
             me->SetReactState(REACT_PASSIVE);
             if (my_followerList.empty())
                 SummonMyMember();
-            me->SetSpeed(MOVE_RUN, 1.0f);
+            me->SetSpeedRate(MOVE_RUN, 1.0f);
             m_events.RescheduleEvent(EVENT_CHECK_PLAYER_FOR_PHASE, 2500);
             m_events.RescheduleEvent(EVENT_INITIALISE, 1000);
             m_events.RescheduleEvent(EVENT_RANDOM_TEXT, 30000);
@@ -2245,7 +2245,7 @@ public:
                     if (m_point < m_waveSize)
                     {
                         me->SetWalk(false);
-                        me->SetSpeed(MOVE_RUN, 1.2f);
+                        me->SetSpeedRate(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -2335,7 +2335,7 @@ public:
                     float dist = frand(1.0f, 3.0f);
                     float angl = frand(0.0f, float(M_PI) * 2);
                     follower->SetWalk(false);
-                    follower->SetSpeed(MOVE_RUN, 1.2f);
+                    follower->SetSpeedRate(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -2710,7 +2710,7 @@ public:
                     if (m_point < m_waveSize)
                     {
                         me->SetWalk(false);
-                        me->SetSpeed(MOVE_RUN, 1.2f);
+                        me->SetSpeedRate(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -2797,7 +2797,7 @@ public:
                     float dist = frand(1.0f, 3.0f);
                     float angl = frand(0.0f, float(M_PI) * 2);
                     follower->SetWalk(false);
-                    follower->SetSpeed(MOVE_RUN, 1.2f);
+                    follower->SetSpeedRate(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -3154,7 +3154,7 @@ public:
                     if (m_point < m_waveSize)
                     {
                         me->SetWalk(false);
-                        me->SetSpeed(MOVE_RUN, 1.2f);
+                        me->SetSpeedRate(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -3284,13 +3284,13 @@ public:
                         if (Creature* villager = ObjectAccessor::GetCreature(*me, *helper))
                         {
                             villager->SetWalk(false);
-                            villager->SetSpeed(MOVE_RUN, 1.2f);
+                            villager->SetSpeedRate(MOVE_RUN, 1.2f);
                             villager->GetMotionMaster()->MoveFollow(cannon, 1.0f, slot ? 1.57f : 4.71f);
                         }
                 if (cannon)
                 {
                     cannon->SetWalk(false);
-                    cannon->SetSpeed(MOVE_RUN, 1.2f);
+                    cannon->SetSpeedRate(MOVE_RUN, 1.2f);
                     cannon->GetMotionMaster()->MoveFollow(me, distances[index], angles[index]);
                 }
                 ++index;
@@ -3302,7 +3302,7 @@ public:
                     float dist = frand(3.0f, 5.0f);
                     float angl = frand(2.14f, 4.14f);
                     follower->SetWalk(false);
-                    follower->SetSpeed(MOVE_RUN, 1.2f);
+                    follower->SetSpeedRate(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -3645,7 +3645,7 @@ public:
                         if (m_point < m_waveSize)
                         {
                             me->SetWalk(false);
-                            me->SetSpeed(MOVE_RUN, 1.2f);
+                            me->SetSpeedRate(MOVE_RUN, 1.2f);
                             me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                         }
                         else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -3734,7 +3734,7 @@ public:
                     float dist = frand(3.0f, 5.0f);
                     float angl = frand(2.14f, 4.14f);
                     follower->SetWalk(false);
-                    follower->SetSpeed(MOVE_RUN, 1.2f);
+                    follower->SetSpeedRate(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -4043,7 +4043,7 @@ public:
                     if (m_point < m_waveSize)
                     {
                         me->SetWalk(false);
-                        me->SetSpeed(MOVE_RUN, 1.2f);
+                        me->SetSpeedRate(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -4146,7 +4146,7 @@ public:
                     float dist = frand(3.0f, 5.0f);
                     float angl = frand(2.14f, 4.14f);
                     follower->SetWalk(false);
-                    follower->SetSpeed(MOVE_RUN, 1.2f);
+                    follower->SetSpeedRate(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -4467,7 +4467,7 @@ public:
                     float dist = frand(3.0f, 5.0f);
                     float angl = frand(2.14f, 4.14f);
                     follower->SetWalk(false);
-                    follower->SetSpeed(MOVE_RUN, 1.2f);
+                    follower->SetSpeedRate(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                 }
         }

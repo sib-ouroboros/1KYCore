@@ -20,7 +20,7 @@ constexpr int MOVE_RUN=1,TEMPSUMMON_DEAD_DESPAWN=1;
 struct Position{};Position SpawnPosGorerot[1];
 struct Motion{int moves=0;void MovePoint(uint32,Position){++moves;}};
 struct AI{std::vector<int>actions;void DoAction(int action){actions.push_back(action);}};
-struct Creature{Motion motion;struct AI ai;bool summonOK=true;int summons=0;void SetWalk(bool){}void SetSpeed(int,float){}Motion*GetMotionMaster(){return &motion;}struct AI*AI(){return &ai;}Creature*SummonCreature(int,Position,int){++summons;return summonOK?this:nullptr;}};
+struct Creature{Motion motion;struct AI ai;bool summonOK=true;int summons=0;void SetWalk(bool){}void SetSpeedRate(int,float){}Motion*GetMotionMaster(){return &motion;}struct AI*AI(){return &ai;}Creature*SummonCreature(int,Position,int){++summons;return summonOK?this:nullptr;}};
 Creature almyra;
 namespace ObjectAccessor{Creature*GetCreature(Creature&,int guid){return guid?&almyra:nullptr;}}
 struct Events{std::vector<int>scheduled;void ScheduleEvent(int event,int){scheduled.push_back(event);}void RescheduleEvent(int event,int){scheduled.push_back(event);}};

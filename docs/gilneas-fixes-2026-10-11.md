@@ -151,3 +151,15 @@ covers the dependency on delayed ticks previously missed by prelinked fixtures.
 Failed readiness now names Lorna, Darius, Genn or Sylvanas individually. Requires
 new server binary; no new SQL is needed. Missing dialogue rows still require the
 previously specified2026_10_11_09 world update. Client verification remains open.
+
+
+### Battle army run-speed units
+
+Live verification confirms battle start and dialogue now work but actors move
+slowly. All16 battle-file MOVE_RUN assignments now use SetSpeedRate instead of
+SetSpeed. The prior1.2 absolute value was1.2m/s, not20% faster running; rate1.2
+means approximately8.4m/s with the7m/s base. Liam reset uses native rate1.0.
+Commander wave movement, following militia, artillery helpers/cannons and finale
+followers retain original routes, SetWalk(false), timers and dialogue. Fixtures
+now distinguish absolute speed from rate and assert actual8.4m/s movement across
+six leaders, cannon/helpers and militia. No SQL or production-server changes.

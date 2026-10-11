@@ -45,14 +45,14 @@ struct Position{float x,y,z,o;Position(float a=0,float b=0,float c=0,float d=0):
 bool same(Position a,Position b){return a.x==b.x&&a.y==b.y&&a.z==b.z&&a.o==b.o;}
 constexpr int MOVE_RUN=1;
 struct Motion{int starts=0,id=0;Position target;void MovePoint(int i,Position p){++starts;id=i;target=p;}};
-struct Creature{Position pos{11,22,33,4};bool walking=true;float rate=0;Motion motion;void SetWalk(bool value){walking=value;}void SetSpeed(int,float value){rate=value;}Motion*GetMotionMaster(){return &motion;}Position GetPosition()const{return pos;}};
+struct Creature{Position pos{11,22,33,4};bool walking=true;float rate=0;Motion motion;void SetWalk(bool value){walking=value;}void SetSpeed(int,float value){rate=value/7.0f;}void SetSpeedRate(int,float value){rate=value;}float GetSpeed(int)const{return rate*7.0f;}Motion*GetMotionMaster(){return &motion;}Position GetPosition()const{return pos;}};
 struct Events{int fight=0,move=0,dialogue=0;void RescheduleEvent(int id,int){if(id==EVENT_FIGHT_WAVE)++fight;if(id==EVENT_MOVE_WAVE)++move;}void ScheduleEvent(int id,int){if(id==EVENT_LIAM_DEATH_TALK1)++dialogue;}};
 void check(bool ok,char const*msg){if(!ok)throw std::runtime_error(msg);}
 ARRAYS
 CLASSES
 template<class AI,std::size_t N>void checkRoute(uint32 wave,Position const(&points)[N]){
  Creature me;AI ai;ai.me=&me;ai.m_wave=wave;ai.m_waveSize=N;
- for(uint32 i=0;i<N;++i){ai.m_point=i;ai.March();check(!me.walking&&me.rate==1.2f&&me.motion.id==int(2000+wave)&&same(me.motion.target,points[i]),"all six leaders run original route at1.2 speed");check(same(ai.GetWavePosition(),points[i]),"all original route coordinates retained");ai.MovementInform(POINT_MOTION_TYPE,2000+wave);}
+ for(uint32 i=0;i<N;++i){ai.m_point=i;ai.March();check(!me.walking&&me.rate==1.2f&&me.GetSpeed(MOVE_RUN)>8.39f&&me.GetSpeed(MOVE_RUN)<8.41f&&me.motion.id==int(2000+wave)&&same(me.motion.target,points[i]),"all six leaders run original route at1.2 speed");check(same(ai.GetWavePosition(),points[i]),"all original route coordinates retained");ai.MovementInform(POINT_MOTION_TYPE,2000+wave);}
  check(ai.m_events.fight==N,"current wave callback accepted");
  ai.m_point=N;ai.MovementInform(POINT_MOTION_TYPE,2000+wave);check(ai.m_events.fight==N,"completed route callback discarded");check(same(ai.GetWavePosition(),me.pos),"one-past-end never reads array or returns origin");ai.Fight();check(!ai.fights&&ai.m_events.move==1,"queued fight at endpoint hands off through normal movement event");
  ai.m_point=std::numeric_limits<uint32>::max();check(same(ai.GetWavePosition(),me.pos),"very large route index safe");
