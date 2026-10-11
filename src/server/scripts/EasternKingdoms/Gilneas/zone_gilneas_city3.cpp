@@ -204,7 +204,8 @@ public:
             if (m_stopped || m_playerGUID.IsEmpty())
                 return false;
             Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
-            if (diff >= 600000 - m_lifetime || !player || !player->IsAlive()
+            uint32 const lifetimeLimit = m_sceneActorsSpawned ? 180000 : 900000;
+            if (m_lifetime >= lifetimeLimit || diff >= lifetimeLimit - m_lifetime || !player || !player->IsAlive()
                 || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
                 || (player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_INCOMPLETE
                     && player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_COMPLETE))
@@ -230,12 +231,15 @@ public:
                 return;
             }
             m_walkingRoute = !HasScenePaths();
-            // Spell 72470 expires after three minutes; the route plus dialogue may take longer.
+            // Use the owner-checked AI timeout; an independent delayed despawn
+            // would still fire after the route hands off to the final scene.
             if (TempSummon* summon = me->ToTempSummon())
             {
                 summon->SetTempSummonType(TEMPSUMMON_MANUAL_DESPAWN);
-                summon->UnSummon(600000);
+
             }
+            me->setActive(true);
+            me->SetSpeedRate(MOVE_RUN, 1.0f);
             m_playerGUID = player->GetGUID();
             m_eventPhase = 1;
             m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 3000);
@@ -262,7 +266,7 @@ public:
                     Talk(3, player);
             }
             m_walkMoving = true;
-            me->SetWalk(true);
+            me->SetWalk(false);
             me->GetMotionMaster()->MovePoint(3000 + m_walkPoint, TobiasWalkingRoute[m_walkPoint]);
         }
 
@@ -301,7 +305,7 @@ public:
                 destination.Relocate(node.x, node.y, node.z, node.orientation);
             }
             m_nativeMoving = true;
-            me->SetWalk(true);
+            me->SetWalk(false);
             me->GetMotionMaster()->MovePoint(4000 + (m_nativePath - 3850701) * 100 + m_nativePoint, destination);
         }
 
@@ -556,6 +560,7 @@ public:
                             StopScene();
                             break;
                         }
+                        m_lifetime = 0; // Give the complete conversation its own three-minute budget.
                         break;
                     }
                 }
