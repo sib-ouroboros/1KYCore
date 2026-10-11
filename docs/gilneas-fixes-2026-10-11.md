@@ -175,3 +175,10 @@ The six allied commanders already zero combat damage. Add the same protection to
 ## Retry distant leader registration before the battle
 
 Player testing found that visiting Darius and Genn made the start gate pass. The starter's 2.5-second readiness heartbeat only activated distant actors and searched for Almyra; it did not perform the bidirectional registration used by the gossip preparation. Reuse `PrepareBattleController()` on each idle heartbeat so actors loaded or respawned after an earlier attempt are linked and acknowledged without requiring their AI initialization event to tick. Running battles remain protected by the existing preparation guard. A native regression now clears all four late links and executes the production heartbeat before starting the battle, without ticking their AI or visiting their staging locations. Real client verification is still required.
+
+
+## Quest 24902: Tobias wall crossing and route endpoint handoffs
+
+Live DB confirmed all five native route counts (2/2/4/6/24); the escort stopped despite a nearby owner. Native waypoint movement constructs a direct multi-point spline without navmesh routing; the quest depends on specific last-node callbacks. Tobias now traverses these same five route parts as individual pathfinding MovePoint movements, with unique phase/point IDs and duplicate-callback guards. The first part starts through the three audited door-approach points from the existing walking fallback. Keep the native moat/wall/hiding jumps, player pauses, outside-event dialogue, owner checks and final Sylvanas conversation. The existing fallback for missing/malformed paths remains unchanged.
+
+No SQL required. Three native fixtures verify all 38 native points plus the three exit points, wrong/duplicate callbacks, owner departure/return, actual first jump and second-part handoff, final dialogue and partial-summon cleanup. Geometry and full escort behavior still require a client playthrough with the server's maps/vmaps/mmaps.

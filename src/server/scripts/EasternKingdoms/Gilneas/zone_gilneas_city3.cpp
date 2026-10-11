@@ -115,6 +115,7 @@ public:
         EVENT_WAIT_FOR_PLAYER_4,
         EVENT_WAIT_FOR_OUTSIDE_EVENT,
         EVENT_WAIT_FOR_OUTSIDE_EVENT1,
+        EVENT_MOVE_NATIVE_POINT,
     };
 
     struct npc_tobias_mistmantle_38507AI : public ScriptedAI
@@ -133,6 +134,9 @@ public:
         bool     m_walkMoving = false;
         bool     m_sceneActorsSpawned = false;
         uint32   m_walkPoint = 0;
+        uint32   m_nativePath = 0;
+        uint32   m_nativePoint = 0;
+        bool     m_nativeMoving = false;
 
         void Reset() override
         {
@@ -255,6 +259,45 @@ public:
             me->GetMotionMaster()->MovePoint(3000 + m_walkPoint, TobiasWalkingRoute[m_walkPoint]);
         }
 
+        void StartNativePath(uint32 pathId)
+        {
+            m_nativePath = pathId;
+            m_nativePoint = 0;
+            m_nativeMoving = false;
+            MoveNativePoint();
+        }
+
+        void MoveNativePoint()
+        {
+            if (m_stopped || m_nativeMoving || !m_nativePath)
+                return;
+            WaypointPath const* path = sWaypointMgr->GetPath(m_nativePath);
+            uint32 const exitPoints = m_nativePath == 3850701 ? 3 : 0;
+            if (!path || m_nativePoint >= exitPoints + path->nodes.size())
+            {
+                StopScene();
+                return;
+            }
+            if (!IsPlayerNear(20.0f))
+            {
+                m_events.RescheduleEvent(EVENT_MOVE_NATIVE_POINT, 1000);
+                return;
+            }
+            // Follow the audited door approach before the native moat-jump route.
+            // MovePoint generates a navmesh path instead of drawing through walls.
+            Position destination;
+            if (m_nativePoint < exitPoints)
+                destination = TobiasWalkingRoute[m_nativePoint];
+            else
+            {
+                WaypointNode const& node = path->nodes[m_nativePoint - exitPoints];
+                destination.Relocate(node.x, node.y, node.z, node.orientation);
+            }
+            m_nativeMoving = true;
+            me->SetWalk(true);
+            me->GetMotionMaster()->MovePoint(4000 + (m_nativePath - 3850701) * 100 + m_nativePoint, destination);
+        }
+
         void JustSummoned(Creature* summon) override
         {
             summon->SetWalk(true);
@@ -282,6 +325,29 @@ public:
         {
             if (m_stopped || m_playerGUID.IsEmpty())
                 return;
+            if (!m_walkingRoute && type == POINT_MOTION_TYPE && m_nativePath)
+            {
+                uint32 const expected = 4000 + (m_nativePath - 3850701) * 100 + m_nativePoint;
+                if (!m_nativeMoving || id != expected)
+                    return;
+                WaypointPath const* path = sWaypointMgr->GetPath(m_nativePath);
+                uint32 const exitPoints = m_nativePath == 3850701 ? 3 : 0;
+                if (!path || m_nativePoint >= exitPoints + path->nodes.size())
+                {
+                    StopScene();
+                    return;
+                }
+                m_nativeMoving = false;
+                uint32 const arrived = m_nativePoint++;
+                if (m_nativePoint < exitPoints + path->nodes.size())
+                    m_events.RescheduleEvent(EVENT_MOVE_NATIVE_POINT, 10);
+                else
+                    m_nativePath = 0;
+                // Preserve the original per-point dialogue, pauses and jump handoffs.
+                if (arrived >= exitPoints)
+                    MovementInform(WAYPOINT_MOTION_TYPE, arrived - exitPoints);
+                return;
+            }
             if (m_walkingRoute && type == POINT_MOTION_TYPE)
             {
                 if (!m_walkMoving || id != 3000 + m_walkPoint)
@@ -369,6 +435,11 @@ public:
             {
                 switch (eventId)
                 {
+                    case EVENT_MOVE_NATIVE_POINT:
+                    {
+                        MoveNativePoint();
+                        break;
+                    }
                     case EVENT_WAIT_FOR_PLAYER_1:
                     {
                         if (m_walkingRoute)
@@ -377,7 +448,7 @@ public:
                             break;
                         }
                         if (IsPlayerNear(20.0f))
-                            me->GetMotionMaster()->MovePath(3850701, false);
+                            StartNativePath(3850701);
                         else
                             m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_1, 1000);
                         break;
@@ -390,7 +461,7 @@ public:
                     case EVENT_MOVEMENT_START_PATH_2:
                     {
                         m_eventPhase = 2;
-                        me->GetMotionMaster()->MovePath(3850702, false);
+                        StartNativePath(3850702);
                         break;
                     }
                     case EVENT_WAIT_FOR_PLAYER_2:
@@ -398,7 +469,7 @@ public:
                         if (IsPlayerNear(8.0f))
                         {
                             m_eventPhase = 3;
-                            me->GetMotionMaster()->MovePath(3850703, false);
+                            StartNativePath(3850703);
                         }
                         else
                             m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_2, 1000);
@@ -415,7 +486,7 @@ public:
                     case EVENT_MOVEMENT_START_PATH_4:
                     {
                         m_eventPhase = 4;
-                        me->GetMotionMaster()->MovePath(3850704, false);
+                        StartNativePath(3850704);
                         break;
                     }
                     case EVENT_WAIT_FOR_OUTSIDE_EVENT:
@@ -436,7 +507,7 @@ public:
                     case EVENT_MOVEMENT_START_PATH_5:
                     {
                         m_eventPhase = 5;
-                        me->GetMotionMaster()->MovePath(3850705, false);
+                        StartNativePath(3850705);
                         break;
                     }
                     case EVENT_WAIT_FOR_PLAYER_4:
