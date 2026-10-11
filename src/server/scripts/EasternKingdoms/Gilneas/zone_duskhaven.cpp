@@ -2875,7 +2875,7 @@ public:
                 return;
             }
             m_playerGUID = player->GetGUID();
-            // Preserve the native run speed from the harness template.
+            me->SetSpeedRate(MOVE_RUN, 2.0f);
             TryBoard();
         }
 
