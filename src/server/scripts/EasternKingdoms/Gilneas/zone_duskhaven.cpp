@@ -21,6 +21,7 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <set>
 
 #include "CreatureTextMgr.h"
 #include "DB2Stores.h"
@@ -3475,26 +3476,45 @@ public:
 
     bool OnGossipHello(Player* player, Creature* creature) override
     {
-        if (creature->GetMapId() == 654 && creature->IsInPhase(player)
+        if (player->IsAlive() && creature->IsAlive() && creature->GetMapId() == 654
+            && creature->IsInPhase(player) && player->GetDistance(creature) <= 5.0f
             && player->GetQuestStatus(24468) == QUEST_STATUS_INCOMPLETE)
         {
             if (Quest const* quest = sObjectMgr->GetQuestTemplate(24468))
-            {
-                // Update only this quest, without synthetic kills affecting other quests.
                 for (QuestObjective const& objective : quest->GetObjectives())
-                    if (objective.Type == QUEST_OBJECTIVE_MONSTER)
-                        player->SetQuestObjectiveData(objective, objective.Amount);
-                player->CompleteQuest(24468);
-                player->SendQuestUpdate(24468);
-            }
+                    if (objective.Type == QUEST_OBJECTIVE_MONSTER && objective.ObjectID == 37067)
+                    {
+                        int32 count = player->GetQuestObjectiveData(quest, objective.StorageIndex);
+                        auto* ai = CAST_AI(npc_crash_survivor_37067AI, creature->AI());
+                        if (count >= 0 && count < objective.Amount && ai && ai->ClaimRescue(player->GetGUID()))
+                        {
+                            player->SetQuestObjectiveData(objective, count + 1);
+                            player->SendQuestUpdateAddCredit(quest, creature->GetGUID(), objective, count + 1);
+                            if (player->CanCompleteQuest(24468))
+                                player->CompleteQuest(24468);
+                        }
+                        break;
+                    }
         }
         return false;
     }
 
-
     struct npc_crash_survivor_37067AI : public ScriptedAI
     {
         npc_crash_survivor_37067AI(Creature* creature) : ScriptedAI(creature) { }
+
+        std::set<ObjectGuid> m_rescuedPlayers;
+
+        bool ClaimRescue(ObjectGuid guid)
+        {
+            return m_rescuedPlayers.insert(guid).second;
+        }
+
+        void SetGUID(ObjectGuid guid, int32 id) override
+        {
+            if (id == 24468)
+                m_rescuedPlayers.erase(guid);
+        }
 
         EventMap m_events;
 
@@ -3553,6 +3573,22 @@ public:
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_crash_survivor_37067AI(creature);
+    }
+};
+
+class player_gilneas_survivor_rescue : public PlayerScript
+{
+public:
+    player_gilneas_survivor_rescue() : PlayerScript("player_gilneas_survivor_rescue") { }
+    void OnQuestStatusChange(Player* player, uint32 questId) override
+    {
+        if (questId != 24468 || player->GetMapId() != 654)
+            return;
+        std::list<Creature*> survivors;
+        player->GetCreatureListWithEntryInGrid(survivors, 37067, 2000.0f);
+        for (Creature* survivor : survivors)
+            if (survivor->IsAIEnabled)
+                survivor->AI()->SetGUID(player->GetGUID(), 24468);
     }
 };
 
@@ -4775,6 +4811,7 @@ void AddSC_zone_gilneas_duskhaven()
     new npc_ogre_ambusher_38762();
     new npc_prince_liam_greymane_37065();
     new npc_crash_survivor_37067();
+    new player_gilneas_survivor_rescue();
     new npc_swamp_crocolisk_37078();
     new go_koroths_banner_201594();
     new at_the_blackwald_6687();

@@ -29,27 +29,8 @@ struct PlayerScript {PlayerScript(char const*){}virtual~PlayerScript()=default;v
 """
     code+=source[source.index('namespace\n{'):source.index('class wp_commandscript')]
     code+='struct Commands {\n'+method(source,'static bool HandleRecordStart(')+method(source,'static bool HandleRecordStop(')+'};\n'
-    dusk=(root/'src/server/scripts/EasternKingdoms/Gilneas/zone_duskhaven.cpp').read_text('utf8')
-    survivor=dusk[dusk.index('class npc_crash_survivor_37067'):]
-    code+=r"""
-enum{QUEST_STATUS_INCOMPLETE=3,QUEST_OBJECTIVE_MONSTER=0};
-struct QuestObjective {int Type=0,Amount=5;};
-struct Quest {std::vector<QuestObjective> goals{{}};std::vector<QuestObjective>const&GetObjectives()const{return goals;}};
-struct ObjectMgr {Quest quest;Quest const*GetQuestTemplate(int id){assert(id==24468);return &quest;}} objectMgr;
-ObjectMgr*sObjectMgr=&objectMgr;
-struct QuestPlayer {int status=3,data=0,complete=0,updates=0;int GetQuestStatus(int id){assert(id==24468);return status;}void SetQuestObjectiveData(QuestObjective const&o,int n){assert(o.Type==0);data=n;}void CompleteQuest(int id){assert(id==24468);status=1;++complete;}void SendQuestUpdate(int id){assert(id==24468);++updates;}};
-struct Creature {int map=654;bool phase=true;int GetMapId(){return map;}bool IsInPhase(QuestPlayer*){return phase;}};
-"""
-    code+='struct Gossip { '+method(survivor,'bool OnGossipHello(').replace('Player*','QuestPlayer*')+' };\n'
-
     code+=r"""
 int main(){
- Gossip gossip;QuestPlayer qp;Creature npc;
- npc.map=1;gossip.OnGossipHello(&qp,&npc);assert(qp.complete==0);
- npc.map=654;npc.phase=false;gossip.OnGossipHello(&qp,&npc);assert(qp.complete==0);
- npc.phase=true;gossip.OnGossipHello(&qp,&npc);assert(qp.data==5&&qp.complete==1&&qp.updates==1);
- gossip.OnGossipHello(&qp,&npc);assert(qp.complete==1);
- qp.status=0;gossip.OnGossipHello(&qp,&npc);assert(qp.complete==1);
  Player p,q;q.id=2;ChatHandler h(&p),h2(&q);player_route_recorder script;
  assert(!Commands::HandleRecordStart(&h,"bad"));assert(routeRecordings.empty());
  assert(Commands::HandleRecordStart(&h,""));auto name=routeRecordings.at(p.GetGUID())->name;

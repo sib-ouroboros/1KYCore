@@ -10,6 +10,8 @@ def main():
 #include <cstdint>
 #include <chrono>
 #include <map>
+#include <set>
+using int32=std::int32_t;using ObjectGuid=int;
 #include <iostream>
 #include <stdexcept>
 using uint32=std::uint32_t;using namespace std::chrono_literals;
@@ -19,7 +21,7 @@ struct Creature;struct ScriptedAI;
 struct MotionMaster{int chases=0;void MoveChase(Unit*){++chases;}};
 struct Creature:Unit{ScriptedAI*ai=nullptr;Creature*croc=nullptr;Unit*victim=nullptr;bool alive=true,attackAllowed=true;int phase=1,melees=0;MotionMaster motion;bool IsAlive(){return alive;}bool IsInCombat(){return victim!=nullptr;}bool IsInPhase(Creature*c){return phase==c->phase;}bool Attack(Unit*u,bool){if(!attackAllowed)return false;victim=u;return true;}void SetReactState(int){}void HandleEmoteCommand(int){}void SetFacingToObject(Unit*){}Creature*FindNearestCreature(int e,float){return croc&&croc->entry==uint32(e)?croc:nullptr;}ScriptedAI*AI(){return ai;}MotionMaster*GetMotionMaster(){return &motion;}};
 struct EventMap{uint32 now=0;std::multimap<uint32,uint32>events;void Update(uint32 d){now+=d;}template<class R,class P>void ScheduleEvent(uint32 e,std::chrono::duration<R,P>d){events.emplace(now+std::chrono::duration_cast<std::chrono::milliseconds>(d).count(),e);}template<class R,class P>void RescheduleEvent(uint32 e,std::chrono::duration<R,P>d){events.clear();ScheduleEvent(e,d);}uint32 ExecuteEvent(){if(events.empty()||events.begin()->first>now)return 0;auto e=events.begin()->second;events.erase(events.begin());return e;}};
-struct ScriptedAI{Creature*me;ScriptedAI(Creature*c):me(c){c->ai=this;}virtual~ScriptedAI()=default;virtual void AttackStart(Unit*u){me->Attack(u,true);}void AttackStartNoMove(Unit*u){me->Attack(u,true);}bool UpdateVictim(){return me->victim;}void DoMeleeAttackIfReady(){++me->melees;}};
+struct ScriptedAI{Creature*me;ScriptedAI(Creature*c):me(c){c->ai=this;}virtual~ScriptedAI()=default;virtual void SetGUID(ObjectGuid,int32){}virtual void AttackStart(Unit*u){me->Attack(u,true);}void AttackStartNoMove(Unit*u){me->Attack(u,true);}bool UpdateVictim(){return me->victim;}void DoMeleeAttackIfReady(){++me->melees;}};
 void check(bool v,char const*m){if(!v)throw std::runtime_error(m);}
 '''
  for name in ['npc_crash_survivor_37067AI','npc_swamp_crocolisk_37078AI']:code+=method(source,'    struct '+name+' :')+';\n'

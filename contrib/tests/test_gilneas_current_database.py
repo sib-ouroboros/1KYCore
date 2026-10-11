@@ -3,14 +3,15 @@ from pathlib import Path
 
 def test_gilneas_current_database(sql,checksum):
  root=Path(__file__).resolve().parents[2]
- names=['2026_10_11_01_world_gilneas_quest_ruru_missing.sql','2026_10_11_02_world_gilneas_scene_spawns_balance.sql','2026_10_11_03_world_gilneas_dialogue_ruru.sql','2026_10_11_04_world_gilneas_fox_roaming.sql','2026_10_11_05_world_gilneas_gwen_mount.sql','2026_10_11_06_world_gilneas_koroth_scene_visibility.sql']
+ names=['2026_10_11_01_world_gilneas_quest_ruru_missing.sql','2026_10_11_02_world_gilneas_scene_spawns_balance.sql','2026_10_11_03_world_gilneas_dialogue_ruru.sql','2026_10_11_04_world_gilneas_fox_roaming.sql','2026_10_11_05_world_gilneas_gwen_mount.sql','2026_10_11_06_world_gilneas_koroth_scene_visibility.sql','2026_10_11_07_world_gilneas_survivor_talk_credit.sql']
  texts=[(root/'sql/updates/world'/n).read_text('utf8') for n in names]
  tables=sql('SHOW TABLES;').stdout.splitlines()
- modified={'quest_template_locale','quest_objectives_locale','quest_offer_reward_locale','quest_request_items_locale','creature','creature_addon','creature_template_scaling','creature_text_locale'}
+ modified={'quest_objectives','quest_template_locale','quest_objectives_locale','quest_offer_reward_locale','quest_request_items_locale','creature','creature_addon','creature_template_scaling','creature_text_locale'}
  untouched=checksum([t for t in tables if t not in modified])
  for text in texts:sql(text)
  assert sql('SELECT mount FROM creature_addon WHERE guid=801805;').stdout.strip()=='229'
  assert sql("SELECT COUNT(*) FROM creature_addon a JOIN creature c ON c.guid=a.guid WHERE c.map=654 AND c.id IN (37805,37806,37807,37808) AND a.auras='80852';").stdout.strip()=='28'
+ assert sql('SELECT ObjectID,Amount FROM quest_objectives WHERE ID=255768 AND QuestID=24468;').stdout.strip()=='37067\t5'
  once=checksum(tables)
  for text in texts:sql(text)
  assert once==checksum(tables),'Repeat changed data'
