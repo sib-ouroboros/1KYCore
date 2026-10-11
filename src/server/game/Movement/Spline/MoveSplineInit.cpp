@@ -228,6 +228,26 @@ namespace Movement
         args.path_Idx_offset = path_offset;
         args.path.reserve(controls.size());
         std::transform(controls.begin(), controls.end(), std::back_inserter(args.path), TransportPathTransform(unit, args.TransformForTransport));
+
+        // MonsterMove packs intermediate offsets from the endpoint midpoint
+        // into signed 11/11/10-bit coordinates at 0.25 m resolution.
+        // Long paths can wrap those offsets and show a different route on
+        // the client. Check the transformed coordinates actually sent.
+        if (args.path.size() > 2)
+        {
+            Vector3 middle = (args.path.front() + args.path.back()) / 2.f;
+            for (size_t i = 1; i + 1 < args.path.size(); ++i)
+            {
+                Vector3 delta = middle - args.path[i];
+                if (delta.x < -256.f || delta.x >= 256.f
+                    || delta.y < -256.f || delta.y >= 256.f
+                    || delta.z < -128.f || delta.z >= 128.f)
+                {
+                    SetUncompressed();
+                    break;
+                }
+            }
+        }
     }
 
     void MoveSplineInit::MoveTo(float x, float y, float z, bool generatePath, bool forceDestination)
