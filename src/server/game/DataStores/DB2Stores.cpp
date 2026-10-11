@@ -486,7 +486,7 @@ inline void LoadDB2(uint32& availableDb2Locales, DB2StoreProblemList& errlist, S
 
     bool loadHotfixData = sConfigMgr->GetBoolDefault("DB2.Hotfix.LoadData", true);
     bool loadHotfixStrings = sConfigMgr->GetBoolDefault("DB2.Hotfix.LoadStrings", true);
-    bool loadHotfixAllLocales = sConfigMgr->GetBoolDefault("DB2.Hotfix.LoadAllLocales", false);
+    bool loadHotfixAllLocales = sConfigMgr->GetBoolDefault("DB2.Hotfix.LoadAllLocales", true);
     bool loadFileAllLocales = sConfigMgr->GetBoolDefault("DB2.Files.LoadAllLocales", true);
 
     if (storage->Load(db2Path + localeNames[defaultLocale] + '/', defaultLocale))
@@ -1353,7 +1353,7 @@ void DB2Manager::LoadStores(std::string const& dataPath, uint32 defaultLocale)
     // hotfix de broadcast_text etaient pousses en anglais par-dessus les donnees FR
     // du client. [fix Sylvania]
     availableDb2Locales |= (1 << LOCALE_enUS);
-    if (sConfigMgr->GetBoolDefault("DB2.Hotfix.LoadAllLocales", false))
+    if (sConfigMgr->GetBoolDefault("DB2.Hotfix.LoadAllLocales", true))
     {
         if (QueryResult localesResult = HotfixDatabase.Query("SELECT DISTINCT locale FROM broadcast_text_locale"))
         {

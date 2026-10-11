@@ -1,0 +1,29 @@
+"""Current Gilneas scene/localization updates; isolated database only."""
+from pathlib import Path
+
+def test_gilneas_current_database(sql,checksum):
+ root=Path(__file__).resolve().parents[2]
+ names=['2026_10_11_01_world_gilneas_quest_ruru_missing.sql','2026_10_11_02_world_gilneas_scene_spawns_balance.sql','2026_10_11_03_world_gilneas_dialogue_ruru.sql','2026_10_11_04_world_gilneas_fox_roaming.sql']
+ texts=[(root/'sql/updates/world'/n).read_text('utf8') for n in names]
+ tables=sql('SHOW TABLES;').stdout.splitlines()
+ modified={'quest_template_locale','quest_objectives_locale','quest_offer_reward_locale','quest_request_items_locale','creature','creature_addon','creature_template_scaling','creature_text_locale'}
+ untouched=checksum([t for t in tables if t not in modified])
+ for text in texts:sql(text)
+ once=checksum(tables)
+ for text in texts:sql(text)
+ assert once==checksum(tables),'Repeat changed data'
+ assert untouched==checksum([t for t in tables if t not in modified]),'Unrelated tables changed'
+ assert sql("SELECT COUNT(*) FROM quest_template_locale WHERE ID=14368 AND locale='ruRU' AND LogTitle<>'';").stdout.strip()=='1'
+ assert sql('SELECT COUNT(*) FROM creature WHERE guid IN (801836,801901) AND id=36461 AND map=654;').stdout.strip()=='0'
+ assert sql('SELECT COUNT(*) FROM creature WHERE id=36231 AND map=654;').stdout.strip()=='9'
+ assert sql("SELECT COUNT(*) FROM creature_text_locale WHERE CreatureID IN (36287,36288,36289,36461) AND Locale='ruRU' AND Text<>'';").stdout.strip()=='7'
+ assert sql('SELECT COUNT(*) FROM creature WHERE id=36512 AND map=654 AND PhaseId=183 AND MovementType=1 AND spawndist=8;').stdout.strip()=='11'
+ assert sql('SELECT COUNT(*) FROM creature_template_scaling WHERE Entry=36671;').stdout.strip()=='1'
+ sql("UPDATE creature_text_locale SET Text='custom dialogue' WHERE CreatureID=36461;")
+ sql("UPDATE quest_template_locale SET LogTitle='custom quest' WHERE ID=14368 AND locale='ruRU';")
+ sql('UPDATE creature SET MovementType=2,spawndist=15 WHERE guid=801829;')
+ for text in texts:sql(text)
+ assert sql('SELECT Text FROM creature_text_locale WHERE CreatureID=36461;').stdout.strip()=='custom dialogue'
+ assert sql("SELECT LogTitle FROM quest_template_locale WHERE ID=14368 AND locale='ruRU';").stdout.strip()=='custom quest'
+ assert sql('SELECT MovementType,spawndist FROM creature WHERE guid=801829;').stdout.strip()=='2\t15'
+ print('PASS: current Gilneas spawns, balance, dialogue, quest locales, roaming and preservation')

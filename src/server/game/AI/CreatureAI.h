@@ -251,6 +251,9 @@ class TC_GAME_API CreatureAI : public UnitAI
 
         virtual bool CanSeeAlways(WorldObject const* /*obj*/) { return false; }
 
+        // Optional per-viewer gate; normal phase/distance checks still apply.
+        virtual bool CanBeSeenBy(WorldObject const* /*viewer*/) const { return true; }
+
         // Called when a player is charmed by the creature
         // If a PlayerAI* is returned, that AI is placed on the player instead of the default charm AI
         // Object destruction is handled by Unit::RemoveCharmedBy

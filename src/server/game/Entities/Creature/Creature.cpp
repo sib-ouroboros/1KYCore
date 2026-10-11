@@ -221,6 +221,12 @@ Creature::~Creature()
     //    TC_LOG_ERROR("entities.unit", "Deconstruct Creature Entry = %u", GetEntry());
 }
 
+bool Creature::IsNeverVisibleFor(WorldObject const* seer) const
+{
+    return WorldObject::IsNeverVisibleFor(seer)
+        || (IsAIEnabled && AI() && !AI()->CanBeSeenBy(seer));
+}
+
 void Creature::AddToWorld()
 {
     ///- Register the creature for guid lookup

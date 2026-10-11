@@ -1,0 +1,278 @@
+{
+  "source": "Provided DB_world_735.02.sql, SHA256 a29464e7e9f408e2750be820f3be620b0d9564e50cf76389d0fdadf408fcc8d4",
+  "tables": {
+    "quest_template_locale": {
+      "counts": {
+        "missing_verified_fields": 6284,
+        "existing_translation_preserved": 217
+      },
+      "examples": [
+        {
+          "ID": "100",
+          "field": "LogTitle"
+        },
+        {
+          "ID": "100",
+          "field": "LogDescription"
+        },
+        {
+          "ID": "100",
+          "field": "QuestDescription"
+        },
+        {
+          "ID": "1000",
+          "field": "LogTitle"
+        },
+        {
+          "ID": "1000",
+          "field": "LogDescription"
+        },
+        {
+          "ID": "1000",
+          "field": "QuestDescription"
+        },
+        {
+          "ID": "10029",
+          "field": "LogTitle"
+        },
+        {
+          "ID": "10029",
+          "field": "LogDescription"
+        },
+        {
+          "ID": "10029",
+          "field": "QuestDescription"
+        },
+        {
+          "ID": "1003",
+          "field": "LogTitle"
+        },
+        {
+          "ID": "1003",
+          "field": "LogDescription"
+        },
+        {
+          "ID": "1003",
+          "field": "QuestDescription"
+        },
+        {
+          "ID": "10032",
+          "field": "LogTitle"
+        },
+        {
+          "ID": "10032",
+          "field": "LogDescription"
+        },
+        {
+          "ID": "10032",
+          "field": "QuestDescription"
+        }
+      ]
+    },
+    "quest_objectives_locale": {
+      "counts": {
+        "missing_verified_fields": 246
+      },
+      "examples": [
+        {
+          "ID": "251951",
+          "field": "Description"
+        },
+        {
+          "ID": "252153",
+          "field": "Description"
+        },
+        {
+          "ID": "252183",
+          "field": "Description"
+        },
+        {
+          "ID": "252228",
+          "field": "Description"
+        },
+        {
+          "ID": "252291",
+          "field": "Description"
+        },
+        {
+          "ID": "252295",
+          "field": "Description"
+        },
+        {
+          "ID": "252296",
+          "field": "Description"
+        },
+        {
+          "ID": "252297",
+          "field": "Description"
+        },
+        {
+          "ID": "252354",
+          "field": "Description"
+        },
+        {
+          "ID": "252355",
+          "field": "Description"
+        },
+        {
+          "ID": "252456",
+          "field": "Description"
+        },
+        {
+          "ID": "252457",
+          "field": "Description"
+        },
+        {
+          "ID": "252458",
+          "field": "Description"
+        },
+        {
+          "ID": "252459",
+          "field": "Description"
+        },
+        {
+          "ID": "252525",
+          "field": "Description"
+        }
+      ]
+    },
+    "quest_offer_reward_locale": {
+      "counts": {
+        "missing_verified_fields": 303
+      },
+      "examples": [
+        {
+          "ID": "10263",
+          "field": "RewardText"
+        },
+        {
+          "ID": "10308",
+          "field": "RewardText"
+        },
+        {
+          "ID": "10468",
+          "field": "RewardText"
+        },
+        {
+          "ID": "10471",
+          "field": "RewardText"
+        },
+        {
+          "ID": "106",
+          "field": "RewardText"
+        },
+        {
+          "ID": "10824",
+          "field": "RewardText"
+        },
+        {
+          "ID": "10976",
+          "field": "RewardText"
+        },
+        {
+          "ID": "10981",
+          "field": "RewardText"
+        },
+        {
+          "ID": "11016",
+          "field": "RewardText"
+        },
+        {
+          "ID": "11038",
+          "field": "RewardText"
+        },
+        {
+          "ID": "11046",
+          "field": "RewardText"
+        },
+        {
+          "ID": "11057",
+          "field": "RewardText"
+        },
+        {
+          "ID": "111",
+          "field": "RewardText"
+        },
+        {
+          "ID": "11102",
+          "field": "RewardText"
+        },
+        {
+          "ID": "11157",
+          "field": "RewardText"
+        }
+      ]
+    },
+    "quest_request_items_locale": {
+      "counts": {
+        "missing_verified_fields": 160
+      },
+      "examples": [
+        {
+          "ID": "10468",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "106",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "107",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11016",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11102",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11291",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11507",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11549",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11711",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11875",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11877",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11880",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "11895",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "12125",
+          "field": "CompletionText"
+        },
+        {
+          "ID": "12126",
+          "field": "CompletionText"
+        }
+      ]
+    }
+  },
+  "limits": "Only fields in previously verified automatic quest translation package. Existing nonempty translations preserved. NPC dialogue is not part of this audit.",
+  "repair_rows": 3067,
+  "repair_fields": 6993,
+  "validation": "PASS MySQL: Save the Children restored, repeat idempotent, base tables and non-ruRU locales unchanged, custom translation preserved"
+}

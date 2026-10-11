@@ -68,6 +68,8 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         explicit Creature(bool isWorldObject = false);
         virtual ~Creature();
 
+        bool IsNeverVisibleFor(WorldObject const* seer) const override;
+
         void AddToWorld() override;
         void RemoveFromWorld() override;
 

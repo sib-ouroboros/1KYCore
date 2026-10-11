@@ -373,6 +373,10 @@ void PlayerMenu::SendQuestGiverQuestListMessage(Object* questgiver)
                 ObjectMgr::GetLocaleString(questGreetingLocale->Greeting, localeConstant, questList.Greeting);
     }
 
+    // Empty greetings otherwise use the client's generic English fallback.
+    if (questList.Greeting.empty() && localeConstant == LOCALE_ruRU)
+        questList.Greeting = "Здравствуйте, " + _session->GetPlayer()->GetName() + ".";
+
     // Store this instead of checking the Singleton every loop iteration
     bool questLevelInTitle = sWorld->getBoolConfig(CONFIG_UI_QUESTLEVELS_IN_DIALOGS);
 

@@ -1490,6 +1490,24 @@ class npc_gilneas_grandma_scene : public CreatureScript
 {
 public:
     npc_gilneas_grandma_scene() : CreatureScript("npc_gilneas_grandma_scene") { }
+    struct static_ai : public NullCreatureAI
+    {
+        static_ai(Creature* creature) : NullCreatureAI(creature) { }
+        bool CanBeSeenBy(WorldObject const* viewer) const override
+        {
+            Player const* player = viewer ? viewer->ToPlayer() : nullptr;
+            if (!player)
+                return true;
+            QuestStatus status = player->GetQuestStatus(QUEST_GRANDMAS_CAT);
+            if (me->GetSpawnId() == 801903)
+                return status == QUEST_STATUS_INCOMPLETE || status == QUEST_STATUS_COMPLETE;
+            if (me->GetSpawnId() == 801893)
+                return status != QUEST_STATUS_INCOMPLETE && status != QUEST_STATUS_COMPLETE
+                    && status != QUEST_STATUS_REWARDED;
+            return true;
+        }
+    };
+
     struct ai : public ScriptedAI
     {
         ai(Creature* creature) : ScriptedAI(creature) { }
@@ -1649,7 +1667,21 @@ public:
     };
     CreatureAI* GetAI(Creature* creature) const override
     {
+        if (creature->GetMapId() == 654 && !creature->IsSummon()
+            && (creature->GetSpawnId() == 801893 || creature->GetSpawnId() == 801903))
+            return new static_ai(creature);
         return creature->GetMapId() == 654 && creature->IsSummon() && creature->IsVisibleBySummonerOnly() ? new ai(creature) : nullptr;
+    }
+};
+
+class player_gilneas_grandma_visibility : public PlayerScript
+{
+public:
+    player_gilneas_grandma_visibility() : PlayerScript("player_gilneas_grandma_visibility") { }
+    void OnQuestStatusChange(Player* player, uint32 questId) override
+    {
+        if (questId == QUEST_GRANDMAS_CAT && player->GetMapId() == 654)
+            player->UpdateObjectVisibility();
     }
 };
 
@@ -1716,6 +1748,12 @@ public:
             if (Player* player = summoner ? summoner->ToPlayer() : nullptr)
             {
                 m_ownerGUID = player->GetGUID();
+                uint8 level = player->GetEffectiveLevel();
+                me->SetLevel(level);
+                me->SetUInt32Value(UNIT_FIELD_SCALING_LEVEL_MIN, level);
+                me->SetUInt32Value(UNIT_FIELD_SCALING_LEVEL_MAX, level);
+                me->SetInt32Value(UNIT_FIELD_SCALING_LEVEL_DELTA, 0);
+                me->UpdateLevelDependantStats();
                 SetCombatMovement(false);
                 me->SetReactState(REACT_PASSIVE);
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
@@ -1844,7 +1882,18 @@ public:
 
     struct npc_forsaken_castaway_36488AI : public ScriptedAI
     {
-        npc_forsaken_castaway_36488AI(Creature* creature) : ScriptedAI(creature) { }
+        npc_forsaken_castaway_36488AI(Creature* creature) : ScriptedAI(creature)
+        {
+            if (me->GetMapId() == 654)
+                me->SetReactState(REACT_DEFENSIVE);
+        }
+
+        void Reset() override
+        {
+            if (me->GetMapId() == 654)
+                me->SetReactState(REACT_DEFENSIVE);
+        }
+
 
         EventMap m_events;
         ObjectGuid m_luciusGUID;
@@ -2012,20 +2061,10 @@ public:
         {
             if (!player)
                 return;
-
-            m_isLornaNear = false;
+            m_isLornaNear = player->GetMapId() == 654 && player->GetAreaId() == 4807
+                && me->GetMapId() == 654 && me->IsInPhase(player);
             m_isPlayerMounted = player->HasAura(SPELL_RIDE_VEHICLE);
             m_hasPlayerRope = player->HasAura(SPELL_ROPE_CHANNEL);
-
-            if (!m_lornaGUID.IsEmpty())
-            {
-                Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID);
-                if (!lorna || lorna->GetEntry() != NPC_LORNA_CROWLEY || !lorna->IsAlive()
-                    || lorna->GetMapId() != player->GetMapId() || !lorna->IsInPhase(player))
-                    m_lornaGUID = ObjectGuid::Empty;
-                else
-                    m_isLornaNear = player->GetDistance(lorna) < 10.0f;
-            }
         }
     };
 
@@ -2071,11 +2110,9 @@ public:
 
         bool IsAtLorna(Player* player) const
         {
-            Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID);
+            // Delivery belongs to Crowley's orchard, not Lorna's proximity.
             return player && player->GetMapId() == 654 && me->GetMapId() == 654
-                && me->IsInPhase(player) && lorna && lorna->GetEntry() == NPC_LORNA_CROWLEY
-                && lorna->IsAlive() && lorna->GetMapId() == player->GetMapId()
-                && lorna->IsInPhase(player) && player->GetDistance(lorna) < 7.0f;
+                && player->GetAreaId() == 4807 && me->IsInPhase(player);
         }
 
         void PassengerBoarded(Unit* passenger, int8 /*seatId*/, bool apply) override
@@ -2192,6 +2229,11 @@ public:
         SpellCastResult CheckTarget()
         {
             Player* player = GetCaster() ? GetCaster()->ToPlayer() : nullptr;
+            if (player && (player->GetMapId() != 654 || player->GetAreaId() != 4807))
+            {
+                player->GetSession()->SendNotification("Применить это заклинание можно только в саду Краули.");
+                return SPELL_FAILED_NOT_HERE;
+            }
             Creature* horse = GetExplTargetUnit() ? GetExplTargetUnit()->ToCreature() : nullptr;
             if (!player || !player->IsAlive() || !horse || horse->GetEntry() != 36540 || !horse->IsAlive()
                 || player->GetMapId() != 654 || horse->GetMapId() != player->GetMapId() || !horse->IsInPhase(player)
@@ -2209,7 +2251,7 @@ public:
 
             Player* player = GetCaster()->ToPlayer();
             Creature* horse = GetHitUnit()->ToCreature();
-            if (!player->IsAlive() || !horse->IsAlive() || player->GetMapId() != 654
+            if (!player->IsAlive() || !horse->IsAlive() || player->GetMapId() != 654 || player->GetAreaId() != 4807
                 || horse->GetMapId() != player->GetMapId() || !horse->IsInPhase(player) || horse->GetVehicleBase())
                 return;
             horse->DespawnOrUnsummon();
@@ -4696,6 +4738,7 @@ void AddSC_zone_gilneas_duskhaven()
     new npc_drowning_watchman_36440();
     new spell_rescue_drowning_watchman_68735();
     new npc_gilneas_grandma_scene();
+    new player_gilneas_grandma_visibility();
     new npc_chance_36459();
     new npc_gilneas_lucius_the_cruel();
     new npc_forsaken_castaway_36488();
