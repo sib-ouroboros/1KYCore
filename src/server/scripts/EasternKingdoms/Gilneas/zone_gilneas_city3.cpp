@@ -367,7 +367,7 @@ public:
                 {
                     // Retain the native hiding jump and subsequent Sylvanas dialogue.
                     m_eventPhase = 5;
-                    me->GetMotionMaster()->MoveJump(-1614.5f, 1533.9f, 27.26f, 20.0f, 5.0f, 2004);
+                    me->GetMotionMaster()->MoveJump(-1614.5f, 1533.9f, 27.26f, 0.0f, 20.0f, 5.0f, 2004);
                 }
                 return;
             }
@@ -462,7 +462,7 @@ public:
                     }
                     case EVENT_MOVEMENT_START_PATH_1:
                     {
-                        me->GetMotionMaster()->MoveJump(-1601.925f, 1607.654f, 20.11606f, 20.0f, 20.0f, 2001);
+                        me->GetMotionMaster()->MoveJump(-1601.925f, 1607.654f, 20.11606f, 0.0f, 20.0f, 20.0f, 2001);
                         break;
                     }
                     case EVENT_MOVEMENT_START_PATH_2:
@@ -485,7 +485,7 @@ public:
                     case EVENT_WAIT_FOR_PLAYER_3:
                     {
                         if (IsPlayerNear(8.0f))
-                            me->GetMotionMaster()->MoveJump(-1548.65f, 1618.41f, 23.1788f, 20.0f, 5.0f, 2003);
+                            me->GetMotionMaster()->MoveJump(-1548.65f, 1618.41f, 23.1788f, 0.0f, 20.0f, 5.0f, 2003);
                         else
                             m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_3, 1000);
                         break;
@@ -523,7 +523,7 @@ public:
                         {
                             if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
                                 Talk(3, player);
-                            me->GetMotionMaster()->MoveJump(-1614.5f, 1533.9f, 27.26f, 20.0f, 5.0f, 2004);
+                            me->GetMotionMaster()->MoveJump(-1614.5f, 1533.9f, 27.26f, 0.0f, 20.0f, 5.0f, 2004);
                         }
                         else
                             m_events.RescheduleEvent(EVENT_WAIT_FOR_PLAYER_4, 1000);

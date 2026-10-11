@@ -189,3 +189,8 @@ No SQL required. Three native fixtures verify all 38 native points plus the thre
 The final native escort point hands off to jump 2004; arrival schedules water positioning and the three Sylvanas-scene actors. Sylvanas arrival 2005 starts the conversation once. Existing dialogue regression executes all eight talk groups and verifies owner-only credit, followed by actor cleanup eight seconds later. Tobias retains the manual-summon lifetime cap of ten minutes, with cleanup on owner logout/death/quest cancellation or scene failure. Normal completion keeps him present until the end of the scene.
 
 Make only the summoned map-654 Tobias guide passive, disable line-of-sight/AttackStart/CanAIAttack, zero incoming combat damage and remove melee updates. Ignore combat evade to prevent default evade Reset from stopping the escort. Persistent Tobias retains default AI via the existing GetAI guard. Native tests verify the final jump-to-scene scheduling and actual passive/damage/attack methods. Client verification remains pending.
+
+
+## Tobias jump API argument order
+
+The actual core signature is `MoveJump(x,y,z,orientation,speedXY,speedZ,id,...)`. Four Tobias calls supplied six arguments, omitting orientation: callback IDs 2001/2003/2004 became vertical speeds and the actual ID defaulted to EVENT_JUMP. Insert orientation 0 (unused because hasOrientation defaults false) into all native and fallback jump calls. The native fixture now matches the real seven-argument signature and validates XY/Z speeds and callback IDs for moat, wall and hiding jumps, using the recorded first-jump ID to continue the escort. No SQL changes. Client jump/landing verification remains required.
