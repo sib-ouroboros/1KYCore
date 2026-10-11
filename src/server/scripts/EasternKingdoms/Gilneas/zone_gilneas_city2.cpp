@@ -44,6 +44,7 @@
 #include "TemporarySummon.h"
 #include "Vehicle.h"
 #include "WorldSession.h"
+#include "WorldSession.h"
 #include "WaypointManager.h"
 #include "zone_gilneas.h"
 
@@ -221,7 +222,15 @@ namespace
         for (Spawn const& spawn : spawns)
             if (CreatureData const* data = sObjectMgr->GetCreatureData(spawn.guid))
                 if (data->id == spawn.entry && data->mapid == 654 && data->phaseId == 187)
+                {
                     context->GetMap()->LoadGrid(data->posX, data->posY);
+                    // Loading a grid does not update inactive creatures outside player range.
+                    // Their pending EVENT_INITIALISE must run before the start gate can pass.
+                    auto bounds = context->GetMap()->GetCreatureBySpawnIdStore().equal_range(spawn.guid);
+                    for (auto itr = bounds.first; itr != bounds.second; ++itr)
+                        if (Creature* actor = GetGilneasBattleActor(context, itr->second->GetGUID(), spawn.entry))
+                            actor->setActive(true);
+                }
     }
 
     bool HasGilneasBattlePlayer(Creature* context, float range)
@@ -882,23 +891,21 @@ public:
     bool OnGossipSelect(Player* player, Creature* creature, uint32 uiSender, uint32 uiAction) override
     {
         player->PlayerTalkClass->ClearMenus();
-        switch (uiAction)
+        CloseGossipMenuFor(player);
+        if (uiSender != GOSSIP_SENDER_MAIN)
+            return true;
+        auto* ai = CAST_AI(npc_krennan_aranas_38553AI, creature->AI());
+        if (!ai)
+            return true;
+        if (uiAction == GOSSIP_ACTION_INFO_DEF + 1)
         {
-            case GOSSIP_ACTION_INFO_DEF + 1:
-            {
-                CloseGossipMenuFor(player);
-                if (uiSender == GOSSIP_SENDER_MAIN)
-                    if (auto* ai = CAST_AI(npc_krennan_aranas_38553AI, creature->AI()))
-                        if (ai->StartBattle(player))
-                            ai->Talk(0, player);
-                break;
-            }
-            case GOSSIP_ACTION_INFO_DEF + 2:
-            {
-                CloseGossipMenuFor(player);
-                break;
-            }
+            if (ai->StartBattle(player))
+                ai->Talk(0, player);
+            else
+                ai->NotifyBattleStatus(player);
         }
+        else if (uiAction == GOSSIP_ACTION_INFO_DEF + 2)
+            ai->NotifyBattleStatus(player);
         return true;
     }
 
@@ -906,16 +913,16 @@ public:
     {
         if (creature->IsQuestGiver())
             player->PrepareQuestMenu(creature->GetGUID());
-
         auto* ai = CAST_AI(npc_krennan_aranas_38553AI, creature->AI());
-        bool ok = ai && ai->CanStartBattle(player);
-        if (ok)
-            AddGossipItemFor(player, 11061, 0, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 1);
-        else
-            AddGossipItemFor(player, 11061, 1, GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF + 2);
-
+        if (ai && player->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) == QUEST_STATUS_INCOMPLETE)
+        {
+            ai->PrepareBattleController();
+            // A missing actor is not an already-running battle.
+            bool running = ai->IsBattleRunning();
+            AddGossipItemFor(player, 11061, running ? 1 : 0, GOSSIP_SENDER_MAIN,
+                GOSSIP_ACTION_INFO_DEF + (running ? 2 : 1));
+        }
         SendGossipMenuFor(player, 2474, creature->GetGUID());
-
         return true;
     }
 
@@ -1041,37 +1048,78 @@ public:
                 DoMeleeAttackIfReady();
         }
 
-        bool CanStartBattle(Player* player) const
+        bool IsBattleRunning() const
         {
+            Creature* almyra = GetGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA);
+            return m_battleIsStarted || (almyra && almyra->AI()->GetData(DATA_IS_BATTLE_STARTED));
+        }
+
+        void PrepareBattleController()
+        {
+            if (IsBattleRunning())
+                return;
+            PrimeGilneasBattleActors(me);
+            FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 50.0f);
+        }
+
+        void NotifyBattleStatus(Player* player) const
+        {
+            if (!player || !player->IsAlive() || player->GetMapId() != me->GetMapId()
+                || !me->IsInPhase(player) || me->GetDistance(player) > INTERACTION_DISTANCE
+                || player->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) != QUEST_STATUS_INCOMPLETE)
+                return;
+            if (IsBattleRunning())
+                player->GetSession()->SendNotification("Битва уже идёт. Присоединитесь к армии в городе.");
+            else
+            {
+                char const* reason = nullptr;
+                if (!CanStartBattle(player, &reason) && reason)
+                    player->GetSession()->SendNotification("%s", reason);
+                else
+                    player->GetSession()->SendNotification("Армия готова. Выберите начало битвы.");
+            }
+        }
+
+        bool CanStartBattle(Player* player, char const** failure = nullptr) const
+        {
+            auto unavailable = [failure](char const* reason)
+            {
+                if (failure)
+                    *failure = reason;
+                return false;
+            };
+            if (failure)
+                *failure = nullptr;
             if (!player || !player->IsAlive() || !me->IsAlive() || me->GetMapId() != 654
                 || player->GetMapId() != me->GetMapId() || !me->IsInPhase(player)
                 || me->GetDistance(player) > INTERACTION_DISTANCE || m_battleIsStarted
                 || player->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) != QUEST_STATUS_INCOMPLETE)
-                return false;
+                return unavailable("Недоступно: проверьте задание 24904, состояние персонажа и расстояние до Креннана.");
 
             if (!HasGilneasBattleCinematicPaths())
-                return false;
+                return unavailable("Битва пока недоступна: не загружены маршруты финальной сцены.");
 
             Creature* almyra = GetGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA);
             if (!almyra || me->GetDistance2d(almyra) >= 50.0f
                 || almyra->AI()->GetData(DATA_IS_BATTLE_STARTED))
-                return false;
+                return unavailable("Битва пока недоступна: сестра Альмира не готова или событие уже идёт.");
 
             // Both leaders are required by the first wave's native arrival mask.
             Creature* liam = GetGilneasBattleActor(me, almyra->AI()->GetGUID(NPC_PRINCE_LIAM_GREYMANE_BATTLE), NPC_PRINCE_LIAM_GREYMANE_BATTLE);
             Creature* myriam = GetGilneasBattleActor(me, almyra->AI()->GetGUID(NPC_MYRIAM_SPELLWAKER), NPC_MYRIAM_SPELLWAKER);
             if (!liam || !myriam || me->GetDistance2d(liam) >= 50.0f || me->GetDistance2d(myriam) >= 50.0f)
-                return false;
+                return unavailable("Битва пока недоступна: Лиам или Мириам не готовы у стартовой позиции.");
             // Do not begin a shared battle whose later arrival masks cannot be fulfilled.
             for (uint32 entry : {uint32(NPC_LORNA_CROWLEY), uint32(NPC_LORD_DARIUS_CROWLEY),
                 uint32(NPC_KING_GENN_GREYMANE), uint32(NPC_LADY_SYLVANAS_WINDRUNNER)})
                 if (!GetGilneasBattleActor(me, almyra->AI()->GetGUID(entry), entry))
-                    return false;
+                    return unavailable("Битва пока недоступна: не готовы Лорна, Дарий, Генн или Сильвана.");
             return true;
         }
 
         bool StartBattle(Player* player)
         {
+            PrepareBattleController();
             if (!CanStartBattle(player))
                 return false;
 

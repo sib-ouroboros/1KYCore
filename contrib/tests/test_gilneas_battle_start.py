@@ -49,7 +49,9 @@ struct ObjectGuid {
 }; ObjectGuid ObjectGuid::Empty{};
 struct Menus {void ClearMenus(){}};
 struct Phases {bool HasPhase(int)const{return false;}};
+struct Session{std::vector<std::string>notices;void SendNotification(char const*text){notices.push_back(text);}void SendNotification(char const*,char const*text){notices.push_back(text);}};
 struct Player {
+ int option=-1,action=0;Session session;Session*GetSession(){return &session;}void PrepareQuestMenu(ObjectGuid){}
  bool alive=true,phase=true; uint32 map=654; int quest=QUEST_STATUS_INCOMPLETE; float distance=1;
  Menus menu; Menus* PlayerTalkClass=&menu;
  bool IsAlive()const{return alive;} uint32 GetMapId()const{return map;}
@@ -73,13 +75,14 @@ struct AI {
 };
 struct Position {Position(float,float,float){}};
 struct CreatureData{uint32 id=0,mapid=654,phaseId=187;float posX=0,posY=0;};
-struct BattleMap{int loads=0;void LoadGrid(float,float){++loads;}} battleMap;
+struct Creature;
+struct BattleMap{std::multimap<uint32,Creature*>spawns;auto&GetCreatureBySpawnIdStore(){return spawns;}int loads=0;void LoadGrid(float,float){++loads;}} battleMap;
 struct Creature {
- bool alive=true,phase=true; uint32 map=654,entry=0,script=0; ObjectGuid guid;
+ bool alive=true,phase=true,active=false;void setActive(bool b){active=b;} uint32 map=654,entry=0,script=0; ObjectGuid guid;
  float distance=1,baseDistance=1; int despawns=0; struct AI*ai=nullptr; std::list<Player*>players;
  BattleMap*GetMap(){return &battleMap;}bool IsAlive()const{return alive;} uint32 GetMapId()const{return map;}
  uint32 GetEntry()const{return entry;} uint32 GetScriptId()const{return script;}
- ObjectGuid GetGUID()const{return guid;}
+ bool IsQuestGiver()const{return true;}ObjectGuid GetGUID()const{return guid;}
  bool IsInPhase(Player*p)const{return phase&&p->phase;}
  bool IsInPhase(Creature*c)const{return phase&&c->phase;}
  float GetDistance(Player*p)const{return p->distance;}
@@ -107,6 +110,8 @@ struct Manager {std::map<std::string,uint32>scripts;std::map<uint32,CreatureData
  uint32 GetScriptId(char const*name){auto i=scripts.find(name);return i==scripts.end()?0:i->second;}
 }manager;auto*sObjectMgr=&manager;
 void CloseGossipMenuFor(Player*){}
+void AddGossipItemFor(Player*p,int,int option,int,int action){p->option=option;p->action=action;}
+void SendGossipMenuFor(Player*,int,ObjectGuid){}
 #define CAST_AI(T, ptr) dynamic_cast<T*>(ptr)
 NATIVE_HELPERS
 struct Controller:AI {
@@ -128,11 +133,14 @@ struct npc_krennan_aranas_38553AI:AI {
  KRENNAN_RESET
  KRENNAN_SET
  KRENNAN_ACTION
+ KRENNAN_RUNNING
+ KRENNAN_PREPARE
+ KRENNAN_NOTIFY
  KRENNAN_GATE
  KRENNAN_START
  void Heartbeat(){switch(int(EVENT_CHECK_PLAYER_FOR_PHASE)){KRENNAN_HEARTBEAT}}
 };
-struct Gossip {GOSSIP_SELECT};
+struct Gossip {GOSSIP_HELLO GOSSIP_SELECT};
 struct Initializer:AI {
  Creature*me=nullptr; bool m_isInitialised=false; Events m_events;
  ObjectGuid m_krennanGUID,m_almyraGUID,m_liamGUID,m_liam2GUID,m_kingGUID,m_sylvanaGUID;
@@ -144,7 +152,7 @@ struct Scene {
  Player player,other; Creature krennan,almyra,liam,myriam,lorna,darius,king,sylvanas,cinematicLiam;
  npc_krennan_aranas_38553AI starter; Controller controller; AI liamAI,myriamAI,lornaAI,dariusAI,kingAI,sylvanasAI,cinematicAI; Gossip gossip;
  Scene(){
-  actors.clear();manager.scripts.clear();
+  actors.clear();manager.scripts.clear();battleMap.spawns.clear();
   std::vector<std::pair<Creature*,AI*>>slots={{&krennan,&starter},{&almyra,&controller},{&liam,&liamAI},{&myriam,&myriamAI},{&lorna,&lornaAI},{&darius,&dariusAI},{&king,&kingAI},{&sylvanas,&sylvanasAI},{&cinematicLiam,&cinematicAI}};
   std::vector<uint32>entries={NPC_KRENNAN_ARANAS,NPC_SISTER_ALMYRA,NPC_PRINCE_LIAM_GREYMANE_BATTLE,NPC_MYRIAM_SPELLWAKER,NPC_LORNA_CROWLEY,NPC_LORD_DARIUS_CROWLEY,NPC_KING_GENN_GREYMANE,NPC_LADY_SYLVANAS_WINDRUNNER,NPC_PRINCE_LIAM_GREYMANE};
   for(unsigned i=0;i<slots.size();++i){Creature*c=slots[i].first;c->entry=entries[i];c->script=entries[i]+100000;c->guid=int(i+1);c->ai=slots[i].second;actors[c->guid.value]=c;manager.scripts[GetGilneasBattleScript(c->entry)]=c->script;}
@@ -208,9 +216,12 @@ int main(){try{
  {Scene s;s.liam.script=99;s.myriam.phase=false;s.king.alive=false;s.controller.SendActionValueToAllLeader(ACTION_EVENT_RESET_TIMER);check(s.liamAI.actions.empty()&&s.myriamAI.actions.empty()&&s.kingAI.actions.empty()&&!s.lornaAI.actions.empty(),"broadcast skips replaced, wrong-phase and dead actors while valid leaders receive timer");}
  {Scene s;s.almyra.players={&s.player,&s.other};s.player.quest=QUEST_STATUS_NONE;s.other.alive=false;check(!s.controller.IsPlayerNear(25),"bystander and corpse do not release a quest wave");s.other.alive=true;check(s.controller.IsPlayerNear(25),"another living participant keeps shared wave eligible");s.other.phase=false;check(!s.controller.IsPlayerNear(25),"other phase is not participation");s.other.phase=true;s.other.map=0;check(!s.controller.IsPlayerNear(25),"other map is not participation");s.other.map=654;s.other.distance=26;check(!s.controller.IsPlayerNear(25),"native range retained");s.other.distance=1;s.other.quest=QUEST_STATUS_COMPLETE;check(!s.controller.IsPlayerNear(25),"finished quest is not a waiting participant");}
  {Scene s;s.liam.players={&s.player};s.myriam.players={&s.other};s.player.quest=QUEST_STATUS_NONE;s.other.alive=false;check(!s.controller.IsPlayerNearBase(),"base gate rejects bystanders and corpses");s.other.alive=true;check(s.controller.IsPlayerNearBase(),"living participant near either native base leader releases gate");s.liam.baseDistance=26;check(!s.controller.IsPlayerNearBase(),"both base leaders must remain at native base");}
+ {Scene s;s.controller.m_lornaGUID={};s.gossip.OnGossipHello(&s.player,&s.krennan);check(s.player.option==0&&s.player.action==1001,"missing leader must not expose join-running-battle placeholder");s.starter.m_battleIsStarted=true;s.gossip.OnGossipHello(&s.player,&s.krennan);check(s.player.option==1&&s.player.action==1002,"join offered only during active battle");s.player.quest=QUEST_STATUS_REWARDED;s.player.option=-1;s.gossip.OnGossipHello(&s.player,&s.krennan);check(s.player.option==-1,"completed player gets no replay menu");}
+ {Scene s;s.controller.m_lornaGUID={};s.gossip.OnGossipSelect(&s.player,&s.krennan,0,1001);check(!s.starter.m_battleIsStarted&&!s.player.session.notices.empty(),"unready click reports failure instead of silently closing");s.starter.m_battleIsStarted=true;unsigned old=s.player.session.notices.size();s.gossip.OnGossipSelect(&s.player,&s.krennan,0,1002);check(s.player.session.notices.size()==old+1,"join running battle gives clear status without replay");}
  {Scene s;waypoints.paths[3847401].nodes.resize(3);check(!s.starter.CanStartBattle(&s.player),"truncated Liam finale route blocks start");waypoints.paths[3847401].nodes.resize(4);auto old=waypoints.paths[3846901];waypoints.paths.erase(3846901);check(!s.starter.CanStartBattle(&s.player),"missing Sylvanas departure route blocks start");waypoints.paths[3846901]=old;check(s.starter.CanStartBattle(&s.player),"valid native finale routes allow battle");}
  {Scene s;for(uint32 role:{uint32(NPC_LORNA_CROWLEY),uint32(NPC_LORD_DARIUS_CROWLEY),uint32(NPC_KING_GENN_GREYMANE),uint32(NPC_LADY_SYLVANAS_WINDRUNNER)}){ObjectGuid id=s.controller.GetGUID(role);Creature*actor=actors.at(id.value);actors.erase(id.value);check(!s.starter.CanStartBattle(&s.player),"missing late leader blocks battle before wave3");actors[id.value]=actor;}}
  {Scene s;ObjectGuid link; s.almyra.distance=600;check(!FindGilneasBattleActor(&s.lorna,link,NPC_SISTER_ALMYRA,100),"old radius misses controller");check(FindGilneasBattleActor(&s.lorna,link,NPC_SISTER_ALMYRA,700)==&s.almyra,"late leader can bind from initial staging area");}
+ {Scene s;manager.data[802754]={NPC_LORNA_CROWLEY,654,187,1,2};battleMap.spawns.emplace(802754,&s.lorna);PrimeGilneasBattleActors(&s.krennan);check(s.lorna.active,"loaded distant actor is activated so pending initialization can tick");s.lorna.active=false;s.lorna.script=0;PrimeGilneasBattleActors(&s.krennan);check(!s.lorna.active,"custom script never activated as battle actor");manager.data.clear();}
  {Scene s;manager.data[802754]={NPC_LORNA_CROWLEY,654,187,1,2};int old=battleMap.loads;PrimeGilneasBattleActors(&s.krennan);check(battleMap.loads==old+1,"only known matching late spawn grid is loaded");manager.data[802754].mapid=1;PrimeGilneasBattleActors(&s.krennan);check(battleMap.loads==old+1,"foreign map data never loaded");manager.data.clear();}
  {Scene s;s.almyra.players={&s.player};s.starter.StartBattle(&s.player);s.player.alive=false;check(!s.controller.IsPlayerNear(25)&&s.controller.m_battleIsStarted,"death waits without clearing shared battle");s.player.alive=true;check(s.controller.IsPlayerNear(25)&&s.controller.m_battleIsStarted,"resurrection resumes same participant gate");}
  NATIVE_INITIALIZER_CHECKS
@@ -230,9 +241,13 @@ int main(){try{
         'KRENNAN_RESET': method(krennan, '        void Reset('),
         'KRENNAN_SET': method(krennan, '        void SetGUID('),
         'KRENNAN_ACTION': method(krennan, '        void DoAction('),
+        'KRENNAN_RUNNING': method(krennan, '        bool IsBattleRunning('),
+        'KRENNAN_PREPARE': method(krennan, '        void PrepareBattleController('),
+        'KRENNAN_NOTIFY': method(krennan, '        void NotifyBattleStatus('),
         'KRENNAN_GATE': method(krennan, '        bool CanStartBattle('),
         'KRENNAN_START': method(krennan, '        bool StartBattle('),
         'KRENNAN_HEARTBEAT': method(krennan, '                case EVENT_CHECK_PLAYER_FOR_PHASE:'),
+        'GOSSIP_HELLO': method(krennan, '    bool OnGossipHello('),
         'GOSSIP_SELECT': method(krennan, '    bool OnGossipSelect('),
         'NATIVE_INITIALIZERS': '\n'.join('struct Init'+str(entry)+':Initializer{void Run(){switch(int(EVENT_INITIALISE)){'+case+'}}};' for entry, _, case in initializers),
         'NATIVE_INITIALIZER_CHECKS': ''.join('pendingRegistration<Init'+str(entry)+'>('+str(entry)+');' for entry, _, _ in initializers),

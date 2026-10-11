@@ -104,3 +104,29 @@ Native archived Walden252538 route begins at ground-floor Z77.740814, matching
 retained actor height rather than the extra roof spawn Z86.8961. Client validation
 of both targets in 24592 is still required. Apply SQL to world and restart or
 reload affected grids; no binary change is required for this SQL-only follow-up.
+
+
+## 2026-10-12: Krennan start menu and distant leader initialization
+
+Live report confirms finale paths have 3/4 nodes, Krennan802514 uses PhaseGroup440,
+and Liam802761 is at the restored start. Live creature_text query for38218/38553
+returned no rows: apply 2026_10_11_09_world_gilneas_battle_dialogue.sql to the
+actual world database, then reload creature_text and creature_text_locale or
+restart worldserver. Stock result is Liam38218:14 lines; Krennan38553:1 line.
+These are data repairs; a binary rebuild alone does not insert dialogue rows.
+
+PrimeGilneasBattleActors now activates only the four audited late-wave spawn
+instances after LoadGrid and native-script/map/phase validation. Map::Update visits
+nearby cells of players and active nonplayers; grid loading alone does not make
+remote inactive leader AI run EVENT_INITIALISE. Acknowledged leader initialization
+retains existing15-minute active timers and battle reset behavior.
+
+The Krennan menu distinguishes unavailable from already-running battles. An idle
+scene always offers the native start action to a quest participant, even if a
+leader is still initializing. Selection retries controller discovery and reports
+which prerequisite is unavailable instead of silently closing. The existing
+join-running-scene choice now reports that the army is already in the city; it
+never restarts the shared event or grants credit/teleports. An ordinary-client
+start, seven spoken motivation lines, subsequent march, late actors and finale
+still require verification. Start/reservation remains guarded against duplicate
+clicks, stale menus, wrong quest/map/phase and missing native actors/routes.
