@@ -1,0 +1,40 @@
+{
+  "source": "F:/Projects/extracted-735-new/dbc/ruRU/SpellEffect.db2",
+  "effects": {
+    "80852": [
+      {
+        "ID": 80436,
+        "Effect": 6,
+        "BasePoints": 100,
+        "Aura": 18,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 18,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 1,
+        "ImplicitTarget2": 0
+      }
+    ],
+    "84481": [
+      {
+        "ID": 85262,
+        "Effect": 6,
+        "BasePoints": 1000,
+        "Aura": 19,
+        "EffectIndex": 0,
+        "DifficultyID": 0,
+        "TriggerSpell": 0,
+        "MiscValue1": 18,
+        "MiscValue2": 0,
+        "PositionFacing": 0.0,
+        "ImplicitTarget1": 1,
+        "ImplicitTarget2": 0
+      }
+    ]
+  },
+  "scene": "24472: Liam grants84481 before the Koroth event, removes it afterwards; phase186 actor spawns802085..802112",
+  "speed": "Personal43336 harness: existing MOVE_RUN rate multiplied by1.6 once per summon.",
+  "source_sha256": "dfcb7076421e3b99fb23e769acddb9215d051069fe5e7488fc33b67770c194db"
+}
