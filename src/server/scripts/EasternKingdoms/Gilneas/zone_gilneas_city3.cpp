@@ -210,6 +210,7 @@ public:
                 || (player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_INCOMPLETE
                     && player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_COMPLETE))
             {
+                TC_LOG_ERROR("scripts", "Gilneas 24902: Tobias stopped: lifetime=%u limit=%u ownerPresent=%u ownerAlive=%u sameMap=%u samePhase=%u questStatus=%u stage=%u", m_lifetime, lifetimeLimit, uint32(player != nullptr), uint32(player && player->IsAlive()), uint32(player && player->GetMapId() == me->GetMapId()), uint32(player && me->IsInPhase(player)), player ? uint32(player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS)) : 0, m_eventPhase);
                 StopScene();
                 return false;
             }
@@ -758,13 +759,21 @@ public:
                         if (!tobias || !tobias->IsAlive() || tobias->GetEntry() != NPC_TOBIAS_MISTMANTLE
                             || tobias->GetMapId() != me->GetMapId() || !tobias->IsInPhase(player)
                             || tobias->AI()->GetGUID(PLAYER_GUID) != m_playerGUID)
+                        {
+                            TC_LOG_ERROR("scripts", "Gilneas 24902: final dialogue cannot credit its owner because Tobias is absent, invalid or owned by another player.");
                             break;
+                        }
+                        player->AreaExploredOrEventHappens(QUEST_HUNT_FOR_SYLVANAS);
+                        player->KilledMonsterCredit(38530);
+                        if (player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS) != QUEST_STATUS_COMPLETE)
+                        {
+                            TC_LOG_ERROR("scripts", "Gilneas 24902: final dialogue finished but event credit failed; questStatus=%u. Scene departure cancelled.", uint32(player->GetQuestStatus(QUEST_HUNT_FOR_SYLVANAS)));
+                            break;
+                        }
                         m_completionHandled = true;
                         if (Creature* crenshaw = ObjectAccessor::GetCreature(*me, m_crenshawGUID))
                             crenshaw->GetMotionMaster()->MovePoint(2010, -1566.053f, 1557.191f, 29.36808f);
                         me->GetMotionMaster()->MovePoint(2010, -1566.053f, 1557.191f, 29.36808f);
-                        player->AreaExploredOrEventHappens(QUEST_HUNT_FOR_SYLVANAS);
-                        player->KilledMonsterCredit(38530);
                         m_events.ScheduleEvent(EVENT_DESPAWN, 8000);
                         break;
                     }

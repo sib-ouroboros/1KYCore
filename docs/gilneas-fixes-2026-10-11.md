@@ -208,3 +208,10 @@ Missing stock groups can be inserted; custom text/broadcast IDs/scripts and none
 Use normal MOVE_RUN rate 1.0 and SetWalk(false) for both native and fallback escort points; leave the other scene actors and jumps unchanged. Mark the owned guide active so its owner checks continue outside nearby player update cells. Remove the independent UnSummon(600000) event. The manual summon is now removed by the existing checked AI lifecycle: 15 minutes for the route, and a fresh three-minute budget after all three scene actors are successfully created. Logout/death/phase/map/quest-invalid owner and partial summon failures still clean up immediately; normal dialogue completion still removes Tobias eight seconds after credit.
 
 Three native fixtures pass, including survival beyond the former ten-minute route cap, separate bounded scene time, successful scene budget reset and final dialogue cleanup. No SQL required. The reported premature disappearance is consistent with the old timer but needs another client playthrough to confirm resolution.
+
+
+## Diagnose missing credit after the final Sylvanas line
+
+Live DB reports SpecialFlags=2 and no quest objectives. Do not alter its requirements or force-complete the quest. The previous final callback marked completion and departed regardless of the result of AreaExploredOrEventHappens/KilledMonsterCredit. Only mark completion and schedule departure/cleanup after GetQuestStatus is COMPLETE. A failed credit attempt now leaves actors in place until the existing bounded scene timeout and emits a scripts error. Also log missing/invalid Tobias at the final gate and owner presence/alive/map/phase/status plus lifetime/stage when Tobias's lifecycle aborts.
+
+Native dialogue regression now models quest-status change on a successful event and injects failed completion, verifying no departure/despawn and a diagnostic. The real cause of the reported disappearance/missing credit is not yet confirmed; a client reproduction and emitted log are required. No SQL change.

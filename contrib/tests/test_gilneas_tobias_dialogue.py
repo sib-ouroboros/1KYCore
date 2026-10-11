@@ -12,10 +12,12 @@ def main():
 #include <stdexcept>
 #include <iostream>
 using uint32=std::uint32_t;
+int failureLogs=0;
+#define TC_LOG_ERROR(...) ++failureLogs
 constexpr int POINT_MOTION_TYPE=1,QUEST_HUNT_FOR_SYLVANAS=24902,QUEST_STATUS_INCOMPLETE=1,QUEST_STATUS_COMPLETE=2,NPC_TOBIAS_MISTMANTLE=38507,PLAYER_GUID=100,NPC_GENERAL_WARHOWL=38533,NPC_HIGH_EXECUTOR_CRENSHAW=38537;
 ENUM
 struct ObjectGuid{static constexpr int Empty=0;};
-struct Player{bool alive=true;int quest=1,map=654;float distance=5;int credits=0,events=0;int GetGUID(){return 1;}bool IsAlive(){return alive;}int GetQuestStatus(int){return quest;}int GetMapId(){return map;}float GetDistance2d(void*){return distance;}void AreaExploredOrEventHappens(int){++events;}void KilledMonsterCredit(int){++credits;}};
+struct Player{bool alive=true;int quest=1,map=654;float distance=5;bool eventCanComplete=true;int credits=0,events=0;int GetGUID(){return 1;}bool IsAlive(){return alive;}int GetQuestStatus(int){return quest;}int GetMapId(){return map;}float GetDistance2d(void*){return distance;}void AreaExploredOrEventHappens(int){++events;if(eventCanComplete)quest=QUEST_STATUS_COMPLETE;}void KilledMonsterCredit(int){++credits;}};
 struct Motion{int moves=0;void MovePoint(int,float,float,float){++moves;}};
 struct ActorAI{int owner=1;std::vector<int>talks;void Talk(int n){talks.push_back(n);}int GetGUID(int id){return id==PLAYER_GUID?owner:(id==NPC_GENERAL_WARHOWL?5:3);}};
 struct Creature{ActorAI ai;bool alive=true;int entry=38507;bool IsAlive(){return alive;}int GetEntry(){return entry;}ActorAI*AI(){return &ai;}bool phase=true;int map=654;int despawns=0;Motion motion;void DespawnOrUnsummon(int){++despawns;}void SetFacingToObject(Creature*){}void SetFacingTo(float){}bool IsInPhase(Player*){return phase;}int GetMapId(){return map;}Motion*GetMotionMaster(){return &motion;}};
@@ -36,6 +38,7 @@ int main(){try{
 
  {Scene s;s.ai.MovementInform(1,2005);s.ai.MovementInform(1,2005);check(s.ai.m_events.starts==1,"dialogue arrival starts once");s.ai.End();s.ai.End();check(s.owner.events==1&&s.owner.credits==1&&!s.foreign.events&&s.ai.m_events.despawns==1,"final native event and compatible kill credit dispatch once to owner only");check(s.sylvanas.motion.moves==1&&s.crenshaw.motion.moves==1,"departure once");}
  for(int mode=0;mode<5;++mode){Scene s;if(mode==0)s.owner.quest=0;if(mode==1)s.owner.quest=3;if(mode==2)s.owner.alive=false;if(mode==3)s.owner.map=0;if(mode==4)s.sylvanas.phase=false;s.ai.End();check(!s.owner.events&&!s.ai.m_completionHandled,"invalid owner cannot finish scene");}
+ {Scene s;s.owner.eventCanComplete=false;int logs=failureLogs;s.ai.End();check(!s.ai.m_completionHandled&&!s.ai.m_events.despawns&&!s.sylvanas.motion.moves&&!s.crenshaw.motion.moves&&failureLogs==logs+1,"failed real quest completion cannot depart or silently despawn actors");}
  {Scene s;s.ai.MovementInform(1,2005);s.ai.Reset();check(!s.ai.m_events.starts&&!s.ai.m_dialogueStarted&&!s.ai.m_completionHandled&&!s.ai.m_playerGUID&&!s.ai.m_tobiasGUID,"reset clears old events and actor ownership");s.ai.End();check(!s.owner.events,"reset scene cannot issue delayed completion");}
  for(int mode=0;mode<6;++mode){Scene s;if(mode==0)actors.erase(4);if(mode==1)s.tobias.alive=false;if(mode==2)s.tobias.map=0;if(mode==3)s.tobias.phase=false;if(mode==4)s.tobias.entry=1;if(mode==5)s.tobias.ai.owner=2;s.ai.End();check(!s.owner.events&&!s.owner.credits&&!s.ai.m_completionHandled,"missing dead foreign map phase entry or owner Tobias cannot complete");}
  {Scene s;s.owner.distance=51;s.ai.End();check(!s.owner.events&&s.ai.m_events.waits==1,"distant owner waits instead of remote credit");s.owner.distance=5;s.ai.End();check(s.owner.events==1,"returning owner can finish");}
