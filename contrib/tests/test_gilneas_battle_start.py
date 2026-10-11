@@ -142,7 +142,7 @@ struct npc_krennan_aranas_38553AI:AI {
 };
 struct Gossip {GOSSIP_HELLO GOSSIP_SELECT};
 struct Initializer:AI {
- Creature*me=nullptr; bool m_isInitialised=false; Events m_events;
+ Creature*me=nullptr;uint32 m_wave=0;bool m_isInitialised=false; Events m_events;
  ObjectGuid m_krennanGUID,m_almyraGUID,m_liamGUID,m_liam2GUID,m_kingGUID,m_sylvanaGUID;
  void DoAction(int32 id)override{AI::DoAction(id);if(id==ACTION_INITIALIZE_DONE)m_isInitialised=true;}
 };
@@ -221,6 +221,16 @@ int main(){try{
  {Scene s;waypoints.paths[3847401].nodes.resize(3);check(!s.starter.CanStartBattle(&s.player),"truncated Liam finale route blocks start");waypoints.paths[3847401].nodes.resize(4);auto old=waypoints.paths[3846901];waypoints.paths.erase(3846901);check(!s.starter.CanStartBattle(&s.player),"missing Sylvanas departure route blocks start");waypoints.paths[3846901]=old;check(s.starter.CanStartBattle(&s.player),"valid native finale routes allow battle");}
  {Scene s;for(uint32 role:{uint32(NPC_LORNA_CROWLEY),uint32(NPC_LORD_DARIUS_CROWLEY),uint32(NPC_KING_GENN_GREYMANE),uint32(NPC_LADY_SYLVANAS_WINDRUNNER)}){ObjectGuid id=s.controller.GetGUID(role);Creature*actor=actors.at(id.value);actors.erase(id.value);check(!s.starter.CanStartBattle(&s.player),"missing late leader blocks battle before wave3");actors[id.value]=actor;}}
  {Scene s;ObjectGuid link; s.almyra.distance=600;check(!FindGilneasBattleActor(&s.lorna,link,NPC_SISTER_ALMYRA,100),"old radius misses controller");check(FindGilneasBattleActor(&s.lorna,link,NPC_SISTER_ALMYRA,700)==&s.almyra,"late leader can bind from initial staging area");}
+ {Scene s;Init38426 lorna;Init38415 darius;Init38470 king;Init38469 sylvanas;
+  lorna.me=&s.lorna;darius.me=&s.darius;king.me=&s.king;sylvanas.me=&s.sylvanas;
+  s.lorna.ai=&lorna;s.darius.ai=&darius;s.king.ai=&king;s.sylvanas.ai=&sylvanas;
+  s.controller.m_lornaGUID={};s.controller.m_dariusGUID={};s.controller.m_kingGUID={};s.controller.m_sylvanaGUID={};
+  for(auto pair:std::vector<std::pair<uint32,Creature*>>{{802754,&s.lorna},{802707,&s.darius},{802822,&s.king},{802781,&s.sylvanas}}){manager.data[pair.first]={pair.second->entry,654,187,1,2};battleMap.spawns.emplace(pair.first,pair.second);}
+  check(!s.starter.CanStartBattle(&s.player),"before-registration gate remains strict");
+  check(s.starter.StartBattle(&s.player),"all four loaded leaders register synchronously without AI tick or grid search");
+  check(lorna.m_almyraGUID==s.almyra.guid&&darius.m_almyraGUID==s.almyra.guid&&king.m_almyraGUID==s.almyra.guid&&sylvanas.m_almyraGUID==s.almyra.guid,"controller acknowledgement follows all four reverse links");
+  check(lorna.m_isInitialised&&darius.m_isInitialised&&king.m_isInitialised&&sylvanas.m_isInitialised,"all distant leaders acknowledge initialization");
+  manager.data.clear();}
  {Scene s;manager.data[802754]={NPC_LORNA_CROWLEY,654,187,1,2};battleMap.spawns.emplace(802754,&s.lorna);PrimeGilneasBattleActors(&s.krennan);check(s.lorna.active,"loaded distant actor is activated so pending initialization can tick");s.lorna.active=false;s.lorna.script=0;PrimeGilneasBattleActors(&s.krennan);check(!s.lorna.active,"custom script never activated as battle actor");manager.data.clear();}
  {Scene s;manager.data[802754]={NPC_LORNA_CROWLEY,654,187,1,2};int old=battleMap.loads;PrimeGilneasBattleActors(&s.krennan);check(battleMap.loads==old+1,"only known matching late spawn grid is loaded");manager.data[802754].mapid=1;PrimeGilneasBattleActors(&s.krennan);check(battleMap.loads==old+1,"foreign map data never loaded");manager.data.clear();}
  {Scene s;s.almyra.players={&s.player};s.starter.StartBattle(&s.player);s.player.alive=false;check(!s.controller.IsPlayerNear(25)&&s.controller.m_battleIsStarted,"death waits without clearing shared battle");s.player.alive=true;check(s.controller.IsPlayerNear(25)&&s.controller.m_battleIsStarted,"resurrection resumes same participant gate");}
@@ -249,7 +259,7 @@ int main(){try{
         'KRENNAN_HEARTBEAT': method(krennan, '                case EVENT_CHECK_PLAYER_FOR_PHASE:'),
         'GOSSIP_HELLO': method(krennan, '    bool OnGossipHello('),
         'GOSSIP_SELECT': method(krennan, '    bool OnGossipSelect('),
-        'NATIVE_INITIALIZERS': '\n'.join('struct Init'+str(entry)+':Initializer{void Run(){switch(int(EVENT_INITIALISE)){'+case+'}}};' for entry, _, case in initializers),
+        'NATIVE_INITIALIZERS': '\n'.join('struct Init'+str(entry)+':Initializer{'+((method(source[source.index('    struct '+name):], '        void SetGUID(')+method(source[source.index('    struct '+name):], '        ObjectGuid GetGUID(')) if entry in (38426,38415,38470,38469) else '')+'void Run(){switch(int(EVENT_INITIALISE)){'+case+'}}};' for entry, name, case in initializers),
         'NATIVE_INITIALIZER_CHECKS': ''.join('pendingRegistration<Init'+str(entry)+'>('+str(entry)+');' for entry, _, _ in initializers),
     }
     for key, value in replacements.items():

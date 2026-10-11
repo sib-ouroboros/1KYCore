@@ -211,7 +211,7 @@ namespace
         return liam && liam->nodes.size() >= 4 && sylvanas && sylvanas->nodes.size() >= 3;
     }
 
-    void PrimeGilneasBattleActors(Creature* context)
+    void PrimeGilneasBattleActors(Creature* context, Creature* controller = nullptr)
     {
         if (context->GetMapId() != 654)
             return;
@@ -229,7 +229,17 @@ namespace
                     auto bounds = context->GetMap()->GetCreatureBySpawnIdStore().equal_range(spawn.guid);
                     for (auto itr = bounds.first; itr != bounds.second; ++itr)
                         if (Creature* actor = GetGilneasBattleActor(context, itr->second->GetGUID(), spawn.entry))
+                        {
                             actor->setActive(true);
+                            if (controller && GetGilneasBattleActor(context, controller->GetGUID(), NPC_SISTER_ALMYRA)
+                                && !controller->AI()->GetData(DATA_IS_BATTLE_STARTED))
+                            {
+                                // Establish the reverse link before acknowledging initialization.
+                                actor->AI()->SetGUID(controller->GetGUID(), NPC_SISTER_ALMYRA);
+                                if (actor->AI()->GetGUID(NPC_SISTER_ALMYRA) == controller->GetGUID())
+                                    controller->AI()->SetGUID(actor->GetGUID(), spawn.entry);
+                            }
+                        }
                 }
     }
 
@@ -1058,8 +1068,8 @@ public:
         {
             if (IsBattleRunning())
                 return;
-            PrimeGilneasBattleActors(me);
-            FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 50.0f);
+            Creature* controller = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 50.0f);
+            PrimeGilneasBattleActors(me, controller);
         }
 
         void NotifyBattleStatus(Player* player) const
@@ -1113,7 +1123,15 @@ public:
             for (uint32 entry : {uint32(NPC_LORNA_CROWLEY), uint32(NPC_LORD_DARIUS_CROWLEY),
                 uint32(NPC_KING_GENN_GREYMANE), uint32(NPC_LADY_SYLVANAS_WINDRUNNER)})
                 if (!GetGilneasBattleActor(me, almyra->AI()->GetGUID(entry), entry))
-                    return unavailable("Битва пока недоступна: не готовы Лорна, Дарий, Генн или Сильвана.");
+                {
+                    switch (entry)
+                    {
+                        case NPC_LORNA_CROWLEY: return unavailable("Битва пока недоступна: Лорна Краули не готова.");
+                        case NPC_LORD_DARIUS_CROWLEY: return unavailable("Битва пока недоступна: Дарий Краули не готов.");
+                        case NPC_KING_GENN_GREYMANE: return unavailable("Битва пока недоступна: Генн Седогрив не готов.");
+                        default: return unavailable("Битва пока недоступна: Сильвана не готова.");
+                    }
+                }
             return true;
         }
 
@@ -2932,6 +2950,18 @@ public:
             m_ai_counter = 0;
         }
 
+        void SetGUID(ObjectGuid guid, int32 id) override
+        {
+            if (id == NPC_SISTER_ALMYRA && GetGilneasBattleActor(me, guid, NPC_SISTER_ALMYRA)
+                && (!m_wave || m_almyraGUID == guid))
+                m_almyraGUID = guid;
+        }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == NPC_SISTER_ALMYRA ? m_almyraGUID : ObjectGuid::Empty;
+        }
+
         void Reset() override
         {
             RemoveMyMember();
@@ -3436,6 +3466,18 @@ public:
             m_ai_counter = 0;
         }
 
+        void SetGUID(ObjectGuid guid, int32 id) override
+        {
+            if (id == NPC_SISTER_ALMYRA && GetGilneasBattleActor(me, guid, NPC_SISTER_ALMYRA)
+                && (!m_wave || m_almyraGUID == guid))
+                m_almyraGUID = guid;
+        }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == NPC_SISTER_ALMYRA ? m_almyraGUID : ObjectGuid::Empty;
+        }
+
         void Reset() override
         {
             RemoveMyMember();
@@ -3835,6 +3877,18 @@ public:
             m_ai_counter = 0;
         }
 
+        void SetGUID(ObjectGuid guid, int32 id) override
+        {
+            if (id == NPC_SISTER_ALMYRA && GetGilneasBattleActor(me, guid, NPC_SISTER_ALMYRA)
+                && (!m_wave || m_almyraGUID == guid))
+                m_almyraGUID = guid;
+        }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == NPC_SISTER_ALMYRA ? m_almyraGUID : ObjectGuid::Empty;
+        }
+
         void Reset() override
         {
             RemoveMyMember();
@@ -4189,6 +4243,18 @@ public:
             m_liamGUID = ObjectGuid::Empty;
             m_kingGUID = ObjectGuid::Empty;
             m_isInitialised = false;
+        }
+
+        void SetGUID(ObjectGuid guid, int32 id) override
+        {
+            if (id == NPC_SISTER_ALMYRA && GetGilneasBattleActor(me, guid, NPC_SISTER_ALMYRA)
+                && (!m_wave || m_almyraGUID == guid))
+                m_almyraGUID = guid;
+        }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == NPC_SISTER_ALMYRA ? m_almyraGUID : ObjectGuid::Empty;
         }
 
         void Reset() override

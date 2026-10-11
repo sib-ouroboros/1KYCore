@@ -130,3 +130,24 @@ never restarts the shared event or grants credit/teleports. An ordinary-client
 start, seven spoken motivation lines, subsequent march, late actors and finale
 still require verification. Start/reservation remains guarded against duplicate
 clicks, stale menus, wrong quest/map/phase and missing native actors/routes.
+
+
+### Follow-up: synchronous distant leader registration
+
+The live database confirms all four audited distant spawns are present in187 with
+native scripts and restored source positions. Preparation now obtains Almyra
+first and, after loading/activating each audited instance, explicitly assigns its
+reverse Almyra GUID. Controller registration/INITIALIZE_DONE follows only after
+the actor confirms that reverse link. Four leader AIs expose only this validated
+controller binding; active-wave reassignment and native script/phase/map checks
+remain guarded. The controller's running state prevents synchronous rebinds
+once the shared event has started. Sylvanas continues its existing retry until
+cinematic Liam/king links become available; Genn retains finale Liam refresh.
+
+A native fixture clears all four controller links while leaving those actors
+loaded, then invokes actual preparation/start without running their pending AI
+initializers. It verifies both directions and all four acknowledgements. This
+covers the dependency on delayed ticks previously missed by prelinked fixtures.
+Failed readiness now names Lorna, Darius, Genn or Sylvanas individually. Requires
+new server binary; no new SQL is needed. Missing dialogue rows still require the
+previously specified2026_10_11_09 world update. Client verification remains open.
