@@ -4,14 +4,15 @@ import json
 
 def test_gilneas_current_database(sql,checksum):
  root=Path(__file__).resolve().parents[2]
- names=['2026_10_11_01_world_gilneas_quest_ruru_missing.sql','2026_10_11_02_world_gilneas_scene_spawns_balance.sql','2026_10_11_03_world_gilneas_dialogue_ruru.sql','2026_10_11_04_world_gilneas_fox_roaming.sql','2026_10_11_05_world_gilneas_gwen_mount.sql','2026_10_11_06_world_gilneas_koroth_scene_visibility.sql','2026_10_11_07_world_gilneas_survivor_talk_credit.sql','2026_10_11_08_world_gilneas_battle_actor_scaling.sql','2026_10_11_09_world_gilneas_battle_dialogue.sql']
+ names=['2026_10_11_01_world_gilneas_quest_ruru_missing.sql','2026_10_11_02_world_gilneas_scene_spawns_balance.sql','2026_10_11_03_world_gilneas_dialogue_ruru.sql','2026_10_11_04_world_gilneas_fox_roaming.sql','2026_10_11_05_world_gilneas_gwen_mount.sql','2026_10_11_06_world_gilneas_koroth_scene_visibility.sql','2026_10_11_07_world_gilneas_survivor_talk_credit.sql','2026_10_11_08_world_gilneas_battle_actor_scaling.sql','2026_10_11_09_world_gilneas_battle_dialogue.sql','2026_10_11_10_world_gilneas_koroth_scene_passive.sql']
  texts=[(root/'sql/updates/world'/n).read_text('utf8') for n in names]
  tables=sql('SHOW TABLES;').stdout.splitlines()
- modified={'waypoint_data','creature_text','quest_objectives','quest_template_locale','quest_objectives_locale','quest_offer_reward_locale','quest_request_items_locale','creature','creature_addon','creature_template_scaling','creature_text_locale'}
+ modified={'creature_template','waypoint_data','creature_text','quest_objectives','quest_template_locale','quest_objectives_locale','quest_offer_reward_locale','quest_request_items_locale','creature','creature_addon','creature_template_scaling','creature_text_locale'}
  battle_ids='38210,38218,38221,38331,38415,38420,38426,38464,38465,38466'
  old_scaling={line.split('	')[0]:line for line in sql('SELECT * FROM creature_template_scaling WHERE Entry IN ('+battle_ids+');').stdout.splitlines()}
  untouched=checksum([t for t in tables if t not in modified])
  for text in texts:sql(text)
+ assert sql("SELECT COUNT(*) FROM creature_template WHERE entry IN (37805,37806,37807,37808) AND AIName='' AND ScriptName='npc_gilneas_koroth_scene_actor';").stdout.strip()=='4'
  assert sql('SELECT mount FROM creature_addon WHERE guid=801805;').stdout.strip()=='229'
  assert sql("SELECT COUNT(*) FROM creature_addon a JOIN creature c ON c.guid=a.guid WHERE c.map=654 AND c.id IN (37805,37806,37807,37808) AND a.auras='80852';").stdout.strip()=='28'
  assert sql('SELECT ObjectID,Amount FROM quest_objectives WHERE ID=255768 AND QuestID=24468;').stdout.strip()=='37067\t5'
@@ -70,3 +71,9 @@ def test_gilneas_current_database(sql,checksum):
  before=sql('SELECT * FROM waypoint_data WHERE id=3847401;').stdout
  sql(texts[-1])
  assert sql('SELECT * FROM waypoint_data WHERE id=3847401;').stdout==before,'Partial custom cinematic route was mixed with native points'
+
+ sql("UPDATE creature_template SET ScriptName='custom_scene_script' WHERE entry=37806;")
+ sql("UPDATE creature_template SET ScriptName='',AIName='SmartAI' WHERE entry=37807;")
+ sql(texts[-1])
+ assert sql("SELECT ScriptName FROM creature_template WHERE entry=37806;").stdout.strip()=='custom_scene_script'
+ assert sql("SELECT AIName,ScriptName FROM creature_template WHERE entry=37807;").stdout.strip()=='SmartAI'

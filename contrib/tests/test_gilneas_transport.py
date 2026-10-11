@@ -26,7 +26,7 @@ struct Vehicle{int removals=0;void RemoveAllPassengers(){++removals;}};
 struct Creature:Unit{int area=4714;int GetAreaIdFromPosition(){return area;}bool despawn=false;MotionMaster motion;Vehicle vehicle;void SetReactState(int){}void DespawnOrUnsummon(){despawn=true;}void DespawnOrUnsummon(std::chrono::seconds){despawn=true;}Vehicle*GetVehicleKit(){return &vehicle;}MotionMaster*GetMotionMaster(){return &motion;}void CastSpell(Player*,int,bool){}};
 struct Player:Unit{ObjectGuid guid;bool alive=true;int map=654,area=4714,positionArea=4714,status=QUEST_STATUS_INCOMPLETE;Creature*base=nullptr;int credits=0;Player*ToPlayer()override{return this;}bool IsAlive(){return alive;}int GetMapId(){return map;}int GetAreaId(){return area;}int GetAreaIdFromPosition(){return positionArea;}ObjectGuid GetGUID(){return guid;}int GetQuestStatus(int){return status;}Creature*GetVehicleBase(){return base;}void AddAura(int,Player*){}};
 std::map<int,Player*>players;namespace ObjectAccessor{Player*GetPlayer(Creature&,ObjectGuid g){auto i=players.find(g.id);return i==players.end()?nullptr:i->second;}}
-struct ScriptedAI{Creature*me;ScriptedAI(Creature*c):me(c){}virtual~ScriptedAI()=default;virtual void Reset(){}virtual void IsSummonedBy(Unit*){}virtual void MovementInform(uint32,uint32){}virtual void PassengerBoarded(Unit*,int8,bool){}virtual void UpdateAI(uint32){}};
+struct ScriptedAI{Creature*me;bool enabled=true;virtual void OnCharmed(bool apply){if(apply)enabled=false;}ScriptedAI(Creature*c):me(c){}virtual~ScriptedAI()=default;virtual void Reset(){}virtual void IsSummonedBy(Unit*){}virtual void MovementInform(uint32,uint32){}virtual void PassengerBoarded(Unit*,int8,bool){}virtual void UpdateAI(uint32){}};
 void check(bool v,char const*m){if(!v)throw std::runtime_error(m);}
 """
  start=s.index('    struct npc_swift_mountain_horse_36741AI');end=s.index('    CreatureAI* GetAI',start);code+=s[start:end]
@@ -35,6 +35,7 @@ int main(){
  using AI=npc_swift_mountain_horse_36741AI;
  Player owner,other;owner.guid.id=1;other.guid.id=2;players[1]=&owner;players[2]=&other;
  Creature horse;AI ai(&horse);ai.Reset();ai.IsSummonedBy(&owner);owner.base=&horse;
+ ai.OnCharmed(true);check(ai.enabled,"controlling rider must not disable quest AI");ai.OnCharmed(false);check(ai.enabled,"uncharmer keeps lifecycle AI");
  ai.PassengerBoarded(&other,0,true);check(other.exits==1&&!horse.motion.starts,"foreign rider rejected");
  ai.PassengerBoarded(&owner,1,true);check(owner.exits==1&&!horse.motion.starts,"wrong seat rejected");
  owner.status=QUEST_STATUS_COMPLETE;ai.PassengerBoarded(&owner,0,true);

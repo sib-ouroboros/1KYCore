@@ -2477,6 +2477,9 @@ public:
         bool m_boarded = false;
         bool m_arrived = false;
 
+        // The rider charms seat 0; keep the quest lifecycle instead of PossessedAI.
+        void OnCharmed(bool /*apply*/) override { }
+
         void Reset() override
         {
             me->SetReactState(REACT_PASSIVE);
@@ -3230,6 +3233,37 @@ public:
     }
 };
 
+// Persistent actors for the scripted Koroth scene, not combat encounters.
+class npc_gilneas_koroth_scene_actor : public CreatureScript
+{
+public:
+    npc_gilneas_koroth_scene_actor() : CreatureScript("npc_gilneas_koroth_scene_actor") { }
+
+    static bool IsSceneSpawn(Creature* creature)
+    {
+        if (creature->GetMapId() != 654)
+            return false;
+        auto guid = creature->GetSpawnId();
+        uint32 entry = creature->GetEntry();
+        return (entry == 37805 && guid >= 802085 && guid <= 802112)
+            || (entry == 37807 && guid == 802086)
+            || (entry == 37806 && guid == 802087)
+            || (entry == 37808 && guid == 802103);
+    }
+
+    struct SceneAI : public PassiveAI
+    {
+        SceneAI(Creature* creature) : PassiveAI(creature) { }
+        bool CanAIAttack(Unit const* /*target*/) const override { return false; }
+    };
+
+    CreatureAI* GetAI(Creature* creature) const override
+    {
+        // Unrelated spawns and summons retain the core's normal AI selection.
+        return IsSceneSpawn(creature) ? new SceneAI(creature) : nullptr;
+    }
+};
+
 // 38762
 class npc_ogre_ambusher_38762 : public CreatureScript
 {
@@ -3251,6 +3285,9 @@ public:
 
         void MoveInLineOfSight(Unit* who) override
         {
+            if (!who || !me->IsInPhase(who) || !me->CanSeeOrDetect(who)
+                || !me->IsValidAttackTarget(who))
+                return;
             if (!m_cast_cooldown)
                 if (who->ToPlayer() || who->getFaction() == 2203 || who->getFaction() == 2163)
                     if (me->GetDistance(who) < 60.0f)
@@ -4811,6 +4848,7 @@ void AddSC_zone_gilneas_duskhaven()
     new npc_harness_43336();
     new npc_stagecoach_carriage_43337();
     new go_kings_gate_196412();
+    new npc_gilneas_koroth_scene_actor();
     new npc_ogre_ambusher_38762();
     new npc_prince_liam_greymane_37065();
     new npc_crash_survivor_37067();

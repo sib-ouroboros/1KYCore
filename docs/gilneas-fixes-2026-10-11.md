@@ -67,3 +67,26 @@ SQL2026_10_11_09_world_gilneas_battle_dialogue.sql восстанавливае�
 Неудачный призыв сценического Лиама повторяется до пяти раз, массовые эффекты не повторяются. При устойчивой ошибке событие очищается существующим тайм-аутом, а не выдаёт незаслуженный зачёт. Ожидания волн3–6 возобновляются после возвращения живого участника. Финальная сцена использует собственные таймеры; смерть игрока не превращает их в бессрочное ожидание. Полная потеря отряда или отсутствие участника может потребовать повторного запуска после штатной очистки. Автоматически пропускать бой или телепортировать лидеров не стали.
 
 Проверки: нативные переходы семи волн, фактические уведомления пяти лидеров, семь событий речи и время её завершения, обработка ошибок призыва, артиллерия при неполном составе, повторное использование AI, смерть/возвращение и финальный зачёт. SQL проверен на отдельной копии полного дампа, включая повторное применение, пользовательские тексты/локали и неполный пользовательский маршрут. Рабочая БД и сервер не менялись. После новой сборки и SQL нужен клиентский проход обычным персонажем через все этапы, отдельная смерть/возврат и проверка речи/голоса/финального зачёта.
+
+
+## Follow-up: Manor dismount and invisible Exodus attackers
+
+Quest 14465 now preserves its vehicle quest AI through rider charm. The inherited
+CreatureAI::OnCharmed previously disabled it, preventing UpdateAI and endpoint
+callbacks from running after boarding. Current-position manor checks and the
+28-point endpoint remain in place; test both in the client with an ordinary player.
+
+Apply 2026_10_11_10_world_gilneas_koroth_scene_passive.sql with the new binary.
+The 28 audited persistent scene actors (GUID 802085–802112, matching entries
+37805/37806/37807/37808) use passive AI and cannot initiate attacks. Other spawns
+and summons retain default AI; custom ScriptName/SmartAI values are preserved.
+Existing invisibility 80852 and scene detection 84481 remain unchanged. Verify
+both Exodus 24438 and the later Koroth scene 24472, including movement/dialogue.
+Invisibility is not phase separation and does not stop an invisible NPC from
+seeing a visible player.
+
+Ambusher 38762 now checks phase, visibility and valid hostility before throwing a
+boulder. Legitimate visible attacks remain enabled. No blanket player immunity,
+NPC damage nerf, or route/speed change is introduced by this follow-up. If damage
+persists, capture the combat-log attacker and spell; that is needed to attribute
+remaining attacks accurately. Production server and database were not updated.
