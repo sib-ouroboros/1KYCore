@@ -2516,6 +2516,7 @@ public:
             if (m_arrived)
                 return;
             m_arrived = true;
+            me->GetMotionMaster()->MoveIdle();
             if (Vehicle* vehicle = me->GetVehicleKit())
                 vehicle->RemoveAllPassengers();
             me->DespawnOrUnsummon(1s);
@@ -2559,8 +2560,10 @@ public:
                 me->DespawnOrUnsummon();
                 return;
             }
-            // Dismount at the manor boundary even before the route's final point.
-            if (m_boarded && player->GetAreaId() == 4817)
+            // Vehicle passengers may retain a cached area while the vehicle moves.
+            // Resolve the manor boundary from current coordinates instead.
+            if (m_boarded && (me->GetAreaIdFromPosition() == 4817
+                || player->GetAreaIdFromPosition() == 4817))
                 FinishRide();
         }
     };

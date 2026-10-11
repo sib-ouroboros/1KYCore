@@ -31,7 +31,8 @@ using uint32=std::uint32_t;using namespace std::chrono_literals;
 enum{WAYPOINT_MOTION_TYPE=2};
 struct NativeAI{virtual~NativeAI()=default;virtual void MovementInform(uint32,uint32)=0;};
 struct Vehicle{int removals=0;void RemoveAllPassengers(){++removals;}};
-struct Creature{NativeAI*ai=nullptr;Vehicle vehicle;int despawns=0;bool gravity=true;NativeAI*AI(){return ai;}Vehicle*GetVehicleKit(){return &vehicle;}void SetDisableGravity(bool b){gravity=b;}template<class T>void DespawnOrUnsummon(T){++despawns;}};
+struct MotionMaster{void MoveIdle(){}};
+struct Creature{MotionMaster motion;MotionMaster*GetMotionMaster(){return &motion;}NativeAI*ai=nullptr;Vehicle vehicle;int despawns=0;bool gravity=true;NativeAI*AI(){return ai;}Vehicle*GetVehicleKit(){return &vehicle;}void SetDisableGravity(bool b){gravity=b;}template<class T>void DespawnOrUnsummon(T){++despawns;}};
 template<class T>struct WaypointMovementGenerator{uint32 i_currentNode=0;void MovementInform(T*);};
 '''
     # Compile the engine's real dispatch, without rewriting index semantics.

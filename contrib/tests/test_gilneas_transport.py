@@ -21,10 +21,10 @@ struct ObjectGuid{int id=0;static const ObjectGuid Empty;};const ObjectGuid Obje
 bool operator==(ObjectGuid a,ObjectGuid b){return a.id==b.id;}bool operator!=(ObjectGuid a,ObjectGuid b){return !(a==b);}
 struct Player;struct Creature;
 struct Unit{virtual ~Unit()=default;virtual Player*ToPlayer(){return nullptr;}int exits=0;void ExitVehicle(){++exits;}};
-struct MotionMaster{uint32 path=0;bool repeat=true;int starts=0;void MovePath(uint32 p,bool r){path=p;repeat=r;++starts;}};
+struct MotionMaster{uint32 path=0;bool repeat=true;int starts=0,idles=0;void MoveIdle(){++idles;}void MovePath(uint32 p,bool r){path=p;repeat=r;++starts;}};
 struct Vehicle{int removals=0;void RemoveAllPassengers(){++removals;}};
-struct Creature:Unit{bool despawn=false;MotionMaster motion;Vehicle vehicle;void SetReactState(int){}void DespawnOrUnsummon(){despawn=true;}void DespawnOrUnsummon(std::chrono::seconds){despawn=true;}Vehicle*GetVehicleKit(){return &vehicle;}MotionMaster*GetMotionMaster(){return &motion;}void CastSpell(Player*,int,bool){}};
-struct Player:Unit{ObjectGuid guid;bool alive=true;int map=654,area=4714,status=QUEST_STATUS_INCOMPLETE;Creature*base=nullptr;int credits=0;Player*ToPlayer()override{return this;}bool IsAlive(){return alive;}int GetMapId(){return map;}int GetAreaId(){return area;}ObjectGuid GetGUID(){return guid;}int GetQuestStatus(int){return status;}Creature*GetVehicleBase(){return base;}void AddAura(int,Player*){}};
+struct Creature:Unit{int area=4714;int GetAreaIdFromPosition(){return area;}bool despawn=false;MotionMaster motion;Vehicle vehicle;void SetReactState(int){}void DespawnOrUnsummon(){despawn=true;}void DespawnOrUnsummon(std::chrono::seconds){despawn=true;}Vehicle*GetVehicleKit(){return &vehicle;}MotionMaster*GetMotionMaster(){return &motion;}void CastSpell(Player*,int,bool){}};
+struct Player:Unit{ObjectGuid guid;bool alive=true;int map=654,area=4714,positionArea=4714,status=QUEST_STATUS_INCOMPLETE;Creature*base=nullptr;int credits=0;Player*ToPlayer()override{return this;}bool IsAlive(){return alive;}int GetMapId(){return map;}int GetAreaId(){return area;}int GetAreaIdFromPosition(){return positionArea;}ObjectGuid GetGUID(){return guid;}int GetQuestStatus(int){return status;}Creature*GetVehicleBase(){return base;}void AddAura(int,Player*){}};
 std::map<int,Player*>players;namespace ObjectAccessor{Player*GetPlayer(Creature&,ObjectGuid g){auto i=players.find(g.id);return i==players.end()?nullptr:i->second;}}
 struct ScriptedAI{Creature*me;ScriptedAI(Creature*c):me(c){}virtual~ScriptedAI()=default;virtual void Reset(){}virtual void IsSummonedBy(Unit*){}virtual void MovementInform(uint32,uint32){}virtual void PassengerBoarded(Unit*,int8,bool){}virtual void UpdateAI(uint32){}};
 void check(bool v,char const*m){if(!v)throw std::runtime_error(m);}
@@ -50,13 +50,18 @@ int main(){
   Creature manor;AI a(&manor);owner.status=QUEST_STATUS_COMPLETE;owner.base=&manor;owner.area=4714;
   a.IsSummonedBy(&owner);a.PassengerBoarded(&owner,0,true);
   other.area=4817;a.UpdateAI(100);check(!manor.despawn&&!manor.vehicle.removals,"another player entering manor has no effect");
-  owner.area=4817;a.UpdateAI(100);check(manor.despawn&&manor.vehicle.removals==1&&a.m_arrived&&!owner.credits,"own manor entry automatically dismounts without fake credit");
+  owner.positionArea=4817;a.UpdateAI(100);check(manor.despawn&&manor.vehicle.removals==1&&a.m_arrived&&!owner.credits,"own manor entry automatically dismounts without fake credit");
   a.UpdateAI(100);a.MovementInform(WAYPOINT_MOTION_TYPE,27);check(manor.vehicle.removals==1,"area and waypoint arrival idempotent");
-  owner.area=4714;
+  owner.area=4714;owner.positionArea=4714;
  }
  {
   Creature unboarded;AI a(&unboarded);owner.area=4817;owner.base=nullptr;a.IsSummonedBy(&owner);a.UpdateAI(100);
-  check(!unboarded.vehicle.removals&&!a.m_arrived,"manor arrival requires actual boarding");owner.area=4714;
+  check(!unboarded.vehicle.removals&&!a.m_arrived,"manor arrival requires actual boarding");owner.area=4714;owner.positionArea=4714;
+ }
+ {
+  Creature manor;AI a(&manor);owner.base=&manor;owner.area=4714;owner.positionArea=4714;
+  a.IsSummonedBy(&owner);a.PassengerBoarded(&owner,0,true);manor.area=4817;
+  a.UpdateAI(100);check(manor.vehicle.removals==1&&manor.motion.idles==1&&a.m_arrived,"vehicle coordinates trigger dismount with stale passenger area");
  }
  Creature early;AI e(&early);e.IsSummonedBy(&owner);owner.base=&early;e.PassengerBoarded(&owner,0,true);e.PassengerBoarded(&owner,0,false);check(early.despawn&&!e.m_arrived&&!owner.credits,"early dismount no fake arrival or credit");
  for(int mode=0;mode<5;++mode){
