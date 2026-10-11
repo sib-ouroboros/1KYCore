@@ -37,7 +37,9 @@ template<class T>struct WaypointMovementGenerator{uint32 i_currentNode=0;void Mo
     # Compile the engine's real dispatch, without rewriting index semantics.
     code+=method(movement,'void WaypointMovementGenerator<Creature>::MovementInform(').replace('void WaypointMovementGenerator<Creature>::','template<> void WaypointMovementGenerator<Creature>::')
     code+='struct Manor:NativeAI{Creature*me;bool m_boarded=true,m_arrived=false;'
-    code+=method(dusk[dusk.index('    struct npc_swift_mountain_horse_36741AI'):],'        void MovementInform(')+'};\n'
+    manor_source=dusk[dusk.index('    struct npc_swift_mountain_horse_36741AI'):]
+    code+=method(manor_source,'        void FinishRide(')
+    code+=method(manor_source,'        void MovementInform(')+'};\n'
     code+='struct Bat:NativeAI{Creature*me;bool m_boarded=true;uint32 m_flightState=1;'
     code+=method(city[city.index('    struct npc_captured_riding_bat_38540AI'):],'        void MovementInform(')+'};\n'
     code+=r'''

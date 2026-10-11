@@ -24,6 +24,7 @@
 #include "GameObjectAI.h"
 #include "MoveSplineInit.h"
 #include "MotionMaster.h"
+#include "Map.h"
 #include "ObjectAccessor.h"
 #include "ObjectMgr.h"
 #include "PassiveAI.h"
@@ -198,6 +199,20 @@ namespace
                 return actor;
             }
         return nullptr;
+    }
+
+    void PrimeGilneasBattleActors(Creature* context)
+    {
+        if (context->GetMapId() != 654)
+            return;
+        // Late-wave leaders live outside the player's initial visibility grids.
+        struct Spawn { uint32 guid; uint32 entry; };
+        Spawn const spawns[] = {{802754, NPC_LORNA_CROWLEY}, {802707, NPC_LORD_DARIUS_CROWLEY},
+            {802822, NPC_KING_GENN_GREYMANE}, {802781, NPC_LADY_SYLVANAS_WINDRUNNER}};
+        for (Spawn const& spawn : spawns)
+            if (CreatureData const* data = sObjectMgr->GetCreatureData(spawn.guid))
+                if (data->id == spawn.entry && data->mapid == 654 && data->phaseId == 187)
+                    context->GetMap()->LoadGrid(data->posX, data->posY);
     }
 
     bool HasGilneasBattlePlayer(Creature* context, float range)
@@ -968,7 +983,10 @@ public:
                 {
                     // Reset clears the local link while Almyra may already have acknowledged it.
                     if (!m_battleIsStarted)
+                    {
+                        PrimeGilneasBattleActors(me);
                         FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 50.0f);
+                    }
 
                     std::list<Player*> playerList = me->SelectNearestPlayers(100.0f, true);
                     for (std::list<Player*>::const_iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
@@ -1030,8 +1048,14 @@ public:
             // Both leaders are required by the first wave's native arrival mask.
             Creature* liam = GetGilneasBattleActor(me, almyra->AI()->GetGUID(NPC_PRINCE_LIAM_GREYMANE_BATTLE), NPC_PRINCE_LIAM_GREYMANE_BATTLE);
             Creature* myriam = GetGilneasBattleActor(me, almyra->AI()->GetGUID(NPC_MYRIAM_SPELLWAKER), NPC_MYRIAM_SPELLWAKER);
-            return liam && myriam && me->GetDistance2d(liam) < 50.0f
-                && me->GetDistance2d(myriam) < 50.0f;
+            if (!liam || !myriam || me->GetDistance2d(liam) >= 50.0f || me->GetDistance2d(myriam) >= 50.0f)
+                return false;
+            // Do not begin a shared battle whose later arrival masks cannot be fulfilled.
+            for (uint32 entry : {uint32(NPC_LORNA_CROWLEY), uint32(NPC_LORD_DARIUS_CROWLEY),
+                uint32(NPC_KING_GENN_GREYMANE), uint32(NPC_LADY_SYLVANAS_WINDRUNNER)})
+                if (!GetGilneasBattleActor(me, almyra->AI()->GetGUID(entry), entry))
+                    return false;
+            return true;
         }
 
         bool StartBattle(Player* player)
@@ -1415,6 +1439,8 @@ public:
 
                     if (m_point < m_waveSize)
                     {
+                        me->SetWalk(false);
+                        me->SetSpeed(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else
@@ -1583,6 +1609,8 @@ public:
                 {
                     float dist = frand(1.0f, 3.0f);
                     float angl = frand(0.0f, float(M_PI) * 2);
+                    follower->SetWalk(false);
+                    follower->SetSpeed(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -2134,6 +2162,8 @@ public:
 
                     if (m_point < m_waveSize)
                     {
+                        me->SetWalk(false);
+                        me->SetSpeed(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -2222,6 +2252,8 @@ public:
                 {
                     float dist = frand(1.0f, 3.0f);
                     float angl = frand(0.0f, float(M_PI) * 2);
+                    follower->SetWalk(false);
+                    follower->SetSpeed(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -2595,6 +2627,8 @@ public:
                     CheckForStartAction();
                     if (m_point < m_waveSize)
                     {
+                        me->SetWalk(false);
+                        me->SetSpeed(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -2680,6 +2714,8 @@ public:
                 {
                     float dist = frand(1.0f, 3.0f);
                     float angl = frand(0.0f, float(M_PI) * 2);
+                    follower->SetWalk(false);
+                    follower->SetSpeed(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -2987,7 +3023,7 @@ public:
                 {
                     if (!m_isInitialised)
                     {
-                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 100.0f))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 700.0f))
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
                         m_events.ScheduleEvent(EVENT_INITIALISE, 1000);
@@ -3023,6 +3059,8 @@ public:
 
                     if (m_point < m_waveSize)
                     {
+                        me->SetWalk(false);
+                        me->SetSpeed(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -3130,6 +3168,7 @@ public:
                     victim->DespawnOrUnsummon(10);
             my_followerList.clear();
             my_cannonList.clear();
+            my_cannonerList.clear();
             my_victimList.clear();
         }
 
@@ -3147,8 +3186,14 @@ public:
                     ++itrM;
                     if (Creature* helper2 = ObjectAccessor::GetCreature(*me, (*itrM)))
                     {
+                        helper1->SetWalk(false);
+                        helper1->SetSpeed(MOVE_RUN, 1.2f);
                         helper1->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 4.71f);
+                        helper2->SetWalk(false);
+                        helper2->SetSpeed(MOVE_RUN, 1.2f);
                         helper2->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 1.57f);
+                        cannon1->SetWalk(false);
+                        cannon1->SetSpeed(MOVE_RUN, 1.2f);
                         cannon1->GetMotionMaster()->MoveFollow(me, 2.0f, 2.14f);
                     }
                 }
@@ -3160,8 +3205,14 @@ public:
                     ++itrM;
                     if (Creature* helper2 = ObjectAccessor::GetCreature(*me, (*itrM)))
                     {
+                        helper1->SetWalk(false);
+                        helper1->SetSpeed(MOVE_RUN, 1.2f);
                         helper1->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 4.71f);
+                        helper2->SetWalk(false);
+                        helper2->SetSpeed(MOVE_RUN, 1.2f);
                         helper2->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 1.57f);
+                        cannon1->SetWalk(false);
+                        cannon1->SetSpeed(MOVE_RUN, 1.2f);
                         cannon1->GetMotionMaster()->MoveFollow(me, 2.0f, 4.14f);
                     }
                 }
@@ -3173,8 +3224,14 @@ public:
                     ++itrM;
                     if (Creature* helper2 = ObjectAccessor::GetCreature(*me, (*itrM)))
                     {
+                        helper1->SetWalk(false);
+                        helper1->SetSpeed(MOVE_RUN, 1.2f);
                         helper1->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 4.71f);
+                        helper2->SetWalk(false);
+                        helper2->SetSpeed(MOVE_RUN, 1.2f);
                         helper2->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 1.57f);
+                        cannon1->SetWalk(false);
+                        cannon1->SetSpeed(MOVE_RUN, 1.2f);
                         cannon1->GetMotionMaster()->MoveFollow(me, 4.0f, 3.14f);
                     }
                 }
@@ -3184,6 +3241,8 @@ public:
                 {
                     float dist = frand(3.0f, 5.0f);
                     float angl = frand(2.14f, 4.14f);
+                    follower->SetWalk(false);
+                    follower->SetSpeed(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -3478,7 +3537,7 @@ public:
                     {
                         if (!m_isInitialised)
                         {
-                            if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 100.0f))
+                            if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 700.0f))
                                 almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
                             m_events.ScheduleEvent(EVENT_INITIALISE, 1000);
@@ -3513,6 +3572,8 @@ public:
                         CheckForStartAction();
                         if (m_point < m_waveSize)
                         {
+                            me->SetWalk(false);
+                            me->SetSpeed(MOVE_RUN, 1.2f);
                             me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                         }
                         else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -3600,6 +3661,8 @@ public:
                 {
                     float dist = frand(3.0f, 5.0f);
                     float angl = frand(2.14f, 4.14f);
+                    follower->SetWalk(false);
+                    follower->SetSpeed(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -3863,7 +3926,7 @@ public:
                 {
                     if (!m_isInitialised)
                     {
-                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 100.0f))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 700.0f))
                         {
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
@@ -3895,6 +3958,8 @@ public:
                     CheckForStartAction();
                     if (m_point < m_waveSize)
                     {
+                        me->SetWalk(false);
+                        me->SetSpeed(MOVE_RUN, 1.2f);
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
@@ -3996,6 +4061,8 @@ public:
                 {
                     float dist = frand(3.0f, 5.0f);
                     float angl = frand(2.14f, 4.14f);
+                    follower->SetWalk(false);
+                    follower->SetSpeed(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                     follower->AI()->SetGUID(me->GetGUID(), NPC_LEADER_GUID);
                 }
@@ -4196,7 +4263,7 @@ public:
 
                     if (!m_isInitialised)
                     {
-                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 100.0f))
+                        if (Creature* almyra = FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 700.0f))
                         {
                             almyra->AI()->SetGUID(me->GetGUID(), me->GetEntry());
 
@@ -4289,6 +4356,8 @@ public:
                 {
                     float dist = frand(3.0f, 5.0f);
                     float angl = frand(2.14f, 4.14f);
+                    follower->SetWalk(false);
+                    follower->SetSpeed(MOVE_RUN, 1.2f);
                     follower->GetMotionMaster()->MoveFollow(me, dist, angl);
                 }
         }

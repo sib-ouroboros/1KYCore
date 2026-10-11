@@ -37,6 +37,8 @@ def main():
             dirty+=['ai.m_targetList.push_back(&foreign);','ai.m_nearestTarget=&foreign;','ai.m_nearestDistance=99;','ai.m_checkDistance=99;']
             clean+=['ai.m_targetList.empty()','!ai.m_nearestTarget','ai.m_nearestDistance==0','ai.m_checkDistance==0']
         if 'm_shootCoolDown' in members:clean.append('ai.m_shootCoolDown==4000')
+        if 'my_cannonerList' in members:
+            dirty.append('ai.my_cannonerList.push_back(99);');clean.append('ai.my_cannonerList.empty()')
         victims='ai.my_victimList.push_back(3);' if 'my_victimList' in members else ''
         victim_check='victim.despawns==1&&ai.my_victimList.empty()' if victims else 'victim.despawns==0'
         checks.append('''{

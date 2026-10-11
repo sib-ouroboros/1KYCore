@@ -1,0 +1,159 @@
+{
+  "LCWave3Pos": {
+    "map": 654,
+    "tiles": 51,
+    "points": [
+      {
+        "point": 1,
+        "ground": true,
+        "source_z": 12.2479,
+        "nav_z": 13.2219
+      },
+      {
+        "point": 2,
+        "ground": true,
+        "source_z": 35.8743,
+        "nav_z": 34.8356
+      },
+      {
+        "point": 3,
+        "ground": true,
+        "source_z": 35.8805,
+        "nav_z": 35.8964
+      },
+      {
+        "point": 4,
+        "ground": true,
+        "source_z": 35.9731,
+        "nav_z": 36.7115
+      },
+      {
+        "point": 5,
+        "ground": true,
+        "source_z": 35.8805,
+        "nav_z": 35.9703
+      },
+      {
+        "point": 6,
+        "ground": true,
+        "source_z": 35.5561,
+        "nav_z": 35.4328
+      },
+      {
+        "point": 7,
+        "ground": true,
+        "source_z": 35.5563,
+        "nav_z": 35.1843
+      },
+      {
+        "point": 8,
+        "ground": true,
+        "source_z": 35.6635,
+        "nav_z": 34.9056
+      },
+      {
+        "point": 9,
+        "ground": true,
+        "source_z": 18.2773,
+        "nav_z": 19.3864
+      },
+      {
+        "point": 10,
+        "ground": true,
+        "source_z": 18.6469,
+        "nav_z": 19.541
+      }
+    ],
+    "segments": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "complete": true
+  },
+  "LGWave3Pos": {
+    "map": 654,
+    "tiles": 51,
+    "points": [
+      {
+        "point": 1,
+        "ground": true,
+        "source_z": 35.5562,
+        "nav_z": 35.3106
+      },
+      {
+        "point": 2,
+        "ground": true,
+        "source_z": 35.6635,
+        "nav_z": 34.9056
+      },
+      {
+        "point": 3,
+        "ground": true,
+        "source_z": 18.2773,
+        "nav_z": 19.3864
+      },
+      {
+        "point": 4,
+        "ground": true,
+        "source_z": 18.6469,
+        "nav_z": 18.8298
+      }
+    ],
+    "segments": [
+      true,
+      true,
+      true
+    ],
+    "complete": true
+  },
+  "SAWave3Pos": {
+    "map": 654,
+    "tiles": 51,
+    "points": [
+      {
+        "point": 1,
+        "ground": true,
+        "source_z": 35.5563,
+        "nav_z": 35.8248
+      },
+      {
+        "point": 2,
+        "ground": true,
+        "source_z": 35.5564,
+        "nav_z": 34.9919
+      },
+      {
+        "point": 3,
+        "ground": true,
+        "source_z": 35.6627,
+        "nav_z": 34.8698
+      },
+      {
+        "point": 4,
+        "ground": true,
+        "source_z": 18.2737,
+        "nav_z": 18.9529
+      }
+    ],
+    "segments": [
+      true,
+      true,
+      true
+    ],
+    "complete": true
+  },
+  "reported_stop": {
+    "x": -1613.41,
+    "y": 1312.47,
+    "z": 18.64,
+    "matches": "LGWave3Pos[3]"
+  },
+  "audit": "Late-wave registration search100 yards misses initial staging actors; pre-load four known actor grids and bind to controller within700 yards before allowing the event. Keep original arrival masks and route points. Death pauses living participant gates; resurrection resumes, native10-minute no-progress timeout still permits a clean restart."
+}
