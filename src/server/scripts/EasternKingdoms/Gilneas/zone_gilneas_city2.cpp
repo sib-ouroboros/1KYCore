@@ -945,6 +945,11 @@ public:
         bool     m_battleIsStarted;
         bool     m_playerIsInvited;
 
+        void DamageTaken(Unit* /*attacker*/, uint32& damage) override
+        {
+            damage = 0;
+        }
+
         void Reset() override
         {
             m_events.Reset();

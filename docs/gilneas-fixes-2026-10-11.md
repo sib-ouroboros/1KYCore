@@ -163,3 +163,10 @@ Commander wave movement, following militia, artillery helpers/cannons and finale
 followers retain original routes, SetWalk(false), timers and dialogue. Fixtures
 now distinguish absolute speed from rate and assert actual8.4m/s movement across
 six leaders, cannon/helpers and militia. No SQL or production-server changes.
+
+
+## Battle stops at the third-wave gathering point
+
+`WorldObject::SelectNearestPlayers` visited `GridTypeMapContainer`, which has no Player type. Players are stored in `WorldTypeMapContainer`. Switch this player-only search to `Cell::VisitWorldObjects`; preserve its radius/alive predicates and the quest helper's map, phase and incomplete-quest gates. This fixes the first player-presence gate at wave 3 without skipping any leader arrivals. Cannons are intentionally parked at Lorna wave-3 point 7 and are not part of the arrival mask.
+
+The six allied commanders already zero combat damage. Add the same protection to Krennan, the event starter. Preserve cinematic Liam and enemy encounters. The synchronization fixture now executes the production player selector against separate grid/world visitors and verifies seven actual allied DamageTaken methods. Full gameplay confirmation remains required.

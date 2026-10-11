@@ -2919,7 +2919,8 @@ std::list<Player*> WorldObject::SelectNearestPlayers(float range, bool alive)
     std::list<Player*> PlayerList;
     Trinity::AnyPlayerInObjectRangeCheck checker(this, range, alive);
     Trinity::PlayerListSearcher<Trinity::AnyPlayerInObjectRangeCheck> searcher(this, PlayerList, checker);
-    Cell::VisitGridObjects(this, searcher, range);
+    // Players belong to WorldTypeMapContainer, not GridTypeMapContainer.
+    Cell::VisitWorldObjects(this, searcher, range);
     return PlayerList;
 }
 
