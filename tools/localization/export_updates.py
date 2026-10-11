@@ -11,6 +11,17 @@ from pathlib import Path
 
 
 def export(root, check=False):
+    manifest_path = root / "docs/localization/automatic-updates.json"
+    if manifest_path.exists():
+        manifest_data = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if manifest_data.get("mode") == "embedded-database":
+            if not check:
+                raise RuntimeError("ruRU is embedded in release databases; automatic SQL export is retired")
+            assert manifest_data["packages"] == []
+            for database in ("world", "hotfixes"):
+                assert not (root / "sql/updates" / database / "ruRU").exists()
+            print("Verified embedded ruRU mode: no automatic localization SQL directories")
+            return
     records = []
     expected = set()
     for bundle, database in (("world", "world"), ("hotfix", "hotfixes")):

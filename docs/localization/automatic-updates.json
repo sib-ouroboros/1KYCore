@@ -1,6 +1,9 @@
 {
-  "format": 1,
-  "packages": [
+  "format": 2,
+  "mode": "embedded-database",
+  "release": "https://github.com/sib-ouroboros/1KYCore/releases/tag/db735.02-ruru-20261011-r1",
+  "note": "Automatic ruRU SQL directories removed; translations included in published database dumps.",
+  "archived_packages": [
     {
       "source": "sql/optional/ruRU/2026-10-04/world/choices-001.apply.sql.gz",
       "file": "sql/updates/world/ruRU/zz_2026_10_04_ruRU_world_choices-001.apply.sql",
@@ -3676,5 +3679,6 @@
       "sha256": "83a6654218eec21e4a240b5495c4d10ab4f3885501f0dd9f92447adac7c9ff63",
       "updater_sha1": "37b32cf8773e1ead5ae1f5ee0df0aa358fb38670"
     }
-  ]
+  ],
+  "packages": []
 }
