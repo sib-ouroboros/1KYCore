@@ -44,6 +44,7 @@
 #include "TemporarySummon.h"
 #include "Vehicle.h"
 #include "WorldSession.h"
+#include "WaypointManager.h"
 #include "zone_gilneas.h"
 
 enum eZoneGilneasCity2
@@ -199,6 +200,14 @@ namespace
                 return actor;
             }
         return nullptr;
+    }
+
+    bool HasGilneasBattleCinematicPaths()
+    {
+        WaypointPath const* liam = sWaypointMgr->GetPath(3847401);
+        WaypointPath const* sylvanas = sWaypointMgr->GetPath(3846901);
+        // Native zero-based callbacks need Liam indices2/3 and Sylvanas index2.
+        return liam && liam->nodes.size() >= 4 && sylvanas && sylvanas->nodes.size() >= 3;
     }
 
     void PrimeGilneasBattleActors(Creature* context)
@@ -1040,6 +1049,9 @@ public:
                 || player->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) != QUEST_STATUS_INCOMPLETE)
                 return false;
 
+            if (!HasGilneasBattleCinematicPaths())
+                return false;
+
             Creature* almyra = GetGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA);
             if (!almyra || me->GetDistance2d(almyra) >= 50.0f
                 || almyra->AI()->GetData(DATA_IS_BATTLE_STARTED))
@@ -1536,8 +1548,12 @@ public:
                                 }
                                 case 4: // running near to gorerot
                                 {
+                                    if (!me->SummonCreature(NPC_GOREROT, SpawnPosGorerot[0], TEMPSUMMON_DEAD_DESPAWN))
+                                    {
+                                        m_events.ScheduleEvent(EVENT_SYNC_BEFORE_NEXT_WAVE, 2500);
+                                        break;
+                                    }
                                     SendActionValueToAllLeader(ACTION_EVENT_RESET_TIMER);
-                                    me->SummonCreature(NPC_GOREROT, SpawnPosGorerot[0], TEMPSUMMON_DEAD_DESPAWN);
                                     SendActionValueToAllLeader(ACTION_MOVE_TO_WAVE_POSION_5);
                                     m_events.ScheduleEvent(EVENT_MOVE_WAVE, 250);
                                     break;
@@ -3174,67 +3190,33 @@ public:
 
         void BuildFollowerGroup()
         {
-            if (my_cannonList.size() != 3 || my_cannonerList.size() != 6)
-                return;
-
-            std::list<ObjectGuid>::const_iterator itrC = my_cannonList.begin();
-            std::list<ObjectGuid>::const_iterator itrM = my_cannonerList.begin();
-
-            if (Creature* cannon1 = ObjectAccessor::GetCreature(*me, (*itrC)))
-                if (Creature* helper1 = ObjectAccessor::GetCreature(*me, (*itrM)))
+            // Pair each cannon with its own two helper slots even if a summon has disappeared.
+            // A partial artillery group must not leave all remaining militia standing at spawn.
+            float const distances[] = {2.0f, 2.0f, 4.0f};
+            float const angles[] = {2.14f, 4.14f, 3.14f};
+            auto helper = my_cannonerList.begin();
+            uint32 index = 0;
+            for (ObjectGuid cannonGuid : my_cannonList)
+            {
+                if (index >= 3)
+                    break;
+                Creature* cannon = ObjectAccessor::GetCreature(*me, cannonGuid);
+                for (uint32 slot = 0; slot < 2 && helper != my_cannonerList.end(); ++slot, ++helper)
+                    if (cannon)
+                        if (Creature* villager = ObjectAccessor::GetCreature(*me, *helper))
+                        {
+                            villager->SetWalk(false);
+                            villager->SetSpeed(MOVE_RUN, 1.2f);
+                            villager->GetMotionMaster()->MoveFollow(cannon, 1.0f, slot ? 1.57f : 4.71f);
+                        }
+                if (cannon)
                 {
-                    ++itrM;
-                    if (Creature* helper2 = ObjectAccessor::GetCreature(*me, (*itrM)))
-                    {
-                        helper1->SetWalk(false);
-                        helper1->SetSpeed(MOVE_RUN, 1.2f);
-                        helper1->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 4.71f);
-                        helper2->SetWalk(false);
-                        helper2->SetSpeed(MOVE_RUN, 1.2f);
-                        helper2->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 1.57f);
-                        cannon1->SetWalk(false);
-                        cannon1->SetSpeed(MOVE_RUN, 1.2f);
-                        cannon1->GetMotionMaster()->MoveFollow(me, 2.0f, 2.14f);
-                    }
+                    cannon->SetWalk(false);
+                    cannon->SetSpeed(MOVE_RUN, 1.2f);
+                    cannon->GetMotionMaster()->MoveFollow(me, distances[index], angles[index]);
                 }
-            ++itrC;
-            ++itrM;
-            if (Creature* cannon1 = ObjectAccessor::GetCreature(*me, (*itrC)))
-                if (Creature* helper1 = ObjectAccessor::GetCreature(*me, (*itrM)))
-                {
-                    ++itrM;
-                    if (Creature* helper2 = ObjectAccessor::GetCreature(*me, (*itrM)))
-                    {
-                        helper1->SetWalk(false);
-                        helper1->SetSpeed(MOVE_RUN, 1.2f);
-                        helper1->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 4.71f);
-                        helper2->SetWalk(false);
-                        helper2->SetSpeed(MOVE_RUN, 1.2f);
-                        helper2->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 1.57f);
-                        cannon1->SetWalk(false);
-                        cannon1->SetSpeed(MOVE_RUN, 1.2f);
-                        cannon1->GetMotionMaster()->MoveFollow(me, 2.0f, 4.14f);
-                    }
-                }
-            ++itrC;
-            ++itrM;
-            if (Creature* cannon1 = ObjectAccessor::GetCreature(*me, (*itrC)))
-                if (Creature* helper1 = ObjectAccessor::GetCreature(*me, (*itrM)))
-                {
-                    ++itrM;
-                    if (Creature* helper2 = ObjectAccessor::GetCreature(*me, (*itrM)))
-                    {
-                        helper1->SetWalk(false);
-                        helper1->SetSpeed(MOVE_RUN, 1.2f);
-                        helper1->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 4.71f);
-                        helper2->SetWalk(false);
-                        helper2->SetSpeed(MOVE_RUN, 1.2f);
-                        helper2->GetMotionMaster()->MoveFollow(cannon1, 1.0f, 1.57f);
-                        cannon1->SetWalk(false);
-                        cannon1->SetSpeed(MOVE_RUN, 1.2f);
-                        cannon1->GetMotionMaster()->MoveFollow(me, 4.0f, 3.14f);
-                    }
-                }
+                ++index;
+            }
 
             for (std::list<ObjectGuid>::const_iterator itr = my_followerList.begin(); itr != my_followerList.end(); ++itr)
                 if (Creature* follower = ObjectAccessor::GetCreature(*me, (*itr)))
@@ -3873,7 +3855,7 @@ public:
                 }
                 case ACTION_KING_TALK_2:
                 {
-                    Talk(2);
+                    Talk(1);
                     break;
                 }
                 case ACTION_SYLVANAS_HAS_ENOUGH:
@@ -3963,7 +3945,7 @@ public:
                         me->GetMotionMaster()->MovePoint(2000 + m_wave, GetWavePosition());
                     }
                     else if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
-                        almyra->AI()->DoAction(ACTION_LORNA_ARRIVED);
+                        almyra->AI()->DoAction(ACTION_GENN_ARRIVED);
                     break;
                 }
                 case EVENT_FIGHT_WAVE:
@@ -4018,7 +4000,7 @@ public:
                 {
                     RefreshCinematicLiam();
                     if (Creature* liam = ObjectAccessor::GetCreature(*me, m_liam2GUID))
-                        liam->AI()->Talk(2);
+                        liam->AI()->Talk(1);
 
                     m_events.ScheduleEvent(EVENT_LIAM_DEATH_TALK2, 5000);
                     break;
@@ -4027,7 +4009,7 @@ public:
                 {
                     RefreshCinematicLiam();
                     if (Creature* liam = ObjectAccessor::GetCreature(*me, m_liam2GUID))
-                        liam->AI()->Talk(3);
+                        liam->AI()->Talk(2);
                     break;
                 }
                 }
@@ -4142,6 +4124,7 @@ public:
         bool     m_cinematicStarted = false;
         bool     m_liamDeathQueued = false;
         bool     m_completionHandled = false;
+        uint32   m_liamSummonAttempts = 0;
         ObjectGuid   m_almyraGUID;
         ObjectGuid   m_liamGUID;
         ObjectGuid   m_kingGUID;
@@ -4153,6 +4136,7 @@ public:
             m_cinematicStarted = false;
             m_liamDeathQueued = false;
             m_completionHandled = false;
+            m_liamSummonAttempts = 0;
             m_almyraGUID = ObjectGuid::Empty;
             m_liamGUID = ObjectGuid::Empty;
             m_kingGUID = ObjectGuid::Empty;
@@ -4212,7 +4196,7 @@ public:
                 {
                     if (Creature* liam = ObjectAccessor::GetCreature(*me, m_liamGUID))
                         me->CastSpell(liam, SPELL_AIMED_SHOOT);
-                    Talk(3); // Let's see how brave Gilneas gets on without its stubborn leader!
+                    Talk(1); // Let's see how brave Gilneas gets on without its stubborn leader!
                     break;
                 }
                 case ACTION_SHOOT_AT_KING:
@@ -4280,8 +4264,12 @@ public:
                 }
                 case EVENT_SYLVANAS_ATTACK1:
                 {
-                    me->CastSpell(me, SPELL_BANSHEE_QUEENS_WAIL);
-                    me->CastSpell(me, SPELL_DESPAWN_FORSAKEN);
+                    if (!m_liamSummonAttempts)
+                    {
+                        me->CastSpell(me, SPELL_BANSHEE_QUEENS_WAIL);
+                        me->CastSpell(me, SPELL_DESPAWN_FORSAKEN);
+                    }
+                    ++m_liamSummonAttempts;
 
                     if (Creature* liam = me->SummonCreature(NPC_PRINCE_LIAM_GREYMANE, -1634.62f, 1632.86f, 21.2116f, 4.44084f, TEMPSUMMON_MANUAL_DESPAWN))
                     {
@@ -4289,6 +4277,14 @@ public:
 
                         if (Creature* almyra = ObjectAccessor::GetCreature(*me, m_almyraGUID))
                             almyra->AI()->SetGUID(liam->GetGUID(), liam->GetEntry());
+                    }
+
+                    else
+                    {
+                        // Retry transient creation failure, then let the existing timeout reset the battle.
+                        if (m_liamSummonAttempts < 5)
+                            m_events.ScheduleEvent(EVENT_SYLVANAS_ATTACK1, 1000);
+                        return;
                     }
 
                     m_events.ScheduleEvent(EVENT_SYLVANAS_ATTACK2, 1000);
@@ -4312,7 +4308,7 @@ public:
                     if (!m_liamDeathQueued || m_completionHandled)
                         break;
                     m_completionHandled = true;
-                    Talk(1);
+                    Talk(2);
                     std::list<Player*> playerList = me->SelectNearestPlayers(50.0f);
                     for (std::list<Player*>::const_iterator itr = playerList.begin(); itr != playerList.end(); ++itr)
                         if ((*itr)->GetQuestStatus(QUEST_THE_BATTLE_FOR_GILNEAS_CITY) == QUEST_STATUS_INCOMPLETE)
@@ -4479,7 +4475,7 @@ public:
                     if (Creature* king = ObjectAccessor::GetCreature(*me, m_kingGUID))
                     {
                         king->GetMotionMaster()->MovePoint(1002, -1680.864f, 1619.74f, 20.48808f);
-                        king->AI()->Talk(1);
+                        king->AI()->Talk(2);
                     }
                 }
         }

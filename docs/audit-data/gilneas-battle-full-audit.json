@@ -1,0 +1,372 @@
+{
+  "map": 654,
+  "client_geometry": "F:/Projects/extracted-735-new/mmaps",
+  "navmesh_tiles": 51,
+  "coverage": "27 distinct arrays,31 leader/wave assignments,all intra-array ground points and full Detour paths; live movement/combat and inter-wave transitions still need client verification.",
+  "routes": {
+    "Wave6Pos": {
+      "points": 21,
+      "segments": 20,
+      "complete": true,
+      "max_z_delta": 1.09
+    },
+    "SAWave1Pos": {
+      "points": 9,
+      "segments": 8,
+      "complete": true,
+      "max_z_delta": 0.995
+    },
+    "SAWave2Pos": {
+      "points": 12,
+      "segments": 11,
+      "complete": true,
+      "max_z_delta": 0.907
+    },
+    "SAWave3Pos": {
+      "points": 4,
+      "segments": 3,
+      "complete": true,
+      "max_z_delta": 0.793
+    },
+    "SAWave4Pos": {
+      "points": 23,
+      "segments": 22,
+      "complete": true,
+      "max_z_delta": 1.299
+    },
+    "SAWave5Pos": {
+      "points": 2,
+      "segments": 1,
+      "complete": true,
+      "max_z_delta": 0.914
+    },
+    "SAWave7Pos": {
+      "points": 4,
+      "segments": 3,
+      "complete": true,
+      "max_z_delta": 0.368
+    },
+    "LGWave1Pos": {
+      "points": 8,
+      "segments": 7,
+      "complete": true,
+      "max_z_delta": 0.828
+    },
+    "LGWave2Pos": {
+      "points": 12,
+      "segments": 11,
+      "complete": true,
+      "max_z_delta": 1.476
+    },
+    "LGWave3Pos": {
+      "points": 4,
+      "segments": 3,
+      "complete": true,
+      "max_z_delta": 1.109
+    },
+    "LGWave4Pos": {
+      "points": 23,
+      "segments": 22,
+      "complete": true,
+      "max_z_delta": 0.921
+    },
+    "LGWave5Pos": {
+      "points": 2,
+      "segments": 1,
+      "complete": true,
+      "max_z_delta": 0.757
+    },
+    "LGWave7Pos": {
+      "points": 3,
+      "segments": 2,
+      "complete": true,
+      "max_z_delta": 1.218
+    },
+    "MSWave1Pos": {
+      "points": 8,
+      "segments": 7,
+      "complete": true,
+      "max_z_delta": 0.545
+    },
+    "MSWave2Pos": {
+      "points": 10,
+      "segments": 9,
+      "complete": true,
+      "max_z_delta": 0.577
+    },
+    "MSWave3Pos": {
+      "points": 3,
+      "segments": 2,
+      "complete": true,
+      "max_z_delta": 1.222
+    },
+    "MSWave4Pos": {
+      "points": 29,
+      "segments": 28,
+      "complete": true,
+      "max_z_delta": 1.237
+    },
+    "MSWave5Pos": {
+      "points": 2,
+      "segments": 1,
+      "complete": true,
+      "max_z_delta": 0.713
+    },
+    "MSWave7Pos": {
+      "points": 4,
+      "segments": 3,
+      "complete": true,
+      "max_z_delta": 0.53
+    },
+    "LCWave3Pos": {
+      "points": 10,
+      "segments": 9,
+      "complete": true,
+      "max_z_delta": 1.109
+    },
+    "LCWave4Pos": {
+      "points": 31,
+      "segments": 30,
+      "complete": true,
+      "max_z_delta": 0.708
+    },
+    "LCWave5Pos": {
+      "points": 2,
+      "segments": 1,
+      "complete": true,
+      "max_z_delta": 0.151
+    },
+    "LCWave7Pos": {
+      "points": 4,
+      "segments": 3,
+      "complete": true,
+      "max_z_delta": 0.332
+    },
+    "DCWave4Pos": {
+      "points": 5,
+      "segments": 4,
+      "complete": true,
+      "max_z_delta": 0.556
+    },
+    "DCWave5Pos": {
+      "points": 1,
+      "segments": 0,
+      "complete": true,
+      "max_z_delta": 0.368
+    },
+    "DCWave7Pos": {
+      "points": 4,
+      "segments": 3,
+      "complete": true,
+      "max_z_delta": 0.332
+    },
+    "GGWave7Pos": {
+      "points": 4,
+      "segments": 3,
+      "complete": true,
+      "max_z_delta": 0.479
+    }
+  },
+  "assignments": [
+    {
+      "leader": "npc_sister_almyra_38466AI",
+      "wave": 1,
+      "array": "SAWave1Pos",
+      "points": 9
+    },
+    {
+      "leader": "npc_sister_almyra_38466AI",
+      "wave": 2,
+      "array": "SAWave2Pos",
+      "points": 12
+    },
+    {
+      "leader": "npc_sister_almyra_38466AI",
+      "wave": 3,
+      "array": "SAWave3Pos",
+      "points": 4
+    },
+    {
+      "leader": "npc_sister_almyra_38466AI",
+      "wave": 4,
+      "array": "SAWave4Pos",
+      "points": 23
+    },
+    {
+      "leader": "npc_sister_almyra_38466AI",
+      "wave": 5,
+      "array": "SAWave5Pos",
+      "points": 2
+    },
+    {
+      "leader": "npc_sister_almyra_38466AI",
+      "wave": 6,
+      "array": "Wave6Pos",
+      "points": 21
+    },
+    {
+      "leader": "npc_sister_almyra_38466AI",
+      "wave": 7,
+      "array": "SAWave7Pos",
+      "points": 4
+    },
+    {
+      "leader": "npc_prince_liam_greymane_38218AI",
+      "wave": 1,
+      "array": "LGWave1Pos",
+      "points": 8
+    },
+    {
+      "leader": "npc_prince_liam_greymane_38218AI",
+      "wave": 2,
+      "array": "LGWave2Pos",
+      "points": 12
+    },
+    {
+      "leader": "npc_prince_liam_greymane_38218AI",
+      "wave": 3,
+      "array": "LGWave3Pos",
+      "points": 4
+    },
+    {
+      "leader": "npc_prince_liam_greymane_38218AI",
+      "wave": 4,
+      "array": "LGWave4Pos",
+      "points": 23
+    },
+    {
+      "leader": "npc_prince_liam_greymane_38218AI",
+      "wave": 5,
+      "array": "LGWave5Pos",
+      "points": 2
+    },
+    {
+      "leader": "npc_prince_liam_greymane_38218AI",
+      "wave": 6,
+      "array": "Wave6Pos",
+      "points": 21
+    },
+    {
+      "leader": "npc_prince_liam_greymane_38218AI",
+      "wave": 7,
+      "array": "LGWave7Pos",
+      "points": 3
+    },
+    {
+      "leader": "npc_myriam_spellwaker_38465AI",
+      "wave": 1,
+      "array": "MSWave1Pos",
+      "points": 8
+    },
+    {
+      "leader": "npc_myriam_spellwaker_38465AI",
+      "wave": 2,
+      "array": "MSWave2Pos",
+      "points": 10
+    },
+    {
+      "leader": "npc_myriam_spellwaker_38465AI",
+      "wave": 3,
+      "array": "MSWave3Pos",
+      "points": 3
+    },
+    {
+      "leader": "npc_myriam_spellwaker_38465AI",
+      "wave": 4,
+      "array": "MSWave4Pos",
+      "points": 29
+    },
+    {
+      "leader": "npc_myriam_spellwaker_38465AI",
+      "wave": 5,
+      "array": "MSWave5Pos",
+      "points": 2
+    },
+    {
+      "leader": "npc_myriam_spellwaker_38465AI",
+      "wave": 6,
+      "array": "Wave6Pos",
+      "points": 21
+    },
+    {
+      "leader": "npc_myriam_spellwaker_38465AI",
+      "wave": 7,
+      "array": "MSWave7Pos",
+      "points": 4
+    },
+    {
+      "leader": "npc_lorna_crowley_38426AI",
+      "wave": 3,
+      "array": "LCWave3Pos",
+      "points": 10
+    },
+    {
+      "leader": "npc_lorna_crowley_38426AI",
+      "wave": 4,
+      "array": "LCWave4Pos",
+      "points": 31
+    },
+    {
+      "leader": "npc_lorna_crowley_38426AI",
+      "wave": 5,
+      "array": "LCWave5Pos",
+      "points": 2
+    },
+    {
+      "leader": "npc_lorna_crowley_38426AI",
+      "wave": 6,
+      "array": "Wave6Pos",
+      "points": 21
+    },
+    {
+      "leader": "npc_lorna_crowley_38426AI",
+      "wave": 7,
+      "array": "LCWave7Pos",
+      "points": 4
+    },
+    {
+      "leader": "npc_lord_darius_crowley_38415AI",
+      "wave": 4,
+      "array": "DCWave4Pos",
+      "points": 5
+    },
+    {
+      "leader": "npc_lord_darius_crowley_38415AI",
+      "wave": 5,
+      "array": "DCWave5Pos",
+      "points": 1
+    },
+    {
+      "leader": "npc_lord_darius_crowley_38415AI",
+      "wave": 6,
+      "array": "Wave6Pos",
+      "points": 21
+    },
+    {
+      "leader": "npc_lord_darius_crowley_38415AI",
+      "wave": 7,
+      "array": "DCWave7Pos",
+      "points": 4
+    },
+    {
+      "leader": "npc_king_genn_greymane_38470AI",
+      "wave": 7,
+      "array": "GGWave7Pos",
+      "points": 4
+    }
+  ],
+  "dependencies": {
+    "broadcast_text": 28,
+    "ruRU": 28,
+    "voice_soundkits": 21,
+    "late_leaders": "native script/phase registration checked before start",
+    "cinematic_paths": "Liam>=4 nodes,Sylvanas>=3 nodes required before start"
+  },
+  "recovery": {
+    "participant": "presence gates wait for a living quest participant; return releases gate",
+    "gorerot": "failed summon retries without renewing timeout",
+    "cinematic_liam": "up to5 attempts,area effects once,then existing timeout",
+    "global_timeout_minutes": 10
+  },
+  "production_server_updated": false
+}

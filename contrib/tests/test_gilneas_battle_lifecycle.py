@@ -31,7 +31,7 @@ def main():
             dirty.append('ai.'+field+'=99;');clean.append('!ai.'+field)
         for field in ['m_isInitialised','m_battleIsStarted','m_doneA','m_doneB','m_cinematicStarted','m_liamDeathQueued','m_completionHandled']:
             if field in members:dirty.append('ai.'+field+'=true;');clean.append('!ai.'+field)
-        for field in ['m_wave','m_waveSize','m_point','m_ai_counter','m_arrivedMask','m_ridingWorgen']:
+        for field in ['m_wave','m_waveSize','m_point','m_ai_counter','m_arrivedMask','m_ridingWorgen','m_liamSummonAttempts']:
             if re.search(r'\b'+field+r'\b',members):dirty.append('ai.'+field+'=99;');clean.append('ai.'+field+'==0')
         if 'm_targetList' in members:
             dirty+=['ai.m_targetList.push_back(&foreign);','ai.m_nearestTarget=&foreign;','ai.m_nearestDistance=99;','ai.m_checkDistance=99;']

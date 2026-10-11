@@ -1,0 +1,334 @@
+{
+  "source": "Existing Legion735 BroadcastText and ruRU localization; ArkCORE historical SQL identifies speech IDs.",
+  "hotfix_sha256": "2cd069bf5ca5d7cd8b78736bd9618c3a507c711387a973e1a2ce3fd59f81f425",
+  "lines": [
+    {
+      "entry": 38218,
+      "group": 0,
+      "id": 0,
+      "broadcast": 37888,
+      "type": 14,
+      "sound": 19623,
+      "en": "The Forsaken think we're weak.  A broken people.  They think we'll roll over like a scared dog.",
+      "ru": "Отрекшиеся думают, что мы ослабли, опустили руки. Они думают, что мы убежим, поджав хвост."
+    },
+    {
+      "entry": 38218,
+      "group": 1,
+      "id": 0,
+      "broadcast": 37893,
+      "type": 14,
+      "sound": 19624,
+      "en": "How wrong they are.  We will fight them in the fields until the last trench collapses and the last cannon is silenced.",
+      "ru": "Как же они ошибаются! Мы будем стоять до конца, будем биться, пока у нас есть пушки и солдаты в окопах."
+    },
+    {
+      "entry": 38218,
+      "group": 2,
+      "id": 0,
+      "broadcast": 37891,
+      "type": 14,
+      "sound": 19625,
+      "en": "We will fight them on the streets until the last shot is fired.  And when there's no more ammunition, we'll crush their skulls with the stones that pave our city.",
+      "ru": "Мы будем сражаться на улицах до последнего патрона. А когда нам нечем будет стрелять, мы будем разбивать их черепа булыжниками с мостовой."
+    },
+    {
+      "entry": 38218,
+      "group": 3,
+      "id": 0,
+      "broadcast": 37892,
+      "type": 14,
+      "sound": 19626,
+      "en": "We will fight them in the alleys, until our knuckles are skinned and bloody and our rapiers lay on the ground shattered.",
+      "ru": "Мы будем сражаться в подворотнях, пока с наших костяшек не сойдет кожа, а рапиры не упадут на землю сломанными."
+    },
+    {
+      "entry": 38218,
+      "group": 4,
+      "id": 0,
+      "broadcast": 37895,
+      "type": 14,
+      "sound": 19627,
+      "en": "And if we find ourselves surrounded and disarmed... wounded and without hope... we will lift our heads in defiance and spit in their faces.",
+      "ru": "А если мы будем зажаты в угол, лишимся сил, оружия и надежды... Мы поднимем голову с презрением и плюнем им в лицо."
+    },
+    {
+      "entry": 38218,
+      "group": 5,
+      "id": 0,
+      "broadcast": 37896,
+      "type": 14,
+      "sound": 19628,
+      "en": "But we will... NEVER SURRENDER!!!!!",
+      "ru": "Но мы... НИКОГДА НЕ СДАДИМСЯ!"
+    },
+    {
+      "entry": 38218,
+      "group": 6,
+      "id": 0,
+      "broadcast": 37897,
+      "type": 14,
+      "sound": 19651,
+      "en": "FOR GILNEAS!!!",
+      "ru": "ЗА ГИЛНЕАС!!!"
+    },
+    {
+      "entry": 38218,
+      "group": 7,
+      "id": 0,
+      "broadcast": 38493,
+      "type": 12,
+      "sound": 0,
+      "en": "Gilneas will prevail!",
+      "ru": "За Гилнеас!"
+    },
+    {
+      "entry": 38218,
+      "group": 7,
+      "id": 1,
+      "broadcast": 38494,
+      "type": 12,
+      "sound": 0,
+      "en": "Your time is up, Forsaken scum!",
+      "ru": "Прошло ваше время, Отрекшиеся мрази!"
+    },
+    {
+      "entry": 38218,
+      "group": 7,
+      "id": 2,
+      "broadcast": 38495,
+      "type": 12,
+      "sound": 0,
+      "en": "Attack!",
+      "ru": "Атакуйте!"
+    },
+    {
+      "entry": 38218,
+      "group": 7,
+      "id": 3,
+      "broadcast": 38496,
+      "type": 12,
+      "sound": 0,
+      "en": "Push them back!",
+      "ru": "Тесни их!"
+    },
+    {
+      "entry": 38218,
+      "group": 8,
+      "id": 0,
+      "broadcast": 38362,
+      "type": 12,
+      "sound": 19609,
+      "en": "Abominations are blocking the way towards the military district!  This won't be easy.",
+      "ru": "Поганища перекрывают путь к Военному кварталу! Пробиться будет нелегко."
+    },
+    {
+      "entry": 38218,
+      "group": 9,
+      "id": 0,
+      "broadcast": 38345,
+      "type": 14,
+      "sound": 19610,
+      "en": "You're a sight for sore eyes, Lorna.  Let's get those cannons manned!  The rest of you, lure the abominations into the open!",
+      "ru": "Лорна, как я рад тебя видеть! Солдаты – по пушкам! Остальные выманивают поганищ на открытое пространство!"
+    },
+    {
+      "entry": 38218,
+      "group": 10,
+      "id": 0,
+      "broadcast": 38360,
+      "type": 14,
+      "sound": 19611,
+      "en": "Crowley's troops are up ahead!  Press on!",
+      "ru": "Впереди войска Краули! Поднажмем!"
+    },
+    {
+      "entry": 38426,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38322,
+      "type": 14,
+      "sound": 19684,
+      "en": "The villagers were thankful to have Emberstone back.  They brought us a little something to help against the Forsaken!",
+      "ru": "Люди благодарны за возвращение Деревни Тлеющего Угля. Они дали нам кое-что, чтобы помочь против Отрекшихся!"
+    },
+    {
+      "entry": 38415,
+      "group": 1,
+      "id": 0,
+      "broadcast": 38361,
+      "type": 14,
+      "sound": 19500,
+      "en": "Let us join your father's force's, Liam.  They'll need our help against Sylvanas.",
+      "ru": "Давай присоединимся к твоему отцу. Ему нужна помощь."
+    },
+    {
+      "entry": 38415,
+      "group": 2,
+      "id": 0,
+      "broadcast": 38662,
+      "type": 14,
+      "sound": 0,
+      "en": "He's too strong!  Use the catapults to bring him down!",
+      "ru": "Он слишком силен! Стреляйте из катапульт, и он падет!"
+    },
+    {
+      "entry": 38331,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38251,
+      "type": 14,
+      "sound": 20914,
+      "en": "Gorerot crush puny worgen!!",
+      "ru": "Гнилокров раздавит хилого воргена!"
+    },
+    {
+      "entry": 38470,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38364,
+      "type": 14,
+      "sound": 19725,
+      "en": "Block their retreat, Liam!  We've got them right where we want them!",
+      "ru": "Не дай им уйти, Лиам! Они как раз там, где нам нужно!"
+    },
+    {
+      "entry": 38470,
+      "group": 1,
+      "id": 0,
+      "broadcast": 38365,
+      "type": 14,
+      "sound": 19726,
+      "en": "SYLVANAS!!",
+      "ru": "СИЛЬВАНА!!!"
+    },
+    {
+      "entry": 38470,
+      "group": 2,
+      "id": 0,
+      "broadcast": 38485,
+      "type": 14,
+      "sound": 19727,
+      "en": "LIAM!!  NO!!!",
+      "ru": "ЛИАМ!!! НЕТ!!!"
+    },
+    {
+      "entry": 38469,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38366,
+      "type": 14,
+      "sound": 20457,
+      "en": "Enough!",
+      "ru": "Хватит!"
+    },
+    {
+      "entry": 38469,
+      "group": 1,
+      "id": 0,
+      "broadcast": 38368,
+      "type": 14,
+      "sound": 0,
+      "en": "Let's see how brave Gilneas gets on without its stubborn leader!",
+      "ru": "Посмотрим, что бравые гилнеанцы будут делать, оставшись без предводителя!"
+    },
+    {
+      "entry": 38469,
+      "group": 2,
+      "id": 0,
+      "broadcast": 38370,
+      "type": 12,
+      "sound": 20458,
+      "en": "Such a waste.  That arrow's poison was not meant to be wasted on your whelp.  We'll meet again, Genn!",
+      "ru": "Ужасно жаль. Яд этой стрелы предназначался не для твоего щенка. Но мы еще встретимся!"
+    },
+    {
+      "entry": 38474,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38369,
+      "type": 14,
+      "sound": 19612,
+      "en": "FATHER!!!",
+      "ru": "ОТЕЦ!!!"
+    },
+    {
+      "entry": 38474,
+      "group": 1,
+      "id": 0,
+      "broadcast": 38371,
+      "type": 12,
+      "sound": 20562,
+      "en": "We did it, father...",
+      "ru": "Отец, мы победили..."
+    },
+    {
+      "entry": 38474,
+      "group": 2,
+      "id": 0,
+      "broadcast": 38372,
+      "type": 12,
+      "sound": 20563,
+      "en": "We took back our city... we took back...",
+      "ru": "Мы вернули свой город... Мы вернули..."
+    },
+    {
+      "entry": 38553,
+      "group": 0,
+      "id": 0,
+      "broadcast": 38513,
+      "type": 14,
+      "sound": 0,
+      "en": "It's time to join the fray, $n!  With you on our side the scales will surely tip in our favor!",
+      "ru": "Пора и нам присоединиться к заварушке, $n! Теперь, когда ты сражаешься на нашей стороне, мы просто не можем проиграть!"
+    }
+  ],
+  "soundkit": {
+    "file": "SoundKit.db2",
+    "sha256": "2643655ddbbc10b9f58cc6bcfb15cf2b2c588f0f13571c980f3ab2b7154547ce",
+    "layout_hash": "0xe9cb7ae",
+    "record_count": 84351,
+    "copy_rows": 0,
+    "identity_count": 84351,
+    "format": "WDC1",
+    "locale": "ruRU",
+    "assurance": "ID presence and exact current-core layout; not decoding gameplay effects",
+    "requested": {
+      "19500": true,
+      "19609": true,
+      "19610": true,
+      "19611": true,
+      "19612": true,
+      "19623": true,
+      "19624": true,
+      "19625": true,
+      "19626": true,
+      "19627": true,
+      "19628": true,
+      "19651": true,
+      "19684": true,
+      "19725": true,
+      "19726": true,
+      "19727": true,
+      "20457": true,
+      "20458": true,
+      "20562": true,
+      "20563": true,
+      "20914": true
+    }
+  },
+  "historical_sources": [
+    {
+      "path": "old_2015_09.zip__2015_09_15_00_world.sql",
+      "sha256": "6992b6799aefeef6487b53c2a3588842cc09f742a1a996dc79984d7b2ba1963c"
+    },
+    {
+      "path": "_world_2016_07.zip__2016_07_14_02_world.sql",
+      "sha256": "e34d3d4919cb162ca96ad0ab67441fa0b634f84a189d27895b1adffd8fd8e6c4"
+    },
+    {
+      "path": "_world_2016_01.zip__2016_01_26_04_world.sql",
+      "sha256": "8aa18d0c588adae27491b4a862fecbb7a215254305e521a061675d98f775fe6c"
+    }
+  ]
+}
