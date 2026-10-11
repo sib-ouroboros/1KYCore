@@ -227,6 +227,9 @@ int main(){try{
   s.controller.m_lornaGUID={};s.controller.m_dariusGUID={};s.controller.m_kingGUID={};s.controller.m_sylvanaGUID={};
   for(auto pair:std::vector<std::pair<uint32,Creature*>>{{802754,&s.lorna},{802707,&s.darius},{802822,&s.king},{802781,&s.sylvanas}}){manager.data[pair.first]={pair.second->entry,654,187,1,2};battleMap.spawns.emplace(pair.first,pair.second);}
   check(!s.starter.CanStartBattle(&s.player),"before-registration gate remains strict");
+  // The periodic readiness check must bind loaded leaders before a new gossip click.
+  s.starter.Heartbeat();
+  check(s.starter.CanStartBattle(&s.player),"heartbeat registers all distant leaders without visiting them or ticking their AI");
   check(s.starter.StartBattle(&s.player),"all four loaded leaders register synchronously without AI tick or grid search");
   check(lorna.m_almyraGUID==s.almyra.guid&&darius.m_almyraGUID==s.almyra.guid&&king.m_almyraGUID==s.almyra.guid&&sylvanas.m_almyraGUID==s.almyra.guid,"controller acknowledgement follows all four reverse links");
   check(lorna.m_isInitialised&&darius.m_isInitialised&&king.m_isInitialised&&sylvanas.m_isInitialised,"all distant leaders acknowledge initialization");

@@ -1015,8 +1015,9 @@ public:
                     // Reset clears the local link while Almyra may already have acknowledged it.
                     if (!m_battleIsStarted)
                     {
-                        PrimeGilneasBattleActors(me);
-                        FindGilneasBattleActor(me, m_almyraGUID, NPC_SISTER_ALMYRA, 50.0f);
+                        // Retry both directions until late actors finish loading/respawning.
+                        // Activating their grids alone leaves registration dependent on AI ticks.
+                        PrepareBattleController();
                     }
 
                     std::list<Player*> playerList = me->SelectNearestPlayers(100.0f, true);

@@ -170,3 +170,8 @@ six leaders, cannon/helpers and militia. No SQL or production-server changes.
 `WorldObject::SelectNearestPlayers` visited `GridTypeMapContainer`, which has no Player type. Players are stored in `WorldTypeMapContainer`. Switch this player-only search to `Cell::VisitWorldObjects`; preserve its radius/alive predicates and the quest helper's map, phase and incomplete-quest gates. This fixes the first player-presence gate at wave 3 without skipping any leader arrivals. Cannons are intentionally parked at Lorna wave-3 point 7 and are not part of the arrival mask.
 
 The six allied commanders already zero combat damage. Add the same protection to Krennan, the event starter. Preserve cinematic Liam and enemy encounters. The synchronization fixture now executes the production player selector against separate grid/world visitors and verifies seven actual allied DamageTaken methods. Full gameplay confirmation remains required.
+
+
+## Retry distant leader registration before the battle
+
+Player testing found that visiting Darius and Genn made the start gate pass. The starter's 2.5-second readiness heartbeat only activated distant actors and searched for Almyra; it did not perform the bidirectional registration used by the gossip preparation. Reuse `PrepareBattleController()` on each idle heartbeat so actors loaded or respawned after an earlier attempt are linked and acknowledged without requiring their AI initialization event to tick. Running battles remain protected by the existing preparation guard. A native regression now clears all four late links and executes the production heartbeat before starting the battle, without ticking their AI or visiting their staging locations. Real client verification is still required.
