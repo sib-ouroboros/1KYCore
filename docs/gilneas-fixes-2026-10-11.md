@@ -182,3 +182,10 @@ Player testing found that visiting Darius and Genn made the start gate pass. The
 Live DB confirmed all five native route counts (2/2/4/6/24); the escort stopped despite a nearby owner. Native waypoint movement constructs a direct multi-point spline without navmesh routing; the quest depends on specific last-node callbacks. Tobias now traverses these same five route parts as individual pathfinding MovePoint movements, with unique phase/point IDs and duplicate-callback guards. The first part starts through the three audited door-approach points from the existing walking fallback. Keep the native moat/wall/hiding jumps, player pauses, outside-event dialogue, owner checks and final Sylvanas conversation. The existing fallback for missing/malformed paths remains unchanged.
 
 No SQL required. Three native fixtures verify all 38 native points plus the three exit points, wrong/duplicate callbacks, owner departure/return, actual first jump and second-part handoff, final dialogue and partial-summon cleanup. Geometry and full escort behavior still require a client playthrough with the server's maps/vmaps/mmaps.
+
+
+## Tobias remains a noncombat scene guide
+
+The final native escort point hands off to jump 2004; arrival schedules water positioning and the three Sylvanas-scene actors. Sylvanas arrival 2005 starts the conversation once. Existing dialogue regression executes all eight talk groups and verifies owner-only credit, followed by actor cleanup eight seconds later. Tobias retains the manual-summon lifetime cap of ten minutes, with cleanup on owner logout/death/quest cancellation or scene failure. Normal completion keeps him present until the end of the scene.
+
+Make only the summoned map-654 Tobias guide passive, disable line-of-sight/AttackStart/CanAIAttack, zero incoming combat damage and remove melee updates. Ignore combat evade to prevent default evade Reset from stopping the escort. Persistent Tobias retains default AI via the existing GetAI guard. Native tests verify the final jump-to-scene scheduling and actual passive/damage/attack methods. Client verification remains pending.

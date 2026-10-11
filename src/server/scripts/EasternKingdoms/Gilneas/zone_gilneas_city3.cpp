@@ -140,6 +140,7 @@ public:
 
         void Reset() override
         {
+            me->SetReactState(REACT_PASSIVE);
             if (!m_playerGUID.IsEmpty())
             {
                 StopScene();
@@ -152,6 +153,12 @@ public:
             m_warhowlGUID = ObjectGuid::Empty;
             m_crenshawGUID = ObjectGuid::Empty;
         }
+
+        void AttackStart(Unit* /*who*/) override { }
+        void MoveInLineOfSight(Unit* /*who*/) override { }
+        bool CanAIAttack(Unit const* /*who*/) const override { return false; }
+        void EnterEvadeMode(EvadeReason /*reason*/) override { }
+        void DamageTaken(Unit* /*attacker*/, uint32& damage) override { damage = 0; }
 
         bool HasScenePaths() const
         {
@@ -554,10 +561,7 @@ public:
                 }
             }
 
-            if (!UpdateVictim())
-                return;
-
-            DoMeleeAttackIfReady();
+            // This guide observes the scene; combat must never interrupt his escort.
         }
 
         bool IsPlayerNear(float range)
