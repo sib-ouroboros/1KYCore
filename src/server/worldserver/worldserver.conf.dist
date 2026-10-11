@@ -666,7 +666,8 @@ StrictPetNames = 0
 #
 #    DBC.Locale
 #        Description: DBC language settings.
-#        Default:     0   - (English)
+#        Default:     8   - (Russian)
+#                     0   - (English)
 #                     1   - (Korean)
 #                     2   - (French)
 #                     3   - (German)
@@ -674,12 +675,11 @@ StrictPetNames = 0
 #                     5   - (Taiwanese)
 #                     6   - (Spanish)
 #                     7   - (Spanish Mexico)
-#                     8   - (Russian)
 #                     9   - (none)
 #                     10  - (ptBR)
 #                     11  - (itIT)
 
-DBC.Locale = 0
+DBC.Locale = 8
 
 #
 #    DeclinedNames
