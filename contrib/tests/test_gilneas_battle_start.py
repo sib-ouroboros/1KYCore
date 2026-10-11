@@ -142,7 +142,7 @@ struct npc_krennan_aranas_38553AI:AI {
 };
 struct Gossip {GOSSIP_HELLO GOSSIP_SELECT};
 struct Initializer:AI {
- Creature*me=nullptr;uint32 m_wave=0;bool m_isInitialised=false; Events m_events;
+ Creature*me=nullptr;bool m_isInitialised=false; Events m_events;
  ObjectGuid m_krennanGUID,m_almyraGUID,m_liamGUID,m_liam2GUID,m_kingGUID,m_sylvanaGUID;
  void DoAction(int32 id)override{AI::DoAction(id);if(id==ACTION_INITIALIZE_DONE)m_isInitialised=true;}
 };
@@ -230,6 +230,11 @@ int main(){try{
   check(s.starter.StartBattle(&s.player),"all four loaded leaders register synchronously without AI tick or grid search");
   check(lorna.m_almyraGUID==s.almyra.guid&&darius.m_almyraGUID==s.almyra.guid&&king.m_almyraGUID==s.almyra.guid&&sylvanas.m_almyraGUID==s.almyra.guid,"controller acknowledgement follows all four reverse links");
   check(lorna.m_isInitialised&&darius.m_isInitialised&&king.m_isInitialised&&sylvanas.m_isInitialised,"all distant leaders acknowledge initialization");
+  Creature replacement=s.almyra;replacement.guid=999;actors[999]=&replacement;
+  sylvanas.m_cinematicStarted=true;sylvanas.SetGUID(replacement.guid,NPC_SISTER_ALMYRA);check(sylvanas.m_almyraGUID==s.almyra.guid,"cinematic Sylvanas cannot switch controller");
+  sylvanas.SetGUID(s.almyra.guid,NPC_SISTER_ALMYRA);check(sylvanas.m_almyraGUID==s.almyra.guid,"same controller remains valid during cinematic");
+  sylvanas.m_cinematicStarted=false;sylvanas.SetGUID(replacement.guid,NPC_SISTER_ALMYRA);check(sylvanas.m_almyraGUID==replacement.guid,"idle Sylvanas can bind validated replacement controller");actors.erase(999);
+
   manager.data.clear();}
  {Scene s;manager.data[802754]={NPC_LORNA_CROWLEY,654,187,1,2};battleMap.spawns.emplace(802754,&s.lorna);PrimeGilneasBattleActors(&s.krennan);check(s.lorna.active,"loaded distant actor is activated so pending initialization can tick");s.lorna.active=false;s.lorna.script=0;PrimeGilneasBattleActors(&s.krennan);check(!s.lorna.active,"custom script never activated as battle actor");manager.data.clear();}
  {Scene s;manager.data[802754]={NPC_LORNA_CROWLEY,654,187,1,2};int old=battleMap.loads;PrimeGilneasBattleActors(&s.krennan);check(battleMap.loads==old+1,"only known matching late spawn grid is loaded");manager.data[802754].mapid=1;PrimeGilneasBattleActors(&s.krennan);check(battleMap.loads==old+1,"foreign map data never loaded");manager.data.clear();}
@@ -259,7 +264,7 @@ int main(){try{
         'KRENNAN_HEARTBEAT': method(krennan, '                case EVENT_CHECK_PLAYER_FOR_PHASE:'),
         'GOSSIP_HELLO': method(krennan, '    bool OnGossipHello('),
         'GOSSIP_SELECT': method(krennan, '    bool OnGossipSelect('),
-        'NATIVE_INITIALIZERS': '\n'.join('struct Init'+str(entry)+':Initializer{'+((method(source[source.index('    struct '+name):], '        void SetGUID(')+method(source[source.index('    struct '+name):], '        ObjectGuid GetGUID(')) if entry in (38426,38415,38470,38469) else '')+'void Run(){switch(int(EVENT_INITIALISE)){'+case+'}}};' for entry, name, case in initializers),
+        'NATIVE_INITIALIZERS': '\n'.join('struct Init'+str(entry)+':Initializer{'+('bool m_cinematicStarted=false;' if entry==38469 else 'uint32 m_wave=0;' if entry in (38426,38415,38470) else '')+((method(source[source.index('    struct '+name):], '        void SetGUID(')+method(source[source.index('    struct '+name):], '        ObjectGuid GetGUID(')) if entry in (38426,38415,38470,38469) else '')+'void Run(){switch(int(EVENT_INITIALISE)){'+case+'}}};' for entry, name, case in initializers),
         'NATIVE_INITIALIZER_CHECKS': ''.join('pendingRegistration<Init'+str(entry)+'>('+str(entry)+');' for entry, _, _ in initializers),
     }
     for key, value in replacements.items():

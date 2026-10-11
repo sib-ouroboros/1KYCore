@@ -4248,7 +4248,7 @@ public:
         void SetGUID(ObjectGuid guid, int32 id) override
         {
             if (id == NPC_SISTER_ALMYRA && GetGilneasBattleActor(me, guid, NPC_SISTER_ALMYRA)
-                && (!m_wave || m_almyraGUID == guid))
+                && (!m_cinematicStarted || m_almyraGUID == guid))
                 m_almyraGUID = guid;
         }
 
