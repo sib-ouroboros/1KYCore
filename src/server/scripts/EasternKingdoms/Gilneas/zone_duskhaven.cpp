@@ -2875,7 +2875,7 @@ public:
                 return;
             }
             m_playerGUID = player->GetGUID();
-            me->SetSpeed(MOVE_RUN, me->GetSpeedRate(MOVE_RUN) * 1.6f);
+            me->SetSpeedRate(MOVE_RUN, me->GetSpeedRate(MOVE_RUN) * 1.6f);
             TryBoard();
         }
 
