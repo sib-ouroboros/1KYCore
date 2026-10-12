@@ -18,17 +18,18 @@ def main():
 #include <iostream>
 using uint32=std::uint32_t;using uint8=std::uint8_t;using int8=std::int8_t;using int32=std::int32_t;using QuestStatus=int;using EvadeReason=int;using namespace std::chrono_literals;
 #define TC_LOG_ERROR(...) ((void)0)
-constexpr int QUEST_STATUS_NONE=0,QUEST_STATUS_INCOMPLETE=3,QUEST_STATUS_COMPLETE=1,REACT_PASSIVE=0,MOVE_FLIGHT=1,PLAYER_GUID=10,WAYPOINT_MOTION_TYPE=2;
+constexpr int QUEST_STATUS_NONE=0,QUEST_STATUS_INCOMPLETE=3,QUEST_STATUS_COMPLETE=1,REACT_PASSIVE=0,MOVE_FLIGHT=1,PLAYER_GUID=10,WAYPOINT_MOTION_TYPE=2,TEMPSUMMON_MANUAL_DESPAWN=8;
 struct ObjectGuid{int id=0;bool IsEmpty()const{return !id;}static const ObjectGuid Empty;};const ObjectGuid ObjectGuid::Empty{};bool operator==(ObjectGuid a,ObjectGuid b){return a.id==b.id;}bool operator!=(ObjectGuid a,ObjectGuid b){return !(a==b);}
 struct WaypointNode{uint32 id;float x,y,z;};struct WaypointPath{std::vector<WaypointNode>nodes;};struct WaypointMgr{std::map<uint32,WaypointPath>paths;WaypointPath const*GetPath(uint32 id){auto it=paths.find(id);return it==paths.end()?nullptr:&it->second;}}waypointMgr;auto*sWaypointMgr=&waypointMgr;
 struct Player;struct Creature;
 struct PhaseShift {};
 struct Unit{ObjectGuid guid;uint32 entry=0,map=654;bool alive=true,phase=true;int exits=0;virtual~Unit()=default;virtual Player*ToPlayer(){return nullptr;}virtual Creature*ToCreature(){return nullptr;}bool IsAlive(){return alive;}uint32 GetMapId(){return map;}uint32 GetEntry(){return entry;}ObjectGuid GetGUID(){return guid;}PhaseShift const& GetPhaseShift()const{static PhaseShift value;return value;}bool InSamePhase(PhaseShift const&){return phase;}bool IsInPhase(Unit*){return phase;}void ExitVehicle(){++exits;}};
-struct CreatureAI{virtual~CreatureAI()=default;virtual ObjectGuid GetGUID(int32)const{return {};}virtual void DoAction(int32){}};
+struct CreatureAI{bool enabled=true;virtual void OnCharmed(bool apply){if(apply)enabled=false;}virtual~CreatureAI()=default;virtual ObjectGuid GetGUID(int32)const{return {};}virtual void DoAction(int32){}};
 struct MotionMaster{std::vector<uint32>paths;int clears=0;void Clear(){++clears;}void MovePath(uint32 p,bool repeat){if(repeat)throw std::runtime_error("unverified loop");paths.push_back(p);}};
 struct Vehicle{int removals=0;void RemoveAllPassengers(){++removals;}};
-struct Creature:Unit{bool despawn=false,gravity=false,fly=false;float speed=0;CreatureAI*ai=nullptr;MotionMaster motion;Vehicle vehicle;Creature*ToCreature()override{return this;}CreatureAI*AI(){return ai;}void SetReactState(int){}void SetCanFly(bool b){fly=b;}void SetDisableGravity(bool b){gravity=b;}void SetSpeed(int,float n){speed=n;}void DespawnOrUnsummon(){despawn=true;}template<class R,class P>void DespawnOrUnsummon(std::chrono::duration<R,P>){despawn=true;}MotionMaster*GetMotionMaster(){return &motion;}Vehicle*GetVehicleKit(){return &vehicle;}};
-struct Player:Unit{QuestStatus status=QUEST_STATUS_INCOMPLETE;Unit*base=nullptr;Creature*existing=nullptr,*source=nullptr;Player*ToPlayer()override{return this;}int GetQuestStatus(int){return status;}Unit*GetVehicleBase(){return base;}Creature*GetSummonedCreatureByEntry(int){return existing;}Creature*FindNearestCreature(int,float){return source;}};
+struct TempSummon{int type=1;void SetTempSummonType(int t){type=t;}};
+struct Creature:Unit{bool despawn=false,gravity=false,fly=false,active=false;TempSummon summon;TempSummon*ToTempSummon(){return &summon;}void setActive(bool a){active=a;}float speed=0;CreatureAI*ai=nullptr;MotionMaster motion;Vehicle vehicle;Creature*ToCreature()override{return this;}CreatureAI*AI(){return ai;}void SetReactState(int){}void SetCanFly(bool b){fly=b;}void SetDisableGravity(bool b){gravity=b;}void SetSpeed(int,float n){speed=n;}void SetSpeedRate(int,float n){speed=n*7.0f;}void DespawnOrUnsummon(){despawn=true;}template<class R,class P>void DespawnOrUnsummon(std::chrono::duration<R,P>){despawn=true;}MotionMaster*GetMotionMaster(){return &motion;}Vehicle*GetVehicleKit(){return &vehicle;}};
+struct Player:Unit{QuestStatus status=QUEST_STATUS_INCOMPLETE;int boardRequests=0;void EnterVehicle(Unit*v,int8){++boardRequests;base=v;}Unit*base=nullptr;Creature*existing=nullptr,*source=nullptr;Player*ToPlayer()override{return this;}int GetQuestStatus(int){return status;}Unit*GetVehicleBase(){return base;}Creature*GetSummonedCreatureByEntry(int){return existing;}Creature*FindNearestCreature(int,float){return source;}};
 std::map<int,Player*>players;struct ObjectAccessor{static Player*GetPlayer(Creature&,ObjectGuid g){auto i=players.find(g.id);return i==players.end()?nullptr:i->second;}};
 struct ScriptedAI:CreatureAI{Creature*me;explicit ScriptedAI(Creature*c):me(c){c->ai=this;}};
 struct SpellScript{Unit*caster=nullptr;Unit*GetCaster(){return caster;}};using SpellEffIndex=int;enum SpellCastResult{SPELL_CAST_OK,SPELL_FAILED_BAD_TARGETS};
@@ -43,7 +44,7 @@ int main(){
  using AI=npc_captured_riding_bat_38540AI;Player p,other;p.guid.id=1;other.guid.id=2;players[1]=&p;players[2]=&other;Creature clicker;clicker.entry=38615;p.source=&clicker;
  Cast cast;cast.caster=&p;check(cast.CheckBat()==SPELL_CAST_OK,"native summon allowed");p.source=nullptr;check(cast.CheckBat()==SPELL_FAILED_BAD_TARGETS,"no clicker no summon");p.source=&clicker;
  Creature bat;bat.entry=38540;AI a(&bat);a.Reset();a.IsSummonedBy(&p);a.PassengerBoarded(&other,0,true);check(other.exits==1&&bat.motion.paths.empty(),"foreign rider denied");p.base=&bat;
- a.PassengerBoarded(&p,0,true);a.PassengerBoarded(&p,0,true);check(!p.exits&&bat.motion.paths.size()==1&&bat.motion.paths.back()==3854001&&bat.fly&&bat.gravity,"one owner starts actual circuit");
+ a.OnCharmed(true);check(a.enabled&&p.boardRequests==1&&p.base==&bat&&bat.active,"owned summoned vehicle auto-boards and keeps custom AI when charmed");a.PassengerBoarded(&p,0,true);a.PassengerBoarded(&p,0,true);check(!p.exits&&bat.motion.paths.size()==1&&bat.motion.paths.back()==3854001&&bat.fly&&bat.gravity&&bat.speed==14.0f,"one owner starts actual circuit");
  check(cast.CheckBat()==SPELL_FAILED_BAD_TARGETS,"already riding cannot create second bat");a.PassengerBoarded(&other,0,false);check(!bat.despawn,"foreign dismount ignored");
  a.MovementInform(WAYPOINT_MOTION_TYPE,3);check(!bat.vehicle.removals,"old intermediate point does not land");
  Return ret;ret.caster=&p;ret.HandleDummy(0);check(a.m_flightState==3&&bat.motion.paths.back()==3854003&&bat.motion.paths.size()==2,"return button changes state and real route");ret.HandleDummy(0);check(bat.motion.paths.size()==2,"return idempotent");
@@ -54,10 +55,11 @@ int main(){
   if(mode==2)p.alive=false;
   if(mode==3)players.erase(1);
   if(mode==4)p.base=nullptr;
-  ai.UpdateAI(mode==5?120000:1000);
+  ai.UpdateAI(mode==5?900000:1000);
   if(mode==0||mode==5)check(!c.despawn&&c.motion.paths.back()==3854003,"cancel/timeout return living rider");
   if(mode==1)check(!c.despawn&&ai.m_flightState==1,"completed objectives keep return button available");
   if(mode>=2&&mode<=4)check(c.despawn,"death/logout/early dismount cleanup");}
+ {Creature c;AI ai(&c);p.status=QUEST_STATUS_INCOMPLETE;p.alive=true;players[1]=&p;ai.IsSummonedBy(&p);ai.PassengerBoarded(&p,0,true);ai.UpdateAI(120000);check(ai.m_flightState==1&&c.summon.type==TEMPSUMMON_MANUAL_DESPAWN,"valid flight survives old two-minute return and factory summon expiry");ai.DoAction(1);check(ai.m_flightState==3&&c.motion.paths.back()==3854003,"owner still controls early return");}
  p.status=QUEST_STATUS_INCOMPLETE;p.alive=true;p.base=nullptr;players[1]=&p;Creature unused;AI u(&unused);u.IsSummonedBy(&p);u.UpdateAI(10000);check(unused.despawn,"failed native boarding is bounded");
  p.base=nullptr;p.alive=true;p.status=QUEST_STATUS_INCOMPLETE;
  for(int mode=0;mode<7;++mode){auto paths=waypointMgr.paths;Creature c;AI ai(&c);if(mode==0)waypointMgr.paths.erase(3854001);if(mode==1)waypointMgr.paths.erase(3854003);if(mode==2)waypointMgr.paths[3854003].nodes.back().id=13;if(mode==3)waypointMgr.paths[3854001].nodes[0].z=std::numeric_limits<float>::quiet_NaN();if(mode==4)waypointMgr.paths[3854001].nodes.resize(1);if(mode==5)waypointMgr.paths[3854001].nodes[0].id=60;if(mode==6)waypointMgr.paths[3854003].nodes[0].id=15;ai.IsSummonedBy(&p);check(c.despawn&&c.motion.paths.empty()&&!c.gravity,"invalid circuit or return path fails before flight");waypointMgr.paths=paths;}

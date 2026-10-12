@@ -222,3 +222,12 @@ Native dialogue regression now models quest-status change on a successful event 
 Player log contains the final missing/invalid Tobias credit gate but no Tobias owner-lifecycle stop message. Core audit found WorldObject::SummonCreature calls Map::SummonCreature (which invokes IsSummonedBy), then applies its requested TempSummonType. SpellEffectSummonType can use that wrapper, overwriting the guide's manual type with a timed type after its initialization. Reassert MANUAL_DESPAWN in the owned guide's UpdateSceneOwner on each tick. TempSummon::Update calls Creature::Update/AI before checking its own type/timer, so this prevents the external timer from expiring the actor, while the existing owner-checked route/scene timeouts and end-of-dialogue cleanup remain authoritative. No global summon behavior changes.
 
 Native regression injects the factory's post-initialization timed-type overwrite and verifies the guide survives the original three-minute expiry and the final conversation, reverting to manual type. Three native fixture suites pass; client confirmation pending.
+
+
+## Quest 24920 ground-only bat and empty action bar
+
+Keep custom flight AI enabled with OnCharmed override. After validating the owner, paths and vehicle kit, the summoned38540 explicitly boards its player in seat0 and stays active. Set flight speed with SetSpeedRate(2.0), about14m/s, instead of absolute4m/s. Increase the fallback return timeout to15 minutes; preserve explicit72849 return and native landing endpoints. Reassert the owned summon manual type during AI updates to avoid factory expiry overwriting initialization.
+
+`2026_10_12_01_world_gilneas_bat_vehicle.sql` makes38615 a spellclick source rather than a controllable stationary641 vehicle, casts72472 from the clicking player, keeps641 on personal38540 and populates action slots1/5 with72246/72849. DB2 SpellEffect confirms72246 triggers missile72247, which applies damage; do not put the damage-only effect on the control bar. Preserve custom scripts/spells/vehicle IDs. Also ensure the prior `2026_10_06_12_world_gilneas_bat_flight.sql` route/phase update has been applied BEFORE this new update.
+
+Native fixture tests auto-boarding request, charm retains AI, actual14m/s, manual summon ownership, timeout/return/landing and invalid riders/routes. Portable SQL fixture checks first/repeat/custom/unrelated preservation (SQLite semantics; local MySQL binaries unavailable). Client flight, control-bar display, bomb hits/6+40 credits and landing remain to verify. No live server or DB modified.

@@ -827,6 +827,7 @@ public:
         uint8 m_flightState = 0; //0 waiting,1 circuit,3 return,4 landed
         bool m_boarded = false;
 
+        void OnCharmed(bool /*apply*/) override { } // Keep the scripted flight AI for the vehicle owner.
         void AttackStart(Unit* /*who*/) override { }
         void EnterCombat(Unit* /*who*/) override { }
         void EnterEvadeMode(EvadeReason /*reason*/) override { }
@@ -877,7 +878,15 @@ public:
                 me->DespawnOrUnsummon();
                 return;
             }
+            if (!me->GetVehicleKit())
+            {
+                TC_LOG_ERROR("sql.sql", "Gilneas quest24920: bat38540 has no vehicle kit; check VehicleId641");
+                me->DespawnOrUnsummon();
+                return;
+            }
             m_playerGUID = player->GetGUID();
+            me->setActive(true);
+            player->EnterVehicle(me, 0);
         }
 
         void DoAction(int32 action) override
@@ -928,7 +937,7 @@ public:
                 m_flightState = 1;
                 me->SetCanFly(true);
                 me->SetDisableGravity(true);
-                me->SetSpeed(MOVE_FLIGHT, 4.0f);
+                me->SetSpeedRate(MOVE_FLIGHT, 2.0f);
                 me->GetMotionMaster()->MovePath(3854001, false);
             }
             else if (player && player->GetGUID() == m_playerGUID)
@@ -940,6 +949,10 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
+            // The summon factory can overwrite the type after IsSummonedBy.
+            if (!m_playerGUID.IsEmpty())
+                if (TempSummon* summon = me->ToTempSummon())
+                    summon->SetTempSummonType(TEMPSUMMON_MANUAL_DESPAWN);
             m_lifetime += diff;
             if (m_lifetime >= 10000 && m_flightState == 0)
             {
@@ -954,7 +967,7 @@ public:
                 return;
             }
             QuestStatus status = player->GetQuestStatus(24920);
-            if (m_lifetime >= 120000 || !me->InSamePhase(player->GetPhaseShift())
+            if (m_lifetime >= 900000 || !me->InSamePhase(player->GetPhaseShift())
                 || (status != QUEST_STATUS_INCOMPLETE && status != QUEST_STATUS_COMPLETE))
                 DoAction(1); // Abandon returns a living rider along the real route.
         }
