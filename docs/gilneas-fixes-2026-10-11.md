@@ -236,3 +236,15 @@ Native fixture tests auto-boarding request, charm retains AI, actual14m/s, manua
 ## Captured bat boarding after the summon spell
 
 The first explicit EnterVehicle ran inside the active72472 summon effect. Unit::EnterVehicle casts46598 using only IGNORE_CASTER_MOUNTED_OR_ON_VEHICLE, not full triggered cast flags; an overlapping summon cast can therefore block it. Defer owner boarding until a subsequent AI update (initial500ms), then retry at most once per second within the existing ten-second unboarded bound. Never switch the owner out of another vehicle, and revalidate phase/quest/routes before retrying. Successful PassengerBoarded still starts flight once. Emit a console error when the boarding bound expires. Native regression verifies no cast during IsSummonedBy, deferred request, throttle and recovery after transient rejection. Client confirmation pending; no SQL changes.
+
+## Quest 24679: missing Aderic tomb spell focus
+Item 51956 invokes spell 72853. Client SpellCastingRequirements requires focus 1643;
+SpellEffect supplies offering object 202319 and credit 38147. The world dump has
+focus template 201964 (type 8, Data0 1643, Data1 10) but no corresponding Gilneas
+spawn. Restore an inert always-visible focus at the player-measured tomb position
+(-1621.367188, 1897.508057, 20.0), map 654. The native spell performs credit;
+no NPC AI or quest objective changes. SQL checks the template before inserting,
+allocates a free GUID and skips an existing equivalent focus on repeated import.
+Local SQLite migration checks pass; actual MySQL import and client use remain
+pending. Apply 2026_10_12_02_world_gilneas_aderic_tomb_focus.sql to the world DB
+and restart worldserver. This SQL-only fix does not require recompilation.

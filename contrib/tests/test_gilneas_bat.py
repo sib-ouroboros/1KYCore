@@ -59,7 +59,7 @@ int main(){
   if(mode==0||mode==5)check(!c.despawn&&c.motion.paths.back()==3854003,"cancel/timeout return living rider");
   if(mode==1)check(!c.despawn&&ai.m_flightState==1,"completed objectives keep return button available");
   if(mode>=2&&mode<=4)check(c.despawn,"death/logout/early dismount cleanup");}
- {Creature c;AI ai(&c);p.status=QUEST_STATUS_INCOMPLETE;p.alive=true;players[1]=&p;ai.IsSummonedBy(&p);ai.PassengerBoarded(&p,0,true);ai.UpdateAI(120000);check(ai.m_flightState==1&&c.summon.type==TEMPSUMMON_MANUAL_DESPAWN,"valid flight survives old two-minute return and factory summon expiry");ai.DoAction(1);check(ai.m_flightState==3&&c.motion.paths.back()==3854003,"owner still controls early return");}
+ {Creature c;AI ai(&c);p.status=QUEST_STATUS_INCOMPLETE;p.alive=true;players[1]=&p;p.base=nullptr;ai.IsSummonedBy(&p);p.base=&c;ai.PassengerBoarded(&p,0,true);ai.UpdateAI(120000);check(ai.m_flightState==1&&c.summon.type==TEMPSUMMON_MANUAL_DESPAWN,"valid flight survives old two-minute return and factory summon expiry");ai.DoAction(1);check(ai.m_flightState==3&&c.motion.paths.back()==3854003,"owner still controls early return");}
  {Creature c;AI ai(&c);p.base=nullptr;p.rejectBoarding=true;p.status=QUEST_STATUS_INCOMPLETE;p.alive=true;players[1]=&p;ai.IsSummonedBy(&p);int requests=p.boardRequests;ai.UpdateAI(500);check(p.boardRequests==requests+1&&!c.despawn,"first blocked ride spell leaves bounded retry");ai.UpdateAI(999);check(p.boardRequests==requests+1,"retry throttled to one second");p.rejectBoarding=false;ai.UpdateAI(1);check(p.boardRequests==requests+2&&p.base==&c&&!c.despawn,"retry boards after transient cast rejection");}
  p.status=QUEST_STATUS_INCOMPLETE;p.alive=true;p.base=nullptr;players[1]=&p;Creature unused;AI u(&unused);u.IsSummonedBy(&p);u.UpdateAI(10000);check(unused.despawn,"failed native boarding is bounded");
  p.base=nullptr;p.alive=true;p.status=QUEST_STATUS_INCOMPLETE;
@@ -74,3 +74,4 @@ int main(){
   if not args.no_sanitizers:cmd[1:1]=['-fsanitize=address,undefined','-fno-sanitize-recover=undefined','-fno-omit-frame-pointer']
   subprocess.run(cmd,check=True);subprocess.run([str(exe)],check=True)
 if __name__=='__main__':main()
+
