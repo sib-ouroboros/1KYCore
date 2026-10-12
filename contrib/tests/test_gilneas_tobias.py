@@ -15,7 +15,7 @@ def main():
 #include <iostream>
 using uint32=std::uint32_t;using uint8=std::uint8_t;
 constexpr int REACT_PASSIVE=0,MOVE_RUN=1;
-constexpr int QUEST_HUNT_FOR_SYLVANAS=24902,QUEST_STATUS_INCOMPLETE=1,QUEST_STATUS_COMPLETE=2,WAYPOINT_MOVE_TYPE_RUN=1,WAYPOINT_MOVE_TYPE_WALK=0,POINT_MOTION_TYPE=1,WAYPOINT_MOTION_TYPE=2,EFFECT_MOTION_TYPE=3,TEMPSUMMON_MANUAL_DESPAWN=8;
+constexpr int QUEST_HUNT_FOR_SYLVANAS=24902,QUEST_STATUS_INCOMPLETE=1,QUEST_STATUS_COMPLETE=2,WAYPOINT_MOVE_TYPE_RUN=1,WAYPOINT_MOVE_TYPE_WALK=0,POINT_MOTION_TYPE=1,WAYPOINT_MOTION_TYPE=2,EFFECT_MOTION_TYPE=3,TEMPSUMMON_MANUAL_DESPAWN=8,TEMPSUMMON_TIMED_DESPAWN=1;
 PRODUCTION_ENUM
 struct Position{float x=0,y=0,z=0,o=0;void Relocate(float a,float b,float c,float d){x=a;y=b;z=c;o=d;}};
 PRODUCTION_ROUTE
@@ -51,6 +51,7 @@ int main(){try{
   s.ai.Run(EVENT_WAIT_FOR_PLAYER_4);check(s.tobias.motion.jumps==3&&s.tobias.motion.jumpId==2004&&s.tobias.motion.jumpXY==20&&s.tobias.motion.jumpZ==5,"last native route retains hiding jump with correct callback");int scheduled=s.ai.m_events.scheduled;s.ai.MovementInform(EFFECT_MOTION_TYPE,2004);check(s.ai.m_events.scheduled==scheduled+2,"hiding arrival schedules both water positioning and Sylvanas actors");
  }
  {Scene s;s.start();s.p.distance=21;s.ai.StartNativePath(3850701);check(!s.ai.m_nativeMoving&&!s.tobias.motion.moves,"distant owner waits before native movement");s.p.distance=5;s.ai.MoveNativePoint();check(s.ai.m_nativeMoving&&s.tobias.motion.moves==1,"returning owner resumes pending native point");}
+ {Scene s;s.start();s.tobias.timer.SetTempSummonType(TEMPSUMMON_TIMED_DESPAWN);check(s.ai.UpdateSceneOwner(180000)&&s.tobias.timer.type==TEMPSUMMON_MANUAL_DESPAWN&&!s.tobias.despawns,"post-IsSummonedBy timed factory overwrite cannot expire the owned escort");s.tobias.timer.SetTempSummonType(TEMPSUMMON_TIMED_DESPAWN);s.ai.m_sceneActorsSpawned=true;s.ai.m_lifetime=0;check(s.ai.UpdateSceneOwner(75000)&&s.tobias.timer.type==TEMPSUMMON_MANUAL_DESPAWN&&!s.tobias.despawns,"scene retains guide through final dialogue even after external type overwrite");}
  {Scene s;s.ai.Reset();check(s.tobias.react==REACT_PASSIVE,"guide is passive before summon starts");s.start();Unit enemy;uint32 damage=100000;s.ai.DamageTaken(&enemy,damage);s.ai.AttackStart(&enemy);s.ai.MoveInLineOfSight(&enemy);check(!damage&&!s.ai.CanAIAttack(&enemy)&&!s.ai.m_stopped,"guide cannot attack or die from combat during escort and scene");}
  {Scene s;s.start();s.ai.m_lifetime=850000;check(s.ai.UpdateSceneOwner(1000),"long route does not remove escort at old ten-minute limit");s.ai.m_sceneActorsSpawned=true;s.ai.m_lifetime=0;check(s.ai.UpdateSceneOwner(179999),"scene has its own full budget");check(!s.ai.UpdateSceneOwner(1),"abandoned scene remains bounded");}
  {Scene s;Unit npc;s.ai.IsSummonedBy(&npc);check(s.ai.m_stopped,"non-player owner rejected");}

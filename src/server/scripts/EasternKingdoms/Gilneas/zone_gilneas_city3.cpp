@@ -203,6 +203,10 @@ public:
         {
             if (m_stopped || m_playerGUID.IsEmpty())
                 return false;
+            // WorldObject::SummonCreature applies its requested type AFTER IsSummonedBy.
+            // Reassert the owned scene lifetime before TempSummon::Update checks its timer.
+            if (TempSummon* summon = me->ToTempSummon())
+                summon->SetTempSummonType(TEMPSUMMON_MANUAL_DESPAWN);
             Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
             uint32 const lifetimeLimit = m_sceneActorsSpawned ? 180000 : 900000;
             if (m_lifetime >= lifetimeLimit || diff >= lifetimeLimit - m_lifetime || !player || !player->IsAlive()

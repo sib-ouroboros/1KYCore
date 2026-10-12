@@ -215,3 +215,10 @@ Three native fixtures pass, including survival beyond the former ten-minute rout
 Live DB reports SpecialFlags=2 and no quest objectives. Do not alter its requirements or force-complete the quest. The previous final callback marked completion and departed regardless of the result of AreaExploredOrEventHappens/KilledMonsterCredit. Only mark completion and schedule departure/cleanup after GetQuestStatus is COMPLETE. A failed credit attempt now leaves actors in place until the existing bounded scene timeout and emits a scripts error. Also log missing/invalid Tobias at the final gate and owner presence/alive/map/phase/status plus lifetime/stage when Tobias's lifecycle aborts.
 
 Native dialogue regression now models quest-status change on a successful event and injects failed completion, verifying no departure/despawn and a diagnostic. The real cause of the reported disappearance/missing credit is not yet confirmed; a client reproduction and emitted log are required. No SQL change.
+
+
+## Tobias summon-factory lifetime overwrite
+
+Player log contains the final missing/invalid Tobias credit gate but no Tobias owner-lifecycle stop message. Core audit found WorldObject::SummonCreature calls Map::SummonCreature (which invokes IsSummonedBy), then applies its requested TempSummonType. SpellEffectSummonType can use that wrapper, overwriting the guide's manual type with a timed type after its initialization. Reassert MANUAL_DESPAWN in the owned guide's UpdateSceneOwner on each tick. TempSummon::Update calls Creature::Update/AI before checking its own type/timer, so this prevents the external timer from expiring the actor, while the existing owner-checked route/scene timeouts and end-of-dialogue cleanup remain authoritative. No global summon behavior changes.
+
+Native regression injects the factory's post-initialization timed-type overwrite and verifies the guide survives the original three-minute expiry and the final conversation, reverting to manual type. Three native fixture suites pass; client confirmation pending.
