@@ -826,6 +826,7 @@ public:
         uint32 m_lifetime = 0;
         uint8 m_flightState = 0; //0 waiting,1 circuit,3 return,4 landed
         bool m_boarded = false;
+        uint32 m_nextBoardAttempt = 500;
 
         void OnCharmed(bool /*apply*/) override { } // Keep the scripted flight AI for the vehicle owner.
         void AttackStart(Unit* /*who*/) override { }
@@ -886,7 +887,7 @@ public:
             }
             m_playerGUID = player->GetGUID();
             me->setActive(true);
-            player->EnterVehicle(me, 0);
+            // Boarding casts another spell; wait until the summon cast has finished.
         }
 
         void DoAction(int32 action) override
@@ -956,6 +957,7 @@ public:
             m_lifetime += diff;
             if (m_lifetime >= 10000 && m_flightState == 0)
             {
+                TC_LOG_ERROR("scripts", "Gilneas quest24920: personal bat boarding timed out after ten seconds; check vehicle641 seat0 and ride spell46598");
                 me->DespawnOrUnsummon();
                 return;
             }
@@ -965,6 +967,23 @@ public:
             {
                 me->DespawnOrUnsummon();
                 return;
+            }
+            if (m_flightState == 0 && !m_boarded && m_lifetime >= m_nextBoardAttempt)
+            {
+                if (player->GetVehicleBase() && player->GetVehicleBase() != me)
+                {
+                    me->DespawnOrUnsummon();
+                    return;
+                }
+                if (player->GetQuestStatus(24920) != QUEST_STATUS_INCOMPLETE
+                    || !me->IsInPhase(player) || !HasFlightPaths())
+                {
+                    me->DespawnOrUnsummon();
+                    return;
+                }
+                m_nextBoardAttempt = m_lifetime + 1000;
+                if (!player->GetVehicleBase())
+                    player->EnterVehicle(me, 0);
             }
             QuestStatus status = player->GetQuestStatus(24920);
             if (m_lifetime >= 900000 || !me->InSamePhase(player->GetPhaseShift())
