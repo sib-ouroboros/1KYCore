@@ -377,3 +377,20 @@ before it leaves. Native fixture covers arrival, departure, destruction, exact12
 boundary and expired stop even before event callback. SQL tests cover phase,
 repeat/custom/unrelated transport preservation. Full GM-OFF client arrival remains
 to be tested; timing margin is chosen conservatively, not a retail exact measurement.
+
+## Quest26706: blocked-window flights and stationary ship diagnostics
+User's3be8ae6 log confirms ship1/window0 while a new hippogryph can still be
+used; also records abandoning26706. Native81877 previously had no cast gate,
+so a stale or GM cursor could launch regardless of the current ship window.
+Bind spell_gilneas_endgame_hippogryph to81877 through the new05 SQL. Require
+living player/map654/incomplete quest/no existing vehicle and nearby enabled
+Tobias whose readiness snapshot and actual ship dock timer both allow boarding.
+Add a native cast-method regression for all these failures. Readiness now derives
+from actual transport timer/keyframe interval rather than depending on a saved
+arrival bool; this recovers missed arrival callback while still rejecting late flight.
+Expanded INFO diagnostics include ship world XYZ,map,GetTimer,period and dock
+frame arrival/departure times and coordinates. The user's extended wait is not
+explained away as normal: runtime positions/progress remain needed to determine
+whether the ship is moving, stopped elsewhere or not visible to this player.
+Local cast/readiness fixtures and actual binding SQL semantics pass. No production
+DB or server modified. Console Logger.root must allow INFO to see these records.

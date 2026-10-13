@@ -25,3 +25,10 @@ before=list(c.iterdump());c.executescript(sql);assert list(c.iterdump())==before
 c.execute('DELETE FROM npc_spellclick_spells');c.execute("UPDATE creature_template SET ScriptName='custom'");c.executescript(sql)
 assert not c.execute('SELECT * FROM npc_spellclick_spells').fetchall()
 print('PASS: actual Endgame ride binding and Russian locale SQL; repeat/custom/foreign preservation (SQLite semantics)')
+
+c.executescript("CREATE TABLE spell_script_names(spell_id INTEGER,ScriptName TEXT,PRIMARY KEY(spell_id,ScriptName));INSERT INTO creature_template VALUES(43749,0,'npc_tobias_mistmantle_43749','');INSERT INTO spell_script_names VALUES(999,'unrelated');")
+gate_sql=(Path(__file__).resolve().parents[2]/'sql/updates/world/2026_10_13_05_world_gilneas_endgame_boarding_guard.sql').read_text('utf-8-sig')
+c.executescript(gate_sql)
+assert c.execute('SELECT ScriptName FROM spell_script_names WHERE spell_id=81877').fetchone()==('spell_gilneas_endgame_hippogryph',)
+before=list(c.iterdump());c.executescript(gate_sql);assert list(c.iterdump())==before
+print('PASS: actual Endgame cast-gate SQL binding and repeated import')

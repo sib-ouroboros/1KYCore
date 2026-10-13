@@ -1145,6 +1145,14 @@ public:
             m_events.ScheduleEvent(EVENT_INIT_TARGET, 1000);
         }
 
+        uint32 GetData(uint32 id) const override
+        {
+            if (id != QUEST_ENDGAME || !m_boardingAllowed)
+                return 0;
+            GameObject* ship = ObjectAccessor::GetGameObject(*me, m_gunshipGUID);
+            return ship && ship->AI() && ship->AI()->GetData(QUEST_ENDGAME) ? 1 : 0;
+        }
+
         void DoAction(int32 param) override
         {
             switch (param)
@@ -1290,8 +1298,17 @@ public:
             {
                 if (!m_readinessReportCooldown)
                 {
-                    TC_LOG_INFO("scripts", "Gilneas26706 readiness: ship=%u boarding_window=%u; waiting for transport arrival event",
-                        uint32(transport != nullptr), uint32(ship && ship->AI() && ship->AI()->GetData(QUEST_ENDGAME)));
+                    TC_LOG_INFO("scripts", "Gilneas26706 readiness: ship=%u boarding_window=%u map=%u position=(%.2f,%.2f,%.2f) timer=%u period=%u; waiting for rendezvous",
+                        uint32(transport != nullptr), uint32(ship && ship->AI() && ship->AI()->GetData(QUEST_ENDGAME)),
+                        transport ? transport->GetMapId() : 0, transport ? transport->GetPositionX() : 0.0f,
+                        transport ? transport->GetPositionY() : 0.0f, transport ? transport->GetPositionZ() : 0.0f,
+                        transport ? transport->GetTimer() : 0, transport ? transport->GetTransportPeriod() : 0);
+                    if (transport)
+                        for (KeyFrame const& frame : transport->GetKeyFrames())
+                            if (frame.Node->ArrivalEventID == ACTION_EVENT_ID_25670)
+                                TC_LOG_INFO("scripts", "Gilneas26706 dock frame: arrival_ms=%u departure_ms=%u map=%u position=(%.2f,%.2f,%.2f)",
+                                    frame.ArriveTime, frame.DepartureTime, uint32(frame.Node->ContinentID),
+                                    frame.Node->Loc.X, frame.Node->Loc.Y, frame.Node->Loc.Z);
                     m_readinessReportCooldown = 30000;
                 }
                 return false;
@@ -1340,6 +1357,31 @@ public:
     CreatureAI* GetAI(Creature* creature) const override
     {
         return new npc_tobias_mistmantle_43749AI(creature);
+    }
+};
+
+// Spellclick must not bypass the ship window, even when a stale client cursor remains.
+class spell_gilneas_endgame_hippogryph : public SpellScript
+{
+    PrepareSpellScript(spell_gilneas_endgame_hippogryph);
+
+    SpellCastResult CheckBoarding()
+    {
+        Player* player = GetCaster()->ToPlayer();
+        if (!player || !player->IsAlive() || player->GetMapId() != 654
+            || player->GetVehicleBase()
+            || player->GetQuestStatus(QUEST_ENDGAME) != QUEST_STATUS_INCOMPLETE)
+            return SPELL_FAILED_BAD_TARGETS;
+        Creature* tobias = player->FindNearestCreature(NPC_TOBIAS_MISTMANTLE_43749, 25.0f);
+        if (!tobias || !tobias->IsAIEnabled || !tobias->AI()
+            || !tobias->AI()->GetData(QUEST_ENDGAME))
+            return SPELL_FAILED_NOT_READY;
+        return SPELL_CAST_OK;
+    }
+
+    void Register() override
+    {
+        OnCheckCast += SpellCheckCastFn(spell_gilneas_endgame_hippogryph::CheckBoarding);
     }
 };
 
@@ -1564,7 +1606,7 @@ public:
 
         uint32 GetData(uint32 id) const override
         {
-            if (id != QUEST_ENDGAME || !m_boardingWindow)
+            if (id != QUEST_ENDGAME)
                 return 0;
             Transport* transport = go->ToTransport();
             if (!transport || !transport->GetTransportPeriod())
@@ -2831,6 +2873,7 @@ void AddSC_zone_gilneas_city3()
     new spell_iron_bomb_72247();
     new npc_tobias_mistmantle_43749();
     new npc_hippogryph_43751();
+    new spell_gilneas_endgame_hippogryph();
     new go_worgen_gunship_203428();
     new npc_lorna_crowley_43566();
     new npc_worgen_warrior_43651();
