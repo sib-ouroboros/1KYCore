@@ -394,3 +394,18 @@ explained away as normal: runtime positions/progress remain needed to determine
 whether the ship is moving, stopped elsewhere or not visible to this player.
 Local cast/readiness fixtures and actual binding SQL semantics pass. No production
 DB or server modified. Console Logger.root must allow INFO to see these records.
+
+## Quest26706: player phase confirmed by client test
+User has phases184/189; adding191 manually makes the gunship visible. Therefore
+transport phase191 is valid, but the current DB never supplies it to the quest player
+(no phase_area191 row was found in the source dump). Add a scoped PlayerScript
+for26706 on map654. Synchronize191 on quest status change, login, map change and
+after area-phase rebuild. This includes flight over areas with no AreaTable entry,
+where an area-only condition would fail. Preserve184/189 and all other phase IDs.
+Keep191 through incomplete/complete status for escape and turn-in; remove after
+abandon/reward or leaving Gilneas. Do not remove a manually assigned191 from
+unrelated questless characters during generic area/login handling.
+Native synchronization fixture passes add/repeat/complete/map/reward/abandon and
+unrelated manual-phase preservation. Full GM-OFF flight, handoff and scene still
+need client confirmation. No new SQL is necessary for this player script; previous
+Endgame SQL remains required. Existing active characters synchronize on relogin.

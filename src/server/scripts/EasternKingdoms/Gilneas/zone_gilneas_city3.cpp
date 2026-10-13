@@ -1360,6 +1360,35 @@ public:
     }
 };
 
+// Endgame's transport actors use phase191, including areas with no AreaTable entry.
+class player_gilneas_endgame_phase : public PlayerScript
+{
+public:
+    player_gilneas_endgame_phase() : PlayerScript("player_gilneas_endgame_phase") { }
+
+    static void Synchronize(Player* player, bool questChanged = false)
+    {
+        QuestStatus status = player->GetQuestStatus(QUEST_ENDGAME);
+        bool eligible = player->GetMapId() == 654
+            && (status == QUEST_STATUS_INCOMPLETE || status == QUEST_STATUS_COMPLETE);
+        bool present = player->GetPhaseShift().HasPhase(191);
+        if (eligible && !present)
+            PhasingHandler::AddPhase(player, 191, true);
+        else if (!eligible && present && (questChanged || status == QUEST_STATUS_INCOMPLETE
+            || status == QUEST_STATUS_COMPLETE || status == QUEST_STATUS_REWARDED))
+            PhasingHandler::RemovePhase(player, 191, true);
+    }
+
+    void OnLogin(Player* player, bool /*firstLogin*/) override { Synchronize(player); }
+    void OnMapChanged(Player* player) override { Synchronize(player); }
+    void OnUpdateArea(Player* player, Area* /*newArea*/, Area* /*oldArea*/) override { Synchronize(player); }
+    void OnQuestStatusChange(Player* player, uint32 questId) override
+    {
+        if (questId == QUEST_ENDGAME)
+            Synchronize(player, true);
+    }
+};
+
 // Spellclick must not bypass the ship window, even when a stale client cursor remains.
 class spell_gilneas_endgame_hippogryph : public SpellScript
 {
@@ -2874,6 +2903,7 @@ void AddSC_zone_gilneas_city3()
     new npc_tobias_mistmantle_43749();
     new npc_hippogryph_43751();
     new spell_gilneas_endgame_hippogryph();
+    new player_gilneas_endgame_phase();
     new go_worgen_gunship_203428();
     new npc_lorna_crowley_43566();
     new npc_worgen_warrior_43651();
