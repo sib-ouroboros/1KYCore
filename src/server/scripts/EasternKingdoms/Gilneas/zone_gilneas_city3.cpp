@@ -1366,7 +1366,7 @@ public:
         EventMap m_events;
         ObjectGuid m_playerGUID;
         ObjectGuid m_lornaGUID;
-        float  m_maxSpeed;
+        float  m_cruiseSpeedRate;
         bool m_boarded = false;
         bool m_finished = false;
 
@@ -1378,11 +1378,18 @@ public:
             m_events.Reset();
             m_playerGUID = ObjectGuid::Empty;
             m_lornaGUID = ObjectGuid::Empty;
-            m_maxSpeed = 4.9f;
+            m_cruiseSpeedRate = 3.0f;
             m_boarded = false;
             m_finished = false;
             if (Creature* wy = me->FindNearestCreature(43747, 10.0f))
                 me->SetOrientation(wy->GetOrientation());
+        }
+
+        void SetFlightSpeedRate(float rate)
+        {
+            // Waypoint splines select run or flight speed from the current movement flags.
+            me->SetSpeedRate(MOVE_RUN, rate);
+            me->SetSpeedRate(MOVE_FLIGHT, rate);
         }
 
         void MovementInform(uint32 type, uint32 id) override
@@ -1394,9 +1401,9 @@ public:
                 case WAYPOINT_MOTION_TYPE:
                 {
                     if (id == 2)
-                        me->SetSpeed(MOVE_RUN, m_maxSpeed);
+                        SetFlightSpeedRate(m_cruiseSpeedRate);
                     else if (id == 6)
-                        me->SetSpeed(MOVE_RUN, 2);
+                        SetFlightSpeedRate(1.0f);
                     else if (id == 7)
                         m_events.ScheduleEvent(EVENT_MOVE_LAST_POINT, 10);
                     break;
@@ -1481,7 +1488,7 @@ public:
                 {
                     me->SetCanFly(true);
                     me->SetDisableGravity(true);
-                    me->SetSpeed(MOVE_RUN, 3);
+                    SetFlightSpeedRate(2.0f);
                     me->GetMotionMaster()->MovePath(4375101, false);
                     break;
                 }

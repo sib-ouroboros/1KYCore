@@ -348,3 +348,14 @@ and the deployed server's resulting readiness log still require confirmation.
 Previous GCC and Windows builds752bcb8 succeeded. Its MySQL regression failed
 because the new locale fixture shadowed an existing module; restored the original
 MySQL route suite and renamed the locale fixture to endgame_locale_database.
+
+## Quest26706: incoming flight speed after client boarding confirmation
+User confirmed boarding now works, but the hippogryph flies very slowly. The AI
+used SetSpeed(MOVE_RUN,3/4.9/2), which means absolute metres per second, not
+speed multipliers. Replace with rates for both RUN and FLIGHT because waypoint
+splines choose their speed from current movement flags. Takeoff rate2=14m/s,
+cruise rate3=21m/s after callback2, final approach rate1=7m/s after callback6.
+Route4375101, arrival callbacks and ownership/handoff remain unchanged. These
+are chosen travel speeds, not a claimed exact retail measurement. Native fixture
+now checks actual speed rates for both movement modes at all three stages and
+passes locally. No SQL needed; install rebuilt script binaries and restart.
