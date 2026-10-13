@@ -359,3 +359,21 @@ Route4375101, arrival callbacks and ownership/handoff remain unchanged. These
 are chosen travel speeds, not a claimed exact retail measurement. Native fixture
 now checks actual speed rates for both movement modes at all three stages and
 passes locally. No SQL needed; install rebuilt script binaries and restart.
+
+## Quest26706: physical ship visibility and actual docking events
+User confirms the ship is visible only with GM ON. Native transport28/203428 has
+phase0 while its onboard actors are191. Correct only the untouched native transport
+to phase191 using2026_10_13_04_world_gilneas_endgame_ship_phase.sql; do not make
+all transports always visible or change player phases globally.
+Actual client TaxiPath2338 node53698 is the rendezvous at(-1465.76,3251.48,93.84),
+with180-second stop: arrival25670,departure25664.25663 is later departure near
+(-871,1866,158);25727 is still later destruction. Previous event mapping opened
+boarding at the wrong side of the route. Correct ship state and Tobias announcements
+so only25670 opens it; other three events close it. Preserve heartbeat scheduling
+when events reset Tobias's EventMap. Late registration still replays current state.
+GetData readiness now checks actual transport timer/keyframe docking interval and
+requires120 seconds until departure, allowing the faster bird to reach the ship
+before it leaves. Native fixture covers arrival, departure, destruction, exact120s
+boundary and expired stop even before event callback. SQL tests cover phase,
+repeat/custom/unrelated transport preservation. Full GM-OFF client arrival remains
+to be tested; timing margin is chosen conservatively, not a retail exact measurement.

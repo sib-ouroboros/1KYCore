@@ -26,7 +26,9 @@ struct Creature:WorldObject{int entry=0;bool alive=true,IsAIEnabled=true;ActorAI
 struct Map{int loads=0;void LoadGrid(float,float){++loads;}};
 struct ShipAI{bool m_boardingWindow=false;ObjectGuid m_tobiasGUID,m_triggerGUID;GameObject*go=nullptr;uint32 GetData(uint32)const;void EventInform(uint32);void SetGUID(ObjectGuid,int32);};
 struct GameObject:WorldObject{int entry=GO_ROPE,map=654;ShipAI*ai=nullptr;GameObject*ToGameObject()override{return this;}int GetEntry(){return entry;}virtual Transport*ToTransport(){return nullptr;}ShipAI*AI(){return ai;}std::list<Player*>SelectNearestPlayers(float){return {};}};
-struct Transport:GameObject{Map grid;int reloads=0;std::vector<WorldObject*>passengers;Transport*ToTransport()override{return this;}int GetMapId(){return map;}Map*GetMap(){return &grid;}float GetPositionX(){return 1;}float GetPositionY(){return 2;}std::vector<WorldObject*>const&GetStaticPassengers(){return passengers;}void LoadStaticPassengers(){++reloads;}};
+struct TaxiNode{uint32 ArrivalEventID=ACTION_EVENT_ID_25670;};
+struct KeyFrame{TaxiNode const*Node;uint32 ArriveTime=1000,DepartureTime=181000;};
+struct Transport:GameObject{TaxiNode node;uint32 timer=1000;std::vector<KeyFrame>frames{{&node,1000,181000}};uint32 GetTimer(){return timer;}uint32 GetTransportPeriod(){return 600000;}std::vector<KeyFrame>const&GetKeyFrames(){return frames;}Map grid;int reloads=0;std::vector<WorldObject*>passengers;Transport*ToTransport()override{return this;}int GetMapId(){return map;}Map*GetMap(){return &grid;}float GetPositionX(){return 1;}float GetPositionY(){return 2;}std::vector<WorldObject*>const&GetStaticPassengers(){return passengers;}void LoadStaticPassengers(){++reloads;}};
 Creature harbor;namespace ObjectAccessor{GameObject*ship=nullptr;GameObject*GetGameObject(Creature&,ObjectGuid){return ship;}Creature*GetCreature(GameObject&,ObjectGuid guid){return guid.id==1?&harbor:nullptr;}}
 struct Harbor{uint32 m_readinessReportCooldown=0;Creature*me=&harbor;ObjectGuid m_gunshipGUID{2};bool CheckIsGunshipReady();};
 void check(bool ok,char const*msg){if(!ok)throw std::runtime_error(msg);}
@@ -40,7 +42,7 @@ void check(bool ok,char const*msg){if(!ok)throw std::runtime_error(msg);}
  code+=method(part,'        bool CheckIsGunshipReady()').replace('bool CheckIsGunshipReady()', 'bool Harbor::CheckIsGunshipReady()',1)
  code+=r'''
 int main(){Transport ship;ShipAI ai;ai.go=&ship;ship.ai=&ai;ObjectAccessor::ship=&ship;Harbor npc;
- ai.EventInform(ACTION_EVENT_ID_25663);check(ai.GetData(QUEST_ENDGAME)==1&&harbor.ai.calls==0,"arrival retained before harbor registration");ai.SetGUID({1},NPC_TOBIAS_MISTMANTLE_43749);check(harbor.ai.last==ACTION_EVENT_ID_25663&&harbor.ai.calls==1,"late registration replays current window");ai.SetGUID({1},NPC_TOBIAS_MISTMANTLE_43749);check(harbor.ai.calls==1,"registration is idempotent");
+ ai.EventInform(ACTION_EVENT_ID_25670);check(ai.GetData(QUEST_ENDGAME)==1&&harbor.ai.calls==0,"arrival retained before harbor registration");ai.SetGUID({1},NPC_TOBIAS_MISTMANTLE_43749);check(harbor.ai.last==ACTION_EVENT_ID_25670&&harbor.ai.calls==1,"late registration replays current window");ai.SetGUID({1},NPC_TOBIAS_MISTMANTLE_43749);check(harbor.ai.calls==1,"registration is idempotent");
  check(!npc.CheckIsGunshipReady()&&ship.reloads==1,"empty grid requests load but never opens boarding");
  std::vector<Creature>actors(46);int index=0;for(auto pair:std::vector<std::pair<int,int>>{{43566,1},{43651,4},{43703,4},{42141,22},{43793,15}})for(int n=0;n<pair.second;++n){actors[index].entry=pair.first;actors[index].transport=&ship;ship.passengers.push_back(&actors[index++]);}
  GameObject rope1,rope2;rope1.transport=&ship;rope2.transport=&ship;ship.passengers.push_back(&rope1);ship.passengers.push_back(&rope2);
@@ -49,7 +51,7 @@ int main(){Transport ship;ShipAI ai;ai.go=&ship;ship.ai=&ai;ObjectAccessor::ship
  actors[9].alive=false;check(npc.CheckIsGunshipReady(),"defeated guard does not invalidate loaded scene");actors[9].alive=true;
  ship.passengers.pop_back();check(!npc.CheckIsGunshipReady(),"missing ropes block entry");ship.passengers.push_back(&rope2);
  actors[0].IsAIEnabled=false;check(!npc.CheckIsGunshipReady(),"disabled Lorna blocks entry");actors[0].IsAIEnabled=true;
- ai.EventInform(ACTION_EVENT_ID_25664);check(!npc.CheckIsGunshipReady(),"departure closes boarding even with full crew");ai.EventInform(ACTION_EVENT_ID_25727);check(npc.CheckIsGunshipReady(),"next native window restores readiness");
+ ai.EventInform(ACTION_EVENT_ID_25664);check(!npc.CheckIsGunshipReady(),"departure closes boarding even with full crew");ai.EventInform(ACTION_EVENT_ID_25663);check(!npc.CheckIsGunshipReady(),"leaving-ship event never opens new boarding");ai.EventInform(ACTION_EVENT_ID_25727);check(!npc.CheckIsGunshipReady(),"destruction never opens boarding");ai.EventInform(ACTION_EVENT_ID_25670);check(npc.CheckIsGunshipReady(),"arrival opens real docking window");ship.timer=61000;check(npc.CheckIsGunshipReady(),"120 seconds remaining allows safe flight");ship.timer=61001;check(!npc.CheckIsGunshipReady(),"insufficient docking time blocks late launch");ship.timer=181000;check(!npc.CheckIsGunshipReady(),"departed dock rejected even if event not yet processed");ship.timer=1000;
  ship.map=1;check(!npc.CheckIsGunshipReady(),"other map rejected");ObjectAccessor::ship=nullptr;check(!npc.CheckIsGunshipReady(),"missing ship rejected");
  std::cout<<"PASS: native ship readiness, grid activation, required crew/ropes, late registration and cycle window\n";}
 '''

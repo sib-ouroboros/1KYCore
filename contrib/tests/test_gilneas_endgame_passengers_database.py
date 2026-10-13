@@ -27,3 +27,13 @@ before=list(c.iterdump());c.executescript(sql);assert list(c.iterdump())==before
 c.execute("UPDATE creature SET map=0,ScriptName='custom' WHERE guid=804788")
 before=list(c.iterdump());c.executescript(sql);assert list(c.iterdump())==before
 print('PASS:94 audited passenger maps/offsets,2 ropes, native source spell, repeat/custom/unrelated guards (SQLite semantics)')
+
+phase_sql=(r/'sql/updates/world/2026_10_13_04_world_gilneas_endgame_ship_phase.sql').read_text('utf-8-sig')
+c.executescript("CREATE TABLE transports(guid INTEGER PRIMARY KEY,entry INTEGER,phaseUseFlags INTEGER,phaseid INTEGER,phasegroup INTEGER,ScriptName TEXT);INSERT INTO transports VALUES(28,203428,0,0,0,''),(29,203428,0,0,0,'');")
+c.executescript(phase_sql)
+assert c.execute('SELECT phaseid FROM transports WHERE guid=28').fetchone()==(191,)
+assert c.execute('SELECT phaseid FROM transports WHERE guid=29').fetchone()==(0,)
+before=list(c.iterdump());c.executescript(phase_sql);assert list(c.iterdump())==before
+c.execute("UPDATE transports SET phaseid=0,ScriptName='custom' WHERE guid=28")
+before=list(c.iterdump());c.executescript(phase_sql);assert list(c.iterdump())==before
+print('PASS: physical gunship phase191; repeat, custom and unrelated transport preservation')

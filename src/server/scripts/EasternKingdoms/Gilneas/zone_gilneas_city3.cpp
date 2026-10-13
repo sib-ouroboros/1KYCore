@@ -1149,20 +1149,17 @@ public:
         {
             switch (param)
             {
-            case ACTION_EVENT_ID_25663:
-            case ACTION_EVENT_ID_25727:
+            case ACTION_EVENT_ID_25670: // arrival at the three-minute boarding stop
                 m_events.Reset();
+                m_events.RescheduleEvent(EVENT_INIT_TARGET, 1000);
                 m_events.RescheduleEvent(EVENT_TALK_PART_00, 10);
                 break;
-            case ACTION_EVENT_ID_25670:
-                m_events.ScheduleEvent(EVENT_TALK_PART_02, 10);
-                m_events.RescheduleEvent(EVENT_TALK_PART_03, 30000);
-                m_events.RescheduleEvent(EVENT_TALK_PART_04, 60000);
-                break;
+            case ACTION_EVENT_ID_25663:
             case ACTION_EVENT_ID_25664:
-                m_events.ScheduleEvent(EVENT_TALK_PART_02, 10);
-                m_events.RescheduleEvent(EVENT_TALK_PART_03, 40000);
-                m_events.RescheduleEvent(EVENT_TALK_PART_04, 80000);
+            case ACTION_EVENT_ID_25727:
+                m_events.Reset();
+                m_events.RescheduleEvent(EVENT_INIT_TARGET, 1000);
+                m_events.RescheduleEvent(EVENT_TALK_PART_02, 10);
                 break;
             }
         }
@@ -1567,14 +1564,26 @@ public:
 
         uint32 GetData(uint32 id) const override
         {
-            return id == QUEST_ENDGAME && m_boardingWindow ? 1 : 0;
+            if (id != QUEST_ENDGAME || !m_boardingWindow)
+                return 0;
+            Transport* transport = go->ToTransport();
+            if (!transport || !transport->GetTransportPeriod())
+                return 0;
+            uint32 timer = transport->GetTimer() % transport->GetTransportPeriod();
+            for (KeyFrame const& frame : transport->GetKeyFrames())
+                if (frame.Node->ArrivalEventID == ACTION_EVENT_ID_25670
+                    && timer >= frame.ArriveTime && timer < frame.DepartureTime)
+                    // The bird needs about ninety seconds, plus handoff/retry margin.
+                    return frame.DepartureTime - timer >= 120000 ? 1 : 0;
+            return 0;
         }
 
         void EventInform(uint32 eventId) override
         {
-            if (eventId == ACTION_EVENT_ID_25663 || eventId == ACTION_EVENT_ID_25727)
+            if (eventId == ACTION_EVENT_ID_25670)
                 m_boardingWindow = true;
-            else if (eventId == ACTION_EVENT_ID_25664 || eventId == ACTION_EVENT_ID_25670)
+            else if (eventId == ACTION_EVENT_ID_25664 || eventId == ACTION_EVENT_ID_25663
+                || eventId == ACTION_EVENT_ID_25727)
                 m_boardingWindow = false;
             if (Creature* tobias = ObjectAccessor::GetCreature(*go, m_tobiasGUID))
                 tobias->AI()->DoAction(eventId);
@@ -1600,7 +1609,7 @@ public:
                     {
                         m_tobiasGUID = guid;
                         if (Creature* tobias = ObjectAccessor::GetCreature(*go, guid))
-                            tobias->AI()->DoAction(m_boardingWindow ? ACTION_EVENT_ID_25663 : ACTION_EVENT_ID_25670);
+                            tobias->AI()->DoAction(GetData(QUEST_ENDGAME) ? ACTION_EVENT_ID_25670 : ACTION_EVENT_ID_25664);
                     }
                     break;
             }
