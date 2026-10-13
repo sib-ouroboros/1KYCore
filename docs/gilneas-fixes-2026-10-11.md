@@ -259,3 +259,27 @@ of this point. It preserves the native template radius and unrelated/custom spaw
 it can also insert the missing focus if the prerequisite template is present.
 Apply 2026_10_13_00_world_gilneas_aderic_tomb_position.sql and restart worldserver;
 no binary rebuild is required. Client quest completion remains to be confirmed.
+
+## Quest 24681: glaive thrower, outriders and Legion level scaling
+Audited desktop world dump: quest objectives are 37916 x40,37938 x8,37921 x4.
+37927 has native spells 70735/70732/59737 but VehicleId 0 and no persistent spawns;
+38150 also has no spawns. Restore one directly boardable 37927 beside the audited
+quest giver 38149 (GUID804189) in phase189. This uses existing glaive Vehicle447,
+seat4806 (client copy of2021, CAN_CONTROL flag present). It is a shared directly
+boarded vehicle, not the previously unconfigured personal summon from71238.
+The harbor point is offset three metres from the known quest-giver spawn; ground
+placement and vehicle controls require client verification. Native abilities and
+ordinary kill credit are retained, with no automatic completion or objective edits.
+37939's accessory37938 already exists, but ObjectMgr rejects it without a wolf
+spellclick row. Add NPC-only ride46598 (do not expose spellclick to players), and
+change invalid accessory summon type0 to DEAD_DESPAWN7. Keep minion0 so the
+native dismounted rider is not forcibly killed with the mount.
+Add missing level-scaling rows5..20,zero delta for37884,37885,37916,37921,37938,
+37939 and the restored glaive. Preserve existing scaling overrides, custom scripts,
+health/damage multipliers, existing spawns and all quest objective amounts.
+SQL:2026_10_13_01_world_gilneas_glaive_and_scaling.sql; no C++ rebuild needed.
+Local SQLite checks cover boarding config, accessory type, scaling preservation,
+repeat import and missing/custom guards. MySQL import and full client completion
+are pending. Verify: visible harbor glaive, single driver, three abilities, targets
+40/8/4, mounted riders, levels relative to players5..20, and leaving/reboarding.
+Reference mechanics: https://warcraft.wiki.gg/wiki/They_Have_Allies,_But_So_Do_We
