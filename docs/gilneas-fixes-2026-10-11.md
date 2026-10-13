@@ -283,3 +283,33 @@ repeat import and missing/custom guards. MySQL import and full client completion
 are pending. Verify: visible harbor glaive, single driver, three abilities, targets
 40/8/4, mounted riders, levels relative to players5..20, and leaving/reboarding.
 Reference mechanics: https://warcraft.wiki.gg/wiki/They_Have_Allies,_But_So_Do_We
+
+## Quest 26706: boarding, scene dialogue and Russian text
+World-dump audit finds Vehicle641/native AI on43751 but no npc_spellclick_spells
+row: Tobias's runtime flag cannot board players without ride46598. Add this
+binding only for the native template, retaining the ship departure window.
+Tobias43749 used reversed text groups: group0 is waiting, group1 is boarding.
+Correct all window announcements and refresh nearby hippogryph GUIDs each window
+so respawned birds are not omitted by a stale cache.
+Override OnCharmed on both43751 and escape43713 to retain scripted route/owner
+state when a control seat charms the NPC. Existing owner, death, dismount, quest,
+phase and once-only arrival credit guards remain. Flight4375101 has eight points;
+after it the bird approaches onboard Lorna43566 and hands the player to her scene.
+The ship stage clears rafters, enables ropes, descends decks, plants three charges,
+fights43567, and creates owner-bound escape vehicles. Escape4371301 triggers
+credit43729 only after arrival; world quest objective254200 requires this credit
+once. Quest ender43727 exists in the dump. No instant quest completion added.
+Correct Lorna's Talk groups to the eight actual rows0..7 (old calls8/9 were missing).
+SQL2026_10_13_02_world_gilneas_endgame_boarding_ruru adds11 missing Russian
+scene translations, restores the dump's official Russian quest description when
+absent, and supplies Russian progress/reward text. Scene/progress/reward translations
+are authored translations; this does not claim extracted official Russian voices.
+Existing custom locale and foreign locale rows are preserved. Existing sound IDs
+are unchanged. Apply earlier2026_10_10_00_world_gilneas_endgame_routes.sql if the
+routes are absent, then the new boarding/localization update and install new code.
+Local native fixtures pass: incoming flight/lifecycle, outgoing flight/arrival credit,
+three charge and boss creation, same-ship floors and battle ownership. Added charm
+regressions simulate default AI disabling, proving the custom AI remains enabled.
+SQLite locale/boarding checks pass first/repeat/custom/foreign cases. Actual MySQL
+import, transport geometry/animation, and complete client passage remain pending.
+Reference sequence: https://www.wowhead.com/quest=26706/endgame

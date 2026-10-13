@@ -39,7 +39,7 @@ struct MotionMaster{int paths=0;void MovePath(uint32 id,bool){if(id!=4371301)thr
 struct Vehicle{Creature*owner;void RemoveAllPassengers();};
 struct Creature:Unit{ObjectGuid guid{5};int map=654,phase=1,despawns=0;ScriptedAI*ai=nullptr;Player*rider=nullptr;Transport*transport=&defaultTransport;Vehicle vehicle{this};MotionMaster motion;int GetMapId(){return map;}bool IsInPhase(Player*p){return p->phase==phase;}Transport*GetTransport(){return transport;}Map*GetMap(){return &worldMap;}std::list<Player*>SelectNearestPlayers(float){return selectedPlayers;}ObjectGuid GetGUID(){return guid;}ScriptedAI*AI(){return ai;}Vehicle*GetVehicleKit(){return &vehicle;}MotionMaster*GetMotionMaster(){return &motion;}template<class T>void DespawnOrUnsummon(T){++despawns;}};
 namespace PhasingHandler{void InheritPhaseShift(Creature*c,Player*p){c->phase=p->phase;}}
-struct ScriptedAI{Creature*me;ScriptedAI(Creature*c):me(c){c->ai=this;}virtual~ScriptedAI()=default;virtual ObjectGuid GetGUID(int32)const{return {};}virtual void SetGUID(ObjectGuid,int32){}virtual void PassengerBoarded(Unit*,int8,bool){}void UpdateAI(uint32){}};
+struct ScriptedAI{bool enabled=true;virtual void OnCharmed(bool apply){if(apply)enabled=false;}Creature*me;ScriptedAI(Creature*c):me(c){c->ai=this;}virtual~ScriptedAI()=default;virtual ObjectGuid GetGUID(int32)const{return {};}virtual void SetGUID(ObjectGuid,int32){}virtual void PassengerBoarded(Unit*,int8,bool){}void UpdateAI(uint32){}};
 void Player::EnterVehicle(Creature*c,int seat){++entries;base=c;c->rider=this;c->AI()->PassengerBoarded(this,seat,true);}
 void Player::ExitVehicle(){++exits;Creature*c=base;base=nullptr;if(c){c->rider=nullptr;c->AI()->PassengerBoarded(this,0,false);}}
 void Vehicle::RemoveAllPassengers(){if(owner->rider)owner->rider->ExitVehicle();}
@@ -57,7 +57,7 @@ void check(bool v,char const*m){if(!v)throw std::runtime_error(m);}
  case=method(lorna,'                case EVENT_TALK_PART_15:');creation=method(lorna,'                case EVENT_TALK_PART_14:')
  code+='struct Boarding{Creature*me;ObjectGuid m_playerGUID{99};std::list<ObjectGuid>wList;EventMap m_events;'+method(lorna,'        bool CanJoinEscape(')+'void Run(){switch(uint32(EVENT_TALK_PART_15)){'+case+'}}void Create(){switch(uint32(EVENT_TALK_PART_14)){'+creation+'}}};\n'
  code+=r'''
-int main(){using AI=npc_wyvern_43713AI;
+int main(){Creature charmBird;npc_wyvern_43713AI charmAI(&charmBird);charmAI.OnCharmed(true);check(charmAI.enabled,"wyvern charm keeps scripted escape AI");using AI=npc_wyvern_43713AI;
  Player probe;Creature probeLorna;Boarding eligibility{&probeLorna,{99},{},{}};check(eligibility.CanJoinEscape(&probe),"eligible same-ship participant");
  for(int reason=0;reason<7;++reason){probe=Player{};probeLorna=Creature{};if(reason==0)probe.alive=false;if(reason==1)probe.status=QUEST_STATUS_NONE;if(reason==2)probe.phase=2;if(reason==3)probe.map=1;if(reason==4)probe.transport=nullptr;if(reason==5)probeLorna.transport=nullptr;if(reason==6)probe.base=&probeLorna;check(!eligibility.CanJoinEscape(&probe),"ineligible/off-ship/dead/wrong phase/already mounted participant rejected");}probeLorna=Creature{};
  Player a,b;a.guid.id=1;b.guid.id=2;players={{1,&a},{2,&b}};Creature wa,wb,lorna;wa.guid.id=10;wb.guid.id=11;creatures={{10,&wa},{11,&wb}};AI xa(&wa),xb(&wb);xa.Reset();xb.Reset();xa.SetGUID(a.guid,PLAYER_GUID);xb.SetGUID(b.guid,PLAYER_GUID);xa.SetGUID(b.guid,PLAYER_GUID);check(xa.GetGUID(PLAYER_GUID)==a.guid&&xa.GetGUID(0).IsEmpty(),"immutable exposed owner");

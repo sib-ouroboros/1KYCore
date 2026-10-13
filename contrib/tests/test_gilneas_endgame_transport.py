@@ -24,12 +24,12 @@ struct MotionMaster{int paths=0,points=0;void MovePath(uint32 id,bool){if(id!=43
 struct ActorAI{void SetGUID(ObjectGuid,int){}void DoAction(int){}};
 struct Creature:Unit{int map=654,phase=1,despawns=0;bool flying=false,gravity=false;MotionMaster motion;ActorAI ai;Creature*lorna=nullptr;int GetMapId(){return map;}bool IsInPhase(Player*p){return p->phase==phase;}Creature*FindNearestCreature(int entry,float){return entry==NPC_LORNA_CRAWLEY_43566?lorna:nullptr;}float GetOrientation(){return 0;}void SetOrientation(float){}void SetSpeed(int,float){}void SetCanFly(bool b){flying=b;}void SetDisableGravity(bool b){gravity=b;}MotionMaster*GetMotionMaster(){return &motion;}ActorAI*AI(){return &ai;}Position GetPosition(){return {};}ObjectGuid GetGUID(){return {5};}template<class T>void DespawnOrUnsummon(T){++despawns;}};
 std::map<int,Player*>players;namespace ObjectAccessor{Player*GetPlayer(Creature&me,ObjectGuid guid){auto i=players.find(guid.id);return i!=players.end()&&i->second->map==me.map?i->second:nullptr;}Creature*GetCreature(Creature&me,ObjectGuid){return me.lorna;}}
-struct ScriptedAI{Creature*me;ScriptedAI(Creature*c):me(c){}void UpdateAI(uint32){}};
+struct ScriptedAI{bool enabled=true;virtual void OnCharmed(bool apply){if(apply)enabled=false;}Creature*me;ScriptedAI(Creature*c):me(c){}void UpdateAI(uint32){}};
 void check(bool v,char const*m){if(!v)throw std::runtime_error(m);}
 '''
  code+=method(source,'    struct npc_hippogryph_43751AI :')+';\n'
  code+=r'''
-int main(){using AI=npc_hippogryph_43751AI;Player owner,other;other.guid.id=2;players={{1,&owner},{2,&other}};Creature bird;AI ai(&bird);ai.Reset();Unit accessory;
+int main(){using AI=npc_hippogryph_43751AI;Player owner,other;other.guid.id=2;players={{1,&owner},{2,&other}};Creature bird;AI ai(&bird);ai.Reset();ai.OnCharmed(true);check(ai.enabled,"hippogryph charm keeps scripted flight AI");Unit accessory;
  ai.PassengerBoarded(nullptr,1,true);ai.PassengerBoarded(&accessory,1,true);ai.PassengerBoarded(&accessory,1,false);check(!bird.despawns&&ai.m_events.events.empty(),"accessories must not destroy ride");
  owner.base=&bird;ai.PassengerBoarded(&owner,0,true);ai.PassengerBoarded(&owner,0,true);check(ai.m_events.events.size()==1&&ai.m_playerGUID==owner.guid,"duplicate boarding starts once");
  other.base=&bird;ai.PassengerBoarded(&other,1,true);ai.PassengerBoarded(&other,1,false);check(other.exits==1&&!bird.despawns&&ai.m_playerGUID==owner.guid,"foreign player cannot hijack or destroy ride");

@@ -1191,7 +1191,7 @@ public:
                 case EVENT_TALK_PART_03:
                 case EVENT_TALK_PART_04:
                 {
-                    Talk(1);
+                    Talk(0);
                     SetHippoSpellClick(false);
                     break;
                 }
@@ -1200,12 +1200,12 @@ public:
                     if (CheckPlayerForQuest() && CheckIsGunshipReady())
                     {
                         SetHippoSpellClick(true);
-                        Talk(0);
+                        Talk(1);
                     }
                     else
                     {
                         SetHippoSpellClick(false);
-                        Talk(1);
+                        Talk(0);
                     }
                     break;
                 }
@@ -1228,13 +1228,8 @@ public:
 
         void SetHippoSpellClick(bool value)
         {
-            if (m_hippoList.empty())
-            {
-                std::list<Creature*> hippoList = me->FindNearestCreatures(NPC_HIPPOGRYPH, 15.0f);
-                for (std::list<Creature*>::const_iterator itr = hippoList.begin(); itr != hippoList.end(); ++itr)
-                    if (Creature* hippo = (*itr))
-                        m_hippoList.push_back(hippo->GetGUID());
-            }
+            // Respawned birds can have new runtime GUIDs; refresh for every departure window.
+            FindNearestHippogryphs();
 
             for (std::list<ObjectGuid>::iterator itr = m_hippoList.begin(); itr != m_hippoList.end(); ++itr)
                 if (Creature* hippo = ObjectAccessor::GetCreature(*me, (*itr)))
@@ -1322,6 +1317,9 @@ public:
         float  m_maxSpeed;
         bool m_boarded = false;
         bool m_finished = false;
+
+        // Retain route and owner state when vehicle boarding charms this creature.
+        void OnCharmed(bool /*apply*/) override { }
 
         void Reset() override
         {
@@ -1758,7 +1756,7 @@ public:
                 }
                 case EVENT_ANIMATION_START:
                 {
-                    Talk(2);
+                    Talk(0);
                     m_events.RescheduleEvent(EVENT_FLOOR_IS_ONE_REMAIN, 3000);
                     break;
                 }
@@ -1767,7 +1765,7 @@ public:
                     uint32 count = CountGruntOnThisFloorZ(86.0f, 15.0f);
                     if (count < 2)
                     {
-                        Talk(3);
+                        Talk(1);
                         m_events.ScheduleEvent(EVENT_FLOOR_IS_CLEAN, 5000);
                     }
                     else
@@ -1780,7 +1778,7 @@ public:
                     uint32 count = CountGruntOnThisFloorZ(86.0f, 15.0f);
                     if (!count)
                     {
-                        Talk(4);
+                        Talk(2);
                         m_events.ScheduleEvent(EVENT_START_ROPE_PART, 7000);
                     }
                     else
@@ -1825,13 +1823,13 @@ public:
                 }
                 case EVENT_TALK_PART_01:
                 {
-                    Talk(6);
+                    Talk(3);
                     m_events.ScheduleEvent(EVENT_TALK_PART_02, 10000);
                     break;
                 }
                 case EVENT_TALK_PART_02:
                 {
-                    Talk(7);
+                    Talk(4);
                     m_events.ScheduleEvent(EVENT_TALK_PART_03, 2000);
                     break;
                 }
@@ -2005,7 +2003,7 @@ public:
                 }
                 case EVENT_TALK_PART_10: // finish talk on door position
                 {
-                    Talk(8); // What a big orc
+                    Talk(6); // What a big orc
                     m_events.ScheduleEvent(EVENT_WAIT_FOR_ACTION_00, 4000);
                     break;
                 }
@@ -2050,7 +2048,7 @@ public:
                 }
                 case EVENT_TALK_PART_13: //
                 {
-                    Talk(9);
+                    Talk(7);
                     m_events.ScheduleEvent(EVENT_TALK_PART_14, 2000);
                     break;
                 }
@@ -2545,6 +2543,9 @@ public:
                 state, me->GetGUID().ToString().c_str(), m_playerGUID.ToString().c_str(),
                 m_flyPart, uint32(m_boarded), uint32(m_arrived));
         }
+
+        // Retain route and owner state when vehicle boarding charms this creature.
+        void OnCharmed(bool /*apply*/) override { }
 
         void Reset() override
         {
