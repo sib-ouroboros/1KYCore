@@ -409,3 +409,9 @@ Native synchronization fixture passes add/repeat/complete/map/reward/abandon and
 unrelated manual-phase preservation. Full GM-OFF flight, handoff and scene still
 need client confirmation. No new SQL is necessary for this player script; previous
 Endgame SQL remains required. Existing active characters synchronize on relogin.
+
+## Quest26706: video-driven transport repair
+See docs/endgame-transport-repair-2026-10-13.md for scope, native code defects,
+new handoff, scene-controlled ship hold, deck rope selection and bounded recovery.
+Local native regression and stopping-flag SQL tests pass; full client validation
+remains mandatory. Rebuild core+scripts and apply the06 scene-hold world SQL.

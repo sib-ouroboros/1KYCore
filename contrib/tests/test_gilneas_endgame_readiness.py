@@ -14,29 +14,32 @@ def main():
 #include <stdexcept>
 #include <iostream>
 #define TC_LOG_INFO(...) ((void)0)
+#define TC_LOG_ERROR(...) ((void)0)
 using uint32=std::uint32_t;using int32=std::int32_t;
-enum{QUEST_ENDGAME=26706,NPC_LORNA_CRAWLEY_43566=43566,NPC_WORGEN_WARRIOR=43651,NPC_GILNEAN_SHARPSHOOTER=43703,NPC_GUNSHIP_GRUNT=42141,NPC_GILNEAS_VEHICLE_ROPE=43793,GO_ROPE=204428,NPC_TOBIAS_MISTMANTLE_43749=43749,ACTION_EVENT_ID_25663=25663,ACTION_EVENT_ID_25664=25664,ACTION_EVENT_ID_25670=25670,ACTION_EVENT_ID_25727=25727};
-struct ObjectGuid{int id=0;};bool operator!=(ObjectGuid a,ObjectGuid b){return a.id!=b.id;}
+enum{QUEST_ENDGAME=26706,NPC_LORNA_CRAWLEY_43566=43566,NPC_WORGEN_WARRIOR=43651,NPC_GILNEAN_SHARPSHOOTER=43703,NPC_GUNSHIP_GRUNT=42141,NPC_GILNEAS_VEHICLE_ROPE=43793,GO_ROPE=204428,NPC_TOBIAS_MISTMANTLE_43749=43749,ACTION_ENDGAME_HOLD=2670601,ACTION_ENDGAME_RELEASE=2670602,ACTION_ENDGAME_SCENE_START=2670603,ACTION_EVENT_ID_25663=25663,ACTION_EVENT_ID_25664=25664,ACTION_EVENT_ID_25670=25670,ACTION_EVENT_ID_25727=25727};
+struct ObjectGuid{int id=0;bool operator!()const{return id==0;}};bool operator!=(ObjectGuid a,ObjectGuid b){return a.id!=b.id;}
 struct WorldLocation{WorldLocation(int,float,float,float,float){}};
-struct Player{void TeleportTo(WorldLocation){}};
+struct Player{ObjectGuid GetGUID(){return {1};}void TeleportTo(WorldLocation){}};
 struct Creature;struct GameObject;struct Transport;
 struct WorldObject{virtual~WorldObject()=default;virtual Creature*ToCreature(){return nullptr;}virtual GameObject*ToGameObject(){return nullptr;}Transport*transport=nullptr;Transport*GetTransport(){return transport;}};
 struct ActorAI{int calls=0,last=0;void DoAction(int action){++calls;last=action;}};
-struct Creature:WorldObject{int entry=0;bool alive=true,IsAIEnabled=true;ActorAI ai;Creature*ToCreature()override{return this;}bool IsAlive(){return alive;}int GetEntry(){return entry;}ActorAI*AI(){return &ai;}};
+struct Creature:WorldObject{int entry=0;bool alive=true,IsAIEnabled=true;ActorAI ai;Creature*ToCreature()override{return this;}bool IsAlive(){return alive;}int GetEntry(){return entry;}ActorAI*AI(){return &ai;}ObjectGuid GetGUID(){return {5};}};
 struct Map{int loads=0;void LoadGrid(float,float){++loads;}};
-struct ShipAI{bool m_boardingWindow=false;ObjectGuid m_tobiasGUID,m_triggerGUID;GameObject*go=nullptr;uint32 GetData(uint32)const;void EventInform(uint32);void SetGUID(ObjectGuid,int32);};
-struct GameObject:WorldObject{int entry=GO_ROPE,map=654;ShipAI*ai=nullptr;GameObject*ToGameObject()override{return this;}int GetEntry(){return entry;}virtual Transport*ToTransport(){return nullptr;}ShipAI*AI(){return ai;}std::list<Player*>SelectNearestPlayers(float){return {};}};
+enum{EVENT_CHECK_POSITIONS=201};struct EventMap{void Update(uint32){}uint32 ExecuteEvent(){return 0;}void ScheduleEvent(uint32,uint32){}};
+struct ShipAI{EventMap m_events;ObjectGuid m_playerGUID;bool m_boardingWindow=false;bool m_sceneStarted=false;uint32 m_holdRemaining=0;ObjectGuid m_tobiasGUID,m_triggerGUID;GameObject*go=nullptr;uint32 GetData(uint32)const;void EventInform(uint32);void SetGUID(ObjectGuid,int32);void DoAction(int32);void UpdateAI(uint32);};
+struct GameObject:WorldObject{int entry=GO_ROPE,map=654;ShipAI*ai=nullptr;GameObject*ToGameObject()override{return this;}int GetEntry(){return entry;}virtual Transport*ToTransport(){return nullptr;}ShipAI*AI(){return ai;}Player*SelectNearestPlayer(float){return nullptr;}Creature*FindNearestCreature(int,float){return nullptr;}std::list<Player*>SelectNearestPlayers(float){return {};}};
 struct TaxiNode{uint32 ArrivalEventID=ACTION_EVENT_ID_25670;};
 struct KeyFrame{TaxiNode const*Node;uint32 ArriveTime=1000,DepartureTime=181000;};
-struct Transport:GameObject{TaxiNode node;uint32 timer=1000;std::vector<KeyFrame>frames{{&node,1000,181000}};uint32 GetTimer(){return timer;}uint32 GetTransportPeriod(){return 600000;}std::vector<KeyFrame>const&GetKeyFrames(){return frames;}Map grid;int reloads=0;std::vector<WorldObject*>passengers;Transport*ToTransport()override{return this;}int GetMapId(){return map;}Map*GetMap(){return &grid;}float GetPositionX(){return 1;}float GetPositionY(){return 2;}std::vector<WorldObject*>const&GetStaticPassengers(){return passengers;}void LoadStaticPassengers(){++reloads;}};
+struct Transport:GameObject{TaxiNode node;uint32 timer=1000;std::vector<KeyFrame>frames{{&node,1000,181000}};uint32 GetTimer(){return timer;}uint32 GetTransportPeriod(){return 600000;}std::vector<KeyFrame>const&GetKeyFrames(){return frames;}bool moving=true;void EnableMovement(bool on){moving=on;}Map grid;int reloads=0;std::vector<WorldObject*>passengers;Transport*ToTransport()override{return this;}int GetMapId(){return map;}Map*GetMap(){return &grid;}float GetPositionX(){return 1;}float GetPositionY(){return 2;}std::vector<WorldObject*>const&GetStaticPassengers(){return passengers;}void LoadStaticPassengers(){++reloads;}};
+int evacuations=0;void EvacuateEndgameShip(Transport*){++evacuations;}
 Creature harbor;namespace ObjectAccessor{GameObject*ship=nullptr;GameObject*GetGameObject(Creature&,ObjectGuid){return ship;}Creature*GetCreature(GameObject&,ObjectGuid guid){return guid.id==1?&harbor:nullptr;}}
 struct Harbor{uint32 m_readinessReportCooldown=0;Creature*me=&harbor;ObjectGuid m_gunshipGUID{2};bool CheckIsGunshipReady();};
 void check(bool ok,char const*msg){if(!ok)throw std::runtime_error(msg);}
 '''
  part=source[source.index('    struct go_worgen_gunship_203428AI'):]
- for signature in ['        uint32 GetData(', '        void EventInform(', '        void SetGUID(']:
+ for signature in ['        uint32 GetData(', '        void EventInform(', '        void SetGUID(', '        void DoAction(', '        void UpdateAI(']:
   body=method(part,signature)
-  name={'        uint32 GetData(':'uint32 ShipAI::GetData(', '        void EventInform(':'void ShipAI::EventInform(', '        void SetGUID(':'void ShipAI::SetGUID('}[signature]
+  name={'        uint32 GetData(':'uint32 ShipAI::GetData(', '        void EventInform(':'void ShipAI::EventInform(', '        void SetGUID(':'void ShipAI::SetGUID(', '        void DoAction(':'void ShipAI::DoAction(', '        void UpdateAI(':'void ShipAI::UpdateAI('}[signature]
   code+=body.replace(signature.strip(),name,1)+'\n'
  part=source[source.index('class npc_tobias_mistmantle_43749 :'):]
  code+=method(part,'        bool CheckIsGunshipReady()').replace('bool CheckIsGunshipReady()', 'bool Harbor::CheckIsGunshipReady()',1)
@@ -52,6 +55,8 @@ int main(){Transport ship;ShipAI ai;ai.go=&ship;ship.ai=&ai;ObjectAccessor::ship
  ship.passengers.pop_back();check(!npc.CheckIsGunshipReady(),"missing ropes block entry");ship.passengers.push_back(&rope2);
  actors[0].IsAIEnabled=false;check(!npc.CheckIsGunshipReady(),"disabled Lorna blocks entry");actors[0].IsAIEnabled=true;
  ship.timer=181000;ai.EventInform(ACTION_EVENT_ID_25664);check(!npc.CheckIsGunshipReady(),"departure closes boarding even with full crew");ai.EventInform(ACTION_EVENT_ID_25663);check(!npc.CheckIsGunshipReady(),"leaving-ship event never opens new boarding");ai.EventInform(ACTION_EVENT_ID_25727);check(!npc.CheckIsGunshipReady(),"destruction never opens boarding");ship.timer=1000;ai.EventInform(ACTION_EVENT_ID_25670);check(npc.CheckIsGunshipReady(),"arrival opens real docking window");ship.timer=61000;check(npc.CheckIsGunshipReady(),"120 seconds remaining allows safe flight");ship.timer=61001;check(!npc.CheckIsGunshipReady(),"insufficient docking time blocks late launch");ship.timer=181000;check(!npc.CheckIsGunshipReady(),"departed dock rejected even if event not yet processed");ship.timer=1000;
+ ai.DoAction(ACTION_ENDGAME_HOLD);check(!ship.moving&&ai.m_holdRemaining==900000,"flight reservation holds native route");ai.DoAction(ACTION_ENDGAME_SCENE_START);check(!npc.CheckIsGunshipReady(),"active scene closes late boarding");ai.DoAction(ACTION_ENDGAME_RELEASE);check(ship.moving&&!ai.m_holdRemaining&&!npc.CheckIsGunshipReady(),"escape releases route while scene stays closed");ai.EventInform(ACTION_EVENT_ID_25670);check(npc.CheckIsGunshipReady(),"next arrival resets scene gate");
+ ai.DoAction(ACTION_ENDGAME_HOLD);ai.DoAction(ACTION_ENDGAME_SCENE_START);int priorEvacuations=evacuations;ai.UpdateAI(899999);check(!ship.moving&&ai.m_holdRemaining==1&&evacuations==priorEvacuations,"scene deadline holds until full timeout");ai.UpdateAI(1);check(ship.moving&&!ai.m_holdRemaining&&evacuations==priorEvacuations+1,"timeout safely releases and evacuates");
  ship.map=1;check(!npc.CheckIsGunshipReady(),"other map rejected");ObjectAccessor::ship=nullptr;check(!npc.CheckIsGunshipReady(),"missing ship rejected");
  std::cout<<"PASS: native ship readiness, grid activation, required crew/ropes, late registration and cycle window\n";}
 '''

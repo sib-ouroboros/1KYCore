@@ -40,6 +40,7 @@ struct Vehicle{Creature*owner;void RemoveAllPassengers();};
 struct Creature:Unit{ObjectGuid guid{5};int map=654,phase=1,despawns=0;ScriptedAI*ai=nullptr;Player*rider=nullptr;Transport*transport=&defaultTransport;Vehicle vehicle{this};MotionMaster motion;int GetMapId(){return map;}bool IsInPhase(Player*p){return p->phase==phase;}Transport*GetTransport(){return transport;}Map*GetMap(){return &worldMap;}std::list<Player*>SelectNearestPlayers(float){return selectedPlayers;}ObjectGuid GetGUID(){return guid;}ScriptedAI*AI(){return ai;}Vehicle*GetVehicleKit(){return &vehicle;}MotionMaster*GetMotionMaster(){return &motion;}template<class T>void DespawnOrUnsummon(T){++despawns;}};
 namespace PhasingHandler{void InheritPhaseShift(Creature*c,Player*p){c->phase=p->phase;}}
 struct ScriptedAI{bool enabled=true;virtual void OnCharmed(bool apply){if(apply)enabled=false;}Creature*me;ScriptedAI(Creature*c):me(c){c->ai=this;}virtual~ScriptedAI()=default;virtual ObjectGuid GetGUID(int32)const{return {};}virtual void SetGUID(ObjectGuid,int32){}virtual void PassengerBoarded(Unit*,int8,bool){}void UpdateAI(uint32){}};
+void ReleaseEndgameShip(Creature*){}
 void Player::EnterVehicle(Creature*c,int seat){++entries;base=c;c->rider=this;c->AI()->PassengerBoarded(this,seat,true);}
 void Player::ExitVehicle(){++exits;Creature*c=base;base=nullptr;if(c){c->rider=nullptr;c->AI()->PassengerBoarded(this,0,false);}}
 void Vehicle::RemoveAllPassengers(){if(owner->rider)owner->rider->ExitVehicle();}

@@ -37,3 +37,14 @@ before=list(c.iterdump());c.executescript(phase_sql);assert list(c.iterdump())==
 c.execute("UPDATE transports SET phaseid=0,ScriptName='custom' WHERE guid=28")
 before=list(c.iterdump());c.executescript(phase_sql);assert list(c.iterdump())==before
 print('PASS: physical gunship phase191; repeat, custom and unrelated transport preservation')
+
+c.executescript("ALTER TABLE gameobject_template ADD COLUMN Data0 INTEGER DEFAULT 0;")
+c.executescript("ALTER TABLE gameobject_template ADD COLUMN Data8 INTEGER DEFAULT 0;UPDATE gameobject_template SET Data0=2338 WHERE entry=203428;")
+hold_sql=(r/'sql/updates/world/2026_10_13_06_world_gilneas_endgame_scene_hold.sql').read_text('utf-8-sig')
+c.executescript(hold_sql)
+assert c.execute('SELECT Data8 FROM gameobject_template WHERE entry=203428').fetchone()==(1,)
+assert c.execute('SELECT Data8 FROM gameobject_template WHERE entry=204428').fetchone()==(0,)
+before=list(c.iterdump());c.executescript(hold_sql);assert list(c.iterdump())==before
+c.execute("UPDATE gameobject_template SET Data8=0,ScriptName='custom_ship' WHERE entry=203428")
+before=list(c.iterdump());c.executescript(hold_sql);assert list(c.iterdump())==before
+print('PASS: scoped native ship stopping flag, repeated import, custom/unrelated preservation')

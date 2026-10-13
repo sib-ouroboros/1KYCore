@@ -1109,6 +1109,9 @@ public:
 
 enum eEndGame
 {
+    ACTION_ENDGAME_HOLD = 2670601,
+    ACTION_ENDGAME_RELEASE = 2670602,
+    ACTION_ENDGAME_SCENE_START = 2670603,
     ACTION_EVENT_ID_25663 = 25663, // leave the ship
     ACTION_EVENT_ID_25664 = 25664, // ship start movening
     ACTION_EVENT_ID_25670 = 25670, // ship spawn
@@ -1143,6 +1146,11 @@ public:
             m_gunshipGUID = ObjectGuid::Empty;
             m_gunshipEventId = 0;
             m_events.ScheduleEvent(EVENT_INIT_TARGET, 1000);
+        }
+
+        ObjectGuid GetGUID(int32 id) const override
+        {
+            return id == GO_WORGEN_GUNSHIP ? m_gunshipGUID : ObjectGuid::Empty;
         }
 
         uint32 GetData(uint32 id) const override
@@ -1298,7 +1306,7 @@ public:
             {
                 if (!m_readinessReportCooldown)
                 {
-                    TC_LOG_INFO("scripts", "Gilneas26706 readiness: ship=%u boarding_window=%u map=%u position=(%.2f,%.2f,%.2f) timer=%u period=%u; waiting for rendezvous",
+                    TC_LOG_INFO("scripts", "Gilneas26706 readiness: ship=%u boarding_window=%u map=%u position=(%.2f,%.2f,%.2f) timer=%u period=%u; boarding closed or rendezvous pending",
                         uint32(transport != nullptr), uint32(ship && ship->AI() && ship->AI()->GetData(QUEST_ENDGAME)),
                         transport ? transport->GetMapId() : 0, transport ? transport->GetPositionX() : 0.0f,
                         transport ? transport->GetPositionY() : 0.0f, transport ? transport->GetPositionZ() : 0.0f,
@@ -1414,6 +1422,87 @@ class spell_gilneas_endgame_hippogryph : public SpellScript
     }
 };
 
+static bool HoldEndgameShip(Creature* bird, ObjectGuid& lornaGuid)
+{
+    Creature* tobias = bird->FindNearestCreature(NPC_TOBIAS_MISTMANTLE_43749, 25.0f);
+    if (!tobias || !tobias->AI())
+        return false;
+    GameObject* ship = ObjectAccessor::GetGameObject(*bird, tobias->AI()->GetGUID(GO_WORGEN_GUNSHIP));
+    if (!ship || !ship->AI() || !ship->AI()->GetData(QUEST_ENDGAME))
+        return false;
+    if (!ship->GetGOInfo()->moTransport.allowstopping)
+    {
+        TC_LOG_ERROR("scripts", "Gilneas26706: ship cannot stop; apply Endgame scene-hold SQL (203428 Data8=1)");
+        return false;
+    }
+    Transport* transport = ship->ToTransport();
+    if (!transport)
+        return false;
+    for (WorldObject* passenger : transport->GetStaticPassengers())
+        if (Creature* actor = passenger->ToCreature())
+            if (actor->GetEntry() == NPC_LORNA_CRAWLEY_43566 && actor->IsAlive())
+                lornaGuid = actor->GetGUID();
+    if (lornaGuid.IsEmpty())
+        return false;
+    ship->AI()->DoAction(ACTION_ENDGAME_HOLD);
+    return true;
+}
+
+static void ReleaseEndgameShip(Creature* rider)
+{
+    if (Transport* ship = rider->GetTransport())
+        if (ship->GetEntry() == GO_WORGEN_GUNSHIP && ship->AI())
+            ship->AI()->DoAction(ACTION_ENDGAME_RELEASE);
+}
+
+static void ReturnEndgamePlayerToHarbor(Player* player)
+{
+    player->ExitVehicle();
+    player->TeleportTo(654, -1294.69f, 2133.24f, 5.62959f, 3.15905f);
+}
+
+static void EvacuateEndgameShip(Transport* ship)
+{
+    if (!ship)
+        return;
+    std::vector<Player*> passengers;
+    for (auto* object : ship->GetPassengers())
+        if (Player* player = object->ToPlayer())
+        {
+            QuestStatus status = player->GetQuestStatus(QUEST_ENDGAME);
+            if (status == QUEST_STATUS_INCOMPLETE || status == QUEST_STATUS_COMPLETE)
+                passengers.push_back(player);
+        }
+    // Teleport removes passengers from the live set; iterate a snapshot.
+    for (Player* player : passengers)
+        ReturnEndgamePlayerToHarbor(player);
+}
+
+static bool BoardEndgameShip(Player* player, Creature* lorna)
+{
+    Transport* ship = lorna ? lorna->GetTransport() : nullptr;
+    if (!player || !ship || ship->GetEntry() != GO_WORGEN_GUNSHIP
+        || player->GetMapId() != 654 || !player->IsAlive() || !lorna->IsInPhase(player)
+        || player->GetQuestStatus(QUEST_ENDGAME) != QUEST_STATUS_INCOMPLETE)
+        return false;
+    player->ExitVehicle();
+    if (Transport* previous = player->GetTransport())
+        if (previous != ship)
+            previous->RemovePassenger(player);
+    Position offset = lorna->GetTransOffset();
+    offset.m_positionZ += 0.2f;
+    player->m_movementInfo.transport.pos = offset;
+    player->m_movementInfo.transport.seat = -1;
+    ship->AddPassenger(player);
+    Position world = offset;
+    ship->CalculatePassengerPosition(world.m_positionX, world.m_positionY, world.m_positionZ, &world.m_orientation);
+    player->NearTeleportTo(world);
+    ship->AI()->DoAction(ACTION_ENDGAME_SCENE_START);
+    lorna->AI()->SetGUID(player->GetGUID(), PLAYER_GUID);
+    lorna->AI()->DoAction(EVENT_TELEPORT_01);
+    return true;
+}
+
 // 43751
 class npc_hippogryph_43751 : public CreatureScript
 {
@@ -1437,6 +1526,7 @@ public:
         float  m_cruiseSpeedRate;
         bool m_boarded = false;
         bool m_finished = false;
+        uint32 m_rideElapsed = 0;
 
         // Retain route and owner state when vehicle boarding charms this creature.
         void OnCharmed(bool /*apply*/) override { }
@@ -1449,6 +1539,7 @@ public:
             m_cruiseSpeedRate = 3.0f;
             m_boarded = false;
             m_finished = false;
+            m_rideElapsed = 0;
             if (Creature* wy = me->FindNearestCreature(43747, 10.0f))
                 me->SetOrientation(wy->GetOrientation());
         }
@@ -1525,6 +1616,12 @@ public:
             }
             if (m_boarded)
                 return;
+            if (!HoldEndgameShip(me, m_lornaGUID))
+            {
+                player->ExitVehicle();
+                me->DespawnOrUnsummon(100ms);
+                return;
+            }
             m_playerGUID = player->GetGUID();
             m_boarded = true;
             m_events.RescheduleEvent(EVENT_MOVEMENT_START, 1000);
@@ -1536,11 +1633,24 @@ public:
                 return;
             if (m_boarded)
             {
+                if (TempSummon* summon = me->ToTempSummon())
+                    summon->SetTempSummonType(TEMPSUMMON_MANUAL_DESPAWN);
+                m_rideElapsed += diff;
+                if (m_rideElapsed >= 300000)
+                {
+                    if (Player* owner = ObjectAccessor::GetPlayer(*me, m_playerGUID))
+                        ReturnEndgamePlayerToHarbor(owner);
+                    FinishRide();
+                    return;
+                }
                 Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID);
                 if (!player || !player->IsAlive() || player->GetMapId() != 654
                     || !me->IsInPhase(player) || player->GetVehicleBase() != me
                     || player->GetQuestStatus(QUEST_ENDGAME) != QUEST_STATUS_INCOMPLETE)
                 {
+                    if (player && player->IsAlive() && player->GetMapId() == 654
+                        && player->GetVehicleBase() == me)
+                        ReturnEndgamePlayerToHarbor(player);
                     FinishRide();
                     return;
                 }
@@ -1569,19 +1679,23 @@ public:
                         pos.m_positionZ += 15.0f;
                         me->GetMotionMaster()->MovePoint(1002, pos);
                     }
+                    else
+                        m_events.RescheduleEvent(EVENT_MOVE_LAST_POINT, 1000);
                     break;
                 }
                 case EVENT_JUMP_TO_LORNA:
                 {
+                    bool delivered = false;
                     if (Player* player = ObjectAccessor::GetPlayer(*me, m_playerGUID))
                         if (Creature* lorna = ObjectAccessor::GetCreature(*me, m_lornaGUID))
-                        {
-                            lorna->AI()->SetGUID(player->GetGUID(), PLAYER_GUID);
-                            player->ExitVehicle();
-                            lorna->AI()->DoAction(EVENT_TELEPORT_01);
-                        }
-
+                            delivered = BoardEndgameShip(player, lorna);
+                    if (!delivered)
+                    {
+                        m_events.RescheduleEvent(EVENT_MOVE_LAST_POINT, 1000);
+                        break;
+                    }
                     me->DespawnOrUnsummon(100);
+
                     break;
                 }
                 }
@@ -1624,6 +1738,8 @@ public:
         ObjectGuid   m_playerGUID;
         ObjectGuid   m_triggerGUID;
         bool m_boardingWindow = false;
+        uint32 m_holdRemaining = 0;
+        bool m_sceneStarted = false;
 
         void Reset() override
         {
@@ -1635,7 +1751,7 @@ public:
 
         uint32 GetData(uint32 id) const override
         {
-            if (id != QUEST_ENDGAME)
+            if (id != QUEST_ENDGAME || m_sceneStarted)
                 return 0;
             Transport* transport = go->ToTransport();
             if (!transport || !transport->GetTransportPeriod())
@@ -1649,10 +1765,37 @@ public:
             return 0;
         }
 
+        void DoAction(int32 action) override
+        {
+            Transport* ship = go->ToTransport();
+            if (!ship)
+                return;
+            if (action == ACTION_ENDGAME_HOLD && GetData(QUEST_ENDGAME))
+            {
+                ship->EnableMovement(false);
+                m_holdRemaining = 900000;
+                TC_LOG_INFO("scripts", "Gilneas26706: ship held for boarding and scene (15-minute recovery limit)");
+            }
+            else if (action == ACTION_ENDGAME_SCENE_START)
+            {
+                m_sceneStarted = true;
+                TC_LOG_INFO("scripts", "Gilneas26706: participant attached; ship scene started, late boarding closed");
+            }
+            else if (action == ACTION_ENDGAME_RELEASE)
+            {
+                ship->EnableMovement(true);
+                m_holdRemaining = 0;
+                TC_LOG_INFO("scripts", "Gilneas26706: ship movement resumed after evacuation or recovery");
+            }
+        }
+
         void EventInform(uint32 eventId) override
         {
             if (eventId == ACTION_EVENT_ID_25670)
+            {
                 m_boardingWindow = true;
+                m_sceneStarted = false;
+            }
             else if (eventId == ACTION_EVENT_ID_25664 || eventId == ACTION_EVENT_ID_25663
                 || eventId == ACTION_EVENT_ID_25727)
                 m_boardingWindow = false;
@@ -1664,10 +1807,7 @@ public:
 
             if (eventId == ACTION_EVENT_ID_25727) // ship is on destroy.. we must leave quickly.. or player char is destroyed in database storing..
             {
-                WorldLocation wLoc = WorldLocation(654, -1317.54f, 2121.90f, 5.6296f, 0.218f);
-                std::list<Player*> pList = go->SelectNearestPlayers(70.0f);
-                for (auto player : pList)
-                    player->TeleportTo(wLoc);
+                EvacuateEndgameShip(go->ToTransport());
             }
         }
 
@@ -1688,6 +1828,17 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
+            if (m_holdRemaining)
+            {
+                if (diff >= m_holdRemaining)
+                {
+                    EvacuateEndgameShip(go->ToTransport());
+                    TC_LOG_ERROR("scripts", "Gilneas26706: scene timed out; passengers returned without automatic quest credit");
+                    DoAction(ACTION_ENDGAME_RELEASE);
+                }
+                else
+                    m_holdRemaining -= diff;
+            }
             m_events.Update(diff);
 
             while (uint32 eventId = m_events.ExecuteEvent())
@@ -1855,25 +2006,12 @@ public:
             me->SetReactState(REACT_DEFENSIVE);
 
             if (me->GetTransport())
-                me->SetTransportHomePosition(me->GetTransport()->GetPosition());
+                me->SetTransportHomePosition(me->GetTransOffset());
         }
 
         void UpdateAI(uint32 diff) override
         {
             m_events.Update(diff);
-
-            if (m_animStarted && pList.size())
-                for (auto guid : pList)
-                    if (Player* player = ObjectAccessor::GetPlayer(*me, guid))
-                    {
-                        if (me->GetTransport())
-                        {
-                            Position pos = me->GetTransport()->GetPosition();
-                            player->MovePosition(pos, 0, 0);
-                        }
-                        pList.remove(guid);
-                        break;
-                    }
 
             while (uint32 eventId = m_events.ExecuteEvent())
             {
@@ -1948,7 +2086,7 @@ public:
                         if (Creature* target = FindBestJumpTarget(source, 34.0f, jumpTargetList))
                         {
                             source->SetTransportHomePosition(target->GetTransOffset());
-                            source->JumpTo(target, 0.4f);
+                            source->GetMotionMaster()->MoveJump(target->GetPosition(), 10.0f, 5.0f);
                         }
 
                     m_events.ScheduleEvent(EVENT_WAIT_TO_MOVE, 8000);
@@ -2250,7 +2388,6 @@ public:
                                 if (CanJoinEscape(player) && wyvern->IsInPhase(player))
                                     player->EnterVehicle(wyvern, 0);
                         }
-
                     break;
                 }
                 }
@@ -2652,25 +2789,39 @@ class go_rope_204428 : public GameObjectScript
 public:
     go_rope_204428() : GameObjectScript("go_rope_204428") { }
 
-    bool OnGossipHello(Player* player, GameObject* /*go*/) override
+    bool OnGossipHello(Player* player, GameObject* go) override
     {
-        if (Creature* target = FindRandomJumpTargetPosition(player))
-            player->JumpTo(target, 0.4f);
-
+        if (!player->IsAlive() || player->GetMapId() != 654
+            || player->GetQuestStatus(QUEST_ENDGAME) != QUEST_STATUS_INCOMPLETE
+            || !player->GetTransport() || player->GetTransport() != go->GetTransport())
+            return true;
+        if (Creature* target = FindRopeLowerDeckAnchor(player))
+            player->GetMotionMaster()->MoveJump(target->GetPosition(), 10.0f, 5.0f);
         return true;
     }
 
-    Creature* FindRandomJumpTargetPosition(Player* player)
+    Creature* FindRopeLowerDeckAnchor(Player* player)
     {
-        float zHeight = player->GetPositionZ() - 10.0f;
-        std::vector<Creature*> rList;
-        std::list<Creature*> tList = player->FindNearestCreatures(NPC_GILNEAS_VEHICLE_ROPE, 50.0f);
-        for (std::list<Creature*>::iterator itr = tList.begin(); itr != tList.end(); ++itr)
-            if (Creature* target = (*itr))
-                if (target->GetPositionZ() < zHeight)
-                    rList.push_back(target);
-
-        return (!rList.empty()) ? rList[urand(0, rList.size() - 1)] : nullptr;
+        Creature* best = nullptr;
+        float bestZ = -10000.0f, bestDistance = 10000.0f;
+        float currentZ = player->GetTransOffset().GetPositionZ();
+        auto anchors = player->FindNearestCreatures(NPC_GILNEAS_VEHICLE_ROPE, 90.0f);
+        for (Creature* anchor : anchors)
+        {
+            if (anchor->GetTransport() != player->GetTransport() || !anchor->IsInPhase(player))
+                continue;
+            float z = anchor->GetTransOffset().GetPositionZ();
+            if (z >= currentZ - 10.0f)
+                continue;
+            float distance = player->GetTransOffset().GetExactDist2d(&anchor->GetTransOffset());
+            if (z > bestZ + 1.0f || (fabs(z - bestZ) <= 1.0f && distance < bestDistance))
+            {
+                best = anchor;
+                bestZ = z;
+                bestDistance = distance;
+            }
+        }
+        return best;
     }
 };
 
@@ -2771,6 +2922,7 @@ public:
                 if (!m_boarded)
                 {
                     m_boarded = true;
+                    ReleaseEndgameShip(me);
                     TraceEscape("ESCAPE_BOARDED");
                     m_events.RescheduleEvent(EVENT_MOVEMENT_START, 200);
                 }

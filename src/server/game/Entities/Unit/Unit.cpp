@@ -13983,8 +13983,8 @@ void Unit::SetFacingTo(float ori, bool force)
 
     Movement::MoveSplineInit init(this);
     init.MoveTo(GetPositionX(), GetPositionY(), GetPositionZMinusOffset(), false);
-    if (GetTransport())
-        init.DisableTransportPathTransformations(); // It makes no sense to target global orientation
+    // MoveTo and facing above are world coordinates, including on a moving transport.
+    // Keep the normal transformation into passenger-local coordinates.
     init.SetFacing(ori);
     init.Launch();
 }
