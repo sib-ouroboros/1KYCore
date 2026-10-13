@@ -1,27 +1,28 @@
-"""Execute Endgame boarding/localization SQL, preserving custom and foreign text."""
-import sqlite3
+"""Native Endgame routes: disposable schema, whole-group/custom-data preservation."""
+import json
 from pathlib import Path
-sql=(Path(__file__).resolve().parents[2]/'sql/updates/world/2026_10_13_02_world_gilneas_endgame_boarding_ruru.sql').read_text('utf8').replace('SET NAMES utf8mb4;','')
-c=sqlite3.connect(':memory:');c.executescript('''CREATE TABLE creature_template(entry INTEGER,VehicleId INTEGER,ScriptName TEXT,AIName TEXT);
-CREATE TABLE npc_spellclick_spells(npc_entry INTEGER,spell_id INTEGER,cast_flags INTEGER,user_type INTEGER);
-CREATE TABLE creature_text(CreatureID INTEGER,GroupID INTEGER,ID INTEGER,Text TEXT);
-CREATE TABLE creature_text_locale(CreatureID INTEGER,GroupID INTEGER,ID INTEGER,Locale TEXT,Text TEXT,PRIMARY KEY(CreatureID,GroupID,ID));
-CREATE TABLE quest_template(ID INTEGER);CREATE TABLE quest_template_locale(ID INTEGER,locale TEXT,LogTitle TEXT,LogDescription TEXT,QuestDescription TEXT);
-CREATE TABLE quest_offer_reward(ID INTEGER);CREATE TABLE quest_offer_reward_locale(ID INTEGER,locale TEXT,RewardText TEXT);
-CREATE TABLE quest_request_items(ID INTEGER);CREATE TABLE quest_request_items_locale(ID INTEGER,locale TEXT,CompletionText TEXT);
-INSERT INTO creature_template VALUES(43751,641,'npc_hippogryph_43751','');INSERT INTO quest_template VALUES(26706);INSERT INTO quest_offer_reward VALUES(26706);INSERT INTO quest_request_items VALUES(26706);
-''')
-c.execute('INSERT INTO creature_text VALUES(43749,1,0,?)',("Hop on a hippogryph, now's our chance!",))
-c.execute('INSERT INTO creature_text VALUES(43749,0,0,?)',("Hold your horses, friend.  We'll hit them when we're all ready.",))
-c.executescript(sql)
-assert c.execute('SELECT * FROM npc_spellclick_spells').fetchone()==(43751,46598,1,0)
-assert c.execute('SELECT Text FROM creature_text_locale WHERE CreatureID=43749 AND GroupID=1').fetchone()==('Садись на гиппогрифа, сейчас наш шанс!',)
-assert c.execute('SELECT LogTitle FROM quest_template_locale').fetchone()==('Эндшпиль',)
-assert c.execute('SELECT COUNT(*) FROM quest_offer_reward_locale').fetchone()==(1,)
-before=list(c.iterdump());c.executescript(sql);assert list(c.iterdump())==before
-c.execute("UPDATE creature_text_locale SET Locale='frFR',Text='Texte' WHERE GroupID=1")
-c.execute("UPDATE creature_text_locale SET Text='Свой перевод' WHERE GroupID=0")
-before=list(c.iterdump());c.executescript(sql);assert list(c.iterdump())==before
-c.execute('DELETE FROM npc_spellclick_spells');c.execute("UPDATE creature_template SET ScriptName='custom'");c.executescript(sql)
-assert not c.execute('SELECT * FROM npc_spellclick_spells').fetchall()
-print('PASS: actual Endgame ride binding and Russian locale SQL; repeat/custom/foreign preservation (SQLite semantics)')
+def test_gilneas_endgame_database(sql,checksum):
+ root=Path(__file__).resolve().parents[2];manifest=json.loads((root/'docs/audit-data/gilneas-endgame-source-routes.json').read_text('utf8'));text=(root/'sql/updates/world/2026_10_10_00_world_gilneas_endgame_routes.sql').read_text('utf8')
+ ids=','.join(str(x['id']) for x in manifest['routes']);tables=sql('SHOW TABLES;').stdout.splitlines()
+ sql('DELETE FROM waypoint_data WHERE id IN('+ids+');')
+ foreign=sql('SELECT * FROM waypoint_data WHERE id NOT IN('+ids+') ORDER BY id,point;').stdout
+ other=checksum([t for t in tables if t!='waypoint_data']);sql(text)
+ assert sql('SELECT COUNT(*) FROM waypoint_data WHERE id IN('+ids+');').stdout.strip()=='48'
+ for route in manifest['routes']:
+  for row in route['points']:
+   key,point,x,y,z,o,delay,mode,action,chance,guid=row
+   assert sql(f'SELECT COUNT(*) FROM waypoint_data WHERE id={key} AND point={point} AND ABS(position_x-({x}))<0.001 AND ABS(position_y-({y}))<0.001 AND ABS(position_z-({z}))<0.001 AND ABS(orientation-({o}))<0.0001 AND delay={delay} AND move_type={mode} AND action={action} AND action_chance={chance} AND wpguid={guid};').stdout.strip()=='1'
+ before=checksum(['waypoint_data','creature_template']);sql(text);assert checksum(['waypoint_data','creature_template'])==before,'Non-idempotent route import'
+ assert checksum([t for t in tables if t!='waypoint_data'])==other
+ assert foreign==sql('SELECT * FROM waypoint_data WHERE id NOT IN('+ids+') ORDER BY id,point;').stdout
+ for route in manifest['routes']:
+  sql('DELETE FROM waypoint_data WHERE id IN('+ids+');')
+  key=route['id'];sql(f'INSERT INTO waypoint_data (id,point,position_x,position_y,position_z) VALUES({key},0,1,2,3);')
+  before=sql(f'SELECT * FROM waypoint_data WHERE id={key};').stdout;sql(text)
+  assert sql(f'SELECT * FROM waypoint_data WHERE id={key};').stdout==before,'Existing custom/partial group extended or overwritten'
+ for entry,field,value,restore,blocked in [(43751,'VehicleId','0','641',[4375101]),(43713,'VehicleId','0','983',[4371301]),(43566,'ScriptName',"'custom_lorna'","'npc_lorna_crowley_43566'",[4356601,4356602,4356603,4356604,4356605,4356606,4356607,4356701]),(43567,'AIName',"'custom_orc'","''",[4356701])]:
+  sql('DELETE FROM waypoint_data WHERE id IN('+ids+');');sql(f'UPDATE creature_template SET {field}={value} WHERE entry={entry};');sql(text)
+  assert sql('SELECT COUNT(*) FROM waypoint_data WHERE id IN('+','.join(map(str,blocked))+');').stdout.strip()=='0','Custom template/vehicle guard failed'
+  sql(f'UPDATE creature_template SET {field}={restore} WHERE entry={entry};')
+ sql('DELETE FROM waypoint_data WHERE id IN('+ids+');');sql(text)
+ print('PASS: Endgame10 routes/48 source points, idempotence,10 partial/custom groups, vehicle/binding guards, unrelated preservation')

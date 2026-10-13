@@ -313,3 +313,38 @@ regressions simulate default AI disabling, proving the custom AI remains enabled
 SQLite locale/boarding checks pass first/repeat/custom/foreign cases. Actual MySQL
 import, transport geometry/animation, and complete client passage remain pending.
 Reference sequence: https://www.wowhead.com/quest=26706/endgame
+
+## Quest26706: actual transport passengers and startup readiness
+The user confirmed all five required groups are still on map0 in the live world DB:
+42141x22,43566x1,43651x4,43703x4,43793x15. Transport203428's template uses
+SpawnMap749 (Data6); Transport::LoadStaticPassengers reads only that map. The
+previous boarding/locale patch therefore did not address this structural blocker.
+SQL2026_10_13_03_world_gilneas_endgame_transport_passengers relocates94 audited
+map0/phase191 local-offset spawns to749. Each update checks exact GUID/entry,
+phase, no custom spawn script and all three recorded coordinates. Offset coordinates
+remain unchanged; zone/area are cleared because the transport uses a separate map.
+Persistent boss804845 is excluded because Lorna creates43567 at its scripted stage.
+Restore two rope gameobjects at the recorded upper-deck rope-anchor offsets; retain
+native template go_rope_204428. Do not create duplicate objects on repeated import.
+Also correct harbor clickers43747/spell81877 cast_flags0->1. Client data shows
+81877 summons43751 with property1201 (copy689,Control4/categoryvehicle); the
+core then performs native automatic seat0 boarding.43751 itself is not the harbor
+clicker, so the previous43751 spellclick row alone was insufficient.
+Tobias now polls readiness every second, activates the ship grid and requests static
+passenger loading only if empty. It checks named roles: one enabled living Lorna,
+four warriors,four sharpshooters,22 loaded guards (defeated ones allowed),15 living
+jump anchors and two actual rope objects. It does not blindly trust passenger39.
+The ship records its native boarding-window state even before Tobias is loaded and
+replays it at late registration. The departure cycle is preserved: a fresh server does
+not imply immediate boarding if the ship is in the departure/travel stage. Readiness
+also requires the native arrival window. No forced teleport or fabricated completion.
+A throttled30-second server log starts with 'Gilneas26706 readiness'; it reports
+missing ship/closed window or individual role counts/ready. Only quest players
+trigger this diagnostic check. Restart after importing SQL and installing new code.
+Local actual-method fixtures and SQLite migration tests pass. They cover late
+registration, empty/full/missing/dead crew, missing ropes, cycle gates,94 recorded
+coordinate preservation, repeat and custom/unrelated guards. Full client passage
+and the deployed server's resulting readiness log still require confirmation.
+Previous GCC and Windows builds752bcb8 succeeded. Its MySQL regression failed
+because the new locale fixture shadowed an existing module; restored the original
+MySQL route suite and renamed the locale fixture to endgame_locale_database.

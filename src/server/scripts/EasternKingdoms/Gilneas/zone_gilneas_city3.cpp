@@ -1134,6 +1134,8 @@ public:
         EventMap m_events;
         ObjectGuid   m_gunshipGUID;
         uint32   m_gunshipEventId;
+        bool m_boardingAllowed = false;
+        uint32 m_readinessReportCooldown = 0;
         std::list<ObjectGuid> m_hippoList;
 
         void Initialize()
@@ -1167,6 +1169,7 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
+            m_readinessReportCooldown = diff >= m_readinessReportCooldown ? 0 : m_readinessReportCooldown - diff;
             m_events.Update(diff);
 
             while (uint32 eventId = m_events.ExecuteEvent())
@@ -1182,7 +1185,13 @@ public:
                     {
                         m_gunshipGUID = ship->GetGUID();
                         ship->AI()->SetGUID(me->GetGUID(), me->GetEntry());
-                        break;
+                        bool ready = CheckPlayerForQuest() && CheckIsGunshipReady();
+                        SetHippoSpellClick(ready);
+                        if (ready != m_boardingAllowed)
+                        {
+                            m_boardingAllowed = ready;
+                            Talk(ready ? 1 : 0);
+                        }
                     }
                     m_events.ScheduleEvent(EVENT_INIT_TARGET, 1000);
                     break;
@@ -1277,15 +1286,58 @@ public:
 
         bool CheckIsGunshipReady()
         {
-            if (GameObject* ship = ObjectAccessor::GetGameObject(*me, m_gunshipGUID))
-                if (Transport* transport = ship->ToTransport())
+            GameObject* ship = ObjectAccessor::GetGameObject(*me, m_gunshipGUID);
+            Transport* transport = ship ? ship->ToTransport() : nullptr;
+            if (!transport || transport->GetMapId() != 654 || !ship->AI()
+                || !ship->AI()->GetData(QUEST_ENDGAME))
+            {
+                if (!m_readinessReportCooldown)
                 {
-                    uint32 count = transport->GetStaticPassengers().size();
-                    return (count >= 39) ? true : false;
+                    TC_LOG_INFO("scripts", "Gilneas26706 readiness: ship=%u boarding_window=%u; waiting for transport arrival event",
+                        uint32(transport != nullptr), uint32(ship && ship->AI() && ship->AI()->GetData(QUEST_ENDGAME)));
+                    m_readinessReportCooldown = 30000;
                 }
+                return false;
+            }
 
-            return false;
+            // Transport passenger loading follows grid activation. The harbor NPC can
+            // register after arrival, or before the distant ship grid has been visited.
+            transport->GetMap()->LoadGrid(transport->GetPositionX(), transport->GetPositionY());
+            if (transport->GetStaticPassengers().empty())
+                transport->LoadStaticPassengers();
+
+            uint32 lorna = 0, warriors = 0, shooters = 0, grunts = 0, anchors = 0, ropes = 0;
+            for (WorldObject* passenger : transport->GetStaticPassengers())
+            {
+                if (Creature* npc = passenger->ToCreature())
+                {
+                    if (npc->GetTransport() != transport
+                        || (!npc->IsAlive() && npc->GetEntry() != NPC_GUNSHIP_GRUNT))
+                        continue;
+                    switch (npc->GetEntry())
+                    {
+                        case NPC_LORNA_CRAWLEY_43566: if (npc->IsAIEnabled && npc->AI()) ++lorna; break;
+                        case NPC_WORGEN_WARRIOR: ++warriors; break;
+                        case NPC_GILNEAN_SHARPSHOOTER: ++shooters; break;
+                        case NPC_GUNSHIP_GRUNT: ++grunts; break;
+                        case NPC_GILNEAS_VEHICLE_ROPE: ++anchors; break;
+                    }
+                }
+                else if (GameObject* object = passenger->ToGameObject())
+                    if (object->GetEntry() == GO_ROPE && object->GetTransport() == transport)
+                        ++ropes;
+            }
+            bool ready = lorna == 1 && warriors >= 4 && shooters >= 4 && grunts >= 22
+                && anchors >= 15 && ropes >= 2;
+            if (!m_readinessReportCooldown)
+            {
+                TC_LOG_INFO("scripts", "Gilneas26706 readiness: Lorna=%u warriors=%u shooters=%u grunts=%u rope_anchors=%u ropes=%u ready=%u",
+                    lorna, warriors, shooters, grunts, anchors, ropes, uint32(ready));
+                m_readinessReportCooldown = 30000;
+            }
+            return ready;
         }
+
     };
 
     CreatureAI* GetAI(Creature* creature) const override
@@ -1496,6 +1548,7 @@ public:
         ObjectGuid   m_tobiasGUID;
         ObjectGuid   m_playerGUID;
         ObjectGuid   m_triggerGUID;
+        bool m_boardingWindow = false;
 
         void Reset() override
         {
@@ -1505,8 +1558,17 @@ public:
             m_events.RescheduleEvent(EVENT_CHECK_POSITIONS, 2500);
         }
 
+        uint32 GetData(uint32 id) const override
+        {
+            return id == QUEST_ENDGAME && m_boardingWindow ? 1 : 0;
+        }
+
         void EventInform(uint32 eventId) override
         {
+            if (eventId == ACTION_EVENT_ID_25663 || eventId == ACTION_EVENT_ID_25727)
+                m_boardingWindow = true;
+            else if (eventId == ACTION_EVENT_ID_25664 || eventId == ACTION_EVENT_ID_25670)
+                m_boardingWindow = false;
             if (Creature* tobias = ObjectAccessor::GetCreature(*go, m_tobiasGUID))
                 tobias->AI()->DoAction(eventId);
 
@@ -1527,7 +1589,12 @@ public:
             switch (id)
             {
                 case NPC_TOBIAS_MISTMANTLE_43749:
-                    m_tobiasGUID = guid;
+                    if (m_tobiasGUID != guid)
+                    {
+                        m_tobiasGUID = guid;
+                        if (Creature* tobias = ObjectAccessor::GetCreature(*go, guid))
+                            tobias->AI()->DoAction(m_boardingWindow ? ACTION_EVENT_ID_25663 : ACTION_EVENT_ID_25670);
+                    }
                     break;
             }
         }
