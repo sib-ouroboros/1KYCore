@@ -248,3 +248,14 @@ allocates a free GUID and skips an existing equivalent focus on repeated import.
 Local SQLite migration checks pass; actual MySQL import and client use remain
 pending. Apply 2026_10_12_02_world_gilneas_aderic_tomb_focus.sql to the world DB
 and restart worldserver. This SQL-only fix does not require recompilation.
+
+## Quest 24679: corrected tomb elevation and position
+The player confirmed the focus exists, but fresh client measurements at the actual
+visible tomb place the player at Z approximately 30, X -1639 to -1646, Y 1902 to
+1907. The original supplied point (-1621.367188,1897.508057,20) is too far away.
+The follow-up migration relocates only the inert focus at that old point to
+(-1643,1904,30), area 4727. All four new player samples are within five metres
+of this point. It preserves the native template radius and unrelated/custom spawns;
+it can also insert the missing focus if the prerequisite template is present.
+Apply 2026_10_13_00_world_gilneas_aderic_tomb_position.sql and restart worldserver;
+no binary rebuild is required. Client quest completion remains to be confirmed.
